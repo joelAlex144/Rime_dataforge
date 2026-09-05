@@ -20,11 +20,13 @@ delivery_layer/            the product
 examples/policy-reader/    the demo environment
   fixtures/policy.json     synthetic homeowners policy, 213 clauses, stable ids
   fixtures/build_fixture.py
+  fixtures/index.json      document registry — the ONLY source of openable documents
   fixtures/README.md       what each committed fixture is, and its extraction problems
   grounding.py             BM25 + spoiler gate + deictic resolution + eligibility refusal
+  library.py               document registry + per-document Session (cursor, ledger, history)
   segment.py               shared segmentation primitives (sentence_spans copy, markers)
   read_demo.py             offline end-to-end of this slice
-  chat_demo.py             text REPL over any fixture (read / stop / ask / resume / ledger)
+  chat_demo.py             text REPL over the library (docs / open / read / stop / ask / resume)
 scripts/
   ingest.py                build-time document -> fixture (PDF/DOCX/HTML/URL/txt)
   fetch_voices.py          live catalog check — fails if speaker/model/lang absent
@@ -117,6 +119,41 @@ two optional fields the hero fixture does not use: `kind`
 (`clause` | `table_row` | `heading`) and `path` (the human numbering path, e.g.
 `4(b)(ii)`). Nothing else in the schema changed, so `grounding.py`, `wordmap.py`,
 `resume.py` and `read_demo.py` read both fixtures unmodified.
+
+### Document library
+
+**Selecting a document at runtime is supported. Ingesting one is not.**
+`examples/policy-reader/fixtures/index.json` is the only source of available
+documents: `library.py` opens what the registry names and nothing else, so
+"choose a document" can never widen into "load arbitrary text at runtime".
+`scripts/ingest.py` appends or updates a registry entry when it writes a fixture
+— `{name, title, path, source, clause_count, ingested_at}`, `name` defaulting to
+the output filename stem and required to be unique. A fixture that is written but
+not registered is invisible to the reader, which is deliberate: registration is
+the moment a document becomes selectable.
+
+```
+docs               list the library
+open <name>        switch, keeping your place in the document you leave
+```
+
+Each document owns a `Session` — read cursor, last heard unit, delivery
+boundary, ledger, question history. Switching emits `document_opened`,
+`position_saved` for the document being left, and `position_restored` for the one
+being entered, then restores the incoming session untouched: come back to a
+document and the cursor, last-heard clause and boundary are exactly as you left
+them, and a deictic question still resolves to the clause you were cut off in.
+Activity in one document cannot alter another's ledger. `Grounding` instances are
+built lazily and cached per document, so a six-document library does not pay to
+index five documents nobody opened. `Library.save()` / `.load()` persist sessions
+only — never fixtures, which are large, committed and immutable.
+
+Retrieval stays per-document by design. A question asked while B is open is
+answered from B, and `not_found` is the correct outcome for something that only
+appears in A; there is no cross-document retrieval and there should not be, since
+answering from a document the listener is not in is a position leak of exactly
+the kind the spoiler gate exists to prevent. `--fixture` still works and simply
+builds a library of one.
 
 **The agent refuses eligibility determinations.** "Am I eligible", "do I
 qualify", "can I claim", "will they pay" and similar second-person outcome asks

@@ -22,6 +22,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import sys
 import time
@@ -291,6 +292,55 @@ def apply_bullet_context(blocks: list[Block]) -> list[Block]:
         out.append(b)
         i += 1
     return out
+
+
+INDEX_FILENAME = "index.json"
+
+
+def update_index(out: Path, doc: dict, name: str) -> Path:
+    """Append or update this document's entry in fixtures/index.json.
+
+    The registry is the only source of documents the reader can open, so a
+    fixture that is written but not registered is invisible at runtime -- which
+    is deliberate: registration is the moment a document becomes selectable.
+    """
+    index = out.parent / INDEX_FILENAME
+    data = {"documents": []}
+    if index.exists():
+        try:
+            data = json.loads(index.read_text(encoding="utf-8"))
+        except ValueError:
+            die(f"{index} is not valid JSON; fix or delete it before ingesting")
+        data.setdefault("documents", [])
+
+    rel = os.path.relpath(out.resolve(), index.parent.resolve()).replace(os.sep, "/")
+    entry = {
+        "name": name,
+        "title": doc["title"],
+        "path": rel,
+        "source": doc["source"],
+        "clause_count": doc["clause_count"],
+        "ingested_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+    }
+
+    by_name = [e for e in data["documents"] if e.get("name") == name]
+    clash = [e for e in data["documents"] if e.get("name") != name and e.get("path") == rel]
+    if clash:
+        die(f"{index.name} already registers {rel} under the name {clash[0]['name']!r}; "
+            f"remove that entry or pass --name {clash[0]['name']}")
+    if by_name:
+        if by_name[0].get("path") != rel:
+            die(f"{index.name} already has a document named {name!r} at "
+                f"{by_name[0].get('path')!r}. Names must be unique -- pass --name <other>.")
+        by_name[0].update(entry)
+        action = "updated"
+    else:
+        data["documents"].append(entry)
+        action = "registered"
+    data["documents"].sort(key=lambda e: e.get("name", ""))
+    index.write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"{action} {name!r} in {index.name} ({len(data['documents'])} documents)")
+    return index
 
 
 def _is_title(rest: str) -> bool:
@@ -587,6 +637,8 @@ def main() -> int:
     ap.add_argument("--out", required=False, help="output fixture path (.json)")
     ap.add_argument("--title", default=None)
     ap.add_argument("--id-prefix", default="sec")
+    ap.add_argument("--name", default=None,
+                    help="registry name (default: output filename stem); must be unique")
     ap.add_argument("--min-clause-chars", type=int, default=40)
     ap.add_argument("--max-clause-chars", type=int, default=600)
     ap.add_argument("--synthetic", action="store_true", help="mark the fixture as synthetic")
@@ -679,6 +731,7 @@ def main() -> int:
     out.write_text(json.dumps(doc, indent=1, ensure_ascii=False))
     print(f"wrote {out} — {len(records)} clauses, "
           f"{len({r['section_title'] for r in records})} sections")
+    update_index(out, doc, args.name or out.stem)
     print("Add an entry to examples/policy-reader/fixtures/README.md before committing.")
     return 0
 

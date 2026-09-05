@@ -106,7 +106,7 @@ class TestReplFlow(unittest.TestCase):
         led = self.s.handle("ledger")
         self.assertIn("heard", led)
         self.assertIn("truncated@80", led)
-        self.assertIn("never-sent", led)
+        self.assertIn("never_sent", led)
 
     def test_where_reports_boundary(self):
         self.s.handle(f"read {LONG_CLAUSE}")
