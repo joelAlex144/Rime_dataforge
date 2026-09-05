@@ -164,6 +164,60 @@ accident can turn it into a yes or a no; the same rule is in `SYSTEM_PROMPT` as
 defence in depth. The spoiler gate still outranks it — an eligibility ask never
 pulls an unread clause forward.
 
+## Web demo
+
+Two React routes over one server and one event stream: `/` is the listener,
+`/dev` is developer diagnostics. They share a single `useReducer` store, so the
+two pages cannot disagree about what was heard -- `/dev` is a rendering of the
+event log that `/` is driven by, not a second measurement path.
+
+```bash
+pip install -r requirements.txt
+cd examples/policy-reader/web && npm install && cd -
+
+# terminal 1 -- offline, no key, no network
+TTS_PROVIDER=fake python examples/policy-reader/server.py
+
+# terminal 2
+cd examples/policy-reader/web && npm run dev     # http://localhost:5173  and  /dev
+```
+
+`npm run dev` proxies `/api` and `/ws` to the server on port 8080. The browser
+talks only to our server: no provider key is ever sent to the client, and none
+appears in the bundle. Use the real voice with `python examples/policy-reader/server.py`
+after `set -a; source .env; set +a`.
+
+**What `--dev` enables.** `python examples/policy-reader/server.py --dev` turns on
+`/api/dev/ingest`, `/api/dev/provider`, and `/api/dev/open`. Without it those
+three return 404 and the `/dev` drop zone is replaced by a note pointing at
+`scripts/ingest.py`. The judged flow never runs with `--dev`.
+
+**The unreviewed rule.** A runtime upload is written to
+`examples/policy-reader/fixtures/unreviewed/` and nowhere else. It is not added
+to `index.json`, so it does not appear in the listener's library; `--dev` can
+load one into the current session only, behind `?unreviewed=1`, and the listener
+then shows a persistent amber banner for as long as it is open. Moving a
+document into the library is a human action: review the clause list, then add it
+to `index.json`. `unreviewed/` is gitignored and must never be committed.
+
+**Trace replay, for judges with no key.** `/dev` lists `traces/*.jsonl` and
+replays a committed one at 20x into the same event stream, emitting
+`replay_start` and `replay_end` around it. The status strip, context table,
+metrics and event list are all driven from that stream, so the evidence can be
+inspected with no Rime credentials and no audio. Playback on `/` is disabled
+while a replay is running.
+
+**Screenshots must never include `.env` or a key.** Capture the browser window,
+not a terminal that has sourced the environment. `/dev` shows the provider
+descriptor -- model, speaker, language, format, sample rate, endpoint -- and
+never the key.
+
+What the listener sees is deliberately narrow: no clause ids, no milliseconds,
+no provider name, no turn ids. Heard text is ink, unheard is grey, and the
+delivery boundary is a rule at the exact character the server derived from the
+client's audio clock. Text after the boundary stays grey even though the server
+has already sent that audio -- that gap is the whole point of the layer.
+
 ## Design decisions (already made)
 
 - Unit granularity is clause-level; **word-level offsets are used because `/ws3` returns word timestamps for English at no extra cost**. Interpolated spans are flagged in the word map and counted in preflight.

@@ -297,7 +297,7 @@ def apply_bullet_context(blocks: list[Block]) -> list[Block]:
 INDEX_FILENAME = "index.json"
 
 
-def update_index(out: Path, doc: dict, name: str) -> Path:
+def update_index(out: Path, doc: dict, name: str, referral: str = None) -> Path:
     """Append or update this document's entry in fixtures/index.json.
 
     The registry is the only source of documents the reader can open, so a
@@ -320,6 +320,7 @@ def update_index(out: Path, doc: dict, name: str) -> Path:
         "path": rel,
         "source": doc["source"],
         "clause_count": doc["clause_count"],
+        "referral": referral or "the team that publishes this document",
         "ingested_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
 
@@ -639,6 +640,9 @@ def main() -> int:
     ap.add_argument("--id-prefix", default="sec")
     ap.add_argument("--name", default=None,
                     help="registry name (default: output filename stem); must be unique")
+    ap.add_argument("--referral", default=None,
+                    help="who the listener should contact for a decision; shown on every "
+                         "answer card. Defaults to a neutral string.")
     ap.add_argument("--min-clause-chars", type=int, default=40)
     ap.add_argument("--max-clause-chars", type=int, default=600)
     ap.add_argument("--synthetic", action="store_true", help="mark the fixture as synthetic")
@@ -731,7 +735,7 @@ def main() -> int:
     out.write_text(json.dumps(doc, indent=1, ensure_ascii=False))
     print(f"wrote {out} — {len(records)} clauses, "
           f"{len({r['section_title'] for r in records})} sections")
-    update_index(out, doc, args.name or out.stem)
+    update_index(out, doc, args.name or out.stem, args.referral)
     print("Add an entry to examples/policy-reader/fixtures/README.md before committing.")
     return 0
 

@@ -7,3 +7,10 @@ notes/*.jsonl
 .venv/
 .pytest_cache/
 traces/chat_demo.jsonl
+
+# dev-only runtime uploads: never committed, never in index.json
+examples/policy-reader/fixtures/unreviewed/
+examples/policy-reader/web/node_modules/
+examples/policy-reader/web/dist/
+traces/session_*.jsonl
+examples/policy-reader/web/*.tsbuildinfo

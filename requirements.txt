@@ -5,6 +5,9 @@ pytest>=8.0
 # optional: number round-trip ASR
 # faster-whisper>=1.0
 
+# web demo server (examples/policy-reader/server.py): HTTP + /ws/audio on one port
+aiohttp>=3.9
+
 # ingestion (build-time only) — scripts/ingest.py. Not imported by the agent path.
 pypdf>=4.0
 python-docx>=1.1
