@@ -1,5 +1,6 @@
 """Grounding: deictic -> last heard, spoiler gate, section-ref parsing, no-LLM fallback."""
 import asyncio
+import re
 import sys
 import unittest
 from pathlib import Path
@@ -54,6 +55,46 @@ class TestGrounding(unittest.TestCase):
         self.assertEqual(self.g.resolve_section_ref("what is Section 9(b)(i)"), "sec-9b-i")
         r = self.g.resolve("what is in section 4 b 7", None, read_cursor=10)
         self.assertEqual(r.kind, "beyond_cursor")
+
+    # ------------------------------------------------------ eligibility refusal
+    ELIGIBILITY_PHRASINGS = ["do I qualify for coverage",
+                            "can I claim for mold damage",
+                            "will they pay for wind damage"]
+
+    def test_eligibility_phrasings_are_tagged(self):
+        for q in self.ELIGIBILITY_PHRASINGS:
+            with self.subTest(q):
+                self.assertTrue(Grounding.is_eligibility_question(q))
+                self.assertEqual(self.g.resolve(q, None, read_cursor=212).kind, "eligibility")
+
+    def test_eligibility_answer_refuses_and_never_says_yes_or_no(self):
+        from grounding import ELIGIBILITY_REFUSAL
+        for q in self.ELIGIBILITY_PHRASINGS:
+            with self.subTest(q):
+                ans = asyncio.run(self.g.answer(self.g.resolve(q, None, read_cursor=212)))
+                self.assertIn(ELIGIBILITY_REFUSAL, ans)
+                self.assertIsNone(re.search(r"\byes\b", ans, re.I), ans)
+                self.assertIsNone(re.search(r"\bno\b", ans, re.I), ans)
+
+    def test_eligibility_still_cites_the_criteria_clause(self):
+        r = self.g.resolve("can I claim for mold damage", None, read_cursor=212)
+        self.assertTrue(r.hits)
+        self.assertIn(r.hits[0].text_spoken, asyncio.run(self.g.answer(r)))
+
+    def test_cover_question_is_not_eligibility(self):
+        q = "what does coverage C cover"
+        self.assertFalse(Grounding.is_eligibility_question(q))
+        self.assertNotEqual(self.g.resolve(q, None, read_cursor=212).kind, "eligibility")
+
+    def test_spoiler_gate_beats_eligibility_tagging(self):
+        """An eligibility ask must not pull an unread clause forward."""
+        self.assertEqual(self.g.resolve("am I eligible for this", None, read_cursor=2).kind,
+                         "beyond_cursor")
+
+    def test_system_prompt_carries_the_refusal_rule(self):
+        from grounding import SYSTEM_PROMPT
+        self.assertIn("NEVER decide whether the listener personally qualifies", SYSTEM_PROMPT)
+        self.assertIn("Never answer such a question with yes or no.", SYSTEM_PROMPT)
 
     def test_prompt_contains_only_document_text(self):
         r = self.g.resolve("what does that mean", "sec-5a-v", read_cursor=70)

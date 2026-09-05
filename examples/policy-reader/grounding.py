@@ -41,6 +41,23 @@ _DEICTIC = re.compile(
     r"\b(that|this|it|those|these|what you (just )?said|last (part|bit|one|clause)|"
     r"repeat|again|come again|what does (that|this|it) mean|say (that|it) again)\b", re.I)
 
+# Second-person outcome asks. The reader may read criteria aloud and cite them;
+# it must never apply them to the listener. Matching is on the shape of the
+# *ask*, not the topic, so "what does coverage C cover" stays a content question.
+_ELIGIBILITY = re.compile(
+    r"\b(?:am\s+i\s+(?:eligible|covered|entitled|able)"
+    r"|does\s+(?:this|that|it)\s+apply\s+to\s+me"
+    r"|do\s+i\s+(?:qualify|have\s+to|need\s+to)"
+    r"|can\s+i\s+(?:claim|get|apply|qualify|still)"
+    r"|will\s+(?:they|you|it|this)\s+(?:pay|cover|reimburse)"
+    r"|will\s+i\s+(?:get|be|receive)"
+    r"|would\s+(?:this|that|it)\s+cover\s+(?:my|me|mine)"
+    r"|is\s+my\s+\w+\s+covered"
+    r"|should\s+i)\b", re.I)
+
+ELIGIBILITY_REFUSAL = ("I can't tell you whether that applies to you — I can only read what the "
+                       "document says. For a decision, contact the insurer or lender.")
+
 # Tiny synonym table for the demo questions. Retrieval quality is out of scope;
 # this only keeps the spoiler gate from misfiring on obvious paraphrases.
 _SYNONYMS = {
@@ -94,11 +111,21 @@ class Hit:
     section_title: str
     text_display: str
     text_spoken: str
+    path: Optional[str] = None      # human numbering path from the fixture, e.g. "4(b)(ii)"
 
     def citation_spoken(self) -> str:
-        sub = self.unit_id.split("-")[1]           # "4b"
-        item = self.unit_id.split("-")[2]           # "ii"
-        return f"Section {sub[0:-1] if sub[-1].isalpha() else sub}{'(' + sub[-1] + ')' if sub[-1].isalpha() else ''}({item}), {self.section_title}"
+        # Ingested fixtures carry an explicit numbering path; policy.json does not,
+        # so its "sec-4b-ii" ids are decoded as before. Unnumbered documents
+        # (ids like "sec-3-p7") have no section number worth speaking: cite the
+        # heading instead of reading "Section 3(p7)" aloud.
+        if self.path:
+            return f"Section {self.path}, {self.section_title}"
+        parts = self.unit_id.split("-")
+        if len(parts) == 3 and re.fullmatch(r"\d+[a-z]?", parts[1]) and re.fullmatch(r"[ivxlcdm]+", parts[2]):
+            sub, item = parts[1], parts[2]
+            return (f"Section {sub[0:-1] if sub[-1].isalpha() else sub}"
+                    f"{'(' + sub[-1] + ')' if sub[-1].isalpha() else ''}({item}), {self.section_title}")
+        return self.section_title or f"Section {self.section}"
 
 
 @dataclass
@@ -126,6 +153,11 @@ Rules:
 - Never mention clauses that are not in DOCUMENT TEXT. Never guess at numbers.
 - Speak numbers and section references in words, the way they are written in DOCUMENT TEXT (spoken form).
 - Do not read ahead: if you are told a clause is further down, only offer to jump there.
+- NEVER decide whether the listener personally qualifies, is eligible, is covered, or will be paid.
+  If they ask "am I eligible", "do I qualify", "can I claim", "will they pay", or anything similar,
+  read the criteria and cite the section, then say exactly:
+  "I can't tell you whether that applies to you — I can only read what the document says. For a
+  decision, contact the insurer or lender." Never answer such a question with yes or no.
 """
 
 
@@ -155,7 +187,8 @@ class Grounding:
     # ------------------------------------------------------------ helpers
     def _hit(self, i: int, score: float) -> Hit:
         c = self.clauses[i]
-        return Hit(c["id"], c["index"], score, c["section"], c["section_title"], c["text_display"], c["text_spoken"])
+        return Hit(c["id"], c["index"], score, c["section"], c["section_title"], c["text_display"],
+                   c["text_spoken"], c.get("path"))
 
     def resolve_section_ref(self, question: str) -> Optional[str]:
         """'section 4 b 2' / 'Section 4(b)(ii)' -> 'sec-4b-ii' if it exists."""
@@ -179,6 +212,11 @@ class Grounding:
         content = tokenize(_DEICTIC.sub(" ", q))
         return len(content) <= 1
 
+    @staticmethod
+    def is_eligibility_question(question: str) -> bool:
+        """Is the listener asking us to apply the document's criteria to them?"""
+        return bool(_ELIGIBILITY.search(question or ""))
+
     # ------------------------------------------------------------ retrieval
     def retrieve(self, question: str, read_cursor: int, k: int = 3, allow_ahead: bool = False) -> GroundingResult:
         """BM25 within scope; hits beyond the cursor are reported separately."""
@@ -200,6 +238,16 @@ class Grounding:
     def resolve(self, question: str, last_heard_unit_id: Optional[str], read_cursor: int) -> GroundingResult:
         """Entry point used by the agent. Deictic -> last heard clause. Explicit
         section ref -> that clause (gated). Otherwise BM25 within scope."""
+        if self.is_eligibility_question(question):
+            # Retrieve the criteria exactly as normal, then tag the result. The
+            # spoiler gate still wins: we never pull an unread clause forward
+            # just because the question was phrased as an eligibility ask.
+            r = self._resolve_plain(question, last_heard_unit_id, read_cursor)
+            return r if r.kind == "beyond_cursor" else GroundingResult(
+                "eligibility", question, r.hits, r.beyond, r.reference_unit_id, read_cursor)
+        return self._resolve_plain(question, last_heard_unit_id, read_cursor)
+
+    def _resolve_plain(self, question: str, last_heard_unit_id: Optional[str], read_cursor: int) -> GroundingResult:
         if last_heard_unit_id and self.is_deictic(question):
             c = self.by_id[last_heard_unit_id]
             return GroundingResult("deictic", question, [self._hit(c["index"], 1.0)], [], last_heard_unit_id, read_cursor)
@@ -236,6 +284,15 @@ class Grounding:
             return f"That's covered further down, in {h.citation_spoken()}. Want me to jump there, or keep going from where we were?"
         if result.kind == "not_found":
             return "I can't find that in the policy text I have. For that one, you'd want to ask the insurer directly. Shall I carry on?"
+        if result.kind == "eligibility":
+            # Deterministic on purpose: this answer never goes through the LLM,
+            # so no sampling accident can turn it into a yes or a no. The same
+            # rule is in SYSTEM_PROMPT as defence in depth for anything that
+            # slips past _ELIGIBILITY and reaches the model.
+            if result.hits:
+                h = result.hits[0]
+                return f"{h.citation_spoken()}, says: {h.text_spoken} {ELIGIBILITY_REFUSAL}"
+            return ELIGIBILITY_REFUSAL
         if llm is None:
             h = result.hits[0]
             return f"{h.citation_spoken()}, says: {h.text_spoken}"

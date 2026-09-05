@@ -6,3 +6,4 @@ traces/numbers/
 notes/*.jsonl
 .venv/
 .pytest_cache/
+traces/chat_demo.jsonl

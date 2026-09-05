@@ -20,9 +20,13 @@ delivery_layer/            the product
 examples/policy-reader/    the demo environment
   fixtures/policy.json     synthetic homeowners policy, 213 clauses, stable ids
   fixtures/build_fixture.py
-  grounding.py             BM25 + spoiler gate + deictic resolution + LLM prompt
+  fixtures/README.md       what each committed fixture is, and its extraction problems
+  grounding.py             BM25 + spoiler gate + deictic resolution + eligibility refusal
+  segment.py               shared segmentation primitives (sentence_spans copy, markers)
   read_demo.py             offline end-to-end of this slice
+  chat_demo.py             text REPL over any fixture (read / stop / ask / resume / ledger)
 scripts/
+  ingest.py                build-time document -> fixture (PDF/DOCX/HTML/URL/txt)
   fetch_voices.py          live catalog check — fails if speaker/model/lang absent
   preflight_rime.py        exact shipped path: one clause, asserts PCM + timestamps
   bench_latency.py         TTFB / full-unit synth, cold vs warm, 50 units
@@ -75,6 +79,54 @@ The active provider and all of the above are logged as a `provider_active` event
 4. **Grounding** answers only from fixture text. Deictic questions ("what does that mean") resolve to the last *heard* clause supplied by the ledger. Retrieval scope is capped at the read cursor; a better hit further down produces an offer to jump, never a read-ahead. No interpretation: the model cites the section and redirects to the insurer otherwise.
 5. **Resume** restarts at the start of the sentence containing the boundary, with a short cue.
 
+## Bring your own document (build time only)
+
+The reader is not tied to the insurance policy. `scripts/ingest.py` turns a PDF,
+DOCX, HTML file, URL, or text file into a fixture in exactly the schema above,
+and `examples/policy-reader/chat_demo.py` is a text REPL that exercises the
+grounding layer against any fixture — no audio, no Rime, no LiveKit.
+
+```bash
+python scripts/ingest.py <path-or-url> --dry-run                    # read the clause list
+python scripts/ingest.py <path-or-url> --out examples/policy-reader/fixtures/<name>.json --review
+python examples/policy-reader/chat_demo.py --fixture fixtures/<name>.json
+```
+
+Three rules, all load-bearing:
+
+- **Ingestion is build time only.** `ingest.py` may fetch a URL *when a developer
+  runs it*; its output is a committed JSON file. There is no runtime upload and
+  no runtime URL fetching anywhere in the agent path — the delivery layer only
+  reads fixtures that are already in version control.
+- **The review step is mandatory.** `--review` prints every clause and waits.
+  A fixture is not committed without a human reading that list, because the
+  segmenter fails silently: a swallowed heading, a dropped list introducer, or a
+  site's feedback widget read aloud as policy text all pass validation. Both
+  splitter bugs fixed while ingesting the second fixture were found this way,
+  not by a test.
+- **The hero document does not change.** `fixtures/policy.json` and
+  `fixtures/build_fixture.py` are frozen; new fixtures sit beside them.
+  `examples/policy-reader/segment.py` holds a deliberate copy of
+  `build_fixture.sentence_spans`, and `tests/test_ingest.py` asserts the two stay
+  identical rather than importing or editing the frozen file.
+
+Segmentation honours a document's own numbering when it has one
+(`Section 4 > (b) > (ii)` → `sec-4b-ii`, `4.2.1` → `sec-4-2-1`) and falls back to
+headings-as-sections with `sec-<n>-p<k>` ids when it does not. Clauses may carry
+two optional fields the hero fixture does not use: `kind`
+(`clause` | `table_row` | `heading`) and `path` (the human numbering path, e.g.
+`4(b)(ii)`). Nothing else in the schema changed, so `grounding.py`, `wordmap.py`,
+`resume.py` and `read_demo.py` read both fixtures unmodified.
+
+**The agent refuses eligibility determinations.** "Am I eligible", "do I
+qualify", "can I claim", "will they pay" and similar second-person outcome asks
+are tagged `eligibility` by `Grounding.resolve()`. The agent reads the criteria
+and cites the clause, then says it cannot apply them to the listener. That answer
+is built deterministically and never goes through the LLM, so no sampling
+accident can turn it into a yes or a no; the same rule is in `SYSTEM_PROMPT` as
+defence in depth. The spoiler gate still outranks it — an eligibility ask never
+pulls an unread clause forward.
+
 ## Design decisions (already made)
 
 - Unit granularity is clause-level; **word-level offsets are used because `/ws3` returns word timestamps for English at no extra cost**. Interpolated spans are flagged in the word map and counted in preflight.
@@ -93,6 +145,24 @@ The active provider and all of the above are logged as a `provider_active` event
 - Timestamp clock behaviour (`per_context` vs `cumulative`) is a probe result, set in `.env`; preflight fails loudly if it looks wrong.
 - Synthesis latency in `traces/latency_bench_*` is measured at the server, not at the listener. Audible-stop latency is a separate measurement in the acceptance harness.
 - Rime's `/textnorm` is compared against our rules for information only; the shipped path uses our normalizer so the golden set is reproducible offline.
+- **Extraction is best-effort and fails silently.** Scanned or JS-rendered pages
+  yield too little text and are rejected outright (< 500 chars), but a page that
+  extracts *badly* still validates. Observed failure modes, all of which the
+  `--review` step exists to catch: site chrome (feedback widgets, cookie banners)
+  ingested as document text unless its class or id matches the block list in
+  `extract_html`; a one-word paragraph such as `Example` absorbed into the
+  following clause by the short-clause merge; and list introducers borrowed only
+  by bullets under six words, so a single list can end up internally inconsistent.
+- **A lone `(i)` is ambiguous** — roman one, or the ninth letter. The segmenter
+  guesses from context (roman unless it follows `(h)`), which is right for legal
+  numbering and wrong for a document that genuinely runs `(a)`…`(i)`.
+- **Ingested fixtures have no spoken section number.** Unnumbered documents get
+  `sec-<n>-p<k>` ids, meaningless read aloud, so `Hit.citation_spoken()` cites the
+  heading instead. That yields "That's covered further down, in If you're not
+  eligible" — grammatical, clumsy.
+- **The eligibility refusal is insurance-worded.** It ends "contact the insurer or
+  lender", the wrong referral on a government-scheme fixture. The sentence is
+  fixed verbatim by the brief; a per-fixture referral string would be the fix.
 
 ## Failure behaviour
 
