@@ -1,0 +1,146 @@
+{
+ "seed": 20260906,
+ "fixture": "policy.json",
+ "points": [
+  {
+   "unit_id": "sec-5b-i",
+   "cut_char": 190,
+   "cut_ms": 13571,
+   "sentence_index": 1,
+   "mid_unit": true
+  },
+  {
+   "unit_id": "sec-7a-i",
+   "cut_char": 91,
+   "cut_ms": 6500,
+   "sentence_index": 1,
+   "mid_unit": true
+  },
+  {
+   "unit_id": "sec-8a-i",
+   "cut_char": 163,
+   "cut_ms": 11642,
+   "sentence_index": 1,
+   "mid_unit": true
+  },
+  {
+   "unit_id": "sec-9c-iv",
+   "cut_char": 113,
+   "cut_ms": 8071,
+   "sentence_index": 1,
+   "mid_unit": true
+  },
+  {
+   "unit_id": "sec-9c-ix",
+   "cut_char": 279,
+   "cut_ms": 19928,
+   "sentence_index": 1,
+   "mid_unit": true
+  },
+  {
+   "unit_id": "sec-13a-vi",
+   "cut_char": 141,
+   "cut_ms": 10071,
+   "sentence_index": 1,
+   "mid_unit": true
+  },
+  {
+   "unit_id": "sec-9b-v",
+   "cut_char": 142,
+   "cut_ms": 10142,
+   "sentence_index": 0,
+   "mid_unit": false
+  },
+  {
+   "unit_id": "sec-8a-ii",
+   "cut_char": 71,
+   "cut_ms": 5071,
+   "sentence_index": 0,
+   "mid_unit": false
+  },
+  {
+   "unit_id": "sec-10c-iv",
+   "cut_char": 70,
+   "cut_ms": 5000,
+   "sentence_index": 0,
+   "mid_unit": false
+  },
+  {
+   "unit_id": "sec-13a-ii",
+   "cut_char": 179,
+   "cut_ms": 12785,
+   "sentence_index": 0,
+   "mid_unit": false
+  },
+  {
+   "unit_id": "sec-4a-v",
+   "cut_char": 101,
+   "cut_ms": 7214,
+   "sentence_index": 0,
+   "mid_unit": false
+  },
+  {
+   "unit_id": "sec-3a-iv",
+   "cut_char": 89,
+   "cut_ms": 6357,
+   "sentence_index": 0,
+   "mid_unit": false
+  },
+  {
+   "unit_id": "sec-13a-iii",
+   "cut_char": 161,
+   "cut_ms": 11500,
+   "sentence_index": 0,
+   "mid_unit": false
+  },
+  {
+   "unit_id": "sec-11a-iii",
+   "cut_char": 96,
+   "cut_ms": 6857,
+   "sentence_index": 0,
+   "mid_unit": false
+  },
+  {
+   "unit_id": "sec-6d-iii",
+   "cut_char": 152,
+   "cut_ms": 10857,
+   "sentence_index": 0,
+   "mid_unit": false
+  },
+  {
+   "unit_id": "sec-13b-i",
+   "cut_char": 74,
+   "cut_ms": 5285,
+   "sentence_index": 0,
+   "mid_unit": false
+  },
+  {
+   "unit_id": "sec-13a-iv",
+   "cut_char": 108,
+   "cut_ms": 7714,
+   "sentence_index": 0,
+   "mid_unit": false
+  },
+  {
+   "unit_id": "sec-1-vi",
+   "cut_char": 46,
+   "cut_ms": 3285,
+   "sentence_index": 0,
+   "mid_unit": false
+  },
+  {
+   "unit_id": "sec-3a-vii",
+   "cut_char": 52,
+   "cut_ms": 3714,
+   "sentence_index": 0,
+   "mid_unit": false
+  },
+  {
+   "unit_id": "sec-5b-vi",
+   "cut_char": 107,
+   "cut_ms": 7642,
+   "sentence_index": 0,
+   "mid_unit": false
+  }
+ ]
+}

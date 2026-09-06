@@ -1,0 +1,193 @@
+{"ts_ms": 23343347.971, "wall": 1788684167.127107, "session_id": "policy-reader", "type": "provider_active", "connect_ms": 1303.8, "provider": "rime", "speaker": "bancroft", "modelId": "coda", "audioFormat": "pcm", "lang": "en", "samplingRate": 24000, "segment": "bySentence", "speedAlpha": 1.0, "endpoint": "wss://users-ws.rime.ai/ws3", "transport": "wss (Rime) -> webrtc (LiveKit) -> client"}
+{"ts_ms": 23343350.254, "wall": 1788684167.1293936, "session_id": "policy-reader", "type": "synth_requested", "turn_id": 0, "unit_id": "sec-5b-i", "provider": "rime"}
+{"ts_ms": 23343352.381, "wall": 1788684167.131523, "session_id": "policy-reader", "type": "synth_requested", "provider": "rime", "context_id": "t0:sec-5b-i", "generation": 0, "chars": 228}
+{"ts_ms": 23343705.453, "wall": 1788684167.4845903, "session_id": "policy-reader", "type": "synth_first_byte", "context_id": "t0:sec-5b-i", "ttfb_ms": 353.1}
+{"ts_ms": 23343707.546, "wall": 1788684167.4866817, "session_id": "policy-reader", "type": "timestamps_received", "context_id": "t0:sec-5b-i", "n": 38, "last_end_ms": 14622.9}
+{"ts_ms": 23343795.384, "wall": 1788684167.5745263, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 100}
+{"ts_ms": 23343998.26, "wall": 1788684167.7774029, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 260}
+{"ts_ms": 23344100.855, "wall": 1788684167.8800015, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 360}
+{"ts_ms": 23344203.546, "wall": 1788684167.982694, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 460}
+{"ts_ms": 23344306.52, "wall": 1788684168.0856671, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 560}
+{"ts_ms": 23344410.646, "wall": 1788684168.1897929, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 660}
+{"ts_ms": 23344513.821, "wall": 1788684168.292969, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 760}
+{"ts_ms": 23344616.99, "wall": 1788684168.3961384, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 860}
+{"ts_ms": 23344719.401, "wall": 1788684168.498541, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 960}
+{"ts_ms": 23344820.96, "wall": 1788684168.600102, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 1060}
+{"ts_ms": 23344923.506, "wall": 1788684168.7026503, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 1160}
+{"ts_ms": 23345025.281, "wall": 1788684168.8044226, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 1260}
+{"ts_ms": 23345126.767, "wall": 1788684168.905912, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 1360}
+{"ts_ms": 23345228.449, "wall": 1788684169.0075886, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 1460}
+{"ts_ms": 23345330.648, "wall": 1788684169.109801, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 1560}
+{"ts_ms": 23345434.922, "wall": 1788684169.2140644, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 1660}
+{"ts_ms": 23345537.827, "wall": 1788684169.3169756, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 1760}
+{"ts_ms": 23345640.935, "wall": 1788684169.420089, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 1860}
+{"ts_ms": 23345744.198, "wall": 1788684169.5233455, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 1960}
+{"ts_ms": 23345847.585, "wall": 1788684169.626736, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 2060}
+{"ts_ms": 23345951.143, "wall": 1788684169.730291, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 2160}
+{"ts_ms": 23346054.185, "wall": 1788684169.8333323, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 2260}
+{"ts_ms": 23346157.421, "wall": 1788684169.936571, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 2360}
+{"ts_ms": 23346260.477, "wall": 1788684170.0396373, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 2460}
+{"ts_ms": 23346363.558, "wall": 1788684170.1427045, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 2560}
+{"ts_ms": 23346466.81, "wall": 1788684170.2459524, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 2660}
+{"ts_ms": 23346570.546, "wall": 1788684170.3496938, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 2760}
+{"ts_ms": 23346676.568, "wall": 1788684170.4557123, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 2860}
+{"ts_ms": 23346779.959, "wall": 1788684170.559106, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 2960}
+{"ts_ms": 23346882.996, "wall": 1788684170.6621435, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 3060}
+{"ts_ms": 23346986.153, "wall": 1788684170.7653012, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 3160}
+{"ts_ms": 23347089.227, "wall": 1788684170.8683758, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 3260}
+{"ts_ms": 23347192.67, "wall": 1788684170.9718175, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 3360}
+{"ts_ms": 23347295.626, "wall": 1788684171.0747736, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 3460}
+{"ts_ms": 23347398.443, "wall": 1788684171.1775904, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 3560}
+{"ts_ms": 23347501.661, "wall": 1788684171.2808082, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 3660}
+{"ts_ms": 23347604.902, "wall": 1788684171.3840482, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 3760}
+{"ts_ms": 23347708.301, "wall": 1788684171.4874475, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 3860}
+{"ts_ms": 23347813.598, "wall": 1788684171.5927422, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 3960}
+{"ts_ms": 23347916.334, "wall": 1788684171.6954842, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 4060}
+{"ts_ms": 23348019.301, "wall": 1788684171.7984476, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 4160}
+{"ts_ms": 23348121.875, "wall": 1788684171.9010224, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 4260}
+{"ts_ms": 23348150.734, "wall": 1788684171.92987, "session_id": "policy-reader", "type": "synth_done", "context_id": "t0:sec-5b-i", "bytes": 871680, "audio_ms": 18160.0, "ttfb_ms": 353.1, "total_ms": 4798.3}
+{"ts_ms": 23348156.376, "wall": 1788684171.9355154, "session_id": "policy-reader", "type": "synth_requested", "turn_id": 0, "unit_id": "sec-5b-ii", "provider": "rime"}
+{"ts_ms": 23348158.089, "wall": 1788684171.93723, "session_id": "policy-reader", "type": "synth_requested", "provider": "rime", "context_id": "t0:sec-5b-ii", "generation": 0, "chars": 130}
+{"ts_ms": 23348225.184, "wall": 1788684172.0043302, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 4360}
+{"ts_ms": 23348329.1, "wall": 1788684172.1082468, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 4460}
+{"ts_ms": 23348431.403, "wall": 1788684172.2105498, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 4560}
+{"ts_ms": 23348492.635, "wall": 1788684172.2717717, "session_id": "policy-reader", "type": "synth_first_byte", "context_id": "t0:sec-5b-ii", "ttfb_ms": 334.5}
+{"ts_ms": 23348494.386, "wall": 1788684172.273521, "session_id": "policy-reader", "type": "timestamps_received", "context_id": "t0:sec-5b-ii", "n": 24, "last_end_ms": 7582.3}
+{"ts_ms": 23348534.411, "wall": 1788684172.3135545, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 4660}
+{"ts_ms": 23348638.088, "wall": 1788684172.4172354, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 4760}
+{"ts_ms": 23348741.268, "wall": 1788684172.5204163, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 4860}
+{"ts_ms": 23348844.58, "wall": 1788684172.62377, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 4960}
+{"ts_ms": 23348947.807, "wall": 1788684172.7269611, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 5060}
+{"ts_ms": 23349050.674, "wall": 1788684172.8298209, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 5160}
+{"ts_ms": 23349153.811, "wall": 1788684172.9329586, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 5260}
+{"ts_ms": 23349257.1, "wall": 1788684173.036249, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 5360}
+{"ts_ms": 23349361.001, "wall": 1788684173.1401474, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 5460}
+{"ts_ms": 23349464.162, "wall": 1788684173.2433107, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 5560}
+{"ts_ms": 23349568.423, "wall": 1788684173.3475707, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 5660}
+{"ts_ms": 23349671.082, "wall": 1788684173.4502294, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 5760}
+{"ts_ms": 23349774.306, "wall": 1788684173.5534945, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 5860}
+{"ts_ms": 23349877.367, "wall": 1788684173.6565187, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 5960}
+{"ts_ms": 23349980.615, "wall": 1788684173.7597597, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 6060}
+{"ts_ms": 23350082.799, "wall": 1788684173.8619447, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 6160}
+{"ts_ms": 23350185.333, "wall": 1788684173.964486, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 6260}
+{"ts_ms": 23350288.819, "wall": 1788684174.0679672, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 6360}
+{"ts_ms": 23350391.421, "wall": 1788684174.170568, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 6460}
+{"ts_ms": 23350494.138, "wall": 1788684174.2732868, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 6560}
+{"ts_ms": 23350597.122, "wall": 1788684174.3762677, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 6660}
+{"ts_ms": 23350699.688, "wall": 1788684174.4788337, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 6760}
+{"ts_ms": 23350801.712, "wall": 1788684174.5808504, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 6860}
+{"ts_ms": 23350903.075, "wall": 1788684174.682212, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 6960}
+{"ts_ms": 23351004.729, "wall": 1788684174.783877, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 7060}
+{"ts_ms": 23351106.358, "wall": 1788684174.8854947, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 7160}
+{"ts_ms": 23351207.487, "wall": 1788684174.9866312, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 7260}
+{"ts_ms": 23351262.805, "wall": 1788684175.0419407, "session_id": "policy-reader", "type": "synth_done", "context_id": "t0:sec-5b-ii", "bytes": 564480, "audio_ms": 11760.0, "ttfb_ms": 334.5, "total_ms": 3104.7}
+{"ts_ms": 23351266.323, "wall": 1788684175.0454621, "session_id": "policy-reader", "type": "synth_requested", "turn_id": 0, "unit_id": "sec-5b-iii", "provider": "rime"}
+{"ts_ms": 23351268.05, "wall": 1788684175.0471914, "session_id": "policy-reader", "type": "synth_requested", "provider": "rime", "context_id": "t0:sec-5b-iii", "generation": 0, "chars": 224}
+{"ts_ms": 23351310.41, "wall": 1788684175.0895576, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 7360}
+{"ts_ms": 23351412.907, "wall": 1788684175.1920538, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 7460}
+{"ts_ms": 23351515.406, "wall": 1788684175.2945538, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 7560}
+{"ts_ms": 23351603.55, "wall": 1788684175.3826857, "session_id": "policy-reader", "type": "synth_first_byte", "context_id": "t0:sec-5b-iii", "ttfb_ms": 335.5}
+{"ts_ms": 23351605.979, "wall": 1788684175.3851159, "session_id": "policy-reader", "type": "timestamps_received", "context_id": "t0:sec-5b-iii", "n": 34, "last_end_ms": 18414.1}
+{"ts_ms": 23351619.01, "wall": 1788684175.3981578, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 7660}
+{"ts_ms": 23351721.962, "wall": 1788684175.501111, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 7760}
+{"ts_ms": 23351825.205, "wall": 1788684175.6043499, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 7860}
+{"ts_ms": 23351928.27, "wall": 1788684175.7074237, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 7960}
+{"ts_ms": 23352030.901, "wall": 1788684175.8100502, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 8060}
+{"ts_ms": 23352133.631, "wall": 1788684175.9127803, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 8160}
+{"ts_ms": 23352136.476, "wall": 1788684175.915617, "session_id": "policy-reader", "type": "cancel_issued", "turn_id": 1, "unit_id": null}
+{"ts_ms": 23352138.383, "wall": 1788684175.9175382, "session_id": "policy-reader", "type": "audible_stop", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 8160, "audible_stop_ts": 23352.138366193}
+{"ts_ms": 23352140.029, "wall": 1788684175.9191728, "session_id": "policy-reader", "type": "unit_truncated", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 8160}
+{"ts_ms": 23352141.696, "wall": 1788684175.9208376, "session_id": "policy-reader", "type": "position_saved", "turn_id": 1, "unit_id": "sec-5b-i", "anchor": "Power failure, meaning the failure of power or other utility service if the failure takes place off the residence premises; if a peril insured against ensues on the residence premises, we cover loss caused by that ensuing peril."}
+{"ts_ms": 23352143.593, "wall": 1788684175.9227283, "session_id": "policy-reader", "type": "cancel_issued", "provider": "rime", "generation": 1, "fenced_contexts": ["t0:sec-5b-iii"], "send_ms": 0.31}
+{"ts_ms": 23352147.875, "wall": 1788684175.9270177, "session_id": "policy-reader", "type": "synth_requested", "turn_id": 1, "unit_id": "answer-1", "provider": "rime"}
+{"ts_ms": 23352149.617, "wall": 1788684175.928758, "session_id": "policy-reader", "type": "synth_requested", "provider": "rime", "context_id": "t1:answer-1", "generation": 1, "chars": 274}
+{"ts_ms": 23352152.97, "wall": 1788684175.9321105, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352154.759, "wall": 1788684175.9338999, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352156.264, "wall": 1788684175.935405, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 829, "generation_now": 1}
+{"ts_ms": 23352157.823, "wall": 1788684175.9369633, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 195, "generation_now": 1}
+{"ts_ms": 23352159.196, "wall": 1788684175.9383407, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352160.965, "wall": 1788684175.940105, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352162.222, "wall": 1788684175.9413626, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352163.995, "wall": 1788684175.9431822, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352165.595, "wall": 1788684175.9447353, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352167.049, "wall": 1788684175.9461892, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352168.638, "wall": 1788684175.9477787, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352170.054, "wall": 1788684175.9491944, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352171.688, "wall": 1788684175.9508288, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 238, "generation_now": 1}
+{"ts_ms": 23352173.261, "wall": 1788684175.9524043, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 786, "generation_now": 1}
+{"ts_ms": 23352175.086, "wall": 1788684175.954227, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352176.642, "wall": 1788684175.9558203, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352178.334, "wall": 1788684175.9575005, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 41, "generation_now": 1}
+{"ts_ms": 23352179.94, "wall": 1788684175.9590805, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 983, "generation_now": 1}
+{"ts_ms": 23352181.6, "wall": 1788684175.9607399, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352183.17, "wall": 1788684175.9623106, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352184.573, "wall": 1788684175.9637127, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352186.126, "wall": 1788684175.9652658, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352187.541, "wall": 1788684175.9666805, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352188.972, "wall": 1788684175.9681113, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352190.436, "wall": 1788684175.9695833, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 64, "generation_now": 1}
+{"ts_ms": 23352192.127, "wall": 1788684175.9712663, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 960, "generation_now": 1}
+{"ts_ms": 23352193.514, "wall": 1788684175.9726605, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352194.75, "wall": 1788684175.9738898, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352196.163, "wall": 1788684175.975303, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352197.583, "wall": 1788684175.9767227, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352199.035, "wall": 1788684175.9781754, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352200.345, "wall": 1788684175.979486, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352201.762, "wall": 1788684175.9809008, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352203.706, "wall": 1788684175.982848, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352236.767, "wall": 1788684176.0159194, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-i", "rendered_ms": 8260}
+{"ts_ms": 23352289.905, "wall": 1788684176.06905, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352292.273, "wall": 1788684176.0714161, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352293.91, "wall": 1788684176.0730517, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352295.601, "wall": 1788684176.0747428, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352297.233, "wall": 1788684176.0763743, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352298.779, "wall": 1788684176.0779214, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352300.377, "wall": 1788684176.0795188, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352302.095, "wall": 1788684176.081238, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352303.701, "wall": 1788684176.0828424, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352305.358, "wall": 1788684176.0844994, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352307.019, "wall": 1788684176.0861597, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352308.632, "wall": 1788684176.0877726, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352310.572, "wall": 1788684176.0897102, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 655, "generation_now": 1}
+{"ts_ms": 23352432.71, "wall": 1788684176.2118561, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 369, "generation_now": 1}
+{"ts_ms": 23352434.988, "wall": 1788684176.2141445, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352437.126, "wall": 1788684176.2162704, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352438.829, "wall": 1788684176.2179723, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352440.647, "wall": 1788684176.219789, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352442.283, "wall": 1788684176.221424, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352444.309, "wall": 1788684176.2234507, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352446.32, "wall": 1788684176.2254617, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352448.342, "wall": 1788684176.2274835, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352450.039, "wall": 1788684176.229184, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352452.251, "wall": 1788684176.231394, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352454.048, "wall": 1788684176.2331896, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352455.704, "wall": 1788684176.2348452, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352457.515, "wall": 1788684176.236656, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352459.126, "wall": 1788684176.2382667, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352460.696, "wall": 1788684176.2398372, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352462.486, "wall": 1788684176.2416408, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352463.851, "wall": 1788684176.2429912, "session_id": "policy-reader", "type": "result_fenced", "provider": "rime", "context_id": "t0:sec-5b-iii", "msg_type": "chunk", "bytes": 1024, "generation_now": 1}
+{"ts_ms": 23352505.649, "wall": 1788684176.284784, "session_id": "policy-reader", "type": "synth_first_byte", "context_id": "t1:answer-1", "ttfb_ms": 356.0}
+{"ts_ms": 23352508.223, "wall": 1788684176.2873595, "session_id": "policy-reader", "type": "timestamps_received", "context_id": "t1:answer-1", "n": 45, "last_end_ms": 18955.7}
+{"ts_ms": 23357349.938, "wall": 1788684181.1290731, "session_id": "policy-reader", "type": "synth_done", "context_id": "t1:answer-1", "bytes": 1109760, "audio_ms": 23120.0, "ttfb_ms": 356.0, "total_ms": 5200.3}
+{"ts_ms": 23357356.47, "wall": 1788684181.135612, "session_id": "policy-reader", "type": "position_restored", "turn_id": 1, "unit_id": "sec-5b-i", "anchor": "Power failure, meaning the failure of power or other utility service if the failure takes place off the residence premises; if a peril insured against ensues on the residence premises, we cover loss caused by that ensuing peril."}
+{"ts_ms": 23357358.439, "wall": 1788684181.1375773, "session_id": "policy-reader", "type": "synth_requested", "turn_id": 1, "unit_id": "cue-1", "provider": "rime"}
+{"ts_ms": 23357359.752, "wall": 1788684181.138894, "session_id": "policy-reader", "type": "synth_requested", "provider": "rime", "context_id": "t1:cue-1", "generation": 1, "chars": 54}
+{"ts_ms": 23357673.638, "wall": 1788684181.4527738, "session_id": "policy-reader", "type": "synth_first_byte", "context_id": "t1:cue-1", "ttfb_ms": 313.9}
+{"ts_ms": 23357675.871, "wall": 1788684181.4550068, "session_id": "policy-reader", "type": "timestamps_received", "context_id": "t1:cue-1", "n": 10, "last_end_ms": 4332.7}
+{"ts_ms": 23358746.825, "wall": 1788684182.5259602, "session_id": "policy-reader", "type": "synth_done", "context_id": "t1:cue-1", "bytes": 257280, "audio_ms": 5360.0, "ttfb_ms": 313.9, "total_ms": 1387.1}
+{"ts_ms": 23358750.806, "wall": 1788684182.5299463, "session_id": "policy-reader", "type": "synth_requested", "turn_id": 1, "unit_id": "sec-5b-i/resume#1", "provider": "rime"}
+{"ts_ms": 23358752.475, "wall": 1788684182.531616, "session_id": "policy-reader", "type": "synth_requested", "provider": "rime", "context_id": "t1:sec-5b-i/resume#1", "generation": 1, "chars": 104}
+{"ts_ms": 23359089.105, "wall": 1788684182.868241, "session_id": "policy-reader", "type": "synth_first_byte", "context_id": "t1:sec-5b-i/resume#1", "ttfb_ms": 336.6}
+{"ts_ms": 23359093.039, "wall": 1788684182.872174, "session_id": "policy-reader", "type": "timestamps_received", "context_id": "t1:sec-5b-i/resume#1", "n": 18, "last_end_ms": 6679.6}
+{"ts_ms": 23360993.616, "wall": 1788684184.7727513, "session_id": "policy-reader", "type": "synth_done", "context_id": "t1:sec-5b-i/resume#1", "bytes": 380160, "audio_ms": 7920.0, "ttfb_ms": 336.6, "total_ms": 2241.1}
+{"ts_ms": 23360996.451, "wall": 1788684184.7755885, "session_id": "policy-reader", "type": "synth_requested", "turn_id": 1, "unit_id": "sec-5b-ii", "provider": "rime"}
+{"ts_ms": 23360998.127, "wall": 1788684184.7772682, "session_id": "policy-reader", "type": "synth_requested", "provider": "rime", "context_id": "t1:sec-5b-ii", "generation": 1, "chars": 130}
+{"ts_ms": 23361351.804, "wall": 1788684185.1309407, "session_id": "policy-reader", "type": "synth_first_byte", "context_id": "t1:sec-5b-ii", "ttfb_ms": 353.7}
+{"ts_ms": 23361355.044, "wall": 1788684185.1341794, "session_id": "policy-reader", "type": "timestamps_received", "context_id": "t1:sec-5b-ii", "n": 24, "last_end_ms": 7582.3}
+{"ts_ms": 23363714.339, "wall": 1788684187.493473, "session_id": "policy-reader", "type": "synth_done", "context_id": "t1:sec-5b-ii", "bytes": 472320, "audio_ms": 9840.0, "ttfb_ms": 353.7, "total_ms": 2716.2}
+{"ts_ms": 23363718.577, "wall": 1788684187.4977136, "session_id": "policy-reader", "type": "synth_requested", "turn_id": 1, "unit_id": "sec-5b-iii", "provider": "rime"}
+{"ts_ms": 23363719.408, "wall": 1788684187.4985461, "session_id": "policy-reader", "type": "synth_requested", "provider": "rime", "context_id": "t1:sec-5b-iii", "generation": 1, "chars": 224}
+{"ts_ms": 23364058.094, "wall": 1788684187.837229, "session_id": "policy-reader", "type": "synth_first_byte", "context_id": "t1:sec-5b-iii", "ttfb_ms": 338.7}
+{"ts_ms": 23364059.501, "wall": 1788684187.8386352, "session_id": "policy-reader", "type": "timestamps_received", "context_id": "t1:sec-5b-iii", "n": 34, "last_end_ms": 18414.1}
+{"ts_ms": 23368932.831, "wall": 1788684192.7119684, "session_id": "policy-reader", "type": "synth_done", "context_id": "t1:sec-5b-iii", "bytes": 983040, "audio_ms": 20480.0, "ttfb_ms": 338.7, "total_ms": 5213.4}

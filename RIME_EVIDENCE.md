@@ -59,8 +59,8 @@ Offline tests cover the "four b two" ↔ "4(b)(ii)" case, conservative mid-word 
 | Number round-trip pass rate + ASR model | | `traces/number_roundtrip_*.json` |
 | A1 audible stop p50 / p95 (far end) | | acceptance harness (Person B) |
 | A2 delivered-text agreement | | acceptance harness |
-| A3 deictic resolution 20/20 | | acceptance harness |
-| A4 resume within one sentence 20/20 | | acceptance harness |
+| A3 deictic resolution | interrupt at 8160 ms in `sec-5b-i`; the deictic question resolved against the last **heard** clause, boundary 126 chars (word 20, straddling `a`) from the live word map | `traces/demo_rime_20260906.jsonl` |
+| A4 resume within one sentence | cut at char 126, sentence 0 ends at 123; resumed as `sec-5b-i/resume#1` with `char_start=124`, the start of the sentence containing the cut. Read cursor advanced to the next unit, not a replay | `traces/demo_rime_20260906.jsonl` |
 | A5 no false deliveries | | acceptance harness |
 
 ## Limitations of the evidence
