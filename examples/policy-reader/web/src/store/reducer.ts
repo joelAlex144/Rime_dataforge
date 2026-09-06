@@ -204,6 +204,16 @@ export function buildInterrupt(contextId: string | null, renderedMs: number): an
   ]
 }
 
+/** Pause is an interrupt without a question: the same flush_ack first, so the
+ *  server attributes the boundary to the clause being heard and re-reads it
+ *  from the cursor instead of skipping it. */
+export function buildPause(contextId: string | null, renderedMs: number): any[] {
+  return [
+    { type: 'flush_ack', context_id: contextId, rendered_ms: renderedMs },
+    { type: 'pause' },
+  ]
+}
+
 function push(events: EventRecord[], rec: EventRecord): EventRecord[] {
   const next = events.length >= EVENT_CAP ? events.slice(events.length - EVENT_CAP + 1) : events.slice()
   next.push(rec)

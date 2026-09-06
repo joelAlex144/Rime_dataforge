@@ -150,6 +150,7 @@ class ContextState:
     ttfb_ms: Optional[float] = None
     synth_done: bool = False       # provider finished sending this unit
     heard: bool = False            # client acked playing it to the end
+    abandoned: bool = False        # reading stopped before it was heard; excluded from flow control
 
     def as_dict(self) -> dict:
         return {
@@ -190,7 +191,6 @@ class ReaderSession:
         # both in ms. The reader pumps synthesis ahead of the playhead by at
         # most LEAD_MS, so audio is always buffered (no inter-clause gap) but a
         # bounded amount is wasted on an interruption.
-        self._synth_ms: float = 0.0
         self._unreviewed: Optional[str] = None
         rows = self.library.list()
         if rows:
@@ -336,10 +336,19 @@ class ReaderSession:
         }
 
     # -------------------------------------------------------------- reading
-    def _played_ms(self) -> float:
-        """Total audio actually played across all units, from client acks."""
-        return sum(min(st.rendered_ms, st.audio_ms) for st in self.contexts.values()
-                   if st.audio_ms > 0)
+    def _backlog_ms(self) -> float:
+        """Audio sent but not yet acked as played, over units still deliverable.
+
+        Abandoned units are excluded. When reading stops, the client flushes
+        its queue and a fresh read_loop re-synthesises from the cursor, so the
+        unplayed remainder of a stopped unit will never be acked. Counting it
+        held the 4 s lead for the rest of session_web-29e08c00 (7.5 s of a
+        clause paused at 2.7 s): every later clause stalled after synthesis
+        until the listener pressed pause and play again.
+        """
+        return sum(max(0.0, st.audio_ms - st.rendered_ms)
+                   for st in self.contexts.values()
+                   if st.audio_ms > 0 and not st.abandoned and not st.heard)
 
     async def _mark_heard(self, st: "ContextState", sockets) -> None:
         """A unit is heard once, when the client says it finished playing it.
@@ -454,7 +463,6 @@ class ReaderSession:
                                 "corrected": True,
                             }, sockets)
                         st.synth_done = True
-                        self._synth_ms += st.audio_ms
                         await broadcast({"type": "unit_done", "context_id": ctx_id,
                                          "unit_id": c["id"], "bytes": item.total_bytes}, sockets)
                     elif isinstance(item, TTSError):
@@ -475,18 +483,16 @@ class ReaderSession:
                 # blocked here for the whole real-time playback, which made every
                 # clause boundary a pause and, when the last ack plateaued just
                 # short of the end, a 12-second one.
-                while self.playing and (self._synth_ms - self._played_ms()) > LEAD_MS:
+                while self.playing and self._backlog_ms() > LEAD_MS:
                     await asyncio.sleep(0.05)
 
             # Synthesis is done; wait for playback to drain before declaring the
             # document finished, so a listener still hearing the last clause is
             # not told it is over.
-            drain_deadline = time.monotonic() + (self._synth_ms / 1000.0) + 15.0
-            while self.playing and self._played_ms() + 250 < self._synth_ms:
+            drain_deadline = time.monotonic() + (self._backlog_ms() / 1000.0) + 15.0
+            while self.playing and self._backlog_ms() > 250:
                 if time.monotonic() > drain_deadline:
-                    self.events.emit("drain_timeout",
-                                     played_ms=round(self._played_ms(), 1),
-                                     synth_ms=round(self._synth_ms, 1))
+                    self.events.emit("drain_timeout", backlog_ms=round(self._backlog_ms(), 1))
                     break
                 await asyncio.sleep(0.1)
             if self.playing and s.read_cursor >= len(g.clauses):
@@ -507,6 +513,12 @@ class ReaderSession:
             except (asyncio.CancelledError, Exception):
                 pass
         self._reader = None
+        # Whatever was not heard when reading stopped will not be: the client
+        # flushes its queue and the next read_loop re-synthesises from the
+        # cursor. Take those units out of flow control (see _backlog_ms).
+        for st in self.contexts.values():
+            if not st.heard:
+                st.abandoned = True
 
 
 # ==========================================================================
@@ -788,6 +800,61 @@ async def ws_audio(request):
     return ws
 
 
+async def _stop_and_attribute(s: ReaderSession, socks, reason: str) -> None:
+    """Stop reading, cancel synthesis, attribute the boundary to the clause the
+    listener was hearing. Shared by interrupt and pause: both cut the audio at
+    the playhead, and both must leave the read cursor on the cut clause."""
+    now = time.monotonic() * 1000.0
+    if s._pending_flush is not None:
+        s._flush_acks.append((s._pending_flush, now))
+        s._pending_flush = None
+    else:
+        s.events.emit(f"{reason}_without_flush_ack")
+    await s.stop_reading()
+    if s.provider:
+        await s.provider.cancel()
+    doc = s.library.current
+    sess = doc.session
+    # The clause the listener was actually hearing is the flush_ack's
+    # context (the playhead), not the last clause synthesised, which under
+    # lookahead may be several clauses further on and already buffered.
+    ctx_id = getattr(s, "_flush_ctx", None)
+    if ctx_id not in s.contexts:
+        ctx_id = sess.current_unit_id and next(
+            (c for c in reversed(list(s.contexts))
+             if s.contexts[c].unit_id == sess.current_unit_id), None)
+    s._flush_ctx = None
+    st = s.contexts.get(ctx_id) if ctx_id else None
+    if st:
+        st.state = "fenced"
+        wm = s.wordmaps.get(ctx_id)
+        c = doc.grounding.by_id[st.unit_id]
+        char_end = wm.offset_at(st.rendered_ms) if wm else 0
+        word_i, word = -1, ""
+        if wm:
+            for i, sp in enumerate(wm.spans):
+                if sp.t_end_ms <= st.rendered_ms:
+                    word_i, word = i, sp.text if hasattr(sp, "text") else ""
+        sess.last_heard_unit_id = st.unit_id
+        sess.boundary_char = char_end
+        cut = char_end < len(c["text_display"])
+        sess.ledger[st.unit_id] = f"truncated@{char_end}" if cut else "heard"
+        # Re-read a cut clause from the cursor; never skip it (pause used
+        # to leave the cursor past it, so sec-3-p4 vanished after a pause
+        # at 0.9 s) and never replay one that was heard to the end.
+        sess.read_cursor = c["index"] if cut else c["index"] + 1
+        if cut:
+            s.events.emit("unit_truncated", document=doc.name, context_id=st.unit_id,
+                          char_end=char_end, of=len(c["text_display"]),
+                          rendered_ms=round(st.rendered_ms, 1), reason=reason)
+        await broadcast({"type": "boundary", "unit_id": st.unit_id,
+                         "context_id": ctx_id, "rendered_ms": round(st.rendered_ms, 1),
+                         "char_end": char_end, "word_index": word_i, "word": word,
+                         "of": len(c["text_display"])}, socks)
+    await broadcast({"type": "paused"}, socks)
+    return
+
+
 async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
     t = m.get("type")
 
@@ -862,50 +929,7 @@ async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
         return
 
     if t == "interrupt":
-        now = time.monotonic() * 1000.0
-        if s._pending_flush is not None:
-            s._flush_acks.append((s._pending_flush, now))
-            s._pending_flush = None
-        else:
-            s.events.emit("interrupt_without_flush_ack")
-        await s.stop_reading()
-        if s.provider:
-            await s.provider.cancel()
-        doc = s.library.current
-        sess = doc.session
-        # The clause the listener was actually hearing is the flush_ack's
-        # context (the playhead), not the last clause synthesised, which under
-        # lookahead may be several clauses further on and already buffered.
-        ctx_id = getattr(s, "_flush_ctx", None)
-        if ctx_id not in s.contexts:
-            ctx_id = sess.current_unit_id and next(
-                (c for c in reversed(list(s.contexts))
-                 if s.contexts[c].unit_id == sess.current_unit_id), None)
-        s._flush_ctx = None
-        st = s.contexts.get(ctx_id) if ctx_id else None
-        if st:
-            st.state = "fenced"
-            wm = s.wordmaps.get(ctx_id)
-            c = doc.grounding.by_id[st.unit_id]
-            char_end = wm.offset_at(st.rendered_ms) if wm else 0
-            word_i, word = -1, ""
-            if wm:
-                for i, sp in enumerate(wm.spans):
-                    if sp.t_end_ms <= st.rendered_ms:
-                        word_i, word = i, sp.text if hasattr(sp, "text") else ""
-            sess.last_heard_unit_id = st.unit_id
-            sess.boundary_char = char_end
-            sess.ledger[st.unit_id] = (f"truncated@{char_end}"
-                                       if char_end < len(c["text_display"]) else "heard")
-            sess.read_cursor = c["index"]          # do not skip the interrupted clause
-            s.events.emit("unit_truncated", document=doc.name, context_id=st.unit_id,
-                          char_end=char_end, of=len(c["text_display"]),
-                          rendered_ms=round(st.rendered_ms, 1))
-            await broadcast({"type": "boundary", "unit_id": st.unit_id,
-                             "context_id": ctx_id, "rendered_ms": round(st.rendered_ms, 1),
-                             "char_end": char_end, "word_index": word_i, "word": word,
-                             "of": len(c["text_display"])}, socks)
-        await broadcast({"type": "paused"}, socks)
+        await _stop_and_attribute(s, socks, "interrupt")
         return
 
     if t == "play":
@@ -917,10 +941,9 @@ async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
         return
 
     if t == "pause":
-        await s.stop_reading()
-        if s.provider:
-            await s.provider.cancel()
-        await broadcast({"type": "paused"}, socks)
+        # The client flushes and sends flush_ack first, exactly as for an
+        # interrupt, so the boundary lands on the clause being heard.
+        await _stop_and_attribute(s, socks, "pause")
         return
 
     if t == "open":

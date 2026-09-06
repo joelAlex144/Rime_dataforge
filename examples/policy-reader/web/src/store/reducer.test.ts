@@ -3,6 +3,7 @@ import {
   Action,
   State,
   buildInterrupt,
+  buildPause,
   initialState,
   reducer,
   spokenCharsAt,
@@ -148,6 +149,19 @@ describe('interrupt ordering', () => {
   it('the interrupt itself carries no position', () => {
     const [, stop] = buildInterrupt('c', 1)
     expect(Object.keys(stop)).toEqual(['type'])
+  })
+})
+
+describe('pause ordering', () => {
+  it('pause sends the same flush ack first, then pause', () => {
+    // Without the ack the server had no playhead to attribute the stop to and
+    // left the cursor past the paused clause: sec-3-p4 was skipped after a
+    // pause at 0.9 s in traces/session_web-29e08c00.jsonl.
+    const msgs = buildPause('sec-3-p4#t5', 906.7)
+    expect(msgs.map((m) => m.type)).toEqual(['flush_ack', 'pause'])
+    expect(msgs[0].rendered_ms).toBe(906.7)
+    expect(msgs[0].context_id).toBe('sec-3-p4#t5')
+    expect(Object.keys(msgs[1])).toEqual(['type'])
   })
 })
 

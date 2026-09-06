@@ -127,7 +127,11 @@ exercised live; it is covered by `tests/test_server_heard.py` and
 stopped at each clause: the flow-control backlog counted the unplayed remainder
 of paused units, and the pause path did not rewind the read cursor
 (`sec-3-p4` was skipped after a pause at 0.9 s). Both are recorded here as found
-and addressed in the commit that follows this evidence.
+and addressed in the commit that follows this evidence: flow control now counts
+only units still deliverable, and pause attributes its boundary exactly as an
+interrupt does. That commit is verified by `tests/test_server_pause.py` and
+the reducer tests, not yet by a further live session; a continuous run that
+reaches `document_finished` without a pause is the outstanding check.
 
 ## Limitations of the evidence
 

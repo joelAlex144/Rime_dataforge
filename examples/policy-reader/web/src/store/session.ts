@@ -8,7 +8,7 @@
  * interrupt -- see buildInterrupt() in reducer.ts.
  */
 import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
-import { Action, DISCONNECTED, State, buildInterrupt, initialState, reducer, wordAt } from './reducer'
+import { Action, DISCONNECTED, State, buildInterrupt, buildPause, initialState, reducer, wordAt } from './reducer'
 
 const ACK_INTERVAL_MS = 100
 
@@ -482,8 +482,8 @@ export function useSession(): Session {
   }, [send])
 
   const pause = useCallback(() => {
-    playerRef.current.flush()
-    send({ type: 'pause' })
+    const at = playerRef.current.flush()
+    for (const msg of buildPause(ctxRef.current, at)) send(msg)
   }, [send])
 
   const ask = useCallback(
