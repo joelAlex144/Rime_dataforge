@@ -41,8 +41,10 @@ from typing import Optional, Protocol
 
 from delivery_layer.fence import Fence
 from delivery_layer.ledger import Ledger
-from delivery_layer.playback_protocol import Cancel, UnitStart, encode
-from delivery_layer.position import PositionManager
+from delivery_layer.playback_protocol import (
+    AudioChunk as WireAudioChunk, Cancel, UnitStart, encode)
+from delivery_layer.normalize import normalize, normalize_with_map
+from delivery_layer.position import PositionManager, sentence_start_containing
 from delivery_layer.scheduler import Scheduler, Unit
 from delivery_layer.events import EventLog
 from delivery_layer.tts import make_provider
@@ -97,22 +99,113 @@ class NotImplementedAnswerProvider:
 # ---------------------------------------------------------------------------
 
 
-def load_units(fixture_path: str | Path) -> list[Unit]:
-    """Loads the clause-chunked fixture. Schema per the agreed contract:
-    a JSON list of {unit_id, order, text_display, text_spoken,
-    clause_label?}. The fixture file itself is owned by the synthesis
-    side; this is just the reader."""
-    data = json.loads(Path(fixture_path).read_text())
-    return [
-        Unit(
-            unit_id=u["unit_id"],
-            order=u["order"],
-            text_display=u["text_display"],
-            text_spoken=u["text_spoken"],
-            clause_label=u.get("clause_label"),
-        )
-        for u in data
-    ]
+def _derive_path(clause: dict) -> Optional[str]:
+    """"4(b)(vii)" from a fixture that carries section/subsection/item.
+
+    Ingested fixtures write an explicit `path`; policy.json predates it but has
+    the parts, and a numbered policy should be cited by number when it is read
+    back. Unnumbered documents have neither and fall back to the heading.
+    """
+    sec = clause.get("section")
+    sub, item = clause.get("subsection"), clause.get("item")
+    if sec in (None, "") or not (sub or item):
+        # An unnumbered document still has a heading ordinal in `section`, but
+        # "Section 3" spoken aloud for a heading called "The person you care
+        # for" is noise. Only a real subsection or item makes it a citation.
+        return None
+    out = str(sec)
+    for part in (sub, item):
+        if part:
+            out += f"({part})"
+    return out
+
+
+def load_units(fixture_path: str | Path, name: Optional[str] = None) -> list[Unit]:
+    """Load the real fixture.
+
+    Accepts examples/policy-reader/fixtures/policy.json (or any fixture named
+    in fixtures/index.json), and still accepts the delivery side's original
+    flat list so their placeholder fixture keeps working.
+
+    Their open question 3 asked for the schema. It is:
+      {"clauses": [{id, index, section_title, path?, text_display,
+                    text_spoken, sentences, spoken_map}, ...]}
+    `spoken_map` and `sentences` are carried through because the word map and
+    the resume anchor cannot be derived without them.
+    """
+    path = Path(fixture_path)
+    if path.name == "index.json" or (name and path.is_dir()):
+        registry = json.loads((path if path.name == "index.json" else path / "index.json").read_text())
+        entries = registry["documents"]
+        entry = next((e for e in entries if e["name"] == name), entries[0])
+        path = (path if path.is_dir() else path.parent) / entry["path"]
+
+    data = json.loads(path.read_text())
+
+    if isinstance(data, list):
+        # the delivery side's original flat placeholder schema
+        return [
+            Unit(unit_id=u["unit_id"], order=u["order"],
+                 text_display=u["text_display"], text_spoken=u["text_spoken"],
+                 clause_label=u.get("clause_label"))
+            for u in data
+        ]
+
+    units: list[Unit] = []
+    for c in data["clauses"]:
+        # Numbered documents get a spoken citation; unnumbered ones only have a
+        # heading, and "Section 3(p7)" read aloud is meaningless.
+        path = c.get("path") or _derive_path(c)
+        label = f"Section {path}, {c['section_title']}" if path else c["section_title"]
+        units.append(Unit(
+            unit_id=c["id"],
+            order=c["index"],
+            text_display=c["text_display"],
+            text_spoken=c["text_spoken"],
+            clause_label=label,
+            spoken_map=tuple(tuple(x) for x in c.get("spoken_map", ())),
+            sentences=tuple(tuple(x) for x in c.get("sentences", ())),
+            char_start=0,
+        ))
+    return units
+
+
+class GroundingAnswerProvider:
+    """AnswerProvider backed by examples/policy-reader/grounding.py.
+
+    Deictic questions resolve against the last clause actually HEARD, which
+    position.py supplies from the ledger rather than from wherever synthesis
+    had reached. The spoiler gate, the beyond-cursor offer and the eligibility
+    refusal all pass through unchanged -- this class chooses nothing, it only
+    supplies the cursor and the truncated reference text.
+    """
+
+    def __init__(self, fixture_path, cursor_fn, heard_text_fn=None) -> None:
+        from grounding import Grounding
+        self._g = Grounding(fixture_path)
+        self._cursor = cursor_fn
+        self._heard = heard_text_fn or (lambda: None)
+        self.last_kind: Optional[str] = None
+        self.last_offer_unit_id: Optional[str] = None
+
+    async def answer(self, question_text: str,
+                     deictic_unit_id: Optional[str]) -> tuple[str, Optional[str]]:
+        r = self._g.resolve(question_text, deictic_unit_id, read_cursor=self._cursor())
+        self.last_kind = r.kind
+        target = (r.hits[0].unit_id if r.hits
+                  else (r.beyond[0].unit_id if r.beyond else None))
+        self.last_offer_unit_id = target if r.kind == "beyond_cursor" else None
+        text = await self._g.answer(r, heard_text_of_reference=self._heard())
+        return text, target
+
+
+_JUMP = ("jump", "go there", "yes please", "read it", "take me there")
+
+
+def is_jump_intent(text: str) -> bool:
+    """Did the listener accept a beyond-cursor offer?"""
+    t = (text or "").strip().lower()
+    return any(k in t for k in _JUMP)
 
 
 # ---------------------------------------------------------------------------
@@ -167,24 +260,29 @@ class PolicyReaderSession:
         tts = TrackedTTS(provider, events)
 
         def send_chunk(unit_id, turn_id, pcm_b64, seq, t_start_ms, t_end_ms):
-            # Mirrors UnitStart being sent once per unit before its
-            # first chunk -- the client needs sample_rate_hz to convert
-            # its own rendered-frame counts into ms.
-            unit = self._handles.units_by_id[unit_id]
+            # UnitStart once per unit, then every chunk. char_start is 0 for a
+            # normal unit and the resumed sentence's offset for a
+            # `<unit_id>/resume#<turn>` unit, so the client can show the
+            # remainder in place instead of from the top of the clause.
+            unit = self._handles.units_by_id.get(unit_id)
             if seq == 0:
-                start_msg = UnitStart(
+                publish_data(encode(UnitStart(
                     turn_id=turn_id,
                     unit_id=unit_id,
                     seq=seq,
                     sample_rate_hz=24_000,
                     channels=1,
-                )
-                publish_data(encode(start_msg).encode("utf-8"))
-            # AudioChunk wire message construction is intentionally left
-            # to whatever glue converts scheduler callbacks into
-            # playback_protocol.AudioChunk instances -- omitted here to
-            # avoid duplicating the protocol's own dataclass, which
-            # would drift. See scheduler.py's send_chunk contract.
+                    char_start=getattr(unit, "char_start", 0) if unit else 0,
+                )).encode("utf-8"))
+            publish_data(encode(WireAudioChunk(
+                turn_id=turn_id,
+                unit_id=unit_id,
+                seq=seq,
+                chunk_index=seq,
+                pcm_b64=pcm_b64,
+                t_start_ms=int(t_start_ms),
+                t_end_ms=int(t_end_ms),
+            )).encode("utf-8"))
 
         scheduler = Scheduler(
             fence=fence,
@@ -229,6 +327,27 @@ class PolicyReaderSession:
             # on_speech_start, which cancels via fence.bump() first.
             logger.info("read loop ended (likely superseded by an interruption)")
 
+    # -- client acks ----------------------------------------------------------
+
+    def on_playback_ack(self, *, unit_id: str, turn_id: int, rendered_ms: int) -> None:
+        """PlaybackAck from the worklet, ~every 100 ms. rendered_ms counts
+        samples actually rendered, not enqueued. This is the only evidence a
+        unit was heard."""
+        self._handles.ledger.log_frames_played(
+            turn_id=turn_id, unit_id=unit_id, rendered_ms=int(rendered_ms))
+
+    def on_flush_ack(self, *, unit_id: str, turn_id: int, rendered_ms: int,
+                     audible_stop_ts: float) -> None:
+        """FlushAck after an interrupt. Records where audio actually stopped and
+        marks the unit truncated there; the ledger turns rendered_ms into a
+        character boundary through the word map."""
+        led = self._handles.ledger
+        led.log_audible_stop(turn_id=turn_id, unit_id=unit_id,
+                             rendered_ms=int(rendered_ms),
+                             audible_stop_ts=float(audible_stop_ts))
+        led.log_unit_truncated(turn_id=turn_id, unit_id=unit_id,
+                               rendered_ms=int(rendered_ms))
+
     # -- VAD callback ---------------------------------------------------------
 
     async def on_speech_start(self, current_read_unit_id: Optional[str], cut_char_offset: int) -> None:
@@ -270,11 +389,16 @@ class PolicyReaderSession:
             h.position_manager.set_reference_unit(reference_unit_id)
 
         turn_id = h.fence.current_turn_id
+        # The answer goes through the same normalizer as the document before it
+        # enters the tracked pipeline, so "$1,000" and "4(b)(ii)" are spoken the
+        # same way in an answer as when the clause itself is read.
+        ans_spoken, ans_segs = normalize_with_map(answer_text)
         answer_unit = Unit(
             unit_id=f"answer-{turn_id}",
             order=-1,  # answers are out-of-band, not part of document order
             text_display=answer_text,
-            text_spoken=answer_text,
+            text_spoken=ans_spoken,
+            spoken_map=tuple((sg.display_start, sg.display_end, sg.spoken) for sg in ans_segs),
         )
         h.units_by_id[answer_unit.unit_id] = answer_unit
         # The answer is spoken through the exact same scheduler/fence/
@@ -286,21 +410,59 @@ class PolicyReaderSession:
         label = clause_label.clause_label if clause_label and clause_label.clause_label else frame.resume_anchor.unit_id
         cue_text = h.position_manager.reentry_cue(frame, answered=True, clause_label=label)
 
-        cue_unit = Unit(unit_id=f"cue-{turn_id}", order=-1, text_display=cue_text, text_spoken=cue_text)
+        cue_spoken, cue_segs = normalize_with_map(cue_text)
+        cue_unit = Unit(unit_id=f"cue-{turn_id}", order=-1, text_display=cue_text,
+                        text_spoken=cue_spoken,
+                        spoken_map=tuple((sg.display_start, sg.display_end, sg.spoken)
+                                         for sg in cue_segs))
         h.units_by_id[cue_unit.unit_id] = cue_unit
         await h.scheduler.run([cue_unit], turn_id=turn_id)
 
-        # Resume the document read from the saved anchor's unit forward.
-        # NOTE: mid-unit char-offset resume (starting partway through a
-        # unit's text_spoken rather than at its start) is not handled by
-        # Scheduler/Unit as built -- Unit carries whole-unit text only.
-        # Flagging rather than inventing: either Unit needs a resume
-        # sub-range, or resume always restarts at the unit boundary and
-        # accepts replaying from the sentence start within that unit's
-        # full audio. Left as an open question for the position.py /
-        # scheduler seam.
-        resume_from_order = h.units_by_id[frame.resume_anchor.unit_id].order
-        h.read_cursor_order = resume_from_order
+        # Resume mid-unit, from the sentence containing the delivery boundary.
+        #
+        # The boundary comes from the ledger -- the position the listener's acks
+        # actually reached -- and the sentence containing it comes from the
+        # fixture's precomputed `sentences`, not position.py's punctuation
+        # heuristic, which misfires on "$1,842.00" and "4(b)(ii)".
+        #
+        # The remainder is synthesised as a NEW unit, `<unit_id>/resume#<turn>`,
+        # carrying char_start so every word timing it produces is reported in
+        # the ORIGINAL unit's coordinates. The original stays truncated@N in the
+        # ledger; when the fragment is heard to the end the ledger marks the
+        # original heard. Reading then continues at the NEXT unit: the clause is
+        # never replayed from the top.
+        orig = h.units_by_id[frame.resume_anchor.unit_id]
+        char_end = h.ledger.delivered_char_end(orig.unit_id)
+        if orig.sentences:
+            start = sentence_start_containing(orig.sentences, char_end)
+        else:
+            start = frame.resume_anchor.char_offset
+
+        if start < len(orig.text_display):
+            tail = orig.text_display[start:]
+            tail_spoken, tail_segs = normalize_with_map(tail)
+            resumed = Unit(
+                unit_id=f"{orig.unit_id}/resume#{turn_id}",
+                order=orig.order,
+                text_display=tail,
+                text_spoken=tail_spoken,
+                clause_label=orig.clause_label,
+                spoken_map=tuple((sg.display_start, sg.display_end, sg.spoken)
+                                 for sg in tail_segs),
+                char_start=start,
+            )
+            h.units_by_id[resumed.unit_id] = resumed
+            h.ledger.register_resume(resumed.unit_id, orig.unit_id, start)
+            await h.scheduler.run([resumed], turn_id=turn_id)
+
+        # read_cursor_order is an INDEX into h.units, not a document order.
+        # They coincide only when the unit list starts at order 0; with any
+        # window or slice they do not, and resume would jump to the wrong place.
+        resume_index = next(
+            (i for i, u in enumerate(h.units) if u.unit_id == orig.unit_id),
+            h.read_cursor_order,
+        )
+        h.read_cursor_order = resume_index + 1
         await self.start_reading()
 
 

@@ -101,6 +101,10 @@ class Ledger:
         # Set from Done. A unit whose acks reached its audio length is fully
         # heard even if its last word timing is missing or overshot.
         self._duration_ms: dict[str, int] = {}
+        # resumed unit id -> (original unit id, char_start). A resumed unit is
+        # a fragment of its original; when the fragment is heard to the end the
+        # original has been heard in full, across two turns.
+        self._resumed: dict[str, tuple] = {}
 
     # -- low-level append -------------------------------------------------
 
@@ -137,6 +141,21 @@ class Ledger:
 
     def register_unit_duration(self, unit_id: str, total_duration_ms: int) -> None:
         self._duration_ms[unit_id] = int(total_duration_ms or 0)
+
+    def register_resume(self, resumed_unit_id: str, original_unit_id: str,
+                        char_start: int) -> None:
+        self._resumed[resumed_unit_id] = (original_unit_id, int(char_start))
+
+    def delivered_char_end(self, unit_id: str) -> int:
+        """Resolved delivery boundary for a unit, in text_display chars.
+
+        This is what the resume anchor is computed from: the position the
+        listener's acks actually reached, not where synthesis stopped.
+        """
+        for rec in self.resolve():
+            if rec.unit_id == unit_id:
+                return len(rec.delivered_text)
+        return 0
 
     # -- event logging, one method per event type --------------------------
 
@@ -307,7 +326,23 @@ class Ledger:
                 )
             )
 
-        return records
+        # A resumed fragment that was heard to the end completes its original:
+        # the listener has now heard the whole clause, across two turns.
+        by_id = {r.unit_id: r for r in records}
+        for resumed_id, (original_id, _char_start) in self._resumed.items():
+            frag = by_id.get(resumed_id)
+            orig = by_id.get(original_id)
+            if frag is None or orig is None:
+                continue
+            if frag.status == DeliveryStatus.HEARD and orig.status != DeliveryStatus.HEARD:
+                by_id[original_id] = DeliveryRecord(
+                    unit_id=orig.unit_id, turn_id=orig.turn_id,
+                    status=DeliveryStatus.HEARD, rendered_ms=orig.rendered_ms,
+                    delivered_text=self._text_display.get(original_id, orig.delivered_text),
+                    boundary_word_index=orig.boundary_word_index,
+                    straddling_word=None,
+                )
+        return [by_id[r.unit_id] for r in records]
 
     def write_session_record(self, out_path: str | Path) -> dict:
         records = self.resolve()

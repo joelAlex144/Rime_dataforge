@@ -32,7 +32,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from delivery_layer.events import EventLog           # noqa: E402
 from delivery_layer.normalize import normalize       # noqa: E402
-from delivery_layer.resume import resume_point       # noqa: E402
+from delivery_layer.position import resume_point       # noqa: E402
 from library import Library, LibraryError            # noqa: E402
 
 # How many arguments each command takes. This is not cosmetic: without it,

@@ -196,3 +196,70 @@ class PositionManager:
         if not self._stack:
             return None
         return self._stack[-1].deictic_anchor_unit_id
+
+
+# ---------------------------------------------------------------------------
+# Sentence-boundary resume, moved here from the deleted delivery_layer/resume.py
+#
+# resolve_resume_anchor() above scans backwards for ". " and friends. That
+# heuristic misfires on the things an insurance policy is full of: "$1,842.00",
+# "4(b)(ii)", "Dr.". The fixtures already carry precomputed `sentences` spans
+# built by the same splitter that produced text_spoken, so when a caller has
+# them, these are used instead and the heuristic is the fallback for text that
+# arrived without them.
+# ---------------------------------------------------------------------------
+
+@dataclass(frozen=True)
+class ResumePoint:
+    unit_id: str
+    sentence_index: int
+    char_start: int
+    text: str          # display text from the resume point to the end of the unit
+    cue: str           # spoken re-entry cue
+
+    @property
+    def spoken_prefix(self) -> str:
+        return f"{self.cue} "
+
+
+def resume_point(unit_id: str, text_display: str, sentences: list[list[int]], cut_char: int,
+                 section_title: str = "") -> ResumePoint:
+    """`cut_char` is the delivery boundary (WordMap.offset_at). Returns the
+    sentence that contains it. If the boundary sits exactly on a sentence end,
+    resume at the *next* sentence — that sentence was fully heard."""
+    idx = len(sentences) - 1
+    for i, (s, e) in enumerate(sentences):
+        if cut_char < e:
+            idx = i
+            break
+    else:
+        idx = len(sentences)  # whole unit heard
+    if idx >= len(sentences):
+        return ResumePoint(unit_id, idx, len(text_display), "", "")
+    s, e = sentences[idx]
+    cue = "So —" if idx == 0 else "Picking up —"
+    if section_title and idx == 0:
+        cue = f"So — back to {section_title.lower()}."
+    return ResumePoint(unit_id, idx, s, text_display[s:], cue)
+
+
+def resume_anchor_from_sentences(
+    unit_id: str, text_display: str, sentences, cut_char_offset: int
+) -> ResumeAnchor:
+    """ResumeAnchor (what the position stack stores) from precomputed spans."""
+    rp = resume_point(unit_id, text_display, sentences, cut_char_offset)
+    return ResumeAnchor(unit_id=unit_id, char_offset=rp.char_start, sentence_text=rp.text)
+
+
+def sentence_start_containing(sentences, char_offset: int) -> int:
+    """Start of the sentence containing char_offset.
+
+    Before the first sentence -> 0. Past the last -> the last sentence's start,
+    so a resume never lands beyond the text it is resuming into.
+    """
+    start = 0
+    for s, e in sentences or ():
+        if char_offset < e:
+            return s
+        start = s
+    return start

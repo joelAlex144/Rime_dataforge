@@ -49,7 +49,7 @@ sys.path.insert(0, str(HERE))
 
 from delivery_layer.events import EventLog                     # noqa: E402
 from delivery_layer.normalize import Segment                   # noqa: E402
-from delivery_layer.resume import resume_point                 # noqa: E402
+from delivery_layer.position import resume_point                 # noqa: E402
 from delivery_layer.tts import make_provider                   # noqa: E402
 from delivery_layer.tts.base import AudioChunk, Done, Timestamps, TTSError  # noqa: E402
 from delivery_layer.tts.fake import FakeTTS                    # noqa: E402

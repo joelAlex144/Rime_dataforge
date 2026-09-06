@@ -4,10 +4,16 @@ Wire protocol between server (scheduler/agent) and client (AudioWorklet/SDK).
 Versioned, explicit dataclasses in both directions. Nothing in this file
 talks to LiveKit, Rime, or the ledger directly -- it is pure data shape.
 
-Convention: all timestamps in this protocol are milliseconds, on a
-*unit-local* clock that starts at 0 when synthesis for that unit is
-requested (t=0 == synth_requested, not first-byte). Both sides must agree
-on this anchor or boundary resolution in ledger.py silently drifts.
+Convention: all timestamps in this protocol are milliseconds on a *unit-local*
+AUDIO clock. t=0 is the FIRST AUDIO SAMPLE of the unit, not the moment
+synthesis was requested.
+
+This was corrected during integration: the original convention here said
+t=0 == synth_requested. Rime's word timestamps and the worklet's rendered_ms
+are both audio-clock values, so anchoring the protocol at the request would
+have offset every boundary comparison in ledger.py by the time to first byte
+-- a drift that grows with provider latency and never shows up as an error.
+Both sides must agree on this anchor.
 """
 
 from __future__ import annotations
@@ -16,7 +22,9 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Optional, Union
 
-PROTOCOL_VERSION = 1
+# 2: UnitStart gained char_start, so a resumed unit can be shown at its real
+#    position inside the original clause instead of at character 0.
+PROTOCOL_VERSION = 2
 
 
 # ---------------------------------------------------------------------------
@@ -51,7 +59,13 @@ class MessageType(str, Enum):
 @dataclass(frozen=True)
 class UnitStart:
     """Announces a new unit is about to stream. Client should prepare a
-    fresh PCM queue keyed by (turn_id, unit_id)."""
+    fresh PCM queue keyed by (turn_id, unit_id).
+
+    char_start is the offset of this unit's text inside the ORIGINAL clause.
+    It is 0 for a normal unit. A resumed unit -- id `<unit_id>/resume#<turn>`
+    -- carries the offset of the sentence it restarts from, so the client can
+    highlight the remainder in place rather than from the top of the clause.
+    """
 
     type: MessageType = field(default=MessageType.UNIT_START, init=False)
     version: int = field(default=PROTOCOL_VERSION, init=False)
@@ -60,6 +74,7 @@ class UnitStart:
     seq: int
     sample_rate_hz: int
     channels: int
+    char_start: int = 0
 
 
 @dataclass(frozen=True)
@@ -204,6 +219,8 @@ def encode(msg) -> str:
 def decode(raw: str):
     d = json.loads(raw)
     msg_type = MessageType(d.pop("type"))
+    # A version 1 UnitStart has no char_start; the dataclass default of 0 is
+    # the correct reading of it, so old traces still decode.
     d.pop("version", None)
     cls = _TYPE_TO_CLASS[msg_type]
     if cls is WordTimestamps:

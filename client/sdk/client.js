@@ -103,6 +103,11 @@ export class PolicyReaderClient {
     this._unitMeta.set(msg.unit_id, {
       sampleRateHz: msg.sample_rate_hz,
       turnId: msg.turn_id,
+      // Protocol v2. Offset of this unit's text inside the original clause:
+      // 0 normally, and the resumed sentence's start for a `<id>/resume#<turn>`
+      // unit, so a resumed fragment is shown in place rather than from the top
+      // of the clause. Absent on v1 messages, where 0 is the correct reading.
+      charStart: msg.char_start ?? 0,
     });
   }
 

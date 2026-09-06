@@ -14,7 +14,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "examples" / "policy-reader"))
 
 from chat_demo import ChatSession, match_command  # noqa: E402
-from delivery_layer.resume import resume_point    # noqa: E402
+from delivery_layer.position import resume_point    # noqa: E402
 
 FIX = ROOT / "examples" / "policy-reader" / "fixtures" / "policy.json"
 LONG_CLAUSE = "sec-4b-vii"          # multi-sentence, 349 display chars
