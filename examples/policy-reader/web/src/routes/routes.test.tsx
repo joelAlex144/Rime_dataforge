@@ -1,4 +1,4 @@
-import { render, screen, waitFor, within } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import Listener from './Listener'
@@ -28,9 +28,10 @@ function feed(msg: any) {
   for (const s of sockets) s.onmessage?.({ data: JSON.stringify(msg) })
 }
 
-const STATUS = (dev: boolean) => ({
+const STATUS = (dev: boolean, upload: boolean = dev) => ({
   session_id: 'web-abc123',
   dev,
+  upload_enabled: upload,
   replaying: null,
   provider: { provider: 'fake', modelId: 'fake', speaker: 'fake', lang: 'en', audioFormat: 'pcm', samplingRate: 24000 },
   ingest: { state: dev ? 'ok' : 'off', detail: dev ? 'dev upload enabled' : 'build time only' },
@@ -46,11 +47,11 @@ const METRICS = {
   interpolated_spans: null, spans_total: null, flush_ack_p50: null,
 }
 
-function mockFetch(dev: boolean) {
+function mockFetch(dev: boolean, upload: boolean = dev) {
   return vi.fn(async (url: any) => {
     const u = String(url)
     const body =
-      u.startsWith('/api/status') ? STATUS(dev)
+      u.startsWith('/api/status') ? STATUS(dev, upload)
       : u.startsWith('/api/contexts') ? { contexts: [] }
       : u.startsWith('/api/metrics') ? METRICS
       : u.startsWith('/api/traces') ? { traces: [{ name: 'preflight.jsonl', bytes: 1226 }] }
@@ -191,24 +192,70 @@ describe('listener route', () => {
     expect(await screen.findByText(/end of the document/)).toBeInTheDocument()
   })
 
-  it('never offers upload from the listener route', async () => {
+  it('hides upload entirely when the server says upload is disabled', async () => {
+    render(<MemoryRouter><Listener /></MemoryRouter>)
+    feed(HELLO)                                   // no upload_enabled
+    await screen.findByText(/Section 4 of 13/)
+    expect(document.querySelector('input[type="file"]')).toBeNull()
+    expect(screen.queryByText('Add a document')).toBeNull()
+  })
+
+  it('offers Add a document, without an override control, when upload is enabled', async () => {
+    // The status poll agrees with the hello: upload on, dev off.
+    vi.stubGlobal('fetch', mockFetch(false, true))
+    render(<MemoryRouter><Listener /></MemoryRouter>)
+    feed({ ...HELLO, upload_enabled: true })
+    await screen.findByText(/Section 4 of 13/)
+    expect(screen.getByRole('button', { name: /Add a document/ })).toBeInTheDocument()
+    expect(screen.getByLabelText('Document file')).toBeInTheDocument()
+    expect(screen.queryByLabelText('Override reason')).toBeNull()
+    expect(screen.getByText(/needs a person to review it first/)).toBeInTheDocument()
+  })
+
+  it('Enter while playing sends the interrupt sequence before the question', async () => {
+    render(<MemoryRouter><Listener /></MemoryRouter>)
+    feed(HELLO)
+    feed(UNIT)                                    // phase: playing
+    await screen.findByText(/Reading section/)
+    const input = screen.getByLabelText('Ask about what you just heard')
+    fireEvent.change(input, { target: { value: 'what does that mean' } })
+    fireEvent.submit(input.closest('form')!)
+    const types = sockets[0].sent.map((m) => m.type)
+    expect(types).toEqual(['flush_ack', 'interrupt', 'ask'])
+    expect(sockets[0].sent[2].question).toBe('what does that mean')
+    expect(screen.getByText(/Answering from the document/)).toBeInTheDocument()
+  })
+
+  it('Enter while paused asks without an interrupt', async () => {
     render(<MemoryRouter><Listener /></MemoryRouter>)
     feed(HELLO)
     await screen.findByText(/Section 4 of 13/)
-    expect(document.querySelector('input[type="file"]')).toBeNull()
+    const input = screen.getByLabelText('Ask about what you just heard')
+    fireEvent.change(input, { target: { value: 'what is the deductible' } })
+    fireEvent.submit(input.closest('form')!)
+    expect(sockets[0].sent.map((m) => m.type)).toEqual(['ask'])
+  })
+
+  it('Keep going sends play, not just a dismissal', async () => {
+    render(<MemoryRouter><Listener /></MemoryRouter>)
+    feed(HELLO)
+    feed({ type: 'answer', question: 'q', kind: 'beyond_cursor', unit_id: 'sec-7a-i', answer: 'a',
+           referral: 'your insurer or lender', offer: true })
+    fireEvent.click(await screen.findByText('Keep going'))
+    expect(sockets[0].sent.map((m) => m.type)).toEqual(['play'])
   })
 })
 
 describe('dev route', () => {
-  it('hides the drop zone and explains why when dev is false', async () => {
+  it('hides the drop zone and explains why when upload is disabled', async () => {
     vi.stubGlobal('fetch', mockFetch(false))
     render(<MemoryRouter><Dev /></MemoryRouter>)
-    expect(await screen.findByText(/Upload is disabled outside dev mode/)).toBeInTheDocument()
+    expect(await screen.findByText(/Upload is disabled/)).toBeInTheDocument()
     expect(document.querySelector('input[type="file"]')).toBeNull()
     expect(document.querySelector('.drop')).toBeNull()
   })
 
-  it('shows the drop zone when dev is true', async () => {
+  it('shows the drop zone with the override control when upload is enabled', async () => {
     vi.stubGlobal('fetch', mockFetch(true))
     render(<MemoryRouter><Dev /></MemoryRouter>)
     await waitFor(() => expect(document.querySelector('.drop')).toBeTruthy())

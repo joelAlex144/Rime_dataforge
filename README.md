@@ -120,6 +120,39 @@ two optional fields the hero fixture does not use: `kind`
 `4(b)(ii)`). Nothing else in the schema changed, so `grounding.py`, `wordmap.py`,
 `resume.py` and `read_demo.py` read both fixtures unmodified.
 
+### Personal data versus institutional contact details
+
+`scripts/ingest.py` scans the extracted text before it segments anything, and
+splits what it finds:
+
+- **Personal** refuses the document (exit 2): an email at a private domain
+  (gmail, yahoo, outlook, hotmail, rediffmail, proton), an email or phone
+  beside a person's name, a 10-digit Indian mobile that is not next to
+  helpline wording, a street address beside a person's name, and a name beside
+  an account or policy number.
+- **Institutional** is kept and warned: a role-based mailbox (`info@`,
+  `care@`, `grievance@`, `complaints@`, `claims@`, `nodal@`, `bima…@`,
+  `rgicl…@` and so on, or `x.care@` / `x.support@`), a regulator, bank or
+  government domain (`irdai.gov.in`, `*.gov.in`, `*.nic.in`, `cioins.co.in`,
+  `rbi.org.in`, `sebi.gov.in`, `npci.org.in`), the insurer's own domain when
+  its name is on the cover, any address that appears three or more times
+  (footer boilerplate), a toll-free 1800/1860 number, and any number within
+  40 characters of helpline / toll free / customer care / grievance / call
+  centre / contact us. Indian policy wordings carry these by regulation.
+
+Institutional hits are printed as `warning: institutional contact detail kept`
+and written, redacted, into the fixture's `source.institutional_contacts` so a
+reviewer sees that the document has a helpline and a grievance mailbox without
+the fixture repeating them. `--pii-report PATH` writes the same split as JSON.
+
+`--allow-pii "reason"` overrides a **personal** refusal only, and the reason is
+written to `source.pii_override_reason`. A name beside an account number is
+never overridable, with or without a reason.
+
+The Reliance General *Arogya Sanjeevani* wording that the dev upload refused
+(hits `rgic…@` and `bima…@`) now passes: 2 insurer addresses, 17 ombudsman
+addresses and 3 toll-free numbers are kept as institutional, nothing personal.
+
 ### Document library
 
 **Selecting a document at runtime is supported. Ingesting one is not.**
@@ -186,6 +219,35 @@ cd examples/policy-reader/web && npm run dev     # http://localhost:5173  and  /
 talks only to our server: no provider key is ever sent to the client, and none
 appears in the bundle. Use the real voice with `python examples/policy-reader/server.py`
 after `set -a; source .env; set +a`.
+
+**Upload on both routes.** Adding a document is available on the listener
+screen ("Add a document") and on `/dev`, through one component. It is gated by
+`--allow-upload`, which is **on by default** for the demo and implied by
+`--dev`; `--no-upload` turns it off and both routes hide the control
+(`/api/status` and the websocket `hello` report `upload_enabled`). The scan,
+the 20 MB limit and the quarantine are the same on both: the file goes to
+`fixtures/unreviewed/`, the listener opens it as an unreviewed, session-only
+document with the banner, and `index.json` is never written. The two differ in
+what a refusal offers: `/dev` shows the institutional and personal hits as two
+lists with a reason field and *Retry with override* (the same file object is
+resubmitted with `allow_pii_reason`, at least 12 characters, and the trace
+gets `pii_override_used`); the listener explains and points at `/dev`. A name
+beside an account number is refused on both with no override.
+
+**Questions.** Enter in the question box while the voice is reading is a
+Stop-and-ask: the client sends `flush_ack`, `interrupt`, `ask`, so the
+boundary is the playhead and the reader is stopped before the question is
+resolved. The answer is synthesised through the same provider as a unit of its
+own (`answer#t<n>`, `unit_started` with `kind: "answer"`), so it is heard on
+the client's acks and interruptible like a clause. Once the client reports the
+answer's last frame, reading resumes after 600 ms at the sentence containing
+the cut, unless the answer was *beyond cursor* or *not found*, which wait for
+Jump there / Keep going / play. Deictic questions resolve against the clause
+the flush ack named, never the last clause synthesised under lookahead. With
+`LLM_API_KEY` set, in-scope answers go through the model named by
+`LLM_PROVIDER` / `LLM_MODEL` (key server-side only; `/api/status` shows which)
+and the trace records `answer_source`; without it, or if the call fails, the
+answer is extractive. Eligibility questions never go through the model.
 
 **What `--dev` enables.** `python examples/policy-reader/server.py --dev` turns on
 `/api/dev/ingest`, `/api/dev/provider`, and `/api/dev/open`. Without it those

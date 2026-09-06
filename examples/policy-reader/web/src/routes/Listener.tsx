@@ -20,6 +20,7 @@ import {
 } from 'lucide-react'
 import { useSession } from '../store/session'
 import type { DocEntry } from '../store/reducer'
+import UploadDocument from '../components/UploadDocument'
 
 const ICON = 18
 
@@ -53,7 +54,7 @@ export default function Listener() {
         inputRef.current?.focus()
       } else if (e.code === 'Space' && !typing) {
         e.preventDefault()
-        state.phase === 'playing' ? s.pause() : s.play()
+        state.phase === 'playing' || state.phase === 'speaking' ? s.pause() : s.play()
       }
     }
     window.addEventListener('keydown', onKey)
@@ -68,8 +69,24 @@ export default function Listener() {
   const submit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!q.trim()) return
+    // Enter while the voice is reading is a Stop-and-ask: the same interrupt
+    // sequence goes first, so the boundary is the playhead and the reader is
+    // stopped before the question is resolved. Otherwise the voice kept
+    // reading over the answer.
+    if (state.phase === 'playing' || state.phase === 'speaking') s.interrupt()
     s.ask(q.trim())
     setQ('')
+  }
+
+  const uploaded = async (d: { name: string }) => {
+    // Session-only. index.json is never touched; the existing unreviewed
+    // banner is what tells the listener so.
+    await fetch('/api/dev/open?unreviewed=1', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ name: d.name }),
+    })
+    dialogRef.current?.close()
   }
 
   return (
@@ -92,22 +109,37 @@ export default function Listener() {
             <span className="s">{railSubtitle(d)}</span>
           </button>
         ))}
-        <button className="rail-row" onClick={() => dialogRef.current?.showModal()}>
-          <span className="t">
-            <FilePlus size={16} aria-hidden="true" /> Add a document
-          </span>
-        </button>
+        {state.uploadEnabled && (
+          <button className="rail-row" onClick={() => dialogRef.current?.showModal()}>
+            <span className="t">
+              <FilePlus size={16} aria-hidden="true" /> Add a document
+            </span>
+          </button>
+        )}
 
         <dialog ref={dialogRef} aria-label="Add a document">
-          <p>
-            Documents are added and reviewed by the team before they appear here. That review
-            is what keeps a document from being read aloud before anyone has checked it.
-          </p>
-          <p className="notice">To ask for one, contact {referral}.</p>
+          {state.uploadEnabled ? (
+            <UploadDocument
+              session={s}
+              allowOverride={false}
+              onSuccess={uploaded}
+              intro={
+                <p>
+                  A document you add here is read in this session only. Adding it to the library
+                  for everyone needs a person to review it first; that review is what keeps a
+                  document from being read aloud before anyone has checked it.
+                </p>
+              }
+            />
+          ) : (
+            <p>
+              Documents are added and reviewed by the team before they appear here. To ask for
+              one, contact {referral}.
+            </p>
+          )}
           {state.dev && (
             <p className="notice">
-              <Link to="/dev">Developer tools</Link> can load an unreviewed document into this
-              session only.
+              <Link to="/dev">Developer tools</Link> show the full ingestion report.
             </p>
           )}
           <button onClick={() => dialogRef.current?.close()}>Close</button>
@@ -158,7 +190,16 @@ export default function Listener() {
                 >
                   Jump there
                 </button>
-                <button onClick={() => s.dispatch({ type: 'clearAnswer' })}>Keep going</button>
+                <button
+                  onClick={() => {
+                    // Keep going means read on: the reader was stopped by the
+                    // question, so this has to start it, not just hide the card.
+                    s.dispatch({ type: 'clearAnswer' })
+                    s.play()
+                  }}
+                >
+                  Keep going
+                </button>
               </div>
             )}
           </section>
@@ -167,12 +208,12 @@ export default function Listener() {
         <div className="transport">
           <button
             className="primary"
-            onClick={() => (state.phase === 'playing' ? s.pause() : s.play())}
+            onClick={() => (state.phase === 'playing' || state.phase === 'speaking' ? s.pause() : s.play())}
             disabled={busy}
-            aria-label={state.phase === 'playing' ? 'Pause' : 'Play'}
+            aria-label={state.phase === 'playing' || state.phase === 'speaking' ? 'Pause' : 'Play'}
           >
-            {state.phase === 'playing' ? <Pause size={ICON} aria-hidden="true" /> : <Play size={ICON} aria-hidden="true" />}
-            {state.phase === 'playing' ? 'Pause' : 'Play'}
+            {state.phase === 'playing' || state.phase === 'speaking' ? <Pause size={ICON} aria-hidden="true" /> : <Play size={ICON} aria-hidden="true" />}
+            {state.phase === 'playing' || state.phase === 'speaking' ? 'Pause' : 'Play'}
           </button>
           <button onClick={stopAndAsk} disabled={busy} aria-label="Stop and ask">
             <Hand size={ICON} aria-hidden="true" /> Stop and ask
@@ -213,6 +254,13 @@ function StatusLine({ phase, current }: { phase: string; current: DocEntry | nul
     return (
       <p className="statusline">
         <MessageSquare size={16} aria-hidden="true" /> Answering from the document&hellip;
+      </p>
+    )
+  }
+  if (phase === 'speaking') {
+    return (
+      <p className="statusline">
+        <Volume2 size={16} aria-hidden="true" /> Reading you the answer.
       </p>
     )
   }

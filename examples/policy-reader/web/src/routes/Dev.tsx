@@ -9,11 +9,10 @@
  */
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Download, Play, Upload } from 'lucide-react'
+import { Download, Play } from 'lucide-react'
 import { useSession } from '../store/session'
 import type { Cell, EventRecord } from '../store/reducer'
-
-const STAGES = ['extract', 'structure', 'segment', 'normalize', 'pii scan', 'validate']
+import UploadDocument, { type IngestResult } from '../components/UploadDocument'
 
 function cls(c?: Cell) {
   return `v s-${c?.state ?? 'off'}`
@@ -26,14 +25,12 @@ export default function Dev() {
   const [follow, setFollow] = useState(true)
   const [traces, setTraces] = useState<{ name: string; bytes: number }[]>([])
   const [trace, setTrace] = useState('')
-  const [ingest, setIngest] = useState<any>(null)
-  const [ingestErr, setIngestErr] = useState<any>(null)
-  const [previewId, setPreviewId] = useState('')
-  const [over, setOver] = useState(false)
-  const [url, setUrl] = useState('')
+  // Documents this session ingested, with the override trail, for the list.
+  const [ingested, setIngested] = useState<IngestResult[]>([])
   const listRef = useRef<HTMLDivElement>(null)
 
   const dev = !!state.status.dev
+  const uploadEnabled = state.status.upload_enabled ?? state.uploadEnabled
 
   useEffect(() => {
     fetch('/api/traces')
@@ -81,34 +78,6 @@ export default function Dev() {
     return `${p50 == null ? 'n/a' : `flush ack ${p50} ms`} · far end n/a`
   }, [state.metrics])
 
-  const submitIngest = async (file?: File) => {
-    setIngestErr(null)
-    setIngest(null)
-    s.dispatch({ type: 'clearIngest' })
-    let res: Response
-    if (file) {
-      if (file.size > 20 * 1024 * 1024) {
-        setIngestErr({ detail: 'File larger than 20 MB.' })
-        return
-      }
-      const fd = new FormData()
-      fd.append('file', file)
-      res = await fetch('/api/dev/ingest', { method: 'POST', body: fd })
-    } else {
-      res = await fetch('/api/dev/ingest', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ url }),
-      })
-    }
-    const d = await res.json()
-    if (res.ok) {
-      setIngest(d)
-      setPreviewId(d.preview?.[0]?.id ?? '')
-    } else setIngestErr(d)
-  }
-
-  const clause = ingest?.preview?.find((c: any) => c.id === previewId)
 
   return (
     <div className="dev">
@@ -168,114 +137,41 @@ export default function Dev() {
       <div className="cols">
         <section className="panel">
           <h2>Ingestion</h2>
-          {!dev ? (
+          {!uploadEnabled ? (
             <p className="notice">
-              Upload is disabled outside dev mode. Add fixtures with scripts/ingest.py.
+              Upload is disabled (started with --no-upload). Add fixtures with scripts/ingest.py.
             </p>
           ) : (
-            <>
-              <div
-                className={`drop${over ? ' over' : ''}`}
-                onDragOver={(e) => {
-                  e.preventDefault()
-                  setOver(true)
-                }}
-                onDragLeave={() => setOver(false)}
-                onDrop={(e) => {
-                  e.preventDefault()
-                  setOver(false)
-                  const f = e.dataTransfer.files?.[0]
-                  if (f) submitIngest(f)
-                }}
-              >
-                <Upload size={18} aria-hidden="true" />
-                <div>Drop a PDF, DOCX, HTML, or text file</div>
-                <input
-                  type="file"
-                  aria-label="Document file"
-                  onChange={(e) => e.target.files?.[0] && submitIngest(e.target.files[0])}
-                />
-              </div>
-              <div className="toolbar" style={{ marginTop: 8 }}>
-                <input
-                  type="url"
-                  placeholder="or a URL"
-                  aria-label="Document URL"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                />
-                <button onClick={() => submitIngest()} disabled={!url.trim()}>
-                  Ingest
-                </button>
-              </div>
-            </>
+            <UploadDocument
+              session={s}
+              allowOverride
+              onSuccess={(d) => setIngested((xs) => [d, ...xs.filter((x) => x.name !== d.name)])}
+            />
           )}
-
-          {(state.ingestStages.length > 0 || ingestErr) && (
-            <div style={{ marginTop: 10 }}>
-              {STAGES.map((st) => {
-                const hit = [...state.ingestStages].reverse().find((x) => x.stage === st)
-                return (
-                  <div className="stage" key={st}>
-                    <span className="st">{st}</span>
-                    <span className={`s-${hit?.state ?? 'off'}`}>{hit?.state ?? 'pending'}</span>
-                    <span className="s-off">{hit?.detail ?? ''}</span>
-                  </div>
-                )
-              })}
-            </div>
-          )}
-          {ingestErr && (
-            <div style={{ marginTop: 8 }}>
-              <div className="s-down mono">
-                {ingestErr.stage ?? 'failed'}: {ingestErr.detail ?? ingestErr.error ?? 'failed'}
-              </div>
-              {(ingestErr.redacted_hits || []).map((h: string, i: number) => (
-                <div className="mono s-warn" key={i}>
-                  {h}
+          {ingested.length > 0 && (
+            <div className="ingested" style={{ marginTop: 10 }}>
+              <div className="s-off mono">Ingested this session (fixtures/unreviewed/)</div>
+              {ingested.map((d) => (
+                <div className="stage" key={d.name}>
+                  <span className="st mono">{d.name}</span>
+                  <span className="s-off">{d.clause_count} clauses</span>
+                  <span className={d.override_reason ? 's-warn' : 's-off'}>
+                    {d.override_reason ? `override: ${d.override_reason}` : ''}
+                  </span>
+                  <button
+                    onClick={() =>
+                      fetch('/api/dev/open?unreviewed=1', {
+                        method: 'POST',
+                        headers: { 'content-type': 'application/json' },
+                        body: JSON.stringify({ name: d.name }),
+                      })
+                    }
+                  >
+                    Open in listener (unreviewed)
+                  </button>
                 </div>
               ))}
             </div>
-          )}
-
-          {ingest && (
-            <>
-              <p className="notice mono">
-                {ingest.clause_count} clauses to {ingest.path}
-              </p>
-              <p className="notice">{ingest.note}</p>
-              <select
-                aria-label="Clause preview"
-                value={previewId}
-                onChange={(e) => setPreviewId(e.target.value)}
-              >
-                {(ingest.preview || []).map((c: any) => (
-                  <option key={c.id} value={c.id}>
-                    {c.id}
-                  </option>
-                ))}
-              </select>
-              {clause && (
-                <div className="side-by-side">
-                  <div className="box">{highlight(clause.text_display, clause.spoken_map, 0)}</div>
-                  <div className="box spoken">{highlight(clause.text_spoken, clause.spoken_map, 1)}</div>
-                </div>
-              )}
-              <div className="toolbar" style={{ marginTop: 8 }}>
-                <button
-                  onClick={() =>
-                    fetch('/api/dev/open?unreviewed=1', {
-                      method: 'POST',
-                      headers: { 'content-type': 'application/json' },
-                      body: JSON.stringify({ name: ingest.name }),
-                    })
-                  }
-                >
-                  Open in listener (unreviewed)
-                </button>
-                <button onClick={() => setIngest(null)}>Discard</button>
-              </div>
-            </>
           )}
         </section>
 
@@ -415,23 +311,4 @@ function EventRow({ rec }: { rec: EventRecord }) {
       <span>{kv}</span>
     </div>
   )
-}
-
-/** Lightly mark the spans the normalizer replaced, in both renderings. */
-function highlight(text: string, map: [number, number, string][] | undefined, side: 0 | 1) {
-  if (!map) return text
-  if (side === 1) return text
-  const out: React.ReactNode[] = []
-  let at = 0
-  for (const [a, b, spoken] of map) {
-    if (a < at) continue
-    const display = text.slice(a, b)
-    if (display !== spoken) {
-      out.push(text.slice(at, a))
-      out.push(<mark key={`${a}-${b}`}>{display}</mark>)
-      at = b
-    }
-  }
-  out.push(text.slice(at))
-  return out
 }

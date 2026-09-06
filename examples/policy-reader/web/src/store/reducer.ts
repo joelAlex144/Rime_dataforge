@@ -24,6 +24,7 @@ export type StatusCells = {
   client_ws?: Cell
   stt?: Cell
   llm?: Cell
+  upload_enabled?: boolean
 }
 
 export type DocEntry = {
@@ -49,6 +50,9 @@ export type Unit = {
   path?: string | null
   textDisplay: string
   sentences: number[][]
+  // A clause resumed after a cut is synthesised from here; everything before
+  // it was already heard and stays ink.
+  charStart: number
 }
 
 export type Answer = {
@@ -83,12 +87,15 @@ export type Metrics = {
   flush_ack_p50: number | null
 }
 
-export type Phase = 'idle' | 'playing' | 'paused' | 'answering' | 'resuming' | 'finished'
+// 'answering': question sent, answer audio not yet started. 'speaking': the
+// answer's own audio is sounding (its unit is client-acked like any clause).
+export type Phase = 'idle' | 'playing' | 'paused' | 'answering' | 'speaking' | 'resuming' | 'finished'
 
 export type State = {
   connected: boolean
   sessionId: string | null
   dev: boolean
+  uploadEnabled: boolean
   provider: Record<string, any>
   providerFellBack: boolean
   replaying: string | null
@@ -110,6 +117,9 @@ export type State = {
 
   phase: Phase
   answer: Answer | null
+  // The answer's own audio context, once it is sounding. Its rendered echoes
+  // never touch the clause on screen.
+  answerCtx: string | null
   resume: { unitId: string; sentenceIndex: number; charStart: number; cue: string } | null
   error: string | null
 
@@ -130,6 +140,7 @@ export const initialState: State = {
   connected: false,
   sessionId: null,
   dev: false,
+  uploadEnabled: false,
   provider: {},
   providerFellBack: false,
   replaying: null,
@@ -145,6 +156,7 @@ export const initialState: State = {
   heardUnits: {},
   phase: 'idle',
   answer: null,
+  answerCtx: null,
   resume: null,
   error: null,
   status: {},
@@ -235,6 +247,7 @@ export function reducer(state: State, action: Action): State {
         ...state,
         status: action.value,
         dev: !!action.value.dev,
+        uploadEnabled: action.value.upload_enabled ?? state.uploadEnabled,
         replaying: action.value.replaying ?? null,
         // /dev can identify the session from the status poll alone, before any
         // websocket hello has arrived.
@@ -269,6 +282,7 @@ function applyServer(state: State, m: any): State {
         connected: true,
         sessionId: m.session_id,
         dev: !!m.dev,
+        uploadEnabled: !!m.upload_enabled,
         provider: m.provider || {},
         providerFellBack: (m.provider?.provider ?? '') === 'fake',
         documents: m.documents || [],
@@ -291,10 +305,18 @@ function applyServer(state: State, m: any): State {
         boundaryChar: 0,
         wordIndex: -1,
         answer: null,
+        answerCtx: null,
         phase: 'idle',
       }
 
     case 'unit_started':
+      if (m.kind === 'answer') {
+        // The spoken answer is a unit of its own so it is acked and interruptible
+        // like a clause, but it is not document text: the clause on screen stays,
+        // and only the phase changes. "Answering from the document…" is replaced
+        // when the answer's audio actually starts, which is when this arrives.
+        return { ...state, answerCtx: m.context_id, phase: 'speaking' }
+      }
       return {
         ...state,
         unit: {
@@ -305,18 +327,23 @@ function applyServer(state: State, m: any): State {
           path: m.path ?? null,
           textDisplay: m.text_display,
           sentences: m.sentences || [],
+          charStart: m.char_start ?? 0,
         },
         words: null,
         spans: [],
         renderedMs: 0,
         // A new unit starts entirely unspoken. Nothing is marked said until the
         // audio clock says so.
-        boundaryChar: 0,
+        boundaryChar: m.char_start ?? 0,
         wordIndex: -1,
+        answerCtx: null,
         phase: 'playing',
       }
 
     case 'timestamps':
+      // The spoken answer has a word map too. It must not restyle the clause
+      // on screen.
+      if (m.context_id && state.unit && m.context_id !== state.unit.contextId) return state
       return {
         ...state,
         words: { words: m.words, start: m.start_ms, end: m.end_ms },
@@ -339,7 +366,11 @@ function applyServer(state: State, m: any): State {
         ...state,
         renderedMs,
         wordIndex: wordAt(state.words, renderedMs),
-        boundaryChar: state.phase === 'playing' ? spoken : state.boundaryChar,
+        // Never below the resume point: the text before it was heard before
+        // the cut, and the first ack of the remainder has no finished word yet.
+        boundaryChar: state.phase === 'playing'
+          ? Math.max(spoken, state.unit?.charStart ?? 0)
+          : state.boundaryChar,
       }
     }
 
@@ -352,7 +383,7 @@ function applyServer(state: State, m: any): State {
         renderedMs: m.rendered_ms ?? state.renderedMs,
         wordIndex: m.word_index ?? state.wordIndex,
         heardUnits: heard,
-        phase: 'paused',
+        phase: state.phase === 'answering' ? 'answering' : 'paused',
       }
     }
 
@@ -370,12 +401,23 @@ function applyServer(state: State, m: any): State {
       return { ...state, phase: 'playing', error: null }
 
     case 'paused':
-      return { ...state, phase: state.phase === 'answering' ? 'answering' : 'paused' }
+      // An interrupt's `paused` lands while the question is still in flight;
+      // that must not clobber "Answering…". Once the answer text is here, a
+      // `paused` means the spoken answer finished (or could not be spoken) and
+      // the listener decides what happens next.
+      return {
+        ...state,
+        phase: state.phase === 'answering' && !state.answer ? 'answering' : 'paused',
+        answerCtx: null,
+      }
 
     case 'answer':
       return {
         ...state,
-        phase: 'paused',
+        // The text arrives before its audio. Stay on "Answering…" until the
+        // answer unit starts sounding; a replayed answer with no audio keeps
+        // whatever phase it was in.
+        phase: state.phase === 'answering' ? 'answering' : state.phase,
         answer: {
           question: m.question,
           kind: m.kind,
@@ -402,7 +444,7 @@ function applyServer(state: State, m: any): State {
       return { ...state, phase: 'finished' }
 
     case 'jumped':
-      return { ...state, answer: null }
+      return { ...state, answer: null, answerCtx: null }
 
     case 'replay_start':
       return { ...state, replaying: m.trace, events: [] }

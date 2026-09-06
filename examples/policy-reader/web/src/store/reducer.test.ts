@@ -242,3 +242,72 @@ describe('ingest progress', () => {
     expect(s.ingestStages[1].state).toBe('fail')
   })
 })
+
+describe('spoken answers', () => {
+  const ASK = { type: 'askPending', question: 'q' } as const
+  it('the answer text keeps "answering" until its audio starts', () => {
+    // Enter while playing: askPending lands before the interrupt's boundary
+    // and paused come back from the server.
+    let s = run([UNIT])
+    s = reducer(s, ASK)
+    s = run([{ type: 'paused' }], s)                // the interrupt's paused
+    expect(s.phase).toBe('answering')
+    s = run([{ type: 'boundary', unit_id: 'sec-4b-vii', rendered_ms: 300, char_end: 20, of: 78 }], s)
+    expect(s.phase).toBe('answering')
+    s = run([{ type: 'answer', question: 'q', kind: 'in_scope', unit_id: 'u', answer: 'a', referral: 'r', offer: false }], s)
+    expect(s.phase).toBe('answering')
+    expect(s.answer?.answer).toBe('a')
+  })
+
+  it('an answer unit starting means speaking, without replacing the clause on screen', () => {
+    let s = run([UNIT])
+    s = reducer(s, ASK)
+    s = run([{ type: 'unit_started', kind: 'answer', context_id: 'answer#t3', unit_id: 'answer',
+               index: -1, section_title: 'Answer', text_display: 'the answer', sentences: [[0, 10]] }], s)
+    expect(s.phase).toBe('speaking')
+    expect(s.answerCtx).toBe('answer#t3')
+    expect(s.unit?.unitId).toBe('sec-4b-vii')
+    expect(s.unit?.textDisplay).toBe(UNIT.text_display)
+  })
+
+  it('the answer\'s timestamps and acks never touch the clause on screen', () => {
+    let s = run([UNIT, WORDS])
+    s = run([{ type: 'timestamps', context_id: 'answer#t3', words: ['x'], start_ms: [0], end_ms: [100],
+               spans: [{ char_start: 0, char_end: 1, t_start_ms: 0, t_end_ms: 100 }] }], s)
+    expect(s.words?.words).toEqual(WORDS.words)
+    s = run([{ type: 'rendered', rendered_ms: 5000, context_id: 'answer#t3' }], s)
+    expect(s.renderedMs).toBe(0)
+  })
+
+  it('paused after the answer text is a real pause (Jump there / Keep going)', () => {
+    let s = reducer(initialState, ASK)
+    s = run([{ type: 'answer', question: 'q', kind: 'beyond_cursor', answer: 'a', referral: 'r', offer: true },
+             { type: 'paused' }], s)
+    expect(s.phase).toBe('paused')
+    expect(s.answer?.offer).toBe(true)
+  })
+})
+
+describe('resumed clause', () => {
+  it('starts with the already-heard text as ink and never drops below it on the first ack', () => {
+    let s = run([{ ...UNIT, char_start: 40 }])
+    expect(s.boundaryChar).toBe(40)
+    s = run([{ type: 'timestamps', context_id: UNIT.context_id, words: ['If'], start_ms: [0], end_ms: [180],
+               spans: [{ char_start: 40, char_end: 42, t_start_ms: 0, t_end_ms: 180 }] },
+             { type: 'rendered', rendered_ms: 50, context_id: UNIT.context_id }], s)
+    expect(s.boundaryChar).toBe(40)
+    s = run([{ type: 'rendered', rendered_ms: 200, context_id: UNIT.context_id }], s)
+    expect(s.boundaryChar).toBe(42)
+  })
+})
+
+describe('upload gate', () => {
+  it('hello carries upload_enabled', () => {
+    expect(run([{ type: 'hello', upload_enabled: true, documents: [] }]).uploadEnabled).toBe(true)
+    expect(run([{ type: 'hello', documents: [] }]).uploadEnabled).toBe(false)
+  })
+  it('status carries it too, for /dev', () => {
+    const s = reducer(initialState, { type: 'status', value: { upload_enabled: true } as any })
+    expect(s.uploadEnabled).toBe(true)
+  })
+})

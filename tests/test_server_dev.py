@@ -42,9 +42,10 @@ SAMPLE_TRACE = "\n".join(json.dumps(r) for r in [
 
 class ServerCase(unittest.IsolatedAsyncioTestCase):
     DEV = False
+    UPLOAD = True          # the demo default; the gate tests turn it off
 
     async def asyncSetUp(self):
-        self.app = srv.build_app(dev=self.DEV)
+        self.app = srv.build_app(dev=self.DEV, allow_upload=self.UPLOAD)
         self.session = self.app["session"]
         self.server = TestServer(self.app)
         self.client = TestClient(self.server)
@@ -76,9 +77,11 @@ class TestStatusAndMetrics(ServerCase):
         self.assertEqual(d["llm"], {"state": "off", "detail": "extractive"})
         self.assertEqual(d["stt"], {"state": "warn", "detail": "button only"})
 
-    async def test_ingest_cell_is_off_outside_dev(self):
+    async def test_ingest_cell_reports_upload_on_by_default_and_status_carries_the_gate(self):
         d = await (await self.client.get("/api/status")).json()
-        self.assertEqual(d["ingest"]["state"], "off")
+        self.assertEqual(d["ingest"]["state"], "ok")
+        self.assertTrue(d["upload_enabled"])
+        self.assertFalse(d["dev"], "upload on does not mean dev on")
 
     async def test_metrics_are_null_on_an_empty_session(self):
         d = await (await self.client.get("/api/metrics")).json()
@@ -114,17 +117,50 @@ class TestStatusAndMetrics(ServerCase):
 class TestDevDisabled(ServerCase):
     DEV = False
 
-    async def test_dev_ingest_is_404_without_dev(self):
-        r = await self.client.post("/api/dev/ingest", json={"url": "https://example.com"})
-        self.assertEqual(r.status, 404)
-
     async def test_dev_provider_is_404_without_dev(self):
         r = await self.client.post("/api/dev/provider", json={"name": "fake"})
         self.assertEqual(r.status, 404)
 
-    async def test_dev_open_unreviewed_is_404_without_dev(self):
+    async def test_hello_carries_upload_enabled(self):
+        ws = await self.client.ws_connect("/ws/audio")
+        try:
+            hello = await ws.receive_json(timeout=5)
+        finally:
+            await ws.close()
+        self.assertTrue(hello["upload_enabled"])
+        self.assertFalse(hello["dev"])
+
+
+class TestUploadDisabled(ServerCase):
+    DEV = False
+    UPLOAD = False
+
+    async def test_ingest_is_404_with_no_upload(self):
+        r = await self.client.post("/api/dev/ingest", json={"url": "https://example.com"})
+        self.assertEqual(r.status, 404)
+
+    async def test_open_unreviewed_is_404_with_no_upload(self):
         r = await self.client.post("/api/dev/open?unreviewed=1", json={"name": "anything"})
         self.assertEqual(r.status, 404)
+
+    async def test_status_and_hello_say_so(self):
+        d = await (await self.client.get("/api/status")).json()
+        self.assertFalse(d["upload_enabled"])
+        self.assertEqual(d["ingest"]["state"], "off")
+        ws = await self.client.ws_connect("/ws/audio")
+        try:
+            self.assertFalse((await ws.receive_json(timeout=5))["upload_enabled"])
+        finally:
+            await ws.close()
+
+    async def test_dev_still_implies_upload(self):
+        app = srv.build_app(dev=True, allow_upload=False)
+        try:
+            self.assertTrue(app["session"].allow_upload)
+        finally:
+            p = getattr(app["session"].events, "path", None)
+            if p and Path(p).exists():
+                Path(p).unlink()
 
 
 class TestDevEnabled(ServerCase):
@@ -188,6 +224,94 @@ class TestDevEnabled(ServerCase):
         after = {d["name"] for d in (await (await self.client.get("/api/library")).json())["documents"]}
         self.assertEqual(before, after,
                          "an ingested document must not appear in the listener library")
+
+
+def _policy_sample(name: str, extra: str = "") -> Path:
+    sample = ROOT / "traces" / f"_ingest_{name}.md"
+    body = ("# Northlake General Insurance Company Limited\n\nPolicy wording, UIN 111N128V01. "
+            "For any complaint write to grievance@insurer.co.in or escalate to the regulator at "
+            "complaints@irdai.gov.in. Toll free helpline 1800 209 5858 (Mon-Sat). " + extra + "\n\n"
+            + "\n\n".join(
+                f"# Section {i}\n\nThis paragraph of the sample policy is comfortably longer than "
+                f"the minimum clause length so that it survives the merge rule intact, number {i}."
+                for i in range(1, 26)))
+    sample.write_text(body, encoding="utf-8")
+    return sample
+
+
+class TestIngestPIISplit(ServerCase):
+    """Institutional contact details pass with a warning; personal data refuses
+    with both lists; an override needs a reason and is logged; a name beside an
+    account number cannot be overridden."""
+    DEV = False
+    UPLOAD = True
+    PERSON = "Policyholder Ramesh Kumar, ramesh.k@gmail.com, 9876543210, is insured."
+
+    def _sample(self, name, extra=""):
+        p = _policy_sample(name, extra)
+        self.addCleanup(lambda: p.unlink(missing_ok=True))
+        return p
+
+    def _cleanup_written(self, payload):
+        if payload.get("path"):
+            out = ROOT / payload["path"]
+            self.addCleanup(lambda: out.unlink(missing_ok=True))
+
+    async def test_institutional_only_document_is_accepted_with_the_hits_reported(self):
+        r = await self.client.post("/api/dev/ingest", json={"url": str(self._sample("inst"))})
+        d = await r.json()
+        self._cleanup_written(d)
+        self.assertEqual(r.status, 200, d)
+        labels = sorted(h["label"] for h in d["institutional_hits"])
+        self.assertEqual(labels, ["email", "email", "phone"])
+        self.assertIsNone(d["override_reason"])
+        self.assertEqual(self.session.events.of_type("pii_override_used"), [])
+        written = json.loads((ROOT / d["path"]).read_text(encoding="utf-8"))
+        self.assertEqual(len(written["source"]["institutional_contacts"]), 3)
+        self.assertNotIn("pii_override_reason", written["source"])
+
+    async def test_personal_data_refuses_with_both_lists(self):
+        r = await self.client.post("/api/dev/ingest",
+                                   json={"url": str(self._sample("pers", self.PERSON))})
+        d = await r.json()
+        self.assertEqual(r.status, 422, d)
+        self.assertEqual(d["stage"], "pii scan")
+        self.assertTrue(d["overridable"])
+        self.assertEqual(sorted(h["label"] for h in d["personal_hits"]), ["email", "phone"])
+        self.assertEqual(len(d["institutional_hits"]), 3)
+        for h in d["personal_hits"] + d["institutional_hits"]:
+            self.assertTrue(h["redacted"].endswith("…"), "hits are redacted on the wire")
+        self.assertFalse(list(UNREVIEWED.glob("_ingest_pers*.json")), "nothing written on refusal")
+
+    async def test_override_with_a_reason_is_accepted_and_logged(self):
+        r = await self.client.post("/api/dev/ingest", json={
+            "url": str(self._sample("over", self.PERSON)),
+            "allow_pii_reason": "sample person is fictional (synthetic fixture)"})
+        d = await r.json()
+        self._cleanup_written(d)
+        self.assertEqual(r.status, 200, d)
+        self.assertEqual(d["override_reason"], "sample person is fictional (synthetic fixture)")
+        used = self.session.events.of_type("pii_override_used")
+        self.assertEqual(len(used), 1)
+        self.assertEqual(used[0]["reason"], d["override_reason"])
+        self.assertEqual(len(used[0]["personal_hits"]), 2)
+        written = json.loads((ROOT / d["path"]).read_text(encoding="utf-8"))
+        self.assertEqual(written["source"]["pii_override_reason"], d["override_reason"])
+
+    async def test_a_short_reason_is_rejected(self):
+        r = await self.client.post("/api/dev/ingest", json={
+            "url": str(self._sample("short", self.PERSON)), "allow_pii_reason": "because"})
+        self.assertEqual(r.status, 400)
+
+    async def test_name_with_account_number_refuses_even_with_a_reason(self):
+        r = await self.client.post("/api/dev/ingest", json={
+            "url": str(self._sample("acct", "Policyholder Jane Marchetti, policy 4820193774, is insured.")),
+            "allow_pii_reason": "we are quite sure this is fine"})
+        d = await r.json()
+        self.assertEqual(r.status, 422, d)
+        self.assertFalse(d["overridable"])
+        self.assertIn("name_with_account_number", [h["label"] for h in d["personal_hits"]])
+        self.assertEqual(self.session.events.of_type("pii_override_used"), [])
 
 
 class TestReplay(ServerCase):

@@ -569,15 +569,162 @@ _STREET = re.compile(
     r"\b\d{1,5}\s+(?:[A-Z][a-z]+\s+){1,3}(?:Street|St|Road|Rd|Avenue|Ave|Lane|Ln|Drive|Dr|Boulevard|Blvd|Court|Ct|Way)\b\.?",
     re.I)
 
+# --- personal vs institutional ---------------------------------------------
+# A public policy wording carries contact details by regulation: the insurer's
+# customer-care mailbox, the IRDAI grievance address, a toll-free helpline. Those
+# are not personal data, and refusing every document that has them refuses every
+# Indian policy document. A person's own email, mobile or address still is.
+_ROLE_LOCALS = (
+    "info", "care", "customer", "customercare", "support", "grievance", "complaints",
+    "claims", "service", "services", "helpdesk", "help", "contact", "enquiry",
+    "enquiries", "feedback", "nodal", "ombudsman", "rgicl", "bima", "irdai", "noreply",
+    "no-reply", "legal", "compliance", "sales",
+)
+_ROLE_SUFFIX = re.compile(r"^[a-z]+\.(care|support|grievance|claims|service)$")
+_INSTITUTIONAL_DOMAINS = ("irdai.gov.in", "bimabharosa.irdai.gov.in", "cioins.co.in",
+                          "rbi.org.in", "sebi.gov.in", "npci.org.in")
+_INSTITUTIONAL_SUFFIXES = (".gov.in", ".nic.in")
+_PRIVATE_DOMAINS = ("gmail.", "googlemail.", "yahoo.", "ymail.", "outlook.", "hotmail.",
+                    "live.", "rediffmail.", "rediff.", "proton.", "protonmail.", "icloud.")
+_HELPLINE = re.compile(r"helpline|toll[\s-]?free|customer\s+care|grievance|call\s+cent(?:re|er)|contact\s+us", re.I)
+_TOLLFREE = re.compile(r"(?<!\d)(?:1800|1860)[\s.-]?\d{2,4}[\s.-]?\d{2,4}(?:[\s.-]?\d{1,4})?(?!\d)")
+_SHORTCODE = re.compile(r"(?<!\d)1\d{4,5}(?!\d)")            # 155255-style helpline codes
+_IN_MOBILE = re.compile(r"(?<!\d)(?:\+91[\s-]?|0)?[6-9]\d{9}(?!\d)")
+_NAME = re.compile(r"\b([A-Z][a-z]{2,})\s+([A-Z][a-z]{2,})\b")
+# Capitalised words that look like a name and never are, in a policy document.
+_NOT_NAMES = {
+    "grievance", "redressal", "officer", "customer", "care", "insurance", "company",
+    "limited", "policy", "toll", "free", "email", "contact", "please", "write", "call",
+    "visit", "nodal", "ombudsman", "council", "executive", "insurers", "office", "head",
+    "branch", "chief", "manager", "department", "life", "general", "health", "registered",
+    "corporate", "address", "helpline", "centre", "center", "service", "services",
+    "claims", "claim", "phone", "telephone", "mobile", "number", "regulatory",
+    "development", "authority", "india", "bharosa", "bima", "lokpal", "website", "senior",
+    "citizen", "citizens", "portal", "online", "assistance", "desk", "help", "support",
+    "sales", "team", "unit", "cell", "escalation", "level", "matrix", "reach",
+}
+_PUBLIC_SUFFIXES = ("co.in", "gov.in", "org.in", "nic.in", "net.in", "ac.in", "co.uk",
+                    "org.uk", "gov.uk", "com.au", "co.nz")
 
-def scan_pii(text: str) -> list[tuple[str, str]]:
-    hits: list[tuple[str, str]] = []
-    for label, rx in (("email", _EMAIL), ("phone", _PHONE), ("street_address", _STREET)):
-        for m in rx.finditer(text):
-            hits.append((label, m.group(0)))
+
+@dataclass
+class PIIReport:
+    """What the scan found, split by whether it is somebody's personal data.
+
+    `personal` is what refuses the document. `institutional` is reported as a
+    warning and recorded in the fixture's source block so the review trail
+    keeps it, but it never blocks: a regulator's mailbox is not a person.
+    """
+    personal: list[tuple[str, str]] = field(default_factory=list)
+    institutional: list[tuple[str, str]] = field(default_factory=list)
+
+    def __bool__(self) -> bool:            # truthy == refuse
+        return bool(self.personal)
+
+    @property
+    def all(self) -> list[tuple[str, str]]:
+        return self.personal + self.institutional
+
+    @property
+    def unoverridable(self) -> bool:
+        return any(label == "name_with_account_number" for label, _ in self.personal)
+
+    def as_dict(self) -> dict:
+        return {"personal": [{"label": l, "redacted": redact(v)} for l, v in self.personal],
+                "institutional": [{"label": l, "redacted": redact(v)} for l, v in self.institutional]}
+
+
+def _registrable(domain: str) -> str:
+    labels = domain.lower().split(".")
+    for suf in _PUBLIC_SUFFIXES:
+        n = len(suf.split("."))
+        if len(labels) > n and ".".join(labels[-n:]) == suf:
+            return labels[-n - 1]
+    return labels[-2] if len(labels) >= 2 else labels[0]
+
+
+def _letters(s: str) -> str:
+    return re.sub(r"[^a-z]", "", s.lower())
+
+
+def _name_adjacent(text: str, start: int, end: int, window: int = 40) -> bool:
+    around = text[max(0, start - window):start] + " " + text[end:end + window]
+    for m in _NAME.finditer(around):
+        if m.group(1).lower() in _NOT_NAMES or m.group(2).lower() in _NOT_NAMES:
+            continue
+        return True
+    return False
+
+
+def _near_helpline(text: str, start: int, end: int, window: int = 40) -> bool:
+    return bool(_HELPLINE.search(text[max(0, start - window):end + window]))
+
+
+def scan_pii(text: str, context: str = "") -> PIIReport:
+    """`context` is the document's title, header and publisher: an address at
+    the insurer's own domain is institutional when that name is on the cover."""
+    rep = PIIReport()
+    # The header context must not contain the addresses themselves, or every
+    # domain would "appear on the cover" by virtue of the email being there.
+    ctx = _letters(_EMAIL.sub(" ", context)) + _letters(_EMAIL.sub(" ", text[:1500]))
+
+    emails = list(_EMAIL.finditer(text))
+    counts: dict[str, int] = {}
+    for m in emails:
+        counts[m.group(0).lower()] = counts.get(m.group(0).lower(), 0) + 1
+    seen: set[str] = set()
+    for m in emails:
+        addr = m.group(0)
+        key = addr.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        local, _, domain = key.partition("@")
+        private = any(domain.startswith(pd) for pd in _PRIVATE_DOMAINS)
+        role = (local in _ROLE_LOCALS or bool(_ROLE_SUFFIX.match(local))
+                or any(local.startswith(r) and len(r) >= 4 for r in _ROLE_LOCALS))
+        inst_domain = (domain in _INSTITUTIONAL_DOMAINS
+                       or any(domain.endswith(suf) for suf in _INSTITUTIONAL_SUFFIXES)
+                       or (len(_registrable(domain)) >= 4 and _registrable(domain) in ctx))
+        boilerplate = counts[key] >= 3
+        if not private and (role or inst_domain or boilerplate):
+            rep.institutional.append(("email", addr))
+        else:
+            rep.personal.append(("email", addr))
+
+    phones: list[tuple[int, int, str, str]] = []
+    for m in _TOLLFREE.finditer(text):
+        phones.append((m.start(), m.end(), m.group(0), "tollfree"))
+    for m in _SHORTCODE.finditer(text):
+        if _near_helpline(text, m.start(), m.end()):
+            phones.append((m.start(), m.end(), m.group(0), "shortcode"))
+    for m in _IN_MOBILE.finditer(text):
+        phones.append((m.start(), m.end(), m.group(0), "mobile"))
+    for m in _PHONE.finditer(text):
+        phones.append((m.start(), m.end(), m.group(0), "generic"))
+    taken: list[tuple[int, int]] = []
+    for start, end, val, kind in sorted(phones):
+        if any(a <= start < b or a < end <= b for a, b in taken):
+            continue
+        taken.append((start, end))
+        if kind in ("tollfree", "shortcode") or _near_helpline(text, start, end):
+            rep.institutional.append(("phone", val))
+        elif kind == "mobile" or _name_adjacent(text, start, end):
+            rep.personal.append(("phone", val))
+        else:
+            rep.institutional.append(("phone", val))
+
+    for m in _STREET.finditer(text):
+        if _name_adjacent(text, m.start(), m.end()):
+            rep.personal.append(("street_address", m.group(0)))
+        else:
+            rep.institutional.append(("street_address", m.group(0)))
+
     for m in _ACCOUNT_NEAR_NAME.finditer(text):
-        hits.append(("name_with_account_number", f"{m.group(1)} … {m.group(2)}"))
-    return hits
+        if m.group(1).split()[0].lower() in _NOT_NAMES or m.group(1).split()[1].lower() in _NOT_NAMES:
+            continue
+        rep.personal.append(("name_with_account_number", f"{m.group(1)} … {m.group(2)}"))
+    return rep
 
 
 def redact(s: str) -> str:
@@ -649,7 +796,11 @@ def main() -> int:
     ap.add_argument("--review", action="store_true", help="print every clause and wait for Enter before writing")
     ap.add_argument("--dry-run", action="store_true", help="print every clause, never write")
     ap.add_argument("--allow-pii", default=None, metavar="REASON",
-                    help="override the PII refusal; the reason is written into the fixture")
+                    help="override a PERSONAL-data refusal; the reason is written into the fixture. "
+                         "Institutional contact details never need it, and a name beside an "
+                         "account number can never be overridden.")
+    ap.add_argument("--pii-report", default=None, metavar="PATH",
+                    help="write the scan result as JSON {personal, institutional} (redacted)")
     args = ap.parse_args()
 
     if not args.dry_run and not args.out:
@@ -685,11 +836,20 @@ def main() -> int:
         die(f"extracted only {len(raw.strip())} chars (need >= {MIN_EXTRACT_CHARS}). "
             "The document is probably scanned images, JS-rendered, or behind a login.")
 
-    hits = scan_pii(raw)
-    if hits:
-        print(f"PII scan found {len(hits)} candidate hit(s):", file=sys.stderr)
-        for label, val in hits[:20]:
+    title_hint = args.title or (urlparse(src).netloc if is_url else Path(src).stem)
+    pii = scan_pii(raw, context=" ".join([title_hint, str(meta.get("publisher", "")),
+                                          str(meta.get("title", ""))]))
+    if args.pii_report:
+        Path(args.pii_report).write_text(json.dumps(pii.as_dict(), indent=1), encoding="utf-8")
+    for label, val in pii.institutional:
+        print(f"warning: institutional contact detail kept: {label} {redact(val)}", file=sys.stderr)
+    if pii.personal:
+        print(f"PII scan found {len(pii.personal)} personal-data hit(s):", file=sys.stderr)
+        for label, val in pii.personal[:20]:
             print(f"  {label}: {redact(val)}", file=sys.stderr)
+        if pii.unoverridable:
+            die("refusing: a person's name next to an account or policy number is personal "
+                "data whatever the reason. --allow-pii does not apply.", code=2)
         if not args.allow_pii:
             die("refusing to ingest a document that looks like it contains real personal data. "
                 "Use a synthetic or public document, or pass --allow-pii \"reason\" if these are "
@@ -719,8 +879,13 @@ def main() -> int:
         "fetched_at": meta.get("fetched_at") or time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "sha256": hashlib.sha256(raw.encode("utf-8")).hexdigest(),
     }
-    if args.allow_pii:
+    if args.allow_pii and pii.personal:
         source["pii_override_reason"] = args.allow_pii
+    if pii.institutional:
+        # Redacted on purpose: the review trail needs to know the document
+        # carries a helpline and a grievance mailbox, not what they are.
+        source["institutional_contacts"] = [
+            {"label": l, "redacted": redact(v)} for l, v in pii.institutional]
 
     title = args.title or (urlparse(src).netloc + urlparse(src).path if is_url else Path(src).stem)
     doc = {

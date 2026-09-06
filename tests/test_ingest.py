@@ -249,23 +249,125 @@ class TestSchemaAndValidator(unittest.TestCase):
 
 
 class TestPIIScan(unittest.TestCase):
-    def test_detects_email_phone_and_address(self):
-        hits = ingest.scan_pii("Write to jo@example.com or call 555-123-4567, "
-                               "at 12 Rosemount Street.")
-        labels = {label for label, _ in hits}
-        self.assertIn("email", labels)
-        self.assertIn("phone", labels)
-        self.assertIn("street_address", labels)
+    """Personal data refuses; institutional contact details are kept and warned.
 
-    def test_detects_name_beside_account_number(self):
-        hits = ingest.scan_pii("Policyholder Jane Marchetti, policy 4820193774, is insured.")
-        self.assertIn("name_with_account_number", {label for label, _ in hits})
+    A public insurer's policy wording carries the grievance mailbox, the IRDAI
+    address and a toll-free helpline by regulation. Refusing those refused every
+    Indian policy document (rgic…@ and bima…@ in the dev upload). A person's own
+    gmail and mobile beside their name is still personal.
+    """
+    POLICY = (
+        "Northlake General Insurance Company Limited. Policy wording, UIN 111N128V01.\n"
+        "For any complaint, write to grievance@insurer.co.in, or escalate to the "
+        "regulator at complaints@irdai.gov.in. Toll free helpline 1800 209 5858 "
+        "(Mon-Sat).\n"
+    )
+    PERSON = "Policyholder Ramesh Kumar, ramesh.k@gmail.com, 9876543210, is insured."
+
+    def test_regulatory_contacts_are_institutional(self):
+        rep = ingest.scan_pii(self.POLICY)
+        inst = {v for _, v in rep.institutional}
+        self.assertIn("grievance@insurer.co.in", inst)     # role-based local part
+        self.assertIn("complaints@irdai.gov.in", inst)     # regulator domain
+        self.assertTrue(any(l == "phone" and v.startswith("1800") for l, v in rep.institutional))
+        self.assertEqual(rep.personal, [])
+        self.assertFalse(rep)                              # falsy == nothing to refuse
+
+    def test_a_person_beside_their_gmail_and_mobile_is_personal(self):
+        rep = ingest.scan_pii(self.POLICY + self.PERSON)
+        personal = {(l, v) for l, v in rep.personal}
+        self.assertIn(("email", "ramesh.k@gmail.com"), personal)
+        self.assertIn(("phone", "9876543210"), personal)
+        self.assertEqual(len(rep.personal), 2, rep.personal)
+        self.assertEqual(len(rep.institutional), 3, rep.institutional)
+        self.assertTrue(rep)
+
+    def test_insurer_own_domain_is_institutional_when_named_on_the_cover(self):
+        text = "Reliance General Insurance policy wording. Email rgicl.services@reliancegeneral.co.in"
+        rep = ingest.scan_pii(text, context="Reliance General Insurance")
+        self.assertEqual([v for _, v in rep.institutional], ["rgicl.services@reliancegeneral.co.in"])
+        # Without the name anywhere the address is still role-based (rgicl…) --
+        # but a plain person@unknown.co.in is not.
+        rep2 = ingest.scan_pii("Contact priya.n@somefirm.co.in for details.")
+        self.assertEqual([v for _, v in rep2.personal], ["priya.n@somefirm.co.in"])
+
+    def test_boilerplate_repetition_is_institutional(self):
+        text = "\n".join(["Ombudsman office: bimalokpal@ecoi.co.in"] * 3)
+        rep = ingest.scan_pii(text)
+        self.assertEqual(len(rep.institutional), 1)
+        self.assertEqual(rep.personal, [])
+
+    def test_helpline_adjacent_phone_is_institutional_and_mobile_alone_is_personal(self):
+        near = ingest.scan_pii("Customer care: 9876543210 (24x7).")
+        self.assertEqual(near.personal, [])
+        alone = ingest.scan_pii("Reach me on 9876543210 after six.")
+        self.assertEqual([l for l, _ in alone.personal], ["phone"])
+
+    def test_name_beside_account_number_is_personal_and_never_overridable(self):
+        rep = ingest.scan_pii("Policyholder Jane Marchetti, policy 4820193774, is insured.")
+        self.assertIn("name_with_account_number", {l for l, _ in rep.personal})
+        self.assertTrue(rep.unoverridable)
+        self.assertFalse(ingest.scan_pii(self.POLICY + self.PERSON).unoverridable)
+
+    def test_street_address_beside_a_name_is_personal_otherwise_institutional(self):
+        office = ingest.scan_pii("Registered office: 12 Rosemount Street, Mumbai.")
+        self.assertEqual([l for l, _ in office.institutional], ["street_address"])
+        home = ingest.scan_pii("Insured Priya Nair, 12 Rosemount Street, Mumbai.")
+        self.assertEqual([l for l, _ in home.personal], ["street_address"])
 
     def test_clean_synthetic_text_passes(self):
-        self.assertEqual(ingest.scan_pii("Coverage A is provided with a limit of $350,000."), [])
+        rep = ingest.scan_pii("Coverage A is provided with a limit of $350,000.")
+        self.assertEqual(rep.all, [])
 
     def test_redaction_keeps_only_four_chars(self):
         self.assertEqual(ingest.redact("jo@example.com"), "jo@e…")
+
+    def test_report_dict_is_redacted(self):
+        d = ingest.scan_pii(self.POLICY + self.PERSON).as_dict()
+        for row in d["personal"] + d["institutional"]:
+            self.assertNotIn("@gmail", row["redacted"])
+            self.assertTrue(row["redacted"].endswith("…"))
+
+
+class TestPIIExitCodes(unittest.TestCase):
+    """The CLI: exit 2 only for personal hits; institutional prints warnings."""
+
+    def _run(self, text, *extra):
+        import subprocess
+        import tempfile
+        with tempfile.TemporaryDirectory() as td:
+            src = Path(td) / "doc.md"
+            body = "# Policy wording\n\n" + text + "\n\n" + "\n\n".join(
+                f"## Section {i}\n\nThis clause number {i} describes cover in plain words "
+                f"for the insured property and lasts more than forty characters." for i in range(1, 24))
+            src.write_text(body, encoding="utf-8")
+            report = Path(td) / "pii.json"
+            cmd = [sys.executable, str(ROOT / "scripts" / "ingest.py"), str(src),
+                   "--dry-run", "--pii-report", str(report), *extra]
+            r = subprocess.run(cmd, capture_output=True, text=True, cwd=str(ROOT))
+            rep = __import__("json").loads(report.read_text()) if report.exists() else None
+            return r.returncode, r.stderr, rep
+
+    def test_institutional_only_exits_0_with_warnings(self):
+        code, err, rep = self._run(TestPIIScan.POLICY)
+        self.assertEqual(code, 0, err)
+        self.assertIn("warning: institutional contact detail kept", err)
+        self.assertEqual(rep["personal"], [])
+        self.assertEqual(len(rep["institutional"]), 3)
+
+    def test_personal_exits_2_and_override_exits_0(self):
+        code, err, rep = self._run(TestPIIScan.POLICY + TestPIIScan.PERSON)
+        self.assertEqual(code, 2)
+        self.assertEqual(len(rep["personal"]), 2)
+        code2, err2, _ = self._run(TestPIIScan.POLICY + TestPIIScan.PERSON,
+                                   "--allow-pii", "synthetic sample person for a test")
+        self.assertEqual(code2, 0, err2)
+
+    def test_name_with_account_number_refuses_even_with_a_reason(self):
+        code, err, rep = self._run("Policyholder Jane Marchetti, policy 4820193774, is insured.",
+                                   "--allow-pii", "we promise it is fine")
+        self.assertEqual(code, 2)
+        self.assertIn("does not apply", err)
 
 
 class TestSentenceSpansCopyIsIdentical(unittest.TestCase):
