@@ -1,0 +1,64 @@
+{
+  "generated_at": 1788684192.7560327,
+  "protocol_version": 1,
+  "unit_count": 6,
+  "heard": 0,
+  "truncated": 1,
+  "never_played": 5,
+  "units": [
+    {
+      "unit_id": "answer-1",
+      "turn_id": 1,
+      "status": "never_played",
+      "rendered_ms": null,
+      "delivered_text": "",
+      "boundary_word_index": null,
+      "straddling_word": null
+    },
+    {
+      "unit_id": "cue-1",
+      "turn_id": 1,
+      "status": "never_played",
+      "rendered_ms": null,
+      "delivered_text": "",
+      "boundary_word_index": null,
+      "straddling_word": null
+    },
+    {
+      "unit_id": "sec-5b-i",
+      "turn_id": 0,
+      "status": "truncated_at_offset",
+      "rendered_ms": 8260,
+      "delivered_text": "Power failure, meaning the failure of power or other utility service if the failure takes place off the residence premises; if",
+      "boundary_word_index": 20,
+      "straddling_word": "a"
+    },
+    {
+      "unit_id": "sec-5b-i/resume#1",
+      "turn_id": 1,
+      "status": "never_played",
+      "rendered_ms": null,
+      "delivered_text": "",
+      "boundary_word_index": null,
+      "straddling_word": null
+    },
+    {
+      "unit_id": "sec-5b-ii",
+      "turn_id": 0,
+      "status": "never_played",
+      "rendered_ms": null,
+      "delivered_text": "",
+      "boundary_word_index": null,
+      "straddling_word": null
+    },
+    {
+      "unit_id": "sec-5b-iii",
+      "turn_id": 0,
+      "status": "never_played",
+      "rendered_ms": null,
+      "delivered_text": "",
+      "boundary_word_index": null,
+      "straddling_word": null
+    }
+  ]
+}
