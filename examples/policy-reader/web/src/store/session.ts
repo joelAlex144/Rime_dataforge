@@ -33,6 +33,10 @@ export class AudioPlayer {
       if (e.data?.type === 'frames') this.framesPlayed = e.data.frames
     }
     this.node.connect(this.ctx.destination)
+    // A context created outside a user gesture starts suspended, and the play
+    // click happened before this context existed. Resume it here or every
+    // chunk is rendered into a stopped graph and nothing is audible.
+    if (this.ctx.state === 'suspended') await this.ctx.resume()
     this.ready = true
     this.ackTimer = window.setInterval(() => {
       this.onAck?.(this.renderedMs())
@@ -65,7 +69,13 @@ export class AudioPlayer {
   }
 
   async resume() {
-    await this.ctx?.resume()
+    // Safe before the context exists: start() resumes it on creation.
+    if (this.ctx && this.ctx.state !== 'running') await this.ctx.resume()
+  }
+
+  /** For the UI: 'running' once audio can actually be heard. */
+  get contextState(): string {
+    return this.ctx?.state ?? 'none'
   }
 
   stop() {

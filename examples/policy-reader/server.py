@@ -64,6 +64,8 @@ TRACES = ROOT / "traces"
 CHARS_PER_SECOND = 14.0          # for the listener's "minutes left" estimate
 MAX_UPLOAD_BYTES = 20 * 1024 * 1024
 DEFAULT_REFERRAL = "the team that publishes this document"
+# Audible tone for the disclosed fallback voice. Set FAKE_TONE_HZ=0 for silence.
+FAKE_TONE_HZ = float(os.environ.get("FAKE_TONE_HZ", "196")) or None
 
 
 # ==========================================================================
@@ -190,7 +192,10 @@ class ReaderSession:
             except Exception:
                 pass
         if name == "fake":
-            self.provider = FakeTTS(self.events, realtime=True)
+            # The fake provider emits digital silence by default, which makes an
+            # offline demo look broken. A tone is not speech and can never be
+            # mistaken for Rime, but it proves the audio path end to end.
+            self.provider = FakeTTS(self.events, realtime=True, tone_hz=FAKE_TONE_HZ)
         elif name == "rime":
             os.environ["TTS_PROVIDER"] = "rime"
             self.provider = make_provider(self.events)
