@@ -51,6 +51,10 @@ class FakeTTS:
     async def connect(self) -> None:
         self.events.emit("provider_active", **self.descriptor)
 
+    @property
+    def connected(self) -> bool:
+        return True                      # in-process: nothing to drop
+
     async def close(self) -> None:
         self._active.clear()
 

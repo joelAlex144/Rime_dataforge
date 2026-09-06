@@ -153,6 +153,27 @@ class RimeTTS:
         self._reader = asyncio.create_task(self._read_loop(), name="rime-reader")
         self.events.emit("provider_active", connect_ms=round((time.monotonic() - t0) * 1000, 1), **self.descriptor)
 
+    @property
+    def connected(self) -> bool:
+        """Is the /ws3 socket usable right now?
+
+        Rime drops an idle socket (a keepalive ping timeout after a long pause
+        was seen after ~4 h). The reader task exits when that happens, so a
+        finished reader is the reliable sign, whichever websockets API is in
+        use; the socket's own closed flag / state is checked as well.
+        """
+        ws = self._ws
+        if ws is None:
+            return False
+        if self._reader is not None and self._reader.done():
+            return False
+        if getattr(ws, "closed", False) is True:
+            return False
+        state = getattr(ws, "state", None)
+        if state is not None and getattr(state, "name", "OPEN") not in ("OPEN", "CONNECTING"):
+            return False
+        return True
+
     async def close(self) -> None:
         if self._ws is None:
             return

@@ -4,10 +4,16 @@ from .fake import FakeTTS
 __all__ = ["AudioChunk", "Done", "StreamItem", "Timestamps", "TTSError", "TTSProvider", "FakeTTS", "make_provider"]
 
 
-def make_provider(events=None):
-    """Rime unless TTS_PROVIDER=fake. The choice is always logged via provider_active."""
+def make_provider(events=None, name=None):
+    """Rime unless TTS_PROVIDER=fake. The choice is always logged via provider_active.
+
+    `name` ("rime" | "fake") overrides the environment for this call without
+    changing it: a reconnect or a dev-mode swap must not flip the provider for
+    everything else in the process.
+    """
     import os
-    if os.environ.get("TTS_PROVIDER", "rime").lower() == "fake":
+    chosen = (name or os.environ.get("TTS_PROVIDER", "rime")).lower()
+    if chosen == "fake":
         # FAKE_REALTIME=1 paces the fake at wall-clock speed so an interrupt can
         # land mid-unit. Off by default: the test suite wants it instant.
         return FakeTTS(

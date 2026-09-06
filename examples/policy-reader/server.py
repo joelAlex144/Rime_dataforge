@@ -220,7 +220,14 @@ class ReaderSession:
     # ------------------------------------------------------------ provider
     async def ensure_provider(self, name: Optional[str] = None):
         if self.provider is not None and name is None:
-            return self.provider
+            if getattr(self.provider, "connected", True):
+                return self.provider
+            # The socket died under us (Rime drops an idle connection; seen
+            # as "keepalive ping timeout" after a four-hour pause). Every play
+            # failed with reader_error until the process was restarted.
+            # Reconnect the same kind of provider instead.
+            name = self.provider.name
+            self.events.emit("provider_reconnect", provider=name)
         if self.provider is not None:
             try:
                 await self.provider.close()
@@ -232,8 +239,7 @@ class ReaderSession:
             # mistaken for Rime, but it proves the audio path end to end.
             self.provider = FakeTTS(self.events, realtime=True, tone_hz=FAKE_TONE_HZ)
         elif name == "rime":
-            os.environ["TTS_PROVIDER"] = "rime"
-            self.provider = make_provider(self.events)
+            self.provider = make_provider(self.events, name="rime")
         else:
             self.provider = make_provider(self.events)
         await self.provider.connect()
@@ -371,7 +377,7 @@ class ReaderSession:
             except Exception:
                 pass
 
-    async def request_flush(self, timeout: float = 0.8) -> bool:
+    async def request_flush(self, timeout: float = 3.0) -> bool:
         """A stop from a tab that is not the audio sink: ask the sink to flush
         and report its playhead, and wait for that flush_ack. The boundary is
         still the audio clock's, just measured on the tab that has the audio."""
@@ -383,6 +389,9 @@ class ReaderSession:
             await asyncio.wait_for(self._flush_waiter, timeout)
             return True
         except (asyncio.TimeoutError, Exception):
+            # Three seconds: the tab must drain the audio frames already queued
+            # on its socket (a 600-char clause is ~1,000 of them) before it
+            # sees the flush frame.
             self.events.emit("flush_ack_timeout", timeout_ms=int(timeout * 1000))
             return False
         finally:
@@ -571,8 +580,23 @@ class ReaderSession:
                 segs = [Segment(a - char_start, b - char_start, sp,
                                 replaced=c["text_display"][a:b] != sp)
                         for a, b, sp in pieces]
-                await self._stream_unit(provider, st, c["id"], display, text_spoken, segs,
-                                        sockets, lambda: self.playing, char_start)
+                try:
+                    await self._stream_unit(provider, st, c["id"], display, text_spoken, segs,
+                                            sockets, lambda: self.playing, char_start)
+                except asyncio.CancelledError:
+                    raise
+                except Exception as e:
+                    # A dead socket before a single byte went out: reconnect
+                    # and say the same unit again on the same context. Once
+                    # audio has been sent the client holds part of it, so that
+                    # case still surfaces as reader_error.
+                    if st.bytes or getattr(provider, "connected", True):
+                        raise
+                    self.events.emit("provider_reconnect", provider=provider.name,
+                                     context_id=ctx_id, error=str(e)[:160])
+                    provider = await self.ensure_provider()
+                    await self._stream_unit(provider, st, c["id"], display, text_spoken, segs,
+                                            sockets, lambda: self.playing, char_start)
 
                 if not self.playing:
                     return
@@ -1198,6 +1222,7 @@ async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
 
     if t == "interrupt":
         if s.sink is not None and ws is not s.sink:
+            await s.stop_reading()              # no audio after the flush
             await s.request_flush()
         await _stop_and_attribute(s, socks, "interrupt")
         if s.sink is None:
@@ -1212,6 +1237,7 @@ async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
             # tab was hearing is cut at its playhead and picked up on the new
             # one from that sentence.
             if s.playing or (s._reader and not s._reader.done()) or s._answer is not None:
+                await s.stop_reading()          # stop sending before the old tab flushes
                 await s.request_flush()
                 await _stop_and_attribute(s, socks, "handover")
         await s.claim_sink(ws, socks)
@@ -1278,6 +1304,7 @@ async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
         # question asked over a spoken answer.
         if s.playing or (s._reader and not s._reader.done()) or s._answer is not None:
             if s.sink is not None and ws is not s.sink:
+                await s.stop_reading()
                 await s.request_flush()
             await _stop_and_attribute(s, socks, "ask")
         if s.sink is None:
