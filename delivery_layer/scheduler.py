@@ -30,12 +30,24 @@ from delivery_layer.tts.tracked import TrackedUnit
 
 logger = logging.getLogger("scheduler")
 
-# 2 = the unit being played plus one lookahead. Rime's `clear` does not stop
-# audio already synthesised -- preflight measured 23 s arriving after clear --
-# so every extra in-flight unit is more audio that must be fenced and thrown
-# away on an interruption. Their spec said 2-3; the leak measurement makes 2
-# the right end of that range.
-MAX_IN_FLIGHT = 2
+# 1, measured against live Rime. Two reasons, in order of severity.
+#
+# Rime's /ws3 will not maintain two simultaneous contextIds on one socket:
+# "the events will contain the most recent context ID at the time that audio was
+# requested". With a cap of 2 the scheduler issues unit N+1 while unit N is still
+# streaming, and the live run showed the consequence exactly -- sec-5b-i received
+# no first-byte, no timestamps and no Done at all, while sec-5b-ii took the
+# stream. It fails silently: no error, just a clause the listener never hears.
+# The fake multiplexes happily, so this is invisible until you run against Rime.
+#
+# Separately, `clear` does not stop audio already synthesised (23 s measured in
+# preflight), so every extra in-flight unit is also more audio to fence and throw
+# away on an interruption.
+#
+# Getting the lookahead back means one socket per in-flight context, i.e. a
+# connection pool in tts/rime.py. That is the right fix and is recorded in
+# docs/HANDOFF_TO_DELIVERY.md; until then correctness beats the buffer.
+MAX_IN_FLIGHT = 1
 
 
 @dataclass(frozen=True)

@@ -105,6 +105,13 @@ class Ledger:
         # a fragment of its original; when the fragment is heard to the end the
         # original has been heard in full, across two turns.
         self._resumed: dict[str, tuple] = {}
+        # Highest rendered_ms acked per unit, tracked as events are logged.
+        # resolve() re-reads and re-parses the whole file, which is the right
+        # shape for running standalone against a committed trace but ruinous in
+        # a poll loop: on a slow filesystem it blocks the event loop long enough
+        # that the Rime socket's keepalive misses its pong and the connection is
+        # dropped with a 1011 ping timeout.
+        self._max_rendered: dict[str, int] = {}
 
     # -- low-level append -------------------------------------------------
 
@@ -151,11 +158,18 @@ class Ledger:
 
         This is what the resume anchor is computed from: the position the
         listener's acks actually reached, not where synthesis stopped.
+
+        In-memory and allocation-light on purpose -- it is called in a poll
+        loop while audio is streaming, and must never touch the disk.
         """
-        for rec in self.resolve():
-            if rec.unit_id == unit_id:
-                return len(rec.delivered_text)
-        return 0
+        rendered = self._max_rendered.get(unit_id)
+        words = self._word_maps.get(unit_id)
+        if rendered is None or not words:
+            return 0
+        boundary_index, _straddling = self._resolve_boundary(rendered, words)
+        if boundary_index is None:
+            return 0
+        return words[boundary_index].char_end
 
     # -- event logging, one method per event type --------------------------
 
@@ -163,12 +177,16 @@ class Ledger:
         self._write(EventType.SYNTH_REQUESTED, turn_id=turn_id, unit_id=unit_id, provider=provider)
 
     def log_frames_played(self, *, turn_id: int, unit_id: str, rendered_ms: int) -> None:
+        self._max_rendered[unit_id] = max(
+            self._max_rendered.get(unit_id, 0), int(rendered_ms))
         self._write(EventType.FRAMES_PLAYED, turn_id=turn_id, unit_id=unit_id, rendered_ms=rendered_ms)
 
     def log_cancel_issued(self, *, turn_id: int, unit_id: Optional[str]) -> None:
         self._write(EventType.CANCEL_ISSUED, turn_id=turn_id, unit_id=unit_id)
 
     def log_audible_stop(self, *, turn_id: int, unit_id: str, rendered_ms: int, audible_stop_ts: float) -> None:
+        self._max_rendered[unit_id] = max(
+            self._max_rendered.get(unit_id, 0), int(rendered_ms))
         self._write(
             EventType.AUDIBLE_STOP,
             turn_id=turn_id,
@@ -178,6 +196,8 @@ class Ledger:
         )
 
     def log_unit_truncated(self, *, turn_id: int, unit_id: str, rendered_ms: int) -> None:
+        self._max_rendered[unit_id] = max(
+            self._max_rendered.get(unit_id, 0), int(rendered_ms))
         self._write(EventType.UNIT_TRUNCATED, turn_id=turn_id, unit_id=unit_id, rendered_ms=rendered_ms)
 
     def log_result_fenced(self, *, issued_turn_id: int, current_turn_id: int, unit_id: Optional[str]) -> None:
