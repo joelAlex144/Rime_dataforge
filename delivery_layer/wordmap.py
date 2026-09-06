@@ -81,6 +81,22 @@ class WordMap:
                 return s
         return None
 
+    def clamp_to(self, audio_ms: float) -> "WordMap":
+        """Clamp span times to the audio actually produced.
+
+        Rime's word timings can run past the end of the audio by roughly
+        100 ms. Left alone, the last word never satisfies t_end_ms <=
+        rendered_ms, so a unit that played to completion would resolve as
+        truncated one word short. Called on Done, when the true audio length
+        is finally known. Mutates in place and returns self.
+        """
+        for sp in self.spans:
+            if sp.t_start_ms > audio_ms:
+                sp.t_start_ms = audio_ms
+            if sp.t_end_ms > audio_ms:
+                sp.t_end_ms = audio_ms
+        return self
+
     def to_json(self) -> dict:
         return {
             "unit_id": self.unit_id,

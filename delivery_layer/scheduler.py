@@ -26,10 +26,16 @@ from typing import AsyncIterator, Callable, Optional, Protocol
 
 from delivery_layer.fence import Fence, StaleGeneration
 from delivery_layer.ledger import Ledger, WordSpanRecord
+from delivery_layer.tts.tracked import TrackedUnit
 
 logger = logging.getLogger("scheduler")
 
-MAX_IN_FLIGHT = 3
+# 2 = the unit being played plus one lookahead. Rime's `clear` does not stop
+# audio already synthesised -- preflight measured 23 s arriving after clear --
+# so every extra in-flight unit is more audio that must be fenced and thrown
+# away on an interruption. Their spec said 2-3; the leak measurement makes 2
+# the right end of that range.
+MAX_IN_FLIGHT = 2
 
 
 @dataclass(frozen=True)
@@ -44,6 +50,13 @@ class Unit:
     text_display: str
     text_spoken: str
     clause_label: Optional[str] = None
+    # Added for the synthesis seam: the normalizer's display<->spoken span map
+    # is what lets word timings be aligned to text_display, and char_start is
+    # non-zero for a resumed unit so its coverage is reported in the original
+    # unit's coordinates. Both default to the previous behaviour.
+    spoken_map: tuple = ()
+    sentences: tuple = ()
+    char_start: int = 0
 
 
 class TTSBackend(Protocol):
@@ -54,7 +67,18 @@ class TTSBackend(Protocol):
 
     def cancel(self, context_id: str) -> None: ...
 
-    def synth(self, text: str, context_id: str) -> AsyncIterator[object]: ...
+    def synth(self, unit: object, context_id: str) -> AsyncIterator[object]: ...
+
+
+def _cancel(tts: object, context_id: str) -> None:
+    """Cancel from sync code. TrackedTTS.cancel is a coroutine (the Rime
+    adapter has to send on a socket), so it exposes cancel_nowait for these
+    call sites. A backend with a plain sync cancel still works."""
+    nowait = getattr(tts, "cancel_nowait", None)
+    if nowait is not None:
+        nowait(context_id)
+    else:
+        tts.cancel(context_id)
 
 
 # Callback types the scheduler drives -- kept generic (not tied to
@@ -104,7 +128,7 @@ class Scheduler:
             else []
         )
         for u_id, ctx_id in targets:
-            self._tts.cancel(ctx_id)
+            _cancel(self._tts, ctx_id)
 
     async def run(self, units: list[Unit], *, turn_id: int) -> None:
         """Drives units through synthesis in document order, respecting
@@ -139,7 +163,12 @@ class Scheduler:
 
         seq = 0
         try:
-            async for event in self._tts.synth(unit.text_spoken, context_id):
+            tracked_unit = TrackedUnit(
+                unit_id=unit.unit_id, text_display=unit.text_display,
+                text_spoken=unit.text_spoken, spoken_map=tuple(unit.spoken_map),
+                char_start=unit.char_start,
+            )
+            async for event in self._tts.synth(tracked_unit, context_id):
                 # Check the fence AFTER every await boundary (the async
                 # generator's __anext__ is exactly that boundary) --
                 # this is the fence's documented usage pattern.
@@ -149,7 +178,7 @@ class Scheduler:
                     # Already logged as result_fenced by fence.check().
                     # Make sure the backend actually stops, then exit --
                     # do not process this or any further event.
-                    self._tts.cancel(context_id)
+                    _cancel(self._tts, context_id)
                     return
 
                 event_type = type(event).__name__
@@ -178,6 +207,11 @@ class Scheduler:
                         await maybe_awaitable
                     seq += 1
                 elif event_type == "Done":
-                    pass  # synthesis complete; delivery truth still comes from client acks
+                    # Synthesis complete. Delivery truth still comes from client
+                    # acks, but the ledger needs the audio length to tell a unit
+                    # that played to the end from one cut a word short.
+                    self._ledger.register_unit_duration(
+                        unit.unit_id, getattr(event, "total_duration_ms", 0)
+                    )
         finally:
             self._active_context_by_unit.pop(unit.unit_id, None)

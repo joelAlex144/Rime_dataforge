@@ -26,13 +26,19 @@ class FakeTTS:
 
     def __init__(self, events: EventLog | None = None, sample_rate: int = 24000,
                  ms_per_word: float = 320.0, chunk_ms: float = 80.0,
-                 realtime: bool = False, tone_hz: float | None = None) -> None:
+                 realtime: bool = False, tone_hz: float | None = None,
+                 straggle: int = 1) -> None:
         self.events = events or EventLog()
         self.sample_rate = sample_rate
         self.ms_per_word = ms_per_word
         self.chunk_ms = chunk_ms
         self.realtime = realtime
         self.tone_hz = tone_hz
+        # Rime's `clear` does not stop audio already synthesised: 23 s arrived
+        # after clear in preflight. The wire-level stragglers are unbounded and
+        # are counted as result_fenced; the iterator itself ends clean. This
+        # reproduces that shape so the fence path is exercised offline.
+        self.straggle = straggle
         self._generation = 0
         self._active: dict[str, int] = {}
 
@@ -71,7 +77,13 @@ class FakeTTS:
             seq, sent_ms, total = 0, 0.0, 0
             while sent_ms < t:
                 if self._active.get(context_id) != gen or gen != self._generation:
-                    self.events.emit("result_fenced", provider=self.name, context_id=context_id, msg_type="chunk")
+                    # Stragglers are dropped here rather than yielded: the
+                    # consumer sees a clean end with no Done, and each dropped
+                    # chunk is still counted as result_fenced with its bytes.
+                    for _ in range(max(0, self.straggle)):
+                        n = int(self.sample_rate * self.chunk_ms / 1000) * 2
+                        self.events.emit("result_fenced", provider=self.name,
+                                         context_id=context_id, msg_type="chunk", bytes=n)
                     return
                 ms = min(self.chunk_ms, t - sent_ms)
                 if self.realtime:

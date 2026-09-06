@@ -44,7 +44,9 @@ from delivery_layer.ledger import Ledger
 from delivery_layer.playback_protocol import Cancel, UnitStart, encode
 from delivery_layer.position import PositionManager
 from delivery_layer.scheduler import Scheduler, Unit
-from tts.fake import FakeTTS  # their fake for now; STEP 3 swaps in delivery_layer.tts
+from delivery_layer.events import EventLog
+from delivery_layer.tts import make_provider
+from delivery_layer.tts.tracked import TrackedTTS
 
 logger = logging.getLogger("policy-reader-agent")
 
@@ -149,13 +151,20 @@ class PolicyReaderSession:
         answer_provider: Optional[AnswerProvider] = None,
     ) -> None:
         fence = Fence()
-        ledger = Ledger(ledger_path)
+        # One sink: the adapter's provider/stream events and the ledger's
+        # delivery events land in the same file.
+        events = EventLog(Path(ledger_path), session_id="policy-reader")
+        ledger = Ledger(events)
         fence.attach_ledger(ledger)
         # provider_active is emitted by the TTS adapter (delivery_layer/tts/*),
         # which is the only place that knows the real model/speaker/endpoint.
 
         units = load_units(fixture_path)
-        tts = FakeTTS()
+        # Rime unless TTS_PROVIDER=fake, wrapped so the scheduler and ledger
+        # see their own event shapes. The provider emits provider_active on
+        # connect, so nothing here hardcodes a provider name.
+        provider = make_provider(events)
+        tts = TrackedTTS(provider, events)
 
         def send_chunk(unit_id, turn_id, pcm_b64, seq, t_start_ms, t_end_ms):
             # Mirrors UnitStart being sent once per unit before its
@@ -181,7 +190,7 @@ class PolicyReaderSession:
             fence=fence,
             ledger=ledger,
             tts=tts,
-            provider_name=PROVIDER_NAME,
+            provider_name=getattr(provider, "name", PROVIDER_NAME),
             send_chunk=send_chunk,
         )
         position_manager = PositionManager(ledger=ledger)
@@ -198,11 +207,17 @@ class PolicyReaderSession:
             publish_data=publish_data,
         )
         self._read_task: Optional[asyncio.Task] = None
+        self._tts = tts
+        self._connected = False
 
     # -- main reading loop ---------------------------------------------------
 
     async def start_reading(self) -> None:
         h = self._handles
+        if not self._connected:
+            # provider_active is emitted here, by the provider, exactly once.
+            await self._tts.connect()
+            self._connected = True
         turn_id = h.fence.stamp()
         remaining = h.units[h.read_cursor_order :]
         self._read_task = asyncio.create_task(h.scheduler.run(remaining, turn_id=turn_id))

@@ -98,6 +98,9 @@ class Ledger:
         # over raw protocol messages.
         self._word_maps: dict[str, Sequence[WordSpanRecord]] = {}
         self._text_display: dict[str, str] = {}
+        # Set from Done. A unit whose acks reached its audio length is fully
+        # heard even if its last word timing is missing or overshot.
+        self._duration_ms: dict[str, int] = {}
 
     # -- low-level append -------------------------------------------------
 
@@ -122,7 +125,18 @@ class Ledger:
         self._text_display[unit_id] = text_display
 
     def register_word_map(self, unit_id: str, words: Sequence[WordSpanRecord]) -> None:
+        """Last write wins, deliberately.
+
+        Rime emits timestamps per segment rather than once up front, so this is
+        called several times per unit and each call carries a cumulative map
+        that supersedes the previous one. At interrupt time the newest map may
+        still be partial -- that is correct, and resolution stays conservative
+        because a word with no timing cannot be counted as delivered.
+        """
         self._word_maps[unit_id] = words
+
+    def register_unit_duration(self, unit_id: str, total_duration_ms: int) -> None:
+        self._duration_ms[unit_id] = int(total_duration_ms or 0)
 
     # -- event logging, one method per event type --------------------------
 
@@ -267,7 +281,19 @@ class Ledger:
             else:
                 delivered_text = ""
 
-            status = DeliveryStatus.TRUNCATED if unit_id in truncated_units else DeliveryStatus.HEARD
+            # Done seen and the acks reached the audio length -> fully heard,
+            # whatever the word map says. Word timings can overshoot the audio
+            # by ~100 ms, which would otherwise leave a completed unit looking
+            # one word short forever.
+            duration = self._duration_ms.get(unit_id)
+            played_to_end = duration is not None and duration > 0 and rendered_ms >= duration
+            if played_to_end:
+                status = DeliveryStatus.HEARD
+                delivered_text = text_display
+            elif unit_id in truncated_units:
+                status = DeliveryStatus.TRUNCATED
+            else:
+                status = DeliveryStatus.HEARD
 
             records.append(
                 DeliveryRecord(
