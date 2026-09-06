@@ -103,7 +103,22 @@ that makes the eligibility refusal load-bearing.
 4. Add a row and a "known extraction problems" list here.
 5. `python -m pytest -q` — the schema and validator tests must still pass.
 
-Refusals you may hit: the PII scan exits 2 on emails, phone numbers, street
-addresses, or a capitalised name next to a 9+ digit number. Use a synthetic or
-public document. `--allow-pii "reason"` exists for false positives only, and the
-reason is written into `source.pii_override_reason` where a reviewer will see it.
+Refusals you may hit: the PII scan exits 2 on **personal** data only — an email
+at a private domain, an email or phone or street address beside a person's
+name, a bare Indian mobile number, or a capitalised name next to a 9+ digit
+number. Institutional contact details (a grievance or customer-care mailbox, a
+regulator's address, a toll-free helpline, the insurer's own domain, an address
+repeated as footer boilerplate) do not refuse: they print as warnings and are
+recorded redacted in `source.institutional_contacts`, so the review trail shows
+the document carries them. `--allow-pii "reason"` overrides a personal refusal
+only, and the reason is written into `source.pii_override_reason` where a
+reviewer will see it; a name beside an account number is never overridable.
+
+## Runtime upload (`fixtures/unreviewed/`)
+
+With the server's `--allow-upload` (default on; `--dev` implies it; `--no-upload`
+turns it off), a document added from the listener screen or `/dev` goes through
+`scripts/ingest.py` into this directory and is opened for that session only. It
+is never written to `index.json` — a human moves it in after `--review`, and
+adds a row here. The `/dev` route can retry a personal-data refusal with a
+reason; the listener screen cannot.
