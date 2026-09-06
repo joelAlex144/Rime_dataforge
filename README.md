@@ -234,6 +234,21 @@ resubmitted with `allow_pii_reason`, at least 12 characters, and the trace
 gets `pii_override_used`); the listener explains and points at `/dev`. A name
 beside an account number is refused on both with no override.
 
+**One tab has the voice.** A session can have several tabs open (the listener
+and `/dev`, say), but exactly one socket receives audio: the tab that pressed
+play. Every other tab sees the same units, timestamps and events and hears
+nothing, so two tabs cannot become two voices, and "heard" has exactly one
+witness. Pause, stop-and-ask or a question from a tab without the voice makes
+the server send `flush` to the tab that has it and wait (up to 800 ms) for
+that tab's `flush_ack`, so the boundary is still the audio clock's. Play from
+another tab hands the voice over: the old tab is flushed, the clause is cut at
+its playhead and picked up on the new tab from that sentence. If the tab with
+the voice closes, reading stops and the boundary is the last ack. Acks and
+flush acks from any other tab are ignored. `/dev` has its own play, pause,
+stop-and-ask and question box, and a badge saying which tab has the voice.
+The flush ack is stamped with the unit at the playhead, not the last unit
+whose audio arrived, which under lookahead is the next clause.
+
 **Questions.** Enter in the question box while the voice is reading is a
 Stop-and-ask: the client sends `flush_ack`, `interrupt`, `ask`, so the
 boundary is the playhead and the reader is stopped before the question is

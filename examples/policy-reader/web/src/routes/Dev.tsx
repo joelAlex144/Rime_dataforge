@@ -9,7 +9,7 @@
  */
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Download, Play } from 'lucide-react'
+import { Download, Hand, Pause, Play } from 'lucide-react'
 import { useSession } from '../store/session'
 import type { Cell, EventRecord } from '../store/reducer'
 import UploadDocument, { type IngestResult } from '../components/UploadDocument'
@@ -27,6 +27,7 @@ export default function Dev() {
   const [trace, setTrace] = useState('')
   // Documents this session ingested, with the override trail, for the list.
   const [ingested, setIngested] = useState<IngestResult[]>([])
+  const [q, setQ] = useState('')
   const listRef = useRef<HTMLDivElement>(null)
 
   const dev = !!state.status.dev
@@ -113,6 +114,55 @@ export default function Dev() {
         {state.replaying && <span className="badge">Replaying {state.replaying}</span>}
         <Link to="/">Listener</Link>
       </header>
+
+      <div className="toolbar transport-dev" aria-label="Transport">
+        {(() => {
+          const sounding = state.phase === 'playing' || state.phase === 'speaking'
+          const busy = !!state.replaying
+          return (
+            <>
+              <button
+                className="primary"
+                onClick={() => (sounding ? s.pause() : s.play())}
+                disabled={busy}
+                aria-label={sounding ? 'Pause' : 'Play'}
+              >
+                {sounding ? <Pause size={16} aria-hidden="true" /> : <Play size={16} aria-hidden="true" />}
+                {sounding ? 'Pause' : 'Play'}
+              </button>
+              <button onClick={() => s.interrupt()} disabled={busy} aria-label="Stop and ask">
+                <Hand size={16} aria-hidden="true" /> Stop and ask
+              </button>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  if (!q.trim()) return
+                  if (sounding) s.interrupt()
+                  s.ask(q.trim())
+                  setQ('')
+                }}
+                style={{ display: 'contents' }}
+              >
+                <input
+                  type="text"
+                  value={q}
+                  onChange={(e) => setQ(e.target.value)}
+                  placeholder="Ask about what was heard"
+                  aria-label="Ask"
+                />
+              </form>
+              <span className={`badge ${state.audioSink ? 'rime' : ''}`} aria-label="Audio sink">
+                {state.audioSink
+                  ? 'voice: this tab'
+                  : state.anySink
+                    ? 'voice: another tab'
+                    : 'voice: none (press play)'}
+              </span>
+              <span className="mono s-off">{state.phase}</span>
+            </>
+          )
+        })()}
+      </div>
 
       <div className="strip">
         {(

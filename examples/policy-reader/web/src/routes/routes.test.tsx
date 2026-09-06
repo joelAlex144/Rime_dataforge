@@ -303,6 +303,32 @@ describe('dev route', () => {
     expect(await screen.findByText(/sec-4b-vii · 2560 ms -> char 30 of 349/)).toBeInTheDocument()
   })
 
+  it('has play, pause and stop-and-ask, and says which tab has the voice', async () => {
+    vi.stubGlobal('fetch', mockFetch(false))
+    render(<MemoryRouter><Dev /></MemoryRouter>)
+    feed({ ...HELLO, sink: false, sink_any: true })
+    expect(await screen.findByText('voice: another tab')).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Play' }))
+    expect(sockets[0].sent.map((m) => m.type)).toEqual(['play'])
+    feed(UNIT)                                        // playing
+    expect(await screen.findByRole('button', { name: 'Pause' })).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Stop and ask' }))
+    expect(sockets[0].sent.map((m) => m.type)).toEqual(['play', 'flush_ack', 'interrupt'])
+    feed({ type: 'sink', you: true, any: true })
+    expect(await screen.findByText('voice: this tab')).toBeInTheDocument()
+  })
+
+  it('a tab without the voice shows each clause as it starts', async () => {
+    vi.stubGlobal('fetch', mockFetch(false))
+    render(<MemoryRouter><Listener /></MemoryRouter>)
+    feed({ ...HELLO, sink: false, sink_any: true })
+    feed(UNIT)
+    feed({ ...UNIT, unit_id: 'sec-4b-viii', context_id: 'sec-4b-viii#t2', index: 47,
+           text_display: 'A second clause that arrives while the first is still sounding elsewhere.' })
+    expect(await screen.findByText(/A second clause that arrives/)).toBeInTheDocument()
+    expect(screen.getByText(/playing in another tab/)).toBeInTheDocument()
+  })
+
   it('identifiers are expected here, unlike the listener', async () => {
     vi.stubGlobal('fetch', mockFetch(false))
     render(<MemoryRouter><Dev /></MemoryRouter>)
