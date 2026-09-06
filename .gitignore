@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.env
+traces/*.jsonl
+traces/*.json
+!traces/.gitkeep
+
+# local venv (each collaborator creates their own)
+.venv/
+venv/

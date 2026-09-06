@@ -1,0 +1,7 @@
+# Core, no external deps yet.
+pytest>=8.0
+
+# Will be added once wired up:
+# livekit-agents
+# livekit-plugins-silero
+# numpy
