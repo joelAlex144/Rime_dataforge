@@ -895,7 +895,17 @@ def main() -> int:
     app = build_app(dev=args.dev)
     s = app["session"]
     print(f"session {s.id}  dev={args.dev}  provider={os.environ.get('TTS_PROVIDER', 'rime')}")
-    print(f"listening on http://{args.host}:{args.port}   ws://{args.host}:{args.port}/ws/audio")
+    print(f"api + websocket  http://{args.host}:{args.port}  ws://{args.host}:{args.port}/ws/audio")
+    if (HERE / "web" / "dist").exists():
+        print(f"ui               http://{args.host}:{args.port}/  and  /dev  (served from web/dist)")
+    else:
+        # Without a build there is no / route here at all, and opening this port
+        # in a browser returns 404. Say so rather than printing a dead link.
+        print("ui               not built. Either:")
+        print("                   cd examples/policy-reader/web && npm run dev   "
+              "-> open http://localhost:5173")
+        print("                   cd examples/policy-reader/web && npm run build "
+              "-> reload this port")
     if args.dev:
         print("dev mode: /api/dev/ingest writes to fixtures/unreviewed/ only; "
               "nothing reaches the listener library without a human moving it into index.json")
