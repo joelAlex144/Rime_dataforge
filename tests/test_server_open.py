@@ -50,6 +50,14 @@ class Tab:
     def audio_ms(self, ctx):
         return self.audio[ctx] / 2 / 24000 * 1000
 
+    async def ack_all(self, ctx):
+        frames = self.audio[ctx] // 2
+        ms = self.audio_ms(ctx)
+        await self.ws.send_json({"type": "rendered", "context_id": ctx, "rendered_ms": ms,
+                                 "enqueued_frames": frames})
+        await self.ws.send_json({"type": "unit_ended", "context_id": ctx,
+                                 "enqueued_frames": frames, "rendered_ms": ms})
+
 
 class OpenCase(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
@@ -70,9 +78,14 @@ class OpenCase(unittest.IsolatedAsyncioTestCase):
 
     async def play_one(self):
         await self.a.ws.send_json({"type": "play"})
-        started = await self.a.until(lambda m: m.get("type") == "unit_started")
-        await self.a.until(lambda m: m.get("type") == "unit_done" and m["context_id"] == started["context_id"])
-        return started
+        while True:
+            started = await self.a.until(lambda m: m.get("type") == "unit_started")
+            ctx = started["context_id"]
+            await self.a.until(lambda m: m.get("type") == "unit_done" and m["context_id"] == ctx)
+            if started.get("kind", "clause") != "clause":
+                await self.a.ack_all(ctx)        # a document map plays before the first clause
+                continue
+            return started
 
     async def answer_flush(self, ctx, ms):
         await self.a.until(lambda m: m.get("type") == "flush")

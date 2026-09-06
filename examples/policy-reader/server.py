@@ -197,6 +197,10 @@ class ReaderSession:
         # open tabs cannot become two voices, and "heard" has one witness.
         self.sink = None
         self._flush_waiter: Optional[asyncio.Future] = None
+        # Documents whose session-start bookkeeping has been done: the map
+        # spoken once and one unit_skipped per clause linear playback never
+        # sends, so the session record has no silent gaps.
+        self._session_started: set = set()
         self.provider = None
         self.provider_connected_at: Optional[float] = None
         self.contexts: dict[str, ContextState] = {}
@@ -538,7 +542,21 @@ class ReaderSession:
         g, s = doc.grounding, doc.session
         provider = await self.ensure_provider()
         try:
+            if doc.name not in self._session_started:
+                self._session_started.add(doc.name)
+                for unit_id, reason in g.skipped():
+                    self.events.emit("unit_skipped", document=doc.name, unit_id=unit_id, reason=reason)
+                    s.ledger[unit_id] = f"skipped:{reason}"
+                if s.read_cursor == 0 and g.map:
+                    await self._speak_map(provider, g, doc, sockets)
+                    if not self.playing:
+                        return
             while self.playing and s.read_cursor < len(g.clauses):
+                # Boilerplate and on-request table rows keep their place in
+                # reading order but are never sent; they were logged above.
+                s.read_cursor = g.next_readable(s.read_cursor)
+                if s.read_cursor >= len(g.clauses):
+                    break
                 c = g.clauses[s.read_cursor]
                 self.turn += 1
                 ctx_id = f"{c['id']}#t{self.turn}"
@@ -628,6 +646,28 @@ class ReaderSession:
         except Exception as e:
             self.events.emit("reader_error", error=str(e))
             await broadcast({"type": "provider_error", "message": str(e)}, sockets)
+
+    async def _speak_map(self, provider, g, doc, sockets) -> None:
+        """The document map, once, at session start: a mechanical count of the
+        top-level headings. Streamed like a clause so it is acked and
+        interruptible, but it is not a clause and has no ledger entry."""
+        text = g.map_sentence("policy" if "policy" in doc.title.lower() else "document")
+        self.turn += 1
+        ctx_id = f"map#t{self.turn}"
+        st = ContextState(ctx_id, self.turn, "map", state="streaming", kind="map")
+        self.contexts[ctx_id] = st
+        self.events.emit("map_spoken", document=doc.name, context_id=ctx_id,
+                         sections=len(g.map), text=text)
+        await broadcast({
+            "type": "unit_started", "context_id": ctx_id, "turn_id": self.turn,
+            "unit_id": "map", "index": -1, "kind": "map",
+            "section_title": doc.title, "path": None,
+            "text_display": text, "sentences": [[0, len(text)]], "char_start": 0,
+        }, sockets)
+        await self._stream_unit(provider, st, "map", text, text, [Segment(0, len(text), text)],
+                                sockets, lambda: self.playing)
+        while self.playing and self._backlog_ms() > LEAD_MS:
+            await asyncio.sleep(0.05)
 
     # ------------------------------------------------------------- answers
     async def speak_answer(self, text: str, kind: str, unit_id: Optional[str], sockets) -> None:
@@ -1099,10 +1139,11 @@ async def _stop_and_attribute(s: ReaderSession, socks, reason: str) -> None:
              if s.contexts[c].unit_id == sess.current_unit_id), None)
     s._flush_ctx = None
     st = s.contexts.get(ctx_id) if ctx_id else None
-    if st and st.kind == "answer":
-        # The listener cut the spoken answer. Its position is the clause the
-        # answer was about, already attributed when the question stopped the
-        # reader; there is nothing new to record beyond fencing the answer.
+    if st and st.kind in ("answer", "map"):
+        # The listener cut the spoken answer, or the document map. Neither is
+        # a clause: the answer's position is the clause it was about, already
+        # attributed when the question stopped the reader, and the map has no
+        # position at all. Fence it and record nothing else.
         st.state = "fenced"
         st = None
     if st:
@@ -1269,7 +1310,7 @@ async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
         if c:
             s.events.emit("position_saved", document=doc.name,
                           unit_id=doc.session.current_unit_id, cursor=doc.session.read_cursor)
-            doc.session.read_cursor = c["index"]
+            doc.session.read_cursor = doc.grounding.next_readable(c["index"])
             s._resume_from = None
             s.events.emit("position_restored", document=doc.name, unit_id=c["id"],
                           sentence_index=0, char_start=0)
@@ -1317,7 +1358,8 @@ async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
         target = r.hits[0].unit_id if r.hits else (r.beyond[0].unit_id if r.beyond else None)
         sess.history.append((q, r.kind, target))
         s.events.emit("question_resolved", document=doc.name, kind=r.kind,
-                      unit_id=target, question=q, last_heard_unit_id=sess.last_heard_unit_id)
+                      unit_id=target, question=q, last_heard_unit_id=sess.last_heard_unit_id,
+                      retrieval_path=r.retrieval_path)
         heard = None
         if sess.last_heard_unit_id:
             c = g.by_id[sess.last_heard_unit_id]
@@ -1334,9 +1376,12 @@ async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
             source = "extractive"
             answer = await g.answer(r, llm=None, heard_text_of_reference=heard)
         s.events.emit("answer_source", source=source, kind=r.kind, unit_id=target)
+        # One record per answered question saying which branch answered it.
+        s.events.emit("answer_grounded", document=doc.name, question=q, kind=r.kind,
+                      unit_id=target, retrieval_path=r.retrieval_path, source=source)
         await broadcast({
             "type": "answer", "question": q, "kind": r.kind, "unit_id": target,
-            "answer": answer, "source": source,
+            "answer": answer, "source": source, "retrieval_path": r.retrieval_path,
             "referral": s.referral_for(doc.name),
             "offer": r.kind == "beyond_cursor",
         }, socks)

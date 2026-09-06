@@ -62,6 +62,14 @@ class Tab:
     def audio_ms(self, ctx):
         return self.audio[ctx] / 2 / 24000 * 1000
 
+    async def ack_all(self, ctx):
+        frames = self.audio[ctx] // 2
+        ms = self.audio_ms(ctx)
+        await self.ws.send_json({"type": "rendered", "context_id": ctx, "rendered_ms": ms,
+                                 "enqueued_frames": frames})
+        await self.ws.send_json({"type": "unit_ended", "context_id": ctx,
+                                 "enqueued_frames": frames, "rendered_ms": ms})
+
 
 class TwoTabs(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
@@ -85,10 +93,14 @@ class TwoTabs(unittest.IsolatedAsyncioTestCase):
 
     async def a_plays_one_clause(self):
         await self.a.ws.send_json({"type": "play"})
-        started = await self.a.until(lambda m: m.get("type") == "unit_started")
-        ctx = started["context_id"]
-        await self.a.until(lambda m: m.get("type") == "unit_done" and m["context_id"] == ctx)
-        return started, ctx
+        while True:
+            started = await self.a.until(lambda m: m.get("type") == "unit_started")
+            ctx = started["context_id"]
+            await self.a.until(lambda m: m.get("type") == "unit_done" and m["context_id"] == ctx)
+            if started.get("kind", "clause") != "clause":
+                await self.a.ack_all(ctx)        # the document map, heard first
+                continue
+            return started, ctx
 
     async def test_audio_goes_only_to_the_tab_that_pressed_play(self):
         self.assertFalse(self.hello_a["sink"])

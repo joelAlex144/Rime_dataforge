@@ -187,6 +187,16 @@ class ChatSession:
                 return f"no clause {arg.strip()!r}"
             s.read_cursor = c["index"] + 1
         else:
+            # Boilerplate and on-request table rows are never read; log the
+            # skip once so the ledger accounts for them.
+            from grounding import is_readable, skip_reason
+            while s.read_cursor < len(self.g.clauses) and not is_readable(self.g.clauses[s.read_cursor]):
+                sk = self.g.clauses[s.read_cursor]
+                if sk["id"] not in s.ledger:
+                    s.ledger[sk["id"]] = f"skipped:{skip_reason(sk)}"
+                    self.ev.emit("unit_skipped", document=self.doc.name, unit_id=sk["id"],
+                                 reason=skip_reason(sk))
+                s.read_cursor += 1
             if s.read_cursor >= len(self.g.clauses):
                 return "end of document; nothing left to read."
             c = self.g.clauses[s.read_cursor]

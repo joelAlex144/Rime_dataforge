@@ -133,6 +133,39 @@ interrupt does. That commit is verified by `tests/test_server_pause.py` and
 the reducer tests, not yet by a further live session; a continuous run that
 reaches `document_finished` without a pause is the outstanding check.
 
+## Grounding correctness (not retrieval quality)
+
+Every answer carries the branch that produced it: `retrieval_path` on the
+`answer_grounded` event and on `question_resolved`, one of `deictic`,
+`definition`, `section_ref`, `bm25`, `none`, in that resolution order. The
+claim is narrow: the scripted questions for the hero fixture resolve to the
+expected clause by the expected branch. Nothing is claimed about questions
+outside the script.
+
+```bash
+python scripts/check_grounding.py --out traces/grounding_check_policy.json
+```
+
+Output, one row per question, then a summary by branch:
+
+```
+     question                              expected                  actual
+HIT  what does that mean                   deictic/sec-4b-ii         deictic/sec-4b-ii (deictic)
+HIT  what does bodily injury mean          definition/sec-3a-iii     definition/sec-3a-iii (in_scope)
+MISS <question>                            bm25/<expected>           bm25/<actual> (<kind>)
+
+<hits> of <n> hit  deictic: h/n  definition: h/n  section_ref: h/n  bm25: h/n  none: h/n
+```
+
+Exit code 0 only when every row is a HIT. The JSON written by `--out` holds
+the same rows plus the listener position each question was asked from
+(`last_heard`, `cursor`). Numbers go in the table below only from a committed
+`traces/grounding_check_policy.json`.
+
+| Fixture | Questions | Hits | deictic | definition | section_ref | bm25 | none | Trace |
+|---|---:|---:|---:|---:|---:|---:|---:|---|
+| `policy.json` | 20 | | | | | | | `traces/grounding_check_policy.json` |
+
 ## Limitations of the evidence
 
 - Latency benches run from a single region and network; they characterise our deployment, not Rime globally.

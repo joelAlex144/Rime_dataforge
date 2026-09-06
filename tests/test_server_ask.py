@@ -65,6 +65,15 @@ class WsCase(unittest.IsolatedAsyncioTestCase):
                     return m
         return await asyncio.wait_for(go(), timeout=timeout)
 
+    async def seen_or_until(self, pred, since=0, timeout=8.0):
+        """Like until(), but a matching message already received (after index
+        `since`) counts: the server may have sent it while an earlier wait was
+        consuming messages for a different predicate."""
+        for m in self.seen[since:]:
+            if pred(m):
+                return m
+        return await self.until(pred, timeout=timeout)
+
     def audio_ms(self, ctx):
         return self.audio[ctx] / 2 / SR * 1000
 
@@ -86,11 +95,16 @@ class WsCase(unittest.IsolatedAsyncioTestCase):
         return m.get("type") == "event" and (m.get("record") or {}).get("type") == kind
 
     async def play_first_clause(self):
+        """Play, hear the document map the way a client does, return the first clause."""
         await self.ws.send_json({"type": "play"})
-        started = await self.until(lambda m: m.get("type") == "unit_started")
-        ctx = started["context_id"]
-        await self.until(lambda m: m.get("type") == "unit_done" and m["context_id"] == ctx)
-        return started, ctx
+        while True:
+            started = await self.until(lambda m: m.get("type") == "unit_started")
+            ctx = started["context_id"]
+            await self.until(lambda m: m.get("type") == "unit_done" and m["context_id"] == ctx)
+            if started.get("kind", "clause") != "clause":
+                await self.ack_all(ctx)          # the map is acked like anything else
+                continue
+            return started, ctx
 
 
 class TestAskWhilePlaying(WsCase):
@@ -213,12 +227,16 @@ class TestPauseRegression(WsCase):
         rctx = resumed["context_id"]
         await self.until(lambda m: m.get("type") == "unit_done" and m["context_id"] == rctx)
         await self.ack_all(rctx)
+        mark = len(self.seen)
         heard = (await self.until(lambda m: self.is_event(m, "unit_heard")
                                   and m["record"]["unit_id"] == n_id))["record"]
         self.assertEqual(heard["char_end"], heard["of"])
         self.assertEqual(sess.ledger[n_id], "heard")
         self.assertNotIn(n1_id, sess.ledger, "N+1 is still not heard early")
-        again = await self.until(lambda m: m.get("type") == "unit_started" and m["unit_id"] == n1_id)
+        # N+1 may already have been re-synthesised under the lead while the
+        # heard event was awaited; either order is correct.
+        again = await self.seen_or_until(
+            lambda m: m.get("type") == "unit_started" and m.get("unit_id") == n1_id, since=mark)
         self.assertNotEqual(again["context_id"], nxt["context_id"], "re-synthesised, not the fenced audio")
 
     async def test_deictic_question_uses_the_clause_heard_not_the_last_synthesised(self):
