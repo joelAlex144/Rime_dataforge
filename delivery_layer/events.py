@@ -13,10 +13,24 @@ Event types used across the layer (keep this list in sync with the README):
   synthesis side : provider_active, synth_requested, synth_first_byte,
                    synth_done, timestamps_received, result_fenced
   delivery side  : frames_played, cancel_issued, audible_stop,
-                   unit_truncated, position_saved, position_restored
+                   unit_truncated, unit_skipped, position_saved, position_restored
+
+`unit_skipped` is written once per skipped clause at session start, with
+`reason: boilerplate` (page furniture, registration lines, placeholders) or
+`reason: table_on_request` (table rows that are spoken only when asked for),
+so the per-session record of a document is complete: every clause is heard,
+truncated, never sent, or skipped -- nothing is silently absent.
 
 Every name in delivery_layer.ledger.EventType already matched a name here,
 so nothing had to be renamed when the two halves were joined.
+
+`jump` {from_unit, to_unit, reason, turn_id} is written once per jump (a topic
+chip, a spoken topic, the spoiler-gate offer, "skip it", "go back"). A jump is
+the interruption path with a different resume target: the unit sounding is
+truncated at the client boundary, every readable clause between the cut and
+the target is `unit_skipped` with `reason: jump`, `position_saved` (label
+before_jump) records where it left, `position_restored` (reason jump) the
+target, and a cue unit is spoken before the target.
 """
 from __future__ import annotations
 

@@ -1,0 +1,4650 @@
+{
+ "body": {
+  "children": [
+   {
+    "$ref": "#/groups/0"
+   },
+   {
+    "$ref": "#/groups/19"
+   }
+  ],
+  "content_layer": "body",
+  "label": "unspecified",
+  "name": "_root_",
+  "self_ref": "#/body"
+ },
+ "form_items": [],
+ "furniture": {
+  "children": [],
+  "content_layer": "furniture",
+  "label": "unspecified",
+  "name": "_root_",
+  "self_ref": "#/furniture"
+ },
+ "groups": [
+  {
+   "children": [
+    {
+     "$ref": "#/texts/0"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section",
+   "name": "header-0",
+   "parent": {
+    "$ref": "#/body"
+   },
+   "self_ref": "#/groups/0"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/3"
+    }
+   ],
+   "content_layer": "body",
+   "label": "unspecified",
+   "name": "rich_cell_group_1_0_0",
+   "parent": {
+    "$ref": "#/tables/0"
+   },
+   "self_ref": "#/groups/1"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/4"
+    }
+   ],
+   "content_layer": "body",
+   "label": "unspecified",
+   "name": "rich_cell_group_1_0_1",
+   "parent": {
+    "$ref": "#/tables/0"
+   },
+   "self_ref": "#/groups/2"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/5"
+    }
+   ],
+   "content_layer": "body",
+   "label": "unspecified",
+   "name": "rich_cell_group_1_0_2",
+   "parent": {
+    "$ref": "#/tables/0"
+   },
+   "self_ref": "#/groups/3"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/6"
+    }
+   ],
+   "content_layer": "body",
+   "label": "unspecified",
+   "name": "rich_cell_group_1_0_3",
+   "parent": {
+    "$ref": "#/tables/0"
+   },
+   "self_ref": "#/groups/4"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/7"
+    }
+   ],
+   "content_layer": "body",
+   "label": "unspecified",
+   "name": "rich_cell_group_1_0_4",
+   "parent": {
+    "$ref": "#/tables/0"
+   },
+   "self_ref": "#/groups/5"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/8"
+    }
+   ],
+   "content_layer": "body",
+   "label": "unspecified",
+   "name": "rich_cell_group_1_0_5",
+   "parent": {
+    "$ref": "#/tables/0"
+   },
+   "self_ref": "#/groups/6"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/9"
+    }
+   ],
+   "content_layer": "body",
+   "label": "unspecified",
+   "name": "rich_cell_group_1_0_6",
+   "parent": {
+    "$ref": "#/tables/0"
+   },
+   "self_ref": "#/groups/7"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/10"
+    }
+   ],
+   "content_layer": "body",
+   "label": "unspecified",
+   "name": "rich_cell_group_1_0_7",
+   "parent": {
+    "$ref": "#/tables/0"
+   },
+   "self_ref": "#/groups/8"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/11"
+    },
+    {
+     "$ref": "#/texts/12"
+    }
+   ],
+   "content_layer": "body",
+   "label": "inline",
+   "name": "group",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "self_ref": "#/groups/9"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/31"
+    },
+    {
+     "$ref": "#/texts/32"
+    },
+    {
+     "$ref": "#/texts/33"
+    },
+    {
+     "$ref": "#/texts/34"
+    },
+    {
+     "$ref": "#/texts/35"
+    }
+   ],
+   "content_layer": "body",
+   "label": "list",
+   "name": "list",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "self_ref": "#/groups/10"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/53"
+    },
+    {
+     "$ref": "#/texts/54"
+    }
+   ],
+   "content_layer": "body",
+   "label": "list",
+   "name": "list",
+   "parent": {
+    "$ref": "#/texts/52"
+   },
+   "self_ref": "#/groups/11"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/57"
+    },
+    {
+     "$ref": "#/texts/58"
+    },
+    {
+     "$ref": "#/texts/59"
+    }
+   ],
+   "content_layer": "body",
+   "label": "list",
+   "name": "list",
+   "parent": {
+    "$ref": "#/texts/52"
+   },
+   "self_ref": "#/groups/12"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/63"
+    }
+   ],
+   "content_layer": "body",
+   "label": "list",
+   "name": "list",
+   "parent": {
+    "$ref": "#/texts/52"
+   },
+   "self_ref": "#/groups/13"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/66"
+    },
+    {
+     "$ref": "#/texts/67"
+    }
+   ],
+   "content_layer": "body",
+   "label": "list",
+   "name": "list",
+   "parent": {
+    "$ref": "#/texts/65"
+   },
+   "self_ref": "#/groups/14"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/70"
+    },
+    {
+     "$ref": "#/texts/71"
+    }
+   ],
+   "content_layer": "body",
+   "label": "list",
+   "name": "list",
+   "parent": {
+    "$ref": "#/texts/69"
+   },
+   "self_ref": "#/groups/15"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/73"
+    }
+   ],
+   "content_layer": "body",
+   "label": "list",
+   "name": "list",
+   "parent": {
+    "$ref": "#/texts/69"
+   },
+   "self_ref": "#/groups/16"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/77"
+    },
+    {
+     "$ref": "#/texts/78"
+    },
+    {
+     "$ref": "#/texts/79"
+    },
+    {
+     "$ref": "#/texts/80"
+    },
+    {
+     "$ref": "#/texts/81"
+    },
+    {
+     "$ref": "#/texts/82"
+    },
+    {
+     "$ref": "#/texts/83"
+    },
+    {
+     "$ref": "#/texts/84"
+    },
+    {
+     "$ref": "#/texts/85"
+    }
+   ],
+   "content_layer": "body",
+   "label": "list",
+   "name": "list",
+   "parent": {
+    "$ref": "#/texts/74"
+   },
+   "self_ref": "#/groups/17"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/104"
+    },
+    {
+     "$ref": "#/texts/105"
+    },
+    {
+     "$ref": "#/texts/106"
+    },
+    {
+     "$ref": "#/texts/107"
+    },
+    {
+     "$ref": "#/texts/108"
+    }
+   ],
+   "content_layer": "body",
+   "label": "list",
+   "name": "list",
+   "parent": {
+    "$ref": "#/texts/102"
+   },
+   "self_ref": "#/groups/18"
+  },
+  {
+   "children": [],
+   "content_layer": "furniture",
+   "label": "section",
+   "name": "page footer",
+   "parent": {
+    "$ref": "#/body"
+   },
+   "self_ref": "#/groups/19"
+  }
+ ],
+ "key_value_items": [],
+ "name": "fixture_home_loan_mitc",
+ "origin": {
+  "binary_hash": 4775654613209095776,
+  "filename": "fixture_home_loan_mitc.docx",
+  "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+ },
+ "pages": {},
+ "pictures": [],
+ "schema_name": "DoclingDocument",
+ "tables": [
+  {
+   "annotations": [],
+   "captions": [],
+   "children": [
+    {
+     "$ref": "#/groups/1"
+    },
+    {
+     "$ref": "#/groups/2"
+    },
+    {
+     "$ref": "#/groups/3"
+    },
+    {
+     "$ref": "#/groups/4"
+    },
+    {
+     "$ref": "#/groups/5"
+    },
+    {
+     "$ref": "#/groups/6"
+    },
+    {
+     "$ref": "#/groups/7"
+    },
+    {
+     "$ref": "#/groups/8"
+    }
+   ],
+   "content_layer": "body",
+   "data": {
+    "grid": [
+     [
+      {
+       "col_span": 1,
+       "column_header": true,
+       "end_col_offset_idx": 1,
+       "end_row_offset_idx": 1,
+       "fillable": false,
+       "row_header": false,
+       "row_section": false,
+       "row_span": 1,
+       "start_col_offset_idx": 0,
+       "start_row_offset_idx": 0,
+       "text": "Document type"
+      },
+      {
+       "col_span": 1,
+       "column_header": true,
+       "end_col_offset_idx": 2,
+       "end_row_offset_idx": 1,
+       "fillable": false,
+       "row_header": false,
+       "row_section": false,
+       "row_span": 1,
+       "start_col_offset_idx": 1,
+       "start_row_offset_idx": 0,
+       "text": "Legal document (housing-finance loan terms)"
+      }
+     ],
+     [
+      {
+       "col_span": 1,
+       "column_header": false,
+       "end_col_offset_idx": 1,
+       "end_row_offset_idx": 2,
+       "fillable": false,
+       "row_header": false,
+       "row_section": false,
+       "row_span": 1,
+       "start_col_offset_idx": 0,
+       "start_row_offset_idx": 1,
+       "text": "Issuer / source"
+      },
+      {
+       "col_span": 1,
+       "column_header": false,
+       "end_col_offset_idx": 2,
+       "end_row_offset_idx": 2,
+       "fillable": false,
+       "row_header": false,
+       "row_section": false,
+       "row_span": 1,
+       "start_col_offset_idx": 1,
+       "start_row_offset_idx": 1,
+       "text": "Bajaj Housing Finance Limited (public MITC)"
+      }
+     ],
+     [
+      {
+       "col_span": 1,
+       "column_header": false,
+       "end_col_offset_idx": 1,
+       "end_row_offset_idx": 3,
+       "fillable": false,
+       "row_header": false,
+       "row_section": false,
+       "row_span": 1,
+       "start_col_offset_idx": 0,
+       "start_row_offset_idx": 2,
+       "text": "UIN / reference"
+      },
+      {
+       "col_span": 1,
+       "column_header": false,
+       "end_col_offset_idx": 2,
+       "end_row_offset_idx": 3,
+       "fillable": false,
+       "row_header": false,
+       "row_section": false,
+       "row_span": 1,
+       "start_col_offset_idx": 1,
+       "start_row_offset_idx": 2,
+       "text": "—"
+      }
+     ],
+     [
+      {
+       "col_span": 1,
+       "column_header": false,
+       "end_col_offset_idx": 1,
+       "end_row_offset_idx": 4,
+       "fillable": false,
+       "row_header": false,
+       "row_section": false,
+       "row_span": 1,
+       "start_col_offset_idx": 0,
+       "start_row_offset_idx": 3,
+       "text": "Source pages"
+      },
+      {
+       "col_span": 1,
+       "column_header": false,
+       "end_col_offset_idx": 2,
+       "end_row_offset_idx": 4,
+       "fillable": false,
+       "row_header": false,
+       "row_section": false,
+       "row_span": 1,
+       "start_col_offset_idx": 1,
+       "start_row_offset_idx": 3,
+       "text": "12"
+      }
+     ],
+     [
+      {
+       "col_span": 1,
+       "column_header": false,
+       "end_col_offset_idx": 1,
+       "end_row_offset_idx": 5,
+       "fillable": false,
+       "row_header": false,
+       "row_section": false,
+       "row_span": 1,
+       "start_col_offset_idx": 0,
+       "start_row_offset_idx": 4,
+       "text": "Word count (body)"
+      },
+      {
+       "col_span": 1,
+       "column_header": false,
+       "end_col_offset_idx": 2,
+       "end_row_offset_idx": 5,
+       "fillable": false,
+       "row_header": false,
+       "row_section": false,
+       "row_span": 1,
+       "start_col_offset_idx": 1,
+       "start_row_offset_idx": 4,
+       "text": "4,098"
+      }
+     ],
+     [
+      {
+       "col_span": 1,
+       "column_header": false,
+       "end_col_offset_idx": 1,
+       "end_row_offset_idx": 6,
+       "fillable": false,
+       "row_header": false,
+       "row_section": false,
+       "row_span": 1,
+       "start_col_offset_idx": 0,
+       "start_row_offset_idx": 5,
+       "text": "Section headings"
+      },
+      {
+       "col_span": 1,
+       "column_header": false,
+       "end_col_offset_idx": 2,
+       "end_row_offset_idx": 6,
+       "fillable": false,
+       "row_header": false,
+       "row_section": false,
+       "row_span": 1,
+       "start_col_offset_idx": 1,
+       "start_row_offset_idx": 5,
+       "text": "38"
+      }
+     ],
+     [
+      {
+       "col_span": 1,
+       "column_header": false,
+       "end_col_offset_idx": 1,
+       "end_row_offset_idx": 7,
+       "fillable": false,
+       "row_header": false,
+       "row_section": false,
+       "row_span": 1,
+       "start_col_offset_idx": 0,
+       "start_row_offset_idx": 6,
+       "text": "Retrieved"
+      },
+      {
+       "col_span": 1,
+       "column_header": false,
+       "end_col_offset_idx": 2,
+       "end_row_offset_idx": 7,
+       "fillable": false,
+       "row_header": false,
+       "row_section": false,
+       "row_span": 1,
+       "start_col_offset_idx": 1,
+       "start_row_offset_idx": 6,
+       "text": "6 September 2026"
+      }
+     ],
+     [
+      {
+       "col_span": 1,
+       "column_header": false,
+       "end_col_offset_idx": 1,
+       "end_row_offset_idx": 8,
+       "fillable": false,
+       "row_header": false,
+       "row_section": false,
+       "row_span": 1,
+       "start_col_offset_idx": 0,
+       "start_row_offset_idx": 7,
+       "text": "Source URL"
+      },
+      {
+       "col_span": 1,
+       "column_header": false,
+       "end_col_offset_idx": 2,
+       "end_row_offset_idx": 8,
+       "fillable": false,
+       "row_header": false,
+       "row_section": false,
+       "row_span": 1,
+       "start_col_offset_idx": 1,
+       "start_row_offset_idx": 7,
+       "text": "https://www.bajajhousingfinance.in/documents/37350/3993180/MITC+-+Retail+(Secured+and+Unsecured)+-+English+(2).pdf"
+      }
+     ]
+    ],
+    "num_cols": 2,
+    "num_rows": 8,
+    "table_cells": [
+     {
+      "col_span": 1,
+      "column_header": true,
+      "end_col_offset_idx": 1,
+      "end_row_offset_idx": 1,
+      "fillable": false,
+      "ref": {
+       "$ref": "#/groups/1"
+      },
+      "row_header": false,
+      "row_section": false,
+      "row_span": 1,
+      "start_col_offset_idx": 0,
+      "start_row_offset_idx": 0,
+      "text": "Document type"
+     },
+     {
+      "col_span": 1,
+      "column_header": true,
+      "end_col_offset_idx": 2,
+      "end_row_offset_idx": 1,
+      "fillable": false,
+      "row_header": false,
+      "row_section": false,
+      "row_span": 1,
+      "start_col_offset_idx": 1,
+      "start_row_offset_idx": 0,
+      "text": "Legal document (housing-finance loan terms)"
+     },
+     {
+      "col_span": 1,
+      "column_header": false,
+      "end_col_offset_idx": 1,
+      "end_row_offset_idx": 2,
+      "fillable": false,
+      "ref": {
+       "$ref": "#/groups/2"
+      },
+      "row_header": false,
+      "row_section": false,
+      "row_span": 1,
+      "start_col_offset_idx": 0,
+      "start_row_offset_idx": 1,
+      "text": "Issuer / source"
+     },
+     {
+      "col_span": 1,
+      "column_header": false,
+      "end_col_offset_idx": 2,
+      "end_row_offset_idx": 2,
+      "fillable": false,
+      "row_header": false,
+      "row_section": false,
+      "row_span": 1,
+      "start_col_offset_idx": 1,
+      "start_row_offset_idx": 1,
+      "text": "Bajaj Housing Finance Limited (public MITC)"
+     },
+     {
+      "col_span": 1,
+      "column_header": false,
+      "end_col_offset_idx": 1,
+      "end_row_offset_idx": 3,
+      "fillable": false,
+      "ref": {
+       "$ref": "#/groups/3"
+      },
+      "row_header": false,
+      "row_section": false,
+      "row_span": 1,
+      "start_col_offset_idx": 0,
+      "start_row_offset_idx": 2,
+      "text": "UIN / reference"
+     },
+     {
+      "col_span": 1,
+      "column_header": false,
+      "end_col_offset_idx": 2,
+      "end_row_offset_idx": 3,
+      "fillable": false,
+      "row_header": false,
+      "row_section": false,
+      "row_span": 1,
+      "start_col_offset_idx": 1,
+      "start_row_offset_idx": 2,
+      "text": "—"
+     },
+     {
+      "col_span": 1,
+      "column_header": false,
+      "end_col_offset_idx": 1,
+      "end_row_offset_idx": 4,
+      "fillable": false,
+      "ref": {
+       "$ref": "#/groups/4"
+      },
+      "row_header": false,
+      "row_section": false,
+      "row_span": 1,
+      "start_col_offset_idx": 0,
+      "start_row_offset_idx": 3,
+      "text": "Source pages"
+     },
+     {
+      "col_span": 1,
+      "column_header": false,
+      "end_col_offset_idx": 2,
+      "end_row_offset_idx": 4,
+      "fillable": false,
+      "row_header": false,
+      "row_section": false,
+      "row_span": 1,
+      "start_col_offset_idx": 1,
+      "start_row_offset_idx": 3,
+      "text": "12"
+     },
+     {
+      "col_span": 1,
+      "column_header": false,
+      "end_col_offset_idx": 1,
+      "end_row_offset_idx": 5,
+      "fillable": false,
+      "ref": {
+       "$ref": "#/groups/5"
+      },
+      "row_header": false,
+      "row_section": false,
+      "row_span": 1,
+      "start_col_offset_idx": 0,
+      "start_row_offset_idx": 4,
+      "text": "Word count (body)"
+     },
+     {
+      "col_span": 1,
+      "column_header": false,
+      "end_col_offset_idx": 2,
+      "end_row_offset_idx": 5,
+      "fillable": false,
+      "row_header": false,
+      "row_section": false,
+      "row_span": 1,
+      "start_col_offset_idx": 1,
+      "start_row_offset_idx": 4,
+      "text": "4,098"
+     },
+     {
+      "col_span": 1,
+      "column_header": false,
+      "end_col_offset_idx": 1,
+      "end_row_offset_idx": 6,
+      "fillable": false,
+      "ref": {
+       "$ref": "#/groups/6"
+      },
+      "row_header": false,
+      "row_section": false,
+      "row_span": 1,
+      "start_col_offset_idx": 0,
+      "start_row_offset_idx": 5,
+      "text": "Section headings"
+     },
+     {
+      "col_span": 1,
+      "column_header": false,
+      "end_col_offset_idx": 2,
+      "end_row_offset_idx": 6,
+      "fillable": false,
+      "row_header": false,
+      "row_section": false,
+      "row_span": 1,
+      "start_col_offset_idx": 1,
+      "start_row_offset_idx": 5,
+      "text": "38"
+     },
+     {
+      "col_span": 1,
+      "column_header": false,
+      "end_col_offset_idx": 1,
+      "end_row_offset_idx": 7,
+      "fillable": false,
+      "ref": {
+       "$ref": "#/groups/7"
+      },
+      "row_header": false,
+      "row_section": false,
+      "row_span": 1,
+      "start_col_offset_idx": 0,
+      "start_row_offset_idx": 6,
+      "text": "Retrieved"
+     },
+     {
+      "col_span": 1,
+      "column_header": false,
+      "end_col_offset_idx": 2,
+      "end_row_offset_idx": 7,
+      "fillable": false,
+      "row_header": false,
+      "row_section": false,
+      "row_span": 1,
+      "start_col_offset_idx": 1,
+      "start_row_offset_idx": 6,
+      "text": "6 September 2026"
+     },
+     {
+      "col_span": 1,
+      "column_header": false,
+      "end_col_offset_idx": 1,
+      "end_row_offset_idx": 8,
+      "fillable": false,
+      "ref": {
+       "$ref": "#/groups/8"
+      },
+      "row_header": false,
+      "row_section": false,
+      "row_span": 1,
+      "start_col_offset_idx": 0,
+      "start_row_offset_idx": 7,
+      "text": "Source URL"
+     },
+     {
+      "col_span": 1,
+      "column_header": false,
+      "end_col_offset_idx": 2,
+      "end_row_offset_idx": 8,
+      "fillable": false,
+      "row_header": false,
+      "row_section": false,
+      "row_span": 1,
+      "start_col_offset_idx": 1,
+      "start_row_offset_idx": 7,
+      "text": "https://www.bajajhousingfinance.in/documents/37350/3993180/MITC+-+Retail+(Secured+and+Unsecured)+-+English+(2).pdf"
+     }
+    ]
+   },
+   "footnotes": [],
+   "label": "table",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "references": [],
+   "self_ref": "#/tables/0"
+  }
+ ],
+ "texts": [
+  {
+   "children": [
+    {
+     "$ref": "#/texts/1"
+    },
+    {
+     "$ref": "#/texts/2"
+    },
+    {
+     "$ref": "#/tables/0"
+    },
+    {
+     "$ref": "#/groups/9"
+    },
+    {
+     "$ref": "#/texts/13"
+    },
+    {
+     "$ref": "#/texts/14"
+    },
+    {
+     "$ref": "#/texts/15"
+    },
+    {
+     "$ref": "#/texts/19"
+    },
+    {
+     "$ref": "#/texts/21"
+    },
+    {
+     "$ref": "#/texts/28"
+    },
+    {
+     "$ref": "#/texts/29"
+    },
+    {
+     "$ref": "#/texts/52"
+    },
+    {
+     "$ref": "#/texts/65"
+    },
+    {
+     "$ref": "#/texts/69"
+    },
+    {
+     "$ref": "#/texts/74"
+    },
+    {
+     "$ref": "#/texts/86"
+    },
+    {
+     "$ref": "#/texts/88"
+    },
+    {
+     "$ref": "#/texts/90"
+    },
+    {
+     "$ref": "#/texts/96"
+    },
+    {
+     "$ref": "#/texts/102"
+    },
+    {
+     "$ref": "#/texts/110"
+    },
+    {
+     "$ref": "#/texts/116"
+    },
+    {
+     "$ref": "#/texts/118"
+    },
+    {
+     "$ref": "#/texts/120"
+    },
+    {
+     "$ref": "#/texts/122"
+    },
+    {
+     "$ref": "#/texts/124"
+    },
+    {
+     "$ref": "#/texts/126"
+    },
+    {
+     "$ref": "#/texts/128"
+    },
+    {
+     "$ref": "#/texts/130"
+    },
+    {
+     "$ref": "#/texts/133"
+    },
+    {
+     "$ref": "#/texts/138"
+    },
+    {
+     "$ref": "#/texts/140"
+    },
+    {
+     "$ref": "#/texts/142"
+    },
+    {
+     "$ref": "#/texts/144"
+    },
+    {
+     "$ref": "#/texts/146"
+    },
+    {
+     "$ref": "#/texts/148"
+    },
+    {
+     "$ref": "#/texts/150"
+    },
+    {
+     "$ref": "#/texts/152"
+    },
+    {
+     "$ref": "#/texts/155"
+    },
+    {
+     "$ref": "#/texts/157"
+    },
+    {
+     "$ref": "#/texts/159"
+    },
+    {
+     "$ref": "#/texts/161"
+    },
+    {
+     "$ref": "#/texts/163"
+    },
+    {
+     "$ref": "#/texts/165"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 1,
+   "orig": "Most Important Terms and Conditions (MITC) — Retail Secured and Unsecured Loans",
+   "parent": {
+    "$ref": "#/groups/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/0",
+   "text": "Most Important Terms and Conditions (MITC) — Retail Secured and Unsecured Loans"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Fixture document for the delivery-aware reader — verbatim text of a public Indian legal document.",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/1",
+   "text": "Fixture document for the delivery-aware reader — verbatim text of a public Indian legal document."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "label": "text",
+   "orig": "",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/2",
+   "text": ""
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": true,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Document type",
+   "parent": {
+    "$ref": "#/groups/1"
+   },
+   "prov": [],
+   "self_ref": "#/texts/3",
+   "text": "Document type"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": true,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Issuer / source",
+   "parent": {
+    "$ref": "#/groups/2"
+   },
+   "prov": [],
+   "self_ref": "#/texts/4",
+   "text": "Issuer / source"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": true,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "UIN / reference",
+   "parent": {
+    "$ref": "#/groups/3"
+   },
+   "prov": [],
+   "self_ref": "#/texts/5",
+   "text": "UIN / reference"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": true,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Source pages",
+   "parent": {
+    "$ref": "#/groups/4"
+   },
+   "prov": [],
+   "self_ref": "#/texts/6",
+   "text": "Source pages"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": true,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Word count (body)",
+   "parent": {
+    "$ref": "#/groups/5"
+   },
+   "prov": [],
+   "self_ref": "#/texts/7",
+   "text": "Word count (body)"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": true,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Section headings",
+   "parent": {
+    "$ref": "#/groups/6"
+   },
+   "prov": [],
+   "self_ref": "#/texts/8",
+   "text": "Section headings"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": true,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Retrieved",
+   "parent": {
+    "$ref": "#/groups/7"
+   },
+   "prov": [],
+   "self_ref": "#/texts/9",
+   "text": "Retrieved"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": true,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Source URL",
+   "parent": {
+    "$ref": "#/groups/8"
+   },
+   "prov": [],
+   "self_ref": "#/texts/10",
+   "text": "Source URL"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": true,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Provenance and handling note.",
+   "parent": {
+    "$ref": "#/groups/9"
+   },
+   "prov": [],
+   "self_ref": "#/texts/11",
+   "text": "Provenance and handling note."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
+   "parent": {
+    "$ref": "#/groups/9"
+   },
+   "prov": [],
+   "self_ref": "#/texts/12",
+   "text": "Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "label": "text",
+   "orig": "",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/13",
+   "text": ""
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": " To be signed by all Borrowers/ Co-Borrowers Page 1 of 12",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/14",
+   "text": " To be signed by all Borrowers/ Co-Borrowers Page 1 of 12"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/16"
+    },
+    {
+     "$ref": "#/texts/17"
+    },
+    {
+     "$ref": "#/texts/18"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "MOST IMPORTANT TERMS AND CONDITIONS (MITC)",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/15",
+   "text": "MOST IMPORTANT TERMS AND CONDITIONS (MITC)"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Pursuant to the terms and conditions agreed to between BAJAJ HOUSING FINANCE LIMITED (“BHFL” or “the Lender”) and the Borrower (“the Borrower” or “the Customer”) as detailed in the Sanction letter, Loan Agreement (“Loan Agreement”), the Top-Up Loan Addendum, Disbursement letter and/ or other documents, if any, (collectively referred to as the “Loan Documents”), the Key Terms and Conditions are mentioned in this MITC.",
+   "parent": {
+    "$ref": "#/texts/15"
+   },
+   "prov": [],
+   "self_ref": "#/texts/16",
+   "text": "Pursuant to the terms and conditions agreed to between BAJAJ HOUSING FINANCE LIMITED (“BHFL” or “the Lender”) and the Borrower (“the Borrower” or “the Customer”) as detailed in the Sanction letter, Loan Agreement (“Loan Agreement”), the Top-Up Loan Addendum, Disbursement letter and/ or other documents, if any, (collectively referred to as the “Loan Documents”), the Key Terms and Conditions are mentioned in this MITC."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "This MITC must be read in conjunction with the terms and conditions of the Loan documents. The Loan availed by the Borrower shall be governed by the Loan Documents. In the event of any conflict between. the MITC set out herein and the Loan Documents, the terms and conditions of the Loan Documents shall prevail. We will be issuing customer login credentials (user id and password) through which customer can access Loan Agreement. In case customer is not able to access Loan agreement on portal, a request can be placed to provide copy of Loan Agreement and thereafter photocopy of Loan Agreement will be facilitated.",
+   "parent": {
+    "$ref": "#/texts/15"
+   },
+   "prov": [],
+   "self_ref": "#/texts/17",
+   "text": "This MITC must be read in conjunction with the terms and conditions of the Loan documents. The Loan availed by the Borrower shall be governed by the Loan Documents. In the event of any conflict between. the MITC set out herein and the Loan Documents, the terms and conditions of the Loan Documents shall prevail. We will be issuing customer login credentials (user id and password) through which customer can access Loan Agreement. In case customer is not able to access Loan agreement on portal, a request can be placed to provide copy of Loan Agreement and thereafter photocopy of Loan Agreement will be facilitated."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "APPLICATION NO.: ___________________________ NATURE OF LOAN:  Secured Loan  Unsecured Loan TYPE OF LOAN:  Fresh/ Purchase  BT  BT+ Top up  Top Up",
+   "parent": {
+    "$ref": "#/texts/15"
+   },
+   "prov": [],
+   "self_ref": "#/texts/18",
+   "text": "APPLICATION NO.: ___________________________ NATURE OF LOAN:  Secured Loan  Unsecured Loan TYPE OF LOAN:  Fresh/ Purchase  BT  BT+ Top up  Top Up"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/20"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "1. LOAN AMOUNT:",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/19",
+   "text": "1. LOAN AMOUNT:"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": ".",
+   "parent": {
+    "$ref": "#/texts/19"
+   },
+   "prov": [],
+   "self_ref": "#/texts/20",
+   "text": "."
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/22"
+    },
+    {
+     "$ref": "#/texts/23"
+    },
+    {
+     "$ref": "#/texts/24"
+    },
+    {
+     "$ref": "#/texts/25"
+    },
+    {
+     "$ref": "#/texts/26"
+    },
+    {
+     "$ref": "#/texts/27"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "2. INTEREST TYPE:",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/21",
+   "text": "2. INTEREST TYPE:"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Floating:  BHFL Floating Reference Rate (FRR) or  Repo Rate  Fixed Rate of Interest:",
+   "parent": {
+    "$ref": "#/texts/21"
+   },
+   "prov": [],
+   "self_ref": "#/texts/22",
+   "text": "Floating:  BHFL Floating Reference Rate (FRR) or  Repo Rate  Fixed Rate of Interest:"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Floating: _____ % p.a. (FRR / Repo ____% +/- ____% spread) Fixed: ____% p.a.",
+   "parent": {
+    "$ref": "#/texts/21"
+   },
+   "prov": [],
+   "self_ref": "#/texts/23",
+   "text": "Floating: _____ % p.a. (FRR / Repo ____% +/- ____% spread) Fixed: ____% p.a."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Moratorium or subsidy:",
+   "parent": {
+    "$ref": "#/texts/21"
+   },
+   "prov": [],
+   "self_ref": "#/texts/24",
+   "text": "Moratorium or subsidy:"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Date of reset of Interest (if any):",
+   "parent": {
+    "$ref": "#/texts/21"
+   },
+   "prov": [],
+   "self_ref": "#/texts/25",
+   "text": "Date of reset of Interest (if any):"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Modes of communication of changes in Interest Rate: BHFL is entitled to revise the interest rate upward or downward at any time and from time to time during the loan tenure at its sole discretion, and with due intimation to the Borrower, due to changes in BHFL FRRs or External benchmarks (for external benchmark linked loans) or internal policies or due to regulatory requirements or on occurrence of event of default, including but not limited to, any delay by",
+   "parent": {
+    "$ref": "#/texts/21"
+   },
+   "prov": [],
+   "self_ref": "#/texts/26",
+   "text": "Modes of communication of changes in Interest Rate: BHFL is entitled to revise the interest rate upward or downward at any time and from time to time during the loan tenure at its sole discretion, and with due intimation to the Borrower, due to changes in BHFL FRRs or External benchmarks (for external benchmark linked loans) or internal policies or due to regulatory requirements or on occurrence of event of default, including but not limited to, any delay by"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Borrower in providing / executing any documents so required by the Lender to be executed / provided by the Borrower, post disbursal of the loan, under the agreement. Any revision in the rate of interest is effective prospectively. BHFL shall inform of such change in Interest Rate by sending letter to the Borrower on registered communication address/ mailer on registered E mail ID/ Message on registered Mobile No and/or by updating its Website. Such communication through any two alternate modes of communications mentioned above shall constitute sufficient notice to the Borrower. If such change is to the disadvantage of the Borrower, the Borrower may within 60 days and without notice close the Loan account or switch it without paying any extra charges or interest.",
+   "parent": {
+    "$ref": "#/texts/21"
+   },
+   "prov": [],
+   "self_ref": "#/texts/27",
+   "text": "Borrower in providing / executing any documents so required by the Lender to be executed / provided by the Borrower, post disbursal of the loan, under the agreement. Any revision in the rate of interest is effective prospectively. BHFL shall inform of such change in Interest Rate by sending letter to the Borrower on registered communication address/ mailer on registered E mail ID/ Message on registered Mobile No and/or by updating its Website. Such communication through any two alternate modes of communications mentioned above shall constitute sufficient notice to the Borrower. If such change is to the disadvantage of the Borrower, the Borrower may within 60 days and without notice close the Loan account or switch it without paying any extra charges or interest."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "3. LOAN TENURE:",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/28",
+   "text": "3. LOAN TENURE:"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/30"
+    },
+    {
+     "$ref": "#/groups/10"
+    },
+    {
+     "$ref": "#/texts/36"
+    },
+    {
+     "$ref": "#/texts/37"
+    },
+    {
+     "$ref": "#/texts/38"
+    },
+    {
+     "$ref": "#/texts/39"
+    },
+    {
+     "$ref": "#/texts/40"
+    },
+    {
+     "$ref": "#/texts/41"
+    },
+    {
+     "$ref": "#/texts/42"
+    },
+    {
+     "$ref": "#/texts/43"
+    },
+    {
+     "$ref": "#/texts/44"
+    },
+    {
+     "$ref": "#/texts/45"
+    },
+    {
+     "$ref": "#/texts/46"
+    },
+    {
+     "$ref": "#/texts/47"
+    },
+    {
+     "$ref": "#/texts/48"
+    },
+    {
+     "$ref": "#/texts/49"
+    },
+    {
+     "$ref": "#/texts/50"
+    },
+    {
+     "$ref": "#/texts/51"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "4. PURPOSE OF LOAN:",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/29",
+   "text": "4. PURPOSE OF LOAN:"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": " Residential property purchase/ Resale Purchase / Plot + Construction / Self-construction (This option is applicable only in case of Housing Loan)  Personal Use (For Salaried top-up cases)  Business Purpose*  Other Use (Please specify) ________________________________ *The following loans shall be classified as loans for business purpose:",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "prov": [],
+   "self_ref": "#/texts/30",
+   "text": " Residential property purchase/ Resale Purchase / Plot + Construction / Self-construction (This option is applicable only in case of Housing Loan)  Personal Use (For Salaried top-up cases)  Business Purpose*  Other Use (Please specify) ________________________________ *The following loans shall be classified as loans for business purpose:"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Lease Rental Discounting Loans.",
+   "parent": {
+    "$ref": "#/groups/10"
+   },
+   "prov": [],
+   "self_ref": "#/texts/31",
+   "text": "Lease Rental Discounting Loans."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Loans Against any Property availed for Business Purpose i.e. Working Capital, Debt Consolidation, Repayment of Business Loan, Expansion of business, Acquisition of Business asset or any similar end usage of funds.",
+   "parent": {
+    "$ref": "#/groups/10"
+   },
+   "prov": [],
+   "self_ref": "#/texts/32",
+   "text": "Loans Against any Property availed for Business Purpose i.e. Working Capital, Debt Consolidation, Repayment of Business Loan, Expansion of business, Acquisition of Business asset or any similar end usage of funds."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Loan for purchase of Non-Residential Properties.",
+   "parent": {
+    "$ref": "#/groups/10"
+   },
+   "prov": [],
+   "self_ref": "#/texts/33",
+   "text": "Loan for purchase of Non-Residential Properties."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Loan against security of Non-Residential Property.",
+   "parent": {
+    "$ref": "#/groups/10"
+   },
+   "prov": [],
+   "self_ref": "#/texts/34",
+   "text": "Loan against security of Non-Residential Property."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Top up loans for Business Purpose i.e. Working Capital, Debt Consolidation, Repayment of Business Loan, Expansion of business, Acquisition of Business asset or any similar end usage of funds.",
+   "parent": {
+    "$ref": "#/groups/10"
+   },
+   "prov": [],
+   "self_ref": "#/texts/35",
+   "text": "Top up loans for Business Purpose i.e. Working Capital, Debt Consolidation, Repayment of Business Loan, Expansion of business, Acquisition of Business asset or any similar end usage of funds."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "5. INSTALLMENT TYPES: Monthly  Term Loan  Flexi Term Loan.",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "prov": [],
+   "self_ref": "#/texts/36",
+   "text": "5. INSTALLMENT TYPES: Monthly  Term Loan  Flexi Term Loan."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": " Flexi Hybrid Loan.",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "prov": [],
+   "self_ref": "#/texts/37",
+   "text": " Flexi Hybrid Loan."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Adjustment of payments done by customer to loan account:",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "prov": [],
+   "self_ref": "#/texts/38",
+   "text": "Adjustment of payments done by customer to loan account:"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "I. Term loans (including Flexi Term Loans):",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "prov": [],
+   "self_ref": "#/texts/39",
+   "text": "I. Term loans (including Flexi Term Loans):"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "a) Customers making payment through any mode other than the payment gateways (i.e.",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "prov": [],
+   "self_ref": "#/texts/40",
+   "text": "a) Customers making payment through any mode other than the payment gateways (i.e."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "RTGS/NEFT/IMPS/UPI etc.): Credit to the loan account will be done post receipt of the clear funds by the Company, (Normally same day except in failure transactions).",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "prov": [],
+   "self_ref": "#/texts/41",
+   "text": "RTGS/NEFT/IMPS/UPI etc.): Credit to the loan account will be done post receipt of the clear funds by the Company, (Normally same day except in failure transactions)."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "b) Customers making payment through payment gateway (e.g. bill desk): Credit to the loan account will be done on receipt of funds by company (normally T+1 day wherein T is debit date to customer account).",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "prov": [],
+   "self_ref": "#/texts/42",
+   "text": "b) Customers making payment through payment gateway (e.g. bill desk): Credit to the loan account will be done on receipt of funds by company (normally T+1 day wherein T is debit date to customer account)."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "c) Banking holidays are excluded for computation of credit period as funds are not received at company end hence it can be more than T+1 days. Customers are advised to check specifically banking holidays before transferring money through payment gateways since there may be more than one banking holiday, the difference in debit to customer bank account and credit may go beyond T+1 day.",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "prov": [],
+   "self_ref": "#/texts/43",
+   "text": "c) Banking holidays are excluded for computation of credit period as funds are not received at company end hence it can be more than T+1 days. Customers are advised to check specifically banking holidays before transferring money through payment gateways since there may be more than one banking holiday, the difference in debit to customer bank account and credit may go beyond T+1 day."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "d) Transactions where customer account is debited but credit is received with delay at payment gateway’s end, credit to customer account would be given on day of receipt of credit in Company’s account.",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "prov": [],
+   "self_ref": "#/texts/44",
+   "text": "d) Transactions where customer account is debited but credit is received with delay at payment gateway’s end, credit to customer account would be given on day of receipt of credit in Company’s account."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "II. Additional conditions for Flexi Term Loan where Loan amount is greater than Rs.1.00 crore:",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "prov": [],
+   "self_ref": "#/texts/45",
+   "text": "II. Additional conditions for Flexi Term Loan where Loan amount is greater than Rs.1.00 crore:"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "a) For flexi payments cut off timings would be 1 p.m. on normal banking working day.",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "prov": [],
+   "self_ref": "#/texts/46",
+   "text": "a) For flexi payments cut off timings would be 1 p.m. on normal banking working day."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "b) Amounts transferred prior to 1:00 p.m. on banking working day: Credit to the loan account will be done on the same day [except payments through gateway, as mentioned in clause: I(b)].",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "prov": [],
+   "self_ref": "#/texts/47",
+   "text": "b) Amounts transferred prior to 1:00 p.m. on banking working day: Credit to the loan account will be done on the same day [except payments through gateway, as mentioned in clause: I(b)]."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "c) Amounts transferred post 1:00 p.m. on banking working day: Credit to the loan account will be done on T+1 day.",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "prov": [],
+   "self_ref": "#/texts/48",
+   "text": "c) Amounts transferred post 1:00 p.m. on banking working day: Credit to the loan account will be done on T+1 day."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "d) Payments done on banking holiday: Credit to the loan account will be done on the next working",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "prov": [],
+   "self_ref": "#/texts/49",
+   "text": "d) Payments done on banking holiday: Credit to the loan account will be done on the next working"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "day. Customers are advised to check specifically banking holidays before transferring money through payment gateways since there may be more than one banking holiday, the difference in debit to customer bank account and credit may go beyond T+1 day.",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "prov": [],
+   "self_ref": "#/texts/50",
+   "text": "day. Customers are advised to check specifically banking holidays before transferring money through payment gateways since there may be more than one banking holiday, the difference in debit to customer bank account and credit may go beyond T+1 day."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "e) Transactions where customer account is debited but credit is received with delay at payment gateway’s end, credit to customer account would be given on day of receipt of credit in Company’s account.",
+   "parent": {
+    "$ref": "#/texts/29"
+   },
+   "prov": [],
+   "self_ref": "#/texts/51",
+   "text": "e) Transactions where customer account is debited but credit is received with delay at payment gateway’s end, credit to customer account would be given on day of receipt of credit in Company’s account."
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/groups/11"
+    },
+    {
+     "$ref": "#/texts/55"
+    },
+    {
+     "$ref": "#/texts/56"
+    },
+    {
+     "$ref": "#/groups/12"
+    },
+    {
+     "$ref": "#/texts/60"
+    },
+    {
+     "$ref": "#/texts/61"
+    },
+    {
+     "$ref": "#/texts/62"
+    },
+    {
+     "$ref": "#/groups/13"
+    },
+    {
+     "$ref": "#/texts/64"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "6. SECURITY",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/52",
+   "text": "6. SECURITY"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "The charge created / to be created against the Property/ies offered as security in favour of BHFL and / or any other collateral / security as may be created in favour of BHFL is/are considered as the security of the loan, which is detailed in Loan Documents. The Security shall mean and include mortgage, guarantee and any other form of security as deemed fit by BHFL for securing the loan and submitted by the Borrower accordingly. The Borrower shall produce such original/copy of title deeds, documents, reports as may be required by BHFL.",
+   "parent": {
+    "$ref": "#/groups/11"
+   },
+   "prov": [],
+   "self_ref": "#/texts/53",
+   "text": "The charge created / to be created against the Property/ies offered as security in favour of BHFL and / or any other collateral / security as may be created in favour of BHFL is/are considered as the security of the loan, which is detailed in Loan Documents. The Security shall mean and include mortgage, guarantee and any other form of security as deemed fit by BHFL for securing the loan and submitted by the Borrower accordingly. The Borrower shall produce such original/copy of title deeds, documents, reports as may be required by BHFL."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "The Borrower shall bear all the charges payable for the creation of said security and shall take all the steps required for the perfection thereof.",
+   "parent": {
+    "$ref": "#/groups/11"
+   },
+   "prov": [],
+   "self_ref": "#/texts/54",
+   "text": "The Borrower shall bear all the charges payable for the creation of said security and shall take all the steps required for the perfection thereof."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "NOTE: If it is an Unsecured Loan, the aforementioned clauses w.r.t. to security shall not be applicable.",
+   "parent": {
+    "$ref": "#/texts/52"
+   },
+   "prov": [],
+   "self_ref": "#/texts/55",
+   "text": "NOTE: If it is an Unsecured Loan, the aforementioned clauses w.r.t. to security shall not be applicable."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "7. INSURANCE OF THE PROPERTY/ BORROWER(S) AND VALUE-ADDED PRODUCTS",
+   "parent": {
+    "$ref": "#/texts/52"
+   },
+   "prov": [],
+   "self_ref": "#/texts/56",
+   "text": "7. INSURANCE OF THE PROPERTY/ BORROWER(S) AND VALUE-ADDED PRODUCTS"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "It will be the Borrower’s responsibility to ensure that the Property offered as security, is duly insured for an amount equivalent or above the loan value from and against all risks, with BHFL as sole beneficiary during the tenure of the loan. The evidence thereof shall be given to BHFL whenever required for by BHFL.",
+   "parent": {
+    "$ref": "#/groups/12"
+   },
+   "prov": [],
+   "self_ref": "#/texts/57",
+   "text": "It will be the Borrower’s responsibility to ensure that the Property offered as security, is duly insured for an amount equivalent or above the loan value from and against all risks, with BHFL as sole beneficiary during the tenure of the loan. The evidence thereof shall be given to BHFL whenever required for by BHFL."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "The claims & coverage will be governed in accordance with the terms & conditions of the insurance policy issued by the insurance company.",
+   "parent": {
+    "$ref": "#/groups/12"
+   },
+   "prov": [],
+   "self_ref": "#/texts/58",
+   "text": "The claims & coverage will be governed in accordance with the terms & conditions of the insurance policy issued by the insurance company."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "BHFL offers enrolment, only to its customers, under various Group insurance policies in the capacity of a Master Policy Holder. The role of BHFL is limited to the effect that it only facilitates at the request of the customer to apply for an insurance policy from the insurance company.",
+   "parent": {
+    "$ref": "#/groups/12"
+   },
+   "prov": [],
+   "self_ref": "#/texts/59",
+   "text": "BHFL offers enrolment, only to its customers, under various Group insurance policies in the capacity of a Master Policy Holder. The role of BHFL is limited to the effect that it only facilitates at the request of the customer to apply for an insurance policy from the insurance company."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "However, the decision to issue an insurance policy, provide requisite insurance coverage and settle any future claim under the policy would solely rest with the insurance company only.",
+   "parent": {
+    "$ref": "#/texts/52"
+   },
+   "prov": [],
+   "self_ref": "#/texts/60",
+   "text": "However, the decision to issue an insurance policy, provide requisite insurance coverage and settle any future claim under the policy would solely rest with the insurance company only."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Insurance is the subject matter of solicitation, and the Borrower has considered availing the same voluntarily. BHFL holds no warranty and does not make any representation about the insurance product, the underlying terms and conditions and/or benefits of the insurance product, the manner of processing the claims by the insurance company. Further, BHFL shall not be responsible for acceptance or rejection of the request for insurance policy and/or claims, the manner of processing of claims etc., in any manner whatsoever. All or any grievances in reference to the insurance policy will have to be directly taken up with the insurance company",
+   "parent": {
+    "$ref": "#/texts/52"
+   },
+   "prov": [],
+   "self_ref": "#/texts/61",
+   "text": "Insurance is the subject matter of solicitation, and the Borrower has considered availing the same voluntarily. BHFL holds no warranty and does not make any representation about the insurance product, the underlying terms and conditions and/or benefits of the insurance product, the manner of processing the claims by the insurance company. Further, BHFL shall not be responsible for acceptance or rejection of the request for insurance policy and/or claims, the manner of processing of claims etc., in any manner whatsoever. All or any grievances in reference to the insurance policy will have to be directly taken up with the insurance company"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "only.",
+   "parent": {
+    "$ref": "#/texts/52"
+   },
+   "prov": [],
+   "self_ref": "#/texts/62",
+   "text": "only."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Value added products are the subject matter of solicitation, and the Borrower has considered availing the same voluntarily. The role of BHFL is limited to the effect that it only facilitates at the request of the customer to apply for such value-added products from the service providers.",
+   "parent": {
+    "$ref": "#/groups/13"
+   },
+   "prov": [],
+   "self_ref": "#/texts/63",
+   "text": "Value added products are the subject matter of solicitation, and the Borrower has considered availing the same voluntarily. The role of BHFL is limited to the effect that it only facilitates at the request of the customer to apply for such value-added products from the service providers."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "BHFL holds no warranty and does not make any representation about the products offered, the underlying terms and conditions and/or benefits of the products, the manner of processing the claims / services by the third party. BHFL shall not be responsible for acceptance or rejection of the third-party products offered and/or claims, the manner of processing of claims / services etc. in any manner whatsoever. All or any grievances in reference to the products availed will have to be directly taken up with the service provider only.",
+   "parent": {
+    "$ref": "#/texts/52"
+   },
+   "prov": [],
+   "self_ref": "#/texts/64",
+   "text": "BHFL holds no warranty and does not make any representation about the products offered, the underlying terms and conditions and/or benefits of the products, the manner of processing the claims / services by the third party. BHFL shall not be responsible for acceptance or rejection of the third-party products offered and/or claims, the manner of processing of claims / services etc. in any manner whatsoever. All or any grievances in reference to the products availed will have to be directly taken up with the service provider only."
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/groups/14"
+    },
+    {
+     "$ref": "#/texts/68"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "8. CONDITIONS FOR DISBURSEMENT OF THE LOAN",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/65",
+   "text": "8. CONDITIONS FOR DISBURSEMENT OF THE LOAN"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Submission of all relevant documents as mentioned by BHFL in the Sanction Letter, Loan Agreement and other Loan Documents;",
+   "parent": {
+    "$ref": "#/groups/14"
+   },
+   "prov": [],
+   "self_ref": "#/texts/66",
+   "text": "Submission of all relevant documents as mentioned by BHFL in the Sanction Letter, Loan Agreement and other Loan Documents;"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "If it is a secured Loan, the following additional conditions will also have to be satisfied by the Customer: o Legal & Technical Assessment of the Property; o Clear, marketable and unencumbered title of the property offered as security; o If the loan is a Home Loan, proof of payment of the own contribution towards the purchase of the Property by the Borrower has to be submitted to BHFL; o The construction carried out over the Property/ies has been undertaken as per the approved plans and as per applicable laws/bye-laws/rules and regulations;",
+   "parent": {
+    "$ref": "#/groups/14"
+   },
+   "prov": [],
+   "self_ref": "#/texts/67",
+   "text": "If it is a secured Loan, the following additional conditions will also have to be satisfied by the Customer: o Legal & Technical Assessment of the Property; o Clear, marketable and unencumbered title of the property offered as security; o If the loan is a Home Loan, proof of payment of the own contribution towards the purchase of the Property by the Borrower has to be submitted to BHFL; o The construction carried out over the Property/ies has been undertaken as per the approved plans and as per applicable laws/bye-laws/rules and regulations;"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "o All required approvals (including, but without limitation, the approved plans and the statutory approvals) for the property have been obtained and submitted to BHFL.",
+   "parent": {
+    "$ref": "#/texts/65"
+   },
+   "prov": [],
+   "self_ref": "#/texts/68",
+   "text": "o All required approvals (including, but without limitation, the approved plans and the statutory approvals) for the property have been obtained and submitted to BHFL."
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/groups/15"
+    },
+    {
+     "$ref": "#/texts/72"
+    },
+    {
+     "$ref": "#/groups/16"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "9. REPAYMENT OF THE LOAN",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/69",
+   "text": "9. REPAYMENT OF THE LOAN"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "The Borrower agrees to repay the EMIs/Monthly Instalments and the other Outstanding Dues to BHFL on or before the respective Due Dates by any of the repayment modes as set out in the Loan Agreement or the Top-Up Loan Addendum, or in such manner and at such place, as may be agreed between the Borrower and BHFL.",
+   "parent": {
+    "$ref": "#/groups/15"
+   },
+   "prov": [],
+   "self_ref": "#/texts/70",
+   "text": "The Borrower agrees to repay the EMIs/Monthly Instalments and the other Outstanding Dues to BHFL on or before the respective Due Dates by any of the repayment modes as set out in the Loan Agreement or the Top-Up Loan Addendum, or in such manner and at such place, as may be agreed between the Borrower and BHFL."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "BHFL may, at the request of the Borrower in writing, agree to change the repayment mode.",
+   "parent": {
+    "$ref": "#/groups/15"
+   },
+   "prov": [],
+   "self_ref": "#/texts/71",
+   "text": "BHFL may, at the request of the Borrower in writing, agree to change the repayment mode."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "BHFL may, at any time, in its discretion revise the repayment schedule in its sole and absolute discretion and notify the Borrower in advance accordingly.",
+   "parent": {
+    "$ref": "#/texts/69"
+   },
+   "prov": [],
+   "self_ref": "#/texts/72",
+   "text": "BHFL may, at any time, in its discretion revise the repayment schedule in its sole and absolute discretion and notify the Borrower in advance accordingly."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "The EMI/Monthly Instalment amount shall be arrived at so as to comprise the repayment of the Loan Amount and payment of Interest calculated on the basis of the Interest Rate within the Loan Tenure. The Borrower agrees to continue paying EMIs/Monthly Instalments until all Outstanding Dues under the Loan have been repaid in full to BHFL.",
+   "parent": {
+    "$ref": "#/groups/16"
+   },
+   "prov": [],
+   "self_ref": "#/texts/73",
+   "text": "The EMI/Monthly Instalment amount shall be arrived at so as to comprise the repayment of the Loan Amount and payment of Interest calculated on the basis of the Interest Rate within the Loan Tenure. The Borrower agrees to continue paying EMIs/Monthly Instalments until all Outstanding Dues under the Loan have been repaid in full to BHFL."
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/75"
+    },
+    {
+     "$ref": "#/texts/76"
+    },
+    {
+     "$ref": "#/groups/17"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "10. BRIEF PROCEDURE TO BE FOLLOWED FOR RECOVERY OF OVERDUES",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/74",
+   "text": "10. BRIEF PROCEDURE TO BE FOLLOWED FOR RECOVERY OF OVERDUES"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "On occurrence of any event of default as mentioned in the Loan Agreement and other Loan Documents (“Event of Default”), all outstanding amounts owed by the Borrower to BHFL shall become payable forthwith and BHFL reserves the right to undertake such necessary processes/measures to enforce its rights under the Loan Agreement and other Loan Documents including but not limited to charging Default Interest for the delayed payment, recovery of over",
+   "parent": {
+    "$ref": "#/texts/74"
+   },
+   "prov": [],
+   "self_ref": "#/texts/75",
+   "text": "On occurrence of any event of default as mentioned in the Loan Agreement and other Loan Documents (“Event of Default”), all outstanding amounts owed by the Borrower to BHFL shall become payable forthwith and BHFL reserves the right to undertake such necessary processes/measures to enforce its rights under the Loan Agreement and other Loan Documents including but not limited to charging Default Interest for the delayed payment, recovery of over"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "dues. Further, in case of a secured loan, BHFL will be entitled to enforce the Security in accordance with the remedies available under the Law. BHFL also reserves the right to:",
+   "parent": {
+    "$ref": "#/texts/74"
+   },
+   "prov": [],
+   "self_ref": "#/texts/76",
+   "text": "dues. Further, in case of a secured loan, BHFL will be entitled to enforce the Security in accordance with the remedies available under the Law. BHFL also reserves the right to:"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Accelerate the repayment of the Outstanding Dues including the Loan.",
+   "parent": {
+    "$ref": "#/groups/17"
+   },
+   "prov": [],
+   "self_ref": "#/texts/77",
+   "text": "Accelerate the repayment of the Outstanding Dues including the Loan."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Place the Loan on demand or declare all Outstanding Dues payable by the Borrower in respect of the Loan to be due and payable immediately.",
+   "parent": {
+    "$ref": "#/groups/17"
+   },
+   "prov": [],
+   "self_ref": "#/texts/78",
+   "text": "Place the Loan on demand or declare all Outstanding Dues payable by the Borrower in respect of the Loan to be due and payable immediately."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Charge default Interest at the Penal Interest Rate and any other applicable penal charges including Bounce Charges.",
+   "parent": {
+    "$ref": "#/groups/17"
+   },
+   "prov": [],
+   "self_ref": "#/texts/79",
+   "text": "Charge default Interest at the Penal Interest Rate and any other applicable penal charges including Bounce Charges."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Exercise such other rights and remedies as may be available to the Company under applicable law during the pendency of the Loan.",
+   "parent": {
+    "$ref": "#/groups/17"
+   },
+   "prov": [],
+   "self_ref": "#/texts/80",
+   "text": "Exercise such other rights and remedies as may be available to the Company under applicable law during the pendency of the Loan."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Stipulate such other condition/s or take such other action/s as the Company deems fit;",
+   "parent": {
+    "$ref": "#/groups/17"
+   },
+   "prov": [],
+   "self_ref": "#/texts/81",
+   "text": "Stipulate such other condition/s or take such other action/s as the Company deems fit;"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Revise the applicable Interest Rate; and/or",
+   "parent": {
+    "$ref": "#/groups/17"
+   },
+   "prov": [],
+   "self_ref": "#/texts/82",
+   "text": "Revise the applicable Interest Rate; and/or"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Has the right to disclose all the loan account details of the Borrower to RBI, NHB, stock exchange, Information Utility, auditors, CIBIL and other information bureaus and any other Statutory/Regulatory authority and/or any other agency authorised in this behalf pursuant to any legal/regulatory requirements.",
+   "parent": {
+    "$ref": "#/groups/17"
+   },
+   "prov": [],
+   "self_ref": "#/texts/83",
+   "text": "Has the right to disclose all the loan account details of the Borrower to RBI, NHB, stock exchange, Information Utility, auditors, CIBIL and other information bureaus and any other Statutory/Regulatory authority and/or any other agency authorised in this behalf pursuant to any legal/regulatory requirements."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "At its sole discretion, publish the name, address, photograph, Security details (if applicable) and such other information of the Borrower as the BHFL deems fit, in electronic, print and social media, and that such publication shall also include the fact of such Event of Default; and the Borrower agrees that the BHFL is not responsible or liable for any harm and/ or damage caused to the Borrower, whether monetary or otherwise, because of the publication of such information.",
+   "parent": {
+    "$ref": "#/groups/17"
+   },
+   "prov": [],
+   "self_ref": "#/texts/84",
+   "text": "At its sole discretion, publish the name, address, photograph, Security details (if applicable) and such other information of the Borrower as the BHFL deems fit, in electronic, print and social media, and that such publication shall also include the fact of such Event of Default; and the Borrower agrees that the BHFL is not responsible or liable for any harm and/ or damage caused to the Borrower, whether monetary or otherwise, because of the publication of such information."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Take possession of the Property, if any, on which Security is so created whether by itself or through any of the recovery agents or attorneys as may be appointed by the Lender.",
+   "parent": {
+    "$ref": "#/groups/17"
+   },
+   "prov": [],
+   "self_ref": "#/texts/85",
+   "text": "Take possession of the Property, if any, on which Security is so created whether by itself or through any of the recovery agents or attorneys as may be appointed by the Lender."
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/87"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "11. ANNUAL OUTSTANDING BALANCE STATEMENT",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/86",
+   "text": "11. ANNUAL OUTSTANDING BALANCE STATEMENT"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "BHFL shall issue the annual outstanding balance statement to the Borrower at the request.",
+   "parent": {
+    "$ref": "#/texts/86"
+   },
+   "prov": [],
+   "self_ref": "#/texts/87",
+   "text": "BHFL shall issue the annual outstanding balance statement to the Borrower at the request."
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/89"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "12. FAIR PRACTICE CODE",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/88",
+   "text": "12. FAIR PRACTICE CODE"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Fair Practice code of the company can be referred online in link provided below: https://www.bajajhousingfinance.in/notice-board",
+   "parent": {
+    "$ref": "#/texts/88"
+   },
+   "prov": [],
+   "self_ref": "#/texts/89",
+   "text": "Fair Practice code of the company can be referred online in link provided below: https://www.bajajhousingfinance.in/notice-board"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/91"
+    },
+    {
+     "$ref": "#/texts/92"
+    },
+    {
+     "$ref": "#/texts/93"
+    },
+    {
+     "$ref": "#/texts/94"
+    },
+    {
+     "$ref": "#/texts/95"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "13. CUSTOMER SERVICES",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/90",
+   "text": "13. CUSTOMER SERVICES"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "E mail bhflwecare@bajajfinserv.in Call 022 - 45297300 Online Customer Portal https://myaccount.bajajhousingfinance.in/#/home Branch visiting hours 10:00 AM to 6:00 PM Queries raised through any of the above-mentioned channels will be actioned and resolved for the Borrower within 7 working days.",
+   "parent": {
+    "$ref": "#/texts/90"
+   },
+   "prov": [],
+   "self_ref": "#/texts/91",
+   "text": "E mail bhflwecare@bajajfinserv.in Call 022 - 45297300 Online Customer Portal https://myaccount.bajajhousingfinance.in/#/home Branch visiting hours 10:00 AM to 6:00 PM Queries raised through any of the above-mentioned channels will be actioned and resolved for the Borrower within 7 working days."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "(i) loan account statement - Loan Account statement can be downloaded online. Alternatively, Customer can obtain the statement by walking into Branch or even by calling on customer care number indicated above.",
+   "parent": {
+    "$ref": "#/texts/90"
+   },
+   "prov": [],
+   "self_ref": "#/texts/92",
+   "text": "(i) loan account statement - Loan Account statement can be downloaded online. Alternatively, Customer can obtain the statement by walking into Branch or even by calling on customer care number indicated above."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "(ii) photocopy of the title documents – In case if secured loan is availed by Customer by submitting title and link documents of the property, photocopy of title and link documents of the property, would be provided to customer upon receiving a written request from Customer and subject to payment of applicable charges as defined under Fees/ charges section below.",
+   "parent": {
+    "$ref": "#/texts/90"
+   },
+   "prov": [],
+   "self_ref": "#/texts/93",
+   "text": "(ii) photocopy of the title documents – In case if secured loan is availed by Customer by submitting title and link documents of the property, photocopy of title and link documents of the property, would be provided to customer upon receiving a written request from Customer and subject to payment of applicable charges as defined under Fees/ charges section below."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "In case of takeover/balance transfer loans, the request by the customer for photocopy of title & link documents will be facilitated subject to receipt of title and link documents from the Transferor bank/Financial Institution.",
+   "parent": {
+    "$ref": "#/texts/90"
+   },
+   "prov": [],
+   "self_ref": "#/texts/94",
+   "text": "In case of takeover/balance transfer loans, the request by the customer for photocopy of title & link documents will be facilitated subject to receipt of title and link documents from the Transferor bank/Financial Institution."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "(iii) return of original title & link documents on closure/transfer of the loan - Original Property documents received by the BHFL, would be returned within 20 working days of closure of all/any loan outstanding dues with BHFL.",
+   "parent": {
+    "$ref": "#/texts/90"
+   },
+   "prov": [],
+   "self_ref": "#/texts/95",
+   "text": "(iii) return of original title & link documents on closure/transfer of the loan - Original Property documents received by the BHFL, would be returned within 20 working days of closure of all/any loan outstanding dues with BHFL."
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/97"
+    },
+    {
+     "$ref": "#/texts/98"
+    },
+    {
+     "$ref": "#/texts/99"
+    },
+    {
+     "$ref": "#/texts/100"
+    },
+    {
+     "$ref": "#/texts/101"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "14. GRIEVANCE REDRESSAL",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/96",
+   "text": "14. GRIEVANCE REDRESSAL"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "You will receive an acknowledgement / response within 2 business days of receiving your communication Level 1 We are committed to resolving customer’s queries / issues within 15 working days (some of the scenarios requiring more time will take maximum of 30 days). If customer does not hear from us within this time, or not satisfied with our resolution of query, the customer may write to us at bhflgrievance@bajajfinserv.in Level 2 If the customer is not satisfied with the resolution provided at level 1 within 3 working days, the customer may post his/her complaint to the head of Customer Experience at Bhflcustomerexperience@bajajfinserv.in Alternatively, the customers may write to The Head of Customer Experience at:",
+   "parent": {
+    "$ref": "#/texts/96"
+   },
+   "prov": [],
+   "self_ref": "#/texts/97",
+   "text": "You will receive an acknowledgement / response within 2 business days of receiving your communication Level 1 We are committed to resolving customer’s queries / issues within 15 working days (some of the scenarios requiring more time will take maximum of 30 days). If customer does not hear from us within this time, or not satisfied with our resolution of query, the customer may write to us at bhflgrievance@bajajfinserv.in Level 2 If the customer is not satisfied with the resolution provided at level 1 within 3 working days, the customer may post his/her complaint to the head of Customer Experience at Bhflcustomerexperience@bajajfinserv.in Alternatively, the customers may write to The Head of Customer Experience at:"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Bajaj Housing Finance Limited, 5th Floor, B2 Cerebrum IT Park, Kumar City Kalyani Nagar Pune, Maharashtra Pin – 411014 Level 3 If the customer is not satisfied with the resolution provided at level 2 within 5 working days, the customer may post his/her complaint to the Grievance Redressal Officer at",
+   "parent": {
+    "$ref": "#/texts/96"
+   },
+   "prov": [],
+   "self_ref": "#/texts/98",
+   "text": "Bajaj Housing Finance Limited, 5th Floor, B2 Cerebrum IT Park, Kumar City Kalyani Nagar Pune, Maharashtra Pin – 411014 Level 3 If the customer is not satisfied with the resolution provided at level 2 within 5 working days, the customer may post his/her complaint to the Grievance Redressal Officer at"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "hema.ratnam@bajajfinserv.in Alternatively, the customers may write to Grievance Redressal Officer:",
+   "parent": {
+    "$ref": "#/texts/96"
+   },
+   "prov": [],
+   "self_ref": "#/texts/99",
+   "text": "hema.ratnam@bajajfinserv.in Alternatively, the customers may write to Grievance Redressal Officer:"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Hema Ratnam Bajaj Housing Finance Limited, 5th Floor, B2 Cerebrum IT Park, Kumar City Kalyani Nagar Pune, Maharashtra Pin – 411014 Level 4 In case of non-redressal of the complaint to the customer’s satisfaction, within 15 working days from the above-mentioned matrix, the customer may approach the National Housing Bank by lodging its complaint in online mode at the link https://grids.nhbonline.org.in or in offline mode by post at the address given below in the prescribed format available under the Grievances section at https://nhb.org.in/.",
+   "parent": {
+    "$ref": "#/texts/96"
+   },
+   "prov": [],
+   "self_ref": "#/texts/100",
+   "text": "Hema Ratnam Bajaj Housing Finance Limited, 5th Floor, B2 Cerebrum IT Park, Kumar City Kalyani Nagar Pune, Maharashtra Pin – 411014 Level 4 In case of non-redressal of the complaint to the customer’s satisfaction, within 15 working days from the above-mentioned matrix, the customer may approach the National Housing Bank by lodging its complaint in online mode at the link https://grids.nhbonline.org.in or in offline mode by post at the address given below in the prescribed format available under the Grievances section at https://nhb.org.in/."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "National Housing Bank, Department of Supervision, (Complaint Redressal Cell), 4th Floor, Core-5A, India Habitat Centre, Lodhi Road, New Delhi- 110003",
+   "parent": {
+    "$ref": "#/texts/96"
+   },
+   "prov": [],
+   "self_ref": "#/texts/101",
+   "text": "National Housing Bank, Department of Supervision, (Complaint Redressal Cell), 4th Floor, Core-5A, India Habitat Centre, Lodhi Road, New Delhi- 110003"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/103"
+    },
+    {
+     "$ref": "#/groups/18"
+    },
+    {
+     "$ref": "#/texts/109"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "15. Grievance Process",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/102",
+   "text": "15. Grievance Process"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "The below-mentioned process is followed when a Borrower writes to bhflgrievance@bajajfinserv.in:",
+   "parent": {
+    "$ref": "#/texts/102"
+   },
+   "prov": [],
+   "self_ref": "#/texts/103",
+   "text": "The below-mentioned process is followed when a Borrower writes to bhflgrievance@bajajfinserv.in:"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Customer service associate reads the entire email to understand the customer query / complaint",
+   "parent": {
+    "$ref": "#/groups/18"
+   },
+   "prov": [],
+   "self_ref": "#/texts/104",
+   "text": "Customer service associate reads the entire email to understand the customer query / complaint"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Customer is out called to understand his stated and unstated requirements",
+   "parent": {
+    "$ref": "#/groups/18"
+   },
+   "prov": [],
+   "self_ref": "#/texts/105",
+   "text": "Customer is out called to understand his stated and unstated requirements"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "Grievance Team coordinates with internal departments to get the complaint resolved as per the defined timeline.",
+   "parent": {
+    "$ref": "#/groups/18"
+   },
+   "prov": [],
+   "self_ref": "#/texts/106",
+   "text": "Grievance Team coordinates with internal departments to get the complaint resolved as per the defined timeline."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "If the resolution is not possible within the defined TAT of 7 working days, due to internal and external dependencies, interim response along with timelines is sent to the Borrower.",
+   "parent": {
+    "$ref": "#/groups/18"
+   },
+   "prov": [],
+   "self_ref": "#/texts/107",
+   "text": "If the resolution is not possible within the defined TAT of 7 working days, due to internal and external dependencies, interim response along with timelines is sent to the Borrower."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "enumerated": false,
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "list_item",
+   "marker": "",
+   "orig": "All queries are closed on e-mail and via telephone call.",
+   "parent": {
+    "$ref": "#/groups/18"
+   },
+   "prov": [],
+   "self_ref": "#/texts/108",
+   "text": "All queries are closed on e-mail and via telephone call."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Timely update is sent to the Borrower in case of any extension required in committed timelines.",
+   "parent": {
+    "$ref": "#/texts/102"
+   },
+   "prov": [],
+   "self_ref": "#/texts/109",
+   "text": "Timely update is sent to the Borrower in case of any extension required in committed timelines."
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/111"
+    },
+    {
+     "$ref": "#/texts/112"
+    },
+    {
+     "$ref": "#/texts/113"
+    },
+    {
+     "$ref": "#/texts/114"
+    },
+    {
+     "$ref": "#/texts/115"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "16. FEES AND OTHER CHARGES",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/110",
+   "text": "16. FEES AND OTHER CHARGES"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "The Fees/Charges as mentioned below are subject to change at the sole discretion of Bajaj Housing Finance Limited. For any changes, the Borrower(s) are requested to refer to the latest Schedule of Charges, mentioned on the BHFL’s website https://www.bajajhousingfinance.in/notice-board, which shall stand applicable.",
+   "parent": {
+    "$ref": "#/texts/110"
+   },
+   "prov": [],
+   "self_ref": "#/texts/111",
+   "text": "The Fees/Charges as mentioned below are subject to change at the sole discretion of Bajaj Housing Finance Limited. For any changes, the Borrower(s) are requested to refer to the latest Schedule of Charges, mentioned on the BHFL’s website https://www.bajajhousingfinance.in/notice-board, which shall stand applicable."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "The Fees/Charges as mentioned below are indicative of the maximum amount payable as such Fee/Charge by the Borrower. The Fees/Charges as mentioned in the Loan Documents detail the exact amount payable. Unless specifically mentioned, the Fees/Charges paid are non-refundable.",
+   "parent": {
+    "$ref": "#/texts/110"
+   },
+   "prov": [],
+   "self_ref": "#/texts/112",
+   "text": "The Fees/Charges as mentioned below are indicative of the maximum amount payable as such Fee/Charge by the Borrower. The Fees/Charges as mentioned in the Loan Documents detail the exact amount payable. Unless specifically mentioned, the Fees/Charges paid are non-refundable."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Sr.",
+   "parent": {
+    "$ref": "#/texts/110"
+   },
+   "prov": [],
+   "self_ref": "#/texts/113",
+   "text": "Sr."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "No.",
+   "parent": {
+    "$ref": "#/texts/110"
+   },
+   "prov": [],
+   "self_ref": "#/texts/114",
+   "text": "No."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Nature of Fee/ Charge Name of Fee/ Charge When Payable Frequency Amount",
+   "parent": {
+    "$ref": "#/texts/110"
+   },
+   "prov": [],
+   "self_ref": "#/texts/115",
+   "text": "Nature of Fee/ Charge Name of Fee/ Charge When Payable Frequency Amount"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/117"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "1. Fees for Home",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/116",
+   "text": "1. Fees for Home"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Loan/ Loan Against Property Processing Fees At Application Once Up to 7% of loan amount + GST as applicable",
+   "parent": {
+    "$ref": "#/texts/116"
+   },
+   "prov": [],
+   "self_ref": "#/texts/117",
+   "text": "Loan/ Loan Against Property Processing Fees At Application Once Up to 7% of loan amount + GST as applicable"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/119"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "2. Fees for Top-Up",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/118",
+   "text": "2. Fees for Top-Up"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Loan Processing Fees At Application Once Up to 7% of loan amount + GST as applicable",
+   "parent": {
+    "$ref": "#/texts/118"
+   },
+   "prov": [],
+   "self_ref": "#/texts/119",
+   "text": "Loan Processing Fees At Application Once Up to 7% of loan amount + GST as applicable"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/121"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "3. Fees for Unsecured",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/120",
+   "text": "3. Fees for Unsecured"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Loan Processing Fees At Application Once Up to 7% of loan amount + GST as applicable",
+   "parent": {
+    "$ref": "#/texts/120"
+   },
+   "prov": [],
+   "self_ref": "#/texts/121",
+   "text": "Loan Processing Fees At Application Once Up to 7% of loan amount + GST as applicable"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/123"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "4. Penal Interest",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/122",
+   "text": "4. Penal Interest"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Charges / Default Interest Rate Additional Interest On Accrual Monthly 24% per annum in addition to the applicable Interest Rate on overdue amount",
+   "parent": {
+    "$ref": "#/texts/122"
+   },
+   "prov": [],
+   "self_ref": "#/texts/123",
+   "text": "Charges / Default Interest Rate Additional Interest On Accrual Monthly 24% per annum in addition to the applicable Interest Rate on overdue amount"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/125"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "5. Expenses to cover",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/124",
+   "text": "5. Expenses to cover"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "costs Incidental Charges On incurring expenses On Actuals",
+   "parent": {
+    "$ref": "#/texts/124"
+   },
+   "prov": [],
+   "self_ref": "#/texts/125",
+   "text": "costs Incidental Charges On incurring expenses On Actuals"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/127"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "6. Statutory Charges Stamp",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/126",
+   "text": "6. Statutory Charges Stamp"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Duty/MODT/M OE As per the relevant laws Once Applicable as per state laws",
+   "parent": {
+    "$ref": "#/texts/126"
+   },
+   "prov": [],
+   "self_ref": "#/texts/127",
+   "text": "Duty/MODT/M OE As per the relevant laws Once Applicable as per state laws"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/129"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "7. Switch to Lower",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/128",
+   "text": "7. Switch to Lower"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Rate Switch Fees On Rate revision On every rate revision Up to 4.5% of principal outstanding + GST as applicable",
+   "parent": {
+    "$ref": "#/texts/128"
+   },
+   "prov": [],
+   "self_ref": "#/texts/129",
+   "text": "Rate Switch Fees On Rate revision On every rate revision Up to 4.5% of principal outstanding + GST as applicable"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/131"
+    },
+    {
+     "$ref": "#/texts/132"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "8. Switch in Interest",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/130",
+   "text": "8. Switch in Interest"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Computation (e.g.",
+   "parent": {
+    "$ref": "#/texts/130"
+   },
+   "prov": [],
+   "self_ref": "#/texts/131",
+   "text": "Computation (e.g."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "From BHFL FRR to Repo Rate and vice-versa) Switch Fees On Interest Computation change On every Switch Up to 4.5% of principal outstanding + GST as applicable",
+   "parent": {
+    "$ref": "#/texts/130"
+   },
+   "prov": [],
+   "self_ref": "#/texts/132",
+   "text": "From BHFL FRR to Repo Rate and vice-versa) Switch Fees On Interest Computation change On every Switch Up to 4.5% of principal outstanding + GST as applicable"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/134"
+    },
+    {
+     "$ref": "#/texts/135"
+    },
+    {
+     "$ref": "#/texts/136"
+    },
+    {
+     "$ref": "#/texts/137"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "9. Mortgage",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/133",
+   "text": "9. Mortgage"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Origination Fees (MOF) (Non- refundable amount)",
+   "parent": {
+    "$ref": "#/texts/133"
+   },
+   "prov": [],
+   "self_ref": "#/texts/134",
+   "text": "Origination Fees (MOF) (Non- refundable amount)"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "– for secured loans MOF over and above processing fees At Application Once Up to Rs. 10000 + GST as applicable",
+   "parent": {
+    "$ref": "#/texts/133"
+   },
+   "prov": [],
+   "self_ref": "#/texts/135",
+   "text": "– for secured loans MOF over and above processing fees At Application Once Up to Rs. 10000 + GST as applicable"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "10. Bounce Charge Misc.",
+   "parent": {
+    "$ref": "#/texts/133"
+   },
+   "prov": [],
+   "self_ref": "#/texts/136",
+   "text": "10. Bounce Charge Misc."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Receipts On Cheque / ECS / NACH Dishonour Depends on number of Dishonour Loan Amount (in Rs.) Charges (in Rs.) Up to Rs 15 Lakhs 500 15,00,001 – 30,00,000 1,000 30,00,001 – 50,00,000 1,500 50,00,001 – 1,00,00,000 2,000 1,00,00,001 – 5,00,00,000 3,000 5,00,00,001 – 10,00,00,000 5,000 More than 10 crores 10,000",
+   "parent": {
+    "$ref": "#/texts/133"
+   },
+   "prov": [],
+   "self_ref": "#/texts/137",
+   "text": "Receipts On Cheque / ECS / NACH Dishonour Depends on number of Dishonour Loan Amount (in Rs.) Charges (in Rs.) Up to Rs 15 Lakhs 500 15,00,001 – 30,00,000 1,000 30,00,001 – 50,00,000 1,500 50,00,001 – 1,00,00,000 2,000 1,00,00,001 – 5,00,00,000 3,000 5,00,00,001 – 10,00,00,000 5,000 More than 10 crores 10,000"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/139"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "11. Cheque Swap",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/138",
+   "text": "11. Cheque Swap"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "charges Miscellaneous Receipts At request As and when NIL",
+   "parent": {
+    "$ref": "#/texts/138"
+   },
+   "prov": [],
+   "self_ref": "#/texts/139",
+   "text": "charges Miscellaneous Receipts At request As and when NIL"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/141"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "12. Security Swap",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/140",
+   "text": "12. Security Swap"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "charges Miscellaneous Receipts At request As and when NIL",
+   "parent": {
+    "$ref": "#/texts/140"
+   },
+   "prov": [],
+   "self_ref": "#/texts/141",
+   "text": "charges Miscellaneous Receipts At request As and when NIL"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/143"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "13. Fees on account of",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/142",
+   "text": "13. Fees on account of"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "External Opinion Miscellaneous Receipts On incurring expenses As and when As per expenses incurred",
+   "parent": {
+    "$ref": "#/texts/142"
+   },
+   "prov": [],
+   "self_ref": "#/texts/143",
+   "text": "External Opinion Miscellaneous Receipts On incurring expenses As and when As per expenses incurred"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/145"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "14. Reappraisal of loan",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/144",
+   "text": "14. Reappraisal of loan"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "after 6 months from sanction Processing Fees At re-application Once Mortgage Origination Fees as applicable",
+   "parent": {
+    "$ref": "#/texts/144"
+   },
+   "prov": [],
+   "self_ref": "#/texts/145",
+   "text": "after 6 months from sanction Processing Fees At re-application Once Mortgage Origination Fees as applicable"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/147"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "15. Hard Copy of",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/146",
+   "text": "15. Hard Copy of"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Statement of Account Miscellaneous Receipts At request Per request Up to Rs. 500 per request + GST as applicable",
+   "parent": {
+    "$ref": "#/texts/146"
+   },
+   "prov": [],
+   "self_ref": "#/texts/147",
+   "text": "Statement of Account Miscellaneous Receipts At request Per request Up to Rs. 500 per request + GST as applicable"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/149"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "16. Conversion of",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/148",
+   "text": "16. Conversion of"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "existing loan to new product (Term loan/ Flexi Term loan/ Flexi Hybrid loan) Conversion Fees On Conversion On every conversion Up to 2% of principal outstanding + GST as applicable",
+   "parent": {
+    "$ref": "#/texts/148"
+   },
+   "prov": [],
+   "self_ref": "#/texts/149",
+   "text": "existing loan to new product (Term loan/ Flexi Term loan/ Flexi Hybrid loan) Conversion Fees On Conversion On every conversion Up to 2% of principal outstanding + GST as applicable"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/151"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "17. Loan processing",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/150",
+   "text": "17. Loan processing"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "fees - Flexi Loans Processing Fees On availing Flexi Term Loan or Flexi Hybrid Loan Once Up to 2% of loan amount + GST as applicable",
+   "parent": {
+    "$ref": "#/texts/150"
+   },
+   "prov": [],
+   "self_ref": "#/texts/151",
+   "text": "fees - Flexi Loans Processing Fees On availing Flexi Term Loan or Flexi Hybrid Loan Once Up to 2% of loan amount + GST as applicable"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/153"
+    },
+    {
+     "$ref": "#/texts/154"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "18. Flexi Annual",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/152",
+   "text": "18. Flexi Annual"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Maintenance Annual Maintenance Charge Applicable on Flexi Hybrid Loan Annual Charge Up to 1% of the Sanctioned amount during Flexi Interest Only Loan Repayment Tenure + GST as",
+   "parent": {
+    "$ref": "#/texts/152"
+   },
+   "prov": [],
+   "self_ref": "#/texts/153",
+   "text": "Maintenance Annual Maintenance Charge Applicable on Flexi Hybrid Loan Annual Charge Up to 1% of the Sanctioned amount during Flexi Interest Only Loan Repayment Tenure + GST as"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Charge – Flexi Hybrid Loan applicable and up to 1% of the available Flexi Loan Limit during the Flexi Term Loan Tenure + GST as applicable",
+   "parent": {
+    "$ref": "#/texts/152"
+   },
+   "prov": [],
+   "self_ref": "#/texts/154",
+   "text": "Charge – Flexi Hybrid Loan applicable and up to 1% of the available Flexi Loan Limit during the Flexi Term Loan Tenure + GST as applicable"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/156"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "19. Flexi Annual",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/155",
+   "text": "19. Flexi Annual"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Maintenance Charge – Flexi Term Loan Annual Maintenance Charge Applicable on Flexi Term Loan Annual Charge Up to 1% of the available Flexi Loan Limit + GST as applicable",
+   "parent": {
+    "$ref": "#/texts/155"
+   },
+   "prov": [],
+   "self_ref": "#/texts/156",
+   "text": "Maintenance Charge – Flexi Term Loan Annual Maintenance Charge Applicable on Flexi Term Loan Annual Charge Up to 1% of the available Flexi Loan Limit + GST as applicable"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/158"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "20. CERSAI Charges",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/157",
+   "text": "20. CERSAI Charges"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "(for Secured Loans) Charges for CERSAI registration At application Once For each loan, as per charges levied by CERSAI+ GST as applicable",
+   "parent": {
+    "$ref": "#/texts/157"
+   },
+   "prov": [],
+   "self_ref": "#/texts/158",
+   "text": "(for Secured Loans) Charges for CERSAI registration At application Once For each loan, as per charges levied by CERSAI+ GST as applicable"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/160"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "21. Secure Fee (for",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/159",
+   "text": "21. Secure Fee (for"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "secured loans) Processing Fees On online application Once Rs. 9999 + GST as applicable",
+   "parent": {
+    "$ref": "#/texts/159"
+   },
+   "prov": [],
+   "self_ref": "#/texts/160",
+   "text": "secured loans) Processing Fees On online application Once Rs. 9999 + GST as applicable"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/162"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "22. Fees for Photocopy",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/161",
+   "text": "22. Fees for Photocopy"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "of Title Documents (for secured loans) Miscellaneous Receipts At request Per request Minimum fee of Rs. 500/- upto 30 pages and Rs. 3/- for each additional page thereafter + GST as applicable",
+   "parent": {
+    "$ref": "#/texts/161"
+   },
+   "prov": [],
+   "self_ref": "#/texts/162",
+   "text": "of Title Documents (for secured loans) Miscellaneous Receipts At request Per request Minimum fee of Rs. 500/- upto 30 pages and Rs. 3/- for each additional page thereafter + GST as applicable"
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/164"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "23. Document Retrieval",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/163",
+   "text": "23. Document Retrieval"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Charges on Closed Loans Miscellaneous Receipts At request Per request A charge of Rs 1000 (including GST) is applicable if original documents of a closed loan are not collected by the borrower within 15 days from issuance of `Collection of original Property Papers’ communication by BHFL.",
+   "parent": {
+    "$ref": "#/texts/163"
+   },
+   "prov": [],
+   "self_ref": "#/texts/164",
+   "text": "Charges on Closed Loans Miscellaneous Receipts At request Per request A charge of Rs 1000 (including GST) is applicable if original documents of a closed loan are not collected by the borrower within 15 days from issuance of `Collection of original Property Papers’ communication by BHFL."
+  },
+  {
+   "children": [
+    {
+     "$ref": "#/texts/166"
+    },
+    {
+     "$ref": "#/texts/167"
+    },
+    {
+     "$ref": "#/texts/168"
+    },
+    {
+     "$ref": "#/texts/169"
+    },
+    {
+     "$ref": "#/texts/170"
+    },
+    {
+     "$ref": "#/texts/171"
+    },
+    {
+     "$ref": "#/texts/172"
+    },
+    {
+     "$ref": "#/texts/173"
+    },
+    {
+     "$ref": "#/texts/174"
+    },
+    {
+     "$ref": "#/texts/175"
+    },
+    {
+     "$ref": "#/texts/176"
+    },
+    {
+     "$ref": "#/texts/177"
+    },
+    {
+     "$ref": "#/texts/178"
+    },
+    {
+     "$ref": "#/texts/179"
+    },
+    {
+     "$ref": "#/texts/180"
+    },
+    {
+     "$ref": "#/texts/181"
+    }
+   ],
+   "content_layer": "body",
+   "label": "section_header",
+   "level": 2,
+   "orig": "PRE-PAYMENT CHARGES",
+   "parent": {
+    "$ref": "#/texts/0"
+   },
+   "prov": [],
+   "self_ref": "#/texts/165",
+   "text": "PRE-PAYMENT CHARGES"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Floating Rate Loans to Individuals / non-Individuals except for Business purpose Term Loan Flexi Term Loan Flexi Hybrid Loan Time Period (Months) >1 >1 >1 Part Prepayment Charges Nil Nil Nil Full Prepayment Charges Nil Nil Nil Floating Rate Loans to Individual / non-Individuals for Business purpose Fixed Rate Loans: All Borrowers (including individuals) ** Term Loan Flexi Term Loan Flexi Hybrid Loan Time Period Months) >1 >1 >1 Part Prepayment Charges 2%* on Part Payment Nil Nil Full Prepayment Charges 4%* on Principal Outstanding 4%* on the available Flexi Loan Limit 4%* on Sanctioned Amount during Flexi Interest Only Loan Repayment Tenure; and 4%* on the available Flexi Loan Limit during Flexi Term Loan Tenure * GST as applicable will be payable by the Borrower in addition to the Prepayment Charges.",
+   "parent": {
+    "$ref": "#/texts/165"
+   },
+   "prov": [],
+   "self_ref": "#/texts/166",
+   "text": "Floating Rate Loans to Individuals / non-Individuals except for Business purpose Term Loan Flexi Term Loan Flexi Hybrid Loan Time Period (Months) >1 >1 >1 Part Prepayment Charges Nil Nil Nil Full Prepayment Charges Nil Nil Nil Floating Rate Loans to Individual / non-Individuals for Business purpose Fixed Rate Loans: All Borrowers (including individuals) ** Term Loan Flexi Term Loan Flexi Hybrid Loan Time Period Months) >1 >1 >1 Part Prepayment Charges 2%* on Part Payment Nil Nil Full Prepayment Charges 4%* on Principal Outstanding 4%* on the available Flexi Loan Limit 4%* on Sanctioned Amount during Flexi Interest Only Loan Repayment Tenure; and 4%* on the available Flexi Loan Limit during Flexi Term Loan Tenure * GST as applicable will be payable by the Borrower in addition to the Prepayment Charges."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "** Nil for Housing Loan closed by the borrower out of their own sources. The expression “own sources” for the purpose means any source other than by borrowing from a bank/ HFC/ NBFC and/or a financial institution Please refer above section on `Purpose of Loan’ as well for classification on Business purpose or Other Purposes of loans availed from BHFL.",
+   "parent": {
+    "$ref": "#/texts/165"
+   },
+   "prov": [],
+   "self_ref": "#/texts/167",
+   "text": "** Nil for Housing Loan closed by the borrower out of their own sources. The expression “own sources” for the purpose means any source other than by borrowing from a bank/ HFC/ NBFC and/or a financial institution Please refer above section on `Purpose of Loan’ as well for classification on Business purpose or Other Purposes of loans availed from BHFL."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Furthermore, the following conditions would be applicable in addition to the existing terms and conditions:",
+   "parent": {
+    "$ref": "#/texts/165"
+   },
+   "prov": [],
+   "self_ref": "#/texts/168",
+   "text": "Furthermore, the following conditions would be applicable in addition to the existing terms and conditions:"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "A. Conditions for Pre-Payment",
+   "parent": {
+    "$ref": "#/texts/165"
+   },
+   "prov": [],
+   "self_ref": "#/texts/169",
+   "text": "A. Conditions for Pre-Payment"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "1. Amount of Part Pre-Payment has to be equal to or greater than at least 1 EMI / Monthly Instalment",
+   "parent": {
+    "$ref": "#/texts/165"
+   },
+   "prov": [],
+   "self_ref": "#/texts/170",
+   "text": "1. Amount of Part Pre-Payment has to be equal to or greater than at least 1 EMI / Monthly Instalment"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "2. The Full and/or Part Pre-Payment can be made by the Borrower only after clearance of first EMI/Monthly Instalment by the Borrower.",
+   "parent": {
+    "$ref": "#/texts/165"
+   },
+   "prov": [],
+   "self_ref": "#/texts/171",
+   "text": "2. The Full and/or Part Pre-Payment can be made by the Borrower only after clearance of first EMI/Monthly Instalment by the Borrower."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "3. Part Payment / Foreclosure made by the Borrower(s) are accepted throughout the month excluding Part Payment/Foreclosure made through cheques / Demand Drafts from the 25th day of the current month to the 3rd day of the subsequent month (both days inclusive).",
+   "parent": {
+    "$ref": "#/texts/165"
+   },
+   "prov": [],
+   "self_ref": "#/texts/172",
+   "text": "3. Part Payment / Foreclosure made by the Borrower(s) are accepted throughout the month excluding Part Payment/Foreclosure made through cheques / Demand Drafts from the 25th day of the current month to the 3rd day of the subsequent month (both days inclusive)."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "4. Issuance of Foreclosure letter: 21 days from the date of request.",
+   "parent": {
+    "$ref": "#/texts/165"
+   },
+   "prov": [],
+   "self_ref": "#/texts/173",
+   "text": "4. Issuance of Foreclosure letter: 21 days from the date of request."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "5. Part Pre-Payment charges from Flexi Term Loans and/or Flexi Hybrid Loans will be NIL.",
+   "parent": {
+    "$ref": "#/texts/165"
+   },
+   "prov": [],
+   "self_ref": "#/texts/174",
+   "text": "5. Part Pre-Payment charges from Flexi Term Loans and/or Flexi Hybrid Loans will be NIL."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "It is hereby agreed that this MITC contains some of the key terms and conditions of the Loan and supersedes the MITC if any received by the Borrower on an earlier occasion. Further, the parties hereto unconditionally agree to refer and rely upon the terms of the loan agreement and other security documents executed/ to be executed by them.",
+   "parent": {
+    "$ref": "#/texts/165"
+   },
+   "prov": [],
+   "self_ref": "#/texts/175",
+   "text": "It is hereby agreed that this MITC contains some of the key terms and conditions of the Loan and supersedes the MITC if any received by the Borrower on an earlier occasion. Further, the parties hereto unconditionally agree to refer and rely upon the terms of the loan agreement and other security documents executed/ to be executed by them."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "The Borrower acknowledges to have read and understood all the 12 pages containing most important terms and conditions and is affixing his / her / its signature / common seal on the first and last page of the MITC evidencing the same. The Borrower further agrees and confirms that the Borrowers shall not be required to sign at each page of MITC and the signature on the first and last page of the MITC would be sufficient.",
+   "parent": {
+    "$ref": "#/texts/165"
+   },
+   "prov": [],
+   "self_ref": "#/texts/176",
+   "text": "The Borrower acknowledges to have read and understood all the 12 pages containing most important terms and conditions and is affixing his / her / its signature / common seal on the first and last page of the MITC evidencing the same. The Borrower further agrees and confirms that the Borrowers shall not be required to sign at each page of MITC and the signature on the first and last page of the MITC would be sufficient."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "The above terms and conditions have been read by the Borrower/s or read over to the Borrower/s by Mr./Mrs./Ms.________________________________________ of BHFL and have been understood by the Borrower/s.",
+   "parent": {
+    "$ref": "#/texts/165"
+   },
+   "prov": [],
+   "self_ref": "#/texts/177",
+   "text": "The above terms and conditions have been read by the Borrower/s or read over to the Borrower/s by Mr./Mrs./Ms.________________________________________ of BHFL and have been understood by the Borrower/s."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "**In case of any inconsistency between English and Vernacular Language, English language shall prevail.",
+   "parent": {
+    "$ref": "#/texts/165"
+   },
+   "prov": [],
+   "self_ref": "#/texts/178",
+   "text": "**In case of any inconsistency between English and Vernacular Language, English language shall prevail."
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": " (SIGNATURE OR THUMB IMPRESSION OF THE BORROWERS) Name of the Borrower(s):",
+   "parent": {
+    "$ref": "#/texts/165"
+   },
+   "prov": [],
+   "self_ref": "#/texts/179",
+   "text": " (SIGNATURE OR THUMB IMPRESSION OF THE BORROWERS) Name of the Borrower(s):"
+  },
+  {
+   "children": [],
+   "content_layer": "body",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": " (SIGNATURE OF THE AUTHORIZED REPRESENTATIVE OF BHFL) Name of Authorized signatory Date Place NOTE: Duplicate copy of the MITC should be handed-over to the Borrower/s",
+   "parent": {
+    "$ref": "#/texts/165"
+   },
+   "prov": [],
+   "self_ref": "#/texts/180",
+   "text": " (SIGNATURE OF THE AUTHORIZED REPRESENTATIVE OF BHFL) Name of Authorized signatory Date Place NOTE: Duplicate copy of the MITC should be handed-over to the Borrower/s"
+  },
+  {
+   "children": [],
+   "content_layer": "furniture",
+   "formatting": {
+    "bold": false,
+    "italic": false,
+    "script": "baseline",
+    "strikethrough": false,
+    "underline": false
+   },
+   "label": "text",
+   "orig": "Fixture document — public source, retrieved 6 September 2026 — page",
+   "parent": {
+    "$ref": "#/texts/165"
+   },
+   "prov": [],
+   "self_ref": "#/texts/181",
+   "text": "Fixture document — public source, retrieved 6 September 2026 — page"
+  }
+ ],
+ "version": "1.9.0"
+}

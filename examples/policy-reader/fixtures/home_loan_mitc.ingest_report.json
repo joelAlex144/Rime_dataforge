@@ -1,0 +1,135 @@
+{
+ "doc_id": "47a0feca107a0723",
+ "name": "home_loan_mitc",
+ "title": "fixture_home_loan_mitc",
+ "source": {
+  "type": "docx",
+  "path_or_url": "fixture_home_loan_mitc.docx",
+  "sha256": "47a0feca107a0723f5d816afcb757608b89b85bb3c8773484246889176489e60",
+  "institutional_contacts": [
+   {
+    "label": "email",
+    "redacted": "bhfl…"
+   },
+   {
+    "label": "email",
+    "redacted": "bhfl…"
+   },
+   {
+    "label": "email",
+    "redacted": "Bhfl…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1100…"
+   }
+  ]
+ },
+ "stages": [
+  "extract",
+  "structure",
+  "segment",
+  "normalize",
+  "pii_scan",
+  "validate",
+  "write"
+ ],
+ "elapsed_ms": {
+  "extract": 29939.3,
+  "structure": 77.7,
+  "segment": 1.6,
+  "normalize": 21.8,
+  "pii_scan": 5.1,
+  "validate": 2.5,
+  "write": 43.9,
+  "total": 30092.1
+ },
+ "structure": {
+  "tool": "docling",
+  "version": "2.69.1",
+  "docling_json": "home_loan_mitc.docling.json",
+  "pages": 0,
+  "labels": {
+   "list_item": 30,
+   "section_header": 39,
+   "table": 1,
+   "text": 112
+  },
+  "demoted": 0,
+  "placeholders_stripped": 0,
+  "splits": 0,
+  "tables": [
+   {
+    "key": "t1",
+    "rows": 8,
+    "csv": "home_loan_mitc.t1.csv"
+   }
+  ]
+ },
+ "pii_scan": {
+  "personal": [
+   {
+    "label": "email",
+    "redacted": "hema…",
+    "clause_id": "sec-2-14-p4"
+   }
+  ],
+  "institutional": [
+   {
+    "label": "email",
+    "redacted": "bhfl…",
+    "clause_id": "sec-2-13-p1"
+   },
+   {
+    "label": "email",
+    "redacted": "bhfl…",
+    "clause_id": "sec-2-14-p1"
+   },
+   {
+    "label": "email",
+    "redacted": "Bhfl…",
+    "clause_id": "sec-2-14-p1"
+   },
+   {
+    "label": "phone",
+    "redacted": "1100…",
+    "clause_id": "sec-2-14-p5"
+   }
+  ],
+  "note": "Informational. Nothing here removed or altered any text; the developer view shows it as the review trail."
+ },
+ "validate": {
+  "clause_count": 143,
+  "by_kind": {
+   "body": 96,
+   "heading": 38,
+   "table_row": 8,
+   "table_stub": 1
+  },
+  "body_clauses": 96,
+  "readable": true,
+  "splits": [],
+  "folds_and_merges": [
+   "folded 13 list items into their runs (max 600 chars)",
+   "merged 32 short clauses (< 120 chars) into the next"
+  ],
+  "oversized_ok": true,
+  "max_clause_chars": 809,
+  "boilerplate_first_15": [],
+  "expected_range": {
+   "reference": "150-250 clauses for a ~12,000-word wording",
+   "words": 4294,
+   "scaled_range": [
+    54,
+    89
+   ],
+   "in_range": false
+  },
+  "other_notes": [
+   "childless heading read as body: 'LOAN TENURE:'"
+  ],
+  "unknown_labels": {},
+  "warnings": []
+ },
+ "readable": true
+}

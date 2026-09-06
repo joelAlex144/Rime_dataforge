@@ -1,6 +1,236 @@
 {
  "documents": [
   {
+   "name": "arogya_sanjeevani",
+   "doc_id": "f23bb7ce63372d57",
+   "title": "fixture_arogya_sanjeevani",
+   "path": "arogya_sanjeevani.json",
+   "source": {
+    "type": "docx",
+    "path_or_url": "fixture_arogya_sanjeevani.docx",
+    "sha256": "f23bb7ce63372d5773c6d64dc8ff764af22963e7efbc9b7cd2941d818c8a8d93",
+    "institutional_contacts": [
+     {
+      "label": "email",
+      "redacted": "rgic…"
+     },
+     {
+      "label": "email",
+      "redacted": "rgic…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "Bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     }
+    ]
+   },
+   "clause_count": 274,
+   "reviewed": false,
+   "readable": true,
+   "report": "arogya_sanjeevani.ingest_report.json",
+   "referral": "the team that publishes this document",
+   "ingested_at": "2026-09-06T20:51:31Z"
+  },
+  {
+   "name": "bharat_griha_raksha",
+   "doc_id": "23a9c597adf161d6",
+   "title": "fixture_bharat_griha_raksha",
+   "path": "bharat_griha_raksha.json",
+   "source": {
+    "type": "docx",
+    "path_or_url": "fixture_bharat_griha_raksha.docx",
+    "sha256": "23a9c597adf161d6d5bea10ed923db848ce03f5aa2ad7b8895e417d4cfe336b7",
+    "institutional_contacts": [
+     {
+      "label": "email",
+      "redacted": "supp…"
+     },
+     {
+      "label": "email",
+      "redacted": "grie…"
+     },
+     {
+      "label": "email",
+      "redacted": "grie…"
+     },
+     {
+      "label": "email",
+      "redacted": "comp…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1552…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     }
+    ]
+   },
+   "clause_count": 292,
+   "reviewed": false,
+   "readable": true,
+   "report": "bharat_griha_raksha.ingest_report.json",
+   "referral": "the team that publishes this document",
+   "ingested_at": "2026-09-06T20:52:03Z"
+  },
+  {
    "name": "carers_allowance",
    "title": "Carer's Allowance: eligibility (GOV.UK)",
    "path": "carers_allowance.json",
@@ -12,7 +242,45 @@
    },
    "clause_count": 45,
    "ingested_at": "2026-09-05T17:48:00Z",
-   "referral": "the Carer's Allowance Unit at GOV.UK"
+   "referral": "the Carer's Allowance Unit at GOV.UK",
+   "doc_id": "carers_allowance",
+   "reviewed": true,
+   "readable": true
+  },
+  {
+   "name": "home_loan_mitc",
+   "doc_id": "47a0feca107a0723",
+   "title": "fixture_home_loan_mitc",
+   "path": "home_loan_mitc.json",
+   "source": {
+    "type": "docx",
+    "path_or_url": "fixture_home_loan_mitc.docx",
+    "sha256": "47a0feca107a0723f5d816afcb757608b89b85bb3c8773484246889176489e60",
+    "institutional_contacts": [
+     {
+      "label": "email",
+      "redacted": "bhfl…"
+     },
+     {
+      "label": "email",
+      "redacted": "bhfl…"
+     },
+     {
+      "label": "email",
+      "redacted": "Bhfl…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1100…"
+     }
+    ]
+   },
+   "clause_count": 143,
+   "reviewed": false,
+   "readable": true,
+   "report": "home_loan_mitc.ingest_report.json",
+   "referral": "the team that publishes this document",
+   "ingested_at": "2026-09-06T20:52:34Z"
   },
   {
    "name": "policy",
@@ -26,7 +294,184 @@
    },
    "clause_count": 213,
    "ingested_at": null,
-   "referral": "your insurer or lender"
+   "referral": "your insurer or lender",
+   "doc_id": "policy",
+   "reviewed": true,
+   "readable": true
+  },
+  {
+   "name": "saral_jeevan_bima",
+   "doc_id": "f5877d522f441c28",
+   "title": "fixture_saral_jeevan_bima",
+   "path": "saral_jeevan_bima.json",
+   "source": {
+    "type": "docx",
+    "path_or_url": "fixture_saral_jeevan_bima.docx",
+    "sha256": "f5877d522f441c28a482db528c63fbfb17815009324baaefec8c7fa06e18cef0",
+    "institutional_contacts": [
+     {
+      "label": "email",
+      "redacted": "info…"
+     },
+     {
+      "label": "email",
+      "redacted": "comp…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "Bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1291…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1552…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     }
+    ]
+   },
+   "clause_count": 415,
+   "reviewed": false,
+   "readable": true,
+   "report": "saral_jeevan_bima.ingest_report.json",
+   "referral": "the team that publishes this document",
+   "ingested_at": "2026-09-06T20:53:06Z"
+  },
+  {
+   "name": "two_wheeler_loan_agreement",
+   "doc_id": "ded4b9c3f93d44ec",
+   "title": "fixture_two_wheeler_loan_agreement",
+   "path": "two_wheeler_loan_agreement.json",
+   "source": {
+    "type": "docx",
+    "path_or_url": "fixture_two_wheeler_loan_agreement.docx",
+    "sha256": "ded4b9c3f93d44ec5dbfa31e08256f18a4122179f667090060b2f8699420ed51",
+    "institutional_contacts": [
+     {
+      "label": "email",
+      "redacted": "nama…"
+     },
+     {
+      "label": "email",
+      "redacted": "CCRC…"
+     },
+     {
+      "label": "email",
+      "redacted": "GRO@…"
+     },
+     {
+      "label": "email",
+      "redacted": "PNO@…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1600…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1444…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     }
+    ]
+   },
+   "clause_count": 374,
+   "reviewed": false,
+   "readable": true,
+   "report": "two_wheeler_loan_agreement.ingest_report.json",
+   "referral": "the team that publishes this document",
+   "ingested_at": "2026-09-06T20:53:38Z"
   }
  ]
 }

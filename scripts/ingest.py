@@ -9,11 +9,26 @@ its product is a file in version control.
 
   python scripts/ingest.py <path-or-url> --out examples/policy-reader/fixtures/<name>.json \
       [--title "..."] [--id-prefix sec] [--min-clause-chars 40] [--max-clause-chars 600] \
-      [--synthetic] [--review] [--dry-run] [--allow-pii "reason"]
+      [--synthetic] [--dry-run] [--ocr] [--fold-lists CHARS] [--source auto|pdf|text]
 
-Output schema is exactly fixtures/policy.json's, plus two optional per-clause
-fields (`kind`, `path`). grounding.py / wordmap.py / resume.py / read_demo.py
-all read that schema, so it does not change.
+Output schema is exactly fixtures/policy.json's, plus optional per-clause
+fields (`kind`, `path`, and from the structure pass `spoken_on_request`,
+`has_placeholder`, `parent`, `page`) and two optional document blocks (`map`,
+`terms`). grounding.py / wordmap.py / position.py / read_demo.py all read
+that schema, so it does not change.
+
+Structure pass (`--source pdf`, also accepted for .docx): Docling's layout
+model classifies every element deterministically -- no LLM -- and the
+lossless DoclingDocument is saved next to the fixture as
+`<name>.docling.json` (the reproducibility artifact; commit it). Docling is a
+BUILD dependency only (requirements-build.txt), runs on the developer's
+machine, never in CI or at demo time. One-time model download (~500 MB):
+
+    pip install -r requirements-build.txt
+    docling-tools models download
+
+Re-running on the same input produces a byte-identical fixture: nothing
+time-dependent is written for a local file.
 
 Exit codes:  0 ok   1 extraction or validation failure   2 refused (PII / unsafe)
 """
@@ -37,7 +52,7 @@ sys.path.insert(0, str(ROOT / "examples" / "policy-reader"))
 
 from delivery_layer.normalize import normalize_with_map          # noqa: E402
 from segment import (                                            # noqa: E402
-    AMBIGUOUS_TOKENS,
+    AMBIGUOUS_TOKENS, ROMAN_RE,
     Block, Marker, drop_page_numbers, drop_repeated_lines, join_hyphenated,
     parse_marker, path_to_human, path_to_id, sentence_spans, split_long,
     strip_toc, word_count,
@@ -256,6 +271,15 @@ class Raw:
     path: Optional[str] = None
     kind: str = "clause"
     id_parts: list[str] = field(default_factory=list)
+    # structure pass
+    spoken_on_request: bool = False
+    has_placeholder: bool = False
+    parent_parts: Optional[list] = None     # table_row -> its table_stub
+    page: int = 0
+    demoted_by: str = ""
+    label: str = ""
+    level: int = 0
+    children: int = 0                       # heading: direct body children
 
 
 def apply_bullet_context(blocks: list[Block]) -> list[Block]:
@@ -540,7 +564,9 @@ def to_records(raws: list[Raw], opts) -> list[dict]:
         cid = path_to_id(r.id_parts, prefix=opts.id_prefix)
         if cid in seen:
             seen[cid] += 1
-            new = f"{cid}-{seen[cid]}"
+            # "-dupN", never "-N": a bare number collides with dotted numbering
+            # ("2.2" is sec-2-2), which is exactly where duplicates arise.
+            new = f"{cid}-dup{seen[cid]}"
             print(f"warning: duplicate id {cid} -> {new}", file=sys.stderr)
             cid = new
         else:
@@ -562,8 +588,479 @@ def to_records(raws: list[Raw], opts) -> list[dict]:
             rec["kind"] = r.kind
         if r.path:
             rec["path"] = r.path
+        if r.spoken_on_request:
+            rec["spoken_on_request"] = True
+        if r.has_placeholder:
+            rec["has_placeholder"] = True
+        if r.parent_parts:
+            rec["parent"] = path_to_id(r.parent_parts, prefix=opts.id_prefix)
+        if r.page:
+            rec["page"] = r.page
+        if r.demoted_by:
+            rec["demoted_by"] = r.demoted_by
+        if r.kind == "boilerplate" and r.label:
+            rec["label"] = r.label
+        if r.kind == "heading":
+            rec["level"] = r.level or 1
+            rec["children"] = r.children
         records.append(rec)
     return records
+
+
+# ==========================================================================
+# structure pass (Docling): typed blocks -> clauses with stable ids
+# ==========================================================================
+
+MAX_CLAUSE_CHARS_HARD = 1000
+_DEFINITIONS_HEADING = re.compile(
+    r"definition|interpretation|special meaning|meaning of certain words|defined terms|glossary", re.I)
+# A root heading: the document's own top-level division. Its token may be a
+# number, a roman numeral, or a single letter ("PART A", "Schedule B").
+_ROOT_HEADING = re.compile(
+    r"^\s*(section|part|chapter|schedule|annexure|annex|article|clause)\s+([0-9]{1,3}|[IVXLCDM]{1,6}|[A-Z])\b"
+    r"[\s:.\-\u2013\u2014]*(.*)$", re.I)
+_TERM_LEAD = re.compile(
+    r"^(?:the\s+(?:words?|terms?)\s+)?[\"\u201c']?([A-Za-z][A-Za-z0-9 ,/'\-]{0,60}?)[\"\u201d']?"
+    r"\s+(?:means?|refers?\s+to|shall\s+mean|is\s+defined\s+as)\b", re.I)
+
+
+def _heading_anchor(text: str, ordinal: int) -> tuple[str, Optional[str], str]:
+    """(anchor token, human token, title) from the document's own numbering.
+
+    "4. Exclusions" -> ("4", "4", "Exclusions"); "D. Exclusions" -> ("d", "D", "Exclusions");
+    "Section 5 General" -> ("5", "5", "General"); unnumbered -> (str(ordinal), None, text).
+    """
+    m = parse_marker(text)
+    if m and m.token and (m.keyword or m.dotted or m.kind in ("num", "alpha", "roman")):
+        tok = ".".join(m.dotted) if m.dotted else m.token
+        title = m.rest.strip() or text
+        return tok.lower(), tok, title
+    return str(ordinal), None, text
+
+
+class _AnchorStack:
+    """Heading hierarchy from the document's own markers, so ids follow its
+    numbering tree: "1.2" under "Part II" is sec-pii-1-2, not a second sec-1-2.
+
+    Depth comes from the marker, not from the layout model's heading level
+    (unreliable on DOCX, where every heading may be level 1):
+      keyword ("Section 4", "Part II", "Annexure A")  -> depth 1, the root
+      dotted  ("1.2.3")                               -> depths 2..n+1 under a root, else 1..n
+      plain   ("4.", "D.", "(ii)")                    -> one below the root, else depth 1
+      none                                            -> one below the root, token = ordinal
+    """
+
+    def __init__(self) -> None:
+        self.stack: list[tuple[int, str, Optional[str]]] = []      # (depth, token, human)
+        self.kinds: dict[int, str] = {}                            # depth -> marker kind
+
+    @property
+    def _base(self) -> int:
+        return 1 if self.stack and self.stack[0][0] == 1 and self.stack[0][2] and \
+            self.stack[0][2].startswith("\u00a7") else 0
+
+    def push(self, marker, ordinal: int, root: Optional[tuple] = None) -> int:
+        """Returns the depth of the heading just pushed. `root` is (word, token)
+        for a top-level division heading such as ("Part", "A")."""
+        if root is not None:
+            word, token = root
+            tok = f"{word[0].lower()}{token.lower()}"                       # Part II -> "pii"
+            self.stack = [(1, tok, "\u00a7" + word.title() + " " + token)]
+            self.kinds = {1: "root"}
+            return 1
+        base = self._base
+        if marker is not None and marker.dotted:
+            parts = list(marker.dotted)
+            self.stack = [e for e in self.stack if e[0] <= base]
+            self.kinds = {d: k for d, k in self.kinds.items() if d <= base}
+            for i, t in enumerate(parts):
+                self.stack.append((base + 1 + i, t.lower(), t))
+                self.kinds[base + 1 + i] = "dotted"
+            return base + len(parts)
+        if marker is not None and marker.token:
+            # "(I)" parses as an ambiguous alpha; for headings any token that
+            # reads as a roman numeral is one, so "(II)" is its sibling.
+            kind = "roman" if ROMAN_RE.fullmatch(marker.token) else marker.kind
+        else:
+            kind = "plain"
+        # A marker of the same kind as one already on the stack is a sibling
+        # at that depth; a different kind nests one level deeper. So "(II)"
+        # after "(I)" replaces it, while "2." under "(I)" sits inside it. An
+        # unnumbered heading is a section title: a sibling of the current
+        # unnumbered level if there is one, else of the level under the root.
+        same = [d for d, k in self.kinds.items() if k == kind and d > base]
+        if same:
+            depth = min(same)
+        elif kind == "plain":
+            depth = base + 1
+        else:
+            depth = (max(self.kinds) + 1) if self.kinds else base + 1
+        self.stack = [e for e in self.stack if e[0] < depth]
+        self.kinds = {d: k for d, k in self.kinds.items() if d < depth}
+        if marker is not None and marker.token:
+            self.stack.append((depth, marker.token.lower(), marker.token))
+        else:
+            self.stack.append((depth, str(ordinal), None))
+        self.kinds[depth] = kind
+        return depth
+
+    @property
+    def parts(self) -> list[str]:
+        return [t for _, t, _ in self.stack]
+
+    @property
+    def human(self) -> Optional[str]:
+        hs = [(h or "").lstrip("\u00a7") for _, _, h in self.stack]
+        return ".".join(hs) if all(hs) else None       # None once any level is unnumbered
+
+
+TOC_RUN = 6
+
+
+def demote_heading_runs(sblocks, notes: list[str]) -> None:
+    """A run of TOC_RUN or more consecutive headings with nothing under them is
+    a table of contents: the same headings recur later with their bodies, and
+    keeping the run would duplicate every root id and read the contents aloud."""
+    i = 0
+    while i < len(sblocks):
+        if sblocks[i].kind != "heading":
+            i += 1
+            continue
+        j = i
+        while j < len(sblocks) and sblocks[j].kind == "heading":
+            j += 1
+        if j - i >= TOC_RUN:
+            for k in range(i, j):
+                sblocks[k].kind = "boilerplate"
+                sblocks[k].demoted_by = "toc_run"
+            notes.append(f"table of contents: {j - i} consecutive headings demoted to boilerplate")
+        i = max(j, i + 1)
+
+
+def segment_structured(sblocks, opts) -> tuple[list[Raw], list[str]]:
+    """Blocks from the structure pass -> Raws. Headings are clauses (kind
+    heading) and the id anchor for everything under them; bodies keep their own
+    markers; tables are a stub plus rows; boilerplate keeps its place."""
+    out: list[Raw] = []
+    notes: list[str] = []
+    demote_heading_runs(sblocks, notes)
+    ordinal = 0
+    anchors = _AnchorStack()
+    aparts: list[str] = ["intro"]
+    hpath: Optional[str] = None
+    title = "Introduction"
+    in_definitions = False
+    k = b_n = 0
+    heading: Optional[Raw] = None
+    stub_parts: dict[str, list] = {}
+    # Body-level numbering under the current heading, as the numbered
+    # segmenter tracks it: "(a)" nests under the numbered paragraph above it,
+    # "(ii)" under the letter, and a list that restarts ("a." again after an
+    # introducing paragraph, "1." again under a bold sub-title the layout model
+    # did not call a heading) nests under that paragraph. Reset at every heading.
+    sub: list[str] = []            # numbered/dotted paragraph token(s)
+    letter: Optional[str] = None
+    roman: Optional[str] = None    # current roman item under the letter
+    in_definitions_body = False
+    last_p: Optional[str] = None   # most recent unmarked paragraph token
+    last_key: Optional[tuple] = None
+    last_roman = 0
+
+    def roman_value(t: str) -> int:
+        vals = {"i": 1, "v": 5, "x": 10, "l": 50, "c": 100, "d": 500, "m": 1000}
+        total, prev = 0, 0
+        for ch in reversed(t.lower()):
+            v = vals.get(ch, 0)
+            total += -v if v < prev else v
+            prev = max(prev, v)
+        return total
+
+    def fresh_p() -> str:
+        # A list that restarts without a new paragraph between still restarts
+        # under something: mint the paragraph the document implies.
+        nonlocal k, last_p
+        k += 1
+        last_p = f"p{k}"
+        return last_p
+
+    for b in sblocks:
+        if b.kind == "heading":
+            ordinal += 1
+            root_m = _ROOT_HEADING.match(b.text)
+            if root_m:
+                title = root_m.group(3).strip() or b.text
+                depth = anchors.push(None, ordinal, (root_m.group(1), root_m.group(2)))
+            else:
+                m = parse_marker(b.text)
+                if not (m and m.token and (m.dotted or m.kind in ("num", "alpha", "roman"))):
+                    m = None
+                title = (m.rest.strip() or b.text) if m else b.text
+                depth = anchors.push(m, ordinal)
+            aparts, hpath = anchors.parts, anchors.human
+            in_definitions = bool(_DEFINITIONS_HEADING.search(title))
+            k = b_n = 0
+            sub, letter, roman, last_p, last_key, last_roman = [], None, None, None, None, 0
+            in_definitions_body = False
+            heading = Raw(text=title, section=ordinal, section_title=title, kind="heading",
+                          id_parts=list(aparts), path=hpath, page=b.page, label=b.label, level=depth)
+            out.append(heading)
+            continue
+        sec = ordinal if ordinal else 1
+        anchor = aparts
+        if b.kind in ("body", "definition"):
+            m = parse_marker(b.text)
+            if m and m.keyword:
+                # "Clause D (2) of this Policy ..." is a sentence that opens
+                # with a cross-reference, not a numbered paragraph.
+                m = None
+            kind = m.kind if (m and m.token) else None
+            tok = m.token.lower() if (m and m.token) else ""
+            # "4. Special meaning of certain words: ..." opens a definitions
+            # run in body text; it ends at the next numbered paragraph.
+            if kind in ("num", "dotted") or (m and m.dotted):
+                in_definitions_body = bool(_DEFINITIONS_HEADING.search(b.text[:80]))
+            if kind == "alpha" and len(tok) == 1 and tok in AMBIGUOUS_TOKENS:
+                # "(i)" straight after "(h)" is the next letter; anywhere else
+                # it opens a nested roman run.
+                expected = chr(ord(letter) + 1) if (letter and len(letter) == 1 and letter.isalpha()) else "a"
+                if tok != expected:
+                    kind = "roman"
+            if m and m.dotted:                                    # "4.1.2 ..."
+                key = ("dotted",) + tuple(int(x) if x.isdigit() else x for x in m.dotted)
+                restart = last_key is not None and last_key[0] == "dotted" and key <= last_key
+                base_p = [fresh_p()] if restart else ([last_p] if (last_p and last_p in sub[:1]) else [])
+                sub = base_p + [t.lower() for t in m.dotted]
+                letter, roman, last_key, last_roman = None, None, key, 0
+                parts = anchor + sub
+                path = path_to_human([hpath or ".".join(anchor)] + list(m.dotted))
+            elif kind == "num":                                   # "3. ..."
+                key = ("num", int(tok) if tok.isdigit() else tok)
+                restart = last_key is not None and last_key[0] == "num" and key <= last_key
+                base_p = [fresh_p()] if restart else ([last_p] if (last_p and last_p in sub[:1]) else [])
+                sub = base_p + [tok]
+                letter, roman, last_key, last_roman = None, None, key, 0
+                parts = anchor + sub
+                path = path_to_human([hpath or ".".join(anchor)] + sub)
+            elif kind == "alpha":                                 # "(a) ..."
+                if letter and tok <= letter:
+                    if roman:
+                        # "a) b) c)" under "(ii)": a second-level list.
+                        sub = sub + [letter, roman]
+                        roman = None
+                    else:
+                        sub = [fresh_p()]                         # a list restarting anew
+                letter, last_roman = tok, 0
+                parts = anchor + sub + [letter]
+                path = path_to_human([hpath or ".".join(anchor)] + sub + [m.token])
+            elif kind == "roman":                                 # "(ii) ..."
+                val = roman_value(tok)
+                if last_roman and val <= last_roman:
+                    sub, letter = [fresh_p()], None               # a roman list restarting
+                roman, last_roman = tok, val
+                parts = anchor + sub + ([letter] if letter else []) + [tok]
+                path = path_to_human([hpath or ".".join(anchor)] + sub + ([letter] if letter else []) + [m.token])
+            elif kind:
+                parts = anchor + sub + [tok]
+                path = path_to_human([hpath or ".".join(anchor)] + sub + [m.token])
+            else:
+                sub = [fresh_p()]
+                letter, roman, last_key, last_roman = None, None, None, 0
+                parts = anchor + [last_p]
+                path = None
+            out.append(Raw(text=b.text, section=sec, section_title=title,
+                           kind="definition" if (in_definitions or in_definitions_body) else "body",
+                           id_parts=parts, path=path,
+                           has_placeholder=b.has_placeholder, page=b.page, label=b.label))
+            continue
+        if b.kind == "table_stub":
+            parts = anchor + [b.table_key]
+            stub_parts[b.table_key] = parts
+            out.append(Raw(text=b.text, section=sec, section_title=title, kind="table_stub",
+                           id_parts=parts, page=b.page, label=b.label))
+            continue
+        if b.kind == "table_row":
+            parent = stub_parts.get(b.table_key, anchor + [b.table_key])
+            out.append(Raw(text=b.text, section=sec, section_title=title, kind="table_row",
+                           id_parts=parent + [f"r{b.extra.get('row', 0)}"], spoken_on_request=True,
+                           parent_parts=parent, page=b.page, label=b.label))
+            continue
+        # boilerplate: keeps its place in reading order, never sent
+        b_n += 1
+        out.append(Raw(text=b.text, section=sec, section_title=title, kind="boilerplate",
+                       id_parts=anchor + [f"b{b_n}"], page=b.page, demoted_by=b.demoted_by,
+                       label=b.label, has_placeholder=b.has_placeholder))
+
+    # Children: every spoken item directly under a heading -- its body and
+    # definition clauses, its table stubs, and its immediate sub-headings.
+    hstack: list[Raw] = []
+    for r in out:
+        if r.kind == "heading":
+            while hstack and hstack[-1].level >= r.level:
+                hstack.pop()
+            if hstack:
+                hstack[-1].children += 1
+            r.children = 0
+            hstack.append(r)
+        elif r.kind in ("body", "definition", "table_stub") and hstack:
+            hstack[-1].children += 1
+    # A heading with nothing under it heads nothing. It is almost always a
+    # list item or a short paragraph the layout model labelled as a heading
+    # ("Civil Commotion;"), so it is read as body text, never dropped.
+    for r in out:
+        if r.kind == "heading" and r.children == 0:
+            r.kind = "body"
+            r.level = 0
+            notes.append(f"childless heading read as body: {r.section_title[:60]!r}")
+    # Signposts: mechanical, from the tree. "{heading}. {n} items."
+    for r in out:
+        if r.kind == "heading":
+            n = r.children
+            r.text = f"{r.section_title}. {n} item{'' if n == 1 else 's'}."
+    return out, notes
+
+
+def split_structured(raws: list[Raw], opts, notes: list[str]) -> list[Raw]:
+    """Rule 3 only (no runt merge: the layout model's paragraphs stand). Pieces
+    are suffixed -s1, -s2 ... and every split is logged for review."""
+    out: list[Raw] = []
+    for r in raws:
+        if r.kind in ("heading", "table_stub", "boilerplate"):
+            out.append(r)
+            continue
+        pieces = split_long(r.text, opts.max_clause_chars)
+        if len(pieces) == 1 and len(r.text) <= MAX_CLAUSE_CHARS_HARD:
+            out.append(r)
+            continue
+        cid = path_to_id(r.id_parts, prefix=opts.id_prefix)
+        # A single sentence longer than the hard limit has no sentence boundary
+        # to split at: break it at the last word boundary before the limit.
+        fixed = []
+        for piece in pieces:
+            while len(piece) > MAX_CLAUSE_CHARS_HARD:
+                cut = piece.rfind(", ", 0, MAX_CLAUSE_CHARS_HARD)
+                if cut < MAX_CLAUSE_CHARS_HARD // 2:
+                    cut = piece.rfind(" ", 0, MAX_CLAUSE_CHARS_HARD)
+                head, piece = piece[:cut + 1].strip(), piece[cut + 1:].strip()
+                fixed.append(head)
+                notes.append(f"hard split {cid}: a {len(head) + len(piece)}-char sentence with no "
+                             f"sentence boundary, cut at a word boundary")
+            fixed.append(piece)
+        pieces = [x for x in fixed if x]
+        notes.append(f"split {cid}: {len(r.text)} chars -> {len(pieces)} pieces "
+                     f"({', '.join(str(len(p)) for p in pieces)})")
+        for n, piece in enumerate(pieces, start=1):
+            out.append(Raw(text=piece, section=r.section, section_title=r.section_title,
+                           subsection=r.subsection, item=r.item,
+                           path=(r.path + f"-s{n}") if r.path else None, kind=r.kind,
+                           id_parts=list(r.id_parts) + [f"s{n}"], spoken_on_request=r.spoken_on_request,
+                           has_placeholder=r.has_placeholder, parent_parts=r.parent_parts,
+                           page=r.page, label=r.label))
+    return out
+
+
+def fold_lists(raws: list[Raw], max_chars: int, notes: list[str]) -> list[Raw]:
+    """Rule 5 for the structure pass: a run of marker-led items under one
+    heading folds into one clause (with its introducer, when the paragraph
+    before ends in a colon) up to `max_chars`, then a new clause begins with
+    the next item. The layout model yields one clause per list item, which
+    put a 12k-word wording at ~700 clauses; a listener hears a list as one
+    unit. Ids: the first item's. Markers stay in the text."""
+    out: list[Raw] = []
+    buf: Optional[Raw] = None
+    folded = 0
+
+    def led(r: Raw) -> bool:
+        m = parse_marker(r.text)
+        return bool(m and m.token and not m.keyword)
+
+    def flush():
+        nonlocal buf
+        if buf is not None:
+            out.append(buf)
+            buf = None
+
+    for r in raws:
+        if r.kind not in ("body", "definition"):
+            flush()
+            out.append(r)
+            continue
+        if buf is not None and r.kind == buf.kind and r.section == buf.section and led(r) \
+                and len(buf.text) + 1 + len(r.text) <= max_chars:
+            buf.text = buf.text + " " + r.text
+            buf.has_placeholder = buf.has_placeholder or r.has_placeholder
+            folded += 1
+            continue
+        flush()
+        if led(r) or r.text.rstrip().endswith(":"):
+            buf = Raw(**{**r.__dict__})
+        else:
+            out.append(r)
+    flush()
+    if folded:
+        notes.append(f"folded {folded} list items into their runs (max {max_chars} chars)")
+    return out
+
+
+def merge_runts(raws: list[Raw], min_chars: int, notes: list[str]) -> list[Raw]:
+    """Rule 4: a body clause shorter than `min_chars` is carried into the next
+    body clause of the same heading, which keeps its own id."""
+    out: list[Raw] = []
+    carry: Optional[Raw] = None
+    merged = 0
+    for r in raws:
+        if carry is not None:
+            if r.kind in ("body", "definition") and r.section == carry.section:
+                r = Raw(**{**r.__dict__})
+                r.text = (carry.text.rstrip() + " " + r.text).strip()
+                r.has_placeholder = r.has_placeholder or carry.has_placeholder
+                merged += 1
+            else:
+                out.append(carry)
+            carry = None
+        if r.kind in ("body", "definition") and len(r.text) < min_chars:
+            carry = r
+            continue
+        out.append(r)
+    if carry is not None:
+        out.append(carry)
+    if merged:
+        notes.append(f"merged {merged} short clauses (< {min_chars} chars) into the next")
+    return out
+
+
+def build_map(records: list[dict]) -> list[dict]:
+    """Ordered top-level headings with direct body child counts."""
+    heads = [r for r in records if r.get("kind") == "heading"]
+    if not heads:
+        return []
+    top = min(r.get("level", 1) or 1 for r in heads)
+    tops = [r for r in heads if (r.get("level", 1) or 1) == top]
+    # The document title is the first heading, unnumbered, followed by the
+    # numbered divisions; it is spoken as a heading but is not a section.
+    if len(tops) > 1 and tops[0] is heads[0] and not tops[0].get("path") and any(t.get("path") for t in tops[1:]):
+        tops = tops[1:]
+    return [{"id": r["id"], "title": r["section_title"], "section": r["section"],
+             "children": r.get("children", 0)} for r in tops]
+
+
+def build_terms(records: list[dict]) -> dict:
+    """normalised term -> clause id, from definition clauses and definitions-table rows."""
+    from grounding import normalise_term
+    terms: dict = {}
+    for r in records:
+        kind = r.get("kind")
+        if kind == "definition":
+            m = _TERM_LEAD.match(r["text_display"])
+            if m:
+                terms.setdefault(normalise_term(m.group(1)), r["id"])
+        elif kind == "table_row" and _DEFINITIONS_HEADING.search(r.get("section_title", "")):
+            # "Term: Meaning." (two-column grid) or "Term: X; Meaning: Y." (headed)
+            first = r["text_display"].split(";", 1)[0]
+            if ":" in first:
+                k_, v_ = first.split(":", 1)
+                term = v_ if re.fullmatch(r"\s*(term|word|expression|definition\s+of)\s*", k_, re.I) else k_
+                terms.setdefault(normalise_term(term), r["id"])
+    return dict(sorted(terms.items()))
 
 
 # ==========================================================================
@@ -897,78 +1394,261 @@ def ingest_document(source, out_dir=None, *, out_path=None, name=None, title=Non
             blocks, raw = extract_txt(p)
             stype = "text"
         else:
-            die(f"unsupported extension {suf!r}; use .pdf .docx .html .txt .md or a URL")
+            raise IngestError(f"unsupported extension {suf!r}; use .pdf .docx .html .txt .md or a URL")
+    doc_id = _doc_id_for(data)
+    doc_key = name or (Path(out_path).stem if out_path else doc_id)
+    stage("extract", detail=f"{stype} {len(data)} bytes", t0=t0)
 
+    # ---- structure -------------------------------------------------------
+    t0 = time.monotonic()
+    rep_s = istr.StructureReport()
+    out_dir = Path(out_dir) if out_dir else (Path(out_path).parent if out_path else None)
+    csv_dir = out_dir if (out_dir and not dry_run) else None
+    if ddoc is not None:
+        sblocks = istr.blocks_from_docling(ddoc, table_csv_dir=csv_dir, doc_key=doc_key, report=rep_s)
+        n_pages = istr.num_pages(ddoc)
+    else:
+        sblocks = istr.blocks_from_legacy(blocks)
+        n_pages = 0
+    sblocks = istr.regex_boilerplate_pass(sblocks, n_pages, rep_s)
+    if ddoc is not None:
+        raw = "\n".join(b.text for b in sblocks)
     if len(raw.strip()) < MIN_EXTRACT_CHARS:
-        die(f"extracted only {len(raw.strip())} chars (need >= {MIN_EXTRACT_CHARS}). "
-            "The document is probably scanned images, JS-rendered, or behind a login.")
+        warnings.append(f"extracted only {len(raw.strip())} chars; scanned images, JS-rendered, or empty")
+    stage("structure", detail=f"{len(sblocks)} blocks, {n_pages} pages", t0=t0)
 
-    title_hint = args.title or (urlparse(src).netloc if is_url else Path(src).stem)
-    pii = scan_pii(raw, context=" ".join([title_hint, str(meta.get("publisher", "")),
+    # ---- segment (fold, merge, split; the 1,000-char assert) --------------
+    t0 = time.monotonic()
+    class Opts:
+        pass
+    opts = Opts()
+    opts.id_prefix = id_prefix
+    opts.max_clause_chars = max_clause_chars if max_clause_chars is not None else MAX_CLAUSE_CHARS_HARD
+    opts.min_clause_chars = min_clause_chars if min_clause_chars is not None else 120
+    if legacy_segmenter and ddoc is None:
+        opts.max_clause_chars = max_clause_chars if max_clause_chars is not None else 600
+        opts.min_clause_chars = min_clause_chars if min_clause_chars is not None else 40
+        raws = segment(blocks, opts)
+        raws = merge_and_split(raws, opts)
+    else:
+        raws, notes = segment_structured(sblocks, opts)
+        if fold_max_chars:
+            raws = fold_lists(raws, fold_max_chars, notes)
+        if opts.min_clause_chars:
+            raws = merge_runts(raws, opts.min_clause_chars, notes)
+        raws = split_structured(raws, opts, notes)
+    for r in raws:
+        assert len(r.text) <= MAX_CLAUSE_CHARS_HARD, f"segmenter left {len(r.text)} chars in one clause"
+    splits = [n for n in notes if n.startswith("split ") or n.startswith("hard split ")]
+    stage("segment", detail=f"{len(raws)} clauses, {len(splits)} splits", t0=t0)
+
+    # ---- normalize -------------------------------------------------------
+    t0 = time.monotonic()
+    records = to_records(raws, opts)
+    stage("normalize", detail=f"{len(records)} spoken forms", t0=t0)
+
+    # ---- pii_scan: informational, never blocks ---------------------------
+    t0 = time.monotonic()
+    pii = scan_pii(raw, context=" ".join([title or doc_key, str(meta.get("publisher", "")),
                                           str(meta.get("title", ""))]))
-    if args.pii_report:
-        Path(args.pii_report).write_text(json.dumps(pii.as_dict(), indent=1), encoding="utf-8")
-    for label, val in pii.institutional:
-        print(f"warning: institutional contact detail kept: {label} {redact(val)}", file=sys.stderr)
-    if pii.personal:
-        print(f"PII scan found {len(pii.personal)} personal-data hit(s):", file=sys.stderr)
-        for label, val in pii.personal[:20]:
-            print(f"  {label}: {redact(val)}", file=sys.stderr)
-        if pii.unoverridable:
-            die("refusing: a person's name next to an account or policy number is personal "
-                "data whatever the reason. --allow-pii does not apply.", code=2)
-        if not args.allow_pii:
-            die("refusing to ingest a document that looks like it contains real personal data. "
-                "Use a synthetic or public document, or pass --allow-pii \"reason\" if these are "
-                "false positives (the reason is recorded in the fixture).", code=2)
-        print(f"--allow-pii given: {args.allow_pii}", file=sys.stderr)
 
-    raws = segment(blocks, args)
-    raws = merge_and_split(raws, args)
-    records = to_records(raws, args)
-    validate(records, args)
+    def locate(value: str) -> Optional[str]:
+        for r in records:
+            if value in r["text_display"]:
+                return r["id"]
+        return None
+    pii_report = {
+        "personal": [{"label": l, "redacted": redact(v), "clause_id": locate(v)} for l, v in pii.personal],
+        "institutional": [{"label": l, "redacted": redact(v), "clause_id": locate(v)} for l, v in pii.institutional],
+        "note": "Informational. Nothing here removed or altered any text; the developer view "
+                "shows it as the review trail.",
+    }
+    stage("pii_scan", detail=f"{len(pii.personal)} personal-looking, {len(pii.institutional)} institutional", t0=t0)
 
-    if args.dry_run or args.review:
-        preview(records)
-    if args.dry_run:
-        print("\n--dry-run: nothing written.")
-        return 0
-    if args.review:
-        try:
-            input("\nReview the clauses above. Enter to write, Ctrl-C to abort: ")
-        except (EOFError, KeyboardInterrupt):
-            print("\naborted; nothing written.")
-            return 1
+    # ---- validate: informational report + the internal invariants --------
+    t0 = time.monotonic()
+    validate(records, opts)
+    by_kind: dict = {}
+    for r in records:
+        by_kind[r.get("kind", "body")] = by_kind.get(r.get("kind", "body"), 0) + 1
+    body_n = by_kind.get("body", 0) + by_kind.get("definition", 0)
+    readable = body_n > 0
+    words = sum(len(r["text_display"].split()) for r in records)
+    scaled = (EXPECTED_RANGE[0] * words / EXPECTED_RANGE_WORDS, EXPECTED_RANGE[1] * words / EXPECTED_RANGE_WORDS)
+    in_range = scaled[0] <= len(records) <= scaled[1] * 1.5
+    boiler = [{"id": r["id"], "text": r["text_display"][:120],
+               "reason": r.get("demoted_by") or r.get("label") or "layout"}
+              for r in records if r.get("kind") == "boilerplate"][:15]
+    validate_report = {
+        "clause_count": len(records),
+        "by_kind": dict(sorted(by_kind.items())),
+        "body_clauses": body_n,
+        "readable": readable,
+        "splits": splits,
+        "folds_and_merges": [n for n in notes if n.startswith(("folded", "merged"))],
+        "oversized_ok": all(len(r["text_display"]) <= MAX_CLAUSE_CHARS_HARD for r in records),
+        "max_clause_chars": max((len(r["text_display"]) for r in records), default=0),
+        "boilerplate_first_15": boiler,
+        "expected_range": {
+            "reference": f"{EXPECTED_RANGE[0]}-{EXPECTED_RANGE[1]} clauses for a ~{EXPECTED_RANGE_WORDS:,}-word wording",
+            "words": words,
+            "scaled_range": [round(scaled[0]), round(scaled[1])],
+            "in_range": in_range,
+        },
+        "other_notes": [n for n in notes if not n.startswith(("split ", "hard split ", "folded", "merged"))],
+        "unknown_labels": dict(rep_s.unknown_labels) if rep_s else {},
+        "warnings": warnings,
+    }
+    stage("validate", detail=f"{len(records)} clauses, {len(by_kind)} kinds, readable={readable}", t0=t0)
 
-    source: dict = {
+    # ---- write -----------------------------------------------------------
+    t0 = time.monotonic()
+    source_block: dict = {
         "type": stype,
         "path_or_url": src if is_url else str(Path(src).name),
-        "fetched_at": meta.get("fetched_at") or time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "sha256": hashlib.sha256(raw.encode("utf-8")).hexdigest(),
+        "sha256": hashlib.sha256(data).hexdigest(),
     }
-    if args.allow_pii and pii.personal:
-        source["pii_override_reason"] = args.allow_pii
+    if is_url:
+        source_block["fetched_at"] = meta.get("fetched_at") or time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     if pii.institutional:
-        # Redacted on purpose: the review trail needs to know the document
-        # carries a helpline and a grievance mailbox, not what they are.
-        source["institutional_contacts"] = [
-            {"label": l, "redacted": redact(v)} for l, v in pii.institutional]
-
-    title = args.title or (urlparse(src).netloc + urlparse(src).path if is_url else Path(src).stem)
+        source_block["institutional_contacts"] = [{"label": l, "redacted": redact(v)} for l, v in pii.institutional]
+    doc_title = title or (urlparse(src).netloc + urlparse(src).path if is_url else Path(src).stem)
+    try:
+        import docling
+        dver = getattr(docling, "__version__", None) or __import__("importlib.metadata").metadata.version("docling")
+    except Exception:
+        dver = None
     doc = {
-        "title": title,
-        "synthetic": bool(args.synthetic),
-        "source": source,
+        "title": doc_title,
+        "doc_id": doc_id,
+        "synthetic": bool(synthetic),
+        "readable": readable,
+        "source": source_block,
         "clause_count": len(records),
         "clauses": records,
+        "map": build_map(records),
+        "terms": build_terms(records),
+        "structure": {
+            "tool": "docling" if ddoc is not None else "text",
+            "version": dver if ddoc is not None else None,
+            "docling_json": f"{doc_key}.docling.json" if ddoc is not None else None,
+            "pages": n_pages,
+            "labels": dict(sorted(rep_s.labels_seen.items())),
+            "demoted": len(rep_s.demoted), "placeholders_stripped": rep_s.placeholders_stripped,
+            "splits": len(splits),
+            "tables": [{"key": k, "rows": n, "csv": Path(c).name if c else None} for k, n, c in rep_s.tables],
+        },
     }
-    out = Path(args.out)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(doc, indent=1, ensure_ascii=False))
-    print(f"wrote {out} — {len(records)} clauses, "
-          f"{len({r['section_title'] for r in records})} sections")
-    update_index(out, doc, args.name or out.stem, args.referral)
-    print("Add an entry to examples/policy-reader/fixtures/README.md before committing.")
+    report = {
+        "doc_id": doc_id, "name": doc_key, "title": doc_title, "source": source_block,
+        "stages": ["extract", "structure", "segment", "normalize", "pii_scan", "validate", "write"],
+        "elapsed_ms": timings,
+        "structure": doc["structure"],
+        "pii_scan": pii_report,
+        "validate": validate_report,
+        "readable": readable,
+    }
+    fixture_path = report_path = docling_path = None
+    entry = {"doc_id": doc_id, "name": doc_key, "title": doc_title, "reviewed": False,
+             "readable": readable, "clause_count": len(records)}
+    if not dry_run:
+        if out_path is None and out_dir is None:
+            raise IngestError("out_dir or out_path is required unless dry_run")
+        fixture_path = Path(out_path) if out_path else Path(out_dir) / f"{doc_key}.json"
+        fixture_path.parent.mkdir(parents=True, exist_ok=True)
+        if ddoc is not None:
+            docling_path = fixture_path.parent / f"{doc_key}.docling.json"
+            istr.save_docling_json(ddoc, docling_path)
+        report_path = fixture_path.parent / f"{doc_key}.ingest_report.json"
+        doc["report_file"] = report_path.name
+        fixture_path.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+        report["elapsed_ms"]["write"] = round((time.monotonic() - t0) * 1000, 1)
+        report["elapsed_ms"]["total"] = round((time.monotonic() - t_all) * 1000, 1)
+        report_path.write_text(json.dumps(report, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+        if register:
+            idx = Path(index_path) if index_path else fixture_path.parent / INDEX_FILENAME
+            entry_written = update_index(fixture_path, doc, doc_key, referral, index_path=idx)
+            entry.update({k: entry_written[k] for k in ("reviewed", "readable", "report") if k in entry_written})
+    stage("write", detail=str(fixture_path) if fixture_path else "dry run, nothing written", t0=t0)
+    return IngestResult(doc_id=doc_id, name=doc_key, title=doc_title, fixture_path=fixture_path,
+                        report_path=report_path, docling_path=docling_path, clause_count=len(records),
+                        readable=readable, entry=entry, report=report, records=records)
+
+
+def print_report(res: IngestResult, stream=sys.stderr) -> None:
+    v = res.report["validate"]
+    print(f"structure pass: {res.name}  (doc_id {res.doc_id})", file=stream)
+    print("  clauses by kind: " + ", ".join(f"{k}={n}" for k, n in v["by_kind"].items()), file=stream)
+    print(f"  splits: {len(v['splits'])}", file=stream)
+    for n in v["splits"]:
+        print(f"    {n}", file=stream)
+    for n in v["folds_and_merges"] + v["other_notes"]:
+        print(f"  {n}", file=stream)
+    print(f"  elapsed: " + ", ".join(f"{k} {ms:.0f} ms" for k, ms in res.report["elapsed_ms"].items()), file=stream)
+    e = v["expected_range"]
+    print(f"  expected range: {e['reference']}; this document {e['words']} words -> "
+          f"{e['scaled_range'][0]}-{e['scaled_range'][1]}; got {v['clause_count']} "
+          f"({'in range' if e['in_range'] else 'OUTSIDE range'})", file=stream)
+    if v["unknown_labels"]:
+        print("  labels mapped to boilerplate by default (review): "
+              + ", ".join(f"{k}={n}" for k, n in v["unknown_labels"].items()), file=stream)
+    p = res.report["pii_scan"]
+    print(f"  pii scan (informational): {len(p['personal'])} personal-looking, "
+          f"{len(p['institutional'])} institutional", file=stream)
+    print(f"  first {len(v['boilerplate_first_15'])} boilerplate items:", file=stream)
+    for b in v["boilerplate_first_15"]:
+        print(f"    [{b['id']}] ({b['reason']}) {b['text'][:90]}", file=stream)
+    if not v["readable"]:
+        print("  readable: false (no body text found)", file=stream)
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description="Build-time document -> fixture ingestion (the same "
+                                             "function the upload endpoint runs).")
+    ap.add_argument("source_path", metavar="source",
+                    help="path to .pdf/.docx/.html/.txt/.md, or an http(s) URL")
+    ap.add_argument("--out", required=False, help="output fixture path (.json); default fixtures/<doc_id>.json")
+    ap.add_argument("--out-dir", default=None, help="directory for <name>.json (default: examples/policy-reader/fixtures)")
+    ap.add_argument("--title", default=None)
+    ap.add_argument("--id-prefix", default="sec")
+    ap.add_argument("--name", default=None,
+                    help="registry name (default: --out stem, else the doc_id); must be unique")
+    ap.add_argument("--referral", default=None,
+                    help="who the listener should contact for a decision; shown on every answer card.")
+    ap.add_argument("--min-clause-chars", type=int, default=None,
+                    help="merge shorter clauses into the next (default 120 for the structure pass)")
+    ap.add_argument("--max-clause-chars", type=int, default=None,
+                    help="split threshold; default the 1000-char hard limit for the structure pass")
+    ap.add_argument("--fold-lists", type=int, default=600, metavar="CHARS",
+                    help="fold runs of list items into clauses up to CHARS (0 disables)")
+    ap.add_argument("--synthetic", action="store_true", help="mark the fixture as synthetic")
+    ap.add_argument("--dry-run", action="store_true", help="run every stage, print the report, write nothing")
+    ap.add_argument("--ocr", action="store_true", help="enable Docling OCR (scanned PDFs; off by default)")
+    ap.add_argument("--source", choices=("auto", "pdf", "text"), default="auto",
+                    help="pdf: the Docling structure pass; text: the line-based extractors; "
+                         "auto: Docling for .pdf/.docx when installed")
+    ap.add_argument("--legacy-segmenter", action="store_true",
+                    help="text sources only: the numbered/headed segmenters instead of the structure mapping")
+    ap.add_argument("--no-register", action="store_true", help="write the fixture but not index.json")
+    args = ap.parse_args()
+
+    out_dir = Path(args.out_dir) if args.out_dir else (ROOT / "examples" / "policy-reader" / "fixtures")
+    try:
+        res = ingest_document(
+            args.source_path, out_dir=None if args.out else out_dir, out_path=args.out, name=args.name,
+            title=args.title, id_prefix=args.id_prefix, min_clause_chars=args.min_clause_chars,
+            max_clause_chars=args.max_clause_chars, fold_max_chars=args.fold_lists,
+            synthetic=args.synthetic, referral=args.referral, ocr=args.ocr, source_kind=args.source,
+            progress=lambda st, status, ms, detail: print(f"  {st:10s} {status:4s} {ms:8.0f} ms  {detail}", file=sys.stderr),
+            register=not args.no_register, dry_run=args.dry_run, legacy_segmenter=args.legacy_segmenter)
+    except IngestError as e:
+        die(str(e))
+    print_report(res)
+    if args.dry_run:
+        preview(res.records)
+        print("\n--dry-run: nothing written.")
+    else:
+        print(f"wrote {res.fixture_path} — {res.clause_count} clauses; report {res.report_path.name}")
     return 0
 
 

@@ -1,0 +1,395 @@
+{
+ "doc_id": "f5877d522f441c28",
+ "name": "saral_jeevan_bima",
+ "title": "fixture_saral_jeevan_bima",
+ "source": {
+  "type": "docx",
+  "path_or_url": "fixture_saral_jeevan_bima.docx",
+  "sha256": "f5877d522f441c28a482db528c63fbfb17815009324baaefec8c7fa06e18cef0",
+  "institutional_contacts": [
+   {
+    "label": "email",
+    "redacted": "info…"
+   },
+   {
+    "label": "email",
+    "redacted": "comp…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "Bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1291…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1552…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…"
+   }
+  ]
+ },
+ "stages": [
+  "extract",
+  "structure",
+  "segment",
+  "normalize",
+  "pii_scan",
+  "validate",
+  "write"
+ ],
+ "elapsed_ms": {
+  "extract": 30209.4,
+  "structure": 127.5,
+  "segment": 7.1,
+  "normalize": 153.9,
+  "pii_scan": 17.3,
+  "validate": 8.1,
+  "write": 89.1,
+  "total": 30612.7
+ },
+ "structure": {
+  "tool": "docling",
+  "version": "2.69.1",
+  "docling_json": "saral_jeevan_bima.docling.json",
+  "pages": 0,
+  "labels": {
+   "section_header": 82,
+   "table": 1,
+   "text": 648
+  },
+  "demoted": 17,
+  "placeholders_stripped": 54,
+  "splits": 0,
+  "tables": [
+   {
+    "key": "t1",
+    "rows": 8,
+    "csv": "saral_jeevan_bima.t1.csv"
+   }
+  ]
+ },
+ "pii_scan": {
+  "personal": [],
+  "institutional": [
+   {
+    "label": "email",
+    "redacted": "info…",
+    "clause_id": "sec-2-p15-5"
+   },
+   {
+    "label": "email",
+    "redacted": "comp…",
+    "clause_id": "sec-pb-10-1-p2-10-1-4"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-pb-73-p2"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-pb-74-p4"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-pb-74-p5"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-pb-75-p2"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-pb-76-p2"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-pb-77-p2"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-pb-77-p8"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-pb-78-p2"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-pb-79-p2"
+   },
+   {
+    "label": "email",
+    "redacted": "Bima…",
+    "clause_id": "sec-pb-79-p5"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-pb-80-p2"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-pb-81-p2"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-pb-82-p3"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-pb-82-p7"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-pb-82-p10"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-pb-82-p16"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-pb-82-p17"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…",
+    "clause_id": "sec-2-p15-5"
+   },
+   {
+    "label": "phone",
+    "redacted": "1291…",
+    "clause_id": "sec-3-p48"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…",
+    "clause_id": "sec-3-p48"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…",
+    "clause_id": "sec-3-p48"
+   },
+   {
+    "label": "phone",
+    "redacted": "1552…",
+    "clause_id": "sec-pb-10-1-p2-10-1-4"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…",
+    "clause_id": "sec-pb-10-1-p2-10-1-4"
+   }
+  ],
+  "note": "Informational. Nothing here removed or altered any text; the developer view shows it as the review trail."
+ },
+ "validate": {
+  "clause_count": 415,
+  "by_kind": {
+   "body": 309,
+   "boilerplate": 17,
+   "heading": 80,
+   "table_row": 8,
+   "table_stub": 1
+  },
+  "body_clauses": 309,
+  "readable": true,
+  "splits": [],
+  "folds_and_merges": [
+   "folded 176 list items into their runs (max 600 chars)",
+   "merged 146 short clauses (< 120 chars) into the next"
+  ],
+  "oversized_ok": true,
+  "max_clause_chars": 719,
+  "boilerplate_first_15": [
+   {
+    "id": "sec-2-b1",
+    "text": "",
+    "reason": "placeholder_only"
+   },
+   {
+    "id": "sec-2-b2",
+    "text": "",
+    "reason": "placeholder_only"
+   },
+   {
+    "id": "sec-2-b3",
+    "text": "",
+    "reason": "placeholder_only"
+   },
+   {
+    "id": "sec-2-b4",
+    "text": "",
+    "reason": "placeholder_only"
+   },
+   {
+    "id": "sec-4-b1",
+    "text": "UIN: 111N128V01",
+    "reason": "uin"
+   },
+   {
+    "id": "sec-5-16-b1",
+    "text": "",
+    "reason": "placeholder_only"
+   },
+   {
+    "id": "sec-5-16-b2",
+    "text": "",
+    "reason": "placeholder_only"
+   },
+   {
+    "id": "sec-5-16-b3",
+    "text": "",
+    "reason": "placeholder_only"
+   },
+   {
+    "id": "sec-pb-11-1-b1",
+    "text": "Page 31 of 39",
+    "reason": "page_number"
+   },
+   {
+    "id": "sec-pb-11-1-b2",
+    "text": "Page 32 of 39",
+    "reason": "page_number"
+   },
+   {
+    "id": "sec-pb-11-1-b3",
+    "text": "Page 33 of 39",
+    "reason": "page_number"
+   },
+   {
+    "id": "sec-pb-11-1-13-b1",
+    "text": "Page 34 of 39",
+    "reason": "page_number"
+   },
+   {
+    "id": "sec-pb-11-1-13-b2",
+    "text": "Page 35 of 39",
+    "reason": "page_number"
+   },
+   {
+    "id": "sec-pb-11-1-13-b3",
+    "text": "Page 36 of 39",
+    "reason": "page_number"
+   },
+   {
+    "id": "sec-pb-11-1-13-b4",
+    "text": "Page 37 of 39",
+    "reason": "page_number"
+   }
+  ],
+  "expected_range": {
+   "reference": "150-250 clauses for a ~12,000-word wording",
+   "words": 12779,
+   "scaled_range": [
+    160,
+    266
+   ],
+   "in_range": false
+  },
+  "other_notes": [
+   "childless heading read as body: 'Telephone Number with STD Code'",
+   "childless heading read as body: 'Policy Holder is the legal owner of this policy'"
+  ],
+  "unknown_labels": {},
+  "warnings": []
+ },
+ "readable": true
+}

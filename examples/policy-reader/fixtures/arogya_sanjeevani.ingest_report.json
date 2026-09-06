@@ -1,0 +1,280 @@
+{
+ "doc_id": "f23bb7ce63372d57",
+ "name": "arogya_sanjeevani",
+ "title": "fixture_arogya_sanjeevani",
+ "source": {
+  "type": "docx",
+  "path_or_url": "fixture_arogya_sanjeevani.docx",
+  "sha256": "f23bb7ce63372d5773c6d64dc8ff764af22963e7efbc9b7cd2941d818c8a8d93",
+  "institutional_contacts": [
+   {
+    "label": "email",
+    "redacted": "rgic…"
+   },
+   {
+    "label": "email",
+    "redacted": "rgic…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "Bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…"
+   }
+  ]
+ },
+ "stages": [
+  "extract",
+  "structure",
+  "segment",
+  "normalize",
+  "pii_scan",
+  "validate",
+  "write"
+ ],
+ "elapsed_ms": {
+  "extract": 29925.4,
+  "structure": 125.9,
+  "segment": 6.6,
+  "normalize": 142.2,
+  "pii_scan": 15.2,
+  "validate": 7.7,
+  "write": 82.2,
+  "total": 30305.6
+ },
+ "structure": {
+  "tool": "docling",
+  "version": "2.69.1",
+  "docling_json": "arogya_sanjeevani.docling.json",
+  "pages": 0,
+  "labels": {
+   "section_header": 42,
+   "table": 1,
+   "text": 650
+  },
+  "demoted": 0,
+  "placeholders_stripped": 0,
+  "splits": 0,
+  "tables": [
+   {
+    "key": "t1",
+    "rows": 8,
+    "csv": "arogya_sanjeevani.t1.csv"
+   }
+  ]
+ },
+ "pii_scan": {
+  "personal": [],
+  "institutional": [
+   {
+    "label": "email",
+    "redacted": "rgic…",
+    "clause_id": "sec-41-p2"
+   },
+   {
+    "label": "email",
+    "redacted": "rgic…",
+    "clause_id": "sec-41-p5"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-42-p158"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-42-p159"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-42-p160"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-42-p161"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-42-p161"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-42-p162"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-42-p164"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-42-p165"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-42-p166"
+   },
+   {
+    "label": "email",
+    "redacted": "Bima…",
+    "clause_id": "sec-42-p167"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-42-p168"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-42-p169"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-42-p170"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-42-p172"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-42-p173"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-42-p175"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-42-p176"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…",
+    "clause_id": "sec-41-p2"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…",
+    "clause_id": "sec-41-p5"
+   }
+  ],
+  "note": "Informational. Nothing here removed or altered any text; the developer view shows it as the review trail."
+ },
+ "validate": {
+  "clause_count": 274,
+  "by_kind": {
+   "body": 218,
+   "definition": 5,
+   "heading": 42,
+   "table_row": 8,
+   "table_stub": 1
+  },
+  "body_clauses": 223,
+  "readable": true,
+  "splits": [],
+  "folds_and_merges": [
+   "folded 246 list items into their runs (max 600 chars)",
+   "merged 179 short clauses (< 120 chars) into the next"
+  ],
+  "oversized_ok": true,
+  "max_clause_chars": 972,
+  "boilerplate_first_15": [],
+  "expected_range": {
+   "reference": "150-250 clauses for a ~12,000-word wording",
+   "words": 12423,
+   "scaled_range": [
+    155,
+    259
+   ],
+   "in_range": true
+  },
+  "other_notes": [],
+  "unknown_labels": {},
+  "warnings": []
+ },
+ "readable": true
+}

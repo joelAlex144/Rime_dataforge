@@ -45,6 +45,8 @@ Owned by Person B (not in this slice): client AudioWorklet + playback acks, turn
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+pip install -r requirements-build.txt   # docling, pinned: the structure pass behind ingest and upload
+docling-tools models download            # one-time, ~500 MB to ~/.cache/docling; a judge reproducing live needs it
 cp .env.example .env            # fill RIME_API_KEY and RIME_SPEAKER; never commit .env
 set -a; source .env; set +a
 
@@ -56,6 +58,15 @@ python -m pytest                             # offline; no key needed
 TTS_PROVIDER=fake python examples/policy-reader/read_demo.py --cut-ms 2500 -q "what does that mean"
 TTS_PROVIDER=rime python examples/policy-reader/read_demo.py --cut-ms 2500 -q "what does that mean"
 ```
+
+### Third-party libraries
+
+| Library | Where | Note |
+|---|---|---|
+| `websockets`, `requests` | runtime | Rime `/ws3`, catalog check |
+| `aiohttp` | web demo | one port for HTTP + `/ws/audio` |
+| `pypdf`, `python-docx`, `beautifulsoup4` | build time | line-based extractors in `scripts/ingest.py` |
+| `docling` | build time only | structure pass; runs locally, no API, pinned in `requirements-build.txt`; models downloaded once with `docling-tools models download` |
 
 ## Rime integration
 
@@ -365,6 +376,25 @@ is a canary for the assumption, not a gate that is expected to pass.
   `sec-<n>-p<k>` ids, meaningless read aloud, so `Hit.citation_spoken()` cites the
   heading instead. That yields "That's covered further down, in If you're not
   eligible" — grammatical, clumsy.
+- **Table clauses are spoken on request only.** The structure pass turns a
+  table into one `table_stub` clause ("There is a table here: ... Ask me for
+  any row.") and one `table_row` clause per row flagged `spoken_on_request`.
+  Linear playback skips the rows and logs `unit_skipped` for each; a question
+  can still land on a row. A grid is never read cell by cell.
+- **Definitions grids are linearised by the layout model.** Docling flattens a
+  definitions table into rows; the term index is built from those rows and from
+  "X means ..." lead-ins. The Bharat Griha Raksha definitions were verified
+  against the source document by hand, not by a test.
+- **Uploaded documents are unreviewed** until a person presses Accept, and may
+  carry residual boilerplate the regex pass did not catch; the developer page
+  lists the first fifteen demotions so that is checkable.
+- **Retrieval quality is not claimed.** What is claimed is that the twenty
+  scripted questions in `fixtures/policy.questions.json` resolve to the
+  expected clause by the expected branch (`scripts/check_grounding.py`). The
+  BM25 with a synonym table and a proximity prior is not a retrieval feature,
+  and no embeddings or reranker are used; a TODO in `grounding.py` records the
+  plan if a scripted question ever misses. The claim holds on reviewed
+  fixtures only.
 - **The eligibility refusal is insurance-worded.** It ends "contact the insurer or
   lender", the wrong referral on a government-scheme fixture. The sentence is
   fixed verbatim by the brief; a per-fixture referral string would be the fix.
@@ -375,6 +405,7 @@ is a canary for the assumption, not a gate that is expected to pass.
 |---|---|
 | Rime socket drops mid-unit | `provider_disconnected` logged; in-flight iterators receive `TTSError`; agent reconnects and resumes from the last acknowledged boundary |
 | Late audio after cancel | dropped, `result_fenced` with byte count |
+| Boilerplate or table row in reading order | never sent to Rime; one `unit_skipped` per clause at session start with `reason: boilerplate` or `reason: table_on_request`, so the session record is heard / truncated / never-sent / skipped with nothing absent |
 | Rime sends an odd-length PCM chunk | trailing byte carried into the next chunk, in the adapter and in the browser; `chunk_realigned` per unit with the odd-chunk count; a lone final byte is dropped and logged |
 | Client frame count short of the bytes sent | unit is not marked heard; `frame_count_mismatch` with both counts. Heard is client-acknowledged, never server-estimated |
 | Speaker not on live catalog | `fetch_voices.py` exits 1 — submission blocker |

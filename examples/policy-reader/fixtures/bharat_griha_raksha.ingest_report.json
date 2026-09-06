@@ -1,0 +1,406 @@
+{
+ "doc_id": "23a9c597adf161d6",
+ "name": "bharat_griha_raksha",
+ "title": "fixture_bharat_griha_raksha",
+ "source": {
+  "type": "docx",
+  "path_or_url": "fixture_bharat_griha_raksha.docx",
+  "sha256": "23a9c597adf161d6d5bea10ed923db848ce03f5aa2ad7b8895e417d4cfe336b7",
+  "institutional_contacts": [
+   {
+    "label": "email",
+    "redacted": "supp…"
+   },
+   {
+    "label": "email",
+    "redacted": "grie…"
+   },
+   {
+    "label": "email",
+    "redacted": "grie…"
+   },
+   {
+    "label": "email",
+    "redacted": "comp…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1552…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…"
+   }
+  ]
+ },
+ "stages": [
+  "extract",
+  "structure",
+  "segment",
+  "normalize",
+  "pii_scan",
+  "validate",
+  "write"
+ ],
+ "elapsed_ms": {
+  "extract": 30147.1,
+  "structure": 117.2,
+  "segment": 4.8,
+  "normalize": 51.7,
+  "pii_scan": 14.0,
+  "validate": 6.5,
+  "write": 78.4,
+  "total": 30420.0
+ },
+ "structure": {
+  "tool": "docling",
+  "version": "2.69.1",
+  "docling_json": "bharat_griha_raksha.docling.json",
+  "pages": 0,
+  "labels": {
+   "list_item": 3,
+   "section_header": 69,
+   "table": 1,
+   "text": 435
+  },
+  "demoted": 1,
+  "placeholders_stripped": 0,
+  "splits": 0,
+  "tables": [
+   {
+    "key": "t1",
+    "rows": 8,
+    "csv": "bharat_griha_raksha.t1.csv"
+   }
+  ]
+ },
+ "pii_scan": {
+  "personal": [],
+  "institutional": [
+   {
+    "label": "email",
+    "redacted": "supp…",
+    "clause_id": "sec-ck-p3"
+   },
+   {
+    "label": "email",
+    "redacted": "grie…",
+    "clause_id": "sec-ck-p4"
+   },
+   {
+    "label": "email",
+    "redacted": "grie…",
+    "clause_id": "sec-ck-p5"
+   },
+   {
+    "label": "email",
+    "redacted": "comp…",
+    "clause_id": "sec-ck-p6"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-ck-1-p7"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-ck-1-p13"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-ck-1-p15"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-ck-1-p18"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-ck-1-p23"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-ck-1-p27"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-ck-1-p30"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-ck-1-p35"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-ck-1-p39"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-ck-1-p44"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-ck-1-p50"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-ck-1-p52"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-ck-1-p57"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-ck-1-p60"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-ck-1-p65"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-ck-1-p67"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-ck-1-p67"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…",
+    "clause_id": "sec-ck-p3"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…",
+    "clause_id": "sec-ck-p4"
+   },
+   {
+    "label": "phone",
+    "redacted": "1552…",
+    "clause_id": "sec-ck-p6"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…",
+    "clause_id": "sec-cl-p1"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…",
+    "clause_id": "sec-cl-p1"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…",
+    "clause_id": "sec-cl-p9"
+   }
+  ],
+  "note": "Informational. Nothing here removed or altered any text; the developer view shows it as the review trail."
+ },
+ "validate": {
+  "clause_count": 292,
+  "by_kind": {
+   "body": 207,
+   "boilerplate": 13,
+   "definition": 8,
+   "heading": 55,
+   "table_row": 8,
+   "table_stub": 1
+  },
+  "body_clauses": 215,
+  "readable": true,
+  "splits": [],
+  "folds_and_merges": [
+   "folded 133 list items into their runs (max 600 chars)",
+   "merged 89 short clauses (< 120 chars) into the next"
+  ],
+  "oversized_ok": true,
+  "max_clause_chars": 921,
+  "boilerplate_first_15": [
+   {
+    "id": "sec-1-b1",
+    "text": "Clause A. This Policy and the Insurance Contract",
+    "reason": "toc_run"
+   },
+   {
+    "id": "sec-1-b2",
+    "text": "Clause B. Insured Events",
+    "reason": "toc_run"
+   },
+   {
+    "id": "sec-1-b3",
+    "text": "Clause C. Home Building Cover",
+    "reason": "toc_run"
+   },
+   {
+    "id": "sec-1-b4",
+    "text": "Clause D. Home Contents cover",
+    "reason": "toc_run"
+   },
+   {
+    "id": "sec-1-b5",
+    "text": "Clause E. Additional Covers",
+    "reason": "toc_run"
+   },
+   {
+    "id": "sec-1-b6",
+    "text": "Clause F. Exclusions",
+    "reason": "toc_run"
+   },
+   {
+    "id": "sec-1-b7",
+    "text": "Clause G. Conditions",
+    "reason": "toc_run"
+   },
+   {
+    "id": "sec-1-b8",
+    "text": "Clause H. Changes to covers",
+    "reason": "toc_run"
+   },
+   {
+    "id": "sec-1-b9",
+    "text": "Clause I. Waiver of Under Insurance",
+    "reason": "toc_run"
+   },
+   {
+    "id": "sec-1-b10",
+    "text": "Clause J. Other Details",
+    "reason": "toc_run"
+   },
+   {
+    "id": "sec-1-b11",
+    "text": "Clause K. Grievances",
+    "reason": "toc_run"
+   },
+   {
+    "id": "sec-1-b12",
+    "text": "Clause L. Information about us",
+    "reason": "toc_run"
+   },
+   {
+    "id": "sec-1-b13",
+    "text": "2",
+    "reason": "page_number"
+   }
+  ],
+  "expected_range": {
+   "reference": "150-250 clauses for a ~12,000-word wording",
+   "words": 11658,
+   "scaled_range": [
+    146,
+    243
+   ],
+   "in_range": true
+  },
+  "other_notes": [
+   "table of contents: 12 consecutive headings demoted to boilerplate",
+   "childless heading read as body: 'Civil Commotion;'",
+   "childless heading read as body: 'Insurrection, Revolution or Rebellion;'"
+  ],
+  "unknown_labels": {},
+  "warnings": []
+ },
+ "readable": true
+}

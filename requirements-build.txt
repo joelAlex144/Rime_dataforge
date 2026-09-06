@@ -1,0 +1,12 @@
+# Build-time only: scripts/ingest.py --source pdf (the Docling structure pass).
+#
+# Runs on the developer's machine. Never imported by the agent path, never
+# installed in CI, never needed at demo time: the judged flow reads committed
+# fixtures. Pinned so that re-running ingest on the same document reproduces the
+# committed fixture byte for byte.
+#
+#   pip install -r requirements.txt -r requirements-build.txt
+#   docling-tools models download        # one-time, ~500 MB, to ~/.cache/docling
+#
+# Python 3.9 is the floor this was resolved on; docling pulls torch (CPU is fine).
+docling==2.69.1

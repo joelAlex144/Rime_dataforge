@@ -1,0 +1,207 @@
+{
+ "doc_id": "ded4b9c3f93d44ec",
+ "name": "two_wheeler_loan_agreement",
+ "title": "fixture_two_wheeler_loan_agreement",
+ "source": {
+  "type": "docx",
+  "path_or_url": "fixture_two_wheeler_loan_agreement.docx",
+  "sha256": "ded4b9c3f93d44ec5dbfa31e08256f18a4122179f667090060b2f8699420ed51",
+  "institutional_contacts": [
+   {
+    "label": "email",
+    "redacted": "nama…"
+   },
+   {
+    "label": "email",
+    "redacted": "CCRC…"
+   },
+   {
+    "label": "email",
+    "redacted": "GRO@…"
+   },
+   {
+    "label": "email",
+    "redacted": "PNO@…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1600…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1444…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…"
+   }
+  ]
+ },
+ "stages": [
+  "extract",
+  "structure",
+  "segment",
+  "normalize",
+  "pii_scan",
+  "validate",
+  "write"
+ ],
+ "elapsed_ms": {
+  "extract": 30194.4,
+  "structure": 113.4,
+  "segment": 6.2,
+  "normalize": 179.9,
+  "pii_scan": 25.1,
+  "validate": 12.9,
+  "write": 101.5,
+  "total": 30633.7
+ },
+ "structure": {
+  "tool": "docling",
+  "version": "2.69.1",
+  "docling_json": "two_wheeler_loan_agreement.docling.json",
+  "pages": 0,
+  "labels": {
+   "list_item": 9,
+   "section_header": 60,
+   "table": 1,
+   "text": 388
+  },
+  "demoted": 0,
+  "placeholders_stripped": 0,
+  "splits": 30,
+  "tables": [
+   {
+    "key": "t1",
+    "rows": 8,
+    "csv": "two_wheeler_loan_agreement.t1.csv"
+   }
+  ]
+ },
+ "pii_scan": {
+  "personal": [],
+  "institutional": [
+   {
+    "label": "email",
+    "redacted": "nama…",
+    "clause_id": "sec-a21-21-17-p2"
+   },
+   {
+    "label": "email",
+    "redacted": "CCRC…",
+    "clause_id": "sec-a21-21-17-p5"
+   },
+   {
+    "label": "email",
+    "redacted": "GRO@…",
+    "clause_id": "sec-a21-21-17-p6"
+   },
+   {
+    "label": "email",
+    "redacted": "PNO@…",
+    "clause_id": "sec-a21-21-17-p8"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…",
+    "clause_id": "sec-a21-21-17-p2"
+   },
+   {
+    "label": "phone",
+    "redacted": "1600…",
+    "clause_id": "sec-a21-21-17-p8-ii"
+   },
+   {
+    "label": "phone",
+    "redacted": "1444…",
+    "clause_id": "sec-a21-21-17-p8-ii"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…",
+    "clause_id": "sec-a21-21-17-p2"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…",
+    "clause_id": "sec-a21-21-17-p2"
+   }
+  ],
+  "note": "Informational. Nothing here removed or altered any text; the developer view shows it as the review trail."
+ },
+ "validate": {
+  "clause_count": 374,
+  "by_kind": {
+   "body": 290,
+   "definition": 17,
+   "heading": 58,
+   "table_row": 8,
+   "table_stub": 1
+  },
+  "body_clauses": 307,
+  "readable": true,
+  "splits": [
+   "split sec-1-p16: 2057 chars -> 3 pieces (922, 595, 538)",
+   "split sec-a2-2-2-p3: 1033 chars -> 2 pieces (889, 143)",
+   "split sec-a3-3-1-a: 1105 chars -> 2 pieces (785, 319)",
+   "split sec-a3-3-1-c: 1490 chars -> 2 pieces (838, 651)",
+   "split sec-a3-3-2-p1: 2271 chars -> 3 pieces (928, 872, 469)",
+   "split sec-a3-3-2-p2: 1369 chars -> 3 pieces (188, 924, 255)",
+   "split sec-a5-p1-5-2: 1294 chars -> 2 pieces (751, 542)",
+   "split sec-a5-p1-5-4: 1239 chars -> 2 pieces (699, 539)",
+   "split sec-a5-p2-5-7: 1073 chars -> 2 pieces (901, 171)",
+   "split sec-a5-p2-5-8: 1216 chars -> 2 pieces (985, 230)",
+   "hard split sec-a5-p3-5-15: a 1005-char sentence with no sentence boundary, cut at a word boundary",
+   "split sec-a5-p3-5-15: 1220 chars -> 3 pieces (213, 885, 120)",
+   "split sec-a5-p4: 1049 chars -> 2 pieces (530, 518)",
+   "split sec-a5-p4-5-18: 1555 chars -> 2 pieces (862, 692)",
+   "split sec-a6-6-2: 1066 chars -> 2 pieces (536, 529)",
+   "hard split sec-a9-9-1-i: a 1062-char sentence with no sentence boundary, cut at a word boundary",
+   "split sec-a9-9-1-i: 1063 chars -> 2 pieces (785, 277)",
+   "split sec-a9-p2-vi: 1762 chars -> 2 pieces (878, 883)",
+   "hard split sec-a9-p2-vii: a 1002-char sentence with no sentence boundary, cut at a word boundary",
+   "split sec-a9-p2-vii: 1003 chars -> 2 pieces (900, 102)",
+   "split sec-a16-p1: 1304 chars -> 2 pieces (943, 360)",
+   "split sec-a17-p1: 1653 chars -> 2 pieces (841, 811)",
+   "hard split sec-a19-19-1: a 1776-char sentence with no sentence boundary, cut at a word boundary",
+   "split sec-a19-19-1: 1777 chars -> 2 pieces (928, 848)",
+   "hard split sec-a19-19-1-c-iv: a 1156-char sentence with no sentence boundary, cut at a word boundary",
+   "split sec-a19-19-1-c-iv: 1589 chars -> 3 pieces (960, 196, 431)",
+   "split sec-a19-19-1-c-v: 1866 chars -> 2 pieces (931, 934)",
+   "split sec-a21-21-2-p1: 1082 chars -> 2 pieces (812, 269)",
+   "split sec-a21-21-3-p1: 1008 chars -> 2 pieces (806, 201)",
+   "split sec-a21-52-p5-b: 1016 chars -> 2 pieces (833, 182)"
+  ],
+  "folds_and_merges": [
+   "folded 58 list items into their runs (max 600 chars)",
+   "merged 62 short clauses (< 120 chars) into the next"
+  ],
+  "oversized_ok": true,
+  "max_clause_chars": 996,
+  "boilerplate_first_15": [],
+  "expected_range": {
+   "reference": "150-250 clauses for a ~12,000-word wording",
+   "words": 21626,
+   "scaled_range": [
+    270,
+    451
+   ],
+   "in_range": true
+  },
+  "other_notes": [
+   "childless heading read as body: 'DECLARATION IN CASE THE BORROWER/CO-'",
+   "childless heading read as body: 'BORROWER/GUARANTORS IS ILLITERATE OR EXECUTES'"
+  ],
+  "unknown_labels": {},
+  "warnings": []
+ },
+ "readable": true
+}

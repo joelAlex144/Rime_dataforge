@@ -118,6 +118,14 @@ scheduler logic.
 
 ## Must not change
 
+- **`unit_skipped` is a ledger value now.** `EventType.UNIT_SKIPPED`
+  (`"unit_skipped"`) was added to `ledger.py` and to the event list in
+  `delivery_layer/events.py`. The synthesis side's structure pass marks page
+  furniture and table rows as `kind: boilerplate` / `spoken_on_request`; the
+  reader writes one `unit_skipped` per such clause at session start with
+  `reason: boilerplate | table_on_request`. It is a fourth terminal state next
+  to heard / truncated / never_played, so a session record accounts for every
+  clause in the fixture. Your resolver can ignore it; nothing else changed.
 - **Heard is only ever an ack.** `frames_played` / `audible_stop` from the
   worklet's rendered-sample counter. Nothing may mark a unit heard because
   synthesis finished.

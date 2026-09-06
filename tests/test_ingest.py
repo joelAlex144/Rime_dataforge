@@ -212,7 +212,7 @@ class TestMergeAndSplit(unittest.TestCase):
         for r in raws:
             r.id_parts = ["1", "p1"]                 # force a collision
         recs = ingest.to_records(raws, opts)
-        self.assertEqual([r["id"] for r in recs], ["sec-1-p1", "sec-1-p1-2"])
+        self.assertEqual([r["id"] for r in recs], ["sec-1-p1", "sec-1-p1-dup2"])
 
 
 class TestSchemaAndValidator(unittest.TestCase):
