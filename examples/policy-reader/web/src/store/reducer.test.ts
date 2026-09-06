@@ -3,6 +3,7 @@ import {
   Action,
   State,
   buildInterrupt,
+  buildOpen,
   buildPause,
   initialState,
   reducer,
@@ -301,14 +302,10 @@ describe('resumed clause', () => {
   })
 })
 
-describe('upload gate', () => {
-  it('hello carries upload_enabled', () => {
-    expect(run([{ type: 'hello', upload_enabled: true, documents: [] }]).uploadEnabled).toBe(true)
-    expect(run([{ type: 'hello', documents: [] }]).uploadEnabled).toBe(false)
-  })
-  it('status carries it too, for /dev', () => {
-    const s = reducer(initialState, { type: 'status', value: { upload_enabled: true } as any })
-    expect(s.uploadEnabled).toBe(true)
+describe('library', () => {
+  it('library_changed replaces the document list', () => {
+    const s = run([{ type: 'hello', documents: [{ name: 'a' }] }, { type: 'library_changed', documents: [{ name: 'a' }, { name: 'b', reviewed: false }] }])
+    expect(s.documents.map((d) => d.name)).toEqual(['a', 'b'])
   })
 })
 
@@ -321,5 +318,15 @@ describe('audio sink', () => {
     expect(s.audioSink).toBe(true)
     s = run([{ type: 'sink', you: false, any: false }], s)
     expect(s.anySink).toBe(false)
+  })
+})
+
+describe('open ordering', () => {
+  it('open while sounding sends the flush ack first', () => {
+    expect(buildOpen('carers', 'sec-1-i#t3', 1234, true).map((m) => m.type)).toEqual(['flush_ack', 'open'])
+    expect(buildOpen('carers', 'sec-1-i#t3', 1234, true)[0].rendered_ms).toBe(1234)
+  })
+  it('open while silent is just open', () => {
+    expect(buildOpen('carers', null, 0, false)).toEqual([{ type: 'open', name: 'carers' }])
   })
 })

@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 import { Download, Hand, Pause, Play } from 'lucide-react'
 import { useSession } from '../store/session'
 import type { Cell, EventRecord } from '../store/reducer'
-import UploadDocument, { openUnreviewed, type IngestResult } from '../components/UploadDocument'
+import UploadDocument from '../components/UploadDocument'
 
 function cls(c?: Cell) {
   return `v s-${c?.state ?? 'off'}`
@@ -25,13 +25,10 @@ export default function Dev() {
   const [follow, setFollow] = useState(true)
   const [traces, setTraces] = useState<{ name: string; bytes: number }[]>([])
   const [trace, setTrace] = useState('')
-  // Documents this session ingested, with the override trail, for the list.
-  const [ingested, setIngested] = useState<IngestResult[]>([])
   const [q, setQ] = useState('')
   const listRef = useRef<HTMLDivElement>(null)
 
   const dev = !!state.status.dev
-  const uploadEnabled = state.status.upload_enabled ?? state.uploadEnabled
 
   useEffect(() => {
     fetch('/api/traces')
@@ -190,37 +187,27 @@ export default function Dev() {
       <div className="cols">
         <section className="panel">
           <h2>Ingestion</h2>
-          {!uploadEnabled ? (
-            <p className="notice">
-              Upload is disabled (started with --no-upload). Add fixtures with scripts/ingest.py.
-            </p>
-          ) : (
-            <UploadDocument
-              session={s}
-              allowOverride
-              onSuccess={(d) => {
-                setIngested((xs) => [d, ...xs.filter((x) => x.name !== d.name)])
-                // Open it now, session-only, exactly as the listener does. Play
-                // otherwise read whatever document was already open.
-                openUnreviewed(d.name)
-              }}
-            />
-          )}
-          {ingested.length > 0 && (
-            <div className="ingested" style={{ marginTop: 10 }}>
-              <div className="s-off mono">Ingested this session (fixtures/unreviewed/)</div>
-              {ingested.map((d) => (
-                <div className="stage" key={d.name}>
-                  <span className="st mono">{d.name}{state.current === d.name ? ' (open)' : ''}</span>
-                  <span className="s-off">{d.clause_count} clauses</span>
-                  <span className={d.override_reason ? 's-warn' : 's-off'}>
-                    {d.override_reason ? `override: ${d.override_reason}` : ''}
-                  </span>
-                  <button onClick={() => openUnreviewed(d.name)}>Open (unreviewed)</button>
-                </div>
-              ))}
-            </div>
-          )}
+          <UploadDocument face="developer" />
+          <div className="ingested" style={{ marginTop: 10 }}>
+            <div className="s-off mono">Library (index.json)</div>
+            {state.documents.map((d) => (
+              <div className="stage" key={d.name}>
+                <span className="st mono">{d.name}{state.current === d.name ? ' (open)' : ''}</span>
+                <span className="s-off">{d.section_count} sections</span>
+                <span className={d.reviewed ? 's-ok' : 's-warn'}>{d.reviewed ? 'reviewed' : 'unreviewed'}</span>
+                {d.readable === false && <span className="s-warn">no readable text</span>}
+                {!d.reviewed && d.doc_id && (
+                  <button
+                    aria-label={`Accept ${d.name}`}
+                    onClick={() => fetch(`/documents/${encodeURIComponent(d.doc_id!)}/accept`, { method: 'POST' })}
+                  >
+                    Accept
+                  </button>
+                )}
+                <button onClick={() => s.open(d.name)}>Open</button>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section className="panel">

@@ -1,160 +1,154 @@
 import { act, fireEvent, render, screen, within } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import UploadDocument from './UploadDocument'
-import { initialState } from '../store/reducer'
-import type { Session } from '../store/session'
+import UploadDocument, { parseSse } from './UploadDocument'
 
-/** Enough of XMLHttpRequest to drive upload progress and the response. */
+/** XMLHttpRequest that streams a server-sent-event body the way the server does. */
 class FakeXHR {
   static last: FakeXHR | null = null
-  static all: FakeXHR[] = []
   upload: { onprogress: ((e: any) => void) | null } = { onprogress: null }
+  onprogress: (() => void) | null = null
   onload: (() => void) | null = null
   onerror: (() => void) | null = null
   status = 0
   responseText = ''
-  headers: Record<string, string> = {}
   body: any = null
   open() {}
-  setRequestHeader(k: string, v: string) {
-    this.headers[k] = v
-  }
+  setRequestHeader() {}
   send(body: any) {
     this.body = body
     FakeXHR.last = this
-    FakeXHR.all.push(this)
   }
-  progress(loaded: number, total: number) {
+  uploaded(loaded: number, total: number) {
     this.upload.onprogress?.({ lengthComputable: true, loaded, total })
   }
-  respond(status: number, text: string) {
+  frame(ev: any) {
+    this.status = 200
+    this.responseText += `data: ${JSON.stringify(ev)}\n\n`
+    this.onprogress?.()
+  }
+  finish() {
+    this.onload?.()
+  }
+  fail(status: number, text: string) {
     this.status = status
     this.responseText = text
     this.onload?.()
   }
 }
 
-function session(over: Partial<typeof initialState> = {}): Session {
-  return {
-    state: { ...initialState, ...over },
-    dispatch: vi.fn(),
-    send: vi.fn(),
-    interrupt: vi.fn(),
-    play: vi.fn(),
-    pause: vi.fn(),
-    ask: vi.fn(),
-    resume: vi.fn(),
-    open: vi.fn(),
-    jump: vi.fn(),
-    player: {} as any,
-  }
+const ENTRY = { doc_id: 'abc123def4567890', name: 'abc123def4567890', title: 'wording', reviewed: false, readable: true, clause_count: 180 }
+const REPORT = {
+  doc_id: ENTRY.doc_id, name: ENTRY.name, title: 'wording', elapsed_ms: { total: 3100 },
+  pii_scan: { personal: [{ label: 'email', redacted: 'hema…', clause_id: 'sec-13-p2' }],
+              institutional: [{ label: 'phone', redacted: '1800…', clause_id: 'sec-13-p1' }], note: 'Informational.' },
+  validate: { clause_count: 180, by_kind: { body: 141, heading: 38, table_stub: 1 }, body_clauses: 141, readable: true,
+              splits: ['split sec-2-p2: 618 chars -> 2 pieces (431, 186)'], folds_and_merges: ['folded 40 list items into their runs (max 600 chars)'],
+              oversized_ok: true, max_clause_chars: 912,
+              boilerplate_first_15: [{ id: 'sec-1-b1', text: 'Page 1 of 9', reason: 'page_number' }],
+              expected_range: { reference: '150-250 clauses for a ~12,000-word wording', words: 4300, scaled_range: [54, 90], in_range: true },
+              other_notes: [], warnings: [] },
 }
-
-const file = () => new File([new Uint8Array(1024)], 'policy.txt', { type: 'text/plain' })
+const file = () => new File([new Uint8Array(2048)], 'wording.pdf', { type: 'application/pdf' })
 
 beforeEach(() => {
   FakeXHR.last = null
-  FakeXHR.all = []
   vi.stubGlobal('XMLHttpRequest', FakeXHR as any)
 })
 afterEach(() => vi.unstubAllGlobals())
 
-const REFUSAL = {
-  ok: false, stage: 'pii scan', code: 2, overridable: true,
-  detail: "Refused: looks like someone's personal data.",
-  personal_hits: [{ label: 'email', redacted: 'rame…' }, { label: 'phone', redacted: '9876…' }],
-  institutional_hits: [{ label: 'email', redacted: 'grie…' }, { label: 'phone', redacted: '1800…' }],
+async function runToDone(xhr: FakeXHR) {
+  await act(async () => xhr.uploaded(2048, 2048))
+  for (const st of ['extract', 'structure', 'segment', 'normalize', 'pii_scan', 'validate', 'write']) {
+    await act(async () => xhr.frame({ stage: st, status: 'ok', elapsed_ms: 10, detail: `${st} detail` }))
+  }
+  await act(async () => {
+    xhr.frame({ stage: 'done', status: 'ok', elapsed_ms: 3100, entry: ENTRY })
+    xhr.finish()
+  })
 }
 
-describe('UploadDocument', () => {
-  it('shows a real progress bar with bytes and percent, and the stage list pending at once', async () => {
-    render(<UploadDocument session={session()} allowOverride />)
+describe('parseSse', () => {
+  it('yields complete frames and reports how far it consumed', () => {
+    const text = 'data: {"stage":"extract","status":"ok","elapsed_ms":1}\n\ndata: {"stage":"str'
+    const r = parseSse(text, 0)
+    expect(r.events.map((e) => e.stage)).toEqual(['extract'])
+    expect(text.slice(r.consumed)).toBe('data: {"stage":"str')
+  })
+})
+
+describe('listener face', () => {
+  it('shows only a progress bar and elapsed time, then the title; never the report', async () => {
+    const onDone = vi.fn()
+    render(<UploadDocument face="listener" onDone={onDone} />)
     fireEvent.change(screen.getByLabelText('Document file'), { target: { files: [file()] } })
-    expect(FakeXHR.last).not.toBeNull()
-    const bar = screen.getByRole('progressbar')
-    expect(bar).toBeInTheDocument()
-    // Every stage is visible and pending before any server event arrives.
-    const pending = screen.getAllByText('pending')
-    expect(pending.length).toBe(7)
-    await act(async () => FakeXHR.last!.progress(512, 1024))
-    expect(screen.getByText(/512 B of 1 KB · 50%/)).toBeInTheDocument()
-    expect(bar).toHaveAttribute('aria-valuenow', '50')
+    const xhr = FakeXHR.last!
+    expect(screen.getByRole('progressbar')).toBeInTheDocument()
+    await runToDone(xhr)
+    expect(screen.getByText(/wording/)).toBeInTheDocument()
+    expect(onDone).toHaveBeenCalledWith(expect.objectContaining({ name: ENTRY.name }))
+    // No stage names, no counts, no scan findings, no accept step.
+    for (const s of ['extract', 'pii_scan', 'validate', 'Accept', '180 clauses', 'hema', 'Page 1 of 9']) {
+      expect(screen.queryByText(new RegExp(s))).toBeNull()
+    }
+    expect(screen.queryByLabelText('Document URL')).toBeNull()
   })
 
-  it('surfaces a non-JSON error verbatim', async () => {
-    render(<UploadDocument session={session()} allowOverride />)
+  it('says when no readable text was found', async () => {
+    render(<UploadDocument face="listener" />)
     fireEvent.change(screen.getByLabelText('Document file'), { target: { files: [file()] } })
-    await act(async () => FakeXHR.last!.respond(502, '<html>bad gateway from the proxy</html>'))
-    expect(screen.getByText(/<html>bad gateway from the proxy<\/html>/)).toBeInTheDocument()
-    expect(screen.getByText(/http 502/)).toBeInTheDocument()
+    const xhr = FakeXHR.last!
+    await act(async () => {
+      xhr.frame({ stage: 'done', status: 'ok', elapsed_ms: 5, entry: { ...ENTRY, readable: false } })
+      xhr.finish()
+    })
+    expect(screen.getByText(/No readable text found/)).toBeInTheDocument()
   })
 
-  it('renders a PII refusal as two labelled lists', async () => {
-    render(<UploadDocument session={session()} allowOverride />)
+  it('surfaces the two HTTP errors verbatim', async () => {
+    render(<UploadDocument face="listener" />)
     fireEvent.change(screen.getByLabelText('Document file'), { target: { files: [file()] } })
-    await act(async () => FakeXHR.last!.respond(422, JSON.stringify(REFUSAL)))
-    const inst = screen.getByLabelText('Institutional contact details')
-    const pers = screen.getByLabelText('Looks like personal data')
-    expect(within(inst).getAllByRole('listitem').map((li) => li.textContent)).toEqual([
-      'email: grie…', 'phone: 1800…',
-    ])
-    expect(within(pers).getAllByRole('listitem').map((li) => li.textContent)).toEqual([
-      'email: rame…', 'phone: 9876…',
-    ])
-    expect(screen.getByText(/Institutional contact details — allowed/)).toBeInTheDocument()
+    await act(async () => FakeXHR.last!.fail(415, JSON.stringify({ error: "unsupported type '.exe'" })))
+    expect(screen.getByText(/unsupported type/)).toBeInTheDocument()
+  })
+})
+
+describe('developer face', () => {
+  it('shows per-stage status, then the full report and an Accept button', async () => {
+    vi.stubGlobal('fetch', vi.fn(async (u: any, init?: any) => {
+      const url = String(u)
+      if (url.endsWith('/report')) return { ok: true, json: async () => REPORT } as any
+      if (url.endsWith('/accept')) return { ok: true, json: async () => ({ ...ENTRY, reviewed: true }) } as any
+      return { ok: false, json: async () => ({}) } as any
+    }))
+    const onAccepted = vi.fn()
+    render(<UploadDocument face="developer" onAccepted={onAccepted} />)
+    fireEvent.change(screen.getByLabelText('Document file'), { target: { files: [file()] } })
+    const xhr = FakeXHR.last!
+    expect(screen.getAllByText('pending').length).toBe(7)
+    await act(async () => xhr.frame({ stage: 'extract', status: 'ok', elapsed_ms: 12, detail: 'pdf 2048 bytes' }))
+    expect(screen.getByText(/12 ms · pdf 2048 bytes/)).toBeInTheDocument()
+    await runToDone(xhr)
+    expect(await screen.findByText(/pii_scan \(informational\)/)).toBeInTheDocument()
+    expect(within(screen.getByLabelText('Personal-looking identifiers')).getByText(/hema… \[sec-13-p2\]/)).toBeInTheDocument()
+    expect(within(screen.getByLabelText('Institutional contact details')).getByText(/1800… \[sec-13-p1\]/)).toBeInTheDocument()
+    expect(screen.getByText(/180 clauses · body 141, heading 38, table_stub 1/)).toBeInTheDocument()
+    expect(screen.getByText(/oversized check: ok/)).toBeInTheDocument()
+    expect(within(screen.getByLabelText('Boilerplate')).getByText(/Page 1 of 9/)).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Accept' }))
+    await act(async () => {})
+    expect(onAccepted).toHaveBeenCalledWith(expect.objectContaining({ reviewed: true }))
+    expect(screen.queryByRole('button', { name: 'Accept' })).toBeNull()
+    expect(screen.getByText(/· reviewed/)).toBeInTheDocument()
   })
 
-  it('retry with override resubmits the SAME file with the reason', async () => {
-    render(<UploadDocument session={session()} allowOverride />)
-    const f = file()
-    fireEvent.change(screen.getByLabelText('Document file'), { target: { files: [f] } })
-    const first = FakeXHR.last!
-    expect((first.body as FormData).get('file')).toBe(f)
-    await act(async () => first.respond(422, JSON.stringify(REFUSAL)))
-    const retry = screen.getByText('Retry with override') as HTMLButtonElement
-    expect(retry.disabled).toBe(true)
-    fireEvent.change(screen.getByLabelText('Override reason'), { target: { value: 'sample person is fictional' } })
-    expect(retry.disabled).toBe(false)
-    fireEvent.click(retry)
-    const second = FakeXHR.last!
-    expect(second).not.toBe(first)
-    const fd = second.body as FormData
-    expect(fd.get('file')).toBe(f)
-    expect(fd.get('allow_pii_reason')).toBe('sample person is fictional')
-  })
-
-  it('without override, a refusal explains and points at the developer tools', async () => {
-    render(<UploadDocument session={session()} allowOverride={false} />)
+  it('an existing document comes back as a single done frame', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => ({ ok: true, json: async () => REPORT }) as any))
+    render(<UploadDocument face="developer" />)
     fireEvent.change(screen.getByLabelText('Document file'), { target: { files: [file()] } })
-    await act(async () => FakeXHR.last!.respond(422, JSON.stringify(REFUSAL)))
-    expect(screen.queryByText('Retry with override')).toBeNull()
-    expect(screen.queryByLabelText('Override reason')).toBeNull()
-    expect(screen.getByText(/developer tools/)).toBeInTheDocument()
-  })
-
-  it('a name beside an account number is never overridable', async () => {
-    render(<UploadDocument session={session()} allowOverride />)
-    fireEvent.change(screen.getByLabelText('Document file'), { target: { files: [file()] } })
-    await act(async () =>
-      FakeXHR.last!.respond(422, JSON.stringify({ ...REFUSAL, overridable: false,
-        personal_hits: [{ label: 'name_with_account_number', redacted: 'Jane…' }] })))
-    expect(screen.queryByText('Retry with override')).toBeNull()
-    expect(screen.getByText(/cannot be overridden/)).toBeInTheDocument()
-  })
-
-  it('success shows the override reason in the result', async () => {
-    const onSuccess = vi.fn()
-    render(<UploadDocument session={session()} allowOverride onSuccess={onSuccess} />)
-    fireEvent.change(screen.getByLabelText('Document file'), { target: { files: [file()] } })
-    await act(async () =>
-      FakeXHR.last!.respond(200, JSON.stringify({
-        ok: true, name: 'policy', clause_count: 25, path: 'fixtures/unreviewed/policy.json',
-        report: [], warnings: [], preview: [], override_reason: 'sample person is fictional',
-        institutional_hits: [{ label: 'email', redacted: 'grie…' }],
-        note: 'Written to fixtures/unreviewed/.',
-      })))
-    expect(screen.getByText(/override: sample person is fictional/)).toBeInTheDocument()
-    expect(screen.getByText(/Kept 1 institutional contact detail in the review trail/)).toBeInTheDocument()
-    expect(onSuccess).toHaveBeenCalledWith(expect.objectContaining({ name: 'policy' }))
+    await act(async () => {
+      FakeXHR.last!.frame({ stage: 'done', status: 'ok', elapsed_ms: 0, existing: true, entry: ENTRY })
+      FakeXHR.last!.finish()
+    })
+    expect(await screen.findByText(/doc_id abc123def4567890/)).toBeInTheDocument()
   })
 })

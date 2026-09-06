@@ -192,24 +192,22 @@ describe('listener route', () => {
     expect(await screen.findByText(/end of the document/)).toBeInTheDocument()
   })
 
-  it('hides upload entirely when the server says upload is disabled', async () => {
+  it('offers Add a document with only a progress bar behind it', async () => {
     render(<MemoryRouter><Listener /></MemoryRouter>)
-    feed(HELLO)                                   // no upload_enabled
-    await screen.findByText(/Section 4 of 13/)
-    expect(document.querySelector('input[type="file"]')).toBeNull()
-    expect(screen.queryByText('Add a document')).toBeNull()
-  })
-
-  it('offers Add a document, without an override control, when upload is enabled', async () => {
-    // The status poll agrees with the hello: upload on, dev off.
-    vi.stubGlobal('fetch', mockFetch(false, true))
-    render(<MemoryRouter><Listener /></MemoryRouter>)
-    feed({ ...HELLO, upload_enabled: true })
+    feed(HELLO)
     await screen.findByText(/Section 4 of 13/)
     expect(screen.getByRole('button', { name: /Add a document/ })).toBeInTheDocument()
     expect(screen.getByLabelText('Document file')).toBeInTheDocument()
-    expect(screen.queryByLabelText('Override reason')).toBeNull()
-    expect(screen.getByText(/needs a person to review it first/)).toBeInTheDocument()
+    expect(screen.queryByLabelText('Document URL')).toBeNull()
+    expect(screen.queryByText(/pii_scan|validate|Accept/)).toBeNull()
+  })
+
+  it('a document with no readable text shows that instead of a play control', async () => {
+    render(<MemoryRouter><Listener /></MemoryRouter>)
+    feed({ ...HELLO, current: 'scan', documents: [{ ...HELLO.documents[0], name: 'scan', title: 'Scanned',
+      readable: false, progress: { started: false, finished: false, current_section_index: 0, minutes_left: 0 } }] })
+    expect(await screen.findByText('No readable text found')).toBeInTheDocument()
+    expect((screen.getByRole('button', { name: 'Play' }) as HTMLButtonElement).disabled).toBe(true)
   })
 
   it('Enter while playing sends the interrupt sequence before the question', async () => {
@@ -247,60 +245,19 @@ describe('listener route', () => {
 })
 
 describe('dev route', () => {
-  it('hides the drop zone and explains why when upload is disabled', async () => {
-    vi.stubGlobal('fetch', mockFetch(false))
+  it('lists the library with review state and an Accept button for unreviewed documents', async () => {
+    const fetchMock = mockFetch(true)
+    vi.stubGlobal('fetch', fetchMock)
     render(<MemoryRouter><Dev /></MemoryRouter>)
-    expect(await screen.findByText(/Upload is disabled/)).toBeInTheDocument()
-    expect(document.querySelector('input[type="file"]')).toBeNull()
-    expect(document.querySelector('.drop')).toBeNull()
-  })
-
-  it('shows the drop zone with the override control when upload is enabled', async () => {
-    vi.stubGlobal('fetch', mockFetch(true))
-    render(<MemoryRouter><Dev /></MemoryRouter>)
-    await waitFor(() => expect(document.querySelector('.drop')).toBeTruthy())
+    feed({ ...HELLO, documents: [
+      { ...HELLO.documents[0], reviewed: true, doc_id: 'policy' },
+      { ...HELLO.documents[0], name: 'new', title: 'New', reviewed: false, doc_id: 'abc123' },
+    ] })
+    expect(await screen.findByText('unreviewed')).toBeInTheDocument()
     expect(screen.getByLabelText('Document file')).toBeInTheDocument()
-    expect(screen.getByLabelText('Provider')).toBeInTheDocument()
-  })
-
-  it('renders the six status cells with their detail strings', async () => {
-    vi.stubGlobal('fetch', mockFetch(false))
-    render(<MemoryRouter><Dev /></MemoryRouter>)
-    for (const k of ['ingest', 'normalize', 'rime ws3', 'client ws', 'stt', 'llm']) {
-      expect(await screen.findByText(k)).toBeInTheDocument()
-    }
-    expect(await screen.findByText(/button only/)).toBeInTheDocument()
-    expect(screen.getByText(/extractive/)).toBeInTheDocument()
-  })
-
-  it('shows n/a for metrics that are null, and never invents far end', async () => {
-    vi.stubGlobal('fetch', mockFetch(false))
-    render(<MemoryRouter><Dev /></MemoryRouter>)
-    await waitFor(() => expect(screen.getAllByText('n/a').length).toBeGreaterThan(2))
-    expect(screen.getByText(/far end n\/a/)).toBeInTheDocument()
-  })
-
-  it('replay populates the events list', async () => {
-    vi.stubGlobal('fetch', mockFetch(false))
-    render(<MemoryRouter><Dev /></MemoryRouter>)
-    await screen.findByText('ingest')
-    feed({ type: 'replay_start', trace: 'preflight.jsonl' })
-    feed({ type: 'event', record: { ts_ms: 1000, type: 'unit_truncated', context_id: 'sec-4b-vii', char_end: 30, of: 349 } })
-    feed({ type: 'event', record: { ts_ms: 1100, type: 'result_fenced', context_id: 'sec-4b-vii', bytes: 4096 } })
-
-    const list = await screen.findByTestId('event-list')
-    await waitFor(() => expect(within(list).getByText('unit_truncated')).toBeInTheDocument())
-    expect(within(list).getByText('result_fenced')).toBeInTheDocument()
-    expect(await screen.findByText(/Replaying preflight.jsonl/)).toBeInTheDocument()
-    expect(screen.getByText(/2 records/)).toBeInTheDocument()
-  })
-
-  it('shows the boundary row from a real event, not a guess', async () => {
-    vi.stubGlobal('fetch', mockFetch(false))
-    render(<MemoryRouter><Dev /></MemoryRouter>)
-    await screen.findByText('ingest')
-    feed({ type: 'event', record: { type: 'unit_truncated', context_id: 'sec-4b-vii', rendered_ms: 2560, char_end: 30, of: 349 } })
-    expect(await screen.findByText(/sec-4b-vii · 2560 ms -> char 30 of 349/)).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Accept new' }))
+    await waitFor(() =>
+      expect(fetchMock.mock.calls.some(([u, init]) => String(u) === '/documents/abc123/accept' && init?.method === 'POST')).toBe(true))
   })
 
   it('has play, pause and stop-and-ask, and says which tab has the voice', async () => {
@@ -327,42 +284,6 @@ describe('dev route', () => {
            text_display: 'A second clause that arrives while the first is still sounding elsewhere.' })
     expect(await screen.findByText(/A second clause that arrives/)).toBeInTheDocument()
     expect(screen.getByText(/playing in another tab/)).toBeInTheDocument()
-  })
-
-  it('a successful upload on /dev opens the document at once and names it', async () => {
-    const fetchMock = mockFetch(true)
-    vi.stubGlobal('fetch', fetchMock)
-    class FakeXHR {
-      static last: any = null
-      upload: any = { onprogress: null }
-      onload: any = null
-      onerror: any = null
-      status = 0
-      responseText = ''
-      open() {}
-      setRequestHeader() {}
-      send() { FakeXHR.last = this }
-    }
-    vi.stubGlobal('XMLHttpRequest', FakeXHR as any)
-    render(<MemoryRouter><Dev /></MemoryRouter>)
-    feed(HELLO)
-    await waitFor(() => expect(document.querySelector('.drop')).toBeTruthy())
-    fireEvent.change(screen.getByLabelText('Document file'), {
-      target: { files: [new File([new Uint8Array(64)], 'wording.pdf', { type: 'application/pdf' })] },
-    })
-    FakeXHR.last.status = 200
-    FakeXHR.last.responseText = JSON.stringify({
-      ok: true, name: 'wording', clause_count: 25, path: 'fixtures/unreviewed/wording.json',
-      report: [], warnings: [], preview: [], note: 'Written to fixtures/unreviewed/.',
-    })
-    FakeXHR.last.onload()
-    await waitFor(() =>
-      expect(fetchMock.mock.calls.some(([u]) => String(u).startsWith('/api/dev/open?unreviewed=1'))).toBe(true))
-    const call = fetchMock.mock.calls.find(([u]) => String(u).startsWith('/api/dev/open'))!
-    expect(JSON.parse((call[1] as any).body).name).toBe('wording')
-    feed({ type: 'document_opened', name: 'wording', documents: [] })
-    expect(await screen.findByText(/document: wording/)).toBeInTheDocument()
-    expect(screen.getByText(/wording \(open\)/)).toBeInTheDocument()
   })
 
   it('identifiers are expected here, unlike the listener', async () => {

@@ -26,7 +26,6 @@ from aiohttp.test_utils import TestClient, TestServer               # noqa: E402
 import server as srv                                                # noqa: E402
 
 TRACES = ROOT / "traces"
-UNREVIEWED = ROOT / "examples" / "policy-reader" / "fixtures" / "unreviewed"
 INDEX = ROOT / "examples" / "policy-reader" / "fixtures" / "index.json"
 
 SAMPLE_TRACE = "\n".join(json.dumps(r) for r in [
@@ -77,9 +76,9 @@ class TestStatusAndMetrics(ServerCase):
         self.assertEqual(d["llm"], {"state": "off", "detail": "extractive"})
         self.assertEqual(d["stt"], {"state": "warn", "detail": "button only"})
 
-    async def test_ingest_cell_reports_upload_on_by_default_and_status_carries_the_gate(self):
+    async def test_ingest_cell_reports_the_structure_pass_and_upload_is_always_on(self):
         d = await (await self.client.get("/api/status")).json()
-        self.assertEqual(d["ingest"]["state"], "ok")
+        self.assertIn(d["ingest"]["state"], ("ok", "warn"))
         self.assertTrue(d["upload_enabled"])
         self.assertFalse(d["dev"], "upload on does not mean dev on")
 
@@ -131,45 +130,13 @@ class TestDevDisabled(ServerCase):
         self.assertFalse(hello["dev"])
 
 
-class TestUploadDisabled(ServerCase):
-    DEV = False
-    UPLOAD = False
-
-    async def test_ingest_is_404_with_no_upload(self):
-        r = await self.client.post("/api/dev/ingest", json={"url": "https://example.com"})
-        self.assertEqual(r.status, 404)
-
-    async def test_open_unreviewed_is_404_with_no_upload(self):
-        r = await self.client.post("/api/dev/open?unreviewed=1", json={"name": "anything"})
-        self.assertEqual(r.status, 404)
-
-    async def test_status_and_hello_say_so(self):
-        d = await (await self.client.get("/api/status")).json()
-        self.assertFalse(d["upload_enabled"])
-        self.assertEqual(d["ingest"]["state"], "off")
-        ws = await self.client.ws_connect("/ws/audio")
-        try:
-            self.assertFalse((await ws.receive_json(timeout=5))["upload_enabled"])
-        finally:
-            await ws.close()
-
-    async def test_dev_still_implies_upload(self):
-        app = srv.build_app(dev=True, allow_upload=False)
-        try:
-            self.assertTrue(app["session"].allow_upload)
-        finally:
-            p = getattr(app["session"].events, "path", None)
-            if p and Path(p).exists():
-                Path(p).unlink()
-
-
 class TestDevEnabled(ServerCase):
     DEV = True
 
     async def test_status_reports_dev(self):
         d = await (await self.client.get("/api/status")).json()
         self.assertTrue(d["dev"])
-        self.assertEqual(d["ingest"]["state"], "ok")
+        self.assertIn(d["ingest"]["state"], ("ok", "warn"))
 
     async def test_provider_swap_to_fake_is_allowed(self):
         r = await self.client.post("/api/dev/provider", json={"name": "fake"})
@@ -180,138 +147,137 @@ class TestDevEnabled(ServerCase):
         r = await self.client.post("/api/dev/provider", json={"name": "elevenlabs"})
         self.assertEqual(r.status, 400)
 
-    async def test_ingest_writes_only_under_unreviewed_and_leaves_index_alone(self):
-        index_before = INDEX.read_text(encoding="utf-8")
-        before = set(p.name for p in UNREVIEWED.glob("*.json")) if UNREVIEWED.exists() else set()
 
-        sample = ROOT / "traces" / "_ingest_sample.md"
-        body = "\n\n".join(
-            f"# Section {i}\n\nThis paragraph of the sample document is comfortably longer "
-            f"than the minimum clause length so that it survives the merge rule intact, "
-            f"number {i}." for i in range(1, 26))
-        sample.write_text(body, encoding="utf-8")
-        self.addCleanup(lambda: sample.unlink(missing_ok=True))
+class TempLibraryCase(unittest.IsolatedAsyncioTestCase):
+    """A server over an empty temporary library, so uploads never touch the
+    real fixtures/ or its index.json."""
+    async def asyncSetUp(self):
+        import tempfile
+        self.tmp = tempfile.TemporaryDirectory()
+        self.index = Path(self.tmp.name) / "index.json"
+        self.index.write_text('{"documents": []}', encoding="utf-8")
+        self.app = srv.build_app(dev=False, index_path=self.index)
+        self.session = self.app["session"]
+        self.client = TestClient(TestServer(self.app))
+        await self.client.start_server()
 
-        r = await self.client.post("/api/dev/ingest", json={"url": str(sample)})
-        # a local path is not a url; the endpoint takes it as a source string
-        payload = await r.json()
+    async def asyncTearDown(self):
+        await self.client.close()
+        p = getattr(self.session.events, "path", None)
+        if p and Path(p).exists():
+            Path(p).unlink()
+        self.tmp.cleanup()
 
-        if r.status == 200:
-            out = ROOT / payload["path"]
-            self.addCleanup(lambda: out.unlink(missing_ok=True))
-            self.assertIn("fixtures/unreviewed/", payload["path"].replace(os.sep, "/"))
-            self.assertTrue(out.exists())
-            self.assertLessEqual(len(payload["clauses"]), 5)
-            self.assertIn("unreviewed", payload["note"])
-        # whatever happened, the registry must be untouched
-        self.assertEqual(INDEX.read_text(encoding="utf-8"), index_before,
-                         "dev ingest must never write to index.json")
-        after = set(p.name for p in UNREVIEWED.glob("*.json")) if UNREVIEWED.exists() else set()
-        self.assertTrue(after >= before)
+    @staticmethod
+    def frames(text: str) -> list:
+        out = []
+        for block in text.split("\n\n"):
+            for line in block.splitlines():
+                if line.startswith("data:"):
+                    out.append(json.loads(line[5:].strip()))
+        return out
 
-    async def test_ingest_never_registers_the_document_in_the_listener_library(self):
-        before = {d["name"] for d in (await (await self.client.get("/api/library")).json())["documents"]}
-        sample = ROOT / "traces" / "_ingest_sample2.md"
-        sample.write_text("\n\n".join(
-            f"# H{i}\n\nA sufficiently long paragraph of sample text for clause {i} that "
-            f"clears the minimum length threshold comfortably." for i in range(1, 26)),
-            encoding="utf-8")
-        self.addCleanup(lambda: sample.unlink(missing_ok=True))
-        r = await self.client.post("/api/dev/ingest", json={"url": str(sample)})
-        if r.status == 200:
-            written = ROOT / (await r.json())["path"]
-            self.addCleanup(written.unlink, True)
-        after = {d["name"] for d in (await (await self.client.get("/api/library")).json())["documents"]}
-        self.assertEqual(before, after,
-                         "an ingested document must not appear in the listener library")
+    async def upload(self, name: str, body: str):
+        from aiohttp import FormData
+        fd = FormData()
+        fd.add_field("file", body.encode("utf-8"), filename=name, content_type="text/plain")
+        r = await self.client.post("/documents", data=fd)
+        return r, (self.frames(await r.text()) if r.status == 200 else await r.json())
 
 
-def _policy_sample(name: str, extra: str = "") -> Path:
-    sample = ROOT / "traces" / f"_ingest_{name}.md"
-    body = ("# Northlake General Insurance Company Limited\n\nPolicy wording, UIN 111N128V01. "
+def _sample_md(extra: str = "") -> str:
+    return ("# Northlake General Insurance Company Limited\n\nPolicy wording, UIN 111N128V01. "
             "For any complaint write to grievance@insurer.co.in or escalate to the regulator at "
             "complaints@irdai.gov.in. Toll free helpline 1800 209 5858 (Mon-Sat). " + extra + "\n\n"
             + "\n\n".join(
                 f"# Section {i}\n\nThis paragraph of the sample policy is comfortably longer than "
                 f"the minimum clause length so that it survives the merge rule intact, number {i}."
                 for i in range(1, 26)))
-    sample.write_text(body, encoding="utf-8")
-    return sample
 
 
-class TestIngestPIISplit(ServerCase):
-    """Institutional contact details pass with a warning; personal data refuses
-    with both lists; an override needs a reason and is logged; a name beside an
-    account number cannot be overridden."""
-    DEV = False
-    UPLOAD = True
-    PERSON = "Policyholder Ramesh Kumar, ramesh.k@gmail.com, 9876543210, is insured."
+PERSON = "Policyholder Ramesh Kumar, ramesh.k@gmail.com, 9876543210, is insured."
 
-    def _sample(self, name, extra=""):
-        p = _policy_sample(name, extra)
-        self.addCleanup(lambda: p.unlink(missing_ok=True))
-        return p
 
-    def _cleanup_written(self, payload):
-        if payload.get("path"):
-            out = ROOT / payload["path"]
-            self.addCleanup(lambda: out.unlink(missing_ok=True))
+class TestDocumentsUpload(TempLibraryCase):
+    async def test_streams_every_stage_then_the_library_entry(self):
+        r, frames = await self.upload("sample.md", _sample_md())
+        self.assertEqual(r.status, 200)
+        self.assertEqual(r.headers["Content-Type"].split(";")[0], "text/event-stream")
+        stages = [f["stage"] for f in frames]
+        self.assertEqual(stages[:7], list(srv.INGEST_STAGES))
+        self.assertEqual(stages[-1], "done")
+        for f in frames[:7]:
+            self.assertEqual(f["status"], "ok")
+            self.assertIn("elapsed_ms", f)
+        entry = frames[-1]["entry"]
+        for k in ("doc_id", "name", "title", "reviewed", "readable", "clause_count"):
+            self.assertIn(k, entry)
+        self.assertFalse(entry["reviewed"])
+        self.assertTrue(entry["readable"])
+        self.assertGreater(entry["clause_count"], 0)
+        self.assertEqual(len(entry["doc_id"]), 16)
+        docs = json.loads(self.index.read_text(encoding="utf-8"))["documents"]
+        self.assertEqual([d["doc_id"] for d in docs], [entry["doc_id"]])
+        self.assertFalse(docs[0]["reviewed"])
+        self.assertTrue((self.index.parent / f"{entry['name']}.json").exists())
+        self.assertTrue((self.index.parent / f"{entry['name']}.ingest_report.json").exists())
+        lib = self.session.listener_library()
+        self.assertEqual([d["doc_id"] for d in lib], [entry["doc_id"]])
+        self.assertTrue(lib[0]["unreviewed"])
 
-    async def test_institutional_only_document_is_accepted_with_the_hits_reported(self):
-        r = await self.client.post("/api/dev/ingest", json={"url": str(self._sample("inst"))})
-        d = await r.json()
-        self._cleanup_written(d)
-        self.assertEqual(r.status, 200, d)
-        labels = sorted(h["label"] for h in d["institutional_hits"])
-        self.assertEqual(labels, ["email", "email", "phone"])
-        self.assertIsNone(d["override_reason"])
-        self.assertEqual(self.session.events.of_type("pii_override_used"), [])
-        written = json.loads((ROOT / d["path"]).read_text(encoding="utf-8"))
-        self.assertEqual(len(written["source"]["institutional_contacts"]), 3)
-        self.assertNotIn("pii_override_reason", written["source"])
+    async def test_same_bytes_twice_returns_the_existing_entry(self):
+        _, first = await self.upload("a.md", _sample_md())
+        r, second = await self.upload("renamed.md", _sample_md())
+        self.assertEqual(r.status, 200)
+        self.assertEqual(len(second), 1)
+        self.assertTrue(second[0]["existing"])
+        self.assertEqual(second[0]["entry"]["doc_id"], first[-1]["entry"]["doc_id"])
+        self.assertEqual(len(json.loads(self.index.read_text(encoding="utf-8"))["documents"]), 1)
 
-    async def test_personal_data_refuses_with_both_lists(self):
-        r = await self.client.post("/api/dev/ingest",
-                                   json={"url": str(self._sample("pers", self.PERSON))})
-        d = await r.json()
-        self.assertEqual(r.status, 422, d)
-        self.assertEqual(d["stage"], "pii scan")
-        self.assertTrue(d["overridable"])
-        self.assertEqual(sorted(h["label"] for h in d["personal_hits"]), ["email", "phone"])
-        self.assertEqual(len(d["institutional_hits"]), 3)
-        for h in d["personal_hits"] + d["institutional_hits"]:
-            self.assertTrue(h["redacted"].endswith("…"), "hits are redacted on the wire")
-        self.assertFalse(list(UNREVIEWED.glob("_ingest_pers*.json")), "nothing written on refusal")
+    async def test_personal_data_never_blocks_but_is_in_the_report(self):
+        r, frames = await self.upload("pers.md", _sample_md(PERSON))
+        self.assertEqual(r.status, 200)
+        entry = frames[-1]["entry"]
+        rep = await (await self.client.get(f"/documents/{entry['doc_id']}/report")).json()
+        self.assertEqual(sorted(h["label"] for h in rep["pii_scan"]["personal"]), ["email", "phone"])
+        self.assertTrue(all(h["clause_id"] for h in rep["pii_scan"]["personal"]))
+        self.assertEqual(len(rep["pii_scan"]["institutional"]), 3)
+        self.assertIn("by_kind", rep["validate"])
+        self.assertIn("boilerplate_first_15", rep["validate"])
+        self.assertTrue(rep["validate"]["oversized_ok"])
 
-    async def test_override_with_a_reason_is_accepted_and_logged(self):
-        r = await self.client.post("/api/dev/ingest", json={
-            "url": str(self._sample("over", self.PERSON)),
-            "allow_pii_reason": "sample person is fictional (synthetic fixture)"})
-        d = await r.json()
-        self._cleanup_written(d)
-        self.assertEqual(r.status, 200, d)
-        self.assertEqual(d["override_reason"], "sample person is fictional (synthetic fixture)")
-        used = self.session.events.of_type("pii_override_used")
-        self.assertEqual(len(used), 1)
-        self.assertEqual(used[0]["reason"], d["override_reason"])
-        self.assertEqual(len(used[0]["personal_hits"]), 2)
-        written = json.loads((ROOT / d["path"]).read_text(encoding="utf-8"))
-        self.assertEqual(written["source"]["pii_override_reason"], d["override_reason"])
+    async def test_accept_sets_reviewed(self):
+        _, frames = await self.upload("acc.md", _sample_md())
+        doc_id = frames[-1]["entry"]["doc_id"]
+        r = await self.client.post(f"/documents/{doc_id}/accept")
+        self.assertEqual(r.status, 200)
+        self.assertTrue((await r.json())["reviewed"])
+        self.assertTrue(json.loads(self.index.read_text(encoding="utf-8"))["documents"][0]["reviewed"])
+        self.assertFalse(self.session.listener_library()[0]["unreviewed"])
+        self.assertEqual(len(self.session.events.of_type("document_accepted")), 1)
 
-    async def test_a_short_reason_is_rejected(self):
-        r = await self.client.post("/api/dev/ingest", json={
-            "url": str(self._sample("short", self.PERSON)), "allow_pii_reason": "because"})
-        self.assertEqual(r.status, 400)
+    async def test_no_body_text_is_readable_false_not_an_error(self):
+        r, frames = await self.upload("scan.md", "Page 1 of 3\n\n2\n\nPage 3 of 3\n")
+        self.assertEqual(r.status, 200, frames)
+        self.assertFalse(frames[-1]["entry"]["readable"])
+        self.assertEqual([d["readable"] for d in self.session.listener_library()], [False])
 
-    async def test_name_with_account_number_refuses_even_with_a_reason(self):
-        r = await self.client.post("/api/dev/ingest", json={
-            "url": str(self._sample("acct", "Policyholder Jane Marchetti, policy 4820193774, is insured.")),
-            "allow_pii_reason": "we are quite sure this is fine"})
-        d = await r.json()
-        self.assertEqual(r.status, 422, d)
-        self.assertFalse(d["overridable"])
-        self.assertIn("name_with_account_number", [h["label"] for h in d["personal_hits"]])
-        self.assertEqual(self.session.events.of_type("pii_override_used"), [])
+    async def test_the_two_http_errors(self):
+        from aiohttp import FormData
+        fd = FormData()
+        fd.add_field("file", b"MZ...", filename="setup.exe", content_type="application/octet-stream")
+        self.assertEqual((await self.client.post("/documents", data=fd)).status, 415)
+        cap = srv.MAX_UPLOAD_BYTES
+        srv.MAX_UPLOAD_BYTES = 1000
+        try:
+            fd = FormData()
+            fd.add_field("file", b"x" * 2000, filename="big.txt", content_type="text/plain")
+            self.assertEqual((await self.client.post("/documents", data=fd)).status, 413)
+        finally:
+            srv.MAX_UPLOAD_BYTES = cap
+
+    async def test_report_404_for_unknown_document(self):
+        self.assertEqual((await self.client.get("/documents/nope/report")).status, 404)
 
 
 class TestReplay(ServerCase):

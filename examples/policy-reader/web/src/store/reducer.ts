@@ -40,6 +40,9 @@ export type DocEntry = {
   }
   referral: string
   unreviewed?: boolean
+  doc_id?: string
+  reviewed?: boolean
+  readable?: boolean
 }
 
 export type Unit = {
@@ -228,6 +231,18 @@ export function buildPause(contextId: string | null, renderedMs: number): any[] 
   return [
     { type: 'flush_ack', context_id: contextId, rendered_ms: renderedMs },
     { type: 'pause' },
+  ]
+}
+
+/** Opening another document while the voice is sounding is a cut too: the
+ *  same flush ack first, so the clause being left is attributed at the
+ *  playhead and the server never has to ask this socket for an ack it could
+ *  not receive until this handler returned. */
+export function buildOpen(name: string, contextId: string | null, renderedMs: number, sounding: boolean): any[] {
+  if (!sounding) return [{ type: 'open', name }]
+  return [
+    { type: 'flush_ack', context_id: contextId, rendered_ms: renderedMs },
+    { type: 'open', name },
   ]
 }
 
@@ -449,6 +464,9 @@ function applyServer(state: State, m: any): State {
           cue: m.cue,
         },
       }
+
+    case 'library_changed':
+      return { ...state, documents: m.documents || state.documents }
 
     case 'document_finished':
       return { ...state, phase: 'finished' }

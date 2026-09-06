@@ -20,11 +20,12 @@ import {
 } from 'lucide-react'
 import { useSession } from '../store/session'
 import type { DocEntry } from '../store/reducer'
-import UploadDocument, { openUnreviewed } from '../components/UploadDocument'
+import UploadDocument from '../components/UploadDocument'
 
 const ICON = 18
 
 function railSubtitle(d: DocEntry): string {
+  if (d.readable === false) return 'No readable text found'
   if (d.progress.finished) return 'Finished'
   if (!d.progress.started) return 'Not started'
   const sec = Math.max(1, d.progress.current_section_index)
@@ -78,10 +79,9 @@ export default function Listener() {
     setQ('')
   }
 
-  const uploaded = async (d: { name: string }) => {
-    // Session-only. index.json is never touched; the existing unreviewed
-    // banner is what tells the listener so.
-    await openUnreviewed(d.name)
+  const uploaded = (d: { name: string }) => {
+    // It is in the library already (reviewed: false); open it and read.
+    s.open(d.name)
     dialogRef.current?.close()
   }
 
@@ -105,39 +105,15 @@ export default function Listener() {
             <span className="s">{railSubtitle(d)}</span>
           </button>
         ))}
-        {state.uploadEnabled && (
-          <button className="rail-row" onClick={() => dialogRef.current?.showModal()}>
-            <span className="t">
-              <FilePlus size={16} aria-hidden="true" /> Add a document
-            </span>
-          </button>
-        )}
+        <button className="rail-row" onClick={() => dialogRef.current?.showModal()}>
+          <span className="t">
+            <FilePlus size={16} aria-hidden="true" /> Add a document
+          </span>
+        </button>
 
         <dialog ref={dialogRef} aria-label="Add a document">
-          {state.uploadEnabled ? (
-            <UploadDocument
-              session={s}
-              allowOverride={false}
-              onSuccess={uploaded}
-              intro={
-                <p>
-                  A document you add here is read in this session only. Adding it to the library
-                  for everyone needs a person to review it first; that review is what keeps a
-                  document from being read aloud before anyone has checked it.
-                </p>
-              }
-            />
-          ) : (
-            <p>
-              Documents are added and reviewed by the team before they appear here. To ask for
-              one, contact {referral}.
-            </p>
-          )}
-          {state.dev && (
-            <p className="notice">
-              <Link to="/dev">Developer tools</Link> show the full ingestion report.
-            </p>
-          )}
+          <p>Pick a PDF. It appears in your documents as soon as it is ready.</p>
+          <UploadDocument face="listener" onDone={uploaded} />
           <button onClick={() => dialogRef.current?.close()}>Close</button>
         </dialog>
       </nav>
@@ -205,7 +181,7 @@ export default function Listener() {
           <button
             className="primary"
             onClick={() => (state.phase === 'playing' || state.phase === 'speaking' ? s.pause() : s.play())}
-            disabled={busy}
+            disabled={busy || current?.readable === false}
             aria-label={state.phase === 'playing' || state.phase === 'speaking' ? 'Pause' : 'Play'}
           >
             {state.phase === 'playing' || state.phase === 'speaking' ? <Pause size={ICON} aria-hidden="true" /> : <Play size={ICON} aria-hidden="true" />}

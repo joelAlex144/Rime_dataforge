@@ -15,11 +15,12 @@ Two rules shape the whole file:
    WordMap.offset_at(). The server's own "I sent N bytes" number is reported
    separately, in the contexts table, and is never used for position.
 
-2. **Runtime ingestion is dev-only and quarantined.** `--dev` enables
-   /api/dev/ingest, which writes to fixtures/unreviewed/ and nothing else. The
-   listener's library is built from index.json; an unreviewed file is invisible
-   there until a human moves it in. There is no code path from an upload to the
-   judged flow.
+2. **Upload runs the same ingestion as build time.** POST /documents calls
+   scripts/ingest.py's ingest_document() in a worker thread, streams the seven
+   stages as server-sent events, writes the fixture, the DoclingDocument, the
+   table CSVs and an ingest report into fixtures/, and appends the library
+   entry with `reviewed: false`. Nothing in the report blocks the document;
+   the developer page shows it and its Accept button sets `reviewed: true`.
 
   python examples/policy-reader/server.py                 # judged flow
   python examples/policy-reader/server.py --dev           # + upload and provider swap
@@ -59,14 +60,16 @@ from llm import describe_llm, make_llm                         # noqa: E402
 
 FIXTURES = HERE / "fixtures"
 INDEX = FIXTURES / "index.json"
-UNREVIEWED = FIXTURES / "unreviewed"
+sys.path.insert(0, str(ROOT / "scripts"))
 TRACES = ROOT / "traces"
 
 CHARS_PER_SECOND = 14.0          # for the listener's "minutes left" estimate
 # How far synthesis may run ahead of the playhead. One clause of buffer keeps
 # playback gapless; a bounded amount is wasted (fenced) on an interruption.
 LEAD_MS = 4000.0
-MAX_UPLOAD_BYTES = 20 * 1024 * 1024
+MAX_UPLOAD_BYTES = 25 * 1024 * 1024
+UPLOAD_SUFFIXES = (".pdf", ".docx", ".txt", ".md", ".html", ".htm")
+INGEST_STAGES = ("extract", "structure", "segment", "normalize", "pii_scan", "validate", "write")
 DEFAULT_REFERRAL = "the team that publishes this document"
 # Audible tone for the disclosed fallback voice. Set FAKE_TONE_HZ=0 for silence.
 FAKE_TONE_HZ = float(os.environ.get("FAKE_TONE_HZ", "196")) or None
@@ -180,11 +183,10 @@ class ReaderSession:
         self.events = BroadcastEventLog(TRACES / f"session_{self.id}.jsonl", session_id=self.id)
         self.library = Library(index_path, self.events)
         self.index_path = index_path
-        # Upload is its own gate, separate from --dev: the main screen can add a
-        # document without exposing provider swapping and the event log. --dev
-        # implies it. The PII scan, the quarantine and the 20 MB limit apply to
-        # every path regardless.
-        self.allow_upload = bool(allow_upload) or bool(dev)
+        # Upload is a first-class path on both routes (POST /documents); the
+        # 25 MB cap and the type check are the only refusals.
+        self.allow_upload = True
+        self._ingest_lock = asyncio.Lock()          # one conversion at a time
         # Optional LLM behind grounded answers; None means extractive. Key never
         # leaves this process.
         self.llm = make_llm()
@@ -299,7 +301,10 @@ class ReaderSession:
                     "minutes_left": left_min,
                 },
                 "referral": self.referral_for(doc.name),
-                "unreviewed": doc.name == self._unreviewed,
+                "doc_id": doc.doc_id,
+                "reviewed": doc.reviewed,
+                "readable": doc.readable,
+                "unreviewed": not doc.reviewed,
             })
         return out
 
@@ -338,14 +343,20 @@ class ReaderSession:
         def cell(state, detail):
             return {"state": state, "detail": detail}
 
-        ing = (cell("ok", "upload enabled" + (" (dev)" if self.dev else ""))
-               if self.allow_upload else cell("off", "build time only"))
+        try:
+            import ingest_structure as _istr
+            ing = cell("ok", "docling warm" if _istr._CONVERTERS else "docling ready (cold)") \
+                if _istr.docling_available() else cell("warn", "docling not installed: text/docx only")
+        except Exception as e:
+            ing = cell("warn", f"structure pass unavailable: {e}"[:80])
         norm = cell("ok", f"{len(self.wordmaps)} word maps built") if self.wordmaps \
             else cell("ok", "ready")
         if self.provider is None:
             rime = cell("down", "not connected")
         elif self.provider.name == "fake":
             rime = cell("warn", "fake provider, no Rime connection")
+        elif not getattr(self.provider, "connected", True):
+            rime = cell("down", "socket dropped; reconnects on the next play")
         else:
             age = int(time.monotonic() - (self.provider_connected_at or time.monotonic()))
             rime = cell("ok", f"open {age} s")
@@ -745,13 +756,20 @@ class ReaderSession:
                                      bytes=st.bytes, rendered_ms=round(st.rendered_ms, 1))
 
 
-async def _switch_document(s: "ReaderSession", socks, name: str):
+async def _switch_document(s: "ReaderSession", socks, name: str, ws=None):
     """Open another document. If anything is sounding, the tab with the voice is
     flushed first and the cut attributed on the document being left, so its
     buffered audio does not play out under the new document's first clause and
-    its position is saved at the playhead, not at what was synthesised."""
+    its position is saved at the playhead, not at what was synthesised.
+
+    The sink's own client sends its flush_ack before `open` (buildOpen), like
+    pause and interrupt. A flush is requested only from a *different* socket:
+    a socket's messages are handled one at a time, so waiting here for an ack
+    from the same socket can never succeed.
+    """
     if s.playing or (s._reader and not s._reader.done()) or s._answer is not None:
-        if s.sink is not None:
+        await s.stop_reading()
+        if s.sink is not None and ws is not s.sink and s._pending_flush is None:
             await s.request_flush()
         await _stop_and_attribute(s, socks, "open")
     else:
@@ -888,32 +906,31 @@ async def api_dev_provider(request):
     return _json({"ok": True, "provider": s.descriptor})
 
 
-INGEST_STAGES = ["extract", "structure", "segment", "normalize", "pii scan", "validate"]
 
 
-async def api_dev_ingest(request):
-    """Run scripts/ingest.py in a subprocess, into fixtures/unreviewed/ only.
+async def api_documents_post(request):
+    """POST /documents: one PDF (or .docx/.txt/.md/.html, or {"url": ...}).
 
-    Dry run first so a document that fails validation or the PII scan never
-    reaches disk. Progress is streamed as ingest_progress over /ws/audio so the
-    stages are visible while they happen rather than as one lump at the end.
+    Runs ingest_document() -- the same function as scripts/ingest.py -- in a
+    worker thread and streams each stage as a server-sent event
+    `{stage, status, elapsed_ms}`; the last event is `{stage: "done",
+    entry: {...}}` with the library entry. The 25 MB cap and an unsupported
+    type are the only HTTP errors. Uploading the same bytes twice returns the
+    existing entry.
     """
     s = request.app["session"]
-    if not s.allow_upload:
-        return _json({"error": "upload is disabled (start with --allow-upload or --dev)"}, status=404)
-
-    source, stem, upload, reason = None, None, None, ""
+    source, upload, filename = None, None, None
     if request.content_type and request.content_type.startswith("multipart/"):
         reader = await request.multipart()
         field = await reader.next()
         while field is not None:
-            if field.name == "allow_pii_reason":
-                reason = (await field.text()).strip()
-            elif field.name == "file":
-                filename = Path(field.filename or "upload.txt").name
-                stem = Path(filename).stem
-                UNREVIEWED.mkdir(parents=True, exist_ok=True)
-                upload = UNREVIEWED / f".incoming_{filename}"
+            if field.name == "file":
+                filename = Path(field.filename or "upload.pdf").name
+                if Path(filename).suffix.lower() not in UPLOAD_SUFFIXES:
+                    return _json({"error": f"unsupported type {Path(filename).suffix!r}; "
+                                           f"send {', '.join(UPLOAD_SUFFIXES)}"}, status=415)
+                s.library.root.mkdir(parents=True, exist_ok=True)
+                upload = s.library.root / f".incoming_{uuid.uuid4().hex[:8]}_{filename}"
                 size = 0
                 with upload.open("wb") as fh:
                     while True:
@@ -924,7 +941,7 @@ async def api_dev_ingest(request):
                         if size > MAX_UPLOAD_BYTES:
                             fh.close()
                             upload.unlink(missing_ok=True)
-                            return _json({"error": "file larger than 20 MB"}, status=413)
+                            return _json({"error": "file larger than 25 MB"}, status=413)
                         fh.write(chunk)
                 source = str(upload)
             elif field.name == "url":
@@ -933,141 +950,113 @@ async def api_dev_ingest(request):
     else:
         body = await request.json()
         source = str(body.get("url", "")).strip()
-        reason = str(body.get("allow_pii_reason", "") or "").strip()
-
     if not source:
         return _json({"error": "provide a file or a url"}, status=400)
-    if reason and len(reason) < 12:
-        if upload:
+
+    import ingest as ingest_mod
+    # Idempotent: the doc_id is the content hash, so the same PDF is the same document.
+    if upload is not None:
+        doc_id = ingest_mod._doc_id_for(upload.read_bytes())
+        existing = s.library.by_doc_id(doc_id)
+        if existing is not None:
             upload.unlink(missing_ok=True)
-        return _json({"error": "allow_pii_reason must be at least 12 characters"}, status=400)
-    if stem is None:
-        stem = "".join(ch if ch.isalnum() or ch in "-_" else "-"
-                       for ch in source.rsplit("/", 1)[-1] or "upload")[:60] or "upload"
-
-    UNREVIEWED.mkdir(parents=True, exist_ok=True)
-    out = UNREVIEWED / f"{stem}.json"
-    pii_path = UNREVIEWED / f".pii_{stem}_{uuid.uuid4().hex[:8]}.json"
-    socks = s.events.sockets
-
-    async def stage(name, state, detail):
-        await broadcast({"type": "ingest_progress", "stage": name,
-                         "state": state, "detail": detail}, socks)
-
-    async def run_ingest(extra):
-        cmd = [sys.executable, str(ROOT / "scripts" / "ingest.py"), source,
-               "--out", str(out), "--name", stem, "--pii-report", str(pii_path)] + extra
-        proc = await asyncio.create_subprocess_exec(
-            *cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
-            cwd=str(ROOT))
-        so, se = await proc.communicate()
-        return proc.returncode, so.decode("utf-8", "replace"), se.decode("utf-8", "replace")
-
-    def pii_report():
-        try:
-            d = json.loads(pii_path.read_text(encoding="utf-8"))
-        except (OSError, ValueError):
-            d = {"personal": [], "institutional": []}
-        return d.get("personal", []), d.get("institutional", [])
-
-    def cleanup():
-        if upload:
-            upload.unlink(missing_ok=True)
-        pii_path.unlink(missing_ok=True)
-
-    override = ["--allow-pii", reason] if reason else []
-    await stage("extract", "ok", f"reading {source[:70]}")
-    code, so, se = await run_ingest(["--dry-run"] + override)
-    report = [ln for ln in (so + se).splitlines() if ln.strip()]
-    personal, institutional = pii_report()
-
-    if code == 2:
-        unoverridable = any(h.get("label") == "name_with_account_number" for h in personal)
-        if unoverridable:
-            detail = ("Refused: a person's name beside an account or policy number. "
-                      "This cannot be overridden.")
-        elif reason:
-            detail = "Refused even with a reason."       # ingest.py said no; report says why
-        else:
-            detail = "Refused: looks like someone's personal data."
-        await stage("pii scan", "fail", detail)
-        cleanup()
-        return _json({"ok": False, "stage": "pii scan", "code": 2, "report": report,
-                      "personal_hits": personal, "institutional_hits": institutional,
-                      "overridable": not unoverridable, "detail": detail}, status=422)
-    if code != 0:
-        await stage("validate", "fail", (se.strip().splitlines() or ["failed"])[-1][:200])
-        cleanup()
-        return _json({"ok": False, "stage": "validate", "code": code,
-                      "report": report}, status=422)
-
-    if reason and personal:
-        s.events.emit("pii_override_used", name=stem, reason=reason,
-                      personal_hits=personal, institutional_hits=institutional)
-    for st_name in ("structure", "segment", "normalize"):
-        await stage(st_name, "ok", "passed")
-    if personal:
-        await stage("pii scan", "warn", f"overridden: {reason[:120]}")
-    elif institutional:
-        await stage("pii scan", "warn",
-                    f"{len(institutional)} institutional contact detail(s) kept in the review trail")
+            resp = web.StreamResponse(headers={"Content-Type": "text/event-stream",
+                                               "Cache-Control": "no-cache"})
+            await resp.prepare(request)
+            await resp.write(("data: " + json.dumps({"stage": "done", "status": "ok", "elapsed_ms": 0,
+                                                     "existing": True,
+                                                     "entry": s.library.entry(existing.name)}) + "\n\n").encode())
+            await resp.write_eof()
+            return resp
+        name = doc_id
     else:
-        await stage("pii scan", "ok", "passed")
-    warn = [ln for ln in report if ln.lower().startswith("warning")
-            and "institutional contact detail" not in ln]
-    await stage("validate", "warn" if warn else "ok",
-                warn[0][:200] if warn else "schema and span coverage ok")
+        name = None
 
-    code, so2, se2 = await run_ingest(override)
-    if code != 0:
-        await stage("write", "fail", "write failed")
-        cleanup()
-        return _json({"ok": False, "stage": "write", "code": code,
-                      "report": report + (so2 + se2).splitlines()}, status=422)
-    cleanup()
-    await stage("write", "ok", str(out.relative_to(ROOT)))
+    resp = web.StreamResponse(headers={"Content-Type": "text/event-stream", "Cache-Control": "no-cache",
+                                       "X-Accel-Buffering": "no"})
+    await resp.prepare(request)
+    loop = asyncio.get_running_loop()
+    queue: asyncio.Queue = asyncio.Queue()
 
-    doc = json.loads(out.read_text(encoding="utf-8"))
-    preview = [{"id": c["id"], "section_title": c["section_title"],
-                "text_display": c["text_display"], "text_spoken": c["text_spoken"],
-                "spoken_map": c["spoken_map"]} for c in doc["clauses"][:20]]
-    s.events.emit("dev_ingest_written", name=stem, path=str(out.relative_to(ROOT)),
-                  clause_count=doc["clause_count"], override=bool(reason and personal),
-                  institutional_contacts=len(institutional))
-    return _json({
-        "ok": True, "name": stem, "clause_count": doc["clause_count"],
-        "path": str(out.relative_to(ROOT)),
-        "report": report + [ln for ln in (so2 + se2).splitlines() if ln.strip()],
-        "warnings": warn,
-        "institutional_hits": institutional,
-        "override_reason": reason if (reason and personal) else None,
-        "clauses": preview[:5], "preview": preview,
-        "note": "Written to fixtures/unreviewed/. It is not in the listener library "
-                "until a human reviews it and moves it into index.json.",
-    })
+    def progress(stage, status, ms, detail):
+        loop.call_soon_threadsafe(queue.put_nowait, {"stage": stage, "status": status,
+                                                     "elapsed_ms": ms, "detail": detail})
+
+    async def send(ev: dict):
+        await resp.write(("data: " + json.dumps(ev) + "\n\n").encode())
+
+    async def run():
+        async with s._ingest_lock:
+            return await loop.run_in_executor(
+                None, lambda: ingest_mod.ingest_document(
+                    source, out_dir=s.library.root, name=name,
+                    title=Path(filename).stem if filename else None,
+                    progress=progress, register=True, index_path=s.library.index_path))
+
+    task = asyncio.ensure_future(run())
+    try:
+        while not task.done():
+            try:
+                ev = await asyncio.wait_for(queue.get(), timeout=0.25)
+            except asyncio.TimeoutError:
+                continue
+            await send(ev)
+            await broadcast({"type": "ingest_progress", "stage": ev["stage"], "state": ev["status"],
+                             "detail": ev["detail"]}, s.events.sockets)
+        while not queue.empty():
+            await send(queue.get_nowait())
+        try:
+            res = task.result()
+        except Exception as e:
+            s.events.emit("ingest_failed", error=str(e)[:200], source=Path(source).name)
+            await send({"stage": "done", "status": "error", "elapsed_ms": 0, "error": str(e)[:300]})
+            return resp
+        s.library.reload()
+        entry = s.library.entry(res.name) or res.entry
+        s.events.emit("document_ingested", document=res.name, doc_id=res.doc_id,
+                      clause_count=res.clause_count, readable=res.readable,
+                      elapsed_ms=res.report["elapsed_ms"].get("total"))
+        await broadcast({"type": "library_changed", "documents": s.listener_library()}, s.events.sockets)
+        await send({"stage": "done", "status": "ok", "elapsed_ms": res.report["elapsed_ms"].get("total", 0),
+                    "entry": entry})
+    finally:
+        if upload is not None:
+            upload.unlink(missing_ok=True)
+        try:
+            await resp.write_eof()
+        except Exception:
+            pass
+    return resp
 
 
-async def api_dev_open_unreviewed(request):
-    """Load an unreviewed fixture into THIS session only. --dev, and never index.json."""
+def _doc_for(s, doc_id: str):
+    d = s.library.by_doc_id(doc_id)
+    if d is None and doc_id in s.library._docs:
+        d = s.library._docs[doc_id]
+    return d
+
+
+async def api_document_report(request):
+    """GET /documents/<doc_id>/report: the ingest report, for the developer page."""
     s = request.app["session"]
-    if not s.allow_upload:
-        return _json({"error": "upload is disabled (start with --allow-upload or --dev)"}, status=404)
-    if request.query.get("unreviewed") != "1":
-        return _json({"error": "pass ?unreviewed=1 to acknowledge"}, status=400)
-    body = await request.json()
-    name = Path(str(body.get("name", ""))).stem
-    path = UNREVIEWED / f"{name}.json"
+    d = _doc_for(s, request.match_info["doc_id"])
+    if d is None:
+        return _json({"error": "no such document"}, status=404)
+    path = d.path.parent / (d.report or f"{d.name}.ingest_report.json")
     if not path.exists():
-        return _json({"error": f"no unreviewed fixture {name!r}"}, status=404)
-    from library import Document
-    doc = Document(name, json.loads(path.read_text(encoding="utf-8")).get("title", name), path)
-    s.library._docs[name] = doc
-    s._unreviewed = name
-    s.events.emit("unreviewed_opened", name=name)
-    # Both routes learn about it the same way a library open is announced, so
-    # the listener shows the document (with its unreviewed banner) at once.
-    await _switch_document(s, s.events.sockets, name)
-    return _json({"ok": True, "name": name, "unreviewed": True})
+        return _json({"error": "no report for this document (ingested before reports existed)"}, status=404)
+    return web.Response(text=path.read_text(encoding="utf-8"), content_type="application/json")
+
+
+async def api_document_accept(request):
+    """POST /documents/<doc_id>/accept: the developer is the reviewer."""
+    s = request.app["session"]
+    d = _doc_for(s, request.match_info["doc_id"])
+    if d is None:
+        return _json({"error": "no such document"}, status=404)
+    entry = s.library.set_reviewed(d.name, True)
+    await broadcast({"type": "library_changed", "documents": s.listener_library()}, s.events.sockets)
+    return _json(entry)
 
 
 # ==========================================================================
@@ -1293,13 +1282,14 @@ async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
         # interrupt, so the boundary lands on the clause being heard. From any
         # other tab the server asks the sink for that ack.
         if s.sink is not None and ws is not s.sink:
+            await s.stop_reading()
             await s.request_flush()
         await _stop_and_attribute(s, socks, "pause")
         return
 
     if t == "open":
         try:
-            await _switch_document(s, socks, str(m.get("name", "")))
+            await _switch_document(s, socks, str(m.get("name", "")), ws)
         except LibraryError as e:
             await ws.send_str(json.dumps({"type": "error", "message": str(e)}))
         return
@@ -1402,7 +1392,7 @@ def _file_route(path: Path):
 
 
 def build_app(dev: bool = False, index_path: Path = INDEX,
-              allow_upload: bool = True) -> web.Application:
+              allow_upload: bool = True, warm_converter: bool = False) -> web.Application:
     app = web.Application(client_max_size=MAX_UPLOAD_BYTES + 1024 * 1024)
     app["session"] = ReaderSession(dev=dev, index_path=index_path, allow_upload=allow_upload)
     app.router.add_get("/api/status", api_status)
@@ -1412,9 +1402,10 @@ def build_app(dev: bool = False, index_path: Path = INDEX,
     app.router.add_get("/api/library", api_library)
     app.router.add_get("/api/traces", api_traces)
     app.router.add_post("/api/replay", api_replay)
-    app.router.add_post("/api/dev/ingest", api_dev_ingest)
+    app.router.add_post("/documents", api_documents_post)
+    app.router.add_get("/documents/{doc_id}/report", api_document_report)
+    app.router.add_post("/documents/{doc_id}/accept", api_document_accept)
     app.router.add_post("/api/dev/provider", api_dev_provider)
-    app.router.add_post("/api/dev/open", api_dev_open_unreviewed)
     app.router.add_get("/ws/audio", ws_audio)
 
     dist = HERE / "web" / "dist"
@@ -1434,6 +1425,17 @@ def build_app(dev: bool = False, index_path: Path = INDEX,
 
     async def on_start(a):
         a["session"].events.bind_loop(asyncio.get_running_loop())
+        # Warm the Docling converter so the first upload is not cold. In a
+        # thread: building it loads the layout models and takes seconds.
+        if warm_converter:
+            def warm():
+                try:
+                    import ingest_structure as istr
+                    ok = istr.warm()
+                    a["session"].events.emit("docling_warm" if ok else "docling_unavailable")
+                except Exception as e:
+                    a["session"].events.emit("docling_unavailable", error=str(e)[:160])
+            asyncio.get_running_loop().run_in_executor(None, warm)
     app.on_startup.append(on_start)
     return app
 
@@ -1445,13 +1447,10 @@ def main() -> int:
     ap.add_argument("--dev", action="store_true",
                     help="enable /api/dev/* : provider swapping and the diagnostics route's "
                          "controls. Implies --allow-upload. Never enable this for the judged flow.")
-    ap.add_argument("--allow-upload", dest="allow_upload", action="store_true", default=True,
-                    help="let the main screen and /dev upload a document into "
-                         "fixtures/unreviewed/ for this session (default: on)")
-    ap.add_argument("--no-upload", dest="allow_upload", action="store_false",
-                    help="disable upload on both routes")
+    ap.add_argument("--no-warm", action="store_true",
+                    help="do not pre-build the Docling converter at start")
     args = ap.parse_args()
-    app = build_app(dev=args.dev, allow_upload=args.allow_upload)
+    app = build_app(dev=args.dev, warm_converter=not args.no_warm)
     s = app["session"]
     print(f"session {s.id}  dev={args.dev}  upload={s.allow_upload}  "
           f"provider={os.environ.get('TTS_PROVIDER', 'rime')}  "
@@ -1467,9 +1466,8 @@ def main() -> int:
               "-> open http://localhost:5173")
         print("                   cd examples/policy-reader/web && npm run build "
               "-> reload this port")
-    if s.allow_upload:
-        print("upload on: /api/dev/ingest writes to fixtures/unreviewed/ only; "
-              "nothing reaches the listener library without a human moving it into index.json")
+    print("upload: POST /documents runs the build-time ingestion, writes fixtures/, "
+          "appends index.json with reviewed=false; /dev shows the report and accepts")
     web.run_app(app, host=args.host, port=args.port, print=None)
     return 0
 

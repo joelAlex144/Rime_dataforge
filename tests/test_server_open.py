@@ -94,16 +94,22 @@ class OpenCase(unittest.IsolatedAsyncioTestCase):
     async def test_open_from_the_rail_flushes_the_voice_and_starts_the_new_document_clean(self):
         docs = [d["name"] for d in self.hello["documents"]]
         self.assertGreaterEqual(len(docs), 2, "the library needs two documents for this")
-        first = self.hello["current"]
+        # Start on the hero fixture (short clauses) so the flush is answered
+        # long before the server stops waiting for it, then leave it.
+        first = "policy"
+        await self.a.ws.send_json({"type": "open", "name": first})
+        await self.a.until(lambda m: m.get("type") == "document_opened")
         other = next(d for d in docs if d != first)
         started = await self.play_one()
         ctx = started["context_id"]
         cut = self.a.audio_ms(ctx) * 0.3
 
+        # What the client does: flush locally, ack the playhead, then open.
+        await self.a.ws.send_json({"type": "flush_ack", "context_id": ctx, "rendered_ms": cut})
         await self.a.ws.send_json({"type": "open", "name": other})
-        await self.answer_flush(ctx, cut)             # the voice is asked to flush first
         opened = await self.a.until(lambda m: m.get("type") == "document_opened")
         self.assertEqual(opened["name"], other)
+        self.assertEqual(self.s.events.of_type("flush_ack_timeout"), [], "the flush ack must be waited for")
         trunc = self.s.events.of_type("unit_truncated")[0]
         self.assertEqual(trunc["reason"], "open")
         self.assertEqual(trunc["context_id"], started["unit_id"])
@@ -117,39 +123,66 @@ class OpenCase(unittest.IsolatedAsyncioTestCase):
         self.assertIn(nxt["unit_id"], self.s.library.current.grounding.by_id)
         self.assertEqual(self.s.library.current.name, other)
 
-    async def test_uploading_on_dev_opens_the_upload_and_play_reads_it(self):
+    async def test_an_uploaded_document_is_in_the_library_at_once_and_play_reads_it(self):
         started = await self.play_one()
         ctx = started["context_id"]
-
-        sample = ROOT / "traces" / "_ingest_open_test.md"
-        sample.write_text("\n\n".join(
+        from aiohttp import FormData
+        body = "\n\n".join(
             f"# Heading {i}\n\nUploaded paragraph number {i} that is comfortably longer than "
-            f"the minimum clause length so that the merge rule leaves it alone." for i in range(1, 26)),
-            encoding="utf-8")
-        self.addCleanup(lambda: sample.unlink(missing_ok=True))
-        r = await self.client.post("/api/dev/ingest", json={"url": str(sample)})
-        d = await r.json()
-        self.assertEqual(r.status, 200, d)
-        out = ROOT / d["path"]
-        self.addCleanup(lambda: out.unlink(missing_ok=True))
+            f"the minimum clause length so that the merge rule leaves it alone." for i in range(1, 26))
+        fd = FormData()
+        fd.add_field("file", body.encode("utf-8"), filename="_ingest_open_test.md", content_type="text/plain")
+        idx = self.s.library.index_path
+        before = idx.read_text(encoding="utf-8")
+        self.addCleanup(lambda: idx.write_text(before, encoding="utf-8"))     # the real registry is restored
+        r = await self.client.post("/documents", data=fd)
+        self.assertEqual(r.status, 200)
+        frames = [json.loads(l[5:]) for l in (await r.text()).splitlines() if l.startswith("data:")]
+        entry = frames[-1]["entry"]
+        root = self.s.library.root
+        for f in (root / f"{entry['name']}.json", root / f"{entry['name']}.ingest_report.json"):
+            self.addCleanup(lambda f=f: f.unlink(missing_ok=True))
+        self.assertFalse(entry["reviewed"])
+        changed = await self.a.until(lambda m: m.get("type") == "library_changed")
+        self.assertIn(entry["name"], [d["name"] for d in changed["documents"]])
 
-        # What the /dev page does on success: open it, while the old one sounds.
-        opening = asyncio.ensure_future(
-            self.client.post("/api/dev/open?unreviewed=1", json={"name": d["name"]}))
-        await self.answer_flush(ctx, self.a.audio_ms(ctx) * 0.5)
-        r2 = await opening
-        self.assertEqual(r2.status, 200, await r2.text())
+        # Open it from the rail while the old one sounds: the client acks the
+        # playhead first, then opens.
+        await self.a.ws.send_json({"type": "flush_ack", "context_id": ctx,
+                                   "rendered_ms": self.a.audio_ms(ctx) * 0.5})
+        await self.a.ws.send_json({"type": "open", "name": entry["name"]})
         opened = await self.a.until(lambda m: m.get("type") == "document_opened")
-        self.assertEqual(opened["name"], d["name"])
-        self.assertTrue(next(x for x in opened["documents"] if x["name"] == d["name"])["unreviewed"])
+        self.assertEqual(opened["name"], entry["name"])
+        self.assertTrue(next(x for x in opened["documents"] if x["name"] == entry["name"])["unreviewed"])
         self.assertEqual(self.s.events.of_type("unit_truncated")[0]["reason"], "open")
 
         nxt = await self.play_one()
-        uploaded = json.loads(out.read_text(encoding="utf-8"))
-        ids = {c["id"] for c in uploaded["clauses"]}
-        self.assertIn(nxt["unit_id"], ids, "play reads the uploaded document")
-        self.assertIn("Uploaded paragraph", nxt["text_display"])
+        # The first spoken unit of the upload is its first heading's signpost;
+        # the body paragraph follows it.
+        uploaded = json.loads((root / f"{entry['name']}.json").read_text(encoding="utf-8"))
+        self.assertIn(nxt["unit_id"], {c["id"] for c in uploaded["clauses"]}, "play reads the upload")
+        self.assertRegex(nxt["text_display"], r"^Heading 1\. \d+ items?\.$")
         self.assertGreater(self.a.audio.get(nxt["context_id"], 0), 0)
+
+
+class OpenFromOtherTab(OpenCase):
+    async def test_open_from_a_tab_without_the_voice_asks_the_sink_to_flush(self):
+        b = Tab(await self.client.ws_connect("/ws/audio"))
+        await b.recv()                                       # hello
+        await self.a.ws.send_json({"type": "open", "name": "policy"})
+        await self.a.until(lambda m: m.get("type") == "document_opened")
+        started = await self.play_one()
+        ctx = started["context_id"]
+        other = next(d["name"] for d in self.hello["documents"] if d["name"] != "policy")
+        await b.ws.send_json({"type": "open", "name": other})  # no ack: B has no audio
+        await self.a.until(lambda m: m.get("type") == "flush")
+        await self.a.ws.send_json({"type": "flush_ack", "context_id": ctx,
+                                   "rendered_ms": self.a.audio_ms(ctx) * 0.4})
+        opened = await self.a.until(lambda m: m.get("type") == "document_opened")
+        self.assertEqual(opened["name"], other)
+        self.assertEqual(self.s.events.of_type("flush_ack_timeout"), [])
+        self.assertEqual(self.s.events.of_type("unit_truncated")[0]["context_id"], started["unit_id"])
+        await b.ws.close()
 
 
 if __name__ == "__main__":

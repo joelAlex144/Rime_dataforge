@@ -155,3 +155,30 @@ scheduler logic.
 - **Two `result_fenced` writers.** `fence.check()` logs one shape (issued and
   current turn ids, no byte count) and the provider logs another (byte counts,
   no turn ids). Both are useful; they should probably converge on one shape.
+
+## Document upload
+
+Upload is a first-class path on the same server, not a `--dev` feature, and it
+touches your UI and your server. The contract:
+
+- `POST /documents` -- multipart `file` (PDF; `.docx`, `.txt`, `.md`, `.html`
+  accepted through the same path) or a JSON body `{"url": ...}`. The response
+  is `text/event-stream`: one event per pipeline stage,
+  `{"stage": "extract"|"structure"|"segment"|"normalize"|"pii_scan"|"validate"|"write",
+  "status": "ok", "elapsed_ms": n, "detail": "..."}`, then a final
+  `{"stage": "done", "status": "ok", "entry": {doc_id, name, title, reviewed,
+  readable, clause_count, report}}`. On failure the final event is
+  `{"stage": "done", "status": "error", "error": "..."}`. Uploading the same
+  bytes again returns a single `done` event with `"existing": true` and the
+  same entry. `413` for more than 25 MB and `415` for an unsupported type are
+  the only HTTP errors; everything else is accepted.
+- `GET /documents/<doc_id>/report` -- the ingest report (JSON).
+- `POST /documents/<doc_id>/accept` -- sets `reviewed: true`; returns the entry.
+- The websocket broadcasts `library_changed` with the listener library after
+  an upload or an accept.
+
+**The listener page must not surface report contents.** It renders a progress
+bar from the stage events, the elapsed time and the title when the entry
+arrives -- no stage names, no clause counts, no scan findings, no accept step.
+The developer page renders the stage list, the report in full and Accept.
+Identity is `(doc_id, clause_id)`; `doc_id` is a content hash of the source.

@@ -131,6 +131,42 @@ two optional fields the hero fixture does not use: `kind`
 `4(b)(ii)`). Nothing else in the schema changed, so `grounding.py`, `wordmap.py`,
 `resume.py` and `read_demo.py` read both fixtures unmodified.
 
+### Structure pass and the one ingestion function
+
+`scripts/ingest.py` exposes `ingest_document()`, and that one function is what
+both the build-time CLI and the runtime upload (`POST /documents`) run, so the
+same PDF gives the same fixture bytes on every machine and `doc_id` is a
+content hash of the source. Every run goes through every stage --
+`extract -> structure -> segment -> normalize -> pii_scan -> validate ->
+write` -- and writes an ingest report next to the fixture as
+`<doc_id>.ingest_report.json`. Nothing in the report blocks a document. For a
+PDF or a `.docx` the structure pass is Docling's layout model, OCR off (there
+is `--ocr` for a scanned one), run locally with no API; the lossless
+DoclingDocument is saved beside the fixture as `<doc_id>.docling.json` and is
+the reproducibility artifact. Text, Markdown and HTML go through the line-based
+extractors and then the same downstream mapping. Docling loads its models
+once; the server pre-builds the converter at start so the first upload is not
+cold. Every clause gets a `kind`:
+
+| `kind` | From | Spoken? |
+|---|---|---|
+| `heading` | `section_header` | yes, as a signpost: `"{heading}. {n} items."` (n = direct body children); the clause-id anchor for everything under it |
+| `body` | `text`, `paragraph`, `list_item`, `caption`, `footnote` | yes; list markers stay in the display text |
+| `definition` | `body` under a Definitions / Interpretation heading, and definitions-table rows | yes; also indexed in the fixture's `terms` block |
+| `table_stub` | `table` | yes: `"There is a table here: {caption or header row}. Ask me for any row."` |
+| `table_row` | one per table row | on request only (`spoken_on_request`); linear playback skips it and logs `unit_skipped`; a question can land on it |
+| `boilerplate` | `page_header`, `page_footer`, any unmapped label, plus the regex pass | never sent; keeps its place in reading order; logged as `unit_skipped` |
+
+The regex pass demotes what the layout model leaves in body text: page
+numbers, standalone UIN codes, registered-office / CIN / IRDAI-registration
+lines, and any line recurring on 30 % or more of pages; `<<placeholder>>`
+fields are stripped and the clause flagged `has_placeholder`. A clause over
+the 1,000-character hard limit is split at sentence boundaries with the same
+splitter the resume path uses and suffixed `-s1`, `-s2`; every split is
+logged. The fixture also gains a `map` block (ordered top-level headings with
+child counts), which the reader speaks once at session start as a plain
+count, and `terms` (normalised term -> definition clause id).
+
 ### Personal data versus institutional contact details
 
 `scripts/ingest.py` scans the extracted text before it segments anything, and
@@ -232,34 +268,22 @@ talks only to our server: no provider key is ever sent to the client, and none
 appears in the bundle. Use the real voice with `python examples/policy-reader/server.py`
 after `set -a; source .env; set +a`.
 
-**Upload on both routes.** Adding a document is available on the listener
-screen ("Add a document") and on `/dev`, through one component. It is gated by
-`--allow-upload`, which is **on by default** for the demo and implied by
-`--dev`; `--no-upload` turns it off and both routes hide the control
-(`/api/status` and the websocket `hello` report `upload_enabled`). The scan,
-the 20 MB limit and the quarantine are the same on both: the file goes to
-`fixtures/unreviewed/`, the listener opens it as an unreviewed, session-only
-document with the banner, and `index.json` is never written. The two differ in
-what a refusal offers: `/dev` shows the institutional and personal hits as two
-lists with a reason field and *Retry with override* (the same file object is
-resubmitted with `allow_pii_reason`, at least 12 characters, and the trace
-gets `pii_override_used`); the listener explains and points at `/dev`. A name
-beside an account number is refused on both with no override.
-
-**One tab has the voice.** A session can have several tabs open (the listener
-and `/dev`, say), but exactly one socket receives audio: the tab that pressed
-play. Every other tab sees the same units, timestamps and events and hears
-nothing, so two tabs cannot become two voices, and "heard" has exactly one
-witness. Pause, stop-and-ask or a question from a tab without the voice makes
-the server send `flush` to the tab that has it and wait (up to 800 ms) for
-that tab's `flush_ack`, so the boundary is still the audio clock's. Play from
-another tab hands the voice over: the old tab is flushed, the clause is cut at
-its playhead and picked up on the new tab from that sentence. If the tab with
-the voice closes, reading stops and the boundary is the last ack. Acks and
-flush acks from any other tab are ignored. `/dev` has its own play, pause,
-stop-and-ask and question box, and a badge saying which tab has the voice.
-The flush ack is stamped with the unit at the playhead, not the last unit
-whose audio arrived, which under lookahead is the next clause.
+**Upload on both routes.** `POST /documents` (multipart PDF; `.docx`, `.txt`,
+`.md`, `.html` or a `{"url": ...}` body take the same path) runs
+`ingest_document()` in a worker thread and streams the seven stages as
+server-sent events `{stage, status, elapsed_ms}`; the last event carries the
+library entry `{doc_id, title, reviewed, readable, clause_count}`. The entry is
+appended to `index.json` at once with `reviewed: false`, and the reader can
+start on it. The listener page renders only a progress bar keyed to the
+stages, the elapsed time and the title once it lands: no stage names, no
+counts, no scan findings, no accept step. The developer page renders the stage
+list, the report in full (`GET /documents/<doc_id>/report`) and an **Accept**
+button (`POST /documents/<doc_id>/accept`) that sets `reviewed: true`; the
+badge on the listener page goes from "unreviewed" to nothing. Uploading the
+same bytes twice returns the existing entry. A 25 MB cap and an unsupported
+type are the only HTTP errors. A scanned or empty PDF still enters the
+library, with `readable: false`, and the picker says "No readable text found"
+instead of offering play.
 
 **Questions.** Enter in the question box while the voice is reading is a
 Stop-and-ask: the client sends `flush_ack`, `interrupt`, `ask`, so the
@@ -277,17 +301,15 @@ and the trace records `answer_source`; without it, or if the call fails, the
 answer is extractive. Eligibility questions never go through the model.
 
 **What `--dev` enables.** `python examples/policy-reader/server.py --dev` turns on
-`/api/dev/ingest`, `/api/dev/provider`, and `/api/dev/open`. Without it those
-three return 404 and the `/dev` drop zone is replaced by a note pointing at
-`scripts/ingest.py`. The judged flow never runs with `--dev`.
+provider swapping (`/api/dev/provider`) and the developer page's controls.
+Upload (`POST /documents`) is not behind it: it is a first-class path on both
+routes. Never enable `--dev` for the judged flow.
 
-**The unreviewed rule.** A runtime upload is written to
-`examples/policy-reader/fixtures/unreviewed/` and nowhere else. It is not added
-to `index.json`, so it does not appear in the listener's library; `--dev` can
-load one into the current session only, behind `?unreviewed=1`, and the listener
-then shows a persistent amber banner for as long as it is open. Moving a
-document into the library is a human action: review the clause list, then add it
-to `index.json`. `unreviewed/` is gitignored and must never be committed.
+**The reviewed flag.** There is no quarantine directory. A library entry
+carries `reviewed`, set by a person (the Accept button, or by hand in
+`index.json`), and `readable`, set by the structure pass. The five hand-checked
+IRDAI/lender wordings are `reviewed: true`; anything uploaded is `false` until
+accepted.
 
 **Trace replay, for judges with no key.** `/dev` lists `traces/*.jsonl` and
 replays a committed one at 20x into the same event stream, emitting

@@ -84,12 +84,21 @@ class Document:
     """One registry entry. The fixture and its Grounding load on first use."""
 
     def __init__(self, name: str, title: str, path: Path, clause_count: int = 0,
-                 source: Optional[dict] = None) -> None:
+                 source: Optional[dict] = None, doc_id: Optional[str] = None,
+                 reviewed: bool = False, readable: bool = True, report: Optional[str] = None) -> None:
         self.name = name
         self.title = title
         self.path = Path(path)
         self.clause_count = clause_count
         self.source = source or {}
+        # Identity is (doc_id, clause_id). doc_id is a content hash of the
+        # source, so it is the same on every machine; `name` is the human key.
+        self.doc_id = doc_id or name
+        # reviewed: a person pressed Accept (or set it by hand). readable:
+        # the structure pass found body text; False for a scanned/empty PDF.
+        self.reviewed = bool(reviewed)
+        self.readable = bool(readable)
+        self.report = report
         self.session = Session()
         self._fixture: Optional[dict] = None
         self._grounding: Optional[Grounding] = None
@@ -131,13 +140,58 @@ class Library:
         data = json.loads(self.index_path.read_text(encoding="utf-8"))
         for e in data.get("documents", []):
             name = e["name"]
+            if name in self._docs:
+                # keep the live session; refresh the registry fields
+                d = self._docs[name]
+                d.title = e.get("title") or name
+                d.clause_count = int(e.get("clause_count") or 0)
+                d.reviewed = bool(e.get("reviewed", False))
+                d.readable = bool(e.get("readable", True))
+                d.report = e.get("report")
+                d.doc_id = e.get("doc_id") or name
+                continue
             self._docs[name] = Document(
                 name=name,
                 title=e.get("title") or name,
                 path=(self.root / e["path"]).resolve(),
                 clause_count=int(e.get("clause_count") or 0),
                 source=e.get("source") or {},
+                doc_id=e.get("doc_id"),
+                reviewed=bool(e.get("reviewed", False)),
+                readable=bool(e.get("readable", True)),
+                report=e.get("report"),
             )
+
+    def reload(self) -> None:
+        """Pick up entries an upload just appended. Open sessions are kept."""
+        if self.index_path.exists():
+            self._read_index()
+
+    def by_doc_id(self, doc_id: str) -> Optional[Document]:
+        for d in self._docs.values():
+            if d.doc_id == doc_id:
+                return d
+        return None
+
+    def entry(self, name: str) -> Optional[dict]:
+        d = self._docs.get(name)
+        if d is None:
+            return None
+        return {"doc_id": d.doc_id, "name": d.name, "title": d.title, "reviewed": d.reviewed,
+                "readable": d.readable, "clause_count": d.clause_count, "report": d.report}
+
+    def set_reviewed(self, name: str, reviewed: bool = True) -> dict:
+        """The Accept button: a person is the review. Written to index.json."""
+        d = self._docs[name]
+        d.reviewed = bool(reviewed)
+        data = json.loads(self.index_path.read_text(encoding="utf-8"))
+        for e in data.get("documents", []):
+            if e.get("name") == name:
+                e["reviewed"] = bool(reviewed)
+        self.index_path.write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+        self.events.emit("document_accepted" if reviewed else "document_unaccepted",
+                         document=name, doc_id=d.doc_id)
+        return self.entry(name)
 
     @classmethod
     def single(cls, fixture_path, events) -> "Library":
@@ -154,7 +208,8 @@ class Library:
 
     # ---------------------------------------------------------------- query
     def list(self) -> list:
-        return [{"name": d.name, "title": d.title, "clause_count": d.clause_count}
+        return [{"name": d.name, "title": d.title, "clause_count": d.clause_count,
+                 "doc_id": d.doc_id, "reviewed": d.reviewed, "readable": d.readable}
                 for d in self._docs.values()]
 
     @property

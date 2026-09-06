@@ -8,7 +8,7 @@
  * interrupt -- see buildInterrupt() in reducer.ts.
  */
 import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
-import { Action, DISCONNECTED, State, buildInterrupt, buildPause, initialState, reducer, wordAt } from './reducer'
+import { Action, DISCONNECTED, State, buildInterrupt, buildOpen, buildPause, initialState, reducer, wordAt } from './reducer'
 
 const ACK_INTERVAL_MS = 100
 
@@ -529,7 +529,15 @@ export function useSession(): Session {
   )
 
   const resume = useCallback(() => send({ type: 'resume' }), [send])
-  const open = useCallback((name: string) => send({ type: 'open', name }), [send])
+  const open = useCallback(
+    (name: string) => {
+      const sounding = playerRef.current.playheadUnit() !== null
+      const ctx = playerRef.current.playheadUnit()?.contextId ?? ctxRef.current
+      const at = sounding ? playerRef.current.flush() : 0
+      for (const msg of buildOpen(name, ctx, at, sounding)) send(msg)
+    },
+    [send],
+  )
   const jump = useCallback((unitId: string) => send({ type: 'jump', unit_id: unitId }), [send])
 
   return useMemo(
