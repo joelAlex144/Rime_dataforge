@@ -48,6 +48,16 @@ export type IngestRefusal = {
 
 type Progress = { loaded: number; total: number } | null
 
+/** Open an ingested fixture in THIS session only. index.json is never touched;
+ *  the server switches the current document and every tab hears about it. */
+export function openUnreviewed(name: string): Promise<Response> {
+  return fetch('/api/dev/open?unreviewed=1', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ name }),
+  })
+}
+
 export function fmtBytes(n: number): string {
   if (n < 1024) return `${n} B`
   if (n < 1024 * 1024) return `${(n / 1024).toFixed(0)} KB`

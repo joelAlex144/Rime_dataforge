@@ -48,7 +48,7 @@ const METRICS = {
 }
 
 function mockFetch(dev: boolean, upload: boolean = dev) {
-  return vi.fn(async (url: any) => {
+  return vi.fn(async (url: any, _init?: any) => {
     const u = String(url)
     const body =
       u.startsWith('/api/status') ? STATUS(dev, upload)
@@ -327,6 +327,42 @@ describe('dev route', () => {
            text_display: 'A second clause that arrives while the first is still sounding elsewhere.' })
     expect(await screen.findByText(/A second clause that arrives/)).toBeInTheDocument()
     expect(screen.getByText(/playing in another tab/)).toBeInTheDocument()
+  })
+
+  it('a successful upload on /dev opens the document at once and names it', async () => {
+    const fetchMock = mockFetch(true)
+    vi.stubGlobal('fetch', fetchMock)
+    class FakeXHR {
+      static last: any = null
+      upload: any = { onprogress: null }
+      onload: any = null
+      onerror: any = null
+      status = 0
+      responseText = ''
+      open() {}
+      setRequestHeader() {}
+      send() { FakeXHR.last = this }
+    }
+    vi.stubGlobal('XMLHttpRequest', FakeXHR as any)
+    render(<MemoryRouter><Dev /></MemoryRouter>)
+    feed(HELLO)
+    await waitFor(() => expect(document.querySelector('.drop')).toBeTruthy())
+    fireEvent.change(screen.getByLabelText('Document file'), {
+      target: { files: [new File([new Uint8Array(64)], 'wording.pdf', { type: 'application/pdf' })] },
+    })
+    FakeXHR.last.status = 200
+    FakeXHR.last.responseText = JSON.stringify({
+      ok: true, name: 'wording', clause_count: 25, path: 'fixtures/unreviewed/wording.json',
+      report: [], warnings: [], preview: [], note: 'Written to fixtures/unreviewed/.',
+    })
+    FakeXHR.last.onload()
+    await waitFor(() =>
+      expect(fetchMock.mock.calls.some(([u]) => String(u).startsWith('/api/dev/open?unreviewed=1'))).toBe(true))
+    const call = fetchMock.mock.calls.find(([u]) => String(u).startsWith('/api/dev/open'))!
+    expect(JSON.parse((call[1] as any).body).name).toBe('wording')
+    feed({ type: 'document_opened', name: 'wording', documents: [] })
+    expect(await screen.findByText(/document: wording/)).toBeInTheDocument()
+    expect(screen.getByText(/wording \(open\)/)).toBeInTheDocument()
   })
 
   it('identifiers are expected here, unlike the listener', async () => {

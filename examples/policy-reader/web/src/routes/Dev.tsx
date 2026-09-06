@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 import { Download, Hand, Pause, Play } from 'lucide-react'
 import { useSession } from '../store/session'
 import type { Cell, EventRecord } from '../store/reducer'
-import UploadDocument, { type IngestResult } from '../components/UploadDocument'
+import UploadDocument, { openUnreviewed, type IngestResult } from '../components/UploadDocument'
 
 function cls(c?: Cell) {
   return `v s-${c?.state ?? 'off'}`
@@ -159,6 +159,9 @@ export default function Dev() {
                     : 'voice: none (press play)'}
               </span>
               <span className="mono s-off">{state.phase}</span>
+              <span className="mono" aria-label="Current document">
+                document: {state.current ?? 'none'}
+              </span>
             </>
           )
         })()}
@@ -195,7 +198,12 @@ export default function Dev() {
             <UploadDocument
               session={s}
               allowOverride
-              onSuccess={(d) => setIngested((xs) => [d, ...xs.filter((x) => x.name !== d.name)])}
+              onSuccess={(d) => {
+                setIngested((xs) => [d, ...xs.filter((x) => x.name !== d.name)])
+                // Open it now, session-only, exactly as the listener does. Play
+                // otherwise read whatever document was already open.
+                openUnreviewed(d.name)
+              }}
             />
           )}
           {ingested.length > 0 && (
@@ -203,22 +211,12 @@ export default function Dev() {
               <div className="s-off mono">Ingested this session (fixtures/unreviewed/)</div>
               {ingested.map((d) => (
                 <div className="stage" key={d.name}>
-                  <span className="st mono">{d.name}</span>
+                  <span className="st mono">{d.name}{state.current === d.name ? ' (open)' : ''}</span>
                   <span className="s-off">{d.clause_count} clauses</span>
                   <span className={d.override_reason ? 's-warn' : 's-off'}>
                     {d.override_reason ? `override: ${d.override_reason}` : ''}
                   </span>
-                  <button
-                    onClick={() =>
-                      fetch('/api/dev/open?unreviewed=1', {
-                        method: 'POST',
-                        headers: { 'content-type': 'application/json' },
-                        body: JSON.stringify({ name: d.name }),
-                      })
-                    }
-                  >
-                    Open in listener (unreviewed)
-                  </button>
+                  <button onClick={() => openUnreviewed(d.name)}>Open (unreviewed)</button>
                 </div>
               ))}
             </div>

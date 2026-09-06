@@ -682,6 +682,24 @@ class ReaderSession:
                                      bytes=st.bytes, rendered_ms=round(st.rendered_ms, 1))
 
 
+async def _switch_document(s: "ReaderSession", socks, name: str):
+    """Open another document. If anything is sounding, the tab with the voice is
+    flushed first and the cut attributed on the document being left, so its
+    buffered audio does not play out under the new document's first clause and
+    its position is saved at the playhead, not at what was synthesised."""
+    if s.playing or (s._reader and not s._reader.done()) or s._answer is not None:
+        if s.sink is not None:
+            await s.request_flush()
+        await _stop_and_attribute(s, socks, "open")
+    else:
+        await s.stop_reading()
+    s._resume_from = None
+    doc = s.library.open(name)
+    await broadcast({"type": "document_opened", "name": doc.name,
+                     "documents": s.listener_library()}, socks)
+    return doc
+
+
 def _spoken_from(c: dict, char_start: int) -> tuple:
     """The spoken text for text_display[char_start:], rebuilt from spoken_map.
 
@@ -979,17 +997,13 @@ async def api_dev_open_unreviewed(request):
     if not path.exists():
         return _json({"error": f"no unreviewed fixture {name!r}"}, status=404)
     from library import Document
-    await s.stop_reading()
-    s._resume_from = None
     doc = Document(name, json.loads(path.read_text(encoding="utf-8")).get("title", name), path)
     s.library._docs[name] = doc
     s._unreviewed = name
-    s.library.open(name)
     s.events.emit("unreviewed_opened", name=name)
     # Both routes learn about it the same way a library open is announced, so
     # the listener shows the document (with its unreviewed banner) at once.
-    await broadcast({"type": "document_opened", "name": name,
-                     "documents": s.listener_library()}, s.events.sockets)
+    await _switch_document(s, s.events.sockets, name)
     return _json({"ok": True, "name": name, "unreviewed": True})
 
 
@@ -1218,15 +1232,10 @@ async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
         return
 
     if t == "open":
-        await s.stop_reading()
-        s._resume_from = None
         try:
-            doc = s.library.open(str(m.get("name", "")))
+            await _switch_document(s, socks, str(m.get("name", "")))
         except LibraryError as e:
             await ws.send_str(json.dumps({"type": "error", "message": str(e)}))
-            return
-        await broadcast({"type": "document_opened", "name": doc.name,
-                         "documents": s.listener_library()}, socks)
         return
 
     if t == "jump":

@@ -20,7 +20,7 @@ import {
 } from 'lucide-react'
 import { useSession } from '../store/session'
 import type { DocEntry } from '../store/reducer'
-import UploadDocument from '../components/UploadDocument'
+import UploadDocument, { openUnreviewed } from '../components/UploadDocument'
 
 const ICON = 18
 
@@ -81,11 +81,7 @@ export default function Listener() {
   const uploaded = async (d: { name: string }) => {
     // Session-only. index.json is never touched; the existing unreviewed
     // banner is what tells the listener so.
-    await fetch('/api/dev/open?unreviewed=1', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ name: d.name }),
-    })
+    await openUnreviewed(d.name)
     dialogRef.current?.close()
   }
 
