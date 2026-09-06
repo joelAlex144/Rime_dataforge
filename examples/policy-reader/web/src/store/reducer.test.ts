@@ -311,3 +311,15 @@ describe('upload gate', () => {
     expect(s.uploadEnabled).toBe(true)
   })
 })
+
+describe('audio sink', () => {
+  it('hello and sink messages say whether this tab has the voice', () => {
+    let s = run([{ type: 'hello', documents: [], sink: false, sink_any: true }])
+    expect(s.audioSink).toBe(false)
+    expect(s.anySink).toBe(true)
+    s = run([{ type: 'sink', you: true, any: true }], s)
+    expect(s.audioSink).toBe(true)
+    s = run([{ type: 'sink', you: false, any: false }], s)
+    expect(s.anySink).toBe(false)
+  })
+})

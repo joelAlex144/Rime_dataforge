@@ -192,6 +192,11 @@ class ReaderSession:
         self._answer: Optional[dict] = None            # the spoken answer in flight
         self._answer_task: Optional[asyncio.Task] = None
         self._stop_seq = 0                             # bumps on every stop_reading
+        # Exactly one socket receives audio: the tab that pressed play. Every
+        # other tab sees the same state and events but hears nothing, so two
+        # open tabs cannot become two voices, and "heard" has one witness.
+        self.sink = None
+        self._flush_waiter: Optional[asyncio.Future] = None
         self.provider = None
         self.provider_connected_at: Optional[float] = None
         self.contexts: dict[str, ContextState] = {}
@@ -354,6 +359,41 @@ class ReaderSession:
             "llm": llm,
         }
 
+    # ---------------------------------------------------------- audio sink
+    def audio_targets(self) -> set:
+        return {self.sink} if self.sink is not None else set()
+
+    async def announce_sink(self, sockets) -> None:
+        for ws in list(sockets):
+            try:
+                await ws.send_str(json.dumps({"type": "sink", "you": ws is self.sink,
+                                              "any": self.sink is not None}))
+            except Exception:
+                pass
+
+    async def request_flush(self, timeout: float = 0.8) -> bool:
+        """A stop from a tab that is not the audio sink: ask the sink to flush
+        and report its playhead, and wait for that flush_ack. The boundary is
+        still the audio clock's, just measured on the tab that has the audio."""
+        if self.sink is None:
+            return False
+        self._flush_waiter = asyncio.get_running_loop().create_future()
+        try:
+            await self.sink.send_str(json.dumps({"type": "flush"}))
+            await asyncio.wait_for(self._flush_waiter, timeout)
+            return True
+        except (asyncio.TimeoutError, Exception):
+            self.events.emit("flush_ack_timeout", timeout_ms=int(timeout * 1000))
+            return False
+        finally:
+            self._flush_waiter = None
+
+    async def claim_sink(self, ws, sockets) -> None:
+        if ws is self.sink:
+            return
+        self.sink = ws
+        await self.announce_sink(sockets)
+
     # -------------------------------------------------------------- reading
     def _backlog_ms(self) -> float:
         """Audio sent but not yet acked as played, over units still deliverable.
@@ -444,7 +484,8 @@ class ReaderSession:
                 st.state = "playing"
                 await broadcast({"type": "audio", "context_id": ctx_id, "seq": item.seq,
                                  "sample_rate": provider.sample_rate,
-                                 "b64": base64.b64encode(item.pcm).decode()}, sockets)
+                                 "b64": base64.b64encode(item.pcm).decode()},
+                                self.audio_targets())
             elif isinstance(item, Done):
                 st.ttfb_ms = item.ttfb_ms
                 st.state = "done"
@@ -968,6 +1009,7 @@ async def ws_audio(request):
         await ws.send_str(json.dumps({"type": "provider_error", "message": str(e)}))
     await ws.send_str(json.dumps({"type": "hello", "session_id": s.id, "dev": s.dev,
                                   "upload_enabled": s.allow_upload,
+                                  "sink": ws is s.sink, "sink_any": s.sink is not None,
                                   "provider": s.descriptor,
                                   "documents": s.listener_library(),
                                   "current": s.library.current.name if s.library.current else None}))
@@ -982,6 +1024,14 @@ async def ws_audio(request):
             await handle_client_message(s, m, socks, ws)
     finally:
         socks.discard(ws)
+        if ws is s.sink:
+            # The tab with the audio went away. Nothing can be heard until
+            # another tab presses play, so stop now and attribute the boundary
+            # to the last ack rather than let synthesis run unheard.
+            s.sink = None
+            if s.playing or (s._reader and not s._reader.done()) or s._answer is not None:
+                await _stop_and_attribute(s, socks, "sink_left")
+            await s.announce_sink(socks)
         if not socks:
             await s.stop_reading()
     return ws
@@ -1055,6 +1105,11 @@ async def _stop_and_attribute(s: ReaderSession, socks, reason: str) -> None:
 async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
     t = m.get("type")
 
+    if s.sink is not None and ws is not s.sink and t in ("rendered", "unit_ended", "flush_ack"):
+        # Only the tab with the audio has a clock. Anything else is a tab that
+        # flushed an empty player; recording it would move the boundary.
+        return
+
     if t == "rendered":
         # The audio clock, every 100 ms. This is the only evidence of hearing.
         st = s.contexts.get(m.get("context_id", ""))
@@ -1123,23 +1178,42 @@ async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
         s._flush_ctx = fctx or None
         s.events.emit("flush_ack", context_id=fctx,
                       rendered_ms=round(float(m.get("rendered_ms") or 0.0), 1))
+        if s._flush_waiter is not None and not s._flush_waiter.done():
+            s._flush_waiter.set_result(True)          # a stop from another tab was waiting
         return
 
     if t == "interrupt":
+        if s.sink is not None and ws is not s.sink:
+            await s.request_flush()
         await _stop_and_attribute(s, socks, "interrupt")
+        if s.sink is None:
+            await s.claim_sink(ws, socks)           # the answer will need a listener
         return
 
     if t == "play":
         if s.replaying:
             return
+        if s.sink is not None and ws is not s.sink:
+            # Play from another tab moves the voice there. Whatever the old
+            # tab was hearing is cut at its playhead and picked up on the new
+            # one from that sentence.
+            if s.playing or (s._reader and not s._reader.done()) or s._answer is not None:
+                await s.request_flush()
+                await _stop_and_attribute(s, socks, "handover")
+        await s.claim_sink(ws, socks)
+        if s._reader and not s._reader.done():
+            return                                  # already reading
         s.playing = True
         await broadcast({"type": "playing"}, socks)
         s._reader = asyncio.ensure_future(s.read_loop(socks))
         return
 
     if t == "pause":
-        # The client flushes and sends flush_ack first, exactly as for an
-        # interrupt, so the boundary lands on the clause being heard.
+        # The sink flushes and sends flush_ack first, exactly as for an
+        # interrupt, so the boundary lands on the clause being heard. From any
+        # other tab the server asks the sink for that ack.
+        if s.sink is not None and ws is not s.sink:
+            await s.request_flush()
         await _stop_and_attribute(s, socks, "pause")
         return
 
@@ -1194,7 +1268,11 @@ async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
         # the fallback for a client that asks while still playing, and for a
         # question asked over a spoken answer.
         if s.playing or (s._reader and not s._reader.done()) or s._answer is not None:
+            if s.sink is not None and ws is not s.sink:
+                await s.request_flush()
             await _stop_and_attribute(s, socks, "ask")
+        if s.sink is None:
+            await s.claim_sink(ws, socks)           # someone has to hear the answer
         g = doc.grounding
         # Deictic questions resolve against the clause the listener actually
         # heard last: _stop_and_attribute set last_heard_unit_id from the

@@ -233,6 +233,9 @@ export default function Listener() {
           </button>
         </div>
         {busy && <p className="notice">Replaying a recorded session. Playback is paused.</p>}
+        {!state.audioSink && state.anySink && (
+          <p className="notice">The voice is playing in another tab. Press play here to move it.</p>
+        )}
       </main>
     </div>
   )

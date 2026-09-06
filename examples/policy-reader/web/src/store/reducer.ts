@@ -96,6 +96,9 @@ export type State = {
   sessionId: string | null
   dev: boolean
   uploadEnabled: boolean
+  // This tab has the session's audio; some tab has it.
+  audioSink: boolean
+  anySink: boolean
   provider: Record<string, any>
   providerFellBack: boolean
   replaying: string | null
@@ -141,6 +144,8 @@ export const initialState: State = {
   sessionId: null,
   dev: false,
   uploadEnabled: false,
+  audioSink: false,
+  anySink: false,
   provider: {},
   providerFellBack: false,
   replaying: null,
@@ -283,11 +288,16 @@ function applyServer(state: State, m: any): State {
         sessionId: m.session_id,
         dev: !!m.dev,
         uploadEnabled: !!m.upload_enabled,
+        audioSink: !!m.sink,
+        anySink: !!m.sink_any,
         provider: m.provider || {},
         providerFellBack: (m.provider?.provider ?? '') === 'fake',
         documents: m.documents || [],
         current: m.current ?? null,
       }
+
+    case 'sink':
+      return { ...state, audioSink: !!m.you, anySink: !!m.any }
 
     case 'provider_active': {
       const fell = (m.provider ?? '') === 'fake'

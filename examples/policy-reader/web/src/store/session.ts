@@ -298,6 +298,9 @@ export function useSession(): Session {
   const wsRef = useRef<WebSocket | null>(null)
   const playerRef = useRef<AudioPlayer>(new AudioPlayer())
   const ctxRef = useRef<string | null>(null)
+  // Whether THIS tab is the session's audio sink. The server sends audio to
+  // exactly one socket; every other tab shows the same state silently.
+  const sinkRef = useRef(false)
   // Units and their word maps arrive while the PREVIOUS clause is still
   // sounding. Showing them on arrival is what makes the text run ahead of the
   // voice, so they are held here and released when the playhead reaches them.
@@ -354,8 +357,27 @@ export function useSession(): Session {
         dispatch({ type: 'error', message: 'A playback message was lost. Audio may have gaps.' })
       }
     }
+    // The unit the listener is hearing right now. Not ctxRef: under lookahead
+    // the most recently ARRIVED audio is the next clause, and a flush ack
+    // stamped with it attributed the boundary to a clause not yet sounding.
+    const playheadCtx = () => playerRef.current.playheadUnit()?.contextId ?? ctxRef.current
+
     const handleMessage = async (m: any) => {
+      if (m.type === 'sink') {
+        sinkRef.current = !!m.you
+        dispatch({ type: 'server', msg: m })
+        return
+      }
+      if (m.type === 'flush') {
+        // A stop from another tab. Flush here, where the audio is, and report
+        // the playhead so the server can attribute the boundary.
+        const ctx = playheadCtx()
+        const at = playerRef.current.flush()
+        send({ type: 'flush_ack', context_id: ctx, rendered_ms: at })
+        return
+      }
       if (m.type === 'audio') {
+        if (!sinkRef.current) return          // not this tab's voice
         ctxRef.current = m.context_id
         try {
           await playerRef.current.start(
@@ -414,6 +436,11 @@ export function useSession(): Session {
         return
       }
       if (m.type === 'unit_started') {
+        if (!sinkRef.current) {
+          // No playhead here to release it: show it as it happens.
+          dispatch({ type: 'server', msg: m })
+          return
+        }
         playerRef.current.beginUnit(m.context_id)
         pendingUnits.current.set(m.context_id, m)
         // Held, not shown: the playhead releases it (see the ack callback).
@@ -425,6 +452,10 @@ export function useSession(): Session {
         return
       }
       if (m.type === 'timestamps') {
+        if (!sinkRef.current) {
+          dispatch({ type: 'server', msg: m })
+          return
+        }
         pendingTs.current.set(m.context_id, m)
         if (m.context_id === shownCtx.current) dispatch({ type: 'server', msg: scaleTs(m) })
         return
@@ -471,9 +502,11 @@ export function useSession(): Session {
   }, [])
 
   const interrupt = useCallback(() => {
-    // Flush locally first so the ack carries a position that has stopped moving.
+    // Flush locally first so the ack carries a position that has stopped
+    // moving, stamped with the unit at the playhead (not the last to arrive).
+    const ctx = playerRef.current.playheadUnit()?.contextId ?? ctxRef.current
     const at = playerRef.current.flush()
-    for (const msg of buildInterrupt(ctxRef.current, at)) send(msg)
+    for (const msg of buildInterrupt(ctx, at)) send(msg)
   }, [send])
 
   const play = useCallback(() => {
@@ -482,8 +515,9 @@ export function useSession(): Session {
   }, [send])
 
   const pause = useCallback(() => {
+    const ctx = playerRef.current.playheadUnit()?.contextId ?? ctxRef.current
     const at = playerRef.current.flush()
-    for (const msg of buildPause(ctxRef.current, at)) send(msg)
+    for (const msg of buildPause(ctx, at)) send(msg)
   }, [send])
 
   const ask = useCallback(

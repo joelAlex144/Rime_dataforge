@@ -221,3 +221,7 @@ a { color: var(--accent); }
 .upload .override { display: flex; gap: 8px; align-items: center; margin-top: 8px; flex-wrap: wrap; }
 .upload .override input { flex: 1; min-width: 220px; }
 dialog .upload { min-width: min(520px, 90vw); }
+
+/* /dev transport */
+.transport-dev { margin: 8px 0 12px; }
+.transport-dev input[type="text"] { flex: 1; min-width: 200px; }
