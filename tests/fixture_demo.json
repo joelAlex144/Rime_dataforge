@@ -1,0 +1,5 @@
+[
+  {"unit_id": "sec-1", "order": 0, "text_display": "The policyholder must file a claim within thirty days.", "text_spoken": "The policyholder must file a claim within thirty days.", "clause_label": "the filing clause"},
+  {"unit_id": "sec-2", "order": 1, "text_display": "Late claims may be denied at insurer discretion.", "text_spoken": "Late claims may be denied at insurer discretion.", "clause_label": "the exclusions clause"},
+  {"unit_id": "sec-3", "order": 2, "text_display": "Section four b two governs exceptions.", "text_spoken": "Section four b two governs exceptions.", "clause_label": "the exceptions clause"}
+]

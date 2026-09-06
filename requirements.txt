@@ -12,3 +12,8 @@ aiohttp>=3.9
 pypdf>=4.0
 python-docx>=1.1
 beautifulsoup4>=4.12
+
+# delivery side: still to be wired, needs credentials and a pinned version
+# livekit-agents
+# livekit-plugins-silero
+# numpy

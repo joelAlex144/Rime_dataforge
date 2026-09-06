@@ -1,16 +1,24 @@
 .env
 __pycache__/
 *.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Traces are the evidence artifact and are committed deliberately, so there is
+# no blanket traces/* rule here. The delivery side ignored traces/*.jsonl and
+# traces/*.json wholesale; adopting that would hide the preflight, bench and
+# round-trip files RIME_EVIDENCE.md cites. Ignore only the per-run noise.
 traces/*.wav
 traces/numbers/
-notes/*.jsonl
-.venv/
-.pytest_cache/
+traces/session_*.jsonl
 traces/chat_demo.jsonl
+traces/demo_ledger.jsonl
+notes/*.jsonl
 
 # dev-only runtime uploads: never committed, never in index.json
 examples/policy-reader/fixtures/unreviewed/
+
 examples/policy-reader/web/node_modules/
 examples/policy-reader/web/dist/
-traces/session_*.jsonl
 examples/policy-reader/web/*.tsbuildinfo
