@@ -97,6 +97,35 @@ class WordMap:
                 sp.t_end_ms = audio_ms
         return self
 
+    def stretch_to(self, audio_ms: float, estimate_threshold: float = 0.05) -> "WordMap":
+        """Scale word times onto the real audio length.
+
+        Rime coda's word timestamps are a nominal PREDICTION: they arrive in the
+        same millisecond as the first audio byte, sit on a fixed 180.53 ms grid,
+        and undershoot the delivered audio by 1.5-3.3 s per clause. Treated as
+        measurements they make a clause look finished at roughly half its true
+        length. Scaling the whole map so its last word ends with the audio keeps
+        the ordering usable while being honest that the interior points are
+        interpolated, not observed.
+
+        A stretch of more than `estimate_threshold` marks every span estimated,
+        which is what keeps /api/metrics' interpolated-span count truthful and
+        the highlight claim at clause level rather than word level.
+        """
+        if not self.spans or audio_ms <= 0:
+            return self
+        last = self.spans[-1].t_end_ms
+        if last <= 0:
+            return self
+        factor = audio_ms / last
+        estimated = abs(factor - 1.0) > estimate_threshold
+        for sp in self.spans:
+            sp.t_start_ms *= factor
+            sp.t_end_ms *= factor
+            if estimated:
+                sp.estimated = True
+        return self
+
     def to_json(self) -> dict:
         return {
             "unit_id": self.unit_id,

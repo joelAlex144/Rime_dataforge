@@ -62,6 +62,9 @@ UNREVIEWED = FIXTURES / "unreviewed"
 TRACES = ROOT / "traces"
 
 CHARS_PER_SECOND = 14.0          # for the listener's "minutes left" estimate
+# How far synthesis may run ahead of the playhead. One clause of buffer keeps
+# playback gapless; a bounded amount is wasted (fenced) on an interruption.
+LEAD_MS = 4000.0
 MAX_UPLOAD_BYTES = 20 * 1024 * 1024
 DEFAULT_REFERRAL = "the team that publishes this document"
 # Audible tone for the disclosed fallback voice. Set FAKE_TONE_HZ=0 for silence.
@@ -142,8 +145,11 @@ class ContextState:
     bytes: int = 0               # bytes the SERVER sent -- not evidence of hearing
     rendered_ms: float = 0.0     # bytes the CLIENT says it played -- this is evidence
     fenced_bytes: int = 0
-    audio_ms: float = 0.0
+    audio_ms: float = 0.0          # derived from BYTES, never from timestamps
+    predicted_end_ms: Optional[float] = None   # what Rime's timestamps claimed
     ttfb_ms: Optional[float] = None
+    synth_done: bool = False       # provider finished sending this unit
+    heard: bool = False            # client acked playing it to the end
 
     def as_dict(self) -> dict:
         return {
@@ -151,6 +157,8 @@ class ContextState:
             "state": self.state, "bytes": self.bytes,
             "rendered_ms": round(self.rendered_ms, 1), "fenced_bytes": self.fenced_bytes,
             "audio_ms": round(self.audio_ms, 1), "ttfb_ms": self.ttfb_ms,
+            "predicted_end_ms": (round(self.predicted_end_ms, 1)
+                                 if self.predicted_end_ms is not None else None),
         }
 
 
@@ -177,6 +185,12 @@ class ReaderSession:
         self._reader: Optional[asyncio.Task] = None
         self._flush_acks: list[tuple[float, float]] = []   # (ack_ms, interrupt_ms)
         self._pending_flush: Optional[float] = None
+        self._flush_ctx: Optional[str] = None
+        # Flow control: how much audio has been synthesised vs actually played,
+        # both in ms. The reader pumps synthesis ahead of the playhead by at
+        # most LEAD_MS, so audio is always buffered (no inter-clause gap) but a
+        # bounded amount is wasted on an interruption.
+        self._synth_ms: float = 0.0
         self._unreviewed: Optional[str] = None
         rows = self.library.list()
         if rows:
@@ -322,6 +336,35 @@ class ReaderSession:
         }
 
     # -------------------------------------------------------------- reading
+    def _played_ms(self) -> float:
+        """Total audio actually played across all units, from client acks."""
+        return sum(min(st.rendered_ms, st.audio_ms) for st in self.contexts.values()
+                   if st.audio_ms > 0)
+
+    async def _mark_heard(self, st: "ContextState", sockets) -> None:
+        """A unit is heard once, when the client says it finished playing it.
+
+        Called from the ack path and the unit_ended path, never from the synth
+        pump: heard is client-acked delivery, not something the server infers
+        from having sent the audio.
+        """
+        if st.heard:
+            return
+        st.heard = True
+        st.state = "done"
+        doc = self.library.current
+        if doc is None:
+            return
+        c = doc.grounding.by_id.get(st.unit_id)
+        if c is None:
+            return
+        doc.session.ledger[st.unit_id] = "heard"
+        doc.session.last_heard_unit_id = st.unit_id
+        doc.session.boundary_char = len(c["text_display"])
+        self.events.emit("unit_heard", document=doc.name, context_id=st.context_id,
+                         unit_id=st.unit_id, char_end=len(c["text_display"]),
+                         of=len(c["text_display"]), rendered_ms=round(st.rendered_ms, 1))
+
     async def read_loop(self, sockets) -> None:
         """Read clause after clause until paused, interrupted, or out of document."""
         doc = self.library.current
@@ -353,18 +396,29 @@ class ReaderSession:
                         break
                     if isinstance(item, Timestamps):
                         ts = item
-                        st.audio_ms = item.end_ms[-1] if item.end_ms else 0.0
+                        # NOT audio_ms. These are a prediction that undershoots
+                        # the delivered audio; audio_ms comes from bytes only.
+                        st.predicted_end_ms = item.end_ms[-1] if item.end_ms else None
                         try:
                             wm = build_word_map(c["id"], c["text_display"], segs,
                                                 item.words, item.start_ms, item.end_ms)
                             self.wordmaps[ctx_id] = wm
                         except Exception as e:                       # alignment is best effort
                             self.events.emit("wordmap_failed", context_id=ctx_id, error=str(e))
+                        # Spans carry char offsets into text_display, so the
+                        # client can advance a read-along highlight from its own
+                        # audio clock instead of waiting for a boundary event.
+                        wm_now = self.wordmaps.get(ctx_id)
+                        spans = ([{"char_start": sp.char_start, "char_end": sp.char_end,
+                                   "t_start_ms": sp.t_start_ms, "t_end_ms": sp.t_end_ms}
+                                  for sp in wm_now.spans] if wm_now else [])
                         await broadcast({"type": "timestamps", "context_id": ctx_id,
                                          "words": item.words, "start_ms": item.start_ms,
-                                         "end_ms": item.end_ms}, sockets)
+                                         "end_ms": item.end_ms, "spans": spans}, sockets)
                     elif isinstance(item, AudioChunk):
                         st.bytes += len(item.pcm)
+                        # The only honest length: bytes actually produced.
+                        st.audio_ms = st.bytes / 2 / provider.sample_rate * 1000
                         st.state = "playing"
                         await broadcast({"type": "audio", "context_id": ctx_id, "seq": item.seq,
                                          "sample_rate": provider.sample_rate,
@@ -372,6 +426,35 @@ class ReaderSession:
                     elif isinstance(item, Done):
                         st.ttfb_ms = item.ttfb_ms
                         st.state = "done"
+                        if item.total_bytes:
+                            st.audio_ms = item.total_bytes / 2 / provider.sample_rate * 1000
+                        self.events.emit(
+                            "timestamp_drift", context_id=ctx_id, unit_id=c["id"],
+                            predicted_end_ms=(round(st.predicted_end_ms, 1)
+                                              if st.predicted_end_ms else None),
+                            audio_ms=round(st.audio_ms, 1),
+                            drift_ms=(round(st.audio_ms - st.predicted_end_ms, 1)
+                                      if st.predicted_end_ms else None),
+                            ratio=(round(st.predicted_end_ms / st.audio_ms, 3)
+                                   if st.predicted_end_ms and st.audio_ms else None))
+                        # Stretch the map onto the real audio and re-broadcast,
+                        # so the client's read-along tracks the voice instead of
+                        # the prediction.
+                        wm_done = self.wordmaps.get(ctx_id)
+                        if wm_done is not None and wm_done.spans:
+                            wm_done.stretch_to(st.audio_ms)
+                            await broadcast({
+                                "type": "timestamps", "context_id": ctx_id,
+                                "words": [sp.word for sp in wm_done.spans],
+                                "start_ms": [sp.t_start_ms for sp in wm_done.spans],
+                                "end_ms": [sp.t_end_ms for sp in wm_done.spans],
+                                "spans": [{"char_start": sp.char_start, "char_end": sp.char_end,
+                                           "t_start_ms": sp.t_start_ms, "t_end_ms": sp.t_end_ms}
+                                          for sp in wm_done.spans],
+                                "corrected": True,
+                            }, sockets)
+                        st.synth_done = True
+                        self._synth_ms += st.audio_ms
                         await broadcast({"type": "unit_done", "context_id": ctx_id,
                                          "unit_id": c["id"], "bytes": item.total_bytes}, sockets)
                     elif isinstance(item, TTSError):
@@ -381,16 +464,31 @@ class ReaderSession:
 
                 if not self.playing:
                     return
-                # Heard is an ack, not a send: wait for the client's clock.
-                await self._await_rendered(st, sockets)
-                if not self.playing:
-                    return
-                s.ledger[c["id"]] = "heard"
-                s.last_heard_unit_id = c["id"]
-                s.boundary_char = len(c["text_display"])
-                self.events.emit("unit_heard", document=doc.name, context_id=c["id"],
-                                 char_end=s.boundary_char, of=len(c["text_display"]),
-                                 rendered_ms=round(st.rendered_ms, 1))
+                if st.bytes == 0:
+                    self.events.emit("no_audio", context_id=ctx_id)
+
+                # Flow control, NOT a wait for this clause to finish. Synthesis
+                # runs ahead of the playhead by at most LEAD_MS so the next
+                # clause's audio is already buffered when this one ends -- that
+                # is what removes the inter-clause gap. "Heard" is marked
+                # separately, from client acks (see _mark_heard). The old code
+                # blocked here for the whole real-time playback, which made every
+                # clause boundary a pause and, when the last ack plateaued just
+                # short of the end, a 12-second one.
+                while self.playing and (self._synth_ms - self._played_ms()) > LEAD_MS:
+                    await asyncio.sleep(0.05)
+
+            # Synthesis is done; wait for playback to drain before declaring the
+            # document finished, so a listener still hearing the last clause is
+            # not told it is over.
+            drain_deadline = time.monotonic() + (self._synth_ms / 1000.0) + 15.0
+            while self.playing and self._played_ms() + 250 < self._synth_ms:
+                if time.monotonic() > drain_deadline:
+                    self.events.emit("drain_timeout",
+                                     played_ms=round(self._played_ms(), 1),
+                                     synth_ms=round(self._synth_ms, 1))
+                    break
+                await asyncio.sleep(0.1)
             if self.playing and s.read_cursor >= len(g.clauses):
                 self.playing = False
                 await broadcast({"type": "document_finished", "name": doc.name}, sockets)
@@ -399,22 +497,6 @@ class ReaderSession:
         except Exception as e:
             self.events.emit("reader_error", error=str(e))
             await broadcast({"type": "provider_error", "message": str(e)}, sockets)
-
-    async def _await_rendered(self, st: ContextState, sockets, grace: float = 12.0) -> None:
-        """Block until the client has acked playing this unit, or the grace runs out.
-
-        The timeout is a liveness guard, not a shortcut: if it fires we log it, so a
-        session where acks stopped arriving is visible rather than silently counted
-        as heard.
-        """
-        deadline = time.monotonic() + (st.audio_ms / 1000.0) + grace
-        while self.playing and st.rendered_ms + 60 < st.audio_ms:
-            if time.monotonic() > deadline:
-                self.events.emit("render_ack_timeout", context_id=st.context_id,
-                                 rendered_ms=round(st.rendered_ms, 1),
-                                 audio_ms=round(st.audio_ms, 1))
-                return
-            await asyncio.sleep(0.05)
 
     async def stop_reading(self) -> None:
         self.playing = False
@@ -713,20 +795,69 @@ async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
         # The audio clock, every 100 ms. This is the only evidence of hearing.
         st = s.contexts.get(m.get("context_id", ""))
         if st:
-            st.rendered_ms = float(m.get("rendered_ms") or 0.0)
+            st.rendered_ms = max(st.rendered_ms, float(m.get("rendered_ms") or 0.0))
+            if st.state != "fenced":
+                st.state = "playing" if not st.heard else st.state
             s.events.emit("frames_played", context_id=st.context_id,
                           rendered_ms=round(st.rendered_ms, 1))
+            # With intact chunks rendered_ms reaches audio_ms exactly; the only
+            # legitimate slack is one render quantum (128 frames). There is no
+            # plateau tolerance: a unit that stops short was not fully heard,
+            # and the frame count says whether that is a dropped chunk.
+            if st.synth_done and not st.heard and st.audio_ms > 0:
+                slack = 128.0 / s.provider.sample_rate * 1000.0 if s.provider else 6.0
+                if st.rendered_ms + slack >= st.audio_ms:
+                    enq = m.get("enqueued_frames")
+                    if enq is not None and int(enq) * 2 != st.bytes:
+                        s.events.emit("frame_count_mismatch", context_id=st.context_id,
+                                      enqueued_frames=int(enq), expected_frames=st.bytes // 2,
+                                      server_bytes=st.bytes, via="rendered")
+                    else:
+                        await s._mark_heard(st, socks)
+        return
+
+    if t == "unit_ended":
+        # The client's definitive "I have emitted the last sample of this unit".
+        #
+        # It is accepted only if the client's frame count matches the bytes the
+        # server sent. A shortfall means chunks were dropped in transit -- the
+        # unit was NOT heard in full, whatever the client believes it drained.
+        # rendered_ms only ever holds a value the client sent -- the periodic
+        # ack, or the exact drained count carried on this message. The server
+        # never stamps a delivery number the client did not report.
+        st = s.contexts.get(m.get("context_id", ""))
+        if not st or not st.synth_done:
+            return
+        enq = m.get("enqueued_frames")
+        if enq is None or int(enq) * 2 != st.bytes:
+            s.events.emit("frame_count_mismatch", context_id=st.context_id,
+                          enqueued_frames=(int(enq) if enq is not None else None),
+                          expected_frames=st.bytes // 2, server_bytes=st.bytes,
+                          via="unit_ended")
+            return
+        # The client's own drained count for this unit. This is a value the
+        # client measured and sent, so recording it keeps "heard" client-
+        # acknowledged; the periodic ack alone lands up to 100 ms short.
+        if m.get("rendered_ms") is not None:
+            st.rendered_ms = max(st.rendered_ms, float(m["rendered_ms"]))
+            s.events.emit("frames_played", context_id=st.context_id,
+                          rendered_ms=round(st.rendered_ms, 1), final=True)
+        await s._mark_heard(st, socks)
         return
 
     if t == "flush_ack":
         # Must arrive BEFORE interrupt. Records the boundary the client actually
         # reached, so the interrupt is measured against the audio clock rather
-        # than against whatever the server had finished sending.
-        st = s.contexts.get(m.get("context_id", ""))
+        # than against whatever the server had finished sending. Its context_id
+        # is the PLAYHEAD unit, which under lookahead is not the last one
+        # synthesised -- the interrupt uses this, not current_unit_id.
+        fctx = m.get("context_id", "")
+        st = s.contexts.get(fctx)
         if st:
             st.rendered_ms = float(m.get("rendered_ms") or st.rendered_ms)
         s._pending_flush = time.monotonic() * 1000.0
-        s.events.emit("flush_ack", context_id=m.get("context_id"),
+        s._flush_ctx = fctx or None
+        s.events.emit("flush_ack", context_id=fctx,
                       rendered_ms=round(float(m.get("rendered_ms") or 0.0), 1))
         return
 
@@ -742,9 +873,15 @@ async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
             await s.provider.cancel()
         doc = s.library.current
         sess = doc.session
-        ctx_id = sess.current_unit_id and next(
-            (c for c in reversed(list(s.contexts)) if s.contexts[c].unit_id == sess.current_unit_id),
-            None)
+        # The clause the listener was actually hearing is the flush_ack's
+        # context (the playhead), not the last clause synthesised, which under
+        # lookahead may be several clauses further on and already buffered.
+        ctx_id = getattr(s, "_flush_ctx", None)
+        if ctx_id not in s.contexts:
+            ctx_id = sess.current_unit_id and next(
+                (c for c in reversed(list(s.contexts))
+                 if s.contexts[c].unit_id == sess.current_unit_id), None)
+        s._flush_ctx = None
         st = s.contexts.get(ctx_id) if ctx_id else None
         if st:
             st.state = "fenced"
@@ -855,6 +992,12 @@ async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
 # app
 # ==========================================================================
 
+def _file_route(path: Path):
+    async def handler(request):
+        return web.FileResponse(path)
+    return handler
+
+
 def build_app(dev: bool = False, index_path: Path = INDEX) -> web.Application:
     app = web.Application(client_max_size=MAX_UPLOAD_BYTES + 1024 * 1024)
     app["session"] = ReaderSession(dev=dev, index_path=index_path)
@@ -875,6 +1018,13 @@ def build_app(dev: bool = False, index_path: Path = INDEX) -> web.Application:
         async def index_html(request):
             return web.FileResponse(dist / "index.html")
         app.router.add_static("/assets", dist / "assets")
+        # Files Vite copies to the dist ROOT -- notably player-worklet.js, which
+        # the client loads with audioWorklet.addModule("/player-worklet.js").
+        # Without these routes it 404s, the worklet never registers, and there
+        # is no audio and no rendered acks: the failure is completely silent.
+        for f in sorted(dist.iterdir()):
+            if f.is_file() and f.name != "index.html":
+                app.router.add_get(f"/{f.name}", _file_route(f))
         app.router.add_get("/", index_html)
         app.router.add_get("/dev", index_html)
 

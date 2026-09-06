@@ -218,6 +218,42 @@ delivery boundary is a rule at the exact character the server derived from the
 client's audio clock. Text after the boundary stays grey even though the server
 has already sent that audio -- that gap is the whole point of the layer.
 
+### Rime word timestamps are estimates, not measurements
+
+Rime coda returns word timestamps that arrive in the same millisecond as the
+first audio byte, sit on a fixed 180.53 ms grid, and do not match the audio that
+is actually delivered. Measured by `scripts/preflight_rime.py`:
+
+| clause | chars | predicted end | bytes-derived | drift | ratio |
+|---|---|---|---|---|---|
+| `sec-4b-vii` | 354 | 22205 ms | 24720 ms | 2515 ms | 0.90 |
+| `sec-7b-ii` | 54 | 4513 ms | 4480 ms | 33 ms | 1.01 |
+| `sec-5b-iv` | 62 | 4152 ms | 6320 ms | 2168 ms | 0.66 |
+
+The error is not a function of length: two clauses of 54 and 62 characters land
+at 1.01 and 0.66. It cannot be corrected for, only measured.
+
+Three consequences, all enforced in code:
+
+- **Audio length comes from bytes, never from timestamps.**
+  `audio_ms = bytes / 2 / sample_rate * 1000`. Treating the prediction as the
+  length made a clause look finished at roughly half its true duration, so the
+  reader advanced early and the on-screen text ran ahead of the voice, gaining
+  on it with every clause.
+- **Heard and the delivery boundary come from client-acked frames** measured
+  against that byte-derived length. A `timestamp_drift` event is written at each
+  `Done` recording predicted vs actual, so the gap stays visible in the trace.
+- **Highlight granularity is clause-level, not word-level.** On `Done` the word
+  map is stretched linearly so its last word ends with the audio; every span is
+  then marked `estimated` when the stretch exceeds 5%, which is almost always.
+  The read-along is therefore an interpolation between two known points (clause
+  start and clause end), and `/api/metrics` reports the interpolated-span count
+  honestly rather than implying word-accurate alignment.
+
+`preflight_rime.py` fails when drift exceeds 1500 ms on any of the three probe
+clauses. Against Rime as it behaves today **that check fails**, deliberately: it
+is a canary for the assumption, not a gate that is expected to pass.
+
 ## Design decisions (already made)
 
 - Unit granularity is clause-level; **word-level offsets are used because `/ws3` returns word timestamps for English at no extra cost**. Interpolated spans are flagged in the word map and counted in preflight.
@@ -261,6 +297,8 @@ has already sent that audio -- that gap is the whole point of the layer.
 |---|---|
 | Rime socket drops mid-unit | `provider_disconnected` logged; in-flight iterators receive `TTSError`; agent reconnects and resumes from the last acknowledged boundary |
 | Late audio after cancel | dropped, `result_fenced` with byte count |
+| Rime sends an odd-length PCM chunk | trailing byte carried into the next chunk, in the adapter and in the browser; `chunk_realigned` per unit with the odd-chunk count; a lone final byte is dropped and logged |
+| Client frame count short of the bytes sent | unit is not marked heard; `frame_count_mismatch` with both counts. Heard is client-acknowledged, never server-estimated |
 | Speaker not on live catalog | `fetch_voices.py` exits 1 — submission blocker |
 | Question about unread clause | offer to jump; clause not read |
 | Question not answerable from text | says so, redirects to insurer |

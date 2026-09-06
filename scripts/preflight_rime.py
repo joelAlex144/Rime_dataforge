@@ -36,6 +36,28 @@ from delivery_layer.wordmap import build_word_map                # noqa: E402
 FIXTURE = ROOT / "examples" / "policy-reader" / "fixtures" / "policy.json"
 
 
+async def measure_clause(tts, cfg, clause: dict) -> tuple:
+    """Synthesise one clause and return (bytes-derived audio_ms, predicted_end_ms).
+
+    The predicted value is Rime's word timestamps. They are a nominal
+    prediction, not a measurement: they arrive in the same millisecond as the
+    first audio byte and sit on a fixed grid. Anything that treats them as the
+    audio length will think a clause finished before it did.
+    """
+    pcm = bytearray()
+    ts = None
+    async for item in tts.synth(clause["text_spoken"], f"{clause['id']}#drift"):
+        if isinstance(item, AudioChunk):
+            pcm.extend(item.pcm)
+        elif isinstance(item, Timestamps):
+            ts = item if ts is None else Timestamps(
+                item.context_id, ts.words + item.words,
+                ts.start_ms + item.start_ms, ts.end_ms + item.end_ms)
+    audio_ms = len(pcm) / 2 / cfg.sampling_rate * 1000
+    predicted = ts.end_ms[-1] if (ts and ts.end_ms) else None
+    return audio_ms, predicted
+
+
 def fail(msg: str) -> None:
     print(f"PREFLIGHT FAIL: {msg}", file=sys.stderr)
     sys.exit(1)
@@ -97,8 +119,7 @@ async def run(args) -> None:
         fail(f"first word starts at {ts.start_ms[0]:.0f} ms; clock looks cumulative — set RIME_TIMESTAMP_CLOCK=cumulative")
     drift = abs(audio_ms - ts.end_ms[-1])
     print(f"timestamps: {len(ts.words)} words, last end {ts.end_ms[-1]:.0f} ms, drift vs audio {drift:.0f} ms")
-    if drift > 1500:
-        fail(f"audio/timestamp drift {drift:.0f} ms > 1500 ms — samplingRate or format mismatch")
+    drift_rows = [(clause["id"], audio_ms, ts.end_ms[-1])]
 
     spoken, segs = normalize_with_map(clause["text_display"])
     wm = build_word_map(clause["id"], clause["text_display"], segs, ts.words, ts.start_ms, ts.end_ms)
@@ -113,6 +134,31 @@ async def run(args) -> None:
     with wave.open(str(wav_path), "wb") as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(cfg.sampling_rate); w.writeframes(bytes(pcm))
     print(f"wrote {wav_path.relative_to(ROOT)} — listen to it; numbers must be right.")
+
+    # Rime's timestamps are a prediction, and the shorter the clause the worse
+    # it is: a long clause can look fine while a short one undershoots by
+    # seconds. Checking only the long one hides exactly the case that broke the
+    # reader. Ratios are printed so the README can cite them.
+    for short in sorted(clauses, key=lambda c: len(c["text_spoken"]))[:2]:
+        a_ms, pred = await measure_clause(tts, cfg, short)
+        if pred is None:
+            print(f"  {short['id']}: no timestamps returned")
+            continue
+        drift_rows.append((short["id"], a_ms, pred))
+
+    print()
+    print(f"{'clause':<16}{'chars':>7}{'predicted':>11}{'bytes':>9}{'drift':>9}{'ratio':>8}")
+    worst = 0.0
+    for cid, a_ms, pred in drift_rows:
+        c = next(x for x in clauses if x["id"] == cid)
+        d = abs(a_ms - pred)
+        worst = max(worst, d)
+        print(f"{cid:<16}{len(c['text_spoken']):>7}{pred:>11.0f}{a_ms:>9.0f}"
+              f"{d:>9.0f}{pred / a_ms if a_ms else 0:>8.2f}")
+    if worst > 1500:
+        fail(f"predicted-vs-bytes drift {worst:.0f} ms > 1500 ms on at least one clause. "
+             "Rime's word timestamps are a prediction; the reader must derive audio "
+             "length from bytes, never from timestamps.")
 
     if args.clear:
         # Fence evidence: start a long unit, cancel after first chunk, count leakage.

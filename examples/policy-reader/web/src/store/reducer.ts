@@ -99,6 +99,10 @@ export type State = {
 
   unit: Unit | null
   words: { words: string[]; start: number[]; end: number[] } | null
+  // Char offsets into text_display with their audio times, so the read-along
+  // highlight advances from the audio clock rather than waiting for a boundary
+  // event (which only fires on an interrupt).
+  spans: { char_start: number; char_end: number; t_start_ms: number; t_end_ms: number }[]
   renderedMs: number
   boundaryChar: number
   wordIndex: number
@@ -134,6 +138,7 @@ export const initialState: State = {
   unreviewedOpen: null,
   unit: null,
   words: null,
+  spans: [],
   renderedMs: 0,
   boundaryChar: 0,
   wordIndex: -1,
@@ -160,6 +165,22 @@ export type Action =
   | { type: 'clearAnswer' }
   | { type: 'clearIngest' }
   | { type: 'error'; message: string | null }
+
+/** How far through the clause the voice has actually got, in display chars.
+ *
+ * The end of the last word whose audio finished. A half-spoken word is not
+ * counted, so the highlight never runs ahead of what was said.
+ */
+export function spokenCharsAt(
+  spans: State['spans'], renderedMs: number,
+): number {
+  let at = 0
+  for (const sp of spans) {
+    if (sp.t_end_ms <= renderedMs) at = sp.char_end
+    else break
+  }
+  return at
+}
 
 /** Which word is currently sounding, from the audio clock alone. */
 export function wordAt(words: State['words'], renderedMs: number): number {
@@ -276,21 +297,40 @@ function applyServer(state: State, m: any): State {
           sentences: m.sentences || [],
         },
         words: null,
+        spans: [],
         renderedMs: 0,
-        // A new unit starts entirely unheard. Nothing is ink until acked.
+        // A new unit starts entirely unspoken. Nothing is marked said until the
+        // audio clock says so.
         boundaryChar: 0,
         wordIndex: -1,
         phase: 'playing',
       }
 
     case 'timestamps':
-      return { ...state, words: { words: m.words, start: m.start_ms, end: m.end_ms } }
+      return {
+        ...state,
+        words: { words: m.words, start: m.start_ms, end: m.end_ms },
+        spans: m.spans || state.spans,
+      }
 
     case 'rendered': {
-      // Local echo of our own ack, so the UI advances off the same number the
-      // server is told about.
+      // Local echo of our own ack. Ignore one stamped with a different clause:
+      // the queue is continuous, so an ack can be produced for a unit whose
+      // audio is buffered but not yet on screen, and applying it would advance
+      // the highlight of the clause the listener is still hearing.
+      if (m.context_id && state.unit && m.context_id !== state.unit.contextId) {
+        return state
+      }
+      // While playing, the read-along boundary follows the audio clock; an
+      // interrupt's `boundary` event still overrides it.
       const renderedMs = m.rendered_ms ?? state.renderedMs
-      return { ...state, renderedMs, wordIndex: wordAt(state.words, renderedMs) }
+      const spoken = spokenCharsAt(state.spans, renderedMs)
+      return {
+        ...state,
+        renderedMs,
+        wordIndex: wordAt(state.words, renderedMs),
+        boundaryChar: state.phase === 'playing' ? spoken : state.boundaryChar,
+      }
     }
 
     case 'boundary': {

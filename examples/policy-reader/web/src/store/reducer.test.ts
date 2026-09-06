@@ -5,6 +5,7 @@ import {
   buildInterrupt,
   initialState,
   reducer,
+  spokenCharsAt,
   wordAt,
 } from './reducer'
 
@@ -61,6 +62,50 @@ describe('rendered acks drive position', () => {
 
   it('wordAt returns -1 before the first word sounds', () => {
     expect(wordAt({ words: ['a'], start: [100], end: [200] }, 0)).toBe(-1)
+  })
+})
+
+describe('rendered echoes are scoped to the clause on screen', () => {
+  it('an echo for the displayed clause advances the read-along', () => {
+    const s = run([
+      UNIT,
+      { type: 'timestamps', context_id: UNIT.context_id, words: WORDS.words,
+        start_ms: WORDS.start_ms, end_ms: WORDS.end_ms,
+        spans: [{ char_start: 0, char_end: 2, t_start_ms: 0, t_end_ms: 180 },
+                { char_start: 3, char_end: 6, t_start_ms: 180, t_end_ms: 360 }] },
+      { type: 'rendered', rendered_ms: 200, context_id: UNIT.context_id },
+    ])
+    expect(s.renderedMs).toBe(200)
+    expect(s.boundaryChar).toBe(2)
+  })
+
+  it('an echo for a different clause is ignored', () => {
+    // The queue is continuous, so acks can be produced for a unit whose audio
+    // is buffered but not yet on screen. Applying one would advance the
+    // highlight of the clause the listener is still hearing.
+    const s = run([
+      UNIT,
+      { type: 'rendered', rendered_ms: 9999, context_id: 'some-other-unit#t9' },
+    ])
+    expect(s.renderedMs).toBe(0)
+    expect(s.boundaryChar).toBe(0)
+  })
+
+  it('an echo with no context is still applied, for the single-unit case', () => {
+    const s = run([UNIT, { type: 'rendered', rendered_ms: 120 }])
+    expect(s.renderedMs).toBe(120)
+  })
+})
+
+describe('read-along boundary', () => {
+  it('spokenCharsAt does not count a half-spoken word', () => {
+    const spans = [
+      { char_start: 0, char_end: 5, t_start_ms: 0, t_end_ms: 300 },
+      { char_start: 6, char_end: 10, t_start_ms: 300, t_end_ms: 800 },
+    ]
+    expect(spokenCharsAt(spans, 500)).toBe(5)
+    expect(spokenCharsAt(spans, 800)).toBe(10)
+    expect(spokenCharsAt(spans, 0)).toBe(0)
   })
 })
 

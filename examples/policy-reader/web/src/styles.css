@@ -102,8 +102,10 @@ input:focus-visible, button:focus-visible, select:focus-visible, a:focus-visible
 }
 .doc { font-family: var(--serif); font-size: 17px; line-height: 1.7; max-width: 68ch; }
 .doc p { margin: 0 0 18px; }
-.clause.unheard, .doc .unheard { color: var(--ink-faint); }
-.clause.heard, .doc .heard { color: var(--ink); }
+/* Read-along: what has already been spoken fades back, what is still to come
+   stays full-strength ink so the listener can read ahead of the voice. */
+.doc .heard { color: var(--ink-faint); }
+.doc .unheard { color: var(--ink); }
 .boundary {
   display: inline-block; width: 2px; height: 1.05em; background: var(--accent);
   vertical-align: -0.16em; margin: 0 1px;

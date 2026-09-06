@@ -101,16 +101,23 @@ class RimeConfig:
 
 
 class _Ctx:
-    __slots__ = ("queue", "generation", "seq", "bytes", "t_req", "t_first", "t_origin_ms")
+    __slots__ = ("queue", "generation", "seq", "bytes", "t_req", "t_first", "t_origin_ms",
+                 "carry", "odd_seen")
 
     def __init__(self, generation: int) -> None:
         self.queue: asyncio.Queue[Optional[StreamItem]] = asyncio.Queue()
         self.generation = generation
         self.seq = 0
-        self.bytes = 0
+        self.bytes = 0            # bytes actually YIELDED (even), not bytes received
         self.t_req = time.monotonic()
         self.t_first: float | None = None
         self.t_origin_ms: float | None = None
+        # Rime /ws3 splits its 1024-byte PCM blocks at arbitrary byte offsets
+        # (829+195, 1006+18 ...), so a chunk can end mid-sample. A held odd
+        # byte is prepended to the next chunk so every yielded chunk is a whole
+        # number of s16le samples and alignment is never lost.
+        self.carry: bytes = b""
+        self.odd_seen = 0
 
 
 class RimeTTS:
@@ -252,11 +259,22 @@ class RimeTTS:
 
         if typ == "chunk" or "data" in ev or "audio" in ev:
             b64 = ev.get("data") or ev.get("audio") or ""
-            pcm = base64.b64decode(b64) if b64 else b""
+            raw = base64.b64decode(b64) if b64 else b""
             if ctx.t_first is None:
                 ctx.t_first = time.monotonic()
                 self.events.emit("synth_first_byte", context_id=cid,
                                  ttfb_ms=round((ctx.t_first - ctx.t_req) * 1000, 1))
+            if len(raw) % 2:
+                ctx.odd_seen += 1
+            pcm = ctx.carry + raw
+            ctx.carry = b""
+            if len(pcm) % 2:
+                # Hold the trailing byte; it is the first half of a sample whose
+                # second half arrives in the next chunk.
+                ctx.carry = pcm[-1:]
+                pcm = pcm[:-1]
+            if not pcm:
+                return
             ctx.queue.put_nowait(AudioChunk(cid, pcm, ctx.seq))
             ctx.seq += 1
             ctx.bytes += len(pcm)
@@ -279,6 +297,11 @@ class RimeTTS:
 
         if typ == "done":
             now = time.monotonic()
+            if ctx.carry:
+                # A lone byte at the end of the stream can never form a sample.
+                self.events.emit("odd_tail_byte_dropped", context_id=cid)
+                ctx.carry = b""
+            self.events.emit("chunk_realigned", context_id=cid, odd_chunks=ctx.odd_seen)
             done = Done(cid, ctx.bytes,
                         ttfb_ms=round((ctx.t_first - ctx.t_req) * 1000, 1) if ctx.t_first else None,
                         total_ms=round((now - ctx.t_req) * 1000, 1))
