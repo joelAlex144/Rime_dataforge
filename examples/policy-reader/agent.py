@@ -151,7 +151,8 @@ class PolicyReaderSession:
         fence = Fence()
         ledger = Ledger(ledger_path)
         fence.attach_ledger(ledger)
-        ledger.log_provider_active(provider=PROVIDER_NAME, reason="default")
+        # provider_active is emitted by the TTS adapter (delivery_layer/tts/*),
+        # which is the only place that knows the real model/speaker/endpoint.
 
         units = load_units(fixture_path)
         tts = FakeTTS()

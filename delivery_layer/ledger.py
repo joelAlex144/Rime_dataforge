@@ -30,7 +30,9 @@ import time
 from dataclasses import asdict, dataclass, field
 from enum import Enum
 from pathlib import Path
-from typing import Optional, Sequence
+from typing import Optional, Sequence, Union
+
+from delivery_layer.events import EventLog
 
 
 class EventType(str, Enum):
@@ -75,10 +77,22 @@ class Ledger:
     """One Ledger per session. Writes are synchronous appends -- cheap,
     and correctness here matters more than write throughput."""
 
-    def __init__(self, path: str | Path):
-        self.path = Path(path)
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        self._fh = open(self.path, "a", buffering=1)  # line-buffered
+    def __init__(self, events: Union[EventLog, str, Path]):
+        """Takes the session's EventLog so one file holds everything.
+
+        The synthesis adapter emits provider_active / synth_requested /
+        result_fenced through the same log the ledger writes frames_played /
+        unit_truncated / position_saved into, so a trace can be read top to
+        bottom without joining two files whose clocks never agreed.
+
+        A path is still accepted and wraps itself in an EventLog, so their
+        call sites and any standalone use keep working unchanged.
+        """
+        if isinstance(events, EventLog):
+            self.events = events
+        else:
+            self.events = EventLog(Path(events), session_id="ledger")
+        self.path = self.events.path
         # unit_id -> word map, registered by the synthesis side when
         # WordTimestamps arrives, so resolve() doesn't need a second pass
         # over raw protocol messages.
@@ -88,15 +102,13 @@ class Ledger:
     # -- low-level append -------------------------------------------------
 
     def _write(self, event_type: EventType, **fields) -> None:
-        record = {
-            "ts": time.time(),
-            "event": event_type.value,
-            **fields,
-        }
-        self._fh.write(json.dumps(record) + "\n")
+        # EventLog stamps ts_ms/wall/session_id and writes the line. Event
+        # names are unchanged: every name in EventType already matches the
+        # list at the top of delivery_layer/events.py.
+        self.events.emit(event_type.value, **fields)
 
     def close(self) -> None:
-        self._fh.close()
+        self.events.close()
 
     def __enter__(self) -> "Ledger":
         return self
@@ -179,13 +191,22 @@ class Ledger:
         """Replay the ledger file and produce one DeliveryRecord per
         unit. Reads from disk (not in-memory events) so this can also be
         run standalone against a committed trace file."""
-        self._fh.flush()
         events: list[dict] = []
-        with open(self.path) as fh:
-            for line in fh:
-                line = line.strip()
-                if line:
-                    events.append(json.loads(line))
+        if self.path is not None and Path(self.path).exists():
+            with open(self.path) as fh:
+                for line in fh:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    rec = json.loads(line)
+                    # EventLog writes "type"; the delivery side's own older
+                    # traces write "event". Accept both so a committed trace
+                    # from either half still resolves.
+                    if "event" not in rec and "type" in rec:
+                        rec["event"] = rec["type"]
+                    events.append(rec)
+        else:
+            events = [{**r, "event": r.get("type")} for r in self.events.records]
 
         # last-write-wins per unit for rendered_ms; frames_played gives
         # running progress, audible_stop/unit_truncated give the final

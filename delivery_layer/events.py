@@ -4,10 +4,19 @@ Every component writes here. This file *is* the evidence artifact: the
 acceptance harness and RIME_EVIDENCE.md are generated from it, never from
 in-memory state.
 
+Both halves of the layer write here. The synthesis adapter emits the
+provider and stream events; delivery_layer/ledger.py emits the delivery
+events through this same log, so one file answers "what was heard" without
+joining two files whose clocks never agreed.
+
 Event types used across the layer (keep this list in sync with the README):
-  provider_active, synth_requested, synth_first_byte, synth_done,
-  frames_played, cancel_issued, audible_stop, unit_truncated,
-  result_fenced, position_saved, position_restored, timestamps_received
+  synthesis side : provider_active, synth_requested, synth_first_byte,
+                   synth_done, timestamps_received, result_fenced
+  delivery side  : frames_played, cancel_issued, audible_stop,
+                   unit_truncated, position_saved, position_restored
+
+Every name in delivery_layer.ledger.EventType already matched a name here,
+so nothing had to be renamed when the two halves were joined.
 """
 from __future__ import annotations
 
