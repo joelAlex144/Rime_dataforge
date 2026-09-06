@@ -297,14 +297,14 @@ def apply_bullet_context(blocks: list[Block]) -> list[Block]:
 INDEX_FILENAME = "index.json"
 
 
-def update_index(out: Path, doc: dict, name: str, referral: str = None) -> Path:
+def update_index(out: Path, doc: dict, name: str, referral: str = None, index_path=None) -> dict:
     """Append or update this document's entry in fixtures/index.json.
 
     The registry is the only source of documents the reader can open, so a
     fixture that is written but not registered is invisible at runtime -- which
     is deliberate: registration is the moment a document becomes selectable.
     """
-    index = out.parent / INDEX_FILENAME
+    index = Path(index_path) if index_path else out.parent / INDEX_FILENAME
     data = {"documents": []}
     if index.exists():
         try:
@@ -316,10 +316,17 @@ def update_index(out: Path, doc: dict, name: str, referral: str = None) -> Path:
     rel = os.path.relpath(out.resolve(), index.parent.resolve()).replace(os.sep, "/")
     entry = {
         "name": name,
+        "doc_id": doc.get("doc_id", name),
         "title": doc["title"],
         "path": rel,
         "source": doc["source"],
         "clause_count": doc["clause_count"],
+        # A person pressing Accept (or editing this file) is the review. A new
+        # document is in the library at once, flagged, and readable unless the
+        # structure pass found no body text at all.
+        "reviewed": False,
+        "readable": bool(doc.get("readable", True)),
+        "report": doc.get("report_file"),
         "referral": referral or "the team that publishes this document",
         "ingested_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
@@ -327,12 +334,13 @@ def update_index(out: Path, doc: dict, name: str, referral: str = None) -> Path:
     by_name = [e for e in data["documents"] if e.get("name") == name]
     clash = [e for e in data["documents"] if e.get("name") != name and e.get("path") == rel]
     if clash:
-        die(f"{index.name} already registers {rel} under the name {clash[0]['name']!r}; "
-            f"remove that entry or pass --name {clash[0]['name']}")
+        raise IngestError(f"{index.name} already registers {rel} under the name {clash[0]['name']!r}; "
+                          f"remove that entry or pass --name {clash[0]['name']}")
     if by_name:
         if by_name[0].get("path") != rel:
             die(f"{index.name} already has a document named {name!r} at "
                 f"{by_name[0].get('path')!r}. Names must be unique -- pass --name <other>.")
+        entry["reviewed"] = bool(by_name[0].get("reviewed", False))    # a re-ingest keeps the review
         by_name[0].update(entry)
         action = "updated"
     else:
@@ -340,8 +348,8 @@ def update_index(out: Path, doc: dict, name: str, referral: str = None) -> Path:
         action = "registered"
     data["documents"].sort(key=lambda e: e.get("name", ""))
     index.write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"{action} {name!r} in {index.name} ({len(data['documents'])} documents)")
-    return index
+    print(f"{action} {name!r} in {index.name} ({len(data['documents'])} documents)", file=sys.stderr)
+    return entry
 
 
 def _is_title(rest: str) -> bool:
@@ -591,6 +599,7 @@ _TOLLFREE = re.compile(r"(?<!\d)(?:1800|1860)[\s.-]?\d{2,4}[\s.-]?\d{2,4}(?:[\s.
 _SHORTCODE = re.compile(r"(?<!\d)1\d{4,5}(?!\d)")            # 155255-style helpline codes
 _IN_MOBILE = re.compile(r"(?<!\d)(?:\+91[\s-]?|0)?[6-9]\d{9}(?!\d)")
 _NAME = re.compile(r"\b([A-Z][a-z]{2,})\s+([A-Z][a-z]{2,})\b")
+_YEAR_RANGE = re.compile(r"(?:19|20)\d{2}-(?:19|20)\d{2}")
 # Capitalised words that look like a name and never are, in a policy document.
 _NOT_NAMES = {
     "grievance", "redressal", "officer", "customer", "care", "insurance", "company",
@@ -602,6 +611,8 @@ _NOT_NAMES = {
     "development", "authority", "india", "bharosa", "bima", "lokpal", "website", "senior",
     "citizen", "citizens", "portal", "online", "assistance", "desk", "help", "support",
     "sales", "team", "unit", "cell", "escalation", "level", "matrix", "reach",
+    "financial", "year", "calling", "calendar", "policy", "period", "effective", "date",
+    "interest", "rate", "sum", "assured", "premium", "amount",
 }
 _PUBLIC_SUFFIXES = ("co.in", "gov.in", "org.in", "nic.in", "net.in", "ac.in", "co.uk",
                     "org.uk", "gov.uk", "com.au", "co.nz")
@@ -681,8 +692,10 @@ def scan_pii(text: str, context: str = "") -> PIIReport:
         seen.add(key)
         local, _, domain = key.partition("@")
         private = any(domain.startswith(pd) for pd in _PRIVATE_DOMAINS)
+        # A role anywhere in the local part: "bhflcustomerservice@", "rgicl.care@",
+        # "bimalokpal@" are company-prefixed role mailboxes, not people.
         role = (local in _ROLE_LOCALS or bool(_ROLE_SUFFIX.match(local))
-                or any(local.startswith(r) and len(r) >= 4 for r in _ROLE_LOCALS))
+                or any(r in local and len(r) >= 4 for r in _ROLE_LOCALS))
         inst_domain = (domain in _INSTITUTIONAL_DOMAINS
                        or any(domain.endswith(suf) for suf in _INSTITUTIONAL_SUFFIXES)
                        or (len(_registrable(domain)) >= 4 and _registrable(domain) in ctx))
@@ -723,7 +736,10 @@ def scan_pii(text: str, context: str = "") -> PIIReport:
     for m in _ACCOUNT_NEAR_NAME.finditer(text):
         if m.group(1).split()[0].lower() in _NOT_NAMES or m.group(1).split()[1].lower() in _NOT_NAMES:
             continue
-        rep.personal.append(("name_with_account_number", f"{m.group(1)} … {m.group(2)}"))
+        num = m.group(2)
+        if _YEAR_RANGE.fullmatch(num) or _TOLLFREE.fullmatch(num) or _TOLLFREE.match(num):
+            continue                       # "Financial Year 2020-2021", "Toll Free 1800-4254-732"
+        rep.personal.append(("name_with_account_number", f"{m.group(1)} … {num}"))
     return rep
 
 
@@ -732,22 +748,29 @@ def redact(s: str) -> str:
     return (s[:4] + "…") if len(s) > 4 else "…"
 
 
-def validate(records: list[dict], opts, min_clauses: int = 20) -> None:
-    """Fail loudly. `min_clauses` is lowered only by tests feeding tiny samples."""
-    n = len(records)
-    if n < min_clauses:
-        die(f"only {n} clauses; need at least {min_clauses}. "
-            "The splitter or the extractor is wrong for this document.")
-    if n > 400:
-        print(f"warning: {n} clauses — the reader will be slow to walk this document", file=sys.stderr)
+class IngestError(RuntimeError):
+    """An internal invariant failed. Never raised for the document's content."""
 
+
+def validate(records: list[dict], opts, min_clauses: int = 0) -> None:
+    """Internal invariants only: ids, index order, span coverage, the 1,000
+    character Rime limit. A document's content never fails validation; what it
+    is like goes in the ingest report."""
+    n = len(records)
+    if min_clauses and n < min_clauses:
+        raise IngestError(f"only {n} clauses; need at least {min_clauses}")
+
+    for r in records:
+        if len(r["text_display"]) > MAX_CLAUSE_CHARS_HARD:
+            raise IngestError(f"{r['id']}: {len(r['text_display'])} chars exceeds the hard limit of "
+                              f"{MAX_CLAUSE_CHARS_HARD}; the splitter must break it at a sentence boundary")
     ids = [r["id"] for r in records]
     if len(ids) != len(set(ids)):
         dupes = sorted({i for i in ids if ids.count(i) > 1})
-        die(f"duplicate clause ids after de-duplication: {dupes[:5]}")
+        raise IngestError(f"duplicate clause ids after de-duplication: {dupes[:5]}")
     for i, r in enumerate(records):
         if r["index"] != i:
-            die(f"index not contiguous at {r['id']}: {r['index']} != {i}")
+            raise IngestError(f"index not contiguous at {r['id']}: {r['index']} != {i}")
 
         text = r["text_display"]
         covered: set[int] = set()
@@ -755,14 +778,14 @@ def validate(records: list[dict], opts, min_clauses: int = 20) -> None:
             covered.update(range(a, b))
         for j, ch in enumerate(text):
             if not ch.isspace() and j not in covered:
-                die(f"{r['id']}: spoken_map does not cover char {j} {ch!r}")
+                raise IngestError(f"{r['id']}: spoken_map does not cover char {j} {ch!r}")
 
         spans = r["sentences"]
         if not spans or spans[0][0] != 0 or spans[-1][1] != len(text):
-            die(f"{r['id']}: sentence spans do not cover text_display (got {spans[:2]}…{spans[-1:]}, len {len(text)})")
+            raise IngestError(f"{r['id']}: sentence spans do not cover text_display (got {spans[:2]}…{spans[-1:]}, len {len(text)})")
         for (a1, b1), (a2, _) in zip(spans, spans[1:]):
             if a2 < b1:
-                die(f"{r['id']}: sentence spans overlap at {b1}/{a2}")
+                raise IngestError(f"{r['id']}: sentence spans overlap at {b1}/{a2}")
 
 
 # ==========================================================================
@@ -779,47 +802,91 @@ def preview(records: list[dict]) -> None:
           f"{sum(len(r['text_display']) for r in records)} display chars")
 
 
-def main() -> int:
-    ap = argparse.ArgumentParser(description="Build-time document -> fixture ingestion.")
-    ap.add_argument("source", help="path to .pdf/.docx/.html/.txt/.md, or an http(s) URL")
-    ap.add_argument("--out", required=False, help="output fixture path (.json)")
-    ap.add_argument("--title", default=None)
-    ap.add_argument("--id-prefix", default="sec")
-    ap.add_argument("--name", default=None,
-                    help="registry name (default: output filename stem); must be unique")
-    ap.add_argument("--referral", default=None,
-                    help="who the listener should contact for a decision; shown on every "
-                         "answer card. Defaults to a neutral string.")
-    ap.add_argument("--min-clause-chars", type=int, default=40)
-    ap.add_argument("--max-clause-chars", type=int, default=600)
-    ap.add_argument("--synthetic", action="store_true", help="mark the fixture as synthetic")
-    ap.add_argument("--review", action="store_true", help="print every clause and wait for Enter before writing")
-    ap.add_argument("--dry-run", action="store_true", help="print every clause, never write")
-    ap.add_argument("--allow-pii", default=None, metavar="REASON",
-                    help="override a PERSONAL-data refusal; the reason is written into the fixture. "
-                         "Institutional contact details never need it, and a name beside an "
-                         "account number can never be overridden.")
-    ap.add_argument("--pii-report", default=None, metavar="PATH",
-                    help="write the scan result as JSON {personal, institutional} (redacted)")
-    args = ap.parse_args()
+EXPECTED_RANGE = (150, 250)         # clauses for a ~20-page / ~12k-word wording
+EXPECTED_RANGE_WORDS = 12000
 
-    if not args.dry_run and not args.out:
-        die("--out is required unless --dry-run")
 
-    src = args.source
+@dataclass
+class IngestResult:
+    doc_id: str
+    name: str
+    title: str
+    fixture_path: Optional[Path]
+    report_path: Optional[Path]
+    docling_path: Optional[Path]
+    clause_count: int
+    readable: bool
+    entry: dict
+    report: dict
+    records: list
+
+
+def _doc_id_for(data: bytes) -> str:
+    """Content hash of the source bytes: the same PDF gives the same id on
+    every machine and every run, and a re-upload is recognised as the same
+    document."""
+    return hashlib.sha256(data).hexdigest()[:16]
+
+
+def _slug(s: str) -> str:
+    return "".join(ch if ch.isalnum() or ch in "-_" else "-" for ch in s)[:60].strip("-") or "document"
+
+
+def ingest_document(source, out_dir=None, *, out_path=None, name=None, title=None, id_prefix="sec",
+                    min_clause_chars=None, max_clause_chars=None, fold_max_chars=600,
+                    synthetic=False, referral=None, ocr=False, source_kind="auto",
+                    progress=None, register=True, index_path=None, dry_run=False,
+                    legacy_segmenter=False) -> IngestResult:
+    """The one ingestion function. Build-time `scripts/ingest.py` and the
+    runtime upload both call this and get the same bytes for the same source.
+
+    Every stage always runs -- extract, structure, segment, normalize,
+    pii_scan, validate, write -- and `progress(stage, status, elapsed_ms,
+    detail)` is called as each ends. Nothing in the scan or the validation
+    report blocks the document. The two silent invariants: no clause over
+    the 1,000-character Rime limit (the splitter guarantees it; asserted
+    after segmentation), and a document with zero body clauses is written
+    with `readable: False` rather than raising.
+    """
+    timings: dict = {}
+    notes: list[str] = []
+    warnings: list[str] = []
+    t_all = time.monotonic()
+
+    def stage(name_, status="ok", detail="", t0=None):
+        ms = round((time.monotonic() - (t0 if t0 is not None else t_all)) * 1000, 1)
+        timings[name_] = ms
+        if progress:
+            progress(name_, status, ms, detail)
+
+    # ---- extract ---------------------------------------------------------
+    t0 = time.monotonic()
+    src = str(source)
     is_url = src.lower().startswith(("http://", "https://"))
     meta: dict = {}
+    sblocks = None
+    ddoc = None
+    rep_s = None
+    import ingest_structure as istr
     if is_url:
         blocks, raw, meta = extract_html(src, True)
         stype = "url"
+        data = raw.encode("utf-8")
     else:
         p = Path(src)
         if not p.exists():
-            die(f"no such file: {p}")
+            raise IngestError(f"no such file: {p}")
+        data = p.read_bytes()
         suf = p.suffix.lower()
-        if suf == ".pdf":
-            blocks, raw = extract_pdf(p)
-            stype = "pdf"
+        use_docling = (source_kind == "pdf" or (source_kind == "auto" and suf in (".pdf", ".docx"))) \
+            and istr.docling_available()
+        if suf == ".pdf" and not use_docling and source_kind != "text":
+            if not istr.docling_available():
+                raise IngestError("PDF ingestion needs docling: pip install -r requirements-build.txt")
+        if use_docling:
+            ddoc = istr.convert(p, ocr=ocr)
+            stype = "pdf" if suf == ".pdf" else "docx"
+            blocks, raw = [], ""
         elif suf == ".docx":
             blocks, raw = extract_docx(p)
             stype = "docx"

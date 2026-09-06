@@ -17,8 +17,12 @@ traces/demo_ledger.jsonl
 notes/*.jsonl
 
 # dev-only runtime uploads: never committed, never in index.json
-examples/policy-reader/fixtures/unreviewed/
 
 examples/policy-reader/web/node_modules/
 examples/policy-reader/web/dist/
 examples/policy-reader/web/*.tsbuildinfo
+
+# Source documents for the structure pass are provided locally by the developer.
+# Commit the extracted .docling.json and the fixture, never the source file, unless licensing is confirmed.
+examples/policy-reader/fixtures/source/*.pdf
+examples/policy-reader/fixtures/source/*.docx

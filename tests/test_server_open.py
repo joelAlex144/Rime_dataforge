@@ -24,7 +24,6 @@ from aiohttp.test_utils import TestClient, TestServer               # noqa: E402
 
 import server as srv                                                # noqa: E402
 
-UNREVIEWED = ROOT / "examples" / "policy-reader" / "fixtures" / "unreviewed"
 
 
 class Tab:

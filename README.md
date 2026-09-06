@@ -145,9 +145,10 @@ and written, redacted, into the fixture's `source.institutional_contacts` so a
 reviewer sees that the document has a helpline and a grievance mailbox without
 the fixture repeating them. `--pii-report PATH` writes the same split as JSON.
 
-`--allow-pii "reason"` overrides a **personal** refusal only, and the reason is
-written to `source.pii_override_reason`. A name beside an account number is
-never overridable, with or without a reason.
+The scan never blocks: personal-looking identifiers go into the ingest report
+with the clause id they were found in, and the developer page shows them as
+the review trail. Data policy: only public product wordings are ingested,
+which is enforced by selection, not by the scanner.
 
 The Reliance General *Arogya Sanjeevani* wording that the dev upload refused
 (hits `rgic…@` and `bima…@`) now passes: 2 insurer addresses, 17 ombudsman

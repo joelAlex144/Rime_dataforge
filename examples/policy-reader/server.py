@@ -212,7 +212,6 @@ class ReaderSession:
         # both in ms. The reader pumps synthesis ahead of the playhead by at
         # most LEAD_MS, so audio is always buffered (no inter-clause gap) but a
         # bounded amount is wasted on an interruption.
-        self._unreviewed: Optional[str] = None
         rows = self.library.list()
         if rows:
             self.library.open(rows[0]["name"])

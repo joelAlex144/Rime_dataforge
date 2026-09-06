@@ -233,13 +233,13 @@ class TestSchemaAndValidator(unittest.TestCase):
     def test_validator_rejects_broken_span_map(self):
         recs = run(UNNUMBERED)
         recs[0]["spoken_map"] = [[0, 1, "x"]]
-        with self.assertRaises(SystemExit):
+        with self.assertRaises(ingest.IngestError):
             ingest.validate(recs, Opts(), min_clauses=1)
 
     def test_validator_rejects_non_contiguous_index(self):
         recs = run(UNNUMBERED)
         recs[0]["index"] = 7
-        with self.assertRaises(SystemExit):
+        with self.assertRaises(ingest.IngestError):
             ingest.validate(recs, Opts(), min_clauses=1)
 
     def test_sentences_cover_text_display(self):
@@ -303,6 +303,12 @@ class TestPIIScan(unittest.TestCase):
         alone = ingest.scan_pii("Reach me on 9876543210 after six.")
         self.assertEqual([l for l, _ in alone.personal], ["phone"])
 
+    def test_year_ranges_and_helplines_are_not_account_numbers(self):
+        rep = ingest.scan_pii("The applicable interest rate for Financial Year 2020-2021 is 6.90%. "
+                              "Reach us by Calling Toll Free Number 155255 / 1800-4254-732 any day.")
+        self.assertEqual([l for l, _ in rep.personal], [])
+        self.assertFalse(rep.unoverridable)
+
     def test_name_beside_account_number_is_personal_and_never_overridable(self):
         rep = ingest.scan_pii("Policyholder Jane Marchetti, policy 4820193774, is insured.")
         self.assertIn("name_with_account_number", {l for l, _ in rep.personal})
@@ -329,10 +335,12 @@ class TestPIIScan(unittest.TestCase):
             self.assertTrue(row["redacted"].endswith("…"))
 
 
-class TestPIIExitCodes(unittest.TestCase):
-    """The CLI: exit 2 only for personal hits; institutional prints warnings."""
+class TestPIIIsReportOnly(unittest.TestCase):
+    """The CLI never refuses a document for its content: the scan goes in the
+    ingest report, exit code 0 either way."""
 
     def _run(self, text, *extra):
+        import json
         import subprocess
         import tempfile
         with tempfile.TemporaryDirectory() as td:
@@ -341,33 +349,28 @@ class TestPIIExitCodes(unittest.TestCase):
                 f"## Section {i}\n\nThis clause number {i} describes cover in plain words "
                 f"for the insured property and lasts more than forty characters." for i in range(1, 24))
             src.write_text(body, encoding="utf-8")
-            report = Path(td) / "pii.json"
             cmd = [sys.executable, str(ROOT / "scripts" / "ingest.py"), str(src),
-                   "--dry-run", "--pii-report", str(report), *extra]
+                   "--out", str(Path(td) / "doc.json"), "--name", "doc", "--no-register", *extra]
             r = subprocess.run(cmd, capture_output=True, text=True, cwd=str(ROOT))
-            rep = __import__("json").loads(report.read_text()) if report.exists() else None
+            rep = json.loads((Path(td) / "doc.ingest_report.json").read_text()) if r.returncode == 0 else None
             return r.returncode, r.stderr, rep
 
-    def test_institutional_only_exits_0_with_warnings(self):
+    def test_institutional_only_exits_0(self):
         code, err, rep = self._run(TestPIIScan.POLICY)
         self.assertEqual(code, 0, err)
-        self.assertIn("warning: institutional contact detail kept", err)
-        self.assertEqual(rep["personal"], [])
-        self.assertEqual(len(rep["institutional"]), 3)
+        self.assertEqual(rep["pii_scan"]["personal"], [])
+        self.assertEqual(len(rep["pii_scan"]["institutional"]), 3)
 
-    def test_personal_exits_2_and_override_exits_0(self):
+    def test_personal_data_exits_0_and_is_reported_with_clause_ids(self):
         code, err, rep = self._run(TestPIIScan.POLICY + TestPIIScan.PERSON)
-        self.assertEqual(code, 2)
-        self.assertEqual(len(rep["personal"]), 2)
-        code2, err2, _ = self._run(TestPIIScan.POLICY + TestPIIScan.PERSON,
-                                   "--allow-pii", "synthetic sample person for a test")
-        self.assertEqual(code2, 0, err2)
+        self.assertEqual(code, 0, err)
+        self.assertEqual(len(rep["pii_scan"]["personal"]), 2)
+        self.assertTrue(all(h["clause_id"] for h in rep["pii_scan"]["personal"]))
 
-    def test_name_with_account_number_refuses_even_with_a_reason(self):
-        code, err, rep = self._run("Policyholder Jane Marchetti, policy 4820193774, is insured.",
-                                   "--allow-pii", "we promise it is fine")
-        self.assertEqual(code, 2)
-        self.assertIn("does not apply", err)
+    def test_name_with_account_number_is_reported_not_refused(self):
+        code, err, rep = self._run("Policyholder Jane Marchetti, policy 4820193774, is insured.")
+        self.assertEqual(code, 0, err)
+        self.assertIn("name_with_account_number", [h["label"] for h in rep["pii_scan"]["personal"]])
 
 
 class TestSentenceSpansCopyIsIdentical(unittest.TestCase):
