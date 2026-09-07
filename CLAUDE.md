@@ -34,7 +34,7 @@ docs/                    handoff notes between the synthesis and delivery slices
 ## Run
 
 ```bash
-source .venv/bin/activate            # WSL venv (python 3.9); run from WSL, not PowerShell
+source .venv311/bin/activate         # WSL venv (python 3.11); run from WSL, not PowerShell
 set -a; source .env; set +a          # never commit .env; never paste a key anywhere
 python -m pytest                     # offline
 python examples/policy-reader/llm.py --check          # answer model reachable + warm

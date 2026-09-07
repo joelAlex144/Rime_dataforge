@@ -43,7 +43,10 @@ Owned by Person B (not in this slice): client AudioWorklet + playback acks, turn
 ## Setup
 
 ```bash
-python -m venv .venv && source .venv/bin/activate
+# Python 3.11. 3.9 is no longer supported: livekit-agents (the voice bridge in
+# examples/policy-reader/voice/) requires >= 3.10, and pip refuses the whole
+# requirements file on 3.9.
+python3.11 -m venv .venv311 && source .venv311/bin/activate
 pip install -r requirements.txt
 pip install -r requirements-build.txt   # docling, pinned: the structure pass behind ingest and upload
 docling-tools models download            # one-time, ~500 MB to ~/.cache/docling; a judge reproducing live needs it
