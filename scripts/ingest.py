@@ -82,9 +82,58 @@ def int_to_roman(n: int) -> str:
 # extraction
 # ==========================================================================
 
+# ---- text-dump hygiene ----------------------------------------------------
+# A PDF dumped to text carries page furniture that is not the document:
+# `=== PAGE n ===` markers, "Page x of y", lines of dots or dashes, form
+# blanks (underscore runs) and checkbox glyphs. The glyphs are the Unicode
+# box set and the Private Use Area that Wingdings/Symbol characters land in.
+_PAGE_MARK = re.compile(r"^\s*=+\s*PAGE\s+\d+\s*=+\s*$", re.I)
+_PAGE_OF = re.compile(r"\bPage\s+\d{1,4}\s+of\s+\d{1,4}\b", re.I)
+_UNDERSCORE_RUN = re.compile(r"_{3,}")
+_GLYPH = re.compile(r"[\u2610\u2611\u2612\u25a1\u25a0\u25a2\u25a3\u25cb\u25cf\u25ef\u25fb\u25fc\ue000-\uf8ff]")
+_NO_ALNUM = re.compile(r"^[\W_]+$")
+_FORM_FIELD = re.compile(r":\s*(?:_{2,}|blank)\s*$", re.I)
+
+
+def split_pages(text: str) -> list[str]:
+    """A text dump with `=== PAGE n ===` markers, split into its pages; one
+    page when there are no markers."""
+    parts = re.split(r"(?mi)^\s*=+\s*PAGE\s+\d+\s*=+\s*$", text)
+    return parts if len(parts) > 1 else [text]
+
+
+def clean_lines(lines: list[str]) -> list[str]:
+    """Page furniture out of a text dump, line by line: page markers and
+    "Page x of y" go; a line of punctuation, underscores or box glyphs goes;
+    checkbox glyphs inside a line go; a run of underscores reads as "blank".
+    A dropped line leaves a blank line behind, so the paragraphs on either
+    side of it stay separate."""
+    out: list[str] = []
+    for line in lines:
+        s = line.strip()
+        if not s:
+            out.append("")
+            continue
+        if _PAGE_MARK.match(s):
+            out.append("")
+            continue
+        s = _PAGE_OF.sub(" ", s)
+        s = _GLYPH.sub(" ", s)
+        s = " ".join(s.split())
+        if not s or _NO_ALNUM.match(s):
+            out.append("")
+            continue
+        s = " ".join(_UNDERSCORE_RUN.sub(" blank ", s).split())
+        out.append(s)
+    return out
+
+
 def extract_txt(path: Path) -> tuple[list[Block], str]:
     raw = path.read_text(encoding="utf-8", errors="replace")
-    return blocks_from_lines(raw.splitlines(), markdown=path.suffix.lower() in (".md", ".markdown")), raw
+    markdown = path.suffix.lower() in (".md", ".markdown")
+    pages = ["\n".join(clean_lines(p.splitlines())) for p in split_pages(raw)]
+    pages = drop_repeated_lines(pages)            # running headers/footers, txt as well as pdf
+    return blocks_from_lines("\n".join(pages).splitlines(), markdown=markdown), raw
 
 
 def extract_pdf(path: Path) -> tuple[list[Block], str]:
@@ -96,7 +145,7 @@ def extract_pdf(path: Path) -> tuple[list[Block], str]:
         except ImportError:
             die("PDF input needs pypdf:  pip install pypdf")
     reader = PdfReader(str(path))
-    pages = [(p.extract_text() or "") for p in reader.pages]
+    pages = ["\n".join(clean_lines((p.extract_text() or "").splitlines())) for p in reader.pages]
     pages = drop_repeated_lines(pages)
     raw = join_hyphenated("\n".join(pages))
     lines = drop_page_numbers(raw.splitlines())
@@ -217,6 +266,7 @@ def blocks_from_lines(lines: list[str], markdown: bool = True) -> list[Block]:
     lines = drop_page_numbers(lines)
     blocks: list[Block] = []
     buf: list[str] = []
+    heuristic: set = set()                   # indices of headings the case rule produced
 
     def flush() -> None:
         if buf:
@@ -246,14 +296,29 @@ def blocks_from_lines(lines: list[str], markdown: bool = True) -> list[Block]:
             flush()
             buf.append(s)
             continue
-        # An ALL-CAPS or short unpunctuated standalone line reads as a heading.
-        if (not markdown or True) and len(s) < 90 and not s.endswith((".", ";", ":", ",")) \
-                and (s.isupper() or (s.istitle() and len(s.split()) <= 10)) and not parse_marker(s):
+        # An ALL-CAPS or short unpunctuated standalone line reads as a heading --
+        # never a single word, a form field ("APPLICATION NO.: ____"), a line
+        # that is mostly a number (a phone, a pin code), one that dangles on
+        # "/" or a dash, one with table symbols (">", "="), or one that
+        # repeats a word ("Nil Nil Nil": a row of a dumped table).
+        words = s.split()
+        if len(s) < 90 and not s.endswith((".", ";", ":", ",", "/", "-", "\u2013", "\u2014", "(", "&")) \
+                and re.search(r"[A-Za-z]", s) \
+                and (s.isupper() or (s.istitle() and len(words) <= 10)) and not parse_marker(s) \
+                and len(words) >= 2 and not _FORM_FIELD.search(s) \
+                and sum(ch.isdigit() for ch in s) < 4 and not any(ch in s for ch in "<>=%|") \
+                and len({w.lower() for w in words}) == len(words):
             flush()
             blocks.append(Block("heading", s, 2))
+            heuristic.add(len(blocks) - 1)
             continue
         buf.append(s)
     flush()
+    # A heuristic heading heads something: one followed directly by another
+    # heading, or by nothing, was a line of a dumped table and is body text.
+    for i in sorted(heuristic):
+        if i + 1 >= len(blocks) or blocks[i + 1].kind == "heading":
+            blocks[i] = Block("para", blocks[i].text)
     return blocks
 
 
@@ -342,6 +407,7 @@ def update_index(out: Path, doc: dict, name: str, referral: str = None, index_pa
         "name": name,
         "doc_id": doc.get("doc_id", name),
         "title": doc["title"],
+        "spoken_title": doc.get("spoken_title"),
         "path": rel,
         "source": doc["source"],
         "clause_count": doc["clause_count"],
@@ -1043,6 +1109,119 @@ def build_map(records: list[dict]) -> list[dict]:
              "children": r.get("children", 0)} for r in tops]
 
 
+def normalised_text_hash(text: str) -> str:
+    """sha256 of the text with case, whitespace and punctuation removed: the
+    same document saved twice (a re-export, a different line wrap) hashes
+    the same, so an upload can be told it is already here."""
+    norm = re.sub(r"[^a-z0-9]+", "", (text or "").lower())
+    return hashlib.sha256(norm.encode("utf-8")).hexdigest()
+
+
+def text_fingerprint(path: Path) -> Optional[str]:
+    """normalised_text_hash of a file's text by the light extractors (no
+    layout model), the same at ingest and at upload. None when the text
+    cannot be read cheaply."""
+    p = Path(path)
+    suf = p.suffix.lower()
+    try:
+        if suf in (".txt", ".md", ".markdown"):
+            return normalised_text_hash(p.read_text(encoding="utf-8", errors="replace"))
+        if suf == ".docx":
+            import docx
+            d = docx.Document(str(p))
+            parts = [para.text for para in d.paragraphs]
+            for t in d.tables:
+                for row in t.rows:
+                    parts.extend(c.text for c in row.cells)
+            return normalised_text_hash("\n".join(parts))
+        if suf in (".html", ".htm"):
+            return normalised_text_hash(re.sub(r"<[^>]+>", " ", p.read_text(encoding="utf-8", errors="replace")))
+        if suf == ".pdf":
+            try:
+                from pypdf import PdfReader
+            except ImportError:
+                return None
+            return normalised_text_hash("\n".join((pg.extract_text() or "") for pg in PdfReader(str(p)).pages))
+    except Exception:
+        return None
+    return None
+
+
+def spoken_title_for(sblocks, doc_title: str, path: Optional[Path] = None) -> str:
+    """What the voice will call the document: the file's own title property
+    (docx), else the first real heading the structure pass found, else the
+    title cleaned of underscores, UINs and fixture tags."""
+    from library import clean_title
+    if path is not None and Path(path).suffix.lower() == ".docx":
+        try:
+            import docx
+            t = (docx.Document(str(path)).core_properties.title or "").strip()
+            if 2 <= len(t.split()) <= 14:
+                return clean_title(t)
+        except Exception:
+            pass
+    for b in sblocks or []:
+        if b.kind != "heading":
+            continue
+        words = b.text.split()
+        if 2 <= len(words) <= 14 and re.search(r"[A-Za-z]{3,}", b.text) and not _NO_ALNUM.match(b.text):
+            return clean_title(b.text)
+    return clean_title(doc_title)
+
+
+def carry_enrichment(old: dict, doc: dict, notes: list) -> None:
+    """A re-ingest keeps what the model generated where it still fits: a
+    section's brief and questions by title (a question only if its clause
+    is still in that section), a clause's tags and spoken override where
+    its text is unchanged, and the overview, topics and enrichment block
+    only when the section list is the same. Anything else regenerates on
+    the next open."""
+    if not old.get("enrichment"):
+        return
+    try:
+        import enrich as _en
+        spans = _en.section_spans(doc)
+    except Exception as e:                       # pragma: no cover - the enrich module is optional here
+        notes.append(f"enrichment not carried over: {e}")
+        return
+    old_secs = {s.get("title"): s for s in old.get("sections") or []}
+    kept = []
+    for sp in spans:
+        os_ = old_secs.get(sp["title"])
+        if not os_:
+            continue
+        sec = {"id": sp["id"], "title": sp["title"]}
+        for k in ("brief", "est_minutes"):
+            if k in os_:
+                sec[k] = os_[k]
+        body_ids = {c["id"] for c in sp["body"]}
+        qs = [q for q in os_.get("suggested_questions") or [] if q.get("clause_id") in body_ids]
+        if qs:
+            sec["suggested_questions"] = qs
+        kept.append(sec)
+    if kept:
+        doc["sections"] = kept
+    old_by_id = {c["id"]: c for c in old.get("clauses") or []}
+    n_tags = 0
+    for c in doc["clauses"]:
+        oc = old_by_id.get(c["id"])
+        if oc and oc.get("text_display") == c.get("text_display"):
+            for k in ("tags", "spoken_override", "read_inline"):
+                if k in oc:
+                    c[k] = oc[k]
+            n_tags += "tags" in oc
+    olds = old.get("sections") or []
+    same = [(s.get("id"), s.get("title")) for s in olds] == [(sp["id"], sp["title"]) for sp in spans]
+    if same:
+        for k in ("overview", "topics", "enrichment"):
+            if k in old:
+                doc[k] = old[k]
+        notes.append("enrichment carried over: the section list is unchanged")
+    else:
+        notes.append(f"enrichment partly carried: {len(kept)}/{len(spans)} section briefs and {n_tags} "
+                     "clause tags kept; overview and topics regenerate on the next open")
+
+
 def build_terms(records: list[dict]) -> dict:
     """normalised term -> clause id, from definition clauses and definitions-table rows."""
     from grounding import normalise_term
@@ -1350,11 +1529,13 @@ def ingest_document(source, out_dir=None, *, out_path=None, name=None, title=Non
     warnings: list[str] = []
     t_all = time.monotonic()
 
-    def stage(name_, status="ok", detail="", t0=None):
+    def stage(name_, status="ok", detail="", t0=None, **extra):
+        """`progress(stage, status, ms, detail, extra)`: `extra` carries what the
+        companion may say aloud -- page count, top-level headings -- never text."""
         ms = round((time.monotonic() - (t0 if t0 is not None else t_all)) * 1000, 1)
         timings[name_] = ms
         if progress:
-            progress(name_, status, ms, detail)
+            progress(name_, status, ms, detail, extra or None)
 
     # ---- extract ---------------------------------------------------------
     t0 = time.monotonic()
@@ -1397,7 +1578,8 @@ def ingest_document(source, out_dir=None, *, out_path=None, name=None, title=Non
             raise IngestError(f"unsupported extension {suf!r}; use .pdf .docx .html .txt .md or a URL")
     doc_id = _doc_id_for(data)
     doc_key = name or (Path(out_path).stem if out_path else doc_id)
-    stage("extract", detail=f"{stype} {len(data)} bytes", t0=t0)
+    stage("extract", detail=f"{stype} {len(data)} bytes", t0=t0,
+          pages=(istr.num_pages(ddoc) if ddoc is not None else 0))
 
     # ---- structure -------------------------------------------------------
     t0 = time.monotonic()
@@ -1415,7 +1597,10 @@ def ingest_document(source, out_dir=None, *, out_path=None, name=None, title=Non
         raw = "\n".join(b.text for b in sblocks)
     if len(raw.strip()) < MIN_EXTRACT_CHARS:
         warnings.append(f"extracted only {len(raw.strip())} chars; scanned images, JS-rendered, or empty")
-    stage("structure", detail=f"{len(sblocks)} blocks, {n_pages} pages", t0=t0)
+    _heads = [b.text for b in sblocks if b.kind == "heading" and b.level <= 1] or \
+             [b.text for b in sblocks if b.kind == "heading"]
+    stage("structure", detail=f"{len(sblocks)} blocks, {n_pages} pages", t0=t0,
+          pages=n_pages, headings=_heads[:40], n_sections=len(_heads))
 
     # ---- segment (fold, merge, split; the 1,000-char assert) --------------
     t0 = time.monotonic()
@@ -1513,6 +1698,8 @@ def ingest_document(source, out_dir=None, *, out_path=None, name=None, title=Non
     if pii.institutional:
         source_block["institutional_contacts"] = [{"label": l, "redacted": redact(v)} for l, v in pii.institutional]
     doc_title = title or (urlparse(src).netloc + urlparse(src).path if is_url else Path(src).stem)
+    spoken_title = spoken_title_for(sblocks, doc_title, None if is_url else Path(src))
+    source_block["text_sha256"] = normalised_text_hash(raw) if is_url else text_fingerprint(Path(src))
     try:
         import docling
         dver = getattr(docling, "__version__", None) or __import__("importlib.metadata").metadata.version("docling")
@@ -1520,6 +1707,7 @@ def ingest_document(source, out_dir=None, *, out_path=None, name=None, title=Non
         dver = None
     doc = {
         "title": doc_title,
+        "spoken_title": spoken_title,
         "doc_id": doc_id,
         "synthetic": bool(synthetic),
         "readable": readable,
@@ -1561,6 +1749,12 @@ def ingest_document(source, out_dir=None, *, out_path=None, name=None, title=Non
             istr.save_docling_json(ddoc, docling_path)
         report_path = fixture_path.parent / f"{doc_key}.ingest_report.json"
         doc["report_file"] = report_path.name
+        if fixture_path.exists():
+            try:
+                carry_enrichment(json.loads(fixture_path.read_text(encoding="utf-8")), doc, notes)
+            except ValueError:
+                pass
+            report["validate"]["other_notes"] = [n for n in notes if not n.startswith(("split ", "hard split ", "folded", "merged"))]
         fixture_path.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
         report["elapsed_ms"]["write"] = round((time.monotonic() - t0) * 1000, 1)
         report["elapsed_ms"]["total"] = round((time.monotonic() - t_all) * 1000, 1)
@@ -1630,16 +1824,32 @@ def main() -> int:
     ap.add_argument("--legacy-segmenter", action="store_true",
                     help="text sources only: the numbered/headed segmenters instead of the structure mapping")
     ap.add_argument("--no-register", action="store_true", help="write the fixture but not index.json")
+    ap.add_argument("--force", action="store_true",
+                    help="re-ingest even when the registered fixture was built from these same bytes")
     args = ap.parse_args()
 
     out_dir = Path(args.out_dir) if args.out_dir else (ROOT / "examples" / "policy-reader" / "fixtures")
+    if not args.force and not args.dry_run and not str(args.source_path).lower().startswith(("http://", "https://")):
+        sp = Path(args.source_path)
+        idx = (Path(args.out).parent if args.out else out_dir) / INDEX_FILENAME
+        if sp.exists() and idx.exists():
+            try:
+                sha = hashlib.sha256(sp.read_bytes()).hexdigest()
+                same = [e for e in json.loads(idx.read_text(encoding="utf-8")).get("documents", [])
+                        if (e.get("source") or {}).get("sha256") == sha and (not args.name or e.get("name") == args.name)]
+            except ValueError:
+                same = []
+            if same:
+                print(f"{sp.name}: already ingested as {same[0]['name']!r} from these same bytes; "
+                      "pass --force to rebuild it", file=sys.stderr)
+                return 0
     try:
         res = ingest_document(
             args.source_path, out_dir=None if args.out else out_dir, out_path=args.out, name=args.name,
             title=args.title, id_prefix=args.id_prefix, min_clause_chars=args.min_clause_chars,
             max_clause_chars=args.max_clause_chars, fold_max_chars=args.fold_lists,
             synthetic=args.synthetic, referral=args.referral, ocr=args.ocr, source_kind=args.source,
-            progress=lambda st, status, ms, detail: print(f"  {st:10s} {status:4s} {ms:8.0f} ms  {detail}", file=sys.stderr),
+            progress=lambda st, status, ms, detail, extra=None: print(f"  {st:10s} {status:4s} {ms:8.0f} ms  {detail}", file=sys.stderr),
             register=not args.no_register, dry_run=args.dry_run, legacy_segmenter=args.legacy_segmenter)
     except IngestError as e:
         die(str(e))

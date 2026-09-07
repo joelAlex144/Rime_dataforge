@@ -107,6 +107,20 @@ describe('listener route', () => {
     expect(screen.getByText(/22 min left/)).toBeInTheDocument()
   })
 
+  it('shows the sections found as "Coming up" until the chips land', async () => {
+    render(<MemoryRouter><Listener /></MemoryRouter>)
+    await waitFor(() => expect(sockets.length).toBeGreaterThan(0))
+    feed(HELLO)
+    feed({ type: 'sections_found', titles: ['Definitions', 'Premium', 'Exclusions'] })
+    expect(await screen.findByLabelText('Coming up')).toHaveTextContent('Definitions')
+    feed({ type: 'topics', document: 'policy', topics: [{ topic: 'Exclusions', section_id: 's1', heading: 'Exclusions' }] })
+    await waitFor(() => expect(screen.queryByLabelText('Coming up')).toBeNull())
+    expect(screen.getByLabelText('Topics')).toHaveTextContent('Exclusions')
+    // a re-open of the same document keeps the chips
+    feed({ type: 'document_opened', name: 'policy', documents: HELLO.documents })
+    expect(screen.getByLabelText('Topics')).toHaveTextContent('Exclusions')
+  })
+
   it('renders no clause ids, no millisecond strings, and no provider name', async () => {
     render(<MemoryRouter><Listener /></MemoryRouter>)
     feed(HELLO)

@@ -36,7 +36,8 @@ class TestBranches(unittest.TestCase):
         cls.g = Grounding(HERO)
 
     def test_every_path_value_is_one_of_the_declared_set(self):
-        self.assertEqual(gr.RETRIEVAL_PATHS, ("deictic", "definition", "section_ref", "bm25", "none"))
+        self.assertEqual(gr.RETRIEVAL_PATHS,
+                         ("deictic", "definition", "section_ref", "bm25", "none", "suggested", "extractive"))
 
     def test_deictic_resolves_to_last_heard_and_never_calls_bm25(self):
         g = Grounding(HERO)
@@ -96,6 +97,29 @@ class TestBranches(unittest.TestCase):
         self.assertEqual(self.g.proximity_prior(same, anchor), 1.0)
         self.assertEqual(self.g.proximity_prior(adjacent, anchor), 0.7)
         self.assertEqual(self.g.proximity_prior(far, anchor), 0.4)
+
+
+class TestNavigationIntent(unittest.TestCase):
+    """The bare-topic rule jumps on a topic name and never on a question."""
+    @classmethod
+    def setUpClass(cls):
+        cls.g = Grounding(HERO)
+
+    def test_a_bare_topic_is_a_jump(self):
+        nav = self.g.navigation_intent("premium")
+        self.assertEqual(nav["intent"], "goto")
+        self.assertIn("Premium", nav["section"]["title"])
+        nav = self.g.navigation_intent("exclusions")
+        self.assertEqual(nav["intent"], "goto")
+        self.assertEqual(nav["section"]["title"], "General Exclusions")
+
+    def test_a_question_about_a_topic_goes_to_retrieval(self):
+        self.assertIsNone(self.g.navigation_intent("what is the premium"))
+        self.assertIsNone(self.g.navigation_intent("explain exclusions"))
+        self.assertIsNone(self.g.navigation_intent("exclusions?"))
+        self.assertIsNone(self.g.navigation_intent("does the premium change"))
+        self.assertTrue(gr.is_question_like("tell me about exclusions"))
+        self.assertFalse(gr.is_question_like("general exclusions"))
 
 
 class TestSyntheticFixture(unittest.TestCase):

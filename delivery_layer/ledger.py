@@ -41,7 +41,8 @@ class EventType(str, Enum):
     CANCEL_ISSUED = "cancel_issued"
     AUDIBLE_STOP = "audible_stop"
     UNIT_TRUNCATED = "unit_truncated"
-    UNIT_SKIPPED = "unit_skipped"          # never sent by design: boilerplate or table_on_request
+    UNIT_SKIPPED = "unit_skipped"          # never sent by design: boilerplate, table_on_request, or jump
+    JUMP = "jump"                          # {from_unit, to_unit, reason, turn_id}
     RESULT_FENCED = "result_fenced"
     POSITION_SAVED = "position_saved"
     POSITION_RESTORED = "position_restored"

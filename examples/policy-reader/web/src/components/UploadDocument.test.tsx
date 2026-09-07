@@ -110,6 +110,15 @@ describe('listener face', () => {
     await act(async () => FakeXHR.last!.fail(415, JSON.stringify({ error: "unsupported type '.exe'" })))
     expect(screen.getByText(/unsupported type/)).toBeInTheDocument()
   })
+
+  it('a document whose text is already here is a 409 with the companion line', async () => {
+    render(<UploadDocument face="listener" />)
+    fireEvent.change(screen.getByLabelText('Document file'), { target: { files: [file()] } })
+    await act(async () =>
+      FakeXHR.last!.fail(409, JSON.stringify({ error: 'That looks like Arogya Sanjeevani, already here.', existing: ENTRY })),
+    )
+    expect(screen.getByText(/That looks like Arogya Sanjeevani, already here\./)).toBeInTheDocument()
+  })
 })
 
 describe('developer face', () => {
@@ -124,7 +133,7 @@ describe('developer face', () => {
     render(<UploadDocument face="developer" onAccepted={onAccepted} />)
     fireEvent.change(screen.getByLabelText('Document file'), { target: { files: [file()] } })
     const xhr = FakeXHR.last!
-    expect(screen.getAllByText('pending').length).toBe(7)
+    expect(screen.getAllByText('pending').length).toBe(8) // seven ingest stages plus enrich
     await act(async () => xhr.frame({ stage: 'extract', status: 'ok', elapsed_ms: 12, detail: 'pdf 2048 bytes' }))
     expect(screen.getByText(/12 ms · pdf 2048 bytes/)).toBeInTheDocument()
     await runToDone(xhr)

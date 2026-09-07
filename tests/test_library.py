@@ -303,5 +303,43 @@ class TestReplLibraryCommands(LibraryTestBase):
         self.assertIn("sec-1-i", s.handle("read"))
 
 
+
+
+class TestSpokenTitleAndRemove(LibraryTestBase):
+    def test_spoken_title_falls_back_to_the_cleaned_title_and_is_editable(self):
+        lib = self.lib
+        first = lib.list()[0]
+        self.assertTrue(first["spoken_title"])
+        self.assertNotIn("_", first["spoken_title"])
+        lib.set_spoken_title(first["name"], "The Home Policy")
+        self.assertEqual(lib.entry(first["name"])["spoken_title"], "The Home Policy")
+        again = Library(self.index, EventLog(None, session_id="test-library-2"))
+        self.assertEqual(again.entry(first["name"])["spoken_title"], "The Home Policy", "written to index.json")
+
+    def test_remove_takes_the_entry_out_of_the_index_and_clears_current(self):
+        lib = self.lib
+        names = [d["name"] for d in lib.list()]
+        lib.open(names[0])
+        entry = lib.remove(names[0])
+        self.assertEqual(entry["name"], names[0])
+        self.assertIsNone(lib.current)
+        self.assertNotIn(names[0], [d["name"] for d in lib.list()])
+        data = json.loads(self.index.read_text(encoding="utf-8"))
+        self.assertNotIn(names[0], [e["name"] for e in data["documents"]])
+
+
+
+class TestFixturesAreClean(unittest.TestCase):
+    def test_no_fixture_in_the_index_has_a_page_marker_or_form_blank_heading(self):
+        root = FIXTURES
+        idx = json.loads((root / "index.json").read_text(encoding="utf-8"))
+        for e in idx["documents"]:
+            fx = json.loads((root / e["path"]).read_text(encoding="utf-8"))
+            heads = [c["text_display"] for c in fx["clauses"] if c.get("kind") == "heading"]
+            bad = [h for h in heads if "PAGE" in h.upper().split(".")[0] and "===" in h or "___" in h]
+            with self.subTest(document=e["name"]):
+                self.assertEqual(bad, [], f"{e['name']}: {bad[:5]}")
+
+
 if __name__ == "__main__":
     unittest.main()

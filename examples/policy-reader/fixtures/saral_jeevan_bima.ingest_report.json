@@ -107,7 +107,8 @@
     "label": "phone",
     "redacted": "1800…"
    }
-  ]
+  ],
+  "text_sha256": "77fb5d4967795415118bd6f4407d60dd909f6cb238fc270812043a72ceb7dd24"
  },
  "stages": [
   "extract",
@@ -119,14 +120,14 @@
   "write"
  ],
  "elapsed_ms": {
-  "extract": 30209.4,
-  "structure": 127.5,
-  "segment": 7.1,
-  "normalize": 153.9,
-  "pii_scan": 17.3,
-  "validate": 8.1,
-  "write": 89.1,
-  "total": 30612.7
+  "extract": 237.2,
+  "structure": 74.7,
+  "segment": 6.4,
+  "normalize": 58.3,
+  "pii_scan": 16.6,
+  "validate": 8.5,
+  "write": 136.5,
+  "total": 538.3
  },
  "structure": {
   "tool": "docling",
@@ -138,7 +139,7 @@
    "table": 1,
    "text": 648
   },
-  "demoted": 17,
+  "demoted": 22,
   "placeholders_stripped": 54,
   "splits": 0,
   "tables": [
@@ -155,7 +156,7 @@
    {
     "label": "email",
     "redacted": "info…",
-    "clause_id": "sec-2-p15-5"
+    "clause_id": "sec-2-b3"
    },
    {
     "label": "email",
@@ -250,7 +251,7 @@
    {
     "label": "phone",
     "redacted": "1800…",
-    "clause_id": "sec-2-p15-5"
+    "clause_id": "sec-2-b3"
    },
    {
     "label": "phone",
@@ -281,24 +282,29 @@
   "note": "Informational. Nothing here removed or altered any text; the developer view shows it as the review trail."
  },
  "validate": {
-  "clause_count": 415,
+  "clause_count": 419,
   "by_kind": {
-   "body": 309,
-   "boilerplate": 17,
+   "body": 308,
+   "boilerplate": 22,
    "heading": 80,
    "table_row": 8,
    "table_stub": 1
   },
-  "body_clauses": 309,
+  "body_clauses": 308,
   "readable": true,
   "splits": [],
   "folds_and_merges": [
-   "folded 176 list items into their runs (max 600 chars)",
-   "merged 146 short clauses (< 120 chars) into the next"
+   "folded 174 list items into their runs (max 600 chars)",
+   "merged 144 short clauses (< 120 chars) into the next"
   ],
   "oversized_ok": true,
   "max_clause_chars": 719,
   "boilerplate_first_15": [
+   {
+    "id": "sec-1-b1",
+    "text": "UIN / reference",
+    "reason": "front_matter"
+   },
    {
     "id": "sec-2-b1",
     "text": "",
@@ -311,11 +317,31 @@
    },
    {
     "id": "sec-2-b3",
+    "text": "5. In case of any clarification / discrepancy, call us toll free at our customer service helpline 18002679090 or email u",
+    "reason": "front_matter"
+   },
+   {
+    "id": "sec-2-b4",
+    "text": "visit us at www.sbilife.co.in.",
+    "reason": "front_matter"
+   },
+   {
+    "id": "sec-2-b5",
+    "text": "6. Register on our Customer Self Service websitehttp://mypolicy.sbilife.co.in to avail various online services available",
+    "reason": "front_matter"
+   },
+   {
+    "id": "sec-2-b6",
+    "text": "8. Please note that the digitally signed copy of your policy document is available on our website www.sbilife.co.in. Thi",
+    "reason": "front_matter"
+   },
+   {
+    "id": "sec-2-b7",
     "text": "",
     "reason": "placeholder_only"
    },
    {
-    "id": "sec-2-b4",
+    "id": "sec-2-b8",
     "text": "",
     "reason": "placeholder_only"
    },
@@ -348,31 +374,6 @@
     "id": "sec-pb-11-1-b2",
     "text": "Page 32 of 39",
     "reason": "page_number"
-   },
-   {
-    "id": "sec-pb-11-1-b3",
-    "text": "Page 33 of 39",
-    "reason": "page_number"
-   },
-   {
-    "id": "sec-pb-11-1-13-b1",
-    "text": "Page 34 of 39",
-    "reason": "page_number"
-   },
-   {
-    "id": "sec-pb-11-1-13-b2",
-    "text": "Page 35 of 39",
-    "reason": "page_number"
-   },
-   {
-    "id": "sec-pb-11-1-13-b3",
-    "text": "Page 36 of 39",
-    "reason": "page_number"
-   },
-   {
-    "id": "sec-pb-11-1-13-b4",
-    "text": "Page 37 of 39",
-    "reason": "page_number"
    }
   ],
   "expected_range": {
@@ -386,7 +387,8 @@
   },
   "other_notes": [
    "childless heading read as body: 'Telephone Number with STD Code'",
-   "childless heading read as body: 'Policy Holder is the legal owner of this policy'"
+   "childless heading read as body: 'Policy Holder is the legal owner of this policy'",
+   "enrichment carried over: the section list is unchanged"
   ],
   "unknown_labels": {},
   "warnings": []

@@ -330,3 +330,79 @@ describe('open ordering', () => {
     expect(buildOpen('carers', null, 0, false)).toEqual([{ type: 'open', name: 'carers' }])
   })
 })
+
+
+describe('prompts', () => {
+  it('a prompt message opens the one prompt with its options; prompt_closed clears it', () => {
+    let s = run([{ type: 'prompt', kind: 'table_choice', options: ['row', 'all', 'carry_on'], text: 'Here there is a table',
+                   labels: ['Document type', 'Issuer'] }])
+    expect(s.prompt?.kind).toBe('table_choice')
+    expect(s.prompt?.labels).toEqual(['Document type', 'Issuer'])
+    expect(s.phase).toBe('paused')
+    s = run([{ type: 'prompt', kind: 'start_choice', options: ['topic', 'brief', 'start'], text: 'I have gone through' },
+             { type: 'prompt_closed', kind: 'start_choice' }])
+    expect(s.prompt).toBeNull()
+  })
+
+  it('the older choice and offer messages feed the same prompt state', () => {
+    let s = run([{ type: 'choice', options: ['now', 'overview_first'], section_id: 'sec-4' }])
+    expect(s.prompt).toEqual({ kind: 'choice', options: ['now', 'overview_first'], text: '', section_id: 'sec-4' })
+    s = run([{ type: 'offer', question: 'q?', clause_id: 'c1' }, { type: 'offer_closed' }])
+    expect(s.prompt).toBeNull()
+    s = run([{ type: 'offer', question: 'q?', clause_id: 'c1' }, { type: 'jumped', unit_id: 'c9' }])
+    expect(s.prompt).toBeNull()
+  })
+})
+
+describe('understanding and the welcome upload', () => {
+  it('reply_understood shows under the box until the next prompt opens', () => {
+    let s = run([{ type: 'reply_understood', intent: 'topic', section_id: 'sec-4', section_title: 'General Exclusions', via: 'llm' }])
+    expect(s.heardAs).toEqual({ intent: 'topic', sectionTitle: 'General Exclusions', via: 'llm' })
+    s = run([{ type: 'prompt', kind: 'section_end', options: ['carry_on', 'topic', 'question'], text: 'That is Declarations.', next: 'Coverages' }], s)
+    expect(s.heardAs).toBeNull()
+    expect(s.prompt?.next).toBe('Coverages')
+  })
+
+  it('focus_upload bumps the counter the listener watches; ingest_wait keeps the phase', () => {
+    let s = run([{ type: 'focus_upload' }])
+    expect(s.focusUpload).toBe(1)
+    s = run([{ type: 'prompt', kind: 'ingest_wait', options: ['question'], text: 'I am going through the document now' }], { ...initialState, phase: 'idle' })
+    expect(s.prompt?.kind).toBe('ingest_wait')
+    expect(s.phase).toBe('idle')
+  })
+})
+
+describe('the companion while a document is processed', () => {
+  it('document_opened keeps the chips of the document already open, takes the chips it carries, clears for another', () => {
+    let s = run([
+      { type: 'hello', documents: [{ name: 'a' }, { name: 'b' }], current: 'a' },
+      { type: 'topics', document: 'a', topics: [{ topic: 'Exclusions', section_id: 's1', heading: 'Exclusions' }] },
+    ])
+    expect(s.topics.map((t) => t.topic)).toEqual(['Exclusions'])
+    s = run([{ type: 'document_opened', name: 'a', documents: [{ name: 'a' }, { name: 'b' }] }], s)
+    expect(s.topics.map((t) => t.topic)).toEqual(['Exclusions'])
+    s = run([{ type: 'document_opened', name: 'b', documents: [{ name: 'a' }, { name: 'b' }],
+              topics: [{ topic: 'Premium', section_id: 's2', heading: 'Premium' }] }], s)
+    expect(s.topics.map((t) => t.topic)).toEqual(['Premium'])
+    s = run([{ type: 'document_opened', name: 'a', documents: [{ name: 'a' }, { name: 'b' }] }], s)
+    expect(s.topics).toEqual([])
+    // chips for a document that is not the one open are ignored
+    s = run([{ type: 'topics', document: 'b', topics: [{ topic: 'X', section_id: 's3', heading: 'X' }] }], s)
+    expect(s.topics).toEqual([])
+  })
+
+  it('sections_found fills the list and a companion unit joins the transcript, not the clause on screen', () => {
+    let s = run([{ type: 'sections_found', titles: ['Definitions', 'Premium'] }])
+    expect(s.sectionsFound).toEqual(['Definitions', 'Premium'])
+    s = run([{ type: 'unit_started', context_id: 'companion#t1', unit_id: 'companion', index: -1, kind: 'companion',
+               section_title: 'Doc', text_display: 'Got the text, 12 pages.', sentences: [[0, 23]], char_start: 0 }], s)
+    expect(s.companionLines.map((l) => l.text)).toEqual(['Got the text, 12 pages.'])
+    expect(s.unit).toBeNull()
+  })
+
+  it('clearIngest resets both for the next upload', () => {
+    const s = run([{ type: 'sections_found', titles: ['A'] }])
+    expect(reducer(s, { type: 'clearIngest' }).sectionsFound).toEqual([])
+    expect(reducer(s, { type: 'clearIngest' }).companionLines).toEqual([])
+  })
+})

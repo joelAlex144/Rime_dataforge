@@ -13,7 +13,7 @@ Event types used across the layer (keep this list in sync with the README):
   synthesis side : provider_active, synth_requested, synth_first_byte,
                    synth_done, timestamps_received, result_fenced
   delivery side  : frames_played, cancel_issued, audible_stop,
-                   unit_truncated, unit_skipped, position_saved, position_restored
+                   unit_truncated, unit_skipped, position_saved, position_restored, jump
 
 `unit_skipped` is written once per skipped clause at session start, with
 `reason: boilerplate` (page furniture, registration lines, placeholders) or

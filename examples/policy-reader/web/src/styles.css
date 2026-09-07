@@ -225,3 +225,13 @@ dialog .upload { min-width: min(520px, 90vw); }
 /* /dev transport */
 .transport-dev { margin: 8px 0 12px; }
 .transport-dev input[type="text"] { flex: 1; min-width: 200px; }
+
+/* the companion transcript and the section list under the upload progress bar */
+.sections-found { columns: 2; margin: 8px 0; padding-left: 18px; font-size: 0.9em; }
+.transcript { max-height: 8em; overflow-y: auto; margin: 8px 0; opacity: 0.7; font-size: 0.9em; }
+.transcript p { margin: 2px 0; }
+
+/* navigator chips */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.chip { border-radius: 999px; padding: 6px 12px; border: 1px solid var(--line); background: var(--paper); }
+.chip:hover { border-color: var(--accent); }

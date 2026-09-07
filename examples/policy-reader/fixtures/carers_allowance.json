@@ -4903,5 +4903,259 @@
     ]
    ]
   }
+ ],
+ "enrichment": {
+  "provider": "ollama",
+  "model": "granite4.2:3b",
+  "elapsed_ms": 171781,
+  "fields": [
+   "tags",
+   "suggested_questions",
+   "tables"
+  ],
+  "done": [
+   "overview",
+   "sections",
+   "suggested_questions",
+   "tables",
+   "tags",
+   "topics"
+  ],
+  "guard_rejections": [
+   {
+    "field": "topics",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch0",
+    "reasons": [
+     "Expecting value: line 1 column 25 (char 24)"
+    ]
+   },
+   {
+    "field": "tags:batch1",
+    "reasons": [
+     "Expecting value: line 2 column 29 (char 30)"
+    ]
+   },
+   {
+    "field": "tags:batch2",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "questions:sec-8-p1",
+    "reasons": [
+     "Expecting ',' delimiter: line 2 column 144 (char 145)"
+    ]
+   },
+   {
+    "field": "questions:sec-10-p1",
+    "reasons": [
+     "Extra data: line 5 column 1 (char 104)"
+    ]
+   }
+  ],
+  "tokens": {
+   "in": 5918,
+   "out": 4200
+  }
+ },
+ "overview": {
+  "text": "This document provides information on Carer's Allowance eligibility, issued by GOV.UK. It is organised into sections including Eligibility, The person you care for, If you care for the person with others, The type of care you provide, Your eligibility, Calculating your earnings, If you get State Pension, If you get Pension Credit, If you’re not eligible. Listening from start to finish takes about 5 minutes.",
+  "generated": true,
+  "provider": "ollama",
+  "listening_minutes": 5,
+  "chars_per_second": 13.97,
+  "chars_per_second_source": "measured from 4 trace file(s)"
+ },
+ "sections": [
+  {
+   "id": "sec-2-p1",
+   "title": "Eligibility",
+   "brief": {
+    "text": "describes eligibility criteria for Carer’s Allowance based on caring responsibilities and care type.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1,
+   "suggested_questions": [
+    {
+     "text": "Does the clause specify that eligibility depends on whether you, the person you care for, and the type of care you provide meet certain criteria?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-2-p1"
+    }
+   ]
+  },
+  {
+   "id": "sec-3-p1",
+   "title": "The person you care for",
+   "brief": {
+    "text": "lists benefits required for care support eligibility",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1,
+   "suggested_questions": [
+    {
+     "text": "Which clause specifies that the person you care for must already receive a benefit before being eligible for personal independence payment?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-3-p4"
+    },
+    {
+     "text": "According to which clause is it required that the person you care for has previously received one of the listed benefits (such as Attendance Allowance) in order to qualify for disability living allowance or similar?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-3-p4"
+    },
+    {
+     "text": "Which clause defines the condition under which constant attendance allowance qualifies for care support at a specific rate?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-3-p6"
+    }
+   ]
+  },
+  {
+   "id": "sec-4-p1",
+   "title": "If you care for the person with others",
+   "brief": {
+    "text": "describes the procedure for sharing Carer’s Allowance when multiple carers look after someone with disabilities.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1,
+   "suggested_questions": [
+    {
+     "text": "Does the document state that you cannot get Carer’s Allowance if you share care with someone whose other carer is already claiming Carer’s Allowance for that person?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-4-p1"
+    },
+    {
+     "text": "According to the document, what happens when you want to get Carer’s Allowance and the other carer does not want to change their benefits?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-4-p5"
+    }
+   ]
+  },
+  {
+   "id": "sec-5-p1",
+   "title": "The type of care you provide",
+   "brief": {
+    "text": "covers the weekly hours required for caregiving tasks such as washing, cooking, doctor appointments, household chores, and bill management.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1,
+   "suggested_questions": [
+    {
+     "text": "Does the document specify any hours of care that must be spent per week?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-5-p1"
+    },
+    {
+     "text": "What types of activities are listed as examples of caring responsibilities under this clause?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-5-p1"
+    }
+   ]
+  },
+  {
+   "id": "sec-6-p1",
+   "title": "Your eligibility",
+   "brief": {
+    "text": "This section lists eligibility criteria for Carer’s Allowance.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1,
+   "suggested_questions": [
+    {
+     "text": "Does the document require that a person is not in full-time education?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-6-p5"
+    }
+   ]
+  },
+  {
+   "id": "sec-7-p1",
+   "title": "Calculating your earnings",
+   "brief": {
+    "text": "describes what this section covers: earnings calculation including income after tax and expenses.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1,
+   "suggested_questions": [
+    {
+     "text": "According to clause sec-7-p8, how is care cost treated when you earn £100 a week and spend £60 on care while working?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-7-p8"
+    },
+    {
+     "text": "What does clause sec-7-p9 list as payments that do not count as earnings?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-7-p9"
+    }
+   ]
+  },
+  {
+   "id": "sec-8-p1",
+   "title": "If you get State Pension",
+   "brief": {
+    "text": "...",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1
+  },
+  {
+   "id": "sec-9-p1",
+   "title": "If you get Pension Credit",
+   "brief": {
+    "text": "covers how Pension Credit adjusts when State Pension exceeds £86.45 per week",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1,
+   "suggested_questions": [
+    {
+     "text": "Does the clause state that if your State Pension is more than £86.45 a week, you will not receive Carer’s Allowance but your Pension Credit payments increase?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-9-p1"
+    }
+   ]
+  },
+  {
+   "id": "sec-10-p1",
+   "title": "If you’re not eligible",
+   "brief": {
+    "text": "covers eligibility criteria when you are not eligible for Carer’s Allowance",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1
+  }
+ ],
+ "topics": [
+  {
+   "topic": "Read from the start",
+   "section_id": null,
+   "heading": null,
+   "generated": false
+  }
  ]
 }

@@ -166,6 +166,22 @@ the same rows plus the listener position each question was asked from
 |---|---:|---:|---:|---:|---:|---:|---:|---|
 | `policy.json` | 20 | | | | | | | `traces/grounding_check_policy.json` |
 
+## Navigator and jump (scope)
+
+The navigator's generated fields are produced at build time and marked in the
+fixture; nothing in the judged runtime path calls a model. What is verified by
+test (`tests/test_server_jump.py`, `tests/test_enrich.py`): a jump issued while
+unit N plays and N+1 is in flight truncates N at the client boundary, skips
+N+1 (`unit_skipped`, reason jump), writes one `jump` event with a `turn_id`,
+speaks the cue unit, then the target; "go back to where I was" returns; a
+topic chip asks "now or overview first" and both answers reach the target;
+"read me every exclusion" returns cited clauses without touching BM25; a
+generated question whose clause id does not resolve is dropped; advisory
+language is rejected by the guard and falls back to the mechanical form.
+Scope: the generality claim rests on two fixtures (hero and two-wheeler) and
+the interruption drift script at 15 points; retrieval quality is still not
+claimed.
+
 ## Limitations of the evidence
 
 - Latency benches run from a single region and network; they characterise our deployment, not Rime globally.
@@ -173,3 +189,34 @@ the same rows plus the listener position each question was asked from
 - The `clear` leak measurement depends on how much text was queued; we report the queued length alongside the bytes.
 - Word-level boundaries depend on Rime's timestamps. Spans the aligner could not match are interpolated and counted; if that count is non-trivial in a run, the boundary claim for that run is clause-level, not word-level.
 - `modelId` is asserted from configuration and the catalog check, not from the audio stream, because the stream does not identify the model.
+
+## Narration gap (no radio silence while a document is processed)
+
+**Claim.** While a tab has the voice and a document is ingested and enriched,
+the longest silence between spoken companion lines is bounded; the target is
+a 95th percentile under 15 s. The lines are templates on real stage events, one
+engagement question, an acknowledgement or a plan line, and at most five
+fillers per ingest; none carries a fact from the document.
+
+**Metric.** `narration_gap_ms{max, count, gaps}` is written to the session
+trace once per ingest by `Narrator.finish()` (`companion.py`): `gaps` are the
+milliseconds between the upload's start, each `companion_spoken` line's start,
+and the end of the ingest; `max` is the longest; `count` the lines spoken.
+The lines themselves are `companion_spoken{source, origin, text}` records, so
+a gap can be read back to what was and was not said.
+
+**Procedure.** Claim the voice (play, or an interrupt on a fresh session),
+upload a document from that tab, and read the trace:
+
+    python - <<'EOF'
+    import json, sys
+    rows = [json.loads(l) for l in open("traces/session_<id>.jsonl")]
+    for r in rows:
+        if r["type"] == "narration_gap_ms": print(r["max"], r["count"], r["gaps"])
+    EOF
+
+Numbers quoted in this file come only from committed traces under `traces/`.
+The tests `tests/test_server_navigator.py::NavigatorCase::test_slow_stages_are_bridged_without_a_reply`
+and `..._a_reply_during_slow_stages_...` hold stage events fifteen seconds
+apart and assert `max < 15000` with the fake voice.
+

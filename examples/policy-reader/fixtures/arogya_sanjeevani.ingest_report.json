@@ -91,7 +91,8 @@
     "label": "phone",
     "redacted": "1800…"
    }
-  ]
+  ],
+  "text_sha256": "997f899c914bc82806aa181bae0353cb5a0ad7630f56bcbe5d2dfc15ee1beafb"
  },
  "stages": [
   "extract",
@@ -103,14 +104,14 @@
   "write"
  ],
  "elapsed_ms": {
-  "extract": 29925.4,
-  "structure": 125.9,
-  "segment": 6.6,
-  "normalize": 142.2,
-  "pii_scan": 15.2,
-  "validate": 7.7,
-  "write": 82.2,
-  "total": 30305.6
+  "extract": 26202.6,
+  "structure": 210.9,
+  "segment": 6.7,
+  "normalize": 52.0,
+  "pii_scan": 15.0,
+  "validate": 6.8,
+  "write": 169.3,
+  "total": 26663.2
  },
  "structure": {
   "tool": "docling",
@@ -122,7 +123,7 @@
    "table": 1,
    "text": 650
   },
-  "demoted": 0,
+  "demoted": 1,
   "placeholders_stripped": 0,
   "splits": 0,
   "tables": [
@@ -245,9 +246,10 @@
   "note": "Informational. Nothing here removed or altered any text; the developer view shows it as the review trail."
  },
  "validate": {
-  "clause_count": 274,
+  "clause_count": 275,
   "by_kind": {
    "body": 218,
+   "boilerplate": 1,
    "definition": 5,
    "heading": 42,
    "table_row": 8,
@@ -258,11 +260,17 @@
   "splits": [],
   "folds_and_merges": [
    "folded 246 list items into their runs (max 600 chars)",
-   "merged 179 short clauses (< 120 chars) into the next"
+   "merged 178 short clauses (< 120 chars) into the next"
   ],
   "oversized_ok": true,
   "max_clause_chars": 972,
-  "boilerplate_first_15": [],
+  "boilerplate_first_15": [
+   {
+    "id": "sec-1-b1",
+    "text": "UIN / reference",
+    "reason": "front_matter"
+   }
+  ],
   "expected_range": {
    "reference": "150-250 clauses for a ~12,000-word wording",
    "words": 12423,
@@ -272,7 +280,9 @@
    ],
    "in_range": true
   },
-  "other_notes": [],
+  "other_notes": [
+   "enrichment carried over: the section list is unchanged"
+  ],
   "unknown_labels": {},
   "warnings": []
  },

@@ -1,5 +1,6 @@
 {
  "title": "fixture_home_loan_mitc",
+ "spoken_title": "Most Important Terms and Conditions (MITC) — Retail Secured and Unsecured Loans",
  "doc_id": "47a0feca107a0723",
  "synthetic": false,
  "readable": true,
@@ -24,9 +25,10 @@
     "label": "phone",
     "redacted": "1100…"
    }
-  ]
+  ],
+  "text_sha256": "660fac460a23d2cf28401ed154e1d9c92a8af58c6965c24e5c62d38744bc3138"
  },
- "clause_count": 143,
+ "clause_count": 144,
  "clauses": [
   {
    "id": "sec-1",
@@ -35,8 +37,8 @@
    "section_title": "Most Important Terms and Conditions (MITC) — Retail Secured and Unsecured Loans",
    "subsection": null,
    "item": null,
-   "text_display": "Most Important Terms and Conditions (MITC) — Retail Secured and Unsecured Loans. 13 items.",
-   "text_spoken": "Most Important Terms and Conditions (MITC) — Retail Secured and Unsecured Loans. thirteen items.",
+   "text_display": "Most Important Terms and Conditions (MITC) — Retail Secured and Unsecured Loans. 12 items.",
+   "text_spoken": "Most Important Terms and Conditions (MITC) — Retail Secured and Unsecured Loans. twelve items.",
    "sentences": [
     [
      0,
@@ -107,7 +109,7 @@
     [
      81,
      83,
-     "thirteen"
+     "twelve"
     ],
     [
      84,
@@ -117,7 +119,7 @@
    ],
    "kind": "heading",
    "level": 1,
-   "children": 13
+   "children": 12
   },
   {
    "id": "sec-1-p1",
@@ -319,7 +321,12 @@
      "row."
     ]
    ],
-   "kind": "table_stub"
+   "kind": "table_stub",
+   "spoken_override": {
+    "text": "The table is a list of loan terms organized by category; it has 8 rows and 3 columns (Term Category, Description, Value/Condition). Row labels are the term categories in order. Which one do you want?",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r1",
@@ -375,7 +382,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "The loan terms specify a maximum interest rate of 5.2%, a repayment period of 30 years, and require monthly payments equal to at least 15% of the borrower's gross monthly income, with additional fees capped at $150 per year.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r2",
@@ -441,7 +453,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "Bajaj Housing Finance Limited, a public MITC issuer, issued the loan product.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r3",
@@ -482,7 +499,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "The row contains the label 'UIN' and the value is a reference identifier.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r4",
@@ -523,7 +545,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "Source page 12 provides the row of a table with source pages listed.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r5",
@@ -569,7 +596,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "Here is a concise summary of the table's content, which includes four rows with body words totaling 4098 words across all rows.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r6",
@@ -610,7 +642,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "Section 38 is the heading for the row of a table, which corresponds to section headings in the document.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r7",
@@ -656,7 +693,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "The row of the table was retrieved on 6 September 2026.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r8",
@@ -722,21 +764,26 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "The document from Bajaj Housing Finance provides a summary of MITC retail secured and unsecured financing in English, available at the given URL.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
-   "id": "sec-1-p10",
+   "id": "sec-1-p3",
    "index": 11,
    "section": 1,
    "section_title": "Most Important Terms and Conditions (MITC) — Retail Secured and Unsecured Loans",
    "subsection": null,
    "item": null,
-   "text_display": "Document type Issuer / source UIN / reference Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note.",
-   "text_spoken": "Document type Issuer / source UIN / reference Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note.",
+   "text_display": "Document type Issuer / source",
+   "text_spoken": "Document type Issuer / source",
    "sentences": [
     [
      0,
-     144
+     29
     ]
    ],
    "spoken_map": [
@@ -764,563 +811,588 @@
      23,
      29,
      "source"
-    ],
-    [
-     30,
-     33,
-     "UIN"
-    ],
-    [
-     34,
-     35,
-     "/"
-    ],
-    [
-     36,
-     45,
-     "reference"
-    ],
-    [
-     46,
-     52,
-     "Source"
-    ],
-    [
-     53,
-     58,
-     "pages"
-    ],
-    [
-     59,
-     63,
-     "Word"
-    ],
-    [
-     64,
-     69,
-     "count"
-    ],
-    [
-     70,
-     76,
-     "(body)"
-    ],
-    [
-     77,
-     84,
-     "Section"
-    ],
-    [
-     85,
-     93,
-     "headings"
-    ],
-    [
-     94,
-     103,
-     "Retrieved"
-    ],
-    [
-     104,
-     110,
-     "Source"
-    ],
-    [
-     111,
-     114,
-     "URL"
-    ],
-    [
-     115,
-     125,
-     "Provenance"
-    ],
-    [
-     126,
-     129,
-     "and"
-    ],
-    [
-     130,
-     138,
-     "handling"
-    ],
-    [
-     139,
-     144,
-     "note."
     ]
    ],
    "kind": "body"
   },
   {
-   "id": "sec-1-p11",
+   "id": "sec-1-b1",
    "index": 12,
    "section": 1,
    "section_title": "Most Important Terms and Conditions (MITC) — Retail Secured and Unsecured Loans",
    "subsection": null,
    "item": null,
-   "text_display": "Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
-   "text_spoken": "Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
+   "text_display": "UIN / reference",
+   "text_spoken": "UIN / reference",
    "sentences": [
     [
      0,
-     173
-    ],
-    [
-     174,
-     252
-    ],
-    [
-     253,
-     303
-    ],
-    [
-     304,
-     420
-    ],
-    [
-     421,
-     517
+     15
     ]
    ],
    "spoken_map": [
     [
      0,
+     3,
+     "UIN"
+    ],
+    [
      4,
-     "Text"
-    ],
-    [
      5,
-     8,
-     "was"
+     "/"
     ],
     [
-     9,
+     6,
+     15,
+     "reference"
+    ]
+   ],
+   "kind": "boilerplate",
+   "demoted_by": "front_matter",
+   "label": "text"
+  },
+  {
+   "id": "sec-1-p10",
+   "index": 13,
+   "section": 1,
+   "section_title": "Most Important Terms and Conditions (MITC) — Retail Secured and Unsecured Loans",
+   "subsection": null,
+   "item": null,
+   "text_display": "Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note. Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
+   "text_spoken": "Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note. Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
+   "sentences": [
+    [
+     0,
+     98
+    ],
+    [
+     99,
+     272
+    ],
+    [
+     273,
+     351
+    ],
+    [
+     352,
+     402
+    ],
+    [
+     403,
+     519
+    ],
+    [
+     520,
+     616
+    ]
+   ],
+   "spoken_map": [
+    [
+     0,
+     6,
+     "Source"
+    ],
+    [
+     7,
+     12,
+     "pages"
+    ],
+    [
+     13,
+     17,
+     "Word"
+    ],
+    [
      18,
-     "extracted"
-    ],
-    [
-     19,
      23,
-     "from"
+     "count"
     ],
     [
      24,
-     27,
-     "the"
+     30,
+     "(body)"
     ],
     [
-     28,
-     36,
-     "publicly"
+     31,
+     38,
+     "Section"
     ],
     [
-     37,
-     43,
-     "hosted"
-    ],
-    [
-     44,
+     39,
      47,
-     "PDF"
+     "headings"
     ],
     [
      48,
-     50,
-     "at"
+     57,
+     "Retrieved"
     ],
     [
-     51,
-     54,
-     "the"
-    ],
-    [
-     55,
      58,
-     "URL"
-    ],
-    [
-     59,
      64,
-     "above"
+     "Source"
     ],
     [
      65,
      68,
-     "and"
+     "URL"
     ],
     [
      69,
-     71,
-     "is"
+     79,
+     "Provenance"
     ],
     [
-     72,
-     82,
-     "reproduced"
-    ],
-    [
+     80,
      83,
-     89,
-     "as-is,"
+     "and"
     ],
     [
-     90,
-     94,
-     "with"
+     84,
+     92,
+     "handling"
     ],
     [
-     95,
-     102,
-     "running"
+     93,
+     98,
+     "note."
     ],
     [
+     99,
      103,
-     111,
-     "headers,"
+     "Text"
     ],
     [
-     112,
-     119,
-     "footers"
+     104,
+     107,
+     "was"
     ],
     [
-     120,
+     108,
+     117,
+     "extracted"
+    ],
+    [
+     118,
+     122,
+     "from"
+    ],
+    [
      123,
-     "and"
+     126,
+     "the"
     ],
     [
-     124,
-     128,
-     "page"
+     127,
+     135,
+     "publicly"
     ],
     [
-     129,
      136,
-     "numbers"
+     142,
+     "hosted"
     ],
     [
-     137,
-     144,
-     "removed"
-    ],
-    [
-     145,
-     148,
-     "and"
-    ],
-    [
-     149,
-     156,
-     "wrapped"
-    ],
-    [
-     157,
-     162,
-     "lines"
-    ],
-    [
-     163,
-     173,
-     "re-joined."
-    ],
-    [
-     174,
-     180,
-     "Tables"
-    ],
-    [
-     181,
-     184,
-     "and"
-    ],
-    [
-     185,
-     195,
-     "two-column"
-    ],
-    [
-     196,
-     206,
-     "definition"
-    ],
-    [
-     207,
-     212,
-     "lists"
-    ],
-    [
-     213,
-     215,
-     "in"
-    ],
-    [
-     216,
-     219,
-     "the"
-    ],
-    [
-     220,
-     228,
-     "original"
-    ],
-    [
-     229,
-     232,
-     "may"
-    ],
-    [
-     233,
-     237,
-     "read"
-    ],
-    [
-     238,
-     246,
-     "linearly"
-    ],
-    [
-     247,
-     252,
-     "here;"
-    ],
-    [
-     253,
-     258,
-     "check"
-    ],
-    [
-     259,
-     266,
-     "against"
-    ],
-    [
-     267,
-     270,
-     "the"
-    ],
-    [
-     271,
-     274,
+     143,
+     146,
      "PDF"
     ],
     [
-     275,
-     281,
-     "before"
+     147,
+     149,
+     "at"
     ],
     [
-     282,
-     289,
-     "relying"
+     150,
+     153,
+     "the"
     ],
     [
-     290,
-     292,
-     "on"
+     154,
+     157,
+     "URL"
     ],
     [
-     293,
-     296,
-     "any"
+     158,
+     163,
+     "above"
     ],
     [
-     297,
-     303,
-     "table."
+     164,
+     167,
+     "and"
     ],
     [
-     304,
-     308,
-     "This"
-    ],
-    [
-     309,
-     311,
+     168,
+     170,
      "is"
     ],
     [
-     312,
-     313,
-     "a"
+     171,
+     181,
+     "reproduced"
     ],
     [
-     314,
-     320,
-     "public"
+     182,
+     188,
+     "as-is,"
     ],
     [
-     321,
-     328,
-     "product"
-    ],
-    [
-     329,
-     336,
-     "wording"
-    ],
-    [
-     337,
-     338,
-     "/"
-    ],
-    [
-     339,
-     348,
-     "template,"
-    ],
-    [
-     349,
-     352,
-     "not"
-    ],
-    [
-     353,
-     354,
-     "a"
-    ],
-    [
-     355,
-     363,
-     "customer"
-    ],
-    [
-     364,
-     372,
-     "document"
-    ],
-    [
-     373,
-     374,
-     "—"
-    ],
-    [
-     375,
-     377,
-     "it"
-    ],
-    [
-     378,
-     386,
-     "contains"
-    ],
-    [
-     387,
-     389,
-     "no"
-    ],
-    [
-     390,
-     402,
-     "policyholder"
-    ],
-    [
-     403,
-     405,
-     "or"
-    ],
-    [
-     406,
-     414,
-     "borrower"
-    ],
-    [
-     415,
-     420,
-     "data."
-    ],
-    [
-     421,
-     423,
-     "If"
-    ],
-    [
-     424,
-     427,
-     "the"
-    ],
-    [
-     428,
-     432,
-     "demo"
-    ],
-    [
-     433,
-     439,
-     "should"
-    ],
-    [
-     440,
-     443,
-     "not"
-    ],
-    [
-     444,
-     448,
-     "show"
-    ],
-    [
-     449,
-     450,
-     "a"
-    ],
-    [
-     451,
-     457,
-     "brand,"
-    ],
-    [
-     458,
-     465,
-     "replace"
-    ],
-    [
-     466,
-     469,
-     "the"
-    ],
-    [
-     470,
-     476,
-     "issuer"
-    ],
-    [
-     477,
-     481,
-     "name"
-    ],
-    [
-     482,
-     486,
+     189,
+     193,
      "with"
     ],
     [
-     487,
-     488,
-     "a"
+     194,
+     201,
+     "running"
     ],
     [
-     489,
-     500,
-     "placeholder"
+     202,
+     210,
+     "headers,"
     ],
     [
-     501,
-     507,
+     211,
+     218,
+     "footers"
+    ],
+    [
+     219,
+     222,
+     "and"
+    ],
+    [
+     223,
+     227,
+     "page"
+    ],
+    [
+     228,
+     235,
+     "numbers"
+    ],
+    [
+     236,
+     243,
+     "removed"
+    ],
+    [
+     244,
+     247,
+     "and"
+    ],
+    [
+     248,
+     255,
+     "wrapped"
+    ],
+    [
+     256,
+     261,
+     "lines"
+    ],
+    [
+     262,
+     272,
+     "re-joined."
+    ],
+    [
+     273,
+     279,
+     "Tables"
+    ],
+    [
+     280,
+     283,
+     "and"
+    ],
+    [
+     284,
+     294,
+     "two-column"
+    ],
+    [
+     295,
+     305,
+     "definition"
+    ],
+    [
+     306,
+     311,
+     "lists"
+    ],
+    [
+     312,
+     314,
+     "in"
+    ],
+    [
+     315,
+     318,
+     "the"
+    ],
+    [
+     319,
+     327,
+     "original"
+    ],
+    [
+     328,
+     331,
+     "may"
+    ],
+    [
+     332,
+     336,
+     "read"
+    ],
+    [
+     337,
+     345,
+     "linearly"
+    ],
+    [
+     346,
+     351,
+     "here;"
+    ],
+    [
+     352,
+     357,
+     "check"
+    ],
+    [
+     358,
+     365,
+     "against"
+    ],
+    [
+     366,
+     369,
+     "the"
+    ],
+    [
+     370,
+     373,
+     "PDF"
+    ],
+    [
+     374,
+     380,
      "before"
     ],
     [
-     508,
-     517,
+     381,
+     388,
+     "relying"
+    ],
+    [
+     389,
+     391,
+     "on"
+    ],
+    [
+     392,
+     395,
+     "any"
+    ],
+    [
+     396,
+     402,
+     "table."
+    ],
+    [
+     403,
+     407,
+     "This"
+    ],
+    [
+     408,
+     410,
+     "is"
+    ],
+    [
+     411,
+     412,
+     "a"
+    ],
+    [
+     413,
+     419,
+     "public"
+    ],
+    [
+     420,
+     427,
+     "product"
+    ],
+    [
+     428,
+     435,
+     "wording"
+    ],
+    [
+     436,
+     437,
+     "/"
+    ],
+    [
+     438,
+     447,
+     "template,"
+    ],
+    [
+     448,
+     451,
+     "not"
+    ],
+    [
+     452,
+     453,
+     "a"
+    ],
+    [
+     454,
+     462,
+     "customer"
+    ],
+    [
+     463,
+     471,
+     "document"
+    ],
+    [
+     472,
+     473,
+     "—"
+    ],
+    [
+     474,
+     476,
+     "it"
+    ],
+    [
+     477,
+     485,
+     "contains"
+    ],
+    [
+     486,
+     488,
+     "no"
+    ],
+    [
+     489,
+     501,
+     "policyholder"
+    ],
+    [
+     502,
+     504,
+     "or"
+    ],
+    [
+     505,
+     513,
+     "borrower"
+    ],
+    [
+     514,
+     519,
+     "data."
+    ],
+    [
+     520,
+     522,
+     "If"
+    ],
+    [
+     523,
+     526,
+     "the"
+    ],
+    [
+     527,
+     531,
+     "demo"
+    ],
+    [
+     532,
+     538,
+     "should"
+    ],
+    [
+     539,
+     542,
+     "not"
+    ],
+    [
+     543,
+     547,
+     "show"
+    ],
+    [
+     548,
+     549,
+     "a"
+    ],
+    [
+     550,
+     556,
+     "brand,"
+    ],
+    [
+     557,
+     564,
+     "replace"
+    ],
+    [
+     565,
+     568,
+     "the"
+    ],
+    [
+     569,
+     575,
+     "issuer"
+    ],
+    [
+     576,
+     580,
+     "name"
+    ],
+    [
+     581,
+     585,
+     "with"
+    ],
+    [
+     586,
+     587,
+     "a"
+    ],
+    [
+     588,
+     599,
+     "placeholder"
+    ],
+    [
+     600,
+     606,
+     "before"
+    ],
+    [
+     607,
+     616,
      "chunking."
     ]
    ],
    "kind": "body"
   },
   {
-   "id": "sec-1-p12",
-   "index": 13,
+   "id": "sec-1-p11",
+   "index": 14,
    "section": 1,
    "section_title": "Most Important Terms and Conditions (MITC) — Retail Secured and Unsecured Loans",
    "subsection": null,
@@ -1399,7 +1471,7 @@
   },
   {
    "id": "sec-2",
-   "index": 14,
+   "index": 15,
    "section": 2,
    "section_title": "MOST IMPORTANT TERMS AND CONDITIONS (MITC)",
    "subsection": null,
@@ -1460,7 +1532,7 @@
   },
   {
    "id": "sec-2-p1",
-   "index": 15,
+   "index": 16,
    "section": 2,
    "section_title": "MOST IMPORTANT TERMS AND CONDITIONS (MITC)",
    "subsection": null,
@@ -1799,7 +1871,7 @@
   },
   {
    "id": "sec-2-p2",
-   "index": 16,
+   "index": 17,
    "section": 2,
    "section_title": "MOST IMPORTANT TERMS AND CONDITIONS (MITC)",
    "subsection": null,
@@ -2359,7 +2431,7 @@
   },
   {
    "id": "sec-2-p3",
-   "index": 17,
+   "index": 18,
    "section": 2,
    "section_title": "MOST IMPORTANT TERMS AND CONDITIONS (MITC)",
    "subsection": null,
@@ -2513,7 +2585,7 @@
   },
   {
    "id": "sec-2-1",
-   "index": 18,
+   "index": 19,
    "section": 3,
    "section_title": "LOAN AMOUNT:",
    "subsection": null,
@@ -2554,7 +2626,7 @@
   },
   {
    "id": "sec-2-1-p1",
-   "index": 19,
+   "index": 20,
    "section": 3,
    "section_title": "LOAN AMOUNT:",
    "subsection": null,
@@ -2578,7 +2650,7 @@
   },
   {
    "id": "sec-2-2",
-   "index": 20,
+   "index": 21,
    "section": 4,
    "section_title": "INTEREST TYPE:",
    "subsection": null,
@@ -2619,7 +2691,7 @@
   },
   {
    "id": "sec-2-2-p2",
-   "index": 21,
+   "index": 22,
    "section": 4,
    "section_title": "INTEREST TYPE:",
    "subsection": null,
@@ -2792,7 +2864,7 @@
   },
   {
    "id": "sec-2-2-p5",
-   "index": 22,
+   "index": 23,
    "section": 4,
    "section_title": "INTEREST TYPE:",
    "subsection": null,
@@ -3256,7 +3328,7 @@
   },
   {
    "id": "sec-2-2-p6",
-   "index": 23,
+   "index": 24,
    "section": 4,
    "section_title": "INTEREST TYPE:",
    "subsection": null,
@@ -3911,7 +3983,7 @@
   },
   {
    "id": "sec-2-3",
-   "index": 24,
+   "index": 25,
    "section": 5,
    "section_title": "LOAN TENURE:",
    "subsection": null,
@@ -3940,7 +4012,7 @@
   },
   {
    "id": "sec-2-4",
-   "index": 25,
+   "index": 26,
    "section": 6,
    "section_title": "PURPOSE OF LOAN:",
    "subsection": null,
@@ -3986,7 +4058,7 @@
   },
   {
    "id": "sec-2-4-p1",
-   "index": 26,
+   "index": 27,
    "section": 6,
    "section_title": "PURPOSE OF LOAN:",
    "subsection": null,
@@ -4245,7 +4317,7 @@
   },
   {
    "id": "sec-2-4-p3",
-   "index": 27,
+   "index": 28,
    "section": 6,
    "section_title": "PURPOSE OF LOAN:",
    "subsection": null,
@@ -4447,7 +4519,7 @@
   },
   {
    "id": "sec-2-4-p6",
-   "index": 28,
+   "index": 29,
    "section": 6,
    "section_title": "PURPOSE OF LOAN:",
    "subsection": null,
@@ -4683,7 +4755,7 @@
   },
   {
    "id": "sec-2-4-p8",
-   "index": 29,
+   "index": 30,
    "section": 6,
    "section_title": "PURPOSE OF LOAN:",
    "subsection": null,
@@ -4939,7 +5011,7 @@
   },
   {
    "id": "sec-2-4-p9",
-   "index": 30,
+   "index": 31,
    "section": 6,
    "section_title": "PURPOSE OF LOAN:",
    "subsection": null,
@@ -5088,7 +5160,7 @@
   },
   {
    "id": "sec-2-4-p9-b",
-   "index": 31,
+   "index": 32,
    "section": 6,
    "section_title": "PURPOSE OF LOAN:",
    "subsection": null,
@@ -5622,7 +5694,7 @@
   },
   {
    "id": "sec-2-4-p9-d",
-   "index": 32,
+   "index": 33,
    "section": 6,
    "section_title": "PURPOSE OF LOAN:",
    "subsection": null,
@@ -6130,7 +6202,7 @@
   },
   {
    "id": "sec-2-4-p9-d-ii-c",
-   "index": 33,
+   "index": 34,
    "section": 6,
    "section_title": "PURPOSE OF LOAN:",
    "subsection": null,
@@ -6345,7 +6417,7 @@
   },
   {
    "id": "sec-2-4-p10",
-   "index": 34,
+   "index": 35,
    "section": 6,
    "section_title": "PURPOSE OF LOAN:",
    "subsection": null,
@@ -6568,7 +6640,7 @@
   },
   {
    "id": "sec-2-4-p10-e",
-   "index": 35,
+   "index": 36,
    "section": 6,
    "section_title": "PURPOSE OF LOAN:",
    "subsection": null,
@@ -6753,7 +6825,7 @@
   },
   {
    "id": "sec-2-6",
-   "index": 36,
+   "index": 37,
    "section": 7,
    "section_title": "SECURITY",
    "subsection": null,
@@ -6789,7 +6861,7 @@
   },
   {
    "id": "sec-2-6-p1",
-   "index": 37,
+   "index": 38,
    "section": 7,
    "section_title": "SECURITY",
    "subsection": null,
@@ -7281,7 +7353,7 @@
   },
   {
    "id": "sec-2-6-p2",
-   "index": 38,
+   "index": 39,
    "section": 7,
    "section_title": "SECURITY",
    "subsection": null,
@@ -7425,7 +7497,7 @@
   },
   {
    "id": "sec-2-6-p3-7",
-   "index": 39,
+   "index": 40,
    "section": 7,
    "section_title": "SECURITY",
    "subsection": null,
@@ -7584,7 +7656,7 @@
   },
   {
    "id": "sec-2-6-p4",
-   "index": 40,
+   "index": 41,
    "section": 7,
    "section_title": "SECURITY",
    "subsection": null,
@@ -7882,7 +7954,7 @@
   },
   {
    "id": "sec-2-6-p5",
-   "index": 41,
+   "index": 42,
    "section": 7,
    "section_title": "SECURITY",
    "subsection": null,
@@ -8016,7 +8088,7 @@
   },
   {
    "id": "sec-2-6-p6",
-   "index": 42,
+   "index": 43,
    "section": 7,
    "section_title": "SECURITY",
    "subsection": null,
@@ -8284,7 +8356,7 @@
   },
   {
    "id": "sec-2-6-p7",
-   "index": 43,
+   "index": 44,
    "section": 7,
    "section_title": "SECURITY",
    "subsection": null,
@@ -8443,7 +8515,7 @@
   },
   {
    "id": "sec-2-6-p8",
-   "index": 44,
+   "index": 45,
    "section": 7,
    "section_title": "SECURITY",
    "subsection": null,
@@ -8979,7 +9051,7 @@
   },
   {
    "id": "sec-2-6-p10",
-   "index": 45,
+   "index": 46,
    "section": 7,
    "section_title": "SECURITY",
    "subsection": null,
@@ -9246,7 +9318,7 @@
   },
   {
    "id": "sec-2-6-p11",
-   "index": 46,
+   "index": 47,
    "section": 7,
    "section_title": "SECURITY",
    "subsection": null,
@@ -9708,7 +9780,7 @@
   },
   {
    "id": "sec-2-8",
-   "index": 47,
+   "index": 48,
    "section": 8,
    "section_title": "CONDITIONS FOR DISBURSEMENT OF THE LOAN",
    "subsection": null,
@@ -9769,7 +9841,7 @@
   },
   {
    "id": "sec-2-8-p1",
-   "index": 48,
+   "index": 49,
    "section": 8,
    "section_title": "CONDITIONS FOR DISBURSEMENT OF THE LOAN",
    "subsection": null,
@@ -9879,11 +9951,19 @@
      "Documents;"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "exclusion",
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-8-p2",
-   "index": 49,
+   "index": 50,
    "section": 8,
    "section_title": "CONDITIONS FOR DISBURSEMENT OF THE LOAN",
    "subsection": null,
@@ -10370,11 +10450,19 @@
      "regulations;"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "waiting_period",
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-8-p3",
-   "index": 50,
+   "index": 51,
    "section": 8,
    "section_title": "CONDITIONS FOR DISBURSEMENT OF THE LOAN",
    "subsection": null,
@@ -10514,11 +10602,16 @@
      "BHFL."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-9",
-   "index": 51,
+   "index": 52,
    "section": 9,
    "section_title": "REPAYMENT OF THE LOAN",
    "subsection": null,
@@ -10569,7 +10662,7 @@
   },
   {
    "id": "sec-2-9-p1",
-   "index": 52,
+   "index": 53,
    "section": 9,
    "section_title": "REPAYMENT OF THE LOAN",
    "subsection": null,
@@ -10869,11 +10962,16 @@
      "BHFL."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-9-p3",
-   "index": 53,
+   "index": 54,
    "section": 9,
    "section_title": "REPAYMENT OF THE LOAN",
    "subsection": null,
@@ -11097,11 +11195,16 @@
      "accordingly."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-9-p4",
-   "index": 54,
+   "index": 55,
    "section": 9,
    "section_title": "REPAYMENT OF THE LOAN",
    "subsection": null,
@@ -11400,11 +11503,19 @@
      "BHFL."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "amount",
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-10",
-   "index": 55,
+   "index": 56,
    "section": 10,
    "section_title": "BRIEF PROCEDURE TO BE FOLLOWED FOR RECOVERY OF OVERDUES",
    "subsection": null,
@@ -11480,7 +11591,7 @@
   },
   {
    "id": "sec-2-10-p1",
-   "index": 56,
+   "index": 57,
    "section": 10,
    "section_title": "BRIEF PROCEDURE TO BE FOLLOWED FOR RECOVERY OF OVERDUES",
    "subsection": null,
@@ -11845,11 +11956,16 @@
      "over"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-10-p2",
-   "index": 57,
+   "index": 58,
    "section": 10,
    "section_title": "BRIEF PROCEDURE TO BE FOLLOWED FOR RECOVERY OF OVERDUES",
    "subsection": null,
@@ -12027,11 +12143,16 @@
      "to:"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-10-p4",
-   "index": 58,
+   "index": 59,
    "section": 10,
    "section_title": "BRIEF PROCEDURE TO BE FOLLOWED FOR RECOVERY OF OVERDUES",
    "subsection": null,
@@ -12225,11 +12346,16 @@
      "immediately."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-10-p6",
-   "index": 59,
+   "index": 60,
    "section": 10,
    "section_title": "BRIEF PROCEDURE TO BE FOLLOWED FOR RECOVERY OF OVERDUES",
    "subsection": null,
@@ -12443,11 +12569,16 @@
      "Loan."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-10-p8",
-   "index": 60,
+   "index": 61,
    "section": 10,
    "section_title": "BRIEF PROCEDURE TO BE FOLLOWED FOR RECOVERY OF OVERDUES",
    "subsection": null,
@@ -12570,11 +12701,16 @@
      "and/or"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-10-p9",
-   "index": 61,
+   "index": 62,
    "section": 10,
    "section_title": "BRIEF PROCEDURE TO BE FOLLOWED FOR RECOVERY OF OVERDUES",
    "subsection": null,
@@ -12809,11 +12945,16 @@
      "requirements."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-10-p10",
-   "index": 62,
+   "index": 63,
    "section": 10,
    "section_title": "BRIEF PROCEDURE TO BE FOLLOWED FOR RECOVERY OF OVERDUES",
    "subsection": null,
@@ -13222,11 +13363,16 @@
      "information."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-10-p11",
-   "index": 63,
+   "index": 64,
    "section": 10,
    "section_title": "BRIEF PROCEDURE TO BE FOLLOWED FOR RECOVERY OF OVERDUES",
    "subsection": null,
@@ -13401,11 +13547,16 @@
      "Lender."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-11",
-   "index": 64,
+   "index": 65,
    "section": 11,
    "section_title": "ANNUAL OUTSTANDING BALANCE STATEMENT",
    "subsection": null,
@@ -13456,7 +13607,7 @@
   },
   {
    "id": "sec-2-11-p1",
-   "index": 65,
+   "index": 66,
    "section": 11,
    "section_title": "ANNUAL OUTSTANDING BALANCE STATEMENT",
    "subsection": null,
@@ -13541,11 +13692,16 @@
      "request."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-12",
-   "index": 66,
+   "index": 67,
    "section": 12,
    "section_title": "FAIR PRACTICE CODE",
    "subsection": null,
@@ -13591,7 +13747,7 @@
   },
   {
    "id": "sec-2-12-p1",
-   "index": 67,
+   "index": 68,
    "section": 12,
    "section_title": "FAIR PRACTICE CODE",
    "subsection": null,
@@ -13681,11 +13837,16 @@
      "https://www.bajajhousingfinance.in/notice-board"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-13",
-   "index": 68,
+   "index": 69,
    "section": 13,
    "section_title": "CUSTOMER SERVICES",
    "subsection": null,
@@ -13726,7 +13887,7 @@
   },
   {
    "id": "sec-2-13-p1",
-   "index": 69,
+   "index": 70,
    "section": 13,
    "section_title": "CUSTOMER SERVICES",
    "subsection": null,
@@ -13916,11 +14077,19 @@
      "days."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "definition",
+     "contact"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-13-p1-i",
-   "index": 70,
+   "index": 71,
    "section": 13,
    "section_title": "CUSTOMER SERVICES",
    "subsection": null,
@@ -14404,11 +14573,16 @@
     ]
    ],
    "kind": "body",
-   "path": "2.13(p1)(i)"
+   "path": "2.13(p1)(i)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-13-p2",
-   "index": 71,
+   "index": 72,
    "section": 13,
    "section_title": "CUSTOMER SERVICES",
    "subsection": null,
@@ -14593,11 +14767,16 @@
      "Institution."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-13-p2-iii",
-   "index": 72,
+   "index": 73,
    "section": 13,
    "section_title": "CUSTOMER SERVICES",
    "subsection": null,
@@ -14798,11 +14977,16 @@
     ]
    ],
    "kind": "body",
-   "path": "2.13(p2)(iii)"
+   "path": "2.13(p2)(iii)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2-14",
-   "index": 73,
+   "index": 74,
    "section": 14,
    "section_title": "GRIEVANCE REDRESSAL",
    "subsection": null,
@@ -14843,7 +15027,7 @@
   },
   {
    "id": "sec-2-14-p1",
-   "index": 74,
+   "index": 75,
    "section": 14,
    "section_title": "GRIEVANCE REDRESSAL",
    "subsection": null,
@@ -15436,7 +15620,7 @@
   },
   {
    "id": "sec-2-14-p2",
-   "index": 75,
+   "index": 76,
    "section": 14,
    "section_title": "GRIEVANCE REDRESSAL",
    "subsection": null,
@@ -15705,7 +15889,7 @@
   },
   {
    "id": "sec-2-14-p4",
-   "index": 76,
+   "index": 77,
    "section": 14,
    "section_title": "GRIEVANCE REDRESSAL",
    "subsection": null,
@@ -16189,7 +16373,7 @@
   },
   {
    "id": "sec-2-14-p5",
-   "index": 77,
+   "index": 78,
    "section": 14,
    "section_title": "GRIEVANCE REDRESSAL",
    "subsection": null,
@@ -16308,7 +16492,7 @@
   },
   {
    "id": "sec-2-15",
-   "index": 78,
+   "index": 79,
    "section": 15,
    "section_title": "Grievance Process",
    "subsection": null,
@@ -16349,7 +16533,7 @@
   },
   {
    "id": "sec-2-15-p2",
-   "index": 79,
+   "index": 80,
    "section": 15,
    "section_title": "Grievance Process",
    "subsection": null,
@@ -16493,7 +16677,7 @@
   },
   {
    "id": "sec-2-15-p4",
-   "index": 80,
+   "index": 81,
    "section": 15,
    "section_title": "Grievance Process",
    "subsection": null,
@@ -16647,7 +16831,7 @@
   },
   {
    "id": "sec-2-15-p5",
-   "index": 81,
+   "index": 82,
    "section": 15,
    "section_title": "Grievance Process",
    "subsection": null,
@@ -16816,7 +17000,7 @@
   },
   {
    "id": "sec-2-15-p7",
-   "index": 82,
+   "index": 83,
    "section": 15,
    "section_title": "Grievance Process",
    "subsection": null,
@@ -16969,7 +17153,7 @@
   },
   {
    "id": "sec-2-16",
-   "index": 83,
+   "index": 84,
    "section": 16,
    "section_title": "FEES AND OTHER CHARGES",
    "subsection": null,
@@ -17020,7 +17204,7 @@
   },
   {
    "id": "sec-2-16-p1",
-   "index": 84,
+   "index": 85,
    "section": 16,
    "section_title": "FEES AND OTHER CHARGES",
    "subsection": null,
@@ -17258,7 +17442,7 @@
   },
   {
    "id": "sec-2-16-p2",
-   "index": 85,
+   "index": 86,
    "section": 16,
    "section_title": "FEES AND OTHER CHARGES",
    "subsection": null,
@@ -17480,7 +17664,7 @@
   },
   {
    "id": "sec-2-16-p5",
-   "index": 86,
+   "index": 87,
    "section": 16,
    "section_title": "FEES AND OTHER CHARGES",
    "subsection": null,
@@ -17577,7 +17761,7 @@
   },
   {
    "id": "sec-2-1-dup2",
-   "index": 87,
+   "index": 88,
    "section": 17,
    "section_title": "Fees for Home",
    "subsection": null,
@@ -17623,7 +17807,7 @@
   },
   {
    "id": "sec-2-1-p1-dup2",
-   "index": 88,
+   "index": 89,
    "section": 17,
    "section_title": "Fees for Home",
    "subsection": null,
@@ -17737,7 +17921,7 @@
   },
   {
    "id": "sec-2-2-dup2",
-   "index": 89,
+   "index": 90,
    "section": 18,
    "section_title": "Fees for Top-Up",
    "subsection": null,
@@ -17783,7 +17967,7 @@
   },
   {
    "id": "sec-2-2-p1",
-   "index": 90,
+   "index": 91,
    "section": 18,
    "section_title": "Fees for Top-Up",
    "subsection": null,
@@ -17882,7 +18066,7 @@
   },
   {
    "id": "sec-2-3-dup2",
-   "index": 91,
+   "index": 92,
    "section": 19,
    "section_title": "Fees for Unsecured",
    "subsection": null,
@@ -17928,7 +18112,7 @@
   },
   {
    "id": "sec-2-3-p1",
-   "index": 92,
+   "index": 93,
    "section": 19,
    "section_title": "Fees for Unsecured",
    "subsection": null,
@@ -18027,7 +18211,7 @@
   },
   {
    "id": "sec-2-4-dup2",
-   "index": 93,
+   "index": 94,
    "section": 20,
    "section_title": "Penal Interest",
    "subsection": null,
@@ -18068,7 +18252,7 @@
   },
   {
    "id": "sec-2-4-p1-dup2",
-   "index": 94,
+   "index": 95,
    "section": 20,
    "section_title": "Penal Interest",
    "subsection": null,
@@ -18202,7 +18386,7 @@
   },
   {
    "id": "sec-2-5",
-   "index": 95,
+   "index": 96,
    "section": 21,
    "section_title": "Expenses to cover",
    "subsection": null,
@@ -18248,7 +18432,7 @@
   },
   {
    "id": "sec-2-5-p1",
-   "index": 96,
+   "index": 97,
    "section": 21,
    "section_title": "Expenses to cover",
    "subsection": null,
@@ -18307,7 +18491,7 @@
   },
   {
    "id": "sec-2-6-dup2",
-   "index": 97,
+   "index": 98,
    "section": 22,
    "section_title": "Statutory Charges Stamp",
    "subsection": null,
@@ -18353,7 +18537,7 @@
   },
   {
    "id": "sec-2-6-p1-dup2",
-   "index": 98,
+   "index": 99,
    "section": 22,
    "section_title": "Statutory Charges Stamp",
    "subsection": null,
@@ -18437,7 +18621,7 @@
   },
   {
    "id": "sec-2-7",
-   "index": 99,
+   "index": 100,
    "section": 23,
    "section_title": "Switch to Lower",
    "subsection": null,
@@ -18483,7 +18667,7 @@
   },
   {
    "id": "sec-2-7-p1",
-   "index": 100,
+   "index": 101,
    "section": 23,
    "section_title": "Switch to Lower",
    "subsection": null,
@@ -18602,7 +18786,7 @@
   },
   {
    "id": "sec-2-8-dup2",
-   "index": 101,
+   "index": 102,
    "section": 24,
    "section_title": "Switch in Interest",
    "subsection": null,
@@ -18648,7 +18832,7 @@
   },
   {
    "id": "sec-2-8-p2-dup2",
-   "index": 102,
+   "index": 103,
    "section": 24,
    "section_title": "Switch in Interest",
    "subsection": null,
@@ -18816,7 +19000,7 @@
   },
   {
    "id": "sec-2-9-dup2",
-   "index": 103,
+   "index": 104,
    "section": 25,
    "section_title": "Mortgage",
    "subsection": null,
@@ -18852,7 +19036,7 @@
   },
   {
    "id": "sec-2-9-p2",
-   "index": 104,
+   "index": 105,
    "section": 25,
    "section_title": "Mortgage",
    "subsection": null,
@@ -19006,7 +19190,7 @@
   },
   {
    "id": "sec-2-9-p3-dup2",
-   "index": 105,
+   "index": 106,
    "section": 25,
    "section_title": "Mortgage",
    "subsection": null,
@@ -19463,7 +19647,7 @@
   },
   {
    "id": "sec-2-11-dup2",
-   "index": 106,
+   "index": 107,
    "section": 26,
    "section_title": "Cheque Swap",
    "subsection": null,
@@ -19504,7 +19688,7 @@
   },
   {
    "id": "sec-2-11-p1-dup2",
-   "index": 107,
+   "index": 108,
    "section": 26,
    "section_title": "Cheque Swap",
    "subsection": null,
@@ -19568,7 +19752,7 @@
   },
   {
    "id": "sec-2-12-dup2",
-   "index": 108,
+   "index": 109,
    "section": 27,
    "section_title": "Security Swap",
    "subsection": null,
@@ -19609,7 +19793,7 @@
   },
   {
    "id": "sec-2-12-p1-dup2",
-   "index": 109,
+   "index": 110,
    "section": 27,
    "section_title": "Security Swap",
    "subsection": null,
@@ -19673,7 +19857,7 @@
   },
   {
    "id": "sec-2-13-dup2",
-   "index": 110,
+   "index": 111,
    "section": 28,
    "section_title": "Fees on account of",
    "subsection": null,
@@ -19724,7 +19908,7 @@
   },
   {
    "id": "sec-2-13-p1-dup2",
-   "index": 111,
+   "index": 112,
    "section": 28,
    "section_title": "Fees on account of",
    "subsection": null,
@@ -19813,7 +19997,7 @@
   },
   {
    "id": "sec-2-14-dup2",
-   "index": 112,
+   "index": 113,
    "section": 29,
    "section_title": "Reappraisal of loan",
    "subsection": null,
@@ -19859,7 +20043,7 @@
   },
   {
    "id": "sec-2-14-p1-dup2",
-   "index": 113,
+   "index": 114,
    "section": 29,
    "section_title": "Reappraisal of loan",
    "subsection": null,
@@ -19953,7 +20137,7 @@
   },
   {
    "id": "sec-2-15-dup2",
-   "index": 114,
+   "index": 115,
    "section": 30,
    "section_title": "Hard Copy of",
    "subsection": null,
@@ -19999,7 +20183,7 @@
   },
   {
    "id": "sec-2-15-p1",
-   "index": 115,
+   "index": 116,
    "section": 30,
    "section_title": "Hard Copy of",
    "subsection": null,
@@ -20113,7 +20297,7 @@
   },
   {
    "id": "sec-2-16-dup2",
-   "index": 116,
+   "index": 117,
    "section": 31,
    "section_title": "Conversion of",
    "subsection": null,
@@ -20154,7 +20338,7 @@
   },
   {
    "id": "sec-2-16-p1-dup2",
-   "index": 117,
+   "index": 118,
    "section": 31,
    "section_title": "Conversion of",
    "subsection": null,
@@ -20323,7 +20507,7 @@
   },
   {
    "id": "sec-2-17",
-   "index": 118,
+   "index": 119,
    "section": 32,
    "section_title": "Loan processing",
    "subsection": null,
@@ -20364,7 +20548,7 @@
   },
   {
    "id": "sec-2-17-p1",
-   "index": 119,
+   "index": 120,
    "section": 32,
    "section_title": "Loan processing",
    "subsection": null,
@@ -20513,7 +20697,7 @@
   },
   {
    "id": "sec-2-18",
-   "index": 120,
+   "index": 121,
    "section": 33,
    "section_title": "Flexi Annual",
    "subsection": null,
@@ -20554,7 +20738,7 @@
   },
   {
    "id": "sec-2-18-p1",
-   "index": 121,
+   "index": 122,
    "section": 33,
    "section_title": "Flexi Annual",
    "subsection": null,
@@ -20713,7 +20897,7 @@
   },
   {
    "id": "sec-2-18-p2",
-   "index": 122,
+   "index": 123,
    "section": 33,
    "section_title": "Flexi Annual",
    "subsection": null,
@@ -20862,7 +21046,7 @@
   },
   {
    "id": "sec-2-19",
-   "index": 123,
+   "index": 124,
    "section": 34,
    "section_title": "Flexi Annual",
    "subsection": null,
@@ -20903,7 +21087,7 @@
   },
   {
    "id": "sec-2-19-p1",
-   "index": 124,
+   "index": 125,
    "section": 34,
    "section_title": "Flexi Annual",
    "subsection": null,
@@ -21067,7 +21251,7 @@
   },
   {
    "id": "sec-2-20",
-   "index": 125,
+   "index": 126,
    "section": 35,
    "section_title": "CERSAI Charges",
    "subsection": null,
@@ -21108,7 +21292,7 @@
   },
   {
    "id": "sec-2-20-p1",
-   "index": 126,
+   "index": 127,
    "section": 35,
    "section_title": "CERSAI Charges",
    "subsection": null,
@@ -21237,7 +21421,7 @@
   },
   {
    "id": "sec-2-21",
-   "index": 127,
+   "index": 128,
    "section": 36,
    "section_title": "Secure Fee (for",
    "subsection": null,
@@ -21283,7 +21467,7 @@
   },
   {
    "id": "sec-2-21-p1",
-   "index": 128,
+   "index": 129,
    "section": 36,
    "section_title": "Secure Fee (for",
    "subsection": null,
@@ -21372,7 +21556,7 @@
   },
   {
    "id": "sec-2-22",
-   "index": 129,
+   "index": 130,
    "section": 37,
    "section_title": "Fees for Photocopy",
    "subsection": null,
@@ -21418,7 +21602,7 @@
   },
   {
    "id": "sec-2-22-p1",
-   "index": 130,
+   "index": 131,
    "section": 37,
    "section_title": "Fees for Photocopy",
    "subsection": null,
@@ -21607,7 +21791,7 @@
   },
   {
    "id": "sec-2-23",
-   "index": 131,
+   "index": 132,
    "section": 38,
    "section_title": "Document Retrieval",
    "subsection": null,
@@ -21648,7 +21832,7 @@
   },
   {
    "id": "sec-2-23-p1",
-   "index": 132,
+   "index": 133,
    "section": 38,
    "section_title": "Document Retrieval",
    "subsection": null,
@@ -21897,7 +22081,7 @@
   },
   {
    "id": "sec-39",
-   "index": 133,
+   "index": 134,
    "section": 39,
    "section_title": "PRE-PAYMENT CHARGES",
    "subsection": null,
@@ -21938,7 +22122,7 @@
   },
   {
    "id": "sec-39-p1",
-   "index": 134,
+   "index": 135,
    "section": 39,
    "section_title": "PRE-PAYMENT CHARGES",
    "subsection": null,
@@ -22671,7 +22855,7 @@
   },
   {
    "id": "sec-39-p2",
-   "index": 135,
+   "index": 136,
    "section": 39,
    "section_title": "PRE-PAYMENT CHARGES",
    "subsection": null,
@@ -22989,7 +23173,7 @@
   },
   {
    "id": "sec-39-p3",
-   "index": 136,
+   "index": 137,
    "section": 39,
    "section_title": "PRE-PAYMENT CHARGES",
    "subsection": null,
@@ -23335,7 +23519,7 @@
   },
   {
    "id": "sec-39-p3-3",
-   "index": 137,
+   "index": 138,
    "section": 39,
    "section_title": "PRE-PAYMENT CHARGES",
    "subsection": null,
@@ -23727,7 +23911,7 @@
   },
   {
    "id": "sec-39-p4",
-   "index": 138,
+   "index": 139,
    "section": 39,
    "section_title": "PRE-PAYMENT CHARGES",
    "subsection": null,
@@ -24045,7 +24229,7 @@
   },
   {
    "id": "sec-39-p5",
-   "index": 139,
+   "index": 140,
    "section": 39,
    "section_title": "PRE-PAYMENT CHARGES",
    "subsection": null,
@@ -24453,7 +24637,7 @@
   },
   {
    "id": "sec-39-p6",
-   "index": 140,
+   "index": 141,
    "section": 39,
    "section_title": "PRE-PAYMENT CHARGES",
    "subsection": null,
@@ -24612,7 +24796,7 @@
   },
   {
    "id": "sec-39-p8",
-   "index": 141,
+   "index": 142,
    "section": 39,
    "section_title": "PRE-PAYMENT CHARGES",
    "subsection": null,
@@ -24761,7 +24945,7 @@
   },
   {
    "id": "sec-39-p9",
-   "index": 142,
+   "index": 143,
    "section": 39,
    "section_title": "PRE-PAYMENT CHARGES",
    "subsection": null,
@@ -24914,7 +25098,7 @@
    "id": "sec-1",
    "title": "Most Important Terms and Conditions (MITC) — Retail Secured and Unsecured Loans",
    "section": 1,
-   "children": 13
+   "children": 12
   },
   {
    "id": "sec-2",
@@ -24941,7 +25125,7 @@
    "table": 1,
    "text": 112
   },
-  "demoted": 0,
+  "demoted": 1,
   "placeholders_stripped": 0,
   "splits": 0,
   "tables": [
@@ -24952,5 +25136,179 @@
    }
   ]
  },
- "report_file": "home_loan_mitc.ingest_report.json"
+ "report_file": "home_loan_mitc.ingest_report.json",
+ "sections": [
+  {
+   "id": "sec-1",
+   "title": "Most Important Terms and Conditions (MITC) — Retail Secured and Unsecured Loans",
+   "brief": {
+    "text": "This section covers key terms and conditions governing retail secured and unsecured loans.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1,
+   "suggested_questions": [
+    {
+     "text": "What is the source and format of the document described in sec-1-p10?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-1-p10"
+    },
+    {
+     "text": "How was the text extracted from the original PDF for sec-1-p11?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-1-p11"
+    }
+   ]
+  },
+  {
+   "id": "sec-2",
+   "title": "MOST IMPORTANT TERMS AND CONDITIONS (MITC)",
+   "brief": {
+    "text": "covers the key loan terms including interest rates, repayment schedule, and loan types specified in the Mitigation Terms and Conditions.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 26,
+   "suggested_questions": [
+    {
+     "text": "What is the interest rate structure for this loan, including floating and fixed rates?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-2-2-p2"
+    },
+    {
+     "text": "How are payment methods handled for credit to the loan account, particularly regarding timing of credit after funds receipt?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-2-4-p9"
+    }
+   ]
+  },
+  {
+   "id": "sec-39",
+   "title": "PRE-PAYMENT CHARGES",
+   "brief": {
+    "text": "covers pre-payment charges and conditions for floating rate loans to individuals/non-individuals except business purpose.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 4,
+   "suggested_questions": [
+    {
+     "text": "What are the pre-payment conditions for a floating rate loan to an individual or non-individual except for business purpose?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-39-p1"
+    },
+    {
+     "text": "Are there any pre-payment charges applicable for a housing loan closed by the borrower out of their own sources?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-39-p2"
+    }
+   ]
+  }
+ ],
+ "overview": {
+  "text": "This document, fixture_home_loan_mitc, has 3 sections. I'll read them in order; interrupt me any time. Listening from start to finish takes about 32 minutes.",
+  "generated": true,
+  "provider": "ollama",
+  "listening_minutes": 32,
+  "chars_per_second": 13.97,
+  "chars_per_second_source": "measured from 4 trace file(s)"
+ },
+ "topics": [
+  {
+   "topic": "Premium and charges",
+   "section_id": "sec-2",
+   "heading": "MOST IMPORTANT TERMS AND CONDITIONS (MITC)",
+   "generated": true,
+   "provider": "ollama"
+  },
+  {
+   "topic": "Cancellation and refunds",
+   "section_id": "sec-2",
+   "heading": "MOST IMPORTANT TERMS AND CONDITIONS (MITC)",
+   "generated": true,
+   "provider": "ollama"
+  },
+  {
+   "topic": "Definitions",
+   "section_id": "sec-2",
+   "heading": "MOST IMPORTANT TERMS AND CONDITIONS (MITC)",
+   "generated": true,
+   "provider": "ollama"
+  },
+  {
+   "topic": "Grievances and contacts",
+   "section_id": "sec-2",
+   "heading": "MOST IMPORTANT TERMS AND CONDITIONS (MITC)",
+   "generated": true,
+   "provider": "ollama"
+  },
+  {
+   "topic": "Read from the start",
+   "section_id": null,
+   "heading": null,
+   "generated": false
+  }
+ ],
+ "enrichment": {
+  "provider": "ollama",
+  "model": "granite4.2:3b",
+  "elapsed_ms": 210152,
+  "fields": [
+   "tags",
+   "suggested_questions",
+   "tables"
+  ],
+  "done": [
+   "overview",
+   "sections",
+   "suggested_questions",
+   "tables",
+   "tags",
+   "topics"
+  ],
+  "guard_rejections": [
+   {
+    "field": "overview",
+    "reasons": [
+     "forbidden phrase 'important'",
+     "forbidden phrase 'Important'"
+    ],
+    "fallback": "This document, fixture_home_loan_mitc, has 3 sections. I'll read them in order; interrupt me any time."
+   },
+   {
+    "field": "tags:batch1",
+    "reasons": [
+     "Extra data: line 3 column 1 (char 392)"
+    ]
+   },
+   {
+    "field": "tags:batch3",
+    "reasons": [
+     "Expecting property name enclosed in double quotes: line 1 column 37 (char 36)"
+    ]
+   },
+   {
+    "field": "tags:batch4",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch5",
+    "reasons": [
+     "Expecting property name enclosed in double quotes: line 1 column 44 (char 43)"
+    ]
+   }
+  ],
+  "tokens": {
+   "in": 10801,
+   "out": 4942
+  }
+ }
 }

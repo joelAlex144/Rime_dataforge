@@ -26,6 +26,7 @@ const ICON = 18
 
 function railSubtitle(d: DocEntry): string {
   if (d.readable === false) return 'No readable text found'
+  if (d.navigator === 'preparing' && !d.progress.started) return 'Preparing overview…'
   if (d.progress.finished) return 'Finished'
   if (!d.progress.started) return 'Not started'
   const sec = Math.max(1, d.progress.current_section_index)
@@ -38,6 +39,7 @@ export default function Listener() {
   const inputRef = useRef<HTMLInputElement>(null)
   const dialogRef = useRef<HTMLDialogElement>(null)
   const [q, setQ] = useState('')
+  const [r, setR] = useState('')
 
   const current = state.documents.find((d) => d.name === state.current) || null
   const referral = current?.referral || 'the team that publishes this document'
@@ -79,6 +81,11 @@ export default function Listener() {
     setQ('')
   }
 
+  useEffect(() => {
+    // The welcome prompt's "upload" reply: the dialog opens for the listener.
+    if (state.focusUpload > 0) dialogRef.current?.showModal()
+  }, [state.focusUpload])
+
   const uploaded = (d: { name: string }) => {
     // It is in the library already (reviewed: false); open it and read.
     s.open(d.name)
@@ -90,20 +97,35 @@ export default function Listener() {
       <nav className="rail" aria-label="Your documents">
         <h2>Your documents</h2>
         {state.documents.map((d) => (
-          <button
-            key={d.name}
-            className={`rail-row${d.name === state.current ? ' current' : ''}`}
-            onClick={() => s.open(d.name)}
-            aria-current={d.name === state.current ? 'true' : undefined}
-          >
-            <span className="t">
-              {state.providerFellBack && d.name === state.current && (
-                <span className="dot amber" aria-label="Using the fallback voice" />
-              )}
-              {d.title}
-            </span>
-            <span className="s">{railSubtitle(d)}</span>
-          </button>
+          <div key={d.name} className="rail-item" style={{ position: 'relative' }}>
+            <button
+              className={`rail-row${d.name === state.current ? ' current' : ''}`}
+              onClick={() => s.open(d.name)}
+              aria-current={d.name === state.current ? 'true' : undefined}
+            >
+              <span className="t">
+                {state.providerFellBack && d.name === state.current && (
+                  <span className="dot amber" aria-label="Using the fallback voice" />
+                )}
+                {d.spoken_title || d.title}
+              </span>
+              <span className="s">{railSubtitle(d)}</span>
+            </button>
+            {d.reviewed === false && d.doc_id && (
+              <button
+                className="rail-trash"
+                aria-label={`Delete ${d.spoken_title || d.title}`}
+                title="Delete this document"
+                style={{ position: 'absolute', right: 6, top: 6, background: 'none', border: 0, cursor: 'pointer', opacity: 0.7 }}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  if (window.confirm(`Delete "${d.spoken_title || d.title}"? Its files are removed.`)) s.remove(d.doc_id!)
+                }}
+              >
+                🗑
+              </button>
+            )}
+          </div>
         ))}
         <button className="rail-row" onClick={() => dialogRef.current?.showModal()}>
           <span className="t">
@@ -114,6 +136,36 @@ export default function Listener() {
         <dialog ref={dialogRef} aria-label="Add a document">
           <p>Pick a PDF. It appears in your documents as soon as it is ready.</p>
           <UploadDocument face="listener" onDone={uploaded} />
+          {state.sectionsFound.length > 0 && (
+            <ul className="sections-found" aria-label="Sections found">
+              {state.sectionsFound.map((t) => (
+                <li key={t}>{t}</li>
+              ))}
+            </ul>
+          )}
+          {state.companionLines.length > 0 && (
+            <div className="transcript" aria-label="Companion">
+              {state.companionLines.map((l, i) => (
+                <p key={i} className="notice">{l.text}</p>
+              ))}
+            </div>
+          )}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              if (!r.trim()) return
+              s.reply(r.trim())
+              setR('')
+            }}
+          >
+            <input
+              type="text"
+              value={r}
+              onChange={(e) => setR(e.target.value)}
+              placeholder="Ask now; it is looked up first, once the document is ready"
+              aria-label="Ask now"
+            />
+          </form>
           <button onClick={() => dialogRef.current?.close()}>Close</button>
         </dialog>
       </nav>
@@ -145,6 +197,102 @@ export default function Listener() {
         </div>
 
         <StatusLine phase={state.phase} current={current} />
+
+        {state.sectionsFound.length > 0 && state.topics.length === 0 && (
+          <div className="coming-up notice" aria-label="Coming up">
+            <strong>Coming up:</strong> {state.sectionsFound.slice(0, 8).join(' · ')}
+            {state.sectionsFound.length > 8 ? ' · …' : ''}
+          </div>
+        )}
+
+        {state.topics.length > 0 && state.prompt?.kind !== 'choice' && (
+          <div className="chips" aria-label="Topics">
+            {state.topics.map((t) => (
+              <button key={t.topic} className="chip" onClick={() => s.topic(t.section_id)}>
+                {t.topic}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {state.prompt?.kind === 'choice' && (
+          <div className="actions" aria-label="Read it now or hear the overview first">
+            <button onClick={() => s.choose('now')}>Read it now</button>
+            <button onClick={() => s.choose('overview_first')}>Overview first</button>
+          </div>
+        )}
+
+        {state.prompt?.kind === 'offer' && (
+          <div className="actions" aria-label="Suggested question">
+            <button onClick={() => s.reply('yes')}>Yes, answer that</button>
+            <button onClick={() => s.reply('no')}>No, carry on</button>
+          </div>
+        )}
+
+        {state.prompt?.kind === 'start_choice' && (
+          <div className="actions" aria-label="A topic, the brief, or from the start">
+            <button onClick={() => s.reply('brief')}>Brief</button>
+            <button onClick={() => s.reply('from the start')}>From the start</button>
+          </div>
+        )}
+
+        {state.prompt?.kind === 'confirm_topic' && (
+          <div className="actions" aria-label={`Read ${state.prompt.heading ?? 'it'} now?`}>
+            <button onClick={() => s.reply('yes')}>Yes, read it</button>
+            <button onClick={() => s.reply('no')}>No</button>
+          </div>
+        )}
+
+        {state.prompt?.kind === 'welcome' && (
+          <div className="actions" aria-label="Which document, or upload a new one">
+            {(state.prompt.titles || []).map((t) => (
+              <button key={t} className="chip" onClick={() => s.reply(t)}>
+                {t}
+              </button>
+            ))}
+            <button onClick={() => s.reply('upload')}>Upload</button>
+          </div>
+        )}
+
+        {state.prompt?.kind === 'pick_topic' && (
+          <div className="actions" aria-label="Where to start">
+            {(state.prompt.topics || []).map((t) => (
+              <button key={t} className="chip" onClick={() => s.reply(t)}>
+                {t}
+              </button>
+            ))}
+            <button onClick={() => s.reply('from the top')}>From the top</button>
+          </div>
+        )}
+
+        {(state.prompt?.kind === 'section_end' || state.prompt?.kind === 'not_found') && (
+          <div className="actions" aria-label="Carry on, or something else">
+            <button onClick={() => s.reply('carry on')}>Carry on</button>
+          </div>
+        )}
+
+        {state.prompt?.kind === 'end_choice' && (
+          <div className="actions" aria-label="A section again, a recap, or stop">
+            <button onClick={() => s.reply('recap')}>Recap</button>
+            <button onClick={() => s.reply('stop')}>Stop</button>
+          </div>
+        )}
+
+        {state.prompt?.kind === 'ingest_wait' && (
+          <p className="notice">Ask now and it is looked up first, once the document is ready.</p>
+        )}
+
+        {state.prompt?.kind === 'table_choice' && (
+          <div className="actions" aria-label="A row of the table, all of them, or carry on">
+            {(state.prompt.labels || []).map((lab) => (
+              <button key={lab} className="chip" onClick={() => s.reply(lab)}>
+                {lab}
+              </button>
+            ))}
+            <button onClick={() => s.reply('all of them')}>All</button>
+            <button onClick={() => s.reply('carry on')}>Carry on</button>
+          </div>
+        )}
 
         {state.answer && (
           <section className="answer" aria-label="Answer">
@@ -204,6 +352,12 @@ export default function Listener() {
             <Mic size={ICON} aria-hidden="true" />
           </button>
         </div>
+        {state.heardAs && (
+          <p className="notice" aria-label="Heard as">
+            Heard as: {state.heardAs.intent}
+            {state.heardAs.sectionTitle ? ` ${state.heardAs.sectionTitle}` : ''}
+          </p>
+        )}
         {busy && <p className="notice">Replaying a recorded session. Playback is paused.</p>}
         {!state.audioSink && state.anySink && (
           <p className="notice">The voice is playing in another tab. Press play here to move it.</p>

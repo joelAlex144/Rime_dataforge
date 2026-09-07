@@ -1,5 +1,6 @@
 {
  "title": "fixture_arogya_sanjeevani",
+ "spoken_title": "Arogya Sanjeevani Policy — Policy Wording",
  "doc_id": "f23bb7ce63372d57",
  "synthetic": false,
  "readable": true,
@@ -92,9 +93,10 @@
     "label": "phone",
     "redacted": "1800…"
    }
-  ]
+  ],
+  "text_sha256": "997f899c914bc82806aa181bae0353cb5a0ad7630f56bcbe5d2dfc15ee1beafb"
  },
- "clause_count": 274,
+ "clause_count": 275,
  "clauses": [
   {
    "id": "sec-1",
@@ -103,8 +105,8 @@
    "section_title": "Arogya Sanjeevani Policy — Policy Wording",
    "subsection": null,
    "item": null,
-   "text_display": "Arogya Sanjeevani Policy — Policy Wording. 12 items.",
-   "text_spoken": "Arogya Sanjeevani Policy — Policy Wording. twelve items.",
+   "text_display": "Arogya Sanjeevani Policy — Policy Wording. 11 items.",
+   "text_spoken": "Arogya Sanjeevani Policy — Policy Wording. eleven items.",
    "sentences": [
     [
      0,
@@ -145,7 +147,7 @@
     [
      43,
      45,
-     "twelve"
+     "eleven"
     ],
     [
      46,
@@ -155,7 +157,7 @@
    ],
    "kind": "heading",
    "level": 1,
-   "children": 12
+   "children": 11
   },
   {
    "id": "sec-1-p1",
@@ -818,18 +820,18 @@
    "parent": "sec-1-t1"
   },
   {
-   "id": "sec-1-p10",
+   "id": "sec-1-p3",
    "index": 11,
    "section": 1,
    "section_title": "Arogya Sanjeevani Policy — Policy Wording",
    "subsection": null,
    "item": null,
-   "text_display": "Document type Issuer / source UIN / reference Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note.",
-   "text_spoken": "Document type Issuer / source UIN / reference Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note.",
+   "text_display": "Document type Issuer / source",
+   "text_spoken": "Document type Issuer / source",
    "sentences": [
     [
      0,
-     144
+     29
     ]
    ],
    "spoken_map": [
@@ -857,555 +859,580 @@
      23,
      29,
      "source"
-    ],
-    [
-     30,
-     33,
-     "UIN"
-    ],
-    [
-     34,
-     35,
-     "/"
-    ],
-    [
-     36,
-     45,
-     "reference"
-    ],
-    [
-     46,
-     52,
-     "Source"
-    ],
-    [
-     53,
-     58,
-     "pages"
-    ],
-    [
-     59,
-     63,
-     "Word"
-    ],
-    [
-     64,
-     69,
-     "count"
-    ],
-    [
-     70,
-     76,
-     "(body)"
-    ],
-    [
-     77,
-     84,
-     "Section"
-    ],
-    [
-     85,
-     93,
-     "headings"
-    ],
-    [
-     94,
-     103,
-     "Retrieved"
-    ],
-    [
-     104,
-     110,
-     "Source"
-    ],
-    [
-     111,
-     114,
-     "URL"
-    ],
-    [
-     115,
-     125,
-     "Provenance"
-    ],
-    [
-     126,
-     129,
-     "and"
-    ],
-    [
-     130,
-     138,
-     "handling"
-    ],
-    [
-     139,
-     144,
-     "note."
     ]
    ],
    "kind": "body"
   },
   {
-   "id": "sec-1-p11",
+   "id": "sec-1-b1",
    "index": 12,
    "section": 1,
    "section_title": "Arogya Sanjeevani Policy — Policy Wording",
    "subsection": null,
    "item": null,
-   "text_display": "Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
-   "text_spoken": "Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
+   "text_display": "UIN / reference",
+   "text_spoken": "UIN / reference",
    "sentences": [
     [
      0,
-     173
-    ],
-    [
-     174,
-     252
-    ],
-    [
-     253,
-     303
-    ],
-    [
-     304,
-     420
-    ],
-    [
-     421,
-     517
+     15
     ]
    ],
    "spoken_map": [
     [
      0,
+     3,
+     "UIN"
+    ],
+    [
      4,
-     "Text"
-    ],
-    [
      5,
-     8,
-     "was"
+     "/"
     ],
     [
-     9,
+     6,
+     15,
+     "reference"
+    ]
+   ],
+   "kind": "boilerplate",
+   "demoted_by": "front_matter",
+   "label": "text"
+  },
+  {
+   "id": "sec-1-p10",
+   "index": 13,
+   "section": 1,
+   "section_title": "Arogya Sanjeevani Policy — Policy Wording",
+   "subsection": null,
+   "item": null,
+   "text_display": "Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note. Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
+   "text_spoken": "Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note. Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
+   "sentences": [
+    [
+     0,
+     98
+    ],
+    [
+     99,
+     272
+    ],
+    [
+     273,
+     351
+    ],
+    [
+     352,
+     402
+    ],
+    [
+     403,
+     519
+    ],
+    [
+     520,
+     616
+    ]
+   ],
+   "spoken_map": [
+    [
+     0,
+     6,
+     "Source"
+    ],
+    [
+     7,
+     12,
+     "pages"
+    ],
+    [
+     13,
+     17,
+     "Word"
+    ],
+    [
      18,
-     "extracted"
-    ],
-    [
-     19,
      23,
-     "from"
+     "count"
     ],
     [
      24,
-     27,
-     "the"
+     30,
+     "(body)"
     ],
     [
-     28,
-     36,
-     "publicly"
+     31,
+     38,
+     "Section"
     ],
     [
-     37,
-     43,
-     "hosted"
-    ],
-    [
-     44,
+     39,
      47,
-     "PDF"
+     "headings"
     ],
     [
      48,
-     50,
-     "at"
+     57,
+     "Retrieved"
     ],
     [
-     51,
-     54,
-     "the"
-    ],
-    [
-     55,
      58,
-     "URL"
-    ],
-    [
-     59,
      64,
-     "above"
+     "Source"
     ],
     [
      65,
      68,
-     "and"
+     "URL"
     ],
     [
      69,
-     71,
-     "is"
+     79,
+     "Provenance"
     ],
     [
-     72,
-     82,
-     "reproduced"
-    ],
-    [
+     80,
      83,
-     89,
-     "as-is,"
+     "and"
     ],
     [
-     90,
-     94,
-     "with"
+     84,
+     92,
+     "handling"
     ],
     [
-     95,
-     102,
-     "running"
+     93,
+     98,
+     "note."
     ],
     [
+     99,
      103,
-     111,
-     "headers,"
+     "Text"
     ],
     [
-     112,
-     119,
-     "footers"
+     104,
+     107,
+     "was"
     ],
     [
-     120,
+     108,
+     117,
+     "extracted"
+    ],
+    [
+     118,
+     122,
+     "from"
+    ],
+    [
      123,
-     "and"
+     126,
+     "the"
     ],
     [
-     124,
-     128,
-     "page"
+     127,
+     135,
+     "publicly"
     ],
     [
-     129,
      136,
-     "numbers"
+     142,
+     "hosted"
     ],
     [
-     137,
-     144,
-     "removed"
-    ],
-    [
-     145,
-     148,
-     "and"
-    ],
-    [
-     149,
-     156,
-     "wrapped"
-    ],
-    [
-     157,
-     162,
-     "lines"
-    ],
-    [
-     163,
-     173,
-     "re-joined."
-    ],
-    [
-     174,
-     180,
-     "Tables"
-    ],
-    [
-     181,
-     184,
-     "and"
-    ],
-    [
-     185,
-     195,
-     "two-column"
-    ],
-    [
-     196,
-     206,
-     "definition"
-    ],
-    [
-     207,
-     212,
-     "lists"
-    ],
-    [
-     213,
-     215,
-     "in"
-    ],
-    [
-     216,
-     219,
-     "the"
-    ],
-    [
-     220,
-     228,
-     "original"
-    ],
-    [
-     229,
-     232,
-     "may"
-    ],
-    [
-     233,
-     237,
-     "read"
-    ],
-    [
-     238,
-     246,
-     "linearly"
-    ],
-    [
-     247,
-     252,
-     "here;"
-    ],
-    [
-     253,
-     258,
-     "check"
-    ],
-    [
-     259,
-     266,
-     "against"
-    ],
-    [
-     267,
-     270,
-     "the"
-    ],
-    [
-     271,
-     274,
+     143,
+     146,
      "PDF"
     ],
     [
-     275,
-     281,
-     "before"
+     147,
+     149,
+     "at"
     ],
     [
-     282,
-     289,
-     "relying"
+     150,
+     153,
+     "the"
     ],
     [
-     290,
-     292,
-     "on"
+     154,
+     157,
+     "URL"
     ],
     [
-     293,
-     296,
-     "any"
+     158,
+     163,
+     "above"
     ],
     [
-     297,
-     303,
-     "table."
+     164,
+     167,
+     "and"
     ],
     [
-     304,
-     308,
-     "This"
-    ],
-    [
-     309,
-     311,
+     168,
+     170,
      "is"
     ],
     [
-     312,
-     313,
-     "a"
+     171,
+     181,
+     "reproduced"
     ],
     [
-     314,
-     320,
-     "public"
+     182,
+     188,
+     "as-is,"
     ],
     [
-     321,
-     328,
-     "product"
-    ],
-    [
-     329,
-     336,
-     "wording"
-    ],
-    [
-     337,
-     338,
-     "/"
-    ],
-    [
-     339,
-     348,
-     "template,"
-    ],
-    [
-     349,
-     352,
-     "not"
-    ],
-    [
-     353,
-     354,
-     "a"
-    ],
-    [
-     355,
-     363,
-     "customer"
-    ],
-    [
-     364,
-     372,
-     "document"
-    ],
-    [
-     373,
-     374,
-     "—"
-    ],
-    [
-     375,
-     377,
-     "it"
-    ],
-    [
-     378,
-     386,
-     "contains"
-    ],
-    [
-     387,
-     389,
-     "no"
-    ],
-    [
-     390,
-     402,
-     "policyholder"
-    ],
-    [
-     403,
-     405,
-     "or"
-    ],
-    [
-     406,
-     414,
-     "borrower"
-    ],
-    [
-     415,
-     420,
-     "data."
-    ],
-    [
-     421,
-     423,
-     "If"
-    ],
-    [
-     424,
-     427,
-     "the"
-    ],
-    [
-     428,
-     432,
-     "demo"
-    ],
-    [
-     433,
-     439,
-     "should"
-    ],
-    [
-     440,
-     443,
-     "not"
-    ],
-    [
-     444,
-     448,
-     "show"
-    ],
-    [
-     449,
-     450,
-     "a"
-    ],
-    [
-     451,
-     457,
-     "brand,"
-    ],
-    [
-     458,
-     465,
-     "replace"
-    ],
-    [
-     466,
-     469,
-     "the"
-    ],
-    [
-     470,
-     476,
-     "issuer"
-    ],
-    [
-     477,
-     481,
-     "name"
-    ],
-    [
-     482,
-     486,
+     189,
+     193,
      "with"
     ],
     [
-     487,
-     488,
-     "a"
+     194,
+     201,
+     "running"
     ],
     [
-     489,
-     500,
-     "placeholder"
+     202,
+     210,
+     "headers,"
     ],
     [
-     501,
-     507,
+     211,
+     218,
+     "footers"
+    ],
+    [
+     219,
+     222,
+     "and"
+    ],
+    [
+     223,
+     227,
+     "page"
+    ],
+    [
+     228,
+     235,
+     "numbers"
+    ],
+    [
+     236,
+     243,
+     "removed"
+    ],
+    [
+     244,
+     247,
+     "and"
+    ],
+    [
+     248,
+     255,
+     "wrapped"
+    ],
+    [
+     256,
+     261,
+     "lines"
+    ],
+    [
+     262,
+     272,
+     "re-joined."
+    ],
+    [
+     273,
+     279,
+     "Tables"
+    ],
+    [
+     280,
+     283,
+     "and"
+    ],
+    [
+     284,
+     294,
+     "two-column"
+    ],
+    [
+     295,
+     305,
+     "definition"
+    ],
+    [
+     306,
+     311,
+     "lists"
+    ],
+    [
+     312,
+     314,
+     "in"
+    ],
+    [
+     315,
+     318,
+     "the"
+    ],
+    [
+     319,
+     327,
+     "original"
+    ],
+    [
+     328,
+     331,
+     "may"
+    ],
+    [
+     332,
+     336,
+     "read"
+    ],
+    [
+     337,
+     345,
+     "linearly"
+    ],
+    [
+     346,
+     351,
+     "here;"
+    ],
+    [
+     352,
+     357,
+     "check"
+    ],
+    [
+     358,
+     365,
+     "against"
+    ],
+    [
+     366,
+     369,
+     "the"
+    ],
+    [
+     370,
+     373,
+     "PDF"
+    ],
+    [
+     374,
+     380,
      "before"
     ],
     [
-     508,
-     517,
+     381,
+     388,
+     "relying"
+    ],
+    [
+     389,
+     391,
+     "on"
+    ],
+    [
+     392,
+     395,
+     "any"
+    ],
+    [
+     396,
+     402,
+     "table."
+    ],
+    [
+     403,
+     407,
+     "This"
+    ],
+    [
+     408,
+     410,
+     "is"
+    ],
+    [
+     411,
+     412,
+     "a"
+    ],
+    [
+     413,
+     419,
+     "public"
+    ],
+    [
+     420,
+     427,
+     "product"
+    ],
+    [
+     428,
+     435,
+     "wording"
+    ],
+    [
+     436,
+     437,
+     "/"
+    ],
+    [
+     438,
+     447,
+     "template,"
+    ],
+    [
+     448,
+     451,
+     "not"
+    ],
+    [
+     452,
+     453,
+     "a"
+    ],
+    [
+     454,
+     462,
+     "customer"
+    ],
+    [
+     463,
+     471,
+     "document"
+    ],
+    [
+     472,
+     473,
+     "—"
+    ],
+    [
+     474,
+     476,
+     "it"
+    ],
+    [
+     477,
+     485,
+     "contains"
+    ],
+    [
+     486,
+     488,
+     "no"
+    ],
+    [
+     489,
+     501,
+     "policyholder"
+    ],
+    [
+     502,
+     504,
+     "or"
+    ],
+    [
+     505,
+     513,
+     "borrower"
+    ],
+    [
+     514,
+     519,
+     "data."
+    ],
+    [
+     520,
+     522,
+     "If"
+    ],
+    [
+     523,
+     526,
+     "the"
+    ],
+    [
+     527,
+     531,
+     "demo"
+    ],
+    [
+     532,
+     538,
+     "should"
+    ],
+    [
+     539,
+     542,
+     "not"
+    ],
+    [
+     543,
+     547,
+     "show"
+    ],
+    [
+     548,
+     549,
+     "a"
+    ],
+    [
+     550,
+     556,
+     "brand,"
+    ],
+    [
+     557,
+     564,
+     "replace"
+    ],
+    [
+     565,
+     568,
+     "the"
+    ],
+    [
+     569,
+     575,
+     "issuer"
+    ],
+    [
+     576,
+     580,
+     "name"
+    ],
+    [
+     581,
+     585,
+     "with"
+    ],
+    [
+     586,
+     587,
+     "a"
+    ],
+    [
+     588,
+     599,
+     "placeholder"
+    ],
+    [
+     600,
+     606,
+     "before"
+    ],
+    [
+     607,
+     616,
      "chunking."
     ]
    ],
@@ -1413,7 +1440,7 @@
   },
   {
    "id": "sec-2",
-   "index": 13,
+   "index": 14,
    "section": 2,
    "section_title": "1.PREAMBLE",
    "subsection": null,
@@ -1454,7 +1481,7 @@
   },
   {
    "id": "sec-2-p1",
-   "index": 14,
+   "index": 15,
    "section": 2,
    "section_title": "1.PREAMBLE",
    "subsection": null,
@@ -1817,7 +1844,7 @@
   },
   {
    "id": "sec-3",
-   "index": 15,
+   "index": 16,
    "section": 3,
    "section_title": "2.OPERATIVE CLAUSE",
    "subsection": null,
@@ -1863,7 +1890,7 @@
   },
   {
    "id": "sec-3-p1",
-   "index": 16,
+   "index": 17,
    "section": 3,
    "section_title": "2.OPERATIVE CLAUSE",
    "subsection": null,
@@ -2147,7 +2174,7 @@
   },
   {
    "id": "sec-3-p2",
-   "index": 17,
+   "index": 18,
    "section": 3,
    "section_title": "2.OPERATIVE CLAUSE",
    "subsection": null,
@@ -2306,7 +2333,7 @@
   },
   {
    "id": "sec-3-p3",
-   "index": 18,
+   "index": 19,
    "section": 3,
    "section_title": "2.OPERATIVE CLAUSE",
    "subsection": null,
@@ -2480,7 +2507,7 @@
   },
   {
    "id": "sec-4",
-   "index": 19,
+   "index": 20,
    "section": 4,
    "section_title": "3.DEFINITIONS",
    "subsection": null,
@@ -2521,7 +2548,7 @@
   },
   {
    "id": "sec-4-p1",
-   "index": 20,
+   "index": 21,
    "section": 4,
    "section_title": "3.DEFINITIONS",
    "subsection": null,
@@ -2829,7 +2856,7 @@
   },
   {
    "id": "sec-4-p1-3-1",
-   "index": 21,
+   "index": 22,
    "section": 4,
    "section_title": "3.DEFINITIONS",
    "subsection": null,
@@ -3269,7 +3296,7 @@
   },
   {
    "id": "sec-4-p1-3-5",
-   "index": 22,
+   "index": 23,
    "section": 4,
    "section_title": "3.DEFINITIONS",
    "subsection": null,
@@ -3568,7 +3595,7 @@
   },
   {
    "id": "sec-4-p1-3-5-c",
-   "index": 23,
+   "index": 24,
    "section": 4,
    "section_title": "3.DEFINITIONS",
    "subsection": null,
@@ -3808,7 +3835,7 @@
   },
   {
    "id": "sec-4-p2-i",
-   "index": 24,
+   "index": 25,
    "section": 4,
    "section_title": "3.DEFINITIONS",
    "subsection": null,
@@ -4161,7 +4188,7 @@
   },
   {
    "id": "sec-3-6",
-   "index": 25,
+   "index": 26,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -4228,7 +4255,7 @@
   },
   {
    "id": "sec-3-6-p1",
-   "index": 26,
+   "index": 27,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -4482,7 +4509,7 @@
   },
   {
    "id": "sec-3-6-p1-s",
-   "index": 27,
+   "index": 28,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -4837,7 +4864,7 @@
   },
   {
    "id": "sec-3-6-p1-3-7",
-   "index": 28,
+   "index": 29,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -5327,7 +5354,7 @@
   },
   {
    "id": "sec-3-6-p1-3-9",
-   "index": 29,
+   "index": 30,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -5745,7 +5772,7 @@
   },
   {
    "id": "sec-3-6-p1-3-11",
-   "index": 30,
+   "index": 31,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -6059,7 +6086,7 @@
   },
   {
    "id": "sec-3-6-p1-3-13",
-   "index": 31,
+   "index": 32,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -6517,7 +6544,7 @@
   },
   {
    "id": "sec-3-6-p1-3-13-iv",
-   "index": 32,
+   "index": 33,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -6871,7 +6898,7 @@
   },
   {
    "id": "sec-3-6-p2-3-15",
-   "index": 33,
+   "index": 34,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -7264,7 +7291,7 @@
   },
   {
    "id": "sec-3-6-p2-3-17",
-   "index": 34,
+   "index": 35,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -7666,7 +7693,7 @@
   },
   {
    "id": "sec-3-6-p2-3-18-iii",
-   "index": 35,
+   "index": 36,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -7885,7 +7912,7 @@
   },
   {
    "id": "sec-3-6-p2-3-19",
-   "index": 36,
+   "index": 37,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -8223,7 +8250,7 @@
   },
   {
    "id": "sec-3-6-p2-3-20",
-   "index": 37,
+   "index": 38,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -8602,7 +8629,7 @@
   },
   {
    "id": "sec-3-6-p2-3-20-ii",
-   "index": 38,
+   "index": 39,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -8975,7 +9002,7 @@
   },
   {
    "id": "sec-3-6-p2-3-21",
-   "index": 39,
+   "index": 40,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -9388,7 +9415,7 @@
   },
   {
    "id": "sec-3-6-p2-3-22-i",
-   "index": 40,
+   "index": 41,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -9841,7 +9868,7 @@
   },
   {
    "id": "sec-3-6-p2-3-22-c",
-   "index": 41,
+   "index": 42,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -10271,7 +10298,7 @@
   },
   {
    "id": "sec-3-6-p3-3-25",
-   "index": 42,
+   "index": 43,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -10731,7 +10758,7 @@
   },
   {
    "id": "sec-3-6-p3-3-27",
-   "index": 43,
+   "index": 44,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -11096,7 +11123,7 @@
   },
   {
    "id": "sec-3-6-p3-3-29",
-   "index": 44,
+   "index": 45,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -11471,7 +11498,7 @@
   },
   {
    "id": "sec-3-6-p3-3-30",
-   "index": 45,
+   "index": 46,
    "section": 5,
    "section_title": "AYUSH Day Care Centre means and includes",
    "subsection": null,
@@ -11810,7 +11837,7 @@
   },
   {
    "id": "sec-3-31",
-   "index": 46,
+   "index": 47,
    "section": 6,
    "section_title": "Medically Necessary Treatment means any",
    "subsection": null,
@@ -11867,7 +11894,7 @@
   },
   {
    "id": "sec-3-31-p1-i",
-   "index": 47,
+   "index": 48,
    "section": 6,
    "section_title": "Medically Necessary Treatment means any",
    "subsection": null,
@@ -12304,7 +12331,7 @@
   },
   {
    "id": "sec-3-31-p1-3-32",
-   "index": 48,
+   "index": 49,
    "section": 6,
    "section_title": "Medically Necessary Treatment means any",
    "subsection": null,
@@ -12519,7 +12546,7 @@
   },
   {
    "id": "sec-3-31-p2-3-33",
-   "index": 49,
+   "index": 50,
    "section": 6,
    "section_title": "Medically Necessary Treatment means any",
    "subsection": null,
@@ -12889,7 +12916,7 @@
   },
   {
    "id": "sec-3-31-p2-3-36",
-   "index": 50,
+   "index": 51,
    "section": 6,
    "section_title": "Medically Necessary Treatment means any",
    "subsection": null,
@@ -13327,7 +13354,7 @@
   },
   {
    "id": "sec-3-31-p2-3-37-ii",
-   "index": 51,
+   "index": 52,
    "section": 6,
    "section_title": "Medically Necessary Treatment means any",
    "subsection": null,
@@ -13799,7 +13826,7 @@
   },
   {
    "id": "sec-3-31-p2-3-39",
-   "index": 52,
+   "index": 53,
    "section": 6,
    "section_title": "Medically Necessary Treatment means any",
    "subsection": null,
@@ -14112,7 +14139,7 @@
   },
   {
    "id": "sec-3-31-p2-3-40",
-   "index": 53,
+   "index": 54,
    "section": 6,
    "section_title": "Medically Necessary Treatment means any",
    "subsection": null,
@@ -14586,7 +14613,7 @@
   },
   {
    "id": "sec-3-31-p2-3-43",
-   "index": 54,
+   "index": 55,
    "section": 6,
    "section_title": "Medically Necessary Treatment means any",
    "subsection": null,
@@ -14975,7 +15002,7 @@
   },
   {
    "id": "sec-3-31-p2-3-44",
-   "index": 55,
+   "index": 56,
    "section": 6,
    "section_title": "Medically Necessary Treatment means any",
    "subsection": null,
@@ -15305,7 +15332,7 @@
   },
   {
    "id": "sec-3-31-p2-3-46",
-   "index": 56,
+   "index": 57,
    "section": 6,
    "section_title": "Medically Necessary Treatment means any",
    "subsection": null,
@@ -15660,7 +15687,7 @@
   },
   {
    "id": "sec-3-31-p2-3-48",
-   "index": 57,
+   "index": 58,
    "section": 6,
    "section_title": "Medically Necessary Treatment means any",
    "subsection": null,
@@ -16104,7 +16131,7 @@
   },
   {
    "id": "sec-3-31-p2-3-50",
-   "index": 58,
+   "index": 59,
    "section": 6,
    "section_title": "Medically Necessary Treatment means any",
    "subsection": null,
@@ -16559,7 +16586,7 @@
   },
   {
    "id": "sec-3-31-p2-3-52",
-   "index": 59,
+   "index": 60,
    "section": 6,
    "section_title": "Medically Necessary Treatment means any",
    "subsection": null,
@@ -16898,7 +16925,7 @@
   },
   {
    "id": "sec-3-31-p3",
-   "index": 60,
+   "index": 61,
    "section": 6,
    "section_title": "Medically Necessary Treatment means any",
    "subsection": null,
@@ -16942,7 +16969,7 @@
   },
   {
    "id": "sec-7",
-   "index": 61,
+   "index": 62,
    "section": 7,
    "section_title": "4.COVERAGE",
    "subsection": null,
@@ -16983,7 +17010,7 @@
   },
   {
    "id": "sec-7-p1",
-   "index": 62,
+   "index": 63,
    "section": 7,
    "section_title": "4.COVERAGE",
    "subsection": null,
@@ -17132,7 +17159,7 @@
   },
   {
    "id": "sec-4-1",
-   "index": 63,
+   "index": 64,
    "section": 8,
    "section_title": "Hospitalization",
    "subsection": null,
@@ -17169,7 +17196,7 @@
   },
   {
    "id": "sec-4-1-p1",
-   "index": 64,
+   "index": 65,
    "section": 8,
    "section_title": "Hospitalization",
    "subsection": null,
@@ -17343,7 +17370,7 @@
   },
   {
    "id": "sec-4-1-p1-i",
-   "index": 65,
+   "index": 66,
    "section": 8,
    "section_title": "Hospitalization",
    "subsection": null,
@@ -17745,7 +17772,7 @@
   },
   {
    "id": "sec-4-1-p1-iv",
-   "index": 66,
+   "index": 67,
    "section": 8,
    "section_title": "Hospitalization",
    "subsection": null,
@@ -18203,7 +18230,7 @@
   },
   {
    "id": "sec-4-1-p1-1",
-   "index": 67,
+   "index": 68,
    "section": 8,
    "section_title": "Hospitalization",
    "subsection": null,
@@ -18795,7 +18822,7 @@
   },
   {
    "id": "sec-4-2",
-   "index": 68,
+   "index": 69,
    "section": 9,
    "section_title": "AYUSH Treatment",
    "subsection": null,
@@ -18837,7 +18864,7 @@
   },
   {
    "id": "sec-4-2-p1",
-   "index": 69,
+   "index": 70,
    "section": 9,
    "section_title": "AYUSH Treatment",
    "subsection": null,
@@ -19076,7 +19103,7 @@
   },
   {
    "id": "sec-4-3",
-   "index": 70,
+   "index": 71,
    "section": 10,
    "section_title": "Cataract Treatment",
    "subsection": null,
@@ -19118,7 +19145,7 @@
   },
   {
    "id": "sec-4-3-p1",
-   "index": 71,
+   "index": 72,
    "section": 10,
    "section_title": "Cataract Treatment",
    "subsection": null,
@@ -19297,7 +19324,7 @@
   },
   {
    "id": "sec-4-3-p2",
-   "index": 72,
+   "index": 73,
    "section": 10,
    "section_title": "Cataract Treatment",
    "subsection": null,
@@ -19321,7 +19348,7 @@
   },
   {
    "id": "sec-4-4",
-   "index": 73,
+   "index": 74,
    "section": 11,
    "section_title": "Pre-Hospitalization",
    "subsection": null,
@@ -19358,7 +19385,7 @@
   },
   {
    "id": "sec-4-4-p1",
-   "index": 74,
+   "index": 75,
    "section": 11,
    "section_title": "Pre-Hospitalization",
    "subsection": null,
@@ -19547,7 +19574,7 @@
   },
   {
    "id": "sec-4-5",
-   "index": 75,
+   "index": 76,
    "section": 12,
    "section_title": "Post Hospitalization",
    "subsection": null,
@@ -19589,7 +19616,7 @@
   },
   {
    "id": "sec-4-5-p1",
-   "index": 76,
+   "index": 77,
    "section": 12,
    "section_title": "Post Hospitalization",
    "subsection": null,
@@ -19808,7 +19835,7 @@
   },
   {
    "id": "sec-4-5-p1-4-6",
-   "index": 77,
+   "index": 78,
    "section": 12,
    "section_title": "Post Hospitalization",
    "subsection": null,
@@ -20274,7 +20301,7 @@
   },
   {
    "id": "sec-4-5-p1-4-6-j",
-   "index": 78,
+   "index": 79,
    "section": 12,
    "section_title": "Post Hospitalization",
    "subsection": null,
@@ -20729,7 +20756,7 @@
   },
   {
    "id": "sec-13",
-   "index": 79,
+   "index": 80,
    "section": 13,
    "section_title": "5.CUMULATIVE BONUS",
    "subsection": null,
@@ -20775,7 +20802,7 @@
   },
   {
    "id": "sec-13-p1",
-   "index": 80,
+   "index": 81,
    "section": 13,
    "section_title": "5.CUMULATIVE BONUS",
    "subsection": null,
@@ -21014,7 +21041,7 @@
   },
   {
    "id": "sec-13-p2",
-   "index": 81,
+   "index": 82,
    "section": 13,
    "section_title": "5.CUMULATIVE BONUS",
    "subsection": null,
@@ -21246,7 +21273,7 @@
   },
   {
    "id": "sec-13-p3",
-   "index": 82,
+   "index": 83,
    "section": 13,
    "section_title": "5.CUMULATIVE BONUS",
    "subsection": null,
@@ -21756,7 +21783,7 @@
   },
   {
    "id": "sec-13-p3-iii",
-   "index": 83,
+   "index": 84,
    "section": 13,
    "section_title": "5.CUMULATIVE BONUS",
    "subsection": null,
@@ -22274,7 +22301,7 @@
   },
   {
    "id": "sec-13-p3-v",
-   "index": 84,
+   "index": 85,
    "section": 13,
    "section_title": "5.CUMULATIVE BONUS",
    "subsection": null,
@@ -22792,7 +22819,7 @@
   },
   {
    "id": "sec-13-p3-vii",
-   "index": 85,
+   "index": 86,
    "section": 13,
    "section_title": "5.CUMULATIVE BONUS",
    "subsection": null,
@@ -23115,7 +23142,7 @@
   },
   {
    "id": "sec-14",
-   "index": 86,
+   "index": 87,
    "section": 14,
    "section_title": "6.WAITING PERIOD",
    "subsection": null,
@@ -23161,7 +23188,7 @@
   },
   {
    "id": "sec-14-p1",
-   "index": 87,
+   "index": 88,
    "section": 14,
    "section_title": "6.WAITING PERIOD",
    "subsection": null,
@@ -23672,7 +23699,7 @@
   },
   {
    "id": "sec-14-p1-6-1-iii",
-   "index": 88,
+   "index": 89,
    "section": 14,
    "section_title": "6.WAITING PERIOD",
    "subsection": null,
@@ -24100,7 +24127,7 @@
   },
   {
    "id": "sec-14-p1-6-2-i",
-   "index": 89,
+   "index": 90,
    "section": 14,
    "section_title": "6.WAITING PERIOD",
    "subsection": null,
@@ -24547,7 +24574,7 @@
   },
   {
    "id": "sec-14-p1-6-3-a",
-   "index": 90,
+   "index": 91,
    "section": 14,
    "section_title": "6.WAITING PERIOD",
    "subsection": null,
@@ -24782,7 +24809,7 @@
   },
   {
    "id": "sec-14-p2-b",
-   "index": 91,
+   "index": 92,
    "section": 14,
    "section_title": "6.WAITING PERIOD",
    "subsection": null,
@@ -25212,7 +25239,7 @@
   },
   {
    "id": "sec-14-p2-e",
-   "index": 92,
+   "index": 93,
    "section": 14,
    "section_title": "6.WAITING PERIOD",
    "subsection": null,
@@ -25417,7 +25444,7 @@
   },
   {
    "id": "sec-14-p3-1",
-   "index": 93,
+   "index": 94,
    "section": 14,
    "section_title": "6.WAITING PERIOD",
    "subsection": null,
@@ -25996,7 +26023,7 @@
   },
   {
    "id": "sec-14-p3-17",
-   "index": 94,
+   "index": 95,
    "section": 14,
    "section_title": "6.WAITING PERIOD",
    "subsection": null,
@@ -26222,7 +26249,7 @@
   },
   {
    "id": "sec-14-p4-1",
-   "index": 95,
+   "index": 96,
    "section": 14,
    "section_title": "6.WAITING PERIOD",
    "subsection": null,
@@ -26355,7 +26382,7 @@
   },
   {
    "id": "sec-15",
-   "index": 96,
+   "index": 97,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -26396,7 +26423,7 @@
   },
   {
    "id": "sec-15-p1",
-   "index": 97,
+   "index": 98,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -26872,7 +26899,7 @@
   },
   {
    "id": "sec-15-p1-7-2-i",
-   "index": 98,
+   "index": 99,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -27195,7 +27222,7 @@
   },
   {
    "id": "sec-15-p2",
-   "index": 99,
+   "index": 100,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -27766,7 +27793,7 @@
   },
   {
    "id": "sec-15-p3",
-   "index": 100,
+   "index": 101,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -27944,7 +27971,7 @@
   },
   {
    "id": "sec-15-p4",
-   "index": 101,
+   "index": 102,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -28292,7 +28319,7 @@
   },
   {
    "id": "sec-15-p5",
-   "index": 102,
+   "index": 103,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -28556,7 +28583,7 @@
   },
   {
    "id": "sec-15-p6",
-   "index": 103,
+   "index": 104,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -28735,7 +28762,7 @@
   },
   {
    "id": "sec-15-p7",
-   "index": 104,
+   "index": 105,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -29143,7 +29170,7 @@
   },
   {
    "id": "sec-15-p7-7-9",
-   "index": 105,
+   "index": 106,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -29438,7 +29465,7 @@
   },
   {
    "id": "sec-15-p8-7-11",
-   "index": 106,
+   "index": 107,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -29648,7 +29675,7 @@
   },
   {
    "id": "sec-15-p9-7-12",
-   "index": 107,
+   "index": 108,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -30052,7 +30079,7 @@
   },
   {
    "id": "sec-15-p10",
-   "index": 108,
+   "index": 109,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -30420,7 +30447,7 @@
   },
   {
    "id": "sec-15-p10-7-15-ii",
-   "index": 109,
+   "index": 110,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -30715,7 +30742,7 @@
   },
   {
    "id": "sec-15-p10-7-17",
-   "index": 110,
+   "index": 111,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -31174,7 +31201,7 @@
   },
   {
    "id": "sec-15-p10-7-17-b",
-   "index": 111,
+   "index": 112,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -31579,7 +31606,7 @@
   },
   {
    "id": "sec-15-p10-7-18",
-   "index": 112,
+   "index": 113,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -31854,7 +31881,7 @@
   },
   {
    "id": "sec-15-p12",
-   "index": 113,
+   "index": 114,
    "section": 15,
    "section_title": "7.EXCLUSIONS",
    "subsection": null,
@@ -32409,7 +32436,7 @@
   },
   {
    "id": "sec-16",
-   "index": 114,
+   "index": 115,
    "section": 16,
    "section_title": "9.CLAIMS PROCEDURE",
    "subsection": null,
@@ -32455,7 +32482,7 @@
   },
   {
    "id": "sec-16-1-1-i",
-   "index": 115,
+   "index": 116,
    "section": 16,
    "section_title": "9.CLAIMS PROCEDURE",
    "subsection": null,
@@ -33250,7 +33277,7 @@
   },
   {
    "id": "sec-1-2",
-   "index": 116,
+   "index": 117,
    "section": 17,
    "section_title": "Procedure for Reimbursement of Claims",
    "subsection": null,
@@ -33307,7 +33334,7 @@
   },
   {
    "id": "sec-1-2-p1",
-   "index": 117,
+   "index": 118,
    "section": 17,
    "section_title": "Procedure for Reimbursement of Claims",
    "subsection": null,
@@ -33446,7 +33473,7 @@
   },
   {
    "id": "sec-1-2-p3",
-   "index": 118,
+   "index": 119,
    "section": 17,
    "section_title": "Procedure for Reimbursement of Claims",
    "subsection": null,
@@ -33709,7 +33736,7 @@
   },
   {
    "id": "sec-1-2-p4",
-   "index": 119,
+   "index": 120,
    "section": 17,
    "section_title": "Procedure for Reimbursement of Claims",
    "subsection": null,
@@ -33992,7 +34019,7 @@
   },
   {
    "id": "sec-1-2-p5-ii",
-   "index": 120,
+   "index": 121,
    "section": 17,
    "section_title": "Procedure for Reimbursement of Claims",
    "subsection": null,
@@ -34121,7 +34148,7 @@
   },
   {
    "id": "sec-9-2",
-   "index": 121,
+   "index": 122,
    "section": 18,
    "section_title": "Documents to be submitted",
    "subsection": null,
@@ -34173,7 +34200,7 @@
   },
   {
    "id": "sec-9-2-p1-i",
-   "index": 122,
+   "index": 123,
    "section": 18,
    "section_title": "Documents to be submitted",
    "subsection": null,
@@ -34699,7 +34726,7 @@
   },
   {
    "id": "sec-9-2-p1-x",
-   "index": 123,
+   "index": 124,
    "section": 18,
    "section_title": "Documents to be submitted",
    "subsection": null,
@@ -35104,7 +35131,7 @@
   },
   {
    "id": "sec-9-2-p2",
-   "index": 124,
+   "index": 125,
    "section": 18,
    "section_title": "Documents to be submitted",
    "subsection": null,
@@ -35635,7 +35662,7 @@
   },
   {
    "id": "sec-9-3",
-   "index": 125,
+   "index": 126,
    "section": 19,
    "section_title": "Co-payment",
    "subsection": null,
@@ -35672,7 +35699,7 @@
   },
   {
    "id": "sec-9-3-p1",
-   "index": 126,
+   "index": 127,
    "section": 19,
    "section_title": "Co-payment",
    "subsection": null,
@@ -35905,7 +35932,7 @@
   },
   {
    "id": "sec-9-3-p1-9-4",
-   "index": 127,
+   "index": 128,
    "section": 19,
    "section_title": "Co-payment",
    "subsection": null,
@@ -36318,7 +36345,7 @@
   },
   {
    "id": "sec-9-3-p1-9-4-iii",
-   "index": 128,
+   "index": 129,
    "section": 19,
    "section_title": "Co-payment",
    "subsection": null,
@@ -36880,7 +36907,7 @@
   },
   {
    "id": "sec-9-5",
-   "index": 129,
+   "index": 130,
    "section": 20,
    "section_title": "Services Offered by TPA",
    "subsection": null,
@@ -36932,7 +36959,7 @@
   },
   {
    "id": "sec-9-5-p1",
-   "index": 130,
+   "index": 131,
    "section": 20,
    "section_title": "Services Offered by TPA",
    "subsection": null,
@@ -37186,7 +37213,7 @@
   },
   {
    "id": "sec-9-5-p1-i",
-   "index": 131,
+   "index": 132,
    "section": 20,
    "section_title": "Services Offered by TPA",
    "subsection": null,
@@ -37408,7 +37435,7 @@
   },
   {
    "id": "sec-9-6",
-   "index": 132,
+   "index": 133,
    "section": 21,
    "section_title": "Payment of claim",
    "subsection": null,
@@ -37455,7 +37482,7 @@
   },
   {
    "id": "sec-9-6-p2",
-   "index": 133,
+   "index": 134,
    "section": 21,
    "section_title": "Payment of claim",
    "subsection": null,
@@ -37534,7 +37561,7 @@
   },
   {
    "id": "sec-22",
-   "index": 134,
+   "index": 135,
    "section": 22,
    "section_title": "10.GENERAL TERMS AND CONDITIONS",
    "subsection": null,
@@ -37590,7 +37617,7 @@
   },
   {
    "id": "sec-10-1",
-   "index": 135,
+   "index": 136,
    "section": 23,
    "section_title": "Disclosure to information norm",
    "subsection": null,
@@ -37642,7 +37669,7 @@
   },
   {
    "id": "sec-10-1-p1",
-   "index": 136,
+   "index": 137,
    "section": 23,
    "section_title": "Disclosure to information norm",
    "subsection": null,
@@ -37801,7 +37828,7 @@
   },
   {
    "id": "sec-10-1-p1-10-2",
-   "index": 137,
+   "index": 138,
    "section": 23,
    "section_title": "Disclosure to information norm",
    "subsection": null,
@@ -38051,7 +38078,7 @@
   },
   {
    "id": "sec-10-3",
-   "index": 138,
+   "index": 139,
    "section": 24,
    "section_title": "Material Change",
    "subsection": null,
@@ -38093,7 +38120,7 @@
   },
   {
    "id": "sec-10-3-p1",
-   "index": 139,
+   "index": 140,
    "section": 24,
    "section_title": "Material Change",
    "subsection": null,
@@ -38342,7 +38369,7 @@
   },
   {
    "id": "sec-10-4",
-   "index": 140,
+   "index": 141,
    "section": 25,
    "section_title": "Records to be Maintained",
    "subsection": null,
@@ -38394,7 +38421,7 @@
   },
   {
    "id": "sec-10-4-p1",
-   "index": 141,
+   "index": 142,
    "section": 25,
    "section_title": "Records to be Maintained",
    "subsection": null,
@@ -38742,7 +38769,7 @@
   },
   {
    "id": "sec-10-5",
-   "index": 142,
+   "index": 143,
    "section": 26,
    "section_title": "Complete Discharge",
    "subsection": null,
@@ -38784,7 +38811,7 @@
   },
   {
    "id": "sec-10-5-p1",
-   "index": 143,
+   "index": 144,
    "section": 26,
    "section_title": "Complete Discharge",
    "subsection": null,
@@ -39113,7 +39140,7 @@
   },
   {
    "id": "sec-10-6",
-   "index": 144,
+   "index": 145,
    "section": 27,
    "section_title": "Notice & Communication",
    "subsection": null,
@@ -39160,7 +39187,7 @@
   },
   {
    "id": "sec-10-6-i",
-   "index": 145,
+   "index": 146,
    "section": 27,
    "section_title": "Notice & Communication",
    "subsection": null,
@@ -39502,7 +39529,7 @@
   },
   {
    "id": "sec-10-7",
-   "index": 146,
+   "index": 147,
    "section": 28,
    "section_title": "Territorial Limit",
    "subsection": null,
@@ -39544,7 +39571,7 @@
   },
   {
    "id": "sec-10-7-p1",
-   "index": 147,
+   "index": 148,
    "section": 28,
    "section_title": "Territorial Limit",
    "subsection": null,
@@ -39648,7 +39675,7 @@
   },
   {
    "id": "sec-10-8",
-   "index": 148,
+   "index": 149,
    "section": 29,
    "section_title": "Multiple Policies",
    "subsection": null,
@@ -39690,7 +39717,7 @@
   },
   {
    "id": "sec-10-8-1",
-   "index": 149,
+   "index": 150,
    "section": 29,
    "section_title": "Multiple Policies",
    "subsection": null,
@@ -40138,7 +40165,7 @@
   },
   {
    "id": "sec-10-8-2",
-   "index": 150,
+   "index": 151,
    "section": 29,
    "section_title": "Multiple Policies",
    "subsection": null,
@@ -40595,7 +40622,7 @@
   },
   {
    "id": "sec-10-8-4",
-   "index": 151,
+   "index": 152,
    "section": 29,
    "section_title": "Multiple Policies",
    "subsection": null,
@@ -40819,7 +40846,7 @@
   },
   {
    "id": "sec-10-9",
-   "index": 152,
+   "index": 153,
    "section": 30,
    "section_title": "Fraud",
    "subsection": null,
@@ -40856,7 +40883,7 @@
   },
   {
    "id": "sec-10-9-p1",
-   "index": 153,
+   "index": 154,
    "section": 30,
    "section_title": "Fraud",
    "subsection": null,
@@ -41180,7 +41207,7 @@
   },
   {
    "id": "sec-10-9-p2",
-   "index": 154,
+   "index": 155,
    "section": 30,
    "section_title": "Fraud",
    "subsection": null,
@@ -41374,7 +41401,7 @@
   },
   {
    "id": "sec-10-9-p3",
-   "index": 155,
+   "index": 156,
    "section": 30,
    "section_title": "Fraud",
    "subsection": null,
@@ -41598,7 +41625,7 @@
   },
   {
    "id": "sec-10-9-p3-a",
-   "index": 156,
+   "index": 157,
    "section": 30,
    "section_title": "Fraud",
    "subsection": null,
@@ -41875,7 +41902,7 @@
   },
   {
    "id": "sec-10-9-p3-d",
-   "index": 157,
+   "index": 158,
    "section": 30,
    "section_title": "Fraud",
    "subsection": null,
@@ -42314,7 +42341,7 @@
   },
   {
    "id": "sec-10-10",
-   "index": 158,
+   "index": 159,
    "section": 31,
    "section_title": "Cancellation",
    "subsection": null,
@@ -42351,7 +42378,7 @@
   },
   {
    "id": "sec-10-10-a",
-   "index": 159,
+   "index": 160,
    "section": 31,
    "section_title": "Cancellation",
    "subsection": null,
@@ -42570,7 +42597,7 @@
   },
   {
    "id": "sec-10-10-p3",
-   "index": 160,
+   "index": 161,
    "section": 31,
    "section_title": "Cancellation",
    "subsection": null,
@@ -42724,7 +42751,7 @@
   },
   {
    "id": "sec-10-10-p4",
-   "index": 161,
+   "index": 162,
    "section": 31,
    "section_title": "Cancellation",
    "subsection": null,
@@ -42973,7 +43000,7 @@
   },
   {
    "id": "sec-10-10-p4-b",
-   "index": 162,
+   "index": 163,
    "section": 31,
    "section_title": "Cancellation",
    "subsection": null,
@@ -43390,7 +43417,7 @@
   },
   {
    "id": "sec-10-10-p5",
-   "index": 163,
+   "index": 164,
    "section": 31,
    "section_title": "Cancellation",
    "subsection": null,
@@ -44025,7 +44052,7 @@
   },
   {
    "id": "sec-10-10-p5-2",
-   "index": 164,
+   "index": 165,
    "section": 31,
    "section_title": "Cancellation",
    "subsection": null,
@@ -44213,7 +44240,7 @@
   },
   {
    "id": "sec-10-12",
-   "index": 165,
+   "index": 166,
    "section": 32,
    "section_title": "Territorial Jurisdiction",
    "subsection": null,
@@ -44255,7 +44282,7 @@
   },
   {
    "id": "sec-10-12-p1",
-   "index": 166,
+   "index": 167,
    "section": 32,
    "section_title": "Territorial Jurisdiction",
    "subsection": null,
@@ -44454,7 +44481,7 @@
   },
   {
    "id": "sec-10-13",
-   "index": 167,
+   "index": 168,
    "section": 33,
    "section_title": "Arbitration",
    "subsection": null,
@@ -44491,7 +44518,7 @@
   },
   {
    "id": "sec-10-13-i",
-   "index": 168,
+   "index": 169,
    "section": 33,
    "section_title": "Arbitration",
    "subsection": null,
@@ -45200,7 +45227,7 @@
   },
   {
    "id": "sec-10-13-ii",
-   "index": 169,
+   "index": 170,
    "section": 33,
    "section_title": "Arbitration",
    "subsection": null,
@@ -45618,7 +45645,7 @@
   },
   {
    "id": "sec-10-13-p1",
-   "index": 170,
+   "index": 171,
    "section": 33,
    "section_title": "Arbitration",
    "subsection": null,
@@ -46001,7 +46028,7 @@
   },
   {
    "id": "sec-10-13-p1-i",
-   "index": 171,
+   "index": 172,
    "section": 33,
    "section_title": "Arbitration",
    "subsection": null,
@@ -46404,7 +46431,7 @@
   },
   {
    "id": "sec-10-13-p2",
-   "index": 172,
+   "index": 173,
    "section": 33,
    "section_title": "Arbitration",
    "subsection": null,
@@ -46463,7 +46490,7 @@
   },
   {
    "id": "sec-10-15",
-   "index": 173,
+   "index": 174,
    "section": 34,
    "section_title": "Portability",
    "subsection": null,
@@ -46500,7 +46527,7 @@
   },
   {
    "id": "sec-10-15-p1",
-   "index": 174,
+   "index": 175,
    "section": 34,
    "section_title": "Portability",
    "subsection": null,
@@ -46853,7 +46880,7 @@
   },
   {
    "id": "sec-10-15-p1-i",
-   "index": 175,
+   "index": 176,
    "section": 34,
    "section_title": "Portability",
    "subsection": null,
@@ -47221,7 +47248,7 @@
   },
   {
    "id": "sec-10-15-p3",
-   "index": 176,
+   "index": 177,
    "section": 34,
    "section_title": "Portability",
    "subsection": null,
@@ -47320,7 +47347,7 @@
   },
   {
    "id": "sec-10-16",
-   "index": 177,
+   "index": 178,
    "section": 35,
    "section_title": "Renewal of Policy",
    "subsection": null,
@@ -47367,7 +47394,7 @@
   },
   {
    "id": "sec-10-16-p1",
-   "index": 178,
+   "index": 179,
    "section": 35,
    "section_title": "Renewal of Policy",
    "subsection": null,
@@ -47476,7 +47503,7 @@
   },
   {
    "id": "sec-10-16-p2-i",
-   "index": 179,
+   "index": 180,
    "section": 35,
    "section_title": "Renewal of Policy",
    "subsection": null,
@@ -48066,7 +48093,7 @@
   },
   {
    "id": "sec-10-17",
-   "index": 180,
+   "index": 181,
    "section": 36,
    "section_title": "Premium Payment in Instalments",
    "subsection": null,
@@ -48118,7 +48145,7 @@
   },
   {
    "id": "sec-10-17-p1",
-   "index": 181,
+   "index": 182,
    "section": 36,
    "section_title": "Premium Payment in Instalments",
    "subsection": null,
@@ -48346,7 +48373,7 @@
   },
   {
    "id": "sec-10-17-p1-i",
-   "index": 182,
+   "index": 183,
    "section": 36,
    "section_title": "Premium Payment in Instalments",
    "subsection": null,
@@ -48594,7 +48621,7 @@
   },
   {
    "id": "sec-10-17-p2-iii",
-   "index": 183,
+   "index": 184,
    "section": 36,
    "section_title": "Premium Payment in Instalments",
    "subsection": null,
@@ -48951,7 +48978,7 @@
   },
   {
    "id": "sec-10-17-p2-10-18",
-   "index": 184,
+   "index": 185,
    "section": 36,
    "section_title": "Premium Payment in Instalments",
    "subsection": null,
@@ -49205,7 +49232,7 @@
   },
   {
    "id": "sec-10-19",
-   "index": 185,
+   "index": 186,
    "section": 37,
    "section_title": "Free look period",
    "subsection": null,
@@ -49252,7 +49279,7 @@
   },
   {
    "id": "sec-10-19-p1",
-   "index": 186,
+   "index": 187,
    "section": 37,
    "section_title": "Free look period",
    "subsection": null,
@@ -49396,7 +49423,7 @@
   },
   {
    "id": "sec-10-19-p2",
-   "index": 187,
+   "index": 188,
    "section": 37,
    "section_title": "Free look period",
    "subsection": null,
@@ -49585,7 +49612,7 @@
   },
   {
    "id": "sec-10-19-p3-i",
-   "index": 188,
+   "index": 189,
    "section": 37,
    "section_title": "Free look period",
    "subsection": null,
@@ -50292,7 +50319,7 @@
   },
   {
    "id": "sec-10-19-p3-10-20-i",
-   "index": 189,
+   "index": 190,
    "section": 37,
    "section_title": "Free look period",
    "subsection": null,
@@ -50795,7 +50822,7 @@
   },
   {
    "id": "sec-10-19-p4",
-   "index": 190,
+   "index": 191,
    "section": 37,
    "section_title": "Free look period",
    "subsection": null,
@@ -50919,7 +50946,7 @@
   },
   {
    "id": "sec-10-21",
-   "index": 191,
+   "index": 192,
    "section": 38,
    "section_title": "Change of Sum Insured",
    "subsection": null,
@@ -50971,7 +50998,7 @@
   },
   {
    "id": "sec-10-21-p1",
-   "index": 192,
+   "index": 193,
    "section": 38,
    "section_title": "Change of Sum Insured",
    "subsection": null,
@@ -51209,7 +51236,7 @@
   },
   {
    "id": "sec-10-22",
-   "index": 193,
+   "index": 194,
    "section": 39,
    "section_title": "Terms and conditions of the Policy",
    "subsection": null,
@@ -51271,7 +51298,7 @@
   },
   {
    "id": "sec-10-22-p1",
-   "index": 194,
+   "index": 195,
    "section": 39,
    "section_title": "Terms and conditions of the Policy",
    "subsection": null,
@@ -51430,7 +51457,7 @@
   },
   {
    "id": "sec-10-23",
-   "index": 195,
+   "index": 196,
    "section": 40,
    "section_title": "Nomination",
    "subsection": null,
@@ -51467,7 +51494,7 @@
   },
   {
    "id": "sec-10-23-p1",
-   "index": 196,
+   "index": 197,
    "section": 40,
    "section_title": "Nomination",
    "subsection": null,
@@ -52133,7 +52160,7 @@
   },
   {
    "id": "sec-41",
-   "index": 197,
+   "index": 198,
    "section": 41,
    "section_title": "11.REDRESSAL OF GRIEVNACES",
    "subsection": null,
@@ -52184,7 +52211,7 @@
   },
   {
    "id": "sec-41-p1",
-   "index": 198,
+   "index": 199,
    "section": 41,
    "section_title": "11.REDRESSAL OF GRIEVNACES",
    "subsection": null,
@@ -52338,7 +52365,7 @@
   },
   {
    "id": "sec-41-p2",
-   "index": 199,
+   "index": 200,
    "section": 41,
    "section_title": "11.REDRESSAL OF GRIEVNACES",
    "subsection": null,
@@ -52492,7 +52519,7 @@
   },
   {
    "id": "sec-41-p3",
-   "index": 200,
+   "index": 201,
    "section": 41,
    "section_title": "11.REDRESSAL OF GRIEVNACES",
    "subsection": null,
@@ -53163,7 +53190,7 @@
   },
   {
    "id": "sec-41-p4",
-   "index": 201,
+   "index": 202,
    "section": 41,
    "section_title": "11.REDRESSAL OF GRIEVNACES",
    "subsection": null,
@@ -53356,7 +53383,7 @@
   },
   {
    "id": "sec-41-p5",
-   "index": 202,
+   "index": 203,
    "section": 41,
    "section_title": "11.REDRESSAL OF GRIEVNACES",
    "subsection": null,
@@ -53460,7 +53487,7 @@
   },
   {
    "id": "sec-42",
-   "index": 203,
+   "index": 204,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -53511,7 +53538,7 @@
   },
   {
    "id": "sec-42-p1",
-   "index": 204,
+   "index": 205,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -53904,7 +53931,7 @@
   },
   {
    "id": "sec-42-p2-i",
-   "index": 205,
+   "index": 206,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -54028,7 +54055,7 @@
   },
   {
    "id": "sec-42-p4",
-   "index": 206,
+   "index": 207,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -54431,7 +54458,7 @@
   },
   {
    "id": "sec-42-p5",
-   "index": 207,
+   "index": 208,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -54914,7 +54941,7 @@
   },
   {
    "id": "sec-42-p6",
-   "index": 208,
+   "index": 209,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -55218,7 +55245,7 @@
   },
   {
    "id": "sec-42-p7",
-   "index": 209,
+   "index": 210,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -55412,7 +55439,7 @@
   },
   {
    "id": "sec-42-p8",
-   "index": 210,
+   "index": 211,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -55686,7 +55713,7 @@
   },
   {
    "id": "sec-42-p11",
-   "index": 211,
+   "index": 212,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -55849,7 +55876,7 @@
   },
   {
    "id": "sec-42-p11-1",
-   "index": 212,
+   "index": 213,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -55988,7 +56015,7 @@
   },
   {
    "id": "sec-42-p19",
-   "index": 213,
+   "index": 214,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -56142,7 +56169,7 @@
   },
   {
    "id": "sec-42-p24",
-   "index": 214,
+   "index": 215,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -56271,7 +56298,7 @@
   },
   {
    "id": "sec-42-p31",
-   "index": 215,
+   "index": 216,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -56430,7 +56457,7 @@
   },
   {
    "id": "sec-42-p36",
-   "index": 216,
+   "index": 217,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -56599,7 +56626,7 @@
   },
   {
    "id": "sec-42-p42",
-   "index": 217,
+   "index": 218,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -56708,7 +56735,7 @@
   },
   {
    "id": "sec-42-p47",
-   "index": 218,
+   "index": 219,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -56832,7 +56859,7 @@
   },
   {
    "id": "sec-42-p55",
-   "index": 219,
+   "index": 220,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -56961,7 +56988,7 @@
   },
   {
    "id": "sec-42-p59",
-   "index": 220,
+   "index": 221,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -57095,7 +57122,7 @@
   },
   {
    "id": "sec-42-p64",
-   "index": 221,
+   "index": 222,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -57219,7 +57246,7 @@
   },
   {
    "id": "sec-42-p66",
-   "index": 222,
+   "index": 223,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -57318,7 +57345,7 @@
   },
   {
    "id": "sec-42-p70",
-   "index": 223,
+   "index": 224,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -57437,7 +57464,7 @@
   },
   {
    "id": "sec-42-p78",
-   "index": 224,
+   "index": 225,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -57576,7 +57603,7 @@
   },
   {
    "id": "sec-42-p80",
-   "index": 225,
+   "index": 226,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -57724,7 +57751,7 @@
   },
   {
    "id": "sec-42-p87",
-   "index": 226,
+   "index": 227,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -57873,7 +57900,7 @@
   },
   {
    "id": "sec-42-p97",
-   "index": 227,
+   "index": 228,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -58032,7 +58059,7 @@
   },
   {
    "id": "sec-42-p103",
-   "index": 228,
+   "index": 229,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -58156,7 +58183,7 @@
   },
   {
    "id": "sec-42-p108",
-   "index": 229,
+   "index": 230,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -58270,7 +58297,7 @@
   },
   {
    "id": "sec-42-p112",
-   "index": 230,
+   "index": 231,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -58399,7 +58426,7 @@
   },
   {
    "id": "sec-42-p115",
-   "index": 231,
+   "index": 232,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -58517,7 +58544,7 @@
   },
   {
    "id": "sec-42-p117",
-   "index": 232,
+   "index": 233,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -58651,7 +58678,7 @@
   },
   {
    "id": "sec-42-p123",
-   "index": 233,
+   "index": 234,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -58785,7 +58812,7 @@
   },
   {
    "id": "sec-42-p128",
-   "index": 234,
+   "index": 235,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -58904,7 +58931,7 @@
   },
   {
    "id": "sec-42-p136",
-   "index": 235,
+   "index": 236,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -59043,7 +59070,7 @@
   },
   {
    "id": "sec-42-p139",
-   "index": 236,
+   "index": 237,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -59191,7 +59218,7 @@
   },
   {
    "id": "sec-42-p143",
-   "index": 237,
+   "index": 238,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -59315,7 +59342,7 @@
   },
   {
    "id": "sec-42-p148",
-   "index": 238,
+   "index": 239,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -59459,7 +59486,7 @@
   },
   {
    "id": "sec-42-p155",
-   "index": 239,
+   "index": 240,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -59578,7 +59605,7 @@
   },
   {
    "id": "sec-42-p157",
-   "index": 240,
+   "index": 241,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -59851,7 +59878,7 @@
   },
   {
    "id": "sec-42-p158",
-   "index": 241,
+   "index": 242,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -60104,7 +60131,7 @@
   },
   {
    "id": "sec-42-p159",
-   "index": 242,
+   "index": 243,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -60327,7 +60354,7 @@
   },
   {
    "id": "sec-42-p160",
-   "index": 243,
+   "index": 244,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -60511,7 +60538,7 @@
   },
   {
    "id": "sec-42-p161",
-   "index": 244,
+   "index": 245,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -61042,7 +61069,7 @@
   },
   {
    "id": "sec-42-p162",
-   "index": 245,
+   "index": 246,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -61241,7 +61268,7 @@
   },
   {
    "id": "sec-42-p164",
-   "index": 246,
+   "index": 247,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -61472,7 +61499,7 @@
   },
   {
    "id": "sec-42-p165",
-   "index": 247,
+   "index": 248,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -61714,7 +61741,7 @@
   },
   {
    "id": "sec-42-p166",
-   "index": 248,
+   "index": 249,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -61993,7 +62020,7 @@
   },
   {
    "id": "sec-42-p167",
-   "index": 249,
+   "index": 250,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -62217,7 +62244,7 @@
   },
   {
    "id": "sec-42-p168",
-   "index": 250,
+   "index": 251,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -62471,7 +62498,7 @@
   },
   {
    "id": "sec-42-p169",
-   "index": 251,
+   "index": 252,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -62750,7 +62777,7 @@
   },
   {
    "id": "sec-42-p170",
-   "index": 252,
+   "index": 253,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -63201,7 +63228,7 @@
   },
   {
    "id": "sec-42-p172",
-   "index": 253,
+   "index": 254,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -63490,7 +63517,7 @@
   },
   {
    "id": "sec-42-p173",
-   "index": 254,
+   "index": 255,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -63719,7 +63746,7 @@
   },
   {
    "id": "sec-42-p174",
-   "index": 255,
+   "index": 256,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -63871,7 +63898,7 @@
   },
   {
    "id": "sec-42-p175",
-   "index": 256,
+   "index": 257,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -64128,7 +64155,7 @@
   },
   {
    "id": "sec-42-p176",
-   "index": 257,
+   "index": 258,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -64291,7 +64318,7 @@
   },
   {
    "id": "sec-42-p178",
-   "index": 258,
+   "index": 259,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -64500,7 +64527,7 @@
   },
   {
    "id": "sec-42-p179-a",
-   "index": 259,
+   "index": 260,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -64860,7 +64887,7 @@
   },
   {
    "id": "sec-42-p182",
-   "index": 260,
+   "index": 261,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -65004,7 +65031,7 @@
   },
   {
    "id": "sec-42-p183-a",
-   "index": 261,
+   "index": 262,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -65485,7 +65512,7 @@
   },
   {
    "id": "sec-42-p184-c",
-   "index": 262,
+   "index": 263,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -66077,7 +66104,7 @@
   },
   {
    "id": "sec-42-p187-a",
-   "index": 263,
+   "index": 264,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -66547,7 +66574,7 @@
   },
   {
    "id": "sec-42-p188",
-   "index": 264,
+   "index": 265,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -66776,7 +66803,7 @@
   },
   {
    "id": "sec-42-p197",
-   "index": 265,
+   "index": 266,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -66947,7 +66974,7 @@
   },
   {
    "id": "sec-42-p198",
-   "index": 266,
+   "index": 267,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -67141,7 +67168,7 @@
   },
   {
    "id": "sec-42-p199",
-   "index": 267,
+   "index": 268,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -67621,7 +67648,7 @@
   },
   {
    "id": "sec-42-p199-3",
-   "index": 268,
+   "index": 269,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -68054,7 +68081,7 @@
   },
   {
    "id": "sec-42-p199-5",
-   "index": 269,
+   "index": 270,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -68447,7 +68474,7 @@
   },
   {
    "id": "sec-42-p202",
-   "index": 270,
+   "index": 271,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -68938,7 +68965,7 @@
   },
   {
    "id": "sec-42-p202-4",
-   "index": 271,
+   "index": 272,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -69429,7 +69456,7 @@
   },
   {
    "id": "sec-42-p203",
-   "index": 272,
+   "index": 273,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -69898,7 +69925,7 @@
   },
   {
    "id": "sec-42-p204",
-   "index": 273,
+   "index": 274,
    "section": 42,
    "section_title": "1.TABLE OF BENEFITS",
    "subsection": null,
@@ -69976,7 +70003,7 @@
    "id": "sec-1",
    "title": "Arogya Sanjeevani Policy — Policy Wording",
    "section": 1,
-   "children": 12
+   "children": 11
   },
   {
    "id": "sec-2",
@@ -70056,7 +70083,7 @@
    "table": 1,
    "text": 650
   },
-  "demoted": 0,
+  "demoted": 1,
   "placeholders_stripped": 0,
   "splits": 0,
   "tables": [
@@ -70067,5 +70094,198 @@
    }
   ]
  },
- "report_file": "arogya_sanjeevani.ingest_report.json"
+ "report_file": "arogya_sanjeevani.ingest_report.json",
+ "sections": [
+  {
+   "id": "sec-1",
+   "title": "Arogya Sanjeevani Policy — Policy Wording",
+   "brief": {
+    "text": "describes the Arogya Sanjeevani policy provisions and coverage details.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1
+  },
+  {
+   "id": "sec-2",
+   "title": "1.PREAMBLE",
+   "brief": {
+    "text": "...",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1
+  },
+  {
+   "id": "sec-3",
+   "title": "2.OPERATIVE CLAUSE",
+   "brief": {
+    "text": "describes the operative clause covering hospitalization claims and liability limits.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1
+  },
+  {
+   "id": "sec-4",
+   "title": "3.DEFINITIONS",
+   "brief": {
+    "text": "defines key policy terms including Accident, Age, AYUSH Hospital criteria, Break in Policy, Condition Precedent, Congenital Anomaly, Co-payment, Day Care Centre, and Day Care Treatment definitions.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 20
+  },
+  {
+   "id": "sec-7",
+   "title": "4.COVERAGE",
+   "brief": {
+    "text": "lists coverage procedures and treatments under medical policy benefits.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 5
+  },
+  {
+   "id": "sec-13",
+   "title": "5.CUMULATIVE BONUS",
+   "brief": {
+    "text": "describes the Cumulative Bonus calculation and adjustment rules based on claim-free policy years.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 3
+  },
+  {
+   "id": "sec-14",
+   "title": "6.WAITING PERIOD",
+   "brief": {
+    "text": "covers waiting period exclusions and conditions for claim eligibility under policy",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 4
+  },
+  {
+   "id": "sec-15",
+   "title": "7.EXCLUSIONS",
+   "brief": {
+    "text": "lists excluded treatment categories under policy exclusions.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 9
+  },
+  {
+   "id": "sec-16",
+   "title": "9.CLAIMS PROCEDURE",
+   "brief": {
+    "text": "sets out cashless claims procedure and time limits",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 7
+  },
+  {
+   "id": "sec-22",
+   "title": "10.GENERAL TERMS AND CONDITIONS",
+   "brief": {
+    "text": "sets out conditions for policy admission and liability requirements including medical treatment location and record-keeping procedures.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 18
+  },
+  {
+   "id": "sec-41",
+   "title": "11.REDRESSAL OF GRIEVNACES",
+   "brief": {
+    "text": "covers grievance redressal procedures and contact details for policy servicing issues.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 2
+  },
+  {
+   "id": "sec-42",
+   "title": "1.TABLE OF BENEFITS",
+   "brief": {
+    "text": "lists items not covered under Arogya Sanjeevani policy.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 22
+  }
+ ],
+ "overview": {
+  "text": "This document is a policy for Arogya Sanjeevani, outlining coverage, procedures, and terms under which healthcare services are provided. It is issued by the relevant authority responsible for health programs (as specified in the fixture). The document is organised into sections as listed: Arogya Sanjeevani Policy — Policy Wording, Preamble, Operative Clause, Definitions, Coverage, Cumulative Bonus, Waiting Period, Claims Procedure, General Terms and Conditions, Redressal of Grievances, Table of Benefits. Each section contains multiple clauses detailing specific policy elements. Listening from start to finish takes about 93 minutes.",
+  "generated": true,
+  "provider": "ollama",
+  "listening_minutes": 93,
+  "chars_per_second": 13.97,
+  "chars_per_second_source": "measured from 4 trace file(s)"
+ },
+ "topics": [
+  {
+   "topic": "Claims process",
+   "section_id": "sec-16",
+   "heading": "9.CLAIMS PROCEDURE",
+   "generated": true,
+   "provider": "ollama"
+  },
+  {
+   "topic": "Exclusions",
+   "section_id": "sec-15",
+   "heading": "7.EXCLUSIONS",
+   "generated": true,
+   "provider": "ollama"
+  },
+  {
+   "topic": "Waiting periods",
+   "section_id": "sec-14",
+   "heading": "6.WAITING PERIOD",
+   "generated": true,
+   "provider": "ollama"
+  },
+  {
+   "topic": "Definitions",
+   "section_id": "sec-4",
+   "heading": "3.DEFINITIONS",
+   "generated": true,
+   "provider": "ollama"
+  },
+  {
+   "topic": "Read from the start",
+   "section_id": null,
+   "heading": null,
+   "generated": false
+  }
+ ],
+ "enrichment": {
+  "provider": "ollama",
+  "model": "granite4.2:3b",
+  "elapsed_ms": 19025,
+  "fields": [
+   "overview",
+   "sections",
+   "topics"
+  ],
+  "done": [
+   "overview",
+   "sections",
+   "topics"
+  ],
+  "guard_rejections": [
+   {
+    "field": "topics",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   }
+  ],
+  "tokens": {
+   "in": 5612,
+   "out": 1084
+  }
+ }
 }

@@ -1,5 +1,6 @@
 {
  "title": "fixture_two_wheeler_loan_agreement",
+ "spoken_title": "Two Wheeler Loan Agreement",
  "doc_id": "ded4b9c3f93d44ec",
  "synthetic": false,
  "readable": true,
@@ -44,9 +45,10 @@
     "label": "phone",
     "redacted": "1800…"
    }
-  ]
+  ],
+  "text_sha256": "ed239c85f65a41e4046faa6d5ebeec47b343780f029e7840f277f1acd454cba4"
  },
- "clause_count": 374,
+ "clause_count": 375,
  "clauses": [
   {
    "id": "sec-1",
@@ -55,8 +57,8 @@
    "section_title": "Two Wheeler Loan Agreement",
    "subsection": null,
    "item": null,
-   "text_display": "Two Wheeler Loan Agreement. 21 items.",
-   "text_spoken": "Two Wheeler Loan Agreement. twenty-one items.",
+   "text_display": "Two Wheeler Loan Agreement. 20 items.",
+   "text_spoken": "Two Wheeler Loan Agreement. twenty items.",
    "sentences": [
     [
      0,
@@ -87,7 +89,7 @@
     [
      28,
      30,
-     "twenty-one"
+     "twenty"
     ],
     [
      31,
@@ -97,7 +99,7 @@
    ],
    "kind": "heading",
    "level": 1,
-   "children": 21
+   "children": 20
   },
   {
    "id": "sec-1-p1",
@@ -299,7 +301,12 @@
      "row."
     ]
    ],
-   "kind": "table_stub"
+   "kind": "table_stub",
+   "spoken_override": {
+    "text": "The table is a loan agreement summary table with 8 rows (each representing a specific clause or term) and multiple columns including 'Term', 'Description', 'Amount', 'Due Date', 'Status', 'Notes', 'Reference', 'Remarks'. Row labels are ordered as: Clause 1, Clause 2, Clause 3, Clause 4, Clause 5, Clause 6, Clause 7, Clause 8. Which one do you want?",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r1",
@@ -360,7 +367,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "The NBFC's retail vehicle loan is a legal agreement where the borrower and lender sign documents outlining their rights, responsibilities, and terms of the loan.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r2",
@@ -451,7 +463,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "...",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r3",
@@ -492,7 +509,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "The row contains the label 'UIN' and the value is a reference identifier.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r4",
@@ -533,7 +555,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "The source page is 28, which provides the row of table data you need.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r5",
@@ -579,7 +606,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "A detailed analysis of 21,397 words covering various topics was provided as requested.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r6",
@@ -620,7 +652,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "Section 59 is the row heading for 'Table' in the document.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r7",
@@ -666,7 +703,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "The row of the table was retrieved on 6 September 2026.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r8",
@@ -702,21 +744,26 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "The Two-Wheeler Loan Agreement PDF outlines the terms of the loan including repayment schedule interest rate and liability provisions as described in the source.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
-   "id": "sec-1-p10",
+   "id": "sec-1-p3",
    "index": 11,
    "section": 1,
    "section_title": "Two Wheeler Loan Agreement",
    "subsection": null,
    "item": null,
-   "text_display": "Document type Issuer / source UIN / reference Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note.",
-   "text_spoken": "Document type Issuer / source UIN / reference Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note.",
+   "text_display": "Document type Issuer / source",
+   "text_spoken": "Document type Issuer / source",
    "sentences": [
     [
      0,
-     144
+     29
     ]
    ],
    "spoken_map": [
@@ -744,563 +791,588 @@
      23,
      29,
      "source"
-    ],
-    [
-     30,
-     33,
-     "UIN"
-    ],
-    [
-     34,
-     35,
-     "/"
-    ],
-    [
-     36,
-     45,
-     "reference"
-    ],
-    [
-     46,
-     52,
-     "Source"
-    ],
-    [
-     53,
-     58,
-     "pages"
-    ],
-    [
-     59,
-     63,
-     "Word"
-    ],
-    [
-     64,
-     69,
-     "count"
-    ],
-    [
-     70,
-     76,
-     "(body)"
-    ],
-    [
-     77,
-     84,
-     "Section"
-    ],
-    [
-     85,
-     93,
-     "headings"
-    ],
-    [
-     94,
-     103,
-     "Retrieved"
-    ],
-    [
-     104,
-     110,
-     "Source"
-    ],
-    [
-     111,
-     114,
-     "URL"
-    ],
-    [
-     115,
-     125,
-     "Provenance"
-    ],
-    [
-     126,
-     129,
-     "and"
-    ],
-    [
-     130,
-     138,
-     "handling"
-    ],
-    [
-     139,
-     144,
-     "note."
     ]
    ],
    "kind": "body"
   },
   {
-   "id": "sec-1-p11",
+   "id": "sec-1-b1",
    "index": 12,
    "section": 1,
    "section_title": "Two Wheeler Loan Agreement",
    "subsection": null,
    "item": null,
-   "text_display": "Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
-   "text_spoken": "Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
+   "text_display": "UIN / reference",
+   "text_spoken": "UIN / reference",
    "sentences": [
     [
      0,
-     173
-    ],
-    [
-     174,
-     252
-    ],
-    [
-     253,
-     303
-    ],
-    [
-     304,
-     420
-    ],
-    [
-     421,
-     517
+     15
     ]
    ],
    "spoken_map": [
     [
      0,
+     3,
+     "UIN"
+    ],
+    [
      4,
-     "Text"
-    ],
-    [
      5,
-     8,
-     "was"
+     "/"
     ],
     [
-     9,
+     6,
+     15,
+     "reference"
+    ]
+   ],
+   "kind": "boilerplate",
+   "demoted_by": "front_matter",
+   "label": "text"
+  },
+  {
+   "id": "sec-1-p10",
+   "index": 13,
+   "section": 1,
+   "section_title": "Two Wheeler Loan Agreement",
+   "subsection": null,
+   "item": null,
+   "text_display": "Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note. Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
+   "text_spoken": "Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note. Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
+   "sentences": [
+    [
+     0,
+     98
+    ],
+    [
+     99,
+     272
+    ],
+    [
+     273,
+     351
+    ],
+    [
+     352,
+     402
+    ],
+    [
+     403,
+     519
+    ],
+    [
+     520,
+     616
+    ]
+   ],
+   "spoken_map": [
+    [
+     0,
+     6,
+     "Source"
+    ],
+    [
+     7,
+     12,
+     "pages"
+    ],
+    [
+     13,
+     17,
+     "Word"
+    ],
+    [
      18,
-     "extracted"
-    ],
-    [
-     19,
      23,
-     "from"
+     "count"
     ],
     [
      24,
-     27,
-     "the"
+     30,
+     "(body)"
     ],
     [
-     28,
-     36,
-     "publicly"
+     31,
+     38,
+     "Section"
     ],
     [
-     37,
-     43,
-     "hosted"
-    ],
-    [
-     44,
+     39,
      47,
-     "PDF"
+     "headings"
     ],
     [
      48,
-     50,
-     "at"
+     57,
+     "Retrieved"
     ],
     [
-     51,
-     54,
-     "the"
-    ],
-    [
-     55,
      58,
-     "URL"
-    ],
-    [
-     59,
      64,
-     "above"
+     "Source"
     ],
     [
      65,
      68,
-     "and"
+     "URL"
     ],
     [
      69,
-     71,
-     "is"
+     79,
+     "Provenance"
     ],
     [
-     72,
-     82,
-     "reproduced"
-    ],
-    [
+     80,
      83,
-     89,
-     "as-is,"
+     "and"
     ],
     [
-     90,
-     94,
-     "with"
+     84,
+     92,
+     "handling"
     ],
     [
-     95,
-     102,
-     "running"
+     93,
+     98,
+     "note."
     ],
     [
+     99,
      103,
-     111,
-     "headers,"
+     "Text"
     ],
     [
-     112,
-     119,
-     "footers"
+     104,
+     107,
+     "was"
     ],
     [
-     120,
+     108,
+     117,
+     "extracted"
+    ],
+    [
+     118,
+     122,
+     "from"
+    ],
+    [
      123,
-     "and"
+     126,
+     "the"
     ],
     [
-     124,
-     128,
-     "page"
+     127,
+     135,
+     "publicly"
     ],
     [
-     129,
      136,
-     "numbers"
+     142,
+     "hosted"
     ],
     [
-     137,
-     144,
-     "removed"
-    ],
-    [
-     145,
-     148,
-     "and"
-    ],
-    [
-     149,
-     156,
-     "wrapped"
-    ],
-    [
-     157,
-     162,
-     "lines"
-    ],
-    [
-     163,
-     173,
-     "re-joined."
-    ],
-    [
-     174,
-     180,
-     "Tables"
-    ],
-    [
-     181,
-     184,
-     "and"
-    ],
-    [
-     185,
-     195,
-     "two-column"
-    ],
-    [
-     196,
-     206,
-     "definition"
-    ],
-    [
-     207,
-     212,
-     "lists"
-    ],
-    [
-     213,
-     215,
-     "in"
-    ],
-    [
-     216,
-     219,
-     "the"
-    ],
-    [
-     220,
-     228,
-     "original"
-    ],
-    [
-     229,
-     232,
-     "may"
-    ],
-    [
-     233,
-     237,
-     "read"
-    ],
-    [
-     238,
-     246,
-     "linearly"
-    ],
-    [
-     247,
-     252,
-     "here;"
-    ],
-    [
-     253,
-     258,
-     "check"
-    ],
-    [
-     259,
-     266,
-     "against"
-    ],
-    [
-     267,
-     270,
-     "the"
-    ],
-    [
-     271,
-     274,
+     143,
+     146,
      "PDF"
     ],
     [
-     275,
-     281,
-     "before"
+     147,
+     149,
+     "at"
     ],
     [
-     282,
-     289,
-     "relying"
+     150,
+     153,
+     "the"
     ],
     [
-     290,
-     292,
-     "on"
+     154,
+     157,
+     "URL"
     ],
     [
-     293,
-     296,
-     "any"
+     158,
+     163,
+     "above"
     ],
     [
-     297,
-     303,
-     "table."
+     164,
+     167,
+     "and"
     ],
     [
-     304,
-     308,
-     "This"
-    ],
-    [
-     309,
-     311,
+     168,
+     170,
      "is"
     ],
     [
-     312,
-     313,
-     "a"
+     171,
+     181,
+     "reproduced"
     ],
     [
-     314,
-     320,
-     "public"
+     182,
+     188,
+     "as-is,"
     ],
     [
-     321,
-     328,
-     "product"
-    ],
-    [
-     329,
-     336,
-     "wording"
-    ],
-    [
-     337,
-     338,
-     "/"
-    ],
-    [
-     339,
-     348,
-     "template,"
-    ],
-    [
-     349,
-     352,
-     "not"
-    ],
-    [
-     353,
-     354,
-     "a"
-    ],
-    [
-     355,
-     363,
-     "customer"
-    ],
-    [
-     364,
-     372,
-     "document"
-    ],
-    [
-     373,
-     374,
-     "—"
-    ],
-    [
-     375,
-     377,
-     "it"
-    ],
-    [
-     378,
-     386,
-     "contains"
-    ],
-    [
-     387,
-     389,
-     "no"
-    ],
-    [
-     390,
-     402,
-     "policyholder"
-    ],
-    [
-     403,
-     405,
-     "or"
-    ],
-    [
-     406,
-     414,
-     "borrower"
-    ],
-    [
-     415,
-     420,
-     "data."
-    ],
-    [
-     421,
-     423,
-     "If"
-    ],
-    [
-     424,
-     427,
-     "the"
-    ],
-    [
-     428,
-     432,
-     "demo"
-    ],
-    [
-     433,
-     439,
-     "should"
-    ],
-    [
-     440,
-     443,
-     "not"
-    ],
-    [
-     444,
-     448,
-     "show"
-    ],
-    [
-     449,
-     450,
-     "a"
-    ],
-    [
-     451,
-     457,
-     "brand,"
-    ],
-    [
-     458,
-     465,
-     "replace"
-    ],
-    [
-     466,
-     469,
-     "the"
-    ],
-    [
-     470,
-     476,
-     "issuer"
-    ],
-    [
-     477,
-     481,
-     "name"
-    ],
-    [
-     482,
-     486,
+     189,
+     193,
      "with"
     ],
     [
-     487,
-     488,
-     "a"
+     194,
+     201,
+     "running"
     ],
     [
-     489,
-     500,
-     "placeholder"
+     202,
+     210,
+     "headers,"
     ],
     [
-     501,
-     507,
+     211,
+     218,
+     "footers"
+    ],
+    [
+     219,
+     222,
+     "and"
+    ],
+    [
+     223,
+     227,
+     "page"
+    ],
+    [
+     228,
+     235,
+     "numbers"
+    ],
+    [
+     236,
+     243,
+     "removed"
+    ],
+    [
+     244,
+     247,
+     "and"
+    ],
+    [
+     248,
+     255,
+     "wrapped"
+    ],
+    [
+     256,
+     261,
+     "lines"
+    ],
+    [
+     262,
+     272,
+     "re-joined."
+    ],
+    [
+     273,
+     279,
+     "Tables"
+    ],
+    [
+     280,
+     283,
+     "and"
+    ],
+    [
+     284,
+     294,
+     "two-column"
+    ],
+    [
+     295,
+     305,
+     "definition"
+    ],
+    [
+     306,
+     311,
+     "lists"
+    ],
+    [
+     312,
+     314,
+     "in"
+    ],
+    [
+     315,
+     318,
+     "the"
+    ],
+    [
+     319,
+     327,
+     "original"
+    ],
+    [
+     328,
+     331,
+     "may"
+    ],
+    [
+     332,
+     336,
+     "read"
+    ],
+    [
+     337,
+     345,
+     "linearly"
+    ],
+    [
+     346,
+     351,
+     "here;"
+    ],
+    [
+     352,
+     357,
+     "check"
+    ],
+    [
+     358,
+     365,
+     "against"
+    ],
+    [
+     366,
+     369,
+     "the"
+    ],
+    [
+     370,
+     373,
+     "PDF"
+    ],
+    [
+     374,
+     380,
      "before"
     ],
     [
-     508,
-     517,
+     381,
+     388,
+     "relying"
+    ],
+    [
+     389,
+     391,
+     "on"
+    ],
+    [
+     392,
+     395,
+     "any"
+    ],
+    [
+     396,
+     402,
+     "table."
+    ],
+    [
+     403,
+     407,
+     "This"
+    ],
+    [
+     408,
+     410,
+     "is"
+    ],
+    [
+     411,
+     412,
+     "a"
+    ],
+    [
+     413,
+     419,
+     "public"
+    ],
+    [
+     420,
+     427,
+     "product"
+    ],
+    [
+     428,
+     435,
+     "wording"
+    ],
+    [
+     436,
+     437,
+     "/"
+    ],
+    [
+     438,
+     447,
+     "template,"
+    ],
+    [
+     448,
+     451,
+     "not"
+    ],
+    [
+     452,
+     453,
+     "a"
+    ],
+    [
+     454,
+     462,
+     "customer"
+    ],
+    [
+     463,
+     471,
+     "document"
+    ],
+    [
+     472,
+     473,
+     "—"
+    ],
+    [
+     474,
+     476,
+     "it"
+    ],
+    [
+     477,
+     485,
+     "contains"
+    ],
+    [
+     486,
+     488,
+     "no"
+    ],
+    [
+     489,
+     501,
+     "policyholder"
+    ],
+    [
+     502,
+     504,
+     "or"
+    ],
+    [
+     505,
+     513,
+     "borrower"
+    ],
+    [
+     514,
+     519,
+     "data."
+    ],
+    [
+     520,
+     522,
+     "If"
+    ],
+    [
+     523,
+     526,
+     "the"
+    ],
+    [
+     527,
+     531,
+     "demo"
+    ],
+    [
+     532,
+     538,
+     "should"
+    ],
+    [
+     539,
+     542,
+     "not"
+    ],
+    [
+     543,
+     547,
+     "show"
+    ],
+    [
+     548,
+     549,
+     "a"
+    ],
+    [
+     550,
+     556,
+     "brand,"
+    ],
+    [
+     557,
+     564,
+     "replace"
+    ],
+    [
+     565,
+     568,
+     "the"
+    ],
+    [
+     569,
+     575,
+     "issuer"
+    ],
+    [
+     576,
+     580,
+     "name"
+    ],
+    [
+     581,
+     585,
+     "with"
+    ],
+    [
+     586,
+     587,
+     "a"
+    ],
+    [
+     588,
+     599,
+     "placeholder"
+    ],
+    [
+     600,
+     606,
+     "before"
+    ],
+    [
+     607,
+     616,
      "chunking."
     ]
    ],
    "kind": "body"
   },
   {
-   "id": "sec-1-p16-s1",
-   "index": 13,
+   "id": "sec-1-p15-s1",
+   "index": 14,
    "section": 1,
    "section_title": "Two Wheeler Loan Agreement",
    "subsection": null,
@@ -2022,8 +2094,8 @@
    "kind": "body"
   },
   {
-   "id": "sec-1-p16-s2",
-   "index": 14,
+   "id": "sec-1-p15-s2",
+   "index": 15,
    "section": 1,
    "section_title": "Two Wheeler Loan Agreement",
    "subsection": null,
@@ -2518,8 +2590,8 @@
    "kind": "body"
   },
   {
-   "id": "sec-1-p16-s3",
-   "index": 15,
+   "id": "sec-1-p15-s3",
+   "index": 16,
    "section": 1,
    "section_title": "Two Wheeler Loan Agreement",
    "subsection": null,
@@ -2977,8 +3049,8 @@
    "kind": "body"
   },
   {
-   "id": "sec-1-p17",
-   "index": 16,
+   "id": "sec-1-p16",
+   "index": 17,
    "section": 1,
    "section_title": "Two Wheeler Loan Agreement",
    "subsection": null,
@@ -3490,8 +3562,8 @@
    "kind": "body"
   },
   {
-   "id": "sec-1-p18",
-   "index": 17,
+   "id": "sec-1-p17",
+   "index": 18,
    "section": 1,
    "section_title": "Two Wheeler Loan Agreement",
    "subsection": null,
@@ -3793,8 +3865,8 @@
    "kind": "body"
   },
   {
-   "id": "sec-1-p19",
-   "index": 18,
+   "id": "sec-1-p18",
+   "index": 19,
    "section": 1,
    "section_title": "Two Wheeler Loan Agreement",
    "subsection": null,
@@ -3878,7 +3950,7 @@
   },
   {
    "id": "sec-a1",
-   "index": 19,
+   "index": 20,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -3925,7 +3997,7 @@
   },
   {
    "id": "sec-a1-p1",
-   "index": 20,
+   "index": 21,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -4084,7 +4156,7 @@
   },
   {
    "id": "sec-a1-p2",
-   "index": 21,
+   "index": 22,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -4363,7 +4435,7 @@
   },
   {
    "id": "sec-a1-p3",
-   "index": 22,
+   "index": 23,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -4502,7 +4574,7 @@
   },
   {
    "id": "sec-a1-p4",
-   "index": 23,
+   "index": 24,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -4701,7 +4773,7 @@
   },
   {
    "id": "sec-a1-p5",
-   "index": 24,
+   "index": 25,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -4945,7 +5017,7 @@
   },
   {
    "id": "sec-a1-p6",
-   "index": 25,
+   "index": 26,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -5144,7 +5216,7 @@
   },
   {
    "id": "sec-a1-p8",
-   "index": 26,
+   "index": 27,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -5408,7 +5480,7 @@
   },
   {
    "id": "sec-a1-p9",
-   "index": 27,
+   "index": 28,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -5707,7 +5779,7 @@
   },
   {
    "id": "sec-a1-p10",
-   "index": 28,
+   "index": 29,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -5901,7 +5973,7 @@
   },
   {
    "id": "sec-a1-p11",
-   "index": 29,
+   "index": 30,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -6070,7 +6142,7 @@
   },
   {
    "id": "sec-a1-p12",
-   "index": 30,
+   "index": 31,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -6219,7 +6291,7 @@
   },
   {
    "id": "sec-a1-p13",
-   "index": 31,
+   "index": 32,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -6562,7 +6634,7 @@
   },
   {
    "id": "sec-a1-p15",
-   "index": 32,
+   "index": 33,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -6806,7 +6878,7 @@
   },
   {
    "id": "sec-a1-p16",
-   "index": 33,
+   "index": 34,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -7095,7 +7167,7 @@
   },
   {
    "id": "sec-a1-p18",
-   "index": 34,
+   "index": 35,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -7294,7 +7366,7 @@
   },
   {
    "id": "sec-a1-p19",
-   "index": 35,
+   "index": 36,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -7571,7 +7643,7 @@
   },
   {
    "id": "sec-a1-p21",
-   "index": 36,
+   "index": 37,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -7965,7 +8037,7 @@
   },
   {
    "id": "sec-a2",
-   "index": 37,
+   "index": 38,
    "section": 3,
    "section_title": "LOAN AMOUNT AND INTEREST",
    "subsection": null,
@@ -8017,7 +8089,7 @@
   },
   {
    "id": "sec-a2-2-1",
-   "index": 38,
+   "index": 39,
    "section": 4,
    "section_title": "Amount of loan:",
    "subsection": null,
@@ -8064,7 +8136,7 @@
   },
   {
    "id": "sec-a2-2-1-p1",
-   "index": 39,
+   "index": 40,
    "section": 4,
    "section_title": "Amount of loan:",
    "subsection": null,
@@ -8502,7 +8574,7 @@
   },
   {
    "id": "sec-a2-2-2",
-   "index": 40,
+   "index": 41,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -8539,7 +8611,7 @@
   },
   {
    "id": "sec-a2-2-2-a",
-   "index": 41,
+   "index": 42,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -9370,7 +9442,7 @@
   },
   {
    "id": "sec-a2-2-2-b",
-   "index": 42,
+   "index": 43,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -9670,7 +9742,7 @@
   },
   {
    "id": "sec-a2-2-2-c",
-   "index": 43,
+   "index": 44,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -10279,7 +10351,7 @@
   },
   {
    "id": "sec-a2-2-2-d",
-   "index": 44,
+   "index": 45,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -10693,7 +10765,7 @@
   },
   {
    "id": "sec-a2-2-2-p1",
-   "index": 45,
+   "index": 46,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -11042,7 +11114,7 @@
   },
   {
    "id": "sec-a2-2-2-p1-f",
-   "index": 46,
+   "index": 47,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -11277,7 +11349,7 @@
   },
   {
    "id": "sec-a2-2-2-p1-g",
-   "index": 47,
+   "index": 48,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -11587,7 +11659,7 @@
   },
   {
    "id": "sec-a2-2-2-p2",
-   "index": 48,
+   "index": 49,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -12078,7 +12150,7 @@
   },
   {
    "id": "sec-a2-2-2-p3-s1",
-   "index": 49,
+   "index": 50,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -12849,7 +12921,7 @@
   },
   {
    "id": "sec-a2-2-2-p3-s2",
-   "index": 50,
+   "index": 51,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -12983,7 +13055,7 @@
   },
   {
    "id": "sec-a2-2-2-p4",
-   "index": 51,
+   "index": 52,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -13197,7 +13269,7 @@
   },
   {
    "id": "sec-a2-2-4",
-   "index": 52,
+   "index": 53,
    "section": 6,
    "section_title": "Term of the Loan:",
    "subsection": null,
@@ -13249,7 +13321,7 @@
   },
   {
    "id": "sec-a2-2-4-p1",
-   "index": 53,
+   "index": 54,
    "section": 6,
    "section_title": "Term of the Loan:",
    "subsection": null,
@@ -13343,7 +13415,7 @@
   },
   {
    "id": "sec-a2-2-5",
-   "index": 54,
+   "index": 55,
    "section": 7,
    "section_title": "Terminal Dates for Disbursements:",
    "subsection": null,
@@ -13395,7 +13467,7 @@
   },
   {
    "id": "sec-a2-2-5-p1",
-   "index": 55,
+   "index": 56,
    "section": 7,
    "section_title": "Terminal Dates for Disbursements:",
    "subsection": null,
@@ -13749,7 +13821,7 @@
   },
   {
    "id": "sec-a3",
-   "index": 56,
+   "index": 57,
    "section": 8,
    "section_title": "REPAYMENT/PREPAYMENT",
    "subsection": null,
@@ -13786,7 +13858,7 @@
   },
   {
    "id": "sec-a3-3-1",
-   "index": 57,
+   "index": 58,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -13823,7 +13895,7 @@
   },
   {
    "id": "sec-a3-3-1-a-s1",
-   "index": 58,
+   "index": 59,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -14544,7 +14616,7 @@
   },
   {
    "id": "sec-a3-3-1-a-s2",
-   "index": 59,
+   "index": 60,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -14829,7 +14901,7 @@
   },
   {
    "id": "sec-a3-3-1-b",
-   "index": 60,
+   "index": 61,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -15159,7 +15231,7 @@
   },
   {
    "id": "sec-a3-3-1-c-s1",
-   "index": 61,
+   "index": 62,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -15943,7 +16015,7 @@
   },
   {
    "id": "sec-a3-3-1-c-s2",
-   "index": 62,
+   "index": 63,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -16536,7 +16608,7 @@
   },
   {
    "id": "sec-a3-3-1-d",
-   "index": 63,
+   "index": 64,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -16811,7 +16883,7 @@
   },
   {
    "id": "sec-a3-3-1-p1",
-   "index": 64,
+   "index": 65,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -17229,7 +17301,7 @@
   },
   {
    "id": "sec-a3-3-1-p2",
-   "index": 65,
+   "index": 66,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -17536,7 +17608,7 @@
   },
   {
    "id": "sec-a3-3-1-p2-e",
-   "index": 66,
+   "index": 67,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -17791,7 +17863,7 @@
   },
   {
    "id": "sec-a3-3-1-p2-f",
-   "index": 67,
+   "index": 68,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -18265,7 +18337,7 @@
   },
   {
    "id": "sec-a3-3-1-p3",
-   "index": 68,
+   "index": 69,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -18464,7 +18536,7 @@
   },
   {
    "id": "sec-a3-3-1-p3-g",
-   "index": 69,
+   "index": 70,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -18979,7 +19051,7 @@
   },
   {
    "id": "sec-a3-3-1-p3-h",
-   "index": 70,
+   "index": 71,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -19334,7 +19406,7 @@
   },
   {
    "id": "sec-a3-3-1-p3-i",
-   "index": 71,
+   "index": 72,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -19821,7 +19893,7 @@
   },
   {
    "id": "sec-a3-3-1-p3-3",
-   "index": 72,
+   "index": 73,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -19960,7 +20032,7 @@
   },
   {
    "id": "sec-a3-3-1-p3-3-j",
-   "index": 73,
+   "index": 74,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -20400,7 +20472,7 @@
   },
   {
    "id": "sec-a3-3-1-p3-3-k",
-   "index": 74,
+   "index": 75,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -20933,7 +21005,7 @@
   },
   {
    "id": "sec-a3-3-2",
-   "index": 75,
+   "index": 76,
    "section": 10,
    "section_title": "Cheques/ECS/SI/NACH:",
    "subsection": null,
@@ -20970,7 +21042,7 @@
   },
   {
    "id": "sec-a3-3-2-p1-s1",
-   "index": 76,
+   "index": 77,
    "section": 10,
    "section_title": "Cheques/ECS/SI/NACH:",
    "subsection": null,
@@ -21711,7 +21783,7 @@
   },
   {
    "id": "sec-a3-3-2-p1-s2",
-   "index": 77,
+   "index": 78,
    "section": 10,
    "section_title": "Cheques/ECS/SI/NACH:",
    "subsection": null,
@@ -22434,7 +22506,7 @@
   },
   {
    "id": "sec-a3-3-2-p1-s3",
-   "index": 78,
+   "index": 79,
    "section": 10,
    "section_title": "Cheques/ECS/SI/NACH:",
    "subsection": null,
@@ -22836,7 +22908,7 @@
   },
   {
    "id": "sec-a3-3-2-p2-s1",
-   "index": 79,
+   "index": 80,
    "section": 10,
    "section_title": "Cheques/ECS/SI/NACH:",
    "subsection": null,
@@ -23010,7 +23082,7 @@
   },
   {
    "id": "sec-a3-3-2-p2-s2",
-   "index": 80,
+   "index": 81,
    "section": 10,
    "section_title": "Cheques/ECS/SI/NACH:",
    "subsection": null,
@@ -23764,7 +23836,7 @@
   },
   {
    "id": "sec-a3-3-2-p2-s3",
-   "index": 81,
+   "index": 82,
    "section": 10,
    "section_title": "Cheques/ECS/SI/NACH:",
    "subsection": null,
@@ -23993,7 +24065,7 @@
   },
   {
    "id": "sec-a3-3-3",
-   "index": 82,
+   "index": 83,
    "section": 11,
    "section_title": "Prepayment:",
    "subsection": null,
@@ -24030,7 +24102,7 @@
   },
   {
    "id": "sec-a3-3-3-p1",
-   "index": 83,
+   "index": 84,
    "section": 11,
    "section_title": "Prepayment:",
    "subsection": null,
@@ -24432,7 +24504,7 @@
   },
   {
    "id": "sec-a3-3-4",
-   "index": 84,
+   "index": 85,
    "section": 12,
    "section_title": "Delay in Payment:",
    "subsection": null,
@@ -24479,7 +24551,7 @@
   },
   {
    "id": "sec-a3-3-4-p1",
-   "index": 85,
+   "index": 86,
    "section": 12,
    "section_title": "Delay in Payment:",
    "subsection": null,
@@ -24921,7 +24993,7 @@
   },
   {
    "id": "sec-a3-3-5",
-   "index": 86,
+   "index": 87,
    "section": 13,
    "section_title": "Liability to be Joint and Several:",
    "subsection": null,
@@ -24983,7 +25055,7 @@
   },
   {
    "id": "sec-a3-3-5-p1",
-   "index": 87,
+   "index": 88,
    "section": 13,
    "section_title": "Liability to be Joint and Several:",
    "subsection": null,
@@ -25252,7 +25324,7 @@
   },
   {
    "id": "sec-a3-3-5-p1-3-6",
-   "index": 88,
+   "index": 89,
    "section": 13,
    "section_title": "Liability to be Joint and Several:",
    "subsection": null,
@@ -25737,7 +25809,7 @@
   },
   {
    "id": "sec-a4",
-   "index": 89,
+   "index": 90,
    "section": 14,
    "section_title": "CONDITION PRECEDENT TO DISBURSEMENT OF THE LOAN",
    "subsection": null,
@@ -25804,7 +25876,7 @@
   },
   {
    "id": "sec-a4-4-1",
-   "index": 90,
+   "index": 91,
    "section": 14,
    "section_title": "CONDITION PRECEDENT TO DISBURSEMENT OF THE LOAN",
    "subsection": null,
@@ -26267,7 +26339,7 @@
   },
   {
    "id": "sec-a4-4-1-b",
-   "index": 91,
+   "index": 92,
    "section": 14,
    "section_title": "CONDITION PRECEDENT TO DISBURSEMENT OF THE LOAN",
    "subsection": null,
@@ -26736,7 +26808,7 @@
   },
   {
    "id": "sec-a4-4-1-d",
-   "index": 92,
+   "index": 93,
    "section": 14,
    "section_title": "CONDITION PRECEDENT TO DISBURSEMENT OF THE LOAN",
    "subsection": null,
@@ -27090,7 +27162,7 @@
   },
   {
    "id": "sec-a4-4-1-f",
-   "index": 93,
+   "index": 94,
    "section": 14,
    "section_title": "CONDITION PRECEDENT TO DISBURSEMENT OF THE LOAN",
    "subsection": null,
@@ -27629,7 +27701,7 @@
   },
   {
    "id": "sec-a4-4-1-g",
-   "index": 94,
+   "index": 95,
    "section": 14,
    "section_title": "CONDITION PRECEDENT TO DISBURSEMENT OF THE LOAN",
    "subsection": null,
@@ -27824,7 +27896,7 @@
   },
   {
    "id": "sec-a5",
-   "index": 95,
+   "index": 96,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -27861,7 +27933,7 @@
   },
   {
    "id": "sec-a5-5-1",
-   "index": 96,
+   "index": 97,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -28466,7 +28538,7 @@
   },
   {
    "id": "sec-a5-p1",
-   "index": 97,
+   "index": 98,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -29050,11 +29122,18 @@
      "attachment."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p1-5-2-s1",
-   "index": 98,
+   "index": 99,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -29711,11 +29790,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 5(5)(2)-s1"
+   "path": "Article 5(5)(2)-s1",
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p1-5-2-s2",
-   "index": 99,
+   "index": 100,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -30165,11 +30251,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 5(5)(2)-s2"
+   "path": "Article 5(5)(2)-s2",
+   "tags": {
+    "tags": [
+     "deadline"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p1-5-3",
-   "index": 100,
+   "index": 101,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -30480,11 +30573,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 5(5)(3)"
+   "path": "Article 5(5)(3)",
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p1-5-4-s1",
-   "index": 101,
+   "index": 102,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -31074,11 +31174,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 5(5)(4)-s1"
+   "path": "Article 5(5)(4)-s1",
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p1-5-4-s2",
-   "index": 102,
+   "index": 103,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -31513,11 +31620,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 5(5)(4)-s2"
+   "path": "Article 5(5)(4)-s2",
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p1-5-5",
-   "index": 103,
+   "index": 104,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -32057,11 +32171,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 5(5)(5)"
+   "path": "Article 5(5)(5)",
+   "tags": {
+    "tags": [
+     "waiting_period"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p1-5-6",
-   "index": 104,
+   "index": 105,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -32282,11 +32403,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 5(5)(6)"
+   "path": "Article 5(5)(6)",
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p2",
-   "index": 105,
+   "index": 106,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -32511,11 +32639,18 @@
      "transit."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "contact"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p2-5-7-s1",
-   "index": 106,
+   "index": 107,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -33303,11 +33438,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 5(5)(7)-s1"
+   "path": "Article 5(5)(7)-s1",
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p2-5-7-s2",
-   "index": 107,
+   "index": 108,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -33468,11 +33610,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 5(5)(7)-s2"
+   "path": "Article 5(5)(7)-s2",
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p2-5-7-b",
-   "index": 108,
+   "index": 109,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -34022,11 +34171,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 5(p2)(5)(7)(b)"
+   "path": "Article 5(p2)(5)(7)(b)",
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p2-5-8-s1",
-   "index": 109,
+   "index": 110,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -34845,11 +35001,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 5(5)(8)-s1"
+   "path": "Article 5(5)(8)-s1",
+   "tags": {
+    "tags": [
+     "deadline"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p2-5-8-s2",
-   "index": 110,
+   "index": 111,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -35060,11 +35223,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 5(5)(8)-s2"
+   "path": "Article 5(5)(8)-s2",
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p2-5-8-b",
-   "index": 111,
+   "index": 112,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -35650,11 +35820,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 5(p2)(5)(8)(b)"
+   "path": "Article 5(p2)(5)(8)(b)",
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p2-5-8-c",
-   "index": 112,
+   "index": 113,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -35964,7 +36141,7 @@
   },
   {
    "id": "sec-a5-p2-5-9",
-   "index": 113,
+   "index": 114,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -36245,11 +36422,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 5(5)(9)"
+   "path": "Article 5(5)(9)",
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p2-5-10",
-   "index": 114,
+   "index": 115,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -36744,11 +36928,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 5(5)(10)"
+   "path": "Article 5(5)(10)",
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p2-5-11",
-   "index": 115,
+   "index": 116,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -37566,11 +37757,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 5(5)(11)"
+   "path": "Article 5(5)(11)",
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a5-p2-5-12",
-   "index": 116,
+   "index": 117,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -37894,7 +38092,7 @@
   },
   {
    "id": "sec-a5-p3",
-   "index": 117,
+   "index": 118,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -38491,7 +38689,7 @@
   },
   {
    "id": "sec-a5-p3-5-14",
-   "index": 118,
+   "index": 119,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -38861,7 +39059,7 @@
   },
   {
    "id": "sec-a5-p3-5-14-b",
-   "index": 119,
+   "index": 120,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -39315,7 +39513,7 @@
   },
   {
    "id": "sec-a5-p3-5-14-b-iii",
-   "index": 120,
+   "index": 121,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -39668,7 +39866,7 @@
   },
   {
    "id": "sec-a5-p3-5-15-s1",
-   "index": 121,
+   "index": 122,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -39863,7 +40061,7 @@
   },
   {
    "id": "sec-a5-p3-5-15-s2",
-   "index": 122,
+   "index": 123,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -40598,7 +40796,7 @@
   },
   {
    "id": "sec-a5-p3-5-15-s3",
-   "index": 123,
+   "index": 124,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -40718,7 +40916,7 @@
   },
   {
    "id": "sec-a5-p4-s1",
-   "index": 124,
+   "index": 125,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -41160,7 +41358,7 @@
   },
   {
    "id": "sec-a5-p4-s2",
-   "index": 125,
+   "index": 126,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -41599,7 +41797,7 @@
   },
   {
    "id": "sec-a5-p4-5-17",
-   "index": 126,
+   "index": 127,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -42014,7 +42212,7 @@
   },
   {
    "id": "sec-a5-p4-5-18-s1",
-   "index": 127,
+   "index": 128,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -42743,7 +42941,7 @@
   },
   {
    "id": "sec-a5-p4-5-18-s2",
-   "index": 128,
+   "index": 129,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -43341,7 +43539,7 @@
   },
   {
    "id": "sec-a5-p4-5-19",
-   "index": 129,
+   "index": 130,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -43631,7 +43829,7 @@
   },
   {
    "id": "sec-a6",
-   "index": 130,
+   "index": 131,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -43683,7 +43881,7 @@
   },
   {
    "id": "sec-a6-6-1",
-   "index": 131,
+   "index": 132,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -44148,7 +44346,7 @@
   },
   {
    "id": "sec-a6-6-1-b",
-   "index": 132,
+   "index": 133,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -44513,7 +44711,7 @@
   },
   {
    "id": "sec-a6-6-1-c",
-   "index": 133,
+   "index": 134,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -44812,7 +45010,7 @@
   },
   {
    "id": "sec-a6-6-1-e",
-   "index": 134,
+   "index": 135,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -45092,7 +45290,7 @@
   },
   {
    "id": "sec-a6-6-1-f",
-   "index": 135,
+   "index": 136,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -45367,7 +45565,7 @@
   },
   {
    "id": "sec-a6-6-1-g",
-   "index": 136,
+   "index": 137,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -45737,7 +45935,7 @@
   },
   {
    "id": "sec-a6-6-1-g-iii",
-   "index": 137,
+   "index": 138,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -46228,11 +46426,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 6(6)(1)(g)(iii)"
+   "path": "Article 6(6)(1)(g)(iii)",
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a6-6-1-i",
-   "index": 138,
+   "index": 139,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -46488,11 +46693,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 6(6)(1)(i)"
+   "path": "Article 6(6)(1)(i)",
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a6-6-1-j",
-   "index": 139,
+   "index": 140,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -46748,11 +46960,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 6(6)(1)(j)"
+   "path": "Article 6(6)(1)(j)",
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a6-6-1-k",
-   "index": 140,
+   "index": 141,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -47148,11 +47367,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 6(6)(1)(k)"
+   "path": "Article 6(6)(1)(k)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a6-6-1-l",
-   "index": 141,
+   "index": 142,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -47592,11 +47816,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 6(6)(1)(l)"
+   "path": "Article 6(6)(1)(l)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a6-6-1-n",
-   "index": 142,
+   "index": 143,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -47927,11 +48156,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 6(6)(1)(n)"
+   "path": "Article 6(6)(1)(n)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a6-6-1-o",
-   "index": 143,
+   "index": 144,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -48366,11 +48600,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 6(6)(1)(o)"
+   "path": "Article 6(6)(1)(o)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a6-6-1-p",
-   "index": 144,
+   "index": 145,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -48676,11 +48915,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 6(6)(1)(p)"
+   "path": "Article 6(6)(1)(p)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a6-6-1-q",
-   "index": 145,
+   "index": 146,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -49170,7 +49414,7 @@
   },
   {
    "id": "sec-a6-6-2-s1",
-   "index": 146,
+   "index": 147,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -49665,11 +49909,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 6(6)(2)-s1"
+   "path": "Article 6(6)(2)-s1",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a6-6-2-s2",
-   "index": 147,
+   "index": 148,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -50110,11 +50359,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 6(6)(2)-s2"
+   "path": "Article 6(6)(2)-s2",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a6-6-3",
-   "index": 148,
+   "index": 149,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -50410,11 +50664,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 6(6)(3)"
+   "path": "Article 6(6)(3)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a6-6-4",
-   "index": 149,
+   "index": 150,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -50909,11 +51168,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 6(6)(4)"
+   "path": "Article 6(6)(4)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a6-6-5",
-   "index": 150,
+   "index": 151,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -51188,11 +51452,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 6(6)(5)"
+   "path": "Article 6(6)(5)",
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a7",
-   "index": 151,
+   "index": 152,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -51244,7 +51515,7 @@
   },
   {
    "id": "sec-a7-7-1",
-   "index": 152,
+   "index": 153,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -51625,11 +51896,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 7(7)(1)"
+   "path": "Article 7(7)(1)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a7-7-1-b",
-   "index": 153,
+   "index": 154,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -51829,11 +52105,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 7(7)(1)(b)"
+   "path": "Article 7(7)(1)(b)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a7-p1",
-   "index": 154,
+   "index": 155,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -51958,11 +52239,16 @@
      "herein."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a7-p1-c",
-   "index": 155,
+   "index": 156,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -52462,11 +52748,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 7(p1)(c)"
+   "path": "Article 7(p1)(c)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a7-p1-e",
-   "index": 156,
+   "index": 157,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -52821,11 +53112,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 7(p1)(e)"
+   "path": "Article 7(p1)(e)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a7-p1-g",
-   "index": 157,
+   "index": 158,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -53136,11 +53432,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 7(p1)(g)"
+   "path": "Article 7(p1)(g)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a7-p1-h",
-   "index": 158,
+   "index": 159,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -53450,7 +53751,7 @@
   },
   {
    "id": "sec-a7-p1-i",
-   "index": 159,
+   "index": 160,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -53948,7 +54249,7 @@
   },
   {
    "id": "sec-a7-p1-l",
-   "index": 160,
+   "index": 161,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -54432,7 +54733,7 @@
   },
   {
    "id": "sec-a7-p1-m",
-   "index": 161,
+   "index": 162,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -54882,7 +55183,7 @@
   },
   {
    "id": "sec-a7-p1-n",
-   "index": 162,
+   "index": 163,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -55395,7 +55696,7 @@
   },
   {
    "id": "sec-a7-p1-q",
-   "index": 163,
+   "index": 164,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -56118,7 +56419,7 @@
   },
   {
    "id": "sec-a7-7-2",
-   "index": 164,
+   "index": 165,
    "section": 18,
    "section_title": "NEGATIVE COVENANTS:",
    "subsection": null,
@@ -56160,7 +56461,7 @@
   },
   {
    "id": "sec-a7-7-2-p1",
-   "index": 165,
+   "index": 166,
    "section": 18,
    "section_title": "NEGATIVE COVENANTS:",
    "subsection": null,
@@ -56613,7 +56914,7 @@
   },
   {
    "id": "sec-a7-7-2-p1-c",
-   "index": 166,
+   "index": 167,
    "section": 18,
    "section_title": "NEGATIVE COVENANTS:",
    "subsection": null,
@@ -56767,7 +57068,7 @@
   },
   {
    "id": "sec-a8",
-   "index": 167,
+   "index": 168,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -56814,7 +57115,7 @@
   },
   {
    "id": "sec-a8-8-1",
-   "index": 168,
+   "index": 169,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -57139,7 +57440,7 @@
   },
   {
    "id": "sec-a8-p1",
-   "index": 169,
+   "index": 170,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -57383,7 +57684,7 @@
   },
   {
    "id": "sec-a8-p2",
-   "index": 170,
+   "index": 171,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -57706,7 +58007,7 @@
   },
   {
    "id": "sec-a8-p3",
-   "index": 171,
+   "index": 172,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -57940,7 +58241,7 @@
   },
   {
    "id": "sec-a8-p4",
-   "index": 172,
+   "index": 173,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -58313,7 +58614,7 @@
   },
   {
    "id": "sec-a8-p5",
-   "index": 173,
+   "index": 174,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -58637,7 +58938,7 @@
   },
   {
    "id": "sec-a8-p6",
-   "index": 174,
+   "index": 175,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -59230,7 +59531,7 @@
   },
   {
    "id": "sec-a8-p7",
-   "index": 175,
+   "index": 176,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -59954,7 +60255,7 @@
   },
   {
    "id": "sec-a8-p8",
-   "index": 176,
+   "index": 177,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -60083,7 +60384,7 @@
   },
   {
    "id": "sec-a8-p9",
-   "index": 177,
+   "index": 178,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -60382,7 +60683,7 @@
   },
   {
    "id": "sec-a8-p10",
-   "index": 178,
+   "index": 179,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -60530,7 +60831,7 @@
   },
   {
    "id": "sec-a8-p11",
-   "index": 179,
+   "index": 180,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -60899,7 +61200,7 @@
   },
   {
    "id": "sec-a8-p12",
-   "index": 180,
+   "index": 181,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -61093,11 +61394,16 @@
      "Repudiation:"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a8-p13",
-   "index": 181,
+   "index": 182,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -61222,11 +61528,16 @@
      "Agreement;"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a8-p14",
-   "index": 182,
+   "index": 183,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -61421,11 +61732,16 @@
      "Credit."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a8-p15",
-   "index": 183,
+   "index": 184,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -62020,11 +62336,16 @@
      "entity)"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a8-p16",
-   "index": 184,
+   "index": 185,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -62348,11 +62669,16 @@
      "Credit;"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a8-p16-ii",
-   "index": 185,
+   "index": 186,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -62913,11 +63239,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 8(p16)(ii)"
+   "path": "Article 8(p16)(ii)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a8-p16-iii",
-   "index": 186,
+   "index": 187,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -63372,11 +63703,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 8(p16)(iii)"
+   "path": "Article 8(p16)(iii)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a8-p16-vi",
-   "index": 187,
+   "index": 188,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -63760,11 +64096,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 8(p16)(vi)"
+   "path": "Article 8(p16)(vi)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a8-p17-ix",
-   "index": 188,
+   "index": 189,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -63850,11 +64191,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 8(p17)(ix)"
+   "path": "Article 8(p17)(ix)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a9",
-   "index": 189,
+   "index": 190,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -63911,7 +64257,7 @@
   },
   {
    "id": "sec-a9-9-1",
-   "index": 190,
+   "index": 191,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -64132,11 +64478,19 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 9(9)(1)"
+   "path": "Article 9(9)(1)",
+   "tags": {
+    "tags": [
+     "amount",
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a9-9-1-i-s1",
-   "index": 191,
+   "index": 192,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -64867,11 +65221,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 9(9)(1)(i)-s1"
+   "path": "Article 9(9)(1)(i)-s1",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a9-9-1-i-s2",
-   "index": 192,
+   "index": 193,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -65107,11 +65466,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 9(9)(1)(i)-s2"
+   "path": "Article 9(9)(1)(i)-s2",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a9-9-1-a",
-   "index": 193,
+   "index": 194,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -65643,11 +66007,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 9(9)(1)(a)"
+   "path": "Article 9(9)(1)(a)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a9-9-1-c-ii",
-   "index": 194,
+   "index": 195,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -65772,11 +66141,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 9(9)(1)(c)(ii)"
+   "path": "Article 9(9)(1)(c)(ii)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a9-9-1-c-iii",
-   "index": 195,
+   "index": 196,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -66206,11 +66580,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 9(9)(1)(c)(iii)"
+   "path": "Article 9(9)(1)(c)(iii)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a9-9-1-c-iv",
-   "index": 196,
+   "index": 197,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -66591,11 +66970,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 9(9)(1)(c)(iv)"
+   "path": "Article 9(9)(1)(c)(iv)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a9-9-1-c-v",
-   "index": 197,
+   "index": 198,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -67348,11 +67732,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 9(9)(1)(c)(v)"
+   "path": "Article 9(9)(1)(c)(v)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a9-p1",
-   "index": 198,
+   "index": 199,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -67682,11 +68071,16 @@
      "actions."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a9-p2",
-   "index": 199,
+   "index": 200,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -67921,11 +68315,16 @@
      "Assets"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a9-p2-vi-s1",
-   "index": 200,
+   "index": 201,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -68685,11 +69084,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 9(p2)(vi)-s1"
+   "path": "Article 9(p2)(vi)-s1",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a9-p2-vi-s2",
-   "index": 201,
+   "index": 202,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -69508,7 +69912,7 @@
   },
   {
    "id": "sec-a9-p2-vii-s1",
-   "index": 202,
+   "index": 203,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -70323,7 +70727,7 @@
   },
   {
    "id": "sec-a9-p2-vii-s2",
-   "index": 203,
+   "index": 204,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -70443,7 +70847,7 @@
   },
   {
    "id": "sec-a10",
-   "index": 204,
+   "index": 205,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -70485,7 +70889,7 @@
   },
   {
    "id": "sec-a10-10-1",
-   "index": 205,
+   "index": 206,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -70988,7 +71392,7 @@
   },
   {
    "id": "sec-a10-10-1-iii",
-   "index": 206,
+   "index": 207,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -71308,7 +71712,7 @@
   },
   {
    "id": "sec-a10-10-1-iv",
-   "index": 207,
+   "index": 208,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -71812,7 +72216,7 @@
   },
   {
    "id": "sec-a10-10-1-vi",
-   "index": 208,
+   "index": 209,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -72171,7 +72575,7 @@
   },
   {
    "id": "sec-a10-10-1-vii",
-   "index": 209,
+   "index": 210,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -72416,7 +72820,7 @@
   },
   {
    "id": "sec-a10-10-1-viii",
-   "index": 210,
+   "index": 211,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -72841,7 +73245,7 @@
   },
   {
    "id": "sec-a10-10-2",
-   "index": 211,
+   "index": 212,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -73316,7 +73720,7 @@
   },
   {
    "id": "sec-a10-p1",
-   "index": 212,
+   "index": 213,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -73470,7 +73874,7 @@
   },
   {
    "id": "sec-a10-p1-10-4",
-   "index": 213,
+   "index": 214,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -73735,7 +74139,7 @@
   },
   {
    "id": "sec-a11",
-   "index": 214,
+   "index": 215,
    "section": 22,
    "section_title": "CROSS COLLATERAL",
    "subsection": null,
@@ -73777,7 +74181,7 @@
   },
   {
    "id": "sec-a11-p1",
-   "index": 215,
+   "index": 216,
    "section": 22,
    "section_title": "CROSS COLLATERAL",
    "subsection": null,
@@ -74170,7 +74574,7 @@
   },
   {
    "id": "sec-a11-23",
-   "index": 216,
+   "index": 217,
    "section": 23,
    "section_title": "REVIVAL OF AGREEMENT",
    "subsection": null,
@@ -74216,7 +74620,7 @@
   },
   {
    "id": "sec-a11-23-p1",
-   "index": 217,
+   "index": 218,
    "section": 23,
    "section_title": "REVIVAL OF AGREEMENT",
    "subsection": null,
@@ -74829,7 +75233,7 @@
   },
   {
    "id": "sec-a13",
-   "index": 218,
+   "index": 219,
    "section": 24,
    "section_title": "SUBORDINATE DEBT",
    "subsection": null,
@@ -74871,7 +75275,7 @@
   },
   {
    "id": "sec-a13-p1",
-   "index": 219,
+   "index": 220,
    "section": 24,
    "section_title": "SUBORDINATE DEBT",
    "subsection": null,
@@ -75404,7 +75808,7 @@
   },
   {
    "id": "sec-a14",
-   "index": 220,
+   "index": 221,
    "section": 25,
    "section_title": "SMFG INDIA CREDIT’S STATEMENTS OF ACCOUNTS TO BE ACCEPTED BY",
    "subsection": null,
@@ -75486,7 +75890,7 @@
   },
   {
    "id": "sec-a14-26",
-   "index": 221,
+   "index": 222,
    "section": 26,
    "section_title": "BORROWER(S)",
    "subsection": null,
@@ -75522,7 +75926,7 @@
   },
   {
    "id": "sec-a14-26-p1",
-   "index": 222,
+   "index": 223,
    "section": 26,
    "section_title": "BORROWER(S)",
    "subsection": null,
@@ -75900,7 +76304,7 @@
   },
   {
    "id": "sec-a15",
-   "index": 223,
+   "index": 224,
    "section": 27,
    "section_title": "SET OFF AND LIEN",
    "subsection": null,
@@ -75952,7 +76356,7 @@
   },
   {
    "id": "sec-a15-15-1",
-   "index": 224,
+   "index": 225,
    "section": 27,
    "section_title": "SET OFF AND LIEN",
    "subsection": null,
@@ -76577,7 +76981,7 @@
   },
   {
    "id": "sec-a15-15-2",
-   "index": 225,
+   "index": 226,
    "section": 27,
    "section_title": "SET OFF AND LIEN",
    "subsection": null,
@@ -76877,7 +77281,7 @@
   },
   {
    "id": "sec-a15-15-3",
-   "index": 226,
+   "index": 227,
    "section": 27,
    "section_title": "SET OFF AND LIEN",
    "subsection": null,
@@ -77477,7 +77881,7 @@
   },
   {
    "id": "sec-a16",
-   "index": 227,
+   "index": 228,
    "section": 28,
    "section_title": "ASSIGNMENT/TRANSFER OF PORTFOLIO/SECUERTISATION",
    "subsection": null,
@@ -77524,7 +77928,7 @@
   },
   {
    "id": "sec-a16-p1-s1",
-   "index": 228,
+   "index": 229,
    "section": 28,
    "section_title": "ASSIGNMENT/TRANSFER OF PORTFOLIO/SECUERTISATION",
    "subsection": null,
@@ -78343,7 +78747,7 @@
   },
   {
    "id": "sec-a16-p1-s2",
-   "index": 229,
+   "index": 230,
    "section": 28,
    "section_title": "ASSIGNMENT/TRANSFER OF PORTFOLIO/SECUERTISATION",
    "subsection": null,
@@ -78657,7 +79061,7 @@
   },
   {
    "id": "sec-a17",
-   "index": 230,
+   "index": 231,
    "section": 29,
    "section_title": "SERVICE PROVIDER",
    "subsection": null,
@@ -78699,7 +79103,7 @@
   },
   {
    "id": "sec-a17-p1-s1",
-   "index": 231,
+   "index": 232,
    "section": 29,
    "section_title": "SERVICE PROVIDER",
    "subsection": null,
@@ -79433,7 +79837,7 @@
   },
   {
    "id": "sec-a17-p1-s2",
-   "index": 232,
+   "index": 233,
    "section": 29,
    "section_title": "SERVICE PROVIDER",
    "subsection": null,
@@ -80067,7 +80471,7 @@
   },
   {
    "id": "sec-a18",
-   "index": 233,
+   "index": 234,
    "section": 30,
    "section_title": "TERMINATION",
    "subsection": null,
@@ -80104,7 +80508,7 @@
   },
   {
    "id": "sec-a18-p1",
-   "index": 234,
+   "index": 235,
    "section": 30,
    "section_title": "TERMINATION",
    "subsection": null,
@@ -80503,7 +80907,7 @@
   },
   {
    "id": "sec-a19",
-   "index": 235,
+   "index": 236,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -80550,7 +80954,7 @@
   },
   {
    "id": "sec-a19-19-1-s1",
-   "index": 236,
+   "index": 237,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -81285,7 +81689,7 @@
   },
   {
    "id": "sec-a19-19-1-s2",
-   "index": 237,
+   "index": 238,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -81985,7 +82389,7 @@
   },
   {
    "id": "sec-a19-19-1-ii",
-   "index": 238,
+   "index": 239,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -82462,7 +82866,7 @@
   },
   {
    "id": "sec-a19-19-1-a",
-   "index": 239,
+   "index": 240,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -82861,7 +83265,7 @@
   },
   {
    "id": "sec-a19-19-1-c",
-   "index": 240,
+   "index": 241,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -83231,7 +83635,7 @@
   },
   {
    "id": "sec-a19-19-1-c-iv-s1",
-   "index": 241,
+   "index": 242,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -83951,7 +84355,7 @@
   },
   {
    "id": "sec-a19-19-1-c-iv-s2",
-   "index": 242,
+   "index": 243,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -84131,7 +84535,7 @@
   },
   {
    "id": "sec-a19-19-1-c-iv-s3",
-   "index": 243,
+   "index": 244,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -84471,7 +84875,7 @@
   },
   {
    "id": "sec-a19-19-1-c-v-s1",
-   "index": 244,
+   "index": 245,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -85220,7 +85624,7 @@
   },
   {
    "id": "sec-a19-19-1-c-v-s2",
-   "index": 245,
+   "index": 246,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -85938,7 +86342,7 @@
   },
   {
    "id": "sec-a19-19-1-c-vi",
-   "index": 246,
+   "index": 247,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -86408,7 +86812,7 @@
   },
   {
    "id": "sec-a20",
-   "index": 247,
+   "index": 248,
    "section": 32,
    "section_title": "CONTINUING SECURITY",
    "subsection": null,
@@ -86450,7 +86854,7 @@
   },
   {
    "id": "sec-a20-p1",
-   "index": 248,
+   "index": 249,
    "section": 32,
    "section_title": "CONTINUING SECURITY",
    "subsection": null,
@@ -86759,7 +87163,7 @@
   },
   {
    "id": "sec-a21",
-   "index": 249,
+   "index": 250,
    "section": 33,
    "section_title": "MISCELLANEOUS",
    "subsection": null,
@@ -86796,7 +87200,7 @@
   },
   {
    "id": "sec-a21-21-1",
-   "index": 250,
+   "index": 251,
    "section": 34,
    "section_title": "Notice:",
    "subsection": null,
@@ -86833,7 +87237,7 @@
   },
   {
    "id": "sec-a21-21-1-p1-a",
-   "index": 251,
+   "index": 252,
    "section": 34,
    "section_title": "Notice:",
    "subsection": null,
@@ -87421,7 +87825,7 @@
   },
   {
    "id": "sec-a21-21-1-p2",
-   "index": 252,
+   "index": 253,
    "section": 34,
    "section_title": "Notice:",
    "subsection": null,
@@ -87530,7 +87934,7 @@
   },
   {
    "id": "sec-a21-21-2",
-   "index": 253,
+   "index": 254,
    "section": 35,
    "section_title": "Benefits:",
    "subsection": null,
@@ -87567,7 +87971,7 @@
   },
   {
    "id": "sec-a21-21-2-p1-s1",
-   "index": 254,
+   "index": 255,
    "section": 35,
    "section_title": "Benefits:",
    "subsection": null,
@@ -88231,7 +88635,7 @@
   },
   {
    "id": "sec-a21-21-2-p1-s2",
-   "index": 255,
+   "index": 256,
    "section": 35,
    "section_title": "Benefits:",
    "subsection": null,
@@ -88465,7 +88869,7 @@
   },
   {
    "id": "sec-a21-21-3",
-   "index": 256,
+   "index": 257,
    "section": 36,
    "section_title": "Waiver",
    "subsection": null,
@@ -88502,7 +88906,7 @@
   },
   {
    "id": "sec-a21-21-3-p1-s1",
-   "index": 257,
+   "index": 258,
    "section": 36,
    "section_title": "Waiver",
    "subsection": null,
@@ -89231,11 +89635,18 @@
      "forth."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-3-p1-s2",
-   "index": 258,
+   "index": 259,
    "section": 36,
    "section_title": "Waiver",
    "subsection": null,
@@ -89430,11 +89841,18 @@
      "borrower."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "waiting_period"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-3-p1-21-4",
-   "index": 259,
+   "index": 260,
    "section": 36,
    "section_title": "Waiver",
    "subsection": null,
@@ -89565,11 +89983,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 21.21.3(21)(4)"
+   "path": "Article 21.21.3(21)(4)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-5",
-   "index": 260,
+   "index": 261,
    "section": 37,
    "section_title": "Partial Invalidity:",
    "subsection": null,
@@ -89611,7 +90034,7 @@
   },
   {
    "id": "sec-a21-21-5-p1",
-   "index": 261,
+   "index": 262,
    "section": 37,
    "section_title": "Partial Invalidity:",
    "subsection": null,
@@ -90016,11 +90439,16 @@
      "Agreement"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-6",
-   "index": 262,
+   "index": 263,
    "section": 38,
    "section_title": "Overriding Effect:",
    "subsection": null,
@@ -90062,7 +90490,7 @@
   },
   {
    "id": "sec-a21-21-6-p1",
-   "index": 263,
+   "index": 264,
    "section": 38,
    "section_title": "Overriding Effect:",
    "subsection": null,
@@ -90627,11 +91055,16 @@
      "prevail."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-7",
-   "index": 264,
+   "index": 265,
    "section": 39,
    "section_title": "Costs:",
    "subsection": null,
@@ -90668,7 +91101,7 @@
   },
   {
    "id": "sec-a21-21-7-p1",
-   "index": 265,
+   "index": 266,
    "section": 39,
    "section_title": "Costs:",
    "subsection": null,
@@ -91407,11 +91840,16 @@
      "reimbursement"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-8",
-   "index": 266,
+   "index": 267,
    "section": 40,
    "section_title": "Return on Unbanked Cheques:",
    "subsection": null,
@@ -91463,7 +91901,7 @@
   },
   {
    "id": "sec-a21-21-8-p1",
-   "index": 267,
+   "index": 268,
    "section": 40,
    "section_title": "Return on Unbanked Cheques:",
    "subsection": null,
@@ -91937,11 +92375,16 @@
      "Borrower(s)."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-9",
-   "index": 268,
+   "index": 269,
    "section": 41,
    "section_title": "Law:",
    "subsection": null,
@@ -91978,7 +92421,7 @@
   },
   {
    "id": "sec-a21-21-9-p1",
-   "index": 269,
+   "index": 270,
    "section": 41,
    "section_title": "Law:",
    "subsection": null,
@@ -92068,11 +92511,16 @@
      "law."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-10",
-   "index": 270,
+   "index": 271,
    "section": 42,
    "section_title": "Arbitration/Jurisdiction:",
    "subsection": null,
@@ -92109,7 +92557,7 @@
   },
   {
    "id": "sec-a21-21-10-p1",
-   "index": 271,
+   "index": 272,
    "section": 42,
    "section_title": "Arbitration/Jurisdiction:",
    "subsection": null,
@@ -92827,11 +93275,16 @@
      "appropriate."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-11",
-   "index": 272,
+   "index": 273,
    "section": 43,
    "section_title": "Schedules to Form Part of the Agreement:",
    "subsection": null,
@@ -92898,7 +93351,7 @@
   },
   {
    "id": "sec-a21-21-11-p1",
-   "index": 273,
+   "index": 274,
    "section": 43,
    "section_title": "Schedules to Form Part of the Agreement:",
    "subsection": null,
@@ -93033,11 +93486,16 @@
      "extension."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-12",
-   "index": 274,
+   "index": 275,
    "section": 44,
    "section_title": "Marginal Notes and Head Notes:",
    "subsection": null,
@@ -93094,7 +93552,7 @@
   },
   {
    "id": "sec-a21-21-12-p1",
-   "index": 275,
+   "index": 276,
    "section": 44,
    "section_title": "Marginal Notes and Head Notes:",
    "subsection": null,
@@ -93189,11 +93647,16 @@
      "only"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-13",
-   "index": 276,
+   "index": 277,
    "section": 45,
    "section_title": "Acceptance",
    "subsection": null,
@@ -93230,7 +93693,7 @@
   },
   {
    "id": "sec-a21-21-13-p1",
-   "index": 277,
+   "index": 278,
    "section": 45,
    "section_title": "Acceptance",
    "subsection": null,
@@ -93475,11 +93938,16 @@
      "hereto."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-13-p2",
-   "index": 278,
+   "index": 279,
    "section": 45,
    "section_title": "Acceptance",
    "subsection": null,
@@ -93879,11 +94347,16 @@
      "Agreement."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-14",
-   "index": 279,
+   "index": 280,
    "section": 46,
    "section_title": "Insurance or Third Party Products",
    "subsection": null,
@@ -93940,7 +94413,7 @@
   },
   {
    "id": "sec-a21-21-14-p1",
-   "index": 280,
+   "index": 281,
    "section": 46,
    "section_title": "Insurance or Third Party Products",
    "subsection": null,
@@ -94205,11 +94678,16 @@
      "Application"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-14-p1-21-15",
-   "index": 281,
+   "index": 282,
    "section": 46,
    "section_title": "Insurance or Third Party Products",
    "subsection": null,
@@ -94645,11 +95123,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 21.21.14(21)(15)"
+   "path": "Article 21.21.14(21)(15)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-14-p1-21-16",
-   "index": 282,
+   "index": 283,
    "section": 46,
    "section_title": "Insurance or Third Party Products",
    "subsection": null,
@@ -95317,11 +95800,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 21.21.14(21)(16)"
+   "path": "Article 21.21.14(21)(16)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-17",
-   "index": 283,
+   "index": 284,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -95373,7 +95861,7 @@
   },
   {
    "id": "sec-a21-21-17-i",
-   "index": 284,
+   "index": 285,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -95544,11 +96032,16 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 21.21.17(i)"
+   "path": "Article 21.21.17(i)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-17-p1",
-   "index": 285,
+   "index": 286,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -95773,11 +96266,16 @@
      "Credit."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-17-p2",
-   "index": 286,
+   "index": 287,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -96169,11 +96667,16 @@
      "timings:"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-17-p3",
-   "index": 287,
+   "index": 288,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -96297,11 +96800,16 @@
      "address:"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-17-p5",
-   "index": 288,
+   "index": 289,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -96848,7 +97356,7 @@
   },
   {
    "id": "sec-a21-21-17-p6",
-   "index": 289,
+   "index": 290,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -97177,11 +97685,16 @@
      "."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-17-p8",
-   "index": 290,
+   "index": 291,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -97678,11 +98191,16 @@
      "complaint."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-17-p8-ii",
-   "index": 291,
+   "index": 292,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -98276,11 +98794,18 @@
     ]
    ],
    "kind": "body",
-   "path": "Article 21.21.17(p8)(ii)"
+   "path": "Article 21.21.17(p8)(ii)",
+   "tags": {
+    "tags": [
+     "deadline"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-21-17-p8-iii",
-   "index": 292,
+   "index": 293,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -98565,7 +99090,7 @@
   },
   {
    "id": "sec-a21-21-17-p9",
-   "index": 293,
+   "index": 294,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -98740,11 +99265,16 @@
      "THE"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-48",
-   "index": 294,
+   "index": 295,
    "section": 48,
    "section_title": "SCHEDULE.",
    "subsection": null,
@@ -98780,7 +99310,7 @@
   },
   {
    "id": "sec-a21-48-p2",
-   "index": 295,
+   "index": 296,
    "section": 48,
    "section_title": "SCHEDULE.",
    "subsection": null,
@@ -98900,11 +99430,18 @@
      ".................................................................................................................................................."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "contact"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-48-p5",
-   "index": 296,
+   "index": 297,
    "section": 48,
    "section_title": "SCHEDULE.",
    "subsection": null,
@@ -98988,11 +99525,18 @@
      ".................................................................................................................................................."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "contact"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-48-p7",
-   "index": 297,
+   "index": 298,
    "section": 48,
    "section_title": "SCHEDULE.",
    "subsection": null,
@@ -99051,7 +99595,7 @@
   },
   {
    "id": "sec-a21-49",
-   "index": 298,
+   "index": 299,
    "section": 49,
    "section_title": "TERMS & CONDITIONS (MITC)",
    "subsection": null,
@@ -99102,7 +99646,7 @@
   },
   {
    "id": "sec-a21-49-p1",
-   "index": 299,
+   "index": 300,
    "section": 49,
    "section_title": "TERMS & CONDITIONS (MITC)",
    "subsection": null,
@@ -99347,11 +99891,16 @@
      "Agreement."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-49-p2",
-   "index": 300,
+   "index": 301,
    "section": 49,
    "section_title": "TERMS & CONDITIONS (MITC)",
    "subsection": null,
@@ -99404,7 +99953,7 @@
   },
   {
    "id": "sec-a21-50",
-   "index": 301,
+   "index": 302,
    "section": 50,
    "section_title": "NAME AND ADDRESS",
    "subsection": null,
@@ -99450,7 +99999,7 @@
   },
   {
    "id": "sec-a21-50-p2",
-   "index": 302,
+   "index": 303,
    "section": 50,
    "section_title": "NAME AND ADDRESS",
    "subsection": null,
@@ -99545,11 +100094,18 @@
      "Jurisdiction"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "contact"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-51",
-   "index": 303,
+   "index": 304,
    "section": 51,
    "section_title": "LOAN DETAILS",
    "subsection": null,
@@ -99590,7 +100146,7 @@
   },
   {
    "id": "sec-a21-51-p1",
-   "index": 304,
+   "index": 305,
    "section": 51,
    "section_title": "LOAN DETAILS",
    "subsection": null,
@@ -100250,11 +100806,16 @@
      "disbursement."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52",
-   "index": 305,
+   "index": 306,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -100295,7 +100856,7 @@
   },
   {
    "id": "sec-a21-52-p3",
-   "index": 306,
+   "index": 307,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -100831,11 +101392,16 @@
      "Cycle."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p4",
-   "index": 307,
+   "index": 308,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -101024,7 +101590,7 @@
   },
   {
    "id": "sec-a21-52-p5",
-   "index": 308,
+   "index": 309,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -101498,11 +102064,16 @@
      "etc."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p5-b-s1",
-   "index": 309,
+   "index": 310,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -102126,11 +102697,16 @@
     ]
    ],
    "kind": "body",
-   "path": "a21.52(p5)(b)-s1"
+   "path": "a21.52(p5)(b)-s1",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p5-b-s2",
-   "index": 310,
+   "index": 311,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -102276,11 +102852,16 @@
     ]
    ],
    "kind": "body",
-   "path": "a21.52(p5)(b)-s2"
+   "path": "a21.52(p5)(b)-s2",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p5-c",
-   "index": 311,
+   "index": 312,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -102535,11 +103116,16 @@
     ]
    ],
    "kind": "body",
-   "path": "a21.52(p5)(c)"
+   "path": "a21.52(p5)(c)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p6",
-   "index": 312,
+   "index": 313,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -102723,7 +103309,7 @@
   },
   {
    "id": "sec-a21-52-p8",
-   "index": 313,
+   "index": 314,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -102838,11 +103424,18 @@
      "process."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p9",
-   "index": 314,
+   "index": 315,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -103769,11 +104362,18 @@
      "payment."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p10",
-   "index": 315,
+   "index": 316,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -104111,11 +104711,18 @@
      "Companies"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p11",
-   "index": 316,
+   "index": 317,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -104265,11 +104872,16 @@
      "."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p13",
-   "index": 317,
+   "index": 318,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -104448,11 +105060,16 @@
      "follows:"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p14",
-   "index": 318,
+   "index": 319,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -104697,11 +105314,18 @@
      "process."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "deadline"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p16",
-   "index": 319,
+   "index": 320,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -105065,11 +105689,18 @@
      "day."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p17",
-   "index": 320,
+   "index": 321,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -105234,11 +105865,18 @@
      "date."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p18",
-   "index": 321,
+   "index": 322,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -105393,11 +106031,18 @@
      "date."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "deadline"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p19",
-   "index": 322,
+   "index": 323,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -105542,11 +106187,16 @@
      "fully."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p21",
-   "index": 323,
+   "index": 324,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -105661,11 +106311,16 @@
      "seven point two zero two one"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p22",
-   "index": 324,
+   "index": 325,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -105980,11 +106635,16 @@
      "NPA"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p23-i",
-   "index": 325,
+   "index": 326,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -106514,11 +107174,16 @@
     ]
    ],
    "kind": "body",
-   "path": "a21.52(p23)(i)"
+   "path": "a21.52(p23)(i)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p23-iv",
-   "index": 326,
+   "index": 327,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -106978,11 +107643,16 @@
     ]
    ],
    "kind": "body",
-   "path": "a21.52(p23)(iv)"
+   "path": "a21.52(p23)(iv)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p25",
-   "index": 327,
+   "index": 328,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -107076,11 +107746,16 @@
      "........................................."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p27",
-   "index": 328,
+   "index": 329,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -107288,11 +107963,18 @@
      "BRANCH."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "contact"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p28",
-   "index": 329,
+   "index": 330,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -107417,11 +108099,18 @@
      "RECEIPT."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "contact"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-52-p29",
-   "index": 330,
+   "index": 331,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -107650,11 +108339,18 @@
      "namaste@smfgindia.com"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [
+     "contact"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-53",
-   "index": 331,
+   "index": 332,
    "section": 53,
    "section_title": "INSTRUCTION FOR DISBURSEMENT OF THE LOAN AMOUNT",
    "subsection": null,
@@ -107720,7 +108416,7 @@
   },
   {
    "id": "sec-a21-53-p3",
-   "index": 332,
+   "index": 333,
    "section": 53,
    "section_title": "INSTRUCTION FOR DISBURSEMENT OF THE LOAN AMOUNT",
    "subsection": null,
@@ -107938,11 +108634,16 @@
      "appearing."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-53-p4",
-   "index": 333,
+   "index": 334,
    "section": 53,
    "section_title": "INSTRUCTION FOR DISBURSEMENT OF THE LOAN AMOUNT",
    "subsection": null,
@@ -108142,11 +108843,16 @@
      "facility."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-53-p5",
-   "index": 334,
+   "index": 335,
    "section": 53,
    "section_title": "INSTRUCTION FOR DISBURSEMENT OF THE LOAN AMOUNT",
    "subsection": null,
@@ -108281,11 +108987,16 @@
      "me/us."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-53-p6",
-   "index": 335,
+   "index": 336,
    "section": 53,
    "section_title": "INSTRUCTION FOR DISBURSEMENT OF THE LOAN AMOUNT",
    "subsection": null,
@@ -108548,11 +109259,16 @@
      "."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-53-p9",
-   "index": 336,
+   "index": 337,
    "section": 53,
    "section_title": "INSTRUCTION FOR DISBURSEMENT OF THE LOAN AMOUNT",
    "subsection": null,
@@ -108719,11 +109435,16 @@
      "."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-53-p15",
-   "index": 337,
+   "index": 338,
    "section": 53,
    "section_title": "INSTRUCTION FOR DISBURSEMENT OF THE LOAN AMOUNT",
    "subsection": null,
@@ -108852,11 +109573,16 @@
      "Signatory:"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-54",
-   "index": 338,
+   "index": 339,
    "section": 54,
    "section_title": "DECLARATION IN CASE THE BORROWER/CO-",
    "subsection": null,
@@ -108896,11 +109622,16 @@
      "BORROWER/CO-"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-55",
-   "index": 339,
+   "index": 340,
    "section": 55,
    "section_title": "BORROWER/GUARANTORS IS ILLITERATE OR EXECUTES",
    "subsection": null,
@@ -108940,11 +109671,16 @@
      "EXECUTES"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-56",
-   "index": 340,
+   "index": 341,
    "section": 56,
    "section_title": "LOAN DOCUMENTS IN VERNACULAR LANGUAGE OR IS",
    "subsection": null,
@@ -109010,7 +109746,7 @@
   },
   {
    "id": "sec-a21-56-p1",
-   "index": 341,
+   "index": 342,
    "section": 56,
    "section_title": "LOAN DOCUMENTS IN VERNACULAR LANGUAGE OR IS",
    "subsection": null,
@@ -109325,11 +110061,16 @@
      "Agreement."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-56-p2",
-   "index": 342,
+   "index": 343,
    "section": 56,
    "section_title": "LOAN DOCUMENTS IN VERNACULAR LANGUAGE OR IS",
    "subsection": null,
@@ -109833,11 +110574,16 @@
      "therein."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-56-p3",
-   "index": 343,
+   "index": 344,
    "section": 56,
    "section_title": "LOAN DOCUMENTS IN VERNACULAR LANGUAGE OR IS",
    "subsection": null,
@@ -110087,11 +110833,16 @@
      "loan."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-56-p4",
-   "index": 344,
+   "index": 345,
    "section": 56,
    "section_title": "LOAN DOCUMENTS IN VERNACULAR LANGUAGE OR IS",
    "subsection": null,
@@ -110344,11 +111095,16 @@
      "Borrower/CoBorrower/Guarantor)"
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-57",
-   "index": 345,
+   "index": 346,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -110394,7 +111150,7 @@
   },
   {
    "id": "sec-a21-57-p2",
-   "index": 346,
+   "index": 347,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -110982,11 +111738,16 @@
      "Credit’’)."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-57-p3",
-   "index": 347,
+   "index": 348,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -111432,11 +112193,16 @@
      "presents."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-57-p4",
-   "index": 348,
+   "index": 349,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -112009,11 +112775,16 @@
      "them."
     ]
    ],
-   "kind": "body"
+   "kind": "body",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-57-p4-ii",
-   "index": 349,
+   "index": 350,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -112244,11 +113015,16 @@
     ]
    ],
    "kind": "body",
-   "path": "a21.57(p4)(ii)"
+   "path": "a21.57(p4)(ii)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-57-p4-iii",
-   "index": 350,
+   "index": 351,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -112564,11 +113340,16 @@
     ]
    ],
    "kind": "body",
-   "path": "a21.57(p4)(iii)"
+   "path": "a21.57(p4)(iii)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-57-p4-iv",
-   "index": 351,
+   "index": 352,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -113073,11 +113854,16 @@
     ]
    ],
    "kind": "body",
-   "path": "a21.57(p4)(iv)"
+   "path": "a21.57(p4)(iv)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-57-p4-vi",
-   "index": 352,
+   "index": 353,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -113433,11 +114219,16 @@
     ]
    ],
    "kind": "body",
-   "path": "a21.57(p4)(vi)"
+   "path": "a21.57(p4)(vi)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-57-p4-vii",
-   "index": 353,
+   "index": 354,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -113678,11 +114469,16 @@
     ]
    ],
    "kind": "body",
-   "path": "a21.57(p4)(vii)"
+   "path": "a21.57(p4)(vii)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-57-p4-viii",
-   "index": 354,
+   "index": 355,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -114093,11 +114889,16 @@
     ]
    ],
    "kind": "body",
-   "path": "a21.57(p4)(viii)"
+   "path": "a21.57(p4)(viii)",
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-a21-57-p5",
-   "index": 355,
+   "index": 356,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -114381,7 +115182,7 @@
   },
   {
    "id": "sec-a21-57-p6",
-   "index": 356,
+   "index": 357,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -114715,7 +115516,7 @@
   },
   {
    "id": "sec-a21-57-p7",
-   "index": 357,
+   "index": 358,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -114974,7 +115775,7 @@
   },
   {
    "id": "sec-a21-57-p8",
-   "index": 358,
+   "index": 359,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -115153,7 +115954,7 @@
   },
   {
    "id": "sec-a21-57-p9",
-   "index": 359,
+   "index": 360,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -115592,7 +116393,7 @@
   },
   {
    "id": "sec-a21-57-p10",
-   "index": 360,
+   "index": 361,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -115801,7 +116602,7 @@
   },
   {
    "id": "sec-si",
-   "index": 361,
+   "index": 362,
    "section": 58,
    "section_title": "SCHEDULE I",
    "subsection": null,
@@ -115843,7 +116644,7 @@
   },
   {
    "id": "sec-si-59",
-   "index": 362,
+   "index": 363,
    "section": 59,
    "section_title": "NAME AND ADDRESS",
    "subsection": null,
@@ -115889,7 +116690,7 @@
   },
   {
    "id": "sec-si-59-p2",
-   "index": 363,
+   "index": 364,
    "section": 59,
    "section_title": "NAME AND ADDRESS",
    "subsection": null,
@@ -115933,7 +116734,7 @@
   },
   {
    "id": "sec-si-60",
-   "index": 364,
+   "index": 365,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -115994,7 +116795,7 @@
   },
   {
    "id": "sec-si-60-p2",
-   "index": 365,
+   "index": 366,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -116245,7 +117046,7 @@
   },
   {
    "id": "sec-si-60-p4",
-   "index": 366,
+   "index": 367,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -116323,7 +117124,7 @@
   },
   {
    "id": "sec-si-60-p6",
-   "index": 367,
+   "index": 368,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -116367,7 +117168,7 @@
   },
   {
    "id": "sec-si-60-p7",
-   "index": 368,
+   "index": 369,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -116411,7 +117212,7 @@
   },
   {
    "id": "sec-si-60-p9",
-   "index": 369,
+   "index": 370,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -116470,7 +117271,7 @@
   },
   {
    "id": "sec-si-60-p13",
-   "index": 370,
+   "index": 371,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -116577,7 +117378,7 @@
   },
   {
    "id": "sec-si-60-p15",
-   "index": 371,
+   "index": 372,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -116606,7 +117407,7 @@
   },
   {
    "id": "sec-si-60-p17",
-   "index": 372,
+   "index": 373,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -116645,7 +117446,7 @@
   },
   {
    "id": "sec-si-60-p19",
-   "index": 373,
+   "index": 374,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -116989,7 +117790,7 @@
    "table": 1,
    "text": 388
   },
-  "demoted": 0,
+  "demoted": 1,
   "placeholders_stripped": 0,
   "splits": 30,
   "tables": [
@@ -117000,5 +117801,542 @@
    }
   ]
  },
- "report_file": "two_wheeler_loan_agreement.ingest_report.json"
+ "report_file": "two_wheeler_loan_agreement.ingest_report.json",
+ "sections": [
+  {
+   "id": "sec-a1",
+   "title": "DEFINITIONS AND INTERPRETATION",
+   "brief": {
+    "text": "covers definitions and interpretations of key terms in the Loan cum Hypothecation Agreement.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 6
+  },
+  {
+   "id": "sec-a2",
+   "title": "LOAN AMOUNT AND INTEREST",
+   "brief": {
+    "text": "...",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 8,
+   "suggested_questions": [
+    {
+     "text": "What is the interest calculation method for the loan amount?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a2-2-2-c"
+    },
+    {
+     "text": "How is the interest on the loan accrued and rounded off?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a2-2-2-c"
+    }
+   ]
+  },
+  {
+   "id": "sec-a3",
+   "title": "REPAYMENT/PREPAYMENT",
+   "brief": {
+    "text": "repayment/prepayment procedures",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 16,
+   "suggested_questions": [
+    {
+     "text": "...",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a3-3-1-a-s1"
+    }
+   ]
+  },
+  {
+   "id": "sec-a4",
+   "title": "CONDITION PRECEDENT TO DISBURSEMENT OF THE LOAN",
+   "brief": {
+    "text": "sets out conditions required before loan disbursement to SMFG India Credit",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 3
+  },
+  {
+   "id": "sec-a5",
+   "title": "SECURITY",
+   "brief": {
+    "text": "covers security provisions and hypothecation details under Section 5.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 22,
+   "suggested_questions": [
+    {
+     "text": "When does the hypothecation take place according to clause sec-a5-p1-5-2-s1?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a5-p1-5-2-s1"
+    },
+    {
+     "text": "What are the specific obligations regarding insurance of Hypothecated Assets as outlined in clause sec-a5-p2-5-8-s1?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a5-p2-5-8-s1"
+    },
+    {
+     "text": "According to which clause does the Borrower(s) declare that all Hypothecated Assets are free from encumbrance?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a5-p3"
+    }
+   ]
+  },
+  {
+   "id": "sec-a6",
+   "title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
+   "brief": {
+    "text": "covers representations and warranties made by Borrower(s) regarding their awareness, permissions, authority, legal status, compliance, and financial condition related to the loan agreement.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 11,
+   "suggested_questions": [
+    {
+     "text": "...",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a6-6-1-b"
+    },
+    {
+     "text": "...",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a6-6-2-s1"
+    }
+   ]
+  },
+  {
+   "id": "sec-a7",
+   "title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
+   "brief": {
+    "text": "lists affirmative covenants requiring Borrower to pay loan and interest promptly, maintain corporate existence, disclose litigation and events of default.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 8,
+   "suggested_questions": [
+    {
+     "text": "According to clause sec-a7-p1, what specific action must the Borrower take regarding payment of the Loan and Interest?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a7-p1"
+    },
+    {
+     "text": "What does clause sec-a7-7-1-b require the Borrower to do in relation to paying the Loan and Interest on demand?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a7-7-1-b"
+    }
+   ]
+  },
+  {
+   "id": "sec-a8",
+   "title": "EVENTS OF DEFAULT",
+   "brief": {
+    "text": "covers events of default that trigger immediate repayment and security enforcement.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 10,
+   "suggested_questions": [
+    {
+     "text": "According to clause sec-a8-p2, what happens if the Borrower fails to pay any sum due under this Agreement?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a8-p2"
+    },
+    {
+     "text": "What is the condition for the Security to be enforced under clause sec-a8-p1?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a8-p1"
+    }
+   ]
+  },
+  {
+   "id": "sec-a9",
+   "title": "REMEDIES OF SMFG INDIA CREDIT",
+   "brief": {
+    "text": "This section outlines SMFG India Credit's remedies upon events of default, including recall rights and possession procedures.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 9,
+   "suggested_questions": [
+    {
+     "text": "What rights does SMFG India Credit have if an Event of Default occurs according to clause sec-a9-9-1?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a9-9-1"
+    },
+    {
+     "text": "Which specific actions can SMFG India Credit take when there is a surplus after full payment in the document's clauses?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a9-p2-vii-s1"
+    }
+   ]
+  },
+  {
+   "id": "sec-a10",
+   "title": "CONSTITUTED ATTORNEY",
+   "brief": {
+    "text": "covers attorney powers and responsibilities under Section 10",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 4,
+   "suggested_questions": [
+    {
+     "text": "What specific actions can SMFG India Credit perform under clause sec-a10-10-1-iii?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a10-10-1-iii"
+    },
+    {
+     "text": "According to clause sec-a10-10-2, what is the Borrower's agreement regarding prior notice before exercising powers?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a10-10-2"
+    }
+   ]
+  },
+  {
+   "id": "sec-a11",
+   "title": "CROSS COLLATERAL",
+   "brief": {
+    "text": "describes the cross collateral procedure when SMFG India Credit holds Hypothecated Assets",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1,
+   "suggested_questions": [
+    {
+     "text": "Does the document provide conditions under which SMFG India Credit may request a revival of the Agreement and have the Hypothecated Assets delivered in as-is condition?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a11-23-p1"
+    }
+   ]
+  },
+  {
+   "id": "sec-a13",
+   "title": "SUBORDINATE DEBT",
+   "brief": {
+    "text": "covers subordination debt obligations.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1,
+   "suggested_questions": [
+    {
+     "text": "Does the document state that borrowers must agree to declare, confirm, and undertake specific obligations regarding loans, advances, or other monies advanced by group companies, associates, directors, partners, or their friends and relatives?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a13-p1"
+    }
+   ]
+  },
+  {
+   "id": "sec-a14",
+   "title": "SMFG INDIA CREDIT’S STATEMENTS OF ACCOUNTS TO BE ACCEPTED BY",
+   "brief": {
+    "text": "describes the procedure for accepting SMFG India Credit's statements of accounts.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1,
+   "suggested_questions": [
+    {
+     "text": "Does the document specify that entries in SMFG India Credit’s account books must be made according to its usual practice and comply with statutory requirements?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a14-26-p1"
+    }
+   ]
+  },
+  {
+   "id": "sec-a15",
+   "title": "SET OFF AND LIEN",
+   "brief": {
+    "text": "describes the lien and set-off rights SMFG India Credit has against Borrower(s) moves.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 2
+  },
+  {
+   "id": "sec-a16",
+   "title": "ASSIGNMENT/TRANSFER OF PORTFOLIO/SECUERTISATION",
+   "brief": {
+    "text": "describes the procedure for assignment/transfer of portfolio and securitization rights",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 2,
+   "suggested_questions": [
+    {
+     "text": "Does the document grant SMFG India Credit the authority to sell, assign, or otherwise transfer its credit portfolio?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a16-p1-s1"
+    },
+    {
+     "text": "Who bears the costs associated with selling, assigning, or transferring the portfolio, and how are those costs accounted for?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a16-p1-s2"
+    }
+   ]
+  },
+  {
+   "id": "sec-a17",
+   "title": "SERVICE PROVIDER",
+   "brief": {
+    "text": "...",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 2
+  },
+  {
+   "id": "sec-a18",
+   "title": "TERMINATION",
+   "brief": {
+    "text": "describes termination rights of SMFG India Credit under the Agreement",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1,
+   "suggested_questions": [
+    {
+     "text": "Can SMFG India Credit terminate the Loan at its sole discretion without liability?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a18-p1"
+    }
+   ]
+  },
+  {
+   "id": "sec-a19",
+   "title": "DISCLOSURE OF INFORMATION",
+   "brief": {
+    "text": "covers disclosure and sharing requirements between SMFG India Credit and Borrower(s) regarding information, data, and use of credit facilities.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 9,
+   "suggested_questions": [
+    {
+     "text": "Does the document allow SMFG India Credit to share information and data relating to the Borrower(s), the Loan, and Loan terms with its professional advisers?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a19-19-1-s2"
+    },
+    {
+     "text": "Is it required that the Borrower(s) declare that all information and data furnished are true and correct and no misrepresentation has been made?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a19-19-1-ii"
+    }
+   ]
+  },
+  {
+   "id": "sec-a20",
+   "title": "CONTINUING SECURITY",
+   "brief": {
+    "text": "continuing security provisions for loan obligations",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1,
+   "suggested_questions": [
+    {
+     "text": "Does this clause specify that the security agreement continues to apply after the loan is completed?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a20-p1"
+    }
+   ]
+  },
+  {
+   "id": "sec-a21",
+   "title": "MISCELLANEOUS",
+   "brief": {
+    "text": "covers miscellaneous provisions including communication methods, rights, remedies, and governing law",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 39,
+   "suggested_questions": [
+    {
+     "text": "What method is specified for sending notices or communications to the Borrower(s) under sec-a21-21-2-p1-s1?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a21-21-2-p1-s1"
+    },
+    {
+     "text": "Under which circumstances may SMFG India Credit waive charges payable under the Agreement, as per sec-a21-21-3-p1-s2?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a21-21-3-p1-s2"
+    },
+    {
+     "text": "How are disputes resolved according to sec-a21-21-10-p1?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-a21-21-10-p1"
+    }
+   ]
+  },
+  {
+   "id": "sec-si",
+   "title": "SCHEDULE I",
+   "brief": {
+    "text": "covers the schedule I requirements and procedures for co-borrower, guarantor, motor cycle details, signatures and notary verification.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 2
+  }
+ ],
+ "overview": {
+  "text": "This document is a loan agreement for a two-wheeler loan issued by SMFG India Credit. It is organized into multiple sections, each covering specific legal and financial terms of the loan. The sections are listed in order as DEFINITIONS AND INTERPRETATION, LOAN AMOUNT AND INTEREST, REPAYMENT/PREPAYMENT, CONDITION PRECEDENT TO DISBURSEMENT OF THE LOAN, SECURITY, BORROWER(S) REPRESENTATION AND WARRANTIES, COVENANTS, EVENTS OF DEFAULT, REMEDIES OF SMFG INDIA CREDIT, CONSTITUTED ATTORNEY, CROSS COLLATERAL, SUBORDINATE DEBT, SMFG INDIA CREDIT’S STATEMENTS OF ACCOUNTS TO BE ACCEPTED BY, SET OFF AND LIEN, ASSIGNMENT/TRANSFER OF PORTFOLIO/SECUERTISATION, SERVICE PROVIDER, TERMINATION, DISCLOSURE OF INFORMATION, CONTINUING SECURITY, MISCELLANEOUS, SCHEDULE I. Each section contains multiple clauses detailing the respective provisions. Listening from start to finish takes about 160 minutes.",
+  "generated": true,
+  "provider": "ollama",
+  "listening_minutes": 160,
+  "chars_per_second": 13.97,
+  "chars_per_second_source": "measured from 4 trace file(s)"
+ },
+ "topics": [
+  {
+   "topic": "Definitions",
+   "section_id": "sec-a1",
+   "heading": "DEFINITIONS AND INTERPRETATION",
+   "generated": true,
+   "provider": "ollama"
+  },
+  {
+   "topic": "Read from the start",
+   "section_id": null,
+   "heading": null,
+   "generated": false
+  }
+ ],
+ "enrichment": {
+  "provider": "ollama",
+  "model": "granite4.2:3b",
+  "elapsed_ms": 185578,
+  "fields": [
+   "tags",
+   "suggested_questions",
+   "tables"
+  ],
+  "done": [
+   "overview",
+   "sections",
+   "suggested_questions",
+   "tables",
+   "tags",
+   "topics"
+  ],
+  "guard_rejections": [
+   {
+    "field": "topics",
+    "reasons": [
+     "Extra data: line 6 column 1 (char 50)"
+    ]
+   },
+   {
+    "field": "tags:batch0",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch1",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch2",
+    "reasons": [
+     "Expecting property name enclosed in double quotes: line 1 column 31 (char 30)"
+    ]
+   },
+   {
+    "field": "tags:batch3",
+    "reasons": [
+     "Expecting ':' delimiter: line 1 column 354 (char 353)"
+    ]
+   },
+   {
+    "field": "tags:batch5",
+    "reasons": [
+     "Expecting property name enclosed in double quotes: line 1 column 31 (char 30)"
+    ]
+   },
+   {
+    "field": "tags:batch7",
+    "reasons": [
+     "Extra data: line 21 column 1 (char 441)"
+    ]
+   },
+   {
+    "field": "tags:batch9",
+    "reasons": [
+     "Expecting property name enclosed in double quotes: line 1 column 32 (char 31)"
+    ]
+   },
+   {
+    "field": "tags:batch10",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch15",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "questions:sec-a4",
+    "reasons": [
+     "Expecting property name enclosed in double quotes: line 12 column 7 (char 594)"
+    ]
+   },
+   {
+    "field": "questions:sec-a17",
+    "reasons": [
+     "Extra data: line 3 column 1 (char 54)"
+    ]
+   },
+   {
+    "field": "questions:sec-si",
+    "reasons": [
+     "Expecting ',' delimiter: line 9 column 7 (char 396)"
+    ]
+   }
+  ],
+  "tokens": {
+   "in": 48331,
+   "out": 13840
+  }
+ }
 }

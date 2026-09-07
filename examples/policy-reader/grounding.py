@@ -61,9 +61,82 @@ PRIOR_ELSEWHERE = 0.4           # everything else, at or before the cursor
 DEFINITION_OVERLAP = 0.8        # stemmed-token overlap needed for a fuzzy term match
 
 RETRIEVABLE_KINDS = ("body", "table_row", "definition")
-RETRIEVAL_PATHS = ("deictic", "definition", "section_ref", "bm25", "none")
+RETRIEVAL_PATHS = ("deictic", "definition", "section_ref", "bm25", "none", "suggested", "extractive")
+
+# Navigation and extractive intents. Matched in this pattern layer, like the
+# deictic and eligibility patterns, and answered from the fixture with no
+# retrieval and no model. Tags are the fixed set scripts/enrich.py writes.
+NAV_TAGS = ("exclusion", "waiting_period", "deadline", "amount", "obligation", "definition",
+            "procedure", "contact")
+_TAG_WORDS = {
+    "exclusion": r"exclusions?|things? (?:that are )?not covered|what(?:'s| is)n'?t covered",
+    "waiting_period": r"waiting periods?",
+    "deadline": r"deadlines?|time limits?|due dates?",
+    "amount": r"amounts?|limits?|sums?|charges?|fees?",
+    "obligation": r"obligations?|duties|things? i (?:must|have to) do",
+    "definition": r"definitions?|defined terms?",
+    "procedure": r"procedures?|steps|process(?:es)?",
+    "contact": r"contacts?|contact details|phone numbers?|helplines?",
+}
+_TAG_ALT = "|".join(f"(?P<{k}>{v})" for k, v in _TAG_WORDS.items())
+_NAV_EVERY = re.compile(r"^\s*(?:read(?: me| out)?|list|give me|what are|tell me)\s+(?:all|every|the|each)?\s*(?:of )?(?:the )?"
+                        r"(?:" + _TAG_ALT + r")(?:\s+(?:in|of) (?:this|the) (?:document|policy|section))?\s*[?.!]*$", re.I)
+_NAV_WHAT_IN = re.compile(r"^\s*what\s+(?:" + _TAG_ALT + r")\s+(?:are|is)(?: there)?\s+(?:in|of)\s+(?:this|the)\s+"
+                          r"(?:document|policy|section)\s*[?.!]*$", re.I)
+_NAV_SUMMARISE = re.compile(r"^\s*(?:summari[sz]e|sum up|what(?:'s| is) in)\s+(?:this|the current|the)\s+section\s*[?.!]*$", re.I)
+_NAV_SKIP = re.compile(r"^\s*(?:skip(?: it| this(?: section| one)?)?|next section|move on)\s*[.!]*$", re.I)
+_NAV_GO_ON = re.compile(r"^\s*(?:go on|carry on|continue|keep going|keep reading|read on|no(?: thanks)?)\s*[.!]*$", re.I)
+_NAV_YES = re.compile(r"^\s*(?:yes|yeah|yep|sure|ok(?:ay)?|please|go ahead|i want that|want that)\s*[.!]*$", re.I)
+_NAV_BACK = re.compile(r"^\s*(?:go |take me )?back(?: to where (?:i|we) (?:was|were))?\s*[.!]*$", re.I)
+_NAV_START = re.compile(r"^\s*(?:read )?from the (?:start|beginning|top)\s*[.!]*$", re.I)
+_NAV_GOTO = re.compile(r"^\s*(?:go to|jump to|take me to|read(?: me)?|open)\s+(?:the )?(.+?)\s*(?:section|part|clause)?\s*[.!]*$", re.I)
+_NAV_NOW = re.compile(r"^\s*(?:now|read it now|right now|straight away)\s*[.!]*$", re.I)
+_NAV_OVERVIEW_FIRST = re.compile(r"^\s*(?:overview first|the rest of the overview|finish the overview|overview)\s*[.!]*$", re.I)
 
 _TOKEN = re.compile(r"[a-z0-9]+")
+# Short replies to a spoken prompt, by shape. The server reads a reply against
+# the open prompt's options with these before anything else.
+_REPLY_ALL = re.compile(r"^\s*(?:all(?: of them)?|every(?:thing| one)?|all the rows|read (?:them|all|everything)(?: all)?|"
+                        r"the whole table|the lot)\s*[.!]*$", re.I)
+_REPLY_NO = re.compile(r"^\s*(?:no|nope|nah|not really|nothing|neither|none|no thanks|no thank you|skip(?: it)?)\s*[.!]*$", re.I)
+_REPLY_BRIEF = re.compile(r"^\s*(?:the )?(?:brief|overview|summary|give me the brief|brief me|just the brief|"
+                          r"the brief please)\s*[.!?]*$", re.I)
+_REPLY_START = re.compile(r"^\s*(?:start|read|read it|just read|read it all|read the whole thing|read everything|"
+                          r"(?:read )?from the (?:start|beginning|top)|start reading|begin|the start)\s*[.!]*$", re.I)
+# An utterance with a question word or a "?" is a question, never a bare topic:
+# "what is the premium" must go to retrieval, "premium" alone is a jump.
+_QUESTION_WORD = re.compile(r"\b(?:what|how|why|when|where|which|who|does|do|is|are|can|could|would|should|"
+                            r"explain|mean|means|meaning|tell)\b", re.I)
+
+
+def is_question_like(text: str) -> bool:
+    return "?" in (text or "") or bool(_QUESTION_WORD.search(text or ""))
+
+
+def reply_shape(text: str) -> Optional[str]:
+    """The shape of a short reply to a prompt: yes | no | now | overview_first |
+    brief | start | all | carry_on, or None when it is none of those (a topic
+    name, a row label, a question)."""
+    q = (text or "").strip()
+    if not q:
+        return None
+    if _NAV_YES.match(q):
+        return "yes"
+    if _NAV_NOW.match(q):
+        return "now"
+    if _NAV_OVERVIEW_FIRST.match(q):
+        return "overview_first"
+    if _REPLY_ALL.match(q):
+        return "all"
+    if _REPLY_BRIEF.match(q):
+        return "brief"
+    if _REPLY_START.match(q) or _NAV_START.match(q):
+        return "start"
+    if _REPLY_NO.match(q):
+        return "no"
+    if _NAV_GO_ON.match(q):
+        return "carry_on"
+    return None
 _STOP = set("""a an and are as at be by for from has have if in is it its of on or that the this
 to we will with you your our us not any other than which who whom under
 i do does how what when where why can could would should my me mean means say tell about
@@ -139,16 +212,28 @@ def clause_kind(c: dict) -> str:
 
 
 def is_readable(c: dict) -> bool:
-    """Spoken in linear playback? Boilerplate never; table rows only on request."""
-    return clause_kind(c) != "boilerplate" and not c.get("spoken_on_request", False)
+    """Spoken in linear playback? Boilerplate never; table rows only on request,
+    unless enrichment flagged a small table `read_inline`."""
+    if clause_kind(c) == "boilerplate":
+        return False
+    return not c.get("spoken_on_request", False) or bool(c.get("read_inline", False))
 
 
 def skip_reason(c: dict) -> Optional[str]:
     if clause_kind(c) == "boilerplate":
         return "boilerplate"
-    if c.get("spoken_on_request", False):
+    if c.get("spoken_on_request", False) and not c.get("read_inline", False):
         return "table_on_request"
     return None
+
+
+def spoken_text(c: dict) -> str:
+    """What the reader sends to the voice: the generated spoken form when
+    enrichment wrote one (table stubs and rows), else the normalised text."""
+    ov = c.get("spoken_override")
+    if isinstance(ov, dict) and ov.get("text"):
+        return ov["text"]
+    return c["text_spoken"]
 
 
 def tokenize(text: str) -> list[str]:
@@ -229,7 +314,10 @@ They interrupted with a question. Answer ONLY from the DOCUMENT TEXT provided.
 
 Rules:
 - Cite the section aloud at the start, e.g. "Section 4(b)(ii), water damage, says ..."
-- Use the document's own words where possible. Keep it to two or three spoken sentences.
+- Use the document's own words where possible (except for a restatement, below). Keep it to two or three spoken sentences.
+- For "what does that mean", "explain that" or "in plain words": restate the clause in plain everyday language.
+  Add nothing that is not in the text, and do not repeat the clause word for word. A restatement is not
+  interpretation; advice and outcomes stay forbidden.
 - Do NOT interpret, advise, predict a claim outcome, or say what the listener should do.
 - If the document text does not answer the question, say exactly that and tell them to ask their insurer or lender.
 - Never mention clauses that are not in DOCUMENT TEXT. Never guess at numbers.
@@ -243,9 +331,37 @@ Rules:
 """
 
 
+_CHIP_ITEMS = re.compile(r"\.\s*\d+\s+items?\.?\s*$")
+_CHIP_NUMBERING = re.compile(r"^\s*(?:(?:section|part|chapter|clause|article)\s+)?"
+                             r"(?:\d+(?:\.\d+)*[.):\-]?|[ivxlc]+[.)]|[a-z][.)])\s*(?=[A-Za-z(])", re.I)
+_CHIP_TAIL_WORDS = {"of", "and", "the", "to", "for", "or", "in", "on", "a", "an", "by", "with"}
+
+
+def chip_name(title: str, max_words: int = 4) -> str:
+    """A section heading as a chip: no numbering, no "N items" tail, four
+    words at most, title case for an all-caps heading; "" when the heading
+    has no words."""
+    t = _CHIP_ITEMS.sub("", title or "").strip()
+    t = _CHIP_NUMBERING.sub("", t)
+    t = t.strip(" :;,.\u2013\u2014-=")
+    if not re.search(r"[A-Za-z]{2,}", t) or re.match(r"^page\s*\d+$", t, re.I):
+        return ""                                  # page furniture is not a topic
+    words = t.split()
+    if len(words) > max_words:
+        words = words[:max_words]
+        while len(words) > 1 and words[-1].lower() in _CHIP_TAIL_WORDS:
+            words.pop()
+    t = " ".join(words)
+    if t.isupper():
+        t = " ".join(w if (w.startswith("(") and len(w.strip("()")) <= 5) else w.capitalize() for w in t.split())
+    return t
+
+
 class Grounding:
     def __init__(self, fixture_path: str | Path) -> None:
         doc = json.loads(Path(fixture_path).read_text(encoding="utf-8"))
+        self._doc = doc
+        self._sections = None
         self.title = doc["title"]
         self.clauses: list[dict] = sorted(doc["clauses"], key=lambda c: c["index"])
         self.by_id = {c["id"]: c for c in self.clauses}
@@ -303,6 +419,211 @@ class Grounding:
         while index < len(self.clauses) and not is_readable(self.clauses[index]):
             index += 1
         return index
+
+    # ------------------------------------------------------------ navigator
+    @property
+    def sections(self) -> list[dict]:
+        """Top-level sections with their clause index range, from the fixture's
+        `sections` block (enrichment) or the map; each has id, title, start, end,
+        brief (text or None), est_minutes, suggested_questions."""
+        if getattr(self, "_sections", None) is not None:
+            return self._sections
+        raw = self._doc.get("sections") or []
+        by_id = {s["id"]: s for s in raw}
+        heads = [m for m in self.map if m.get("id") in self.by_id] or []
+        out = []
+        if not heads:                                   # fixture with no map block: section_title runs
+            for c in self.clauses:
+                if clause_kind(c) == "boilerplate":
+                    continue
+                if not out or out[-1]["title"] != c["section_title"]:
+                    out.append({"id": c["id"], "title": c["section_title"], "start": c["index"], "end": c["index"] + 1})
+                else:
+                    out[-1]["end"] = c["index"] + 1
+        else:
+            for i, m in enumerate(heads):
+                start = self.by_id[m["id"]]["index"]
+                end = self.by_id[heads[i + 1]["id"]]["index"] if i + 1 < len(heads) else len(self.clauses)
+                out.append({"id": m["id"], "title": m["title"], "start": start, "end": end})
+        for sec in out:
+            e = by_id.get(sec["id"], {})
+            brief = e.get("brief")
+            sec["brief"] = brief.get("text") if isinstance(brief, dict) else None
+            sec["est_minutes"] = e.get("est_minutes")
+            sec["suggested_questions"] = [q for q in (e.get("suggested_questions") or [])
+                                          if q.get("clause_id") in self.by_id]
+        self._sections = out
+        return out
+
+    def section_of(self, index: int) -> Optional[dict]:
+        for sec in self.sections:
+            if sec["start"] <= index < sec["end"]:
+                return sec
+        return None
+
+    def section_at_start(self, index: int) -> Optional[dict]:
+        """The section that begins exactly at this clause index (a transition)."""
+        for sec in self.sections:
+            if sec["start"] == index:
+                return sec
+        return None
+
+    @property
+    def topics(self) -> list[dict]:
+        """Chips for the opening screen, five to seven of them: the generated
+        topics whose pointer resolves, then top-level section headings
+        (cleaned, four words at most) until there are five, then "Read from
+        the start". Every pointer resolves or is dropped."""
+        out: list[dict] = []
+        seen: set = set()
+        for t in self._doc.get("topics") or []:
+            sid = t.get("section_id")
+            if sid is None or sid not in self.by_id or sid in seen:
+                continue
+            out.append(t)
+            seen.add(sid)
+        if len(out) < 5:
+            names = {o["topic"].lower() for o in out}
+            for sec in self.sections:
+                if sec["id"] in seen:
+                    continue
+                name = chip_name(sec["title"])
+                if not name or name.lower() in names:
+                    continue
+                out.append({"topic": name, "section_id": sec["id"], "heading": sec["title"], "generated": False})
+                seen.add(sec["id"])
+                names.add(name.lower())
+                if len(out) >= 5:
+                    break
+        if len(out) < 5:
+            # Few top-level sections (a loan MITC with three): the sub-headings
+            # fill the chips; each jumps to its own span (section_for_id).
+            names = {o["topic"].lower() for o in out}
+            for c in self.clauses:
+                if clause_kind(c) != "heading" or c["id"] in seen:
+                    continue
+                name = chip_name(c.get("text_display", ""))
+                if not name or name.lower() in names:
+                    continue
+                out.append({"topic": name, "section_id": c["id"], "heading": _CHIP_ITEMS.sub("", c["text_display"]).strip(),
+                            "generated": False})
+                seen.add(c["id"])
+                names.add(name.lower())
+                if len(out) >= 5:
+                    break
+        out = out[:6]
+        out.append({"topic": "Read from the start", "section_id": None, "heading": None, "generated": False})
+        return out
+
+    def section_for_id(self, sid: Optional[str]) -> Optional[dict]:
+        """The section a chip or a reply points at: a top-level section by id,
+        else the span of a heading clause (to the next heading of the same
+        or a higher level, within its section)."""
+        if not sid:
+            return None
+        sec = next((x for x in self.sections if x["id"] == sid), None)
+        if sec is not None:
+            return sec
+        c = self.by_id.get(sid)
+        if not c or clause_kind(c) != "heading":
+            return None
+        start = c["index"]
+        end = len(self.clauses)
+        level = c.get("level") or 0
+        for d in self.clauses[start + 1:]:
+            if clause_kind(d) == "heading" and (d.get("level") or 0) <= level:
+                end = d["index"]
+                break
+        enclosing = self.section_of(start)
+        if enclosing is not None and enclosing["end"] > start:
+            end = min(end, enclosing["end"])
+        return {"id": sid, "title": _CHIP_ITEMS.sub("", c["text_display"]).strip(), "start": start, "end": end,
+                "brief": None, "est_minutes": None, "suggested_questions": []}
+
+    @property
+    def overview_text(self) -> Optional[str]:
+        ov = self._doc.get("overview")
+        return ov.get("text") if isinstance(ov, dict) and ov.get("text") else None
+
+    def find_section(self, phrase: str) -> Optional[dict]:
+        """A topic chip name, or a heading (exact, then substring, then token overlap)."""
+        q = normalise_term(phrase)
+        if not q:
+            return None
+        for t in self.topics:
+            if t.get("section_id") and normalise_term(t["topic"]) == q:
+                return next((s for s in self.sections if s["id"] == t["section_id"]), None)
+        secs = self.sections
+        for s in secs:
+            if normalise_term(s["title"]) == q:
+                return s
+        for s in secs:
+            if q in normalise_term(s["title"]):
+                return s
+        qs = {stem(x) for x in q.split() if x not in _STOP}
+        best, score = None, 0.0
+        for s in secs:
+            ts = {stem(x) for x in normalise_term(s["title"]).split() if x not in _STOP}
+            if ts and qs:
+                sc = len(ts & qs) / len(qs)
+                if sc > score:
+                    best, score = s, sc
+        return best if score >= 0.6 else None
+
+    def tagged(self, tag: str, section: Optional[dict] = None) -> list[dict]:
+        """Clauses carrying a tag (from enrichment), in reading order; cited, never ranked."""
+        out = []
+        for c in self.clauses:
+            t = c.get("tags")
+            tags = t.get("tags") if isinstance(t, dict) else (t or [])
+            if tag in tags and (section is None or section["start"] <= c["index"] < section["end"]):
+                out.append(c)
+        return out
+
+    def navigation_intent(self, question: str, at_index: int = 0) -> Optional[dict]:
+        """Navigation and extractive intents, matched before any retrieval.
+
+        Returns {"intent": ..., ...} or None. Intents: skip, go_on, yes, back,
+        start, now, overview_first, goto (with section), every (with tag),
+        summarise (with section). Never touches BM25.
+        """
+        q = (question or "").strip()
+        if not q:
+            return None
+        if _NAV_SKIP.match(q):
+            return {"intent": "skip"}
+        if _NAV_YES.match(q):
+            return {"intent": "yes"}
+        if _NAV_GO_ON.match(q):
+            return {"intent": "go_on"}
+        if _NAV_BACK.match(q):
+            return {"intent": "back"}
+        if _NAV_START.match(q):
+            return {"intent": "start"}
+        if _NAV_NOW.match(q):
+            return {"intent": "now"}
+        if _NAV_OVERVIEW_FIRST.match(q):
+            return {"intent": "overview_first"}
+        m = _NAV_EVERY.match(q) or _NAV_WHAT_IN.match(q)
+        if m:
+            tag = next(k for k in NAV_TAGS if m.group(k))
+            return {"intent": "every", "tag": tag, "clauses": self.tagged(tag)}
+        if _NAV_SUMMARISE.match(q):
+            sec = self.section_of(at_index)
+            return {"intent": "summarise", "section": sec} if sec else None
+        m = _NAV_GOTO.match(q)
+        if m:
+            sec = self.find_section(m.group(1))
+            if sec:
+                return {"intent": "goto", "section": sec}
+        # a bare topic chip name spoken -- never an utterance shaped like a
+        # question ("what is the premium" is retrieval, "premium" is a jump)
+        if is_question_like(q):
+            return None
+        sec = self.find_section(q)
+        if sec and len(q.split()) <= 5:
+            return {"intent": "goto", "section": sec}
+        return None
 
     def expand(self, query: list[str]) -> list[str]:
         """Crude prefix expansion so 'wind' also hits 'windstorm', 'cancel' hits 'cancellation'."""

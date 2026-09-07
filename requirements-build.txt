@@ -10,3 +10,7 @@
 #
 # Python 3.9 is the floor this was resolved on; docling pulls torch (CPU is fine).
 docling==2.69.1
+
+# Enrichment providers (scripts/enrich.py): the Groq path uses the OpenAI-compatible client.
+# Build time only; never imported by the reader.
+openai>=1.30

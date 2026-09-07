@@ -15,6 +15,7 @@ from pathlib import Path
 
 os.environ["TTS_PROVIDER"] = "fake"
 os.environ.pop("LLM_API_KEY", None)
+os.environ.pop("LLM_PROVIDER", None)     # a sourced .env with LLM_PROVIDER=ollama must not reach the tests
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -84,6 +85,8 @@ class OpenCase(unittest.IsolatedAsyncioTestCase):
             await self.a.until(lambda m: m.get("type") == "unit_done" and m["context_id"] == ctx)
             if started.get("kind", "clause") != "clause":
                 await self.a.ack_all(ctx)        # a document map plays before the first clause
+                if started["kind"] in ("pick_topic", "welcome", "start_choice"):   # the opening prompts: read on
+                    await self.a.ws.send_json({"type": "ask", "question": {"pick_topic": "from the top", "welcome": "the first one", "start_choice": "brief"}[started["kind"]]})
                 continue
             return started
 
@@ -154,7 +157,9 @@ class OpenCase(unittest.IsolatedAsyncioTestCase):
         opened = await self.a.until(lambda m: m.get("type") == "document_opened")
         self.assertEqual(opened["name"], entry["name"])
         self.assertTrue(next(x for x in opened["documents"] if x["name"] == entry["name"])["unreviewed"])
-        self.assertEqual(self.s.events.of_type("unit_truncated")[0]["reason"], "open")
+        # The upload itself took the voice: the reading was cut at the playhead
+        # for it (reason upload); the open afterwards had nothing left to cut.
+        self.assertEqual(self.s.events.of_type("unit_truncated")[0]["reason"], "upload")
 
         nxt = await self.play_one()
         # The first spoken unit of the upload is its first heading's signpost;

@@ -115,7 +115,8 @@
     "label": "phone",
     "redacted": "1800…"
    }
-  ]
+  ],
+  "text_sha256": "c07d8454ff1cccff657b12a57d2884a6dd4d54f2b2b55d8bcda9eeb53fcb08ca"
  },
  "stages": [
   "extract",
@@ -127,14 +128,14 @@
   "write"
  ],
  "elapsed_ms": {
-  "extract": 30147.1,
-  "structure": 117.2,
-  "segment": 4.8,
-  "normalize": 51.7,
-  "pii_scan": 14.0,
-  "validate": 6.5,
-  "write": 78.4,
-  "total": 30420.0
+  "extract": 179.6,
+  "structure": 54.2,
+  "segment": 4.2,
+  "normalize": 146.1,
+  "pii_scan": 14.1,
+  "validate": 7.5,
+  "write": 119.6,
+  "total": 525.4
  },
  "structure": {
   "tool": "docling",
@@ -147,7 +148,7 @@
    "table": 1,
    "text": 435
   },
-  "demoted": 1,
+  "demoted": 3,
   "placeholders_stripped": 0,
   "splits": 0,
   "tables": [
@@ -300,10 +301,10 @@
   "note": "Informational. Nothing here removed or altered any text; the developer view shows it as the review trail."
  },
  "validate": {
-  "clause_count": 292,
+  "clause_count": 294,
   "by_kind": {
    "body": 207,
-   "boilerplate": 13,
+   "boilerplate": 15,
    "definition": 8,
    "heading": 55,
    "table_row": 8,
@@ -314,73 +315,83 @@
   "splits": [],
   "folds_and_merges": [
    "folded 133 list items into their runs (max 600 chars)",
-   "merged 89 short clauses (< 120 chars) into the next"
+   "merged 87 short clauses (< 120 chars) into the next"
   ],
   "oversized_ok": true,
   "max_clause_chars": 921,
   "boilerplate_first_15": [
    {
     "id": "sec-1-b1",
+    "text": "UIN / reference",
+    "reason": "front_matter"
+   },
+   {
+    "id": "sec-1-b2",
+    "text": "11 Edelweiss General Insurance Company Limited, Bharat Griha Raksha Policy I UIN: IRDAN159RP0019V01202021",
+    "reason": "front_matter"
+   },
+   {
+    "id": "sec-1-b3",
     "text": "Clause A. This Policy and the Insurance Contract",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b2",
+    "id": "sec-1-b4",
     "text": "Clause B. Insured Events",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b3",
+    "id": "sec-1-b5",
     "text": "Clause C. Home Building Cover",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b4",
+    "id": "sec-1-b6",
     "text": "Clause D. Home Contents cover",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b5",
+    "id": "sec-1-b7",
     "text": "Clause E. Additional Covers",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b6",
+    "id": "sec-1-b8",
     "text": "Clause F. Exclusions",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b7",
+    "id": "sec-1-b9",
     "text": "Clause G. Conditions",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b8",
+    "id": "sec-1-b10",
     "text": "Clause H. Changes to covers",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b9",
+    "id": "sec-1-b11",
     "text": "Clause I. Waiver of Under Insurance",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b10",
+    "id": "sec-1-b12",
     "text": "Clause J. Other Details",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b11",
+    "id": "sec-1-b13",
     "text": "Clause K. Grievances",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b12",
+    "id": "sec-1-b14",
     "text": "Clause L. Information about us",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b13",
+    "id": "sec-1-b15",
     "text": "2",
     "reason": "page_number"
    }
@@ -397,7 +408,8 @@
   "other_notes": [
    "table of contents: 12 consecutive headings demoted to boilerplate",
    "childless heading read as body: 'Civil Commotion;'",
-   "childless heading read as body: 'Insurrection, Revolution or Rebellion;'"
+   "childless heading read as body: 'Insurrection, Revolution or Rebellion;'",
+   "enrichment carried over: the section list is unchanged"
   ],
   "unknown_labels": {},
   "warnings": []

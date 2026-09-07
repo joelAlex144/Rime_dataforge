@@ -43,7 +43,8 @@
     "label": "phone",
     "redacted": "1800…"
    }
-  ]
+  ],
+  "text_sha256": "ed239c85f65a41e4046faa6d5ebeec47b343780f029e7840f277f1acd454cba4"
  },
  "stages": [
   "extract",
@@ -55,14 +56,14 @@
   "write"
  ],
  "elapsed_ms": {
-  "extract": 30194.4,
-  "structure": 113.4,
-  "segment": 6.2,
-  "normalize": 179.9,
-  "pii_scan": 25.1,
-  "validate": 12.9,
-  "write": 101.5,
-  "total": 30633.7
+  "extract": 164.3,
+  "structure": 58.7,
+  "segment": 5.9,
+  "normalize": 86.5,
+  "pii_scan": 23.8,
+  "validate": 12.8,
+  "write": 149.1,
+  "total": 501.2
  },
  "structure": {
   "tool": "docling",
@@ -75,7 +76,7 @@
    "table": 1,
    "text": 388
   },
-  "demoted": 0,
+  "demoted": 1,
   "placeholders_stripped": 0,
   "splits": 30,
   "tables": [
@@ -138,9 +139,10 @@
   "note": "Informational. Nothing here removed or altered any text; the developer view shows it as the review trail."
  },
  "validate": {
-  "clause_count": 374,
+  "clause_count": 375,
   "by_kind": {
    "body": 290,
+   "boilerplate": 1,
    "definition": 17,
    "heading": 58,
    "table_row": 8,
@@ -149,7 +151,7 @@
   "body_clauses": 307,
   "readable": true,
   "splits": [
-   "split sec-1-p16: 2057 chars -> 3 pieces (922, 595, 538)",
+   "split sec-1-p15: 2057 chars -> 3 pieces (922, 595, 538)",
    "split sec-a2-2-2-p3: 1033 chars -> 2 pieces (889, 143)",
    "split sec-a3-3-1-a: 1105 chars -> 2 pieces (785, 319)",
    "split sec-a3-3-1-c: 1490 chars -> 2 pieces (838, 651)",
@@ -182,11 +184,17 @@
   ],
   "folds_and_merges": [
    "folded 58 list items into their runs (max 600 chars)",
-   "merged 62 short clauses (< 120 chars) into the next"
+   "merged 61 short clauses (< 120 chars) into the next"
   ],
   "oversized_ok": true,
   "max_clause_chars": 996,
-  "boilerplate_first_15": [],
+  "boilerplate_first_15": [
+   {
+    "id": "sec-1-b1",
+    "text": "UIN / reference",
+    "reason": "front_matter"
+   }
+  ],
   "expected_range": {
    "reference": "150-250 clauses for a ~12,000-word wording",
    "words": 21626,
@@ -198,7 +206,8 @@
   },
   "other_notes": [
    "childless heading read as body: 'DECLARATION IN CASE THE BORROWER/CO-'",
-   "childless heading read as body: 'BORROWER/GUARANTORS IS ILLITERATE OR EXECUTES'"
+   "childless heading read as body: 'BORROWER/GUARANTORS IS ILLITERATE OR EXECUTES'",
+   "enrichment carried over: the section list is unchanged"
   ],
   "unknown_labels": {},
   "warnings": []

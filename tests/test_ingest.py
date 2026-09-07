@@ -188,6 +188,87 @@ class TestCleanupPasses(unittest.TestCase):
         self.assertEqual(seg.drop_page_numbers(["- 12 -", "Page 3 of 9", "real text"]), ["real text"])
 
 
+class TestCleanLines(unittest.TestCase):
+    """Text-dump hygiene, one pattern per test."""
+
+    def test_page_markers_are_dropped(self):
+        out = ingest.clean_lines(["=== PAGE 1 ===", "Body text here.", "===PAGE 12===", "More."])
+        self.assertEqual(out, ["", "Body text here.", "", "More."])
+
+    def test_page_x_of_y_is_dropped_standalone_and_inside_a_line(self):
+        out = ingest.clean_lines(["Page 3 of 12", "To be signed by all Borrowers Page 1 of 12", "Page 3 of this form"])
+        self.assertEqual(out, ["", "To be signed by all Borrowers", "Page 3 of this form"])
+
+    def test_punctuation_only_lines_are_dropped(self):
+        out = ingest.clean_lines([".", "-", "......................", "\\__ --", "(a) kept"])
+        self.assertEqual(out, ["", "", "", "", "(a) kept"])
+
+    def test_box_glyph_lines_are_dropped_and_inline_glyphs_stripped(self):
+        out = ingest.clean_lines(["\u2610", "\uf0b0 Fixed", "NATURE OF LOAN: \uf0b0 Secured Loan \uf0b0 Unsecured Loan", "\u2611 \u25a1"])
+        self.assertEqual(out, ["", "Fixed", "NATURE OF LOAN: Secured Loan Unsecured Loan", ""])
+
+    def test_underscore_runs_read_as_blank_and_underscore_only_lines_go(self):
+        out = ingest.clean_lines(["APPLICATION NO.: ___________________", "Name ____ and date ______.", "__________"])
+        self.assertEqual(out, ["APPLICATION NO.: blank", "Name blank and date blank .", ""])
+
+    def test_repeated_header_across_txt_pages_is_dropped(self):
+        import tempfile
+        pages = []
+        for n in range(1, 5):
+            pages.append(f"=== PAGE {n} ===\nTo be signed by all Borrowers Page {n} of 4\n\n"
+                         f"Paragraph {n} of the body, long enough to be a clause of its own here.\n")
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "dump.txt"
+            p.write_text("\n".join(pages), encoding="utf-8")
+            blocks, _raw = ingest.extract_txt(p)
+        texts = [b.text for b in blocks]
+        self.assertEqual(len(texts), 4, texts)
+        self.assertFalse(any("signed" in t or "PAGE" in t for t in texts), texts)
+
+    def test_a_form_field_line_is_never_a_heading(self):
+        blocks = ingest.blocks_from_lines(["APPLICATION NO.: ____________", "", "Some body text follows it here."], markdown=False)
+        self.assertEqual([b.kind for b in blocks], ["para", "para"])
+        blocks = ingest.blocks_from_lines(["APPLICATION NO.: blank", "", "Some body text."], markdown=False)
+        self.assertEqual(blocks[0].kind, "para")
+
+    def test_a_single_word_is_never_a_heading(self):
+        blocks = ingest.blocks_from_lines(["Charges", "", "The fees are listed below in detail.", "", "GENERAL CONDITIONS", "", "Body."], markdown=False)
+        self.assertEqual([b.kind for b in blocks], ["para", "para", "heading", "para"])
+
+    def test_a_line_with_no_letters_is_never_a_heading(self):
+        blocks = ingest.blocks_from_lines(["12 / 34", "", "\u2612 \u2612", "", "Body text follows here."], markdown=False)
+        self.assertEqual([b.kind for b in blocks], ["para", "para", "para"])
+
+    def test_a_mostly_numeric_line_is_never_a_heading(self):
+        blocks = ingest.blocks_from_lines(["Call 022 - 45297300", "", "New Delhi- 110003", "", "Body text."], markdown=False)
+        self.assertEqual([b.kind for b in blocks], ["para", "para", "para"])
+
+
+class TestSpokenTitle(unittest.TestCase):
+    def test_clean_title_strips_underscores_uins_and_fixture_tags(self):
+        from library import clean_title
+        self.assertEqual(clean_title("fixture_arogya_sanjeevani"), "Arogya Sanjeevani")
+        self.assertEqual(clean_title("Bharat Griha Raksha (SYNTHETIC FIXTURE)"), "Bharat Griha Raksha")
+        self.assertEqual(clean_title("Saral Jeevan Bima UIN: 111N128V01"), "Saral Jeevan Bima")
+        self.assertEqual(clean_title("Arogya Sanjeevani IRDAN159RP0019V01202021"), "Arogya Sanjeevani")
+        self.assertEqual(clean_title("Second Wording"), "Second Wording")
+        self.assertEqual(clean_title("057879ada627b11c"), "057879ada627b11c")
+        self.assertEqual(clean_title("MOST IMPORTANT TERMS AND CONDITIONS (MITC)"), "Most Important Terms And Conditions (MITC)")
+
+    def test_spoken_title_prefers_the_first_real_heading(self):
+        from types import SimpleNamespace as B
+        blocks = [B(kind="body", text="Page 1 of 3", level=0), B(kind="heading", text="X", level=1),
+                  B(kind="heading", text="Two Wheeler Loan Agreement", level=1), B(kind="body", text="text", level=0)]
+        self.assertEqual(ingest.spoken_title_for(blocks, "fixture_two_wheeler_loan_agreement"), "Two Wheeler Loan Agreement")
+        self.assertEqual(ingest.spoken_title_for([], "fixture_two_wheeler_loan_agreement"), "Two Wheeler Loan Agreement")
+
+    def test_normalised_text_hash_ignores_case_whitespace_and_punctuation(self):
+        a = ingest.normalised_text_hash("Section 1.\nThe insurer pays,   the insured claims.")
+        b = ingest.normalised_text_hash("SECTION 1 -- the insurer pays the insured claims")
+        self.assertEqual(a, b)
+        self.assertNotEqual(a, ingest.normalised_text_hash("Section 2. The insurer pays."))
+
+
 class TestMergeAndSplit(unittest.TestCase):
     def test_runt_clause_merges_forward(self):
         text = "# H\nShort.\nThis following paragraph is comfortably longer than the minimum clause length."

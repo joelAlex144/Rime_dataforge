@@ -1,5 +1,6 @@
 {
  "title": "fixture_bharat_griha_raksha",
+ "spoken_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
  "doc_id": "23a9c597adf161d6",
  "synthetic": false,
  "readable": true,
@@ -116,9 +117,10 @@
     "label": "phone",
     "redacted": "1800…"
    }
-  ]
+  ],
+  "text_sha256": "c07d8454ff1cccff657b12a57d2884a6dd4d54f2b2b55d8bcda9eeb53fcb08ca"
  },
- "clause_count": 292,
+ "clause_count": 294,
  "clauses": [
   {
    "id": "sec-1",
@@ -127,8 +129,8 @@
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
    "item": null,
-   "text_display": "Bharat Griha Raksha Policy — Standard Policy Wordings. 17 items.",
-   "text_spoken": "Bharat Griha Raksha Policy — Standard Policy Wordings. seventeen items.",
+   "text_display": "Bharat Griha Raksha Policy — Standard Policy Wordings. 15 items.",
+   "text_spoken": "Bharat Griha Raksha Policy — Standard Policy Wordings. fifteen items.",
    "sentences": [
     [
      0,
@@ -179,7 +181,7 @@
     [
      55,
      57,
-     "seventeen"
+     "fifteen"
     ],
     [
      58,
@@ -189,7 +191,7 @@
    ],
    "kind": "heading",
    "level": 1,
-   "children": 17
+   "children": 15
   },
   {
    "id": "sec-1-p1",
@@ -391,7 +393,12 @@
      "row."
     ]
    ],
-   "kind": "table_stub"
+   "kind": "table_stub",
+   "spoken_override": {
+    "text": "The table is a policy summary table listing key details for an insurance policy (home building & contents). It has 8 columns representing specific policy attributes, and the row labels are in order: Policy ID, Coverage Type, Effective Date, Expiry Date, Premium Amount, Deductible Amount, Claim History Count, and Notes. Which one do you want?",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r1",
@@ -472,7 +479,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "The document is an insurance policy for home building and contents, issued under the Indian Reinsurance Administration Act, covering standard products as defined by IRDAI.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r2",
@@ -548,7 +560,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "Issued by Edelweiss General Insurance Company Limited, an IRDAI-registered insurer under the Indian Insurance Act, 1956, providing insurance products and services in accordance with applicable regulations.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r3",
@@ -589,7 +606,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "Here is the row of the table: UIN / reference: IRDAN159RP0019V01202021.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r4",
@@ -630,7 +652,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "The source page is 21, which provides the row of table data you need.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r5",
@@ -676,7 +703,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "Word count (body): 11,427.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r6",
@@ -717,7 +749,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "Section 68 is the row heading for 'Table' in the document.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r7",
@@ -763,7 +800,12 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "The row of the table was retrieved on 6 September 2026.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-t1-r8",
@@ -849,21 +891,26 @@
    ],
    "kind": "table_row",
    "spoken_on_request": true,
-   "parent": "sec-1-t1"
+   "parent": "sec-1-t1",
+   "spoken_override": {
+    "text": "The document provides guidance on IRDA regulations for insurance policies, detailing key requirements and compliance standards relevant to policyholders.",
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
-   "id": "sec-1-p10",
+   "id": "sec-1-p3",
    "index": 11,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
    "item": null,
-   "text_display": "Document type Issuer / source UIN / reference Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note.",
-   "text_spoken": "Document type Issuer / source UIN / reference Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note.",
+   "text_display": "Document type Issuer / source",
+   "text_spoken": "Document type Issuer / source",
    "sentences": [
     [
      0,
-     144
+     29
     ]
    ],
    "spoken_map": [
@@ -891,573 +938,598 @@
      23,
      29,
      "source"
-    ],
-    [
-     30,
-     33,
-     "UIN"
-    ],
-    [
-     34,
-     35,
-     "/"
-    ],
-    [
-     36,
-     45,
-     "reference"
-    ],
-    [
-     46,
-     52,
-     "Source"
-    ],
-    [
-     53,
-     58,
-     "pages"
-    ],
-    [
-     59,
-     63,
-     "Word"
-    ],
-    [
-     64,
-     69,
-     "count"
-    ],
-    [
-     70,
-     76,
-     "(body)"
-    ],
-    [
-     77,
-     84,
-     "Section"
-    ],
-    [
-     85,
-     93,
-     "headings"
-    ],
-    [
-     94,
-     103,
-     "Retrieved"
-    ],
-    [
-     104,
-     110,
-     "Source"
-    ],
-    [
-     111,
-     114,
-     "URL"
-    ],
-    [
-     115,
-     125,
-     "Provenance"
-    ],
-    [
-     126,
-     129,
-     "and"
-    ],
-    [
-     130,
-     138,
-     "handling"
-    ],
-    [
-     139,
-     144,
-     "note."
     ]
    ],
    "kind": "body"
   },
   {
-   "id": "sec-1-p11",
+   "id": "sec-1-b1",
    "index": 12,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
    "item": null,
-   "text_display": "Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
-   "text_spoken": "Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
+   "text_display": "UIN / reference",
+   "text_spoken": "UIN / reference",
    "sentences": [
     [
      0,
-     173
-    ],
-    [
-     174,
-     252
-    ],
-    [
-     253,
-     303
-    ],
-    [
-     304,
-     420
-    ],
-    [
-     421,
-     517
+     15
     ]
    ],
    "spoken_map": [
     [
      0,
+     3,
+     "UIN"
+    ],
+    [
      4,
-     "Text"
-    ],
-    [
      5,
-     8,
-     "was"
+     "/"
     ],
     [
-     9,
+     6,
+     15,
+     "reference"
+    ]
+   ],
+   "kind": "boilerplate",
+   "demoted_by": "front_matter",
+   "label": "text"
+  },
+  {
+   "id": "sec-1-p10",
+   "index": 13,
+   "section": 1,
+   "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
+   "subsection": null,
+   "item": null,
+   "text_display": "Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note. Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
+   "text_spoken": "Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note. Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
+   "sentences": [
+    [
+     0,
+     98
+    ],
+    [
+     99,
+     272
+    ],
+    [
+     273,
+     351
+    ],
+    [
+     352,
+     402
+    ],
+    [
+     403,
+     519
+    ],
+    [
+     520,
+     616
+    ]
+   ],
+   "spoken_map": [
+    [
+     0,
+     6,
+     "Source"
+    ],
+    [
+     7,
+     12,
+     "pages"
+    ],
+    [
+     13,
+     17,
+     "Word"
+    ],
+    [
      18,
-     "extracted"
-    ],
-    [
-     19,
      23,
-     "from"
+     "count"
     ],
     [
      24,
-     27,
-     "the"
+     30,
+     "(body)"
     ],
     [
-     28,
-     36,
-     "publicly"
+     31,
+     38,
+     "Section"
     ],
     [
-     37,
-     43,
-     "hosted"
-    ],
-    [
-     44,
+     39,
      47,
-     "PDF"
+     "headings"
     ],
     [
      48,
-     50,
-     "at"
+     57,
+     "Retrieved"
     ],
     [
-     51,
-     54,
-     "the"
-    ],
-    [
-     55,
      58,
-     "URL"
-    ],
-    [
-     59,
      64,
-     "above"
+     "Source"
     ],
     [
      65,
      68,
-     "and"
+     "URL"
     ],
     [
      69,
-     71,
-     "is"
+     79,
+     "Provenance"
     ],
     [
-     72,
-     82,
-     "reproduced"
-    ],
-    [
+     80,
      83,
-     89,
-     "as-is,"
+     "and"
     ],
     [
-     90,
-     94,
-     "with"
+     84,
+     92,
+     "handling"
     ],
     [
-     95,
-     102,
-     "running"
+     93,
+     98,
+     "note."
     ],
     [
+     99,
      103,
-     111,
-     "headers,"
+     "Text"
     ],
     [
-     112,
-     119,
-     "footers"
+     104,
+     107,
+     "was"
     ],
     [
-     120,
+     108,
+     117,
+     "extracted"
+    ],
+    [
+     118,
+     122,
+     "from"
+    ],
+    [
      123,
-     "and"
+     126,
+     "the"
     ],
     [
-     124,
-     128,
-     "page"
+     127,
+     135,
+     "publicly"
     ],
     [
-     129,
      136,
-     "numbers"
+     142,
+     "hosted"
     ],
     [
-     137,
-     144,
-     "removed"
-    ],
-    [
-     145,
-     148,
-     "and"
-    ],
-    [
-     149,
-     156,
-     "wrapped"
-    ],
-    [
-     157,
-     162,
-     "lines"
-    ],
-    [
-     163,
-     173,
-     "re-joined."
-    ],
-    [
-     174,
-     180,
-     "Tables"
-    ],
-    [
-     181,
-     184,
-     "and"
-    ],
-    [
-     185,
-     195,
-     "two-column"
-    ],
-    [
-     196,
-     206,
-     "definition"
-    ],
-    [
-     207,
-     212,
-     "lists"
-    ],
-    [
-     213,
-     215,
-     "in"
-    ],
-    [
-     216,
-     219,
-     "the"
-    ],
-    [
-     220,
-     228,
-     "original"
-    ],
-    [
-     229,
-     232,
-     "may"
-    ],
-    [
-     233,
-     237,
-     "read"
-    ],
-    [
-     238,
-     246,
-     "linearly"
-    ],
-    [
-     247,
-     252,
-     "here;"
-    ],
-    [
-     253,
-     258,
-     "check"
-    ],
-    [
-     259,
-     266,
-     "against"
-    ],
-    [
-     267,
-     270,
-     "the"
-    ],
-    [
-     271,
-     274,
+     143,
+     146,
      "PDF"
     ],
     [
-     275,
-     281,
-     "before"
+     147,
+     149,
+     "at"
     ],
     [
-     282,
-     289,
-     "relying"
+     150,
+     153,
+     "the"
     ],
     [
-     290,
-     292,
-     "on"
+     154,
+     157,
+     "URL"
     ],
     [
-     293,
-     296,
-     "any"
+     158,
+     163,
+     "above"
     ],
     [
-     297,
-     303,
-     "table."
+     164,
+     167,
+     "and"
     ],
     [
-     304,
-     308,
-     "This"
-    ],
-    [
-     309,
-     311,
+     168,
+     170,
      "is"
     ],
     [
-     312,
-     313,
-     "a"
+     171,
+     181,
+     "reproduced"
     ],
     [
-     314,
-     320,
-     "public"
+     182,
+     188,
+     "as-is,"
     ],
     [
-     321,
-     328,
-     "product"
-    ],
-    [
-     329,
-     336,
-     "wording"
-    ],
-    [
-     337,
-     338,
-     "/"
-    ],
-    [
-     339,
-     348,
-     "template,"
-    ],
-    [
-     349,
-     352,
-     "not"
-    ],
-    [
-     353,
-     354,
-     "a"
-    ],
-    [
-     355,
-     363,
-     "customer"
-    ],
-    [
-     364,
-     372,
-     "document"
-    ],
-    [
-     373,
-     374,
-     "—"
-    ],
-    [
-     375,
-     377,
-     "it"
-    ],
-    [
-     378,
-     386,
-     "contains"
-    ],
-    [
-     387,
-     389,
-     "no"
-    ],
-    [
-     390,
-     402,
-     "policyholder"
-    ],
-    [
-     403,
-     405,
-     "or"
-    ],
-    [
-     406,
-     414,
-     "borrower"
-    ],
-    [
-     415,
-     420,
-     "data."
-    ],
-    [
-     421,
-     423,
-     "If"
-    ],
-    [
-     424,
-     427,
-     "the"
-    ],
-    [
-     428,
-     432,
-     "demo"
-    ],
-    [
-     433,
-     439,
-     "should"
-    ],
-    [
-     440,
-     443,
-     "not"
-    ],
-    [
-     444,
-     448,
-     "show"
-    ],
-    [
-     449,
-     450,
-     "a"
-    ],
-    [
-     451,
-     457,
-     "brand,"
-    ],
-    [
-     458,
-     465,
-     "replace"
-    ],
-    [
-     466,
-     469,
-     "the"
-    ],
-    [
-     470,
-     476,
-     "issuer"
-    ],
-    [
-     477,
-     481,
-     "name"
-    ],
-    [
-     482,
-     486,
+     189,
+     193,
      "with"
     ],
     [
-     487,
-     488,
-     "a"
+     194,
+     201,
+     "running"
     ],
     [
-     489,
-     500,
-     "placeholder"
+     202,
+     210,
+     "headers,"
     ],
     [
-     501,
-     507,
+     211,
+     218,
+     "footers"
+    ],
+    [
+     219,
+     222,
+     "and"
+    ],
+    [
+     223,
+     227,
+     "page"
+    ],
+    [
+     228,
+     235,
+     "numbers"
+    ],
+    [
+     236,
+     243,
+     "removed"
+    ],
+    [
+     244,
+     247,
+     "and"
+    ],
+    [
+     248,
+     255,
+     "wrapped"
+    ],
+    [
+     256,
+     261,
+     "lines"
+    ],
+    [
+     262,
+     272,
+     "re-joined."
+    ],
+    [
+     273,
+     279,
+     "Tables"
+    ],
+    [
+     280,
+     283,
+     "and"
+    ],
+    [
+     284,
+     294,
+     "two-column"
+    ],
+    [
+     295,
+     305,
+     "definition"
+    ],
+    [
+     306,
+     311,
+     "lists"
+    ],
+    [
+     312,
+     314,
+     "in"
+    ],
+    [
+     315,
+     318,
+     "the"
+    ],
+    [
+     319,
+     327,
+     "original"
+    ],
+    [
+     328,
+     331,
+     "may"
+    ],
+    [
+     332,
+     336,
+     "read"
+    ],
+    [
+     337,
+     345,
+     "linearly"
+    ],
+    [
+     346,
+     351,
+     "here;"
+    ],
+    [
+     352,
+     357,
+     "check"
+    ],
+    [
+     358,
+     365,
+     "against"
+    ],
+    [
+     366,
+     369,
+     "the"
+    ],
+    [
+     370,
+     373,
+     "PDF"
+    ],
+    [
+     374,
+     380,
      "before"
     ],
     [
-     508,
-     517,
+     381,
+     388,
+     "relying"
+    ],
+    [
+     389,
+     391,
+     "on"
+    ],
+    [
+     392,
+     395,
+     "any"
+    ],
+    [
+     396,
+     402,
+     "table."
+    ],
+    [
+     403,
+     407,
+     "This"
+    ],
+    [
+     408,
+     410,
+     "is"
+    ],
+    [
+     411,
+     412,
+     "a"
+    ],
+    [
+     413,
+     419,
+     "public"
+    ],
+    [
+     420,
+     427,
+     "product"
+    ],
+    [
+     428,
+     435,
+     "wording"
+    ],
+    [
+     436,
+     437,
+     "/"
+    ],
+    [
+     438,
+     447,
+     "template,"
+    ],
+    [
+     448,
+     451,
+     "not"
+    ],
+    [
+     452,
+     453,
+     "a"
+    ],
+    [
+     454,
+     462,
+     "customer"
+    ],
+    [
+     463,
+     471,
+     "document"
+    ],
+    [
+     472,
+     473,
+     "—"
+    ],
+    [
+     474,
+     476,
+     "it"
+    ],
+    [
+     477,
+     485,
+     "contains"
+    ],
+    [
+     486,
+     488,
+     "no"
+    ],
+    [
+     489,
+     501,
+     "policyholder"
+    ],
+    [
+     502,
+     504,
+     "or"
+    ],
+    [
+     505,
+     513,
+     "borrower"
+    ],
+    [
+     514,
+     519,
+     "data."
+    ],
+    [
+     520,
+     522,
+     "If"
+    ],
+    [
+     523,
+     526,
+     "the"
+    ],
+    [
+     527,
+     531,
+     "demo"
+    ],
+    [
+     532,
+     538,
+     "should"
+    ],
+    [
+     539,
+     542,
+     "not"
+    ],
+    [
+     543,
+     547,
+     "show"
+    ],
+    [
+     548,
+     549,
+     "a"
+    ],
+    [
+     550,
+     556,
+     "brand,"
+    ],
+    [
+     557,
+     564,
+     "replace"
+    ],
+    [
+     565,
+     568,
+     "the"
+    ],
+    [
+     569,
+     575,
+     "issuer"
+    ],
+    [
+     576,
+     580,
+     "name"
+    ],
+    [
+     581,
+     585,
+     "with"
+    ],
+    [
+     586,
+     587,
+     "a"
+    ],
+    [
+     588,
+     599,
+     "placeholder"
+    ],
+    [
+     600,
+     606,
+     "before"
+    ],
+    [
+     607,
+     616,
      "chunking."
     ]
    ],
    "kind": "body"
   },
   {
-   "id": "sec-1-p13",
-   "index": 13,
+   "id": "sec-1-p11",
+   "index": 14,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
    "item": null,
-   "text_display": "Edelweiss General Insurance Company Limited, Bharat Griha Raksha Policy 11 Edelweiss General Insurance Company Limited, Bharat Griha Raksha Policy I UIN: IRDAN159RP0019V01202021",
-   "text_spoken": "Edelweiss General Insurance Company Limited, Bharat Griha Raksha Policy eleven Edelweiss General Insurance Company Limited, Bharat Griha Raksha Policy I UIN: IRDAN159RP0019V01202021",
+   "text_display": "Edelweiss General Insurance Company Limited, Bharat Griha Raksha Policy",
+   "text_spoken": "Edelweiss General Insurance Company Limited, Bharat Griha Raksha Policy",
    "sentences": [
     [
      0,
-     177
+     71
     ]
    ],
    "spoken_map": [
@@ -1505,78 +1577,99 @@
      65,
      71,
      "Policy"
-    ],
-    [
-     72,
-     74,
-     "eleven"
-    ],
-    [
-     75,
-     84,
-     "Edelweiss"
-    ],
-    [
-     85,
-     92,
-     "General"
-    ],
-    [
-     93,
-     102,
-     "Insurance"
-    ],
-    [
-     103,
-     110,
-     "Company"
-    ],
-    [
-     111,
-     119,
-     "Limited,"
-    ],
-    [
-     120,
-     126,
-     "Bharat"
-    ],
-    [
-     127,
-     132,
-     "Griha"
-    ],
-    [
-     133,
-     139,
-     "Raksha"
-    ],
-    [
-     140,
-     146,
-     "Policy"
-    ],
-    [
-     147,
-     148,
-     "I"
-    ],
-    [
-     149,
-     153,
-     "UIN:"
-    ],
-    [
-     154,
-     177,
-     "IRDAN159RP0019V01202021"
     ]
    ],
    "kind": "body"
   },
   {
-   "id": "sec-1-p14",
-   "index": 14,
+   "id": "sec-1-b2",
+   "index": 15,
+   "section": 1,
+   "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
+   "subsection": null,
+   "item": null,
+   "text_display": "11 Edelweiss General Insurance Company Limited, Bharat Griha Raksha Policy I UIN: IRDAN159RP0019V01202021",
+   "text_spoken": "eleven Edelweiss General Insurance Company Limited, Bharat Griha Raksha Policy I UIN: IRDAN159RP0019V01202021",
+   "sentences": [
+    [
+     0,
+     105
+    ]
+   ],
+   "spoken_map": [
+    [
+     0,
+     2,
+     "eleven"
+    ],
+    [
+     3,
+     12,
+     "Edelweiss"
+    ],
+    [
+     13,
+     20,
+     "General"
+    ],
+    [
+     21,
+     30,
+     "Insurance"
+    ],
+    [
+     31,
+     38,
+     "Company"
+    ],
+    [
+     39,
+     47,
+     "Limited,"
+    ],
+    [
+     48,
+     54,
+     "Bharat"
+    ],
+    [
+     55,
+     60,
+     "Griha"
+    ],
+    [
+     61,
+     67,
+     "Raksha"
+    ],
+    [
+     68,
+     74,
+     "Policy"
+    ],
+    [
+     75,
+     76,
+     "I"
+    ],
+    [
+     77,
+     81,
+     "UIN:"
+    ],
+    [
+     82,
+     105,
+     "IRDAN159RP0019V01202021"
+    ]
+   ],
+   "kind": "boilerplate",
+   "demoted_by": "front_matter",
+   "label": "text"
+  },
+  {
+   "id": "sec-1-p12",
+   "index": 16,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
@@ -1599,8 +1692,8 @@
    "kind": "body"
   },
   {
-   "id": "sec-1-b1",
-   "index": 15,
+   "id": "sec-1-b3",
+   "index": 17,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
@@ -1664,8 +1757,8 @@
    "label": "section_header"
   },
   {
-   "id": "sec-1-b2",
-   "index": 16,
+   "id": "sec-1-b4",
+   "index": 18,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
@@ -1709,8 +1802,8 @@
    "label": "section_header"
   },
   {
-   "id": "sec-1-b3",
-   "index": 17,
+   "id": "sec-1-b5",
+   "index": 19,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
@@ -1759,8 +1852,8 @@
    "label": "section_header"
   },
   {
-   "id": "sec-1-b4",
-   "index": 18,
+   "id": "sec-1-b6",
+   "index": 20,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
@@ -1809,8 +1902,8 @@
    "label": "section_header"
   },
   {
-   "id": "sec-1-b5",
-   "index": 19,
+   "id": "sec-1-b7",
+   "index": 21,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
@@ -1854,8 +1947,8 @@
    "label": "section_header"
   },
   {
-   "id": "sec-1-b6",
-   "index": 20,
+   "id": "sec-1-b8",
+   "index": 22,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
@@ -1894,8 +1987,8 @@
    "label": "section_header"
   },
   {
-   "id": "sec-1-b7",
-   "index": 21,
+   "id": "sec-1-b9",
+   "index": 23,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
@@ -1934,8 +2027,8 @@
    "label": "section_header"
   },
   {
-   "id": "sec-1-b8",
-   "index": 22,
+   "id": "sec-1-b10",
+   "index": 24,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
@@ -1984,8 +2077,8 @@
    "label": "section_header"
   },
   {
-   "id": "sec-1-b9",
-   "index": 23,
+   "id": "sec-1-b11",
+   "index": 25,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
@@ -2039,8 +2132,8 @@
    "label": "section_header"
   },
   {
-   "id": "sec-1-b10",
-   "index": 24,
+   "id": "sec-1-b12",
+   "index": 26,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
@@ -2084,8 +2177,8 @@
    "label": "section_header"
   },
   {
-   "id": "sec-1-b11",
-   "index": 25,
+   "id": "sec-1-b13",
+   "index": 27,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
@@ -2124,8 +2217,8 @@
    "label": "section_header"
   },
   {
-   "id": "sec-1-b12",
-   "index": 26,
+   "id": "sec-1-b14",
+   "index": 28,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
@@ -2174,8 +2267,8 @@
    "label": "section_header"
   },
   {
-   "id": "sec-1-p15",
-   "index": 27,
+   "id": "sec-1-p13",
+   "index": 29,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
@@ -2263,8 +2356,8 @@
    "kind": "body"
   },
   {
-   "id": "sec-1-b13",
-   "index": 28,
+   "id": "sec-1-b15",
+   "index": 30,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
@@ -2289,8 +2382,8 @@
    "label": "text"
   },
   {
-   "id": "sec-1-p16",
-   "index": 29,
+   "id": "sec-1-p14",
+   "index": 31,
    "section": 1,
    "section_title": "Bharat Griha Raksha Policy — Standard Policy Wordings",
    "subsection": null,
@@ -2692,7 +2785,7 @@
   },
   {
    "id": "sec-ca",
-   "index": 30,
+   "index": 32,
    "section": 2,
    "section_title": "This Policy and the Insurance Contract",
    "subsection": null,
@@ -2754,7 +2847,7 @@
   },
   {
    "id": "sec-ca-1",
-   "index": 31,
+   "index": 33,
    "section": 2,
    "section_title": "This Policy and the Insurance Contract",
    "subsection": null,
@@ -3158,7 +3251,7 @@
   },
   {
    "id": "sec-ca-2",
-   "index": 32,
+   "index": 34,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -3240,7 +3333,7 @@
   },
   {
    "id": "sec-ca-2-a",
-   "index": 33,
+   "index": 35,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -3696,7 +3789,7 @@
   },
   {
    "id": "sec-ca-2-c",
-   "index": 34,
+   "index": 36,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -4241,7 +4334,7 @@
   },
   {
    "id": "sec-ca-2-3-e",
-   "index": 35,
+   "index": 37,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -4416,7 +4509,7 @@
   },
   {
    "id": "sec-ca-2-4",
-   "index": 36,
+   "index": 38,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -4565,7 +4658,7 @@
   },
   {
    "id": "sec-ca-2-p2",
-   "index": 37,
+   "index": 39,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -4713,7 +4806,7 @@
   },
   {
    "id": "sec-ca-2-p3-1",
-   "index": 38,
+   "index": 40,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -5291,7 +5384,7 @@
   },
   {
    "id": "sec-ca-2-p5",
-   "index": 39,
+   "index": 41,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -5613,7 +5706,7 @@
   },
   {
    "id": "sec-ca-2-p7",
-   "index": 40,
+   "index": 42,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -5785,7 +5878,7 @@
   },
   {
    "id": "sec-ca-2-p8",
-   "index": 41,
+   "index": 43,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -6078,7 +6171,7 @@
   },
   {
    "id": "sec-ca-2-p8-b",
-   "index": 42,
+   "index": 44,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -6247,7 +6340,7 @@
   },
   {
    "id": "sec-ca-2-p9",
-   "index": 43,
+   "index": 45,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -6416,7 +6509,7 @@
   },
   {
    "id": "sec-ca-2-p10",
-   "index": 44,
+   "index": 46,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -6589,7 +6682,7 @@
   },
   {
    "id": "sec-ca-2-p11",
-   "index": 45,
+   "index": 47,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -6823,7 +6916,7 @@
   },
   {
    "id": "sec-ca-2-p12",
-   "index": 46,
+   "index": 48,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -6962,7 +7055,7 @@
   },
   {
    "id": "sec-ca-2-p14",
-   "index": 47,
+   "index": 49,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -7110,7 +7203,7 @@
   },
   {
    "id": "sec-ca-2-p15",
-   "index": 48,
+   "index": 50,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -7219,7 +7312,7 @@
   },
   {
    "id": "sec-ca-2-p16",
-   "index": 49,
+   "index": 51,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -7513,7 +7606,7 @@
   },
   {
    "id": "sec-ca-2-p17",
-   "index": 50,
+   "index": 52,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -7677,7 +7770,7 @@
   },
   {
    "id": "sec-ca-2-p18",
-   "index": 51,
+   "index": 53,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -7845,7 +7938,7 @@
   },
   {
    "id": "sec-ca-2-p21",
-   "index": 52,
+   "index": 54,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -8017,7 +8110,7 @@
   },
   {
    "id": "sec-ca-2-p23",
-   "index": 53,
+   "index": 55,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -8344,7 +8437,7 @@
   },
   {
    "id": "sec-ca-2-p25",
-   "index": 54,
+   "index": 56,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -8535,7 +8628,7 @@
   },
   {
    "id": "sec-ca-2-p26",
-   "index": 55,
+   "index": 57,
    "section": 3,
    "section_title": "To whom this Policy is issued and what it covers:",
    "subsection": null,
@@ -8754,7 +8847,7 @@
   },
   {
    "id": "sec-cb",
-   "index": 56,
+   "index": 58,
    "section": 4,
    "section_title": "Insured Events",
    "subsection": null,
@@ -8796,7 +8889,7 @@
   },
   {
    "id": "sec-cb-p1",
-   "index": 57,
+   "index": 59,
    "section": 4,
    "section_title": "Insured Events",
    "subsection": null,
@@ -8940,7 +9033,7 @@
   },
   {
    "id": "sec-cb-p3",
-   "index": 58,
+   "index": 60,
    "section": 4,
    "section_title": "Insured Events",
    "subsection": null,
@@ -9613,7 +9706,7 @@
   },
   {
    "id": "sec-cb-p5",
-   "index": 59,
+   "index": 61,
    "section": 4,
    "section_title": "Insured Events",
    "subsection": null,
@@ -9756,7 +9849,7 @@
   },
   {
    "id": "sec-cb-p6",
-   "index": 60,
+   "index": 62,
    "section": 4,
    "section_title": "Insured Events",
    "subsection": null,
@@ -9920,7 +10013,7 @@
   },
   {
    "id": "sec-cb-p7-a",
-   "index": 61,
+   "index": 63,
    "section": 4,
    "section_title": "Insured Events",
    "subsection": null,
@@ -10215,7 +10308,7 @@
   },
   {
    "id": "sec-cb-p8",
-   "index": 62,
+   "index": 64,
    "section": 4,
    "section_title": "Insured Events",
    "subsection": null,
@@ -10334,7 +10427,7 @@
   },
   {
    "id": "sec-cb-p9-a",
-   "index": 63,
+   "index": 65,
    "section": 4,
    "section_title": "Insured Events",
    "subsection": null,
@@ -10549,7 +10642,7 @@
   },
   {
    "id": "sec-cb-p11-a",
-   "index": 64,
+   "index": 66,
    "section": 4,
    "section_title": "Insured Events",
    "subsection": null,
@@ -10964,7 +11057,7 @@
   },
   {
    "id": "sec-cb-p13",
-   "index": 65,
+   "index": 67,
    "section": 4,
    "section_title": "Insured Events",
    "subsection": null,
@@ -11053,7 +11146,7 @@
   },
   {
    "id": "sec-cc",
-   "index": 66,
+   "index": 68,
    "section": 5,
    "section_title": "Home Building Cover",
    "subsection": null,
@@ -11100,7 +11193,7 @@
   },
   {
    "id": "sec-cc-1",
-   "index": 67,
+   "index": 69,
    "section": 6,
    "section_title": "What We cover",
    "subsection": null,
@@ -11147,7 +11240,7 @@
   },
   {
    "id": "sec-cc-1-p1",
-   "index": 68,
+   "index": 70,
    "section": 6,
    "section_title": "What We cover",
    "subsection": null,
@@ -11689,7 +11782,7 @@
   },
   {
    "id": "sec-cc-2",
-   "index": 69,
+   "index": 71,
    "section": 7,
    "section_title": "Your Home Building",
    "subsection": null,
@@ -11736,7 +11829,7 @@
   },
   {
    "id": "sec-cc-2-a",
-   "index": 70,
+   "index": 72,
    "section": 7,
    "section_title": "Your Home Building",
    "subsection": null,
@@ -12209,7 +12302,7 @@
   },
   {
    "id": "sec-cc-2-b-ii-b",
-   "index": 71,
+   "index": 73,
    "section": 7,
    "section_title": "Your Home Building",
    "subsection": null,
@@ -12583,7 +12676,7 @@
   },
   {
    "id": "sec-cc-3",
-   "index": 72,
+   "index": 74,
    "section": 8,
    "section_title": "Use for residence",
    "subsection": null,
@@ -12630,7 +12723,7 @@
   },
   {
    "id": "sec-cc-3-a",
-   "index": 73,
+   "index": 75,
    "section": 8,
    "section_title": "Use for residence",
    "subsection": null,
@@ -12912,7 +13005,7 @@
   },
   {
    "id": "sec-cc-3-b-ii",
-   "index": 74,
+   "index": 76,
    "section": 8,
    "section_title": "Use for residence",
    "subsection": null,
@@ -13271,7 +13364,7 @@
   },
   {
    "id": "sec-cc-4",
-   "index": 75,
+   "index": 77,
    "section": 9,
    "section_title": "Sum Insured",
    "subsection": null,
@@ -13313,7 +13406,7 @@
   },
   {
    "id": "sec-cc-4-a",
-   "index": 76,
+   "index": 78,
    "section": 9,
    "section_title": "Sum Insured",
    "subsection": null,
@@ -13821,7 +13914,7 @@
   },
   {
    "id": "sec-cc-4-c",
-   "index": 77,
+   "index": 79,
    "section": 9,
    "section_title": "Sum Insured",
    "subsection": null,
@@ -13995,7 +14088,7 @@
   },
   {
    "id": "sec-cc-4-d",
-   "index": 78,
+   "index": 80,
    "section": 9,
    "section_title": "Sum Insured",
    "subsection": null,
@@ -14437,7 +14530,7 @@
   },
   {
    "id": "sec-cc-4-p1",
-   "index": 79,
+   "index": 81,
    "section": 9,
    "section_title": "Sum Insured",
    "subsection": null,
@@ -14531,7 +14624,7 @@
   },
   {
    "id": "sec-cc-5",
-   "index": 80,
+   "index": 82,
    "section": 10,
    "section_title": "What We pay",
    "subsection": null,
@@ -14578,7 +14671,7 @@
   },
   {
    "id": "sec-cc-5-a",
-   "index": 81,
+   "index": 83,
    "section": 10,
    "section_title": "What We pay",
    "subsection": null,
@@ -15065,7 +15158,7 @@
   },
   {
    "id": "sec-cc-5-c",
-   "index": 82,
+   "index": 84,
    "section": 10,
    "section_title": "What We pay",
    "subsection": null,
@@ -15660,7 +15753,7 @@
   },
   {
    "id": "sec-cc-5-f-i",
-   "index": 83,
+   "index": 85,
    "section": 10,
    "section_title": "What We pay",
    "subsection": null,
@@ -16153,7 +16246,7 @@
   },
   {
    "id": "sec-cc-5-6-a",
-   "index": 84,
+   "index": 86,
    "section": 10,
    "section_title": "What We pay",
    "subsection": null,
@@ -16546,7 +16639,7 @@
   },
   {
    "id": "sec-cc-5-6-c",
-   "index": 85,
+   "index": 87,
    "section": 10,
    "section_title": "What We pay",
    "subsection": null,
@@ -17137,7 +17230,7 @@
   },
   {
    "id": "sec-cc-5-6-e",
-   "index": 86,
+   "index": 88,
    "section": 10,
    "section_title": "What We pay",
    "subsection": null,
@@ -17306,7 +17399,7 @@
   },
   {
    "id": "sec-cd",
-   "index": 87,
+   "index": 89,
    "section": 11,
    "section_title": "Home Contents Cover",
    "subsection": null,
@@ -17353,7 +17446,7 @@
   },
   {
    "id": "sec-cd-1",
-   "index": 88,
+   "index": 90,
    "section": 12,
    "section_title": "What We cover:",
    "subsection": null,
@@ -17400,7 +17493,7 @@
   },
   {
    "id": "sec-cd-1-p1",
-   "index": 89,
+   "index": 91,
    "section": 12,
    "section_title": "What We cover:",
    "subsection": null,
@@ -17673,7 +17766,7 @@
   },
   {
    "id": "sec-cd-1-p2",
-   "index": 90,
+   "index": 92,
    "section": 12,
    "section_title": "What We cover:",
    "subsection": null,
@@ -17702,7 +17795,7 @@
   },
   {
    "id": "sec-cd-2",
-   "index": 91,
+   "index": 93,
    "section": 13,
    "section_title": "Sum Insured:",
    "subsection": null,
@@ -17744,7 +17837,7 @@
   },
   {
    "id": "sec-cd-2-a",
-   "index": 92,
+   "index": 94,
    "section": 13,
    "section_title": "Sum Insured:",
    "subsection": null,
@@ -18306,7 +18399,7 @@
   },
   {
    "id": "sec-cd-2-c",
-   "index": 93,
+   "index": 95,
    "section": 13,
    "section_title": "Sum Insured:",
    "subsection": null,
@@ -18743,7 +18836,7 @@
   },
   {
    "id": "sec-cd-2-f",
-   "index": 94,
+   "index": 96,
    "section": 13,
    "section_title": "Sum Insured:",
    "subsection": null,
@@ -19264,7 +19357,7 @@
   },
   {
    "id": "sec-cd-3",
-   "index": 95,
+   "index": 97,
    "section": 14,
    "section_title": "What We pay",
    "subsection": null,
@@ -19311,7 +19404,7 @@
   },
   {
    "id": "sec-cd-3-a",
-   "index": 96,
+   "index": 98,
    "section": 14,
    "section_title": "What We pay",
    "subsection": null,
@@ -19725,7 +19818,7 @@
   },
   {
    "id": "sec-cd-3-b",
-   "index": 97,
+   "index": 99,
    "section": 14,
    "section_title": "What We pay",
    "subsection": null,
@@ -19998,7 +20091,7 @@
   },
   {
    "id": "sec-ce",
-   "index": 98,
+   "index": 100,
    "section": 15,
    "section_title": "Additional Covers",
    "subsection": null,
@@ -20040,7 +20133,7 @@
   },
   {
    "id": "sec-ce-1",
-   "index": 99,
+   "index": 101,
    "section": 16,
    "section_title": "Optional Covers:",
    "subsection": null,
@@ -20082,7 +20175,7 @@
   },
   {
    "id": "sec-ce-1-p1",
-   "index": 100,
+   "index": 102,
    "section": 16,
    "section_title": "Optional Covers:",
    "subsection": null,
@@ -20295,7 +20388,7 @@
   },
   {
    "id": "sec-ce-1-p2",
-   "index": 101,
+   "index": 103,
    "section": 16,
    "section_title": "Optional Covers:",
    "subsection": null,
@@ -20499,7 +20592,7 @@
   },
   {
    "id": "sec-ce-1-p2-i",
-   "index": 102,
+   "index": 104,
    "section": 16,
    "section_title": "Optional Covers:",
    "subsection": null,
@@ -20782,7 +20875,7 @@
   },
   {
    "id": "sec-ce-1-p3",
-   "index": 103,
+   "index": 105,
    "section": 16,
    "section_title": "Optional Covers:",
    "subsection": null,
@@ -21050,7 +21143,7 @@
   },
   {
    "id": "sec-ce-1-p4",
-   "index": 104,
+   "index": 106,
    "section": 16,
    "section_title": "Optional Covers:",
    "subsection": null,
@@ -21303,7 +21396,7 @@
   },
   {
    "id": "sec-ce-1-p5",
-   "index": 105,
+   "index": 107,
    "section": 16,
    "section_title": "Optional Covers:",
    "subsection": null,
@@ -21442,7 +21535,7 @@
   },
   {
    "id": "sec-ce-2",
-   "index": 106,
+   "index": 108,
    "section": 17,
    "section_title": "Add-ons:",
    "subsection": null,
@@ -21479,7 +21572,7 @@
   },
   {
    "id": "sec-ce-2-p1",
-   "index": 107,
+   "index": 109,
    "section": 17,
    "section_title": "Add-ons:",
    "subsection": null,
@@ -21723,7 +21816,7 @@
   },
   {
    "id": "sec-cf",
-   "index": 108,
+   "index": 110,
    "section": 18,
    "section_title": "Exclusions (What We do not cover) for all covers under this policy",
    "subsection": null,
@@ -21815,7 +21908,7 @@
   },
   {
    "id": "sec-cf-p1",
-   "index": 109,
+   "index": 111,
    "section": 18,
    "section_title": "Exclusions (What We do not cover) for all covers under this policy",
    "subsection": null,
@@ -22317,7 +22410,7 @@
   },
   {
    "id": "sec-cf-p1-3",
-   "index": 110,
+   "index": 112,
    "section": 18,
    "section_title": "Exclusions (What We do not cover) for all covers under this policy",
    "subsection": null,
@@ -22561,7 +22654,7 @@
   },
   {
    "id": "sec-cf-4",
-   "index": 111,
+   "index": 113,
    "section": 19,
    "section_title": "Pollution or contamination, unless",
    "subsection": null,
@@ -22613,7 +22706,7 @@
   },
   {
    "id": "sec-cf-4-i",
-   "index": 112,
+   "index": 114,
    "section": 19,
    "section_title": "Pollution or contamination, unless",
    "subsection": null,
@@ -22981,7 +23074,7 @@
   },
   {
    "id": "sec-cf-4-6",
-   "index": 113,
+   "index": 115,
    "section": 19,
    "section_title": "Pollution or contamination, unless",
    "subsection": null,
@@ -23408,7 +23501,7 @@
   },
   {
    "id": "sec-cf-4-9",
-   "index": 114,
+   "index": 116,
    "section": 19,
    "section_title": "Pollution or contamination, unless",
    "subsection": null,
@@ -23930,7 +24023,7 @@
   },
   {
    "id": "sec-cf-4-12",
-   "index": 115,
+   "index": 117,
    "section": 19,
    "section_title": "Pollution or contamination, unless",
    "subsection": null,
@@ -24004,7 +24097,7 @@
   },
   {
    "id": "sec-cg",
-   "index": 116,
+   "index": 118,
    "section": 20,
    "section_title": "Conditions",
    "subsection": null,
@@ -24041,7 +24134,7 @@
   },
   {
    "id": "sec-cgi",
-   "index": 117,
+   "index": 119,
    "section": 21,
    "section_title": "Your Obligations",
    "subsection": null,
@@ -24083,7 +24176,7 @@
   },
   {
    "id": "sec-cgi-1",
-   "index": 118,
+   "index": 120,
    "section": 21,
    "section_title": "Your Obligations",
    "subsection": null,
@@ -24539,7 +24632,7 @@
   },
   {
    "id": "sec-cgi-1-b",
-   "index": 119,
+   "index": 121,
    "section": 21,
    "section_title": "Your Obligations",
    "subsection": null,
@@ -25081,7 +25174,7 @@
   },
   {
    "id": "sec-cgi-2",
-   "index": 120,
+   "index": 122,
    "section": 22,
    "section_title": "Obligation to take care : You must:",
    "subsection": null,
@@ -25148,7 +25241,7 @@
   },
   {
    "id": "sec-cgi-2-a",
-   "index": 121,
+   "index": 123,
    "section": 22,
    "section_title": "Obligation to take care : You must:",
    "subsection": null,
@@ -25666,7 +25759,7 @@
   },
   {
    "id": "sec-cgi-2-3-b",
-   "index": 122,
+   "index": 124,
    "section": 22,
    "section_title": "Obligation to take care : You must:",
    "subsection": null,
@@ -25908,7 +26001,7 @@
   },
   {
    "id": "sec-cgi-2-4",
-   "index": 123,
+   "index": 125,
    "section": 22,
    "section_title": "Obligation to take care : You must:",
    "subsection": null,
@@ -26395,7 +26488,7 @@
   },
   {
    "id": "sec-cgi-2-5",
-   "index": 124,
+   "index": 126,
    "section": 22,
    "section_title": "Obligation to take care : You must:",
    "subsection": null,
@@ -26762,7 +26855,7 @@
   },
   {
    "id": "sec-cg-ii",
-   "index": 125,
+   "index": 127,
    "section": 23,
    "section_title": "Renewal of Policy",
    "subsection": null,
@@ -26809,7 +26902,7 @@
   },
   {
    "id": "sec-cg-ii-1",
-   "index": 126,
+   "index": 128,
    "section": 23,
    "section_title": "Renewal of Policy",
    "subsection": null,
@@ -27270,7 +27363,7 @@
   },
   {
    "id": "sec-cg-iii",
-   "index": 127,
+   "index": 129,
    "section": 24,
    "section_title": "Cancellation and Termination of Policy",
    "subsection": null,
@@ -27327,7 +27420,7 @@
   },
   {
    "id": "sec-cg-iii-1",
-   "index": 128,
+   "index": 130,
    "section": 25,
    "section_title": "Cancellation by You at any Time",
    "subsection": null,
@@ -27389,7 +27482,7 @@
   },
   {
    "id": "sec-cg-iii-1-a",
-   "index": 129,
+   "index": 131,
    "section": 25,
    "section_title": "Cancellation by You at any Time",
    "subsection": null,
@@ -27601,7 +27694,7 @@
   },
   {
    "id": "sec-cg-iii-1-p4",
-   "index": 130,
+   "index": 132,
    "section": 25,
    "section_title": "Cancellation by You at any Time",
    "subsection": null,
@@ -27795,7 +27888,7 @@
   },
   {
    "id": "sec-cg-iii-1-p5",
-   "index": 131,
+   "index": 133,
    "section": 25,
    "section_title": "Cancellation by You at any Time",
    "subsection": null,
@@ -27979,7 +28072,7 @@
   },
   {
    "id": "sec-cg-iii-1-p7",
-   "index": 132,
+   "index": 134,
    "section": 25,
    "section_title": "Cancellation by You at any Time",
    "subsection": null,
@@ -28223,7 +28316,7 @@
   },
   {
    "id": "sec-cg-iii-1-p10",
-   "index": 133,
+   "index": 135,
    "section": 25,
    "section_title": "Cancellation by You at any Time",
    "subsection": null,
@@ -28347,7 +28440,7 @@
   },
   {
    "id": "sec-cg-iii-2",
-   "index": 134,
+   "index": 136,
    "section": 26,
    "section_title": "Cancellation by Us:",
    "subsection": null,
@@ -28394,7 +28487,7 @@
   },
   {
    "id": "sec-cg-iii-2-a",
-   "index": 135,
+   "index": 137,
    "section": 26,
    "section_title": "Cancellation by Us:",
    "subsection": null,
@@ -28946,7 +29039,7 @@
   },
   {
    "id": "sec-cg-iii-3",
-   "index": 136,
+   "index": 138,
    "section": 27,
    "section_title": "Automatic termination of the Policy",
    "subsection": null,
@@ -29003,7 +29096,7 @@
   },
   {
    "id": "sec-cg-iii-3-p1",
-   "index": 137,
+   "index": 139,
    "section": 27,
    "section_title": "Automatic termination of the Policy",
    "subsection": null,
@@ -29390,7 +29483,7 @@
   },
   {
    "id": "sec-cg-iii-3-p2",
-   "index": 138,
+   "index": 140,
    "section": 27,
    "section_title": "Automatic termination of the Policy",
    "subsection": null,
@@ -29588,7 +29681,7 @@
   },
   {
    "id": "sec-cg-iii-3-p2-b",
-   "index": 139,
+   "index": 141,
    "section": 27,
    "section_title": "Automatic termination of the Policy",
    "subsection": null,
@@ -30100,7 +30193,7 @@
   },
   {
    "id": "sec-cg-iii-3-p2-c-i",
-   "index": 140,
+   "index": 142,
    "section": 27,
    "section_title": "Automatic termination of the Policy",
    "subsection": null,
@@ -30285,7 +30378,7 @@
   },
   {
    "id": "sec-cg-iii-3-p2-d",
-   "index": 141,
+   "index": 143,
    "section": 27,
    "section_title": "Automatic termination of the Policy",
    "subsection": null,
@@ -30757,7 +30850,7 @@
   },
   {
    "id": "sec-cg-iii-3-p3",
-   "index": 142,
+   "index": 144,
    "section": 27,
    "section_title": "Automatic termination of the Policy",
    "subsection": null,
@@ -31026,7 +31119,7 @@
   },
   {
    "id": "sec-cg-iv",
-   "index": 143,
+   "index": 145,
    "section": 28,
    "section_title": "Claims Procedure",
    "subsection": null,
@@ -31068,7 +31161,7 @@
   },
   {
    "id": "sec-cg-iv-p1",
-   "index": 144,
+   "index": 146,
    "section": 28,
    "section_title": "Claims Procedure",
    "subsection": null,
@@ -31414,7 +31507,7 @@
   },
   {
    "id": "sec-cg-iv-1",
-   "index": 145,
+   "index": 147,
    "section": 29,
    "section_title": "Immediate notice to Us",
    "subsection": null,
@@ -31466,7 +31559,7 @@
   },
   {
    "id": "sec-cg-iv-1-a",
-   "index": 146,
+   "index": 148,
    "section": 29,
    "section_title": "Immediate notice to Us",
    "subsection": null,
@@ -32051,7 +32144,7 @@
   },
   {
    "id": "sec-cg-iv-1-c-vii",
-   "index": 147,
+   "index": 149,
    "section": 29,
    "section_title": "Immediate notice to Us",
    "subsection": null,
@@ -32261,7 +32354,7 @@
   },
   {
    "id": "sec-cg-iv-2",
-   "index": 148,
+   "index": 150,
    "section": 30,
    "section_title": "Steps to prevent loss and damage",
    "subsection": null,
@@ -32323,7 +32416,7 @@
   },
   {
    "id": "sec-cg-iv-2-a",
-   "index": 149,
+   "index": 151,
    "section": 30,
    "section_title": "Steps to prevent loss and damage",
    "subsection": null,
@@ -32846,7 +32939,7 @@
   },
   {
    "id": "sec-cg-iv-3",
-   "index": 150,
+   "index": 152,
    "section": 31,
    "section_title": "Immediate notice to Authorities",
    "subsection": null,
@@ -32898,7 +32991,7 @@
   },
   {
    "id": "sec-cg-iv-3-a",
-   "index": 151,
+   "index": 153,
    "section": 31,
    "section_title": "Immediate notice to Authorities",
    "subsection": null,
@@ -33171,7 +33264,7 @@
   },
   {
    "id": "sec-cg-iv-3-p1",
-   "index": 152,
+   "index": 154,
    "section": 31,
    "section_title": "Immediate notice to Authorities",
    "subsection": null,
@@ -33458,7 +33551,7 @@
   },
   {
    "id": "sec-cg-iv-3-p1-b",
-   "index": 153,
+   "index": 155,
    "section": 31,
    "section_title": "Immediate notice to Authorities",
    "subsection": null,
@@ -33662,7 +33755,7 @@
   },
   {
    "id": "sec-cg-iv-4",
-   "index": 154,
+   "index": 156,
    "section": 32,
    "section_title": "Submit claim",
    "subsection": null,
@@ -33704,7 +33797,7 @@
   },
   {
    "id": "sec-cg-iv-4-a",
-   "index": 155,
+   "index": 157,
    "section": 32,
    "section_title": "Submit claim",
    "subsection": null,
@@ -34175,7 +34268,7 @@
   },
   {
    "id": "sec-cg-iv-4-b",
-   "index": 156,
+   "index": 158,
    "section": 32,
    "section_title": "Submit claim",
    "subsection": null,
@@ -34613,7 +34706,7 @@
   },
   {
    "id": "sec-cg-iv-5",
-   "index": 157,
+   "index": 159,
    "section": 33,
    "section_title": "Establish loss",
    "subsection": null,
@@ -34655,7 +34748,7 @@
   },
   {
    "id": "sec-cg-iv-5-a",
-   "index": 158,
+   "index": 160,
    "section": 33,
    "section_title": "Establish loss",
    "subsection": null,
@@ -35146,7 +35239,7 @@
   },
   {
    "id": "sec-cg-iv-5-b-iii",
-   "index": 159,
+   "index": 161,
    "section": 33,
    "section_title": "Establish loss",
    "subsection": null,
@@ -35399,7 +35492,7 @@
   },
   {
    "id": "sec-cg-iv-6",
-   "index": 160,
+   "index": 162,
    "section": 34,
    "section_title": "Fraudulent claim",
    "subsection": null,
@@ -35441,7 +35534,7 @@
   },
   {
    "id": "sec-cg-iv-6-p1",
-   "index": 161,
+   "index": 163,
    "section": 34,
    "section_title": "Fraudulent claim",
    "subsection": null,
@@ -35812,7 +35905,7 @@
   },
   {
    "id": "sec-cg-iv-7",
-   "index": 162,
+   "index": 164,
    "section": 35,
    "section_title": "Other insurance",
    "subsection": null,
@@ -35854,7 +35947,7 @@
   },
   {
    "id": "sec-cg-iv-7-a",
-   "index": 163,
+   "index": 165,
    "section": 35,
    "section_title": "Other insurance",
    "subsection": null,
@@ -36426,7 +36519,7 @@
   },
   {
    "id": "sec-cg-iv-7-d",
-   "index": 164,
+   "index": 166,
    "section": 35,
    "section_title": "Other insurance",
    "subsection": null,
@@ -36520,7 +36613,7 @@
   },
   {
    "id": "sec-cg-iv-8",
-   "index": 165,
+   "index": 167,
    "section": 36,
    "section_title": "Recovery action by Us",
    "subsection": null,
@@ -36572,7 +36665,7 @@
   },
   {
    "id": "sec-cg-iv-8-a",
-   "index": 166,
+   "index": 168,
    "section": 36,
    "section_title": "Recovery action by Us",
    "subsection": null,
@@ -37132,7 +37225,7 @@
   },
   {
    "id": "sec-cg-iv-8-a-iii",
-   "index": 167,
+   "index": 169,
    "section": 36,
    "section_title": "Recovery action by Us",
    "subsection": null,
@@ -37410,7 +37503,7 @@
   },
   {
    "id": "sec-cg-iv-8-c",
-   "index": 168,
+   "index": 170,
    "section": 36,
    "section_title": "Recovery action by Us",
    "subsection": null,
@@ -37861,7 +37954,7 @@
   },
   {
    "id": "sec-ch",
-   "index": 169,
+   "index": 171,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -37908,7 +38001,7 @@
   },
   {
    "id": "sec-cha",
-   "index": 170,
+   "index": 172,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -38329,7 +38422,7 @@
   },
   {
    "id": "sec-ch-p3",
-   "index": 171,
+   "index": 173,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -38918,7 +39011,7 @@
   },
   {
    "id": "sec-ch-p4",
-   "index": 172,
+   "index": 174,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -39572,7 +39665,7 @@
   },
   {
    "id": "sec-ch-p5",
-   "index": 173,
+   "index": 175,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -39806,7 +39899,7 @@
   },
   {
    "id": "sec-ch-p6",
-   "index": 174,
+   "index": 176,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -40045,7 +40138,7 @@
   },
   {
    "id": "sec-ch-p7",
-   "index": 175,
+   "index": 177,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -40259,7 +40352,7 @@
   },
   {
    "id": "sec-ch-p8",
-   "index": 176,
+   "index": 178,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -40428,7 +40521,7 @@
   },
   {
    "id": "sec-ch-p10-1",
-   "index": 177,
+   "index": 179,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -40911,7 +41004,7 @@
   },
   {
    "id": "sec-ch-p10-4",
-   "index": 178,
+   "index": 180,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -41291,7 +41384,7 @@
   },
   {
    "id": "sec-ch-p10-5",
-   "index": 179,
+   "index": 181,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -41804,7 +41897,7 @@
   },
   {
    "id": "sec-ch-p10-8",
-   "index": 180,
+   "index": 182,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -42258,7 +42351,7 @@
   },
   {
    "id": "sec-ch-p10-9",
-   "index": 181,
+   "index": 183,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -42711,7 +42804,7 @@
   },
   {
    "id": "sec-ch-p10-12",
-   "index": 182,
+   "index": 184,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -43269,7 +43362,7 @@
   },
   {
    "id": "sec-ch-p10-15",
-   "index": 183,
+   "index": 185,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -43790,7 +43883,7 @@
   },
   {
    "id": "sec-ch-p10-19",
-   "index": 184,
+   "index": 186,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -44257,7 +44350,7 @@
   },
   {
    "id": "sec-ch-p10-22",
-   "index": 185,
+   "index": 187,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -44386,7 +44479,7 @@
   },
   {
    "id": "sec-ch-p12",
-   "index": 186,
+   "index": 188,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -44555,7 +44648,7 @@
   },
   {
    "id": "sec-ch-p13",
-   "index": 187,
+   "index": 189,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -44734,7 +44827,7 @@
   },
   {
    "id": "sec-ch-p14",
-   "index": 188,
+   "index": 190,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -44993,7 +45086,7 @@
   },
   {
    "id": "sec-ch-p15",
-   "index": 189,
+   "index": 191,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -45346,7 +45439,7 @@
   },
   {
    "id": "sec-ch-p17",
-   "index": 190,
+   "index": 192,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -45610,7 +45703,7 @@
   },
   {
    "id": "sec-ch-p18",
-   "index": 191,
+   "index": 193,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -45769,7 +45862,7 @@
   },
   {
    "id": "sec-ch-p20",
-   "index": 192,
+   "index": 194,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -46137,7 +46230,7 @@
   },
   {
    "id": "sec-ch-p21",
-   "index": 193,
+   "index": 195,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -46510,7 +46603,7 @@
   },
   {
    "id": "sec-ch-p23",
-   "index": 194,
+   "index": 196,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -46918,7 +47011,7 @@
   },
   {
    "id": "sec-ch-p25",
-   "index": 195,
+   "index": 197,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -47337,7 +47430,7 @@
   },
   {
    "id": "sec-ch-p27",
-   "index": 196,
+   "index": 198,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -47785,7 +47878,7 @@
   },
   {
    "id": "sec-ch-p28",
-   "index": 197,
+   "index": 199,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -47909,7 +48002,7 @@
   },
   {
    "id": "sec-ch-p30",
-   "index": 198,
+   "index": 200,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -48077,7 +48170,7 @@
   },
   {
    "id": "sec-ch-p31",
-   "index": 199,
+   "index": 201,
    "section": 37,
    "section_title": "Changes to covers",
    "subsection": null,
@@ -48156,7 +48249,7 @@
   },
   {
    "id": "sec-ch-1",
-   "index": 200,
+   "index": 202,
    "section": 38,
    "section_title": "INSURING CLAUSE",
    "subsection": null,
@@ -48198,7 +48291,7 @@
   },
   {
    "id": "sec-ch-1-p1",
-   "index": 201,
+   "index": 203,
    "section": 38,
    "section_title": "INSURING CLAUSE",
    "subsection": null,
@@ -48587,7 +48680,7 @@
   },
   {
    "id": "sec-ch-1-p1-1-1",
-   "index": 202,
+   "index": 204,
    "section": 38,
    "section_title": "INSURING CLAUSE",
    "subsection": null,
@@ -48852,7 +48945,7 @@
   },
   {
    "id": "sec-ch-1-dup2",
-   "index": 203,
+   "index": 205,
    "section": 39,
    "section_title": "Civil Commotion;",
    "subsection": null,
@@ -48882,7 +48975,7 @@
   },
   {
    "id": "sec-ch-2",
-   "index": 204,
+   "index": 206,
    "section": 40,
    "section_title": "Insurrection, Revolution or Rebellion;",
    "subsection": null,
@@ -48922,7 +49015,7 @@
   },
   {
    "id": "sec-ch-3",
-   "index": 205,
+   "index": 207,
    "section": 41,
    "section_title": "Mutiny and/or Coup d'Etat;",
    "subsection": null,
@@ -48974,7 +49067,7 @@
   },
   {
    "id": "sec-ch-3-p1",
-   "index": 206,
+   "index": 208,
    "section": 41,
    "section_title": "Mutiny and/or Coup d'Etat;",
    "subsection": null,
@@ -49121,7 +49214,7 @@
   },
   {
    "id": "sec-ch-2-dup2",
-   "index": 207,
+   "index": 209,
    "section": 42,
    "section_title": "DEFINITIONS",
    "subsection": null,
@@ -49158,7 +49251,7 @@
   },
   {
    "id": "sec-ch-2-p1",
-   "index": 208,
+   "index": 210,
    "section": 42,
    "section_title": "DEFINITIONS",
    "subsection": null,
@@ -49457,7 +49550,7 @@
   },
   {
    "id": "sec-ch-2-p2",
-   "index": 209,
+   "index": 211,
    "section": 42,
    "section_title": "DEFINITIONS",
    "subsection": null,
@@ -49591,7 +49684,7 @@
   },
   {
    "id": "sec-ch-2-p3",
-   "index": 210,
+   "index": 212,
    "section": 42,
    "section_title": "DEFINITIONS",
    "subsection": null,
@@ -49710,7 +49803,7 @@
   },
   {
    "id": "sec-ch-2-p4",
-   "index": 211,
+   "index": 213,
    "section": 42,
    "section_title": "DEFINITIONS",
    "subsection": null,
@@ -49934,7 +50027,7 @@
   },
   {
    "id": "sec-ch-2-p5",
-   "index": 212,
+   "index": 214,
    "section": 42,
    "section_title": "DEFINITIONS",
    "subsection": null,
@@ -50043,7 +50136,7 @@
   },
   {
    "id": "sec-ch-3-dup2",
-   "index": 213,
+   "index": 215,
    "section": 43,
    "section_title": "EXCLUSIONS",
    "subsection": null,
@@ -50080,7 +50173,7 @@
   },
   {
    "id": "sec-ch-3-p1-dup2",
-   "index": 214,
+   "index": 216,
    "section": 43,
    "section_title": "EXCLUSIONS",
    "subsection": null,
@@ -50347,7 +50440,7 @@
   },
   {
    "id": "sec-ch-4",
-   "index": 215,
+   "index": 217,
    "section": 44,
    "section_title": "CHANGES/AMENDMENTS",
    "subsection": null,
@@ -50384,7 +50477,7 @@
   },
   {
    "id": "sec-ch-4-p2",
-   "index": 216,
+   "index": 218,
    "section": 44,
    "section_title": "CHANGES/AMENDMENTS",
    "subsection": null,
@@ -50632,7 +50725,7 @@
   },
   {
    "id": "sec-ch-4-p4",
-   "index": 217,
+   "index": 219,
    "section": 44,
    "section_title": "CHANGES/AMENDMENTS",
    "subsection": null,
@@ -50775,7 +50868,7 @@
   },
   {
    "id": "sec-ch-1-dup3",
-   "index": 218,
+   "index": 220,
    "section": 45,
    "section_title": "Insuring Clause",
    "subsection": null,
@@ -50817,7 +50910,7 @@
   },
   {
    "id": "sec-ch-1-1-1",
-   "index": 219,
+   "index": 221,
    "section": 45,
    "section_title": "Insuring Clause",
    "subsection": null,
@@ -51491,7 +51584,7 @@
   },
   {
    "id": "sec-ch-1-1-2",
-   "index": 220,
+   "index": 222,
    "section": 45,
    "section_title": "Insuring Clause",
    "subsection": null,
@@ -52008,7 +52101,7 @@
   },
   {
    "id": "sec-ch-1-1-4",
-   "index": 221,
+   "index": 223,
    "section": 45,
    "section_title": "Insuring Clause",
    "subsection": null,
@@ -52292,7 +52385,7 @@
   },
   {
    "id": "sec-ch-1-1-5",
-   "index": 222,
+   "index": 224,
    "section": 45,
    "section_title": "Insuring Clause",
    "subsection": null,
@@ -52626,7 +52719,7 @@
   },
   {
    "id": "sec-ch-1-1-6",
-   "index": 223,
+   "index": 225,
    "section": 45,
    "section_title": "Insuring Clause",
    "subsection": null,
@@ -52895,7 +52988,7 @@
   },
   {
    "id": "sec-ch-1-1-7",
-   "index": 224,
+   "index": 226,
    "section": 45,
    "section_title": "Insuring Clause",
    "subsection": null,
@@ -53294,7 +53387,7 @@
   },
   {
    "id": "sec-ch-1-1-8",
-   "index": 225,
+   "index": 227,
    "section": 45,
    "section_title": "Insuring Clause",
    "subsection": null,
@@ -53737,7 +53830,7 @@
   },
   {
    "id": "sec-ch-2-dup3",
-   "index": 226,
+   "index": 228,
    "section": 46,
    "section_title": "Definition",
    "subsection": null,
@@ -53774,7 +53867,7 @@
   },
   {
    "id": "sec-ch-2-p1-dup2",
-   "index": 227,
+   "index": 229,
    "section": 46,
    "section_title": "Definition",
    "subsection": null,
@@ -53998,7 +54091,7 @@
   },
   {
    "id": "sec-ch-3-dup3",
-   "index": 228,
+   "index": 230,
    "section": 47,
    "section_title": "Exclusions",
    "subsection": null,
@@ -54035,7 +54128,7 @@
   },
   {
    "id": "sec-ch-3-1",
-   "index": 229,
+   "index": 231,
    "section": 47,
    "section_title": "Exclusions",
    "subsection": null,
@@ -54232,7 +54325,7 @@
   },
   {
    "id": "sec-ch-3-dup4",
-   "index": 230,
+   "index": 232,
    "section": 48,
    "section_title": "Loss or damage to property",
    "subsection": null,
@@ -54289,7 +54382,7 @@
   },
   {
    "id": "sec-ch-3-a",
-   "index": 231,
+   "index": 233,
    "section": 48,
    "section_title": "Loss or damage to property",
    "subsection": null,
@@ -54694,7 +54787,7 @@
   },
   {
    "id": "sec-ch-3-p1-dup3",
-   "index": 232,
+   "index": 234,
    "section": 48,
    "section_title": "Loss or damage to property",
    "subsection": null,
@@ -54848,7 +54941,7 @@
   },
   {
    "id": "sec-ci",
-   "index": 233,
+   "index": 235,
    "section": 49,
    "section_title": "Waiver of Underinsurance",
    "subsection": null,
@@ -54895,7 +54988,7 @@
   },
   {
    "id": "sec-ci-p1",
-   "index": 234,
+   "index": 236,
    "section": 49,
    "section_title": "Waiver of Underinsurance",
    "subsection": null,
@@ -55128,7 +55221,7 @@
   },
   {
    "id": "sec-cj",
-   "index": 235,
+   "index": 237,
    "section": 50,
    "section_title": "Other Details",
    "subsection": null,
@@ -55170,7 +55263,7 @@
   },
   {
    "id": "sec-cj-1",
-   "index": 236,
+   "index": 238,
    "section": 51,
    "section_title": "Notices",
    "subsection": null,
@@ -55207,7 +55300,7 @@
   },
   {
    "id": "sec-cj-1-a",
-   "index": 237,
+   "index": 239,
    "section": 51,
    "section_title": "Notices",
    "subsection": null,
@@ -55579,7 +55672,7 @@
   },
   {
    "id": "sec-cj-2",
-   "index": 238,
+   "index": 240,
    "section": 52,
    "section_title": "Nomination for this Policy",
    "subsection": null,
@@ -55631,7 +55724,7 @@
   },
   {
    "id": "sec-cj-2-p1",
-   "index": 239,
+   "index": 241,
    "section": 52,
    "section_title": "Nomination for this Policy",
    "subsection": null,
@@ -55962,7 +56055,7 @@
   },
   {
    "id": "sec-cj-3",
-   "index": 240,
+   "index": 242,
    "section": 53,
    "section_title": "Applicable law and jurisdiction",
    "subsection": null,
@@ -56014,7 +56107,7 @@
   },
   {
    "id": "sec-cj-3-p1",
-   "index": 241,
+   "index": 243,
    "section": 53,
    "section_title": "Applicable law and jurisdiction",
    "subsection": null,
@@ -56123,7 +56216,7 @@
   },
   {
    "id": "sec-cj-4",
-   "index": 242,
+   "index": 244,
    "section": 54,
    "section_title": "Arbitration",
    "subsection": null,
@@ -56160,7 +56253,7 @@
   },
   {
    "id": "sec-cj-4-p1",
-   "index": 243,
+   "index": 245,
    "section": 54,
    "section_title": "Arbitration",
    "subsection": null,
@@ -56834,7 +56927,7 @@
   },
   {
    "id": "sec-ck",
-   "index": 244,
+   "index": 246,
    "section": 55,
    "section_title": "Grievances",
    "subsection": null,
@@ -56871,7 +56964,7 @@
   },
   {
    "id": "sec-ck-p1",
-   "index": 245,
+   "index": 247,
    "section": 55,
    "section_title": "Grievances",
    "subsection": null,
@@ -57030,7 +57123,7 @@
   },
   {
    "id": "sec-ck-p2",
-   "index": 246,
+   "index": 248,
    "section": 55,
    "section_title": "Grievances",
    "subsection": null,
@@ -57229,7 +57322,7 @@
   },
   {
    "id": "sec-ck-p3",
-   "index": 247,
+   "index": 249,
    "section": 55,
    "section_title": "Grievances",
    "subsection": null,
@@ -57373,7 +57466,7 @@
   },
   {
    "id": "sec-ck-p4",
-   "index": 248,
+   "index": 250,
    "section": 55,
    "section_title": "Grievances",
    "subsection": null,
@@ -57567,7 +57660,7 @@
   },
   {
    "id": "sec-ck-p5",
-   "index": 249,
+   "index": 251,
    "section": 55,
    "section_title": "Grievances",
    "subsection": null,
@@ -57946,7 +58039,7 @@
   },
   {
    "id": "sec-ck-p6",
-   "index": 250,
+   "index": 252,
    "section": 55,
    "section_title": "Grievances",
    "subsection": null,
@@ -58080,7 +58173,7 @@
   },
   {
    "id": "sec-ck-p7",
-   "index": 251,
+   "index": 253,
    "section": 55,
    "section_title": "Grievances",
    "subsection": null,
@@ -58423,7 +58516,7 @@
   },
   {
    "id": "sec-ck-p8",
-   "index": 252,
+   "index": 254,
    "section": 55,
    "section_title": "Grievances",
    "subsection": null,
@@ -58502,7 +58595,7 @@
   },
   {
    "id": "sec-ck-1",
-   "index": 253,
+   "index": 255,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -58544,7 +58637,7 @@
   },
   {
    "id": "sec-ck-1-p1",
-   "index": 254,
+   "index": 256,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -58902,7 +58995,7 @@
   },
   {
    "id": "sec-ck-1-p5",
-   "index": 255,
+   "index": 257,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -59086,7 +59179,7 @@
   },
   {
    "id": "sec-ck-1-p7",
-   "index": 256,
+   "index": 258,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -59245,7 +59338,7 @@
   },
   {
    "id": "sec-ck-1-p9",
-   "index": 257,
+   "index": 259,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -59434,7 +59527,7 @@
   },
   {
    "id": "sec-ck-1-p13",
-   "index": 258,
+   "index": 260,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -59632,7 +59725,7 @@
   },
   {
    "id": "sec-ck-1-p15",
-   "index": 259,
+   "index": 261,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -59756,7 +59849,7 @@
   },
   {
    "id": "sec-ck-1-p18",
-   "index": 260,
+   "index": 262,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -59914,7 +60007,7 @@
   },
   {
    "id": "sec-ck-1-p21",
-   "index": 261,
+   "index": 263,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -60087,7 +60180,7 @@
   },
   {
    "id": "sec-ck-1-p23",
-   "index": 262,
+   "index": 264,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -60271,7 +60364,7 @@
   },
   {
    "id": "sec-ck-1-p25",
-   "index": 263,
+   "index": 265,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -60395,7 +60488,7 @@
   },
   {
    "id": "sec-ck-1-p27",
-   "index": 264,
+   "index": 266,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -60554,7 +60647,7 @@
   },
   {
    "id": "sec-ck-1-p30",
-   "index": 265,
+   "index": 267,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -60727,7 +60820,7 @@
   },
   {
    "id": "sec-ck-1-p33",
-   "index": 266,
+   "index": 268,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -60869,7 +60962,7 @@
   },
   {
    "id": "sec-ck-1-p35",
-   "index": 267,
+   "index": 269,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -61013,7 +61106,7 @@
   },
   {
    "id": "sec-ck-1-p37",
-   "index": 268,
+   "index": 270,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -61140,7 +61233,7 @@
   },
   {
    "id": "sec-ck-1-p39",
-   "index": 269,
+   "index": 271,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -61254,7 +61347,7 @@
   },
   {
    "id": "sec-ck-1-p42",
-   "index": 270,
+   "index": 272,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -61435,7 +61528,7 @@
   },
   {
    "id": "sec-ck-1-p44",
-   "index": 271,
+   "index": 273,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -61569,7 +61662,7 @@
   },
   {
    "id": "sec-ck-1-p46",
-   "index": 272,
+   "index": 274,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -61693,7 +61786,7 @@
   },
   {
    "id": "sec-ck-1-p50",
-   "index": 273,
+   "index": 275,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -61861,7 +61954,7 @@
   },
   {
    "id": "sec-ck-1-p52",
-   "index": 274,
+   "index": 276,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -61995,7 +62088,7 @@
   },
   {
    "id": "sec-ck-1-p54",
-   "index": 275,
+   "index": 277,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -62109,7 +62202,7 @@
   },
   {
    "id": "sec-ck-1-p57",
-   "index": 276,
+   "index": 278,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -62652,7 +62745,7 @@
   },
   {
    "id": "sec-ck-1-p60",
-   "index": 277,
+   "index": 279,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -62843,7 +62936,7 @@
   },
   {
    "id": "sec-ck-1-p63",
-   "index": 278,
+   "index": 280,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -63042,7 +63135,7 @@
   },
   {
    "id": "sec-ck-1-p65",
-   "index": 279,
+   "index": 281,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -63211,7 +63304,7 @@
   },
   {
    "id": "sec-ck-1-p67",
-   "index": 280,
+   "index": 282,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -63410,7 +63503,7 @@
   },
   {
    "id": "sec-ck-1-p68",
-   "index": 281,
+   "index": 283,
    "section": 56,
    "section_title": "Insurance Ombudsman",
    "subsection": null,
@@ -63519,7 +63612,7 @@
   },
   {
    "id": "sec-cl",
-   "index": 282,
+   "index": 284,
    "section": 57,
    "section_title": "Information About us",
    "subsection": null,
@@ -63566,7 +63659,7 @@
   },
   {
    "id": "sec-cl-p1",
-   "index": 283,
+   "index": 285,
    "section": 57,
    "section_title": "Information About us",
    "subsection": null,
@@ -63804,7 +63897,7 @@
   },
   {
    "id": "sec-cl-p3",
-   "index": 284,
+   "index": 286,
    "section": 57,
    "section_title": "Information About us",
    "subsection": null,
@@ -64227,7 +64320,7 @@
   },
   {
    "id": "sec-cl-p4",
-   "index": 285,
+   "index": 287,
    "section": 57,
    "section_title": "Information About us",
    "subsection": null,
@@ -64772,7 +64865,7 @@
   },
   {
    "id": "sec-cl-p4-iv",
-   "index": 286,
+   "index": 288,
    "section": 57,
    "section_title": "Information About us",
    "subsection": null,
@@ -65269,7 +65362,7 @@
   },
   {
    "id": "sec-cl-p4-vi",
-   "index": 287,
+   "index": 289,
    "section": 57,
    "section_title": "Information About us",
    "subsection": null,
@@ -65830,7 +65923,7 @@
   },
   {
    "id": "sec-cl-p7",
-   "index": 288,
+   "index": 290,
    "section": 57,
    "section_title": "Information About us",
    "subsection": null,
@@ -65953,7 +66046,7 @@
   },
   {
    "id": "sec-cl-p8",
-   "index": 289,
+   "index": 291,
    "section": 57,
    "section_title": "Information About us",
    "subsection": null,
@@ -66221,7 +66314,7 @@
   },
   {
    "id": "sec-cl-p9",
-   "index": 290,
+   "index": 292,
    "section": 57,
    "section_title": "Information About us",
    "subsection": null,
@@ -66420,7 +66513,7 @@
   },
   {
    "id": "sec-cl-p10",
-   "index": 291,
+   "index": 293,
    "section": 57,
    "section_title": "Information About us",
    "subsection": null,
@@ -66635,7 +66728,7 @@
    "table": 1,
    "text": 435
   },
-  "demoted": 1,
+  "demoted": 3,
   "placeholders_stripped": 0,
   "splits": 0,
   "tables": [
@@ -66646,5 +66739,287 @@
    }
   ]
  },
- "report_file": "bharat_griha_raksha.ingest_report.json"
+ "report_file": "bharat_griha_raksha.ingest_report.json",
+ "sections": [
+  {
+   "id": "sec-ca",
+   "title": "This Policy and the Insurance Contract",
+   "brief": {
+    "text": "This section defines special meanings of certain words throughout the policy.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 8
+  },
+  {
+   "id": "sec-cb",
+   "title": "Insured Events",
+   "brief": {
+    "text": "covers physical loss or damage to Insured Property from specified events during Policy Period.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 3
+  },
+  {
+   "id": "sec-cc",
+   "title": "Home Building Cover",
+   "brief": {
+    "text": "covers Home Building Cover provisions including coverage scope, conditions, and claim procedures.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 7
+  },
+  {
+   "id": "sec-cd",
+   "title": "Home Contents Cover",
+   "brief": {
+    "text": "Home Contents Cover. 7 items.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 3
+  },
+  {
+   "id": "sec-ce",
+   "title": "Additional Covers",
+   "brief": {
+    "text": "lists additional cover options including Valuable Contents and Personal Accident coverage details.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 2
+  },
+  {
+   "id": "sec-cf",
+   "title": "Exclusions (What We do not cover) for all covers under this policy",
+   "brief": {
+    "text": "lists exclusions that define what is not covered under the policy",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 3
+  },
+  {
+   "id": "sec-cg",
+   "title": "Conditions",
+   "brief": {
+    "text": "lists conditions governing claim processing and policy terms.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 17
+  },
+  {
+   "id": "sec-ch",
+   "title": "Changes to covers",
+   "brief": {
+    "text": "lists losses excluded from Sabotage and Terrorism Damage Cover",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 23
+  },
+  {
+   "id": "sec-ci",
+   "title": "Waiver of Underinsurance",
+   "brief": {
+    "text": "describes the waiver of underinsurance condition in the Bharat Griha Raksha Policy.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1
+  },
+  {
+   "id": "sec-cj",
+   "title": "Other Details",
+   "brief": {
+    "text": "lists other details including notice procedures and claim liability clauses.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 2
+  },
+  {
+   "id": "sec-ck",
+   "title": "Grievances",
+   "brief": {
+    "text": "This section describes the procedure for addressing grievances and provides contact details for resolution.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 10
+  },
+  {
+   "id": "sec-cl",
+   "title": "Information About us",
+   "brief": {
+    "text": "covers the agreed bank clause and its provisions regarding payment to a bank, settlements, risk increase, and notification requirements.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 4
+  }
+ ],
+ "overview": {
+  "text": "This document is a policy and insurance contract for Bharat Griha Raksha, issued by the insurer. It is organized into multiple sections as listed, including Policy and Insurance Contract (24 clauses), Insured Events (9 clauses), Home Building Cover (15 clauses), Home Contents Cover (7 clauses), Additional Covers (7 clauses), Exclusions (6 clauses), Conditions (36 clauses), Changes to covers (54 clauses), Waiver of Underinsurance (1 clause), Other Details (4 clauses), Grievances (36 clauses), and Information About us (9 clauses). The sections are presented in the specified order. Listening from start to finish takes about 83 minutes.",
+  "generated": true,
+  "provider": "ollama",
+  "listening_minutes": 83,
+  "chars_per_second": 13.97,
+  "chars_per_second_source": "measured from 4 trace file(s)"
+ },
+ "topics": [
+  {
+   "topic": "Exclusions",
+   "section_id": "sec-cf",
+   "heading": "Exclusions (What We do not cover) for all covers under this policy",
+   "generated": true,
+   "provider": "ollama"
+  },
+  {
+   "topic": "Grievances and contacts",
+   "section_id": "sec-ck",
+   "heading": "Grievances",
+   "generated": true,
+   "provider": "ollama"
+  },
+  {
+   "topic": "Read from the start",
+   "section_id": null,
+   "heading": null,
+   "generated": false
+  }
+ ],
+ "enrichment": {
+  "provider": "ollama",
+  "model": "granite4.2:3b",
+  "elapsed_ms": 236718,
+  "fields": [
+   "overview",
+   "sections",
+   "topics"
+  ],
+  "done": [
+   "overview",
+   "sections",
+   "suggested_questions",
+   "tables",
+   "tags",
+   "topics"
+  ],
+  "guard_rejections": [
+   {
+    "field": "brief:sec-ch",
+    "reasons": [
+     "unparseable reply: Extra data: line 1 column 17 (char 16)",
+     "unparseable reply: Extra data: line 1 column 95 (char 94)"
+    ],
+    "fallback": "Changes to covers. 54 items."
+   },
+   {
+    "field": "topics",
+    "reasons": [
+     "Expecting ':' delimiter: line 1 column 42 (char 41)"
+    ]
+   },
+   {
+    "field": "tags:batch0",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch1",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch2",
+    "reasons": [
+     "Expecting property name enclosed in double quotes: line 1 column 44 (char 43)"
+    ]
+   },
+   {
+    "field": "tags:batch3",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch4",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch5",
+    "reasons": [
+     "Expecting property name enclosed in double quotes: line 1 column 52 (char 51)"
+    ]
+   },
+   {
+    "field": "tags:batch6",
+    "reasons": [
+     "Expecting ':' delimiter: line 2 column 4 (char 33)"
+    ]
+   },
+   {
+    "field": "tags:batch7",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch8",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch9",
+    "reasons": [
+     "Extra data: line 5 column 1 (char 48)"
+    ]
+   },
+   {
+    "field": "tags:batch10",
+    "reasons": [
+     "Expecting value: line 1 column 25 (char 24)"
+    ]
+   },
+   {
+    "field": "tags:batch11",
+    "reasons": [
+     "Extra data: line 1 column 53 (char 52)"
+    ]
+   },
+   {
+    "field": "questions:sec-cc",
+    "reasons": [
+     "Extra data: line 1 column 53 (char 52)"
+    ]
+   },
+   {
+    "field": "brief:sec-cd",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "unparseable reply: Extra data: line 1 column 18 (char 17)"
+    ],
+    "fallback": "Home Contents Cover. 7 items."
+   },
+   {
+    "field": "topics",
+    "reasons": [
+     "Expecting ':' delimiter: line 1 column 42 (char 41)"
+    ]
+   }
+  ],
+  "tokens": {
+   "in": 6342,
+   "out": 1167
+  }
+ }
 }

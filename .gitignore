@@ -26,3 +26,5 @@ examples/policy-reader/web/*.tsbuildinfo
 # Commit the extracted .docling.json and the fixture, never the source file, unless licensing is confirmed.
 examples/policy-reader/fixtures/source/*.pdf
 examples/policy-reader/fixtures/source/*.docx
+_stage/
+examples/policy-reader/fixtures/.incoming_*

@@ -8,7 +8,7 @@
  * interrupt -- see buildInterrupt() in reducer.ts.
  */
 import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
-import { Action, DISCONNECTED, State, buildInterrupt, buildOpen, buildPause, initialState, reducer, wordAt } from './reducer'
+import { Action, DISCONNECTED, State, buildCut, buildInterrupt, buildOpen, buildPause, initialState, reducer, wordAt } from './reducer'
 
 const ACK_INTERVAL_MS = 100
 
@@ -287,9 +287,13 @@ export type Session = {
   play: () => void
   pause: () => void
   ask: (q: string) => void
+  reply: (text: string) => void
   resume: () => void
   open: (name: string) => void
+  remove: (docId: string, force?: boolean) => Promise<boolean>
   jump: (unitId: string) => void
+  topic: (sectionId: string | null) => void
+  choose: (choice: 'now' | 'overview_first') => void
   player: AudioPlayer
 }
 
@@ -529,6 +533,12 @@ export function useSession(): Session {
   )
 
   const resume = useCallback(() => send({ type: 'resume' }), [send])
+  // Delete a document (the library entry and its files). The server broadcasts
+  // document_deleted to every tab; a committed fixture needs force.
+  const remove = useCallback(async (docId: string, force = false) => {
+    const r = await fetch(`/documents/${encodeURIComponent(docId)}${force ? '?force=1' : ''}`, { method: 'DELETE' })
+    return r.ok
+  }, [])
   const open = useCallback(
     (name: string) => {
       const sounding = playerRef.current.playheadUnit() !== null
@@ -538,7 +548,24 @@ export function useSession(): Session {
     },
     [send],
   )
-  const jump = useCallback((unitId: string) => send({ type: 'jump', unit_id: unitId }), [send])
+  // Every jump is a cut: flush locally and ack the playhead first when the
+  // voice is sounding, then the request; the server routes it through the
+  // interruption path with a different resume target.
+  const cut = useCallback(
+    (msg: any) => {
+      const sounding = playerRef.current.playheadUnit() !== null
+      const ctx = playerRef.current.playheadUnit()?.contextId ?? ctxRef.current
+      const at = sounding ? playerRef.current.flush() : 0
+      for (const m of buildCut(msg, ctx, at, sounding)) send(m)
+    },
+    [send],
+  )
+  const jump = useCallback((unitId: string) => cut({ type: 'jump', unit_id: unitId, reason: 'spoiler_offer' }), [cut])
+  const topic = useCallback((sectionId: string | null) => cut({ type: 'topic', section_id: sectionId }), [cut])
+  const choose = useCallback((choice: 'now' | 'overview_first') => send({ type: 'choice', choice }), [send])
+  // A button on a prompt: the same `ask` the voice would hear, routed by the
+  // server against the open prompt first; no "answering" phase on screen.
+  const reply = useCallback((text: string) => send({ type: 'ask', question: text }), [send])
 
   return useMemo(
     () => ({
@@ -551,10 +578,14 @@ export function useSession(): Session {
       ask,
       resume,
       open,
+      remove,
       jump,
+      topic,
+      choose,
+      reply,
       player: playerRef.current,
     }),
-    [state, send, interrupt, play, pause, ask, resume, open, jump],
+    [state, send, interrupt, play, pause, ask, resume, open, remove, jump, topic, choose, reply],
   )
 }
 

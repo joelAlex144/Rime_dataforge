@@ -1,0 +1,26 @@
+{
+  "fixture": "policy.json",
+  "note": "Scripted demo questions for the hero fixture. Each carries the listener's position (last clause heard, read cursor) and the branch and clause it must resolve to. This is grounding correctness on a fixed script, not retrieval quality.",
+  "questions": [
+    {"question": "what does that mean",                    "last_heard": "sec-4b-ii",   "cursor": "sec-4b-iii",  "expected_path": "deictic",     "expected_unit": "sec-4b-ii",   "expected_kind": "deictic"},
+    {"question": "repeat that",                            "last_heard": "sec-9c-vii",  "cursor": "sec-9c-vii",  "expected_path": "deictic",     "expected_unit": "sec-9c-vii",  "expected_kind": "deictic"},
+    {"question": "what does bodily injury mean",           "last_heard": "sec-10a-i",   "cursor": "sec-10a-i",   "expected_path": "definition",  "expected_unit": "sec-3a-iii",  "expected_kind": "in_scope"},
+    {"question": "what is an occurrence",                  "last_heard": "sec-10a-i",   "cursor": "sec-10a-i",   "expected_path": "definition",  "expected_unit": "sec-3a-viii", "expected_kind": "in_scope"},
+    {"question": "define fungi",                           "last_heard": "sec-4b-ii",   "cursor": "sec-4b-iii",  "expected_path": "definition",  "expected_unit": "sec-3b-vi",   "expected_kind": "in_scope"},
+    {"question": "what is replacement cost",               "last_heard": "sec-9b-iii",  "cursor": "sec-9b-iv",   "expected_path": "definition",  "expected_unit": "sec-3b-v",    "expected_kind": "in_scope"},
+    {"question": "what does vacant mean",                  "last_heard": "sec-4a-vi",   "cursor": "sec-4a-vi",   "expected_path": "definition",  "expected_unit": "sec-3b-viii", "expected_kind": "in_scope"},
+    {"question": "meaning of insured location",            "last_heard": "sec-10a-i",   "cursor": "sec-10a-i",   "expected_path": "definition",  "expected_unit": "sec-3a-vii",  "expected_kind": "in_scope"},
+    {"question": "what is business",                       "last_heard": "sec-1-ii",    "cursor": "sec-1-ii",    "expected_path": "definition",  "expected_unit": "sec-3a-iv",   "expected_kind": "in_scope"},
+    {"question": "what is in section 4 b 7",               "last_heard": "sec-4c-i",    "cursor": "sec-4c-i",    "expected_path": "section_ref", "expected_unit": "sec-4b-vii",  "expected_kind": "in_scope"},
+    {"question": "what does section 8 b 2 say",            "last_heard": "sec-13b-vii", "cursor": "sec-13b-vii", "expected_path": "section_ref", "expected_unit": "sec-8b-ii",   "expected_kind": "in_scope"},
+    {"question": "how much is the windstorm and hail deductible", "last_heard": "sec-1-vii", "cursor": "sec-1-viii", "expected_path": "bm25",   "expected_unit": "sec-1-vii",   "expected_kind": "in_scope"},
+    {"question": "what is the limit for coverage C",       "last_heard": "sec-2a-iii",  "cursor": "sec-2a-vi",   "expected_path": "bm25",        "expected_unit": "sec-2a-iii",  "expected_kind": "in_scope"},
+    {"question": "what about rust and corrosion",          "last_heard": "sec-4b-ii",   "cursor": "sec-4b-iii",  "expected_path": "bm25",        "expected_unit": "sec-4b-ii",   "expected_kind": "in_scope"},
+    {"question": "what refund do I get if I cancel",       "last_heard": "sec-8b-i",    "cursor": "sec-8b-ii",   "expected_path": "bm25",        "expected_unit": "sec-8b-ii",   "expected_kind": "in_scope"},
+    {"question": "what is the time limit for a suit against you", "last_heard": "sec-9c-vi", "cursor": "sec-9c-vii", "expected_path": "bm25",     "expected_unit": "sec-9c-vii",  "expected_kind": "in_scope"},
+    {"question": "what is the fire department service charge", "last_heard": "sec-6c-iv", "cursor": "sec-6c-iv", "expected_path": "bm25",        "expected_unit": "sec-6c-iv",   "expected_kind": "in_scope"},
+    {"question": "how much for theft of jewelry",          "last_heard": "sec-7a-vi",   "cursor": "sec-7a-ix",   "expected_path": "bm25",        "expected_unit": "sec-7a-vii",  "expected_kind": "in_scope"},
+    {"question": "what happens if I die",                  "last_heard": "sec-4b-i",    "cursor": "sec-4b-iii",  "expected_path": "bm25",        "expected_unit": "sec-13a-vii", "expected_kind": "beyond_cursor"},
+    {"question": "what is the capital of France",          "last_heard": "sec-4b-i",    "cursor": "sec-4b-iii",  "expected_path": "none",        "expected_unit": null,          "expected_kind": "not_found"}
+  ]
+}

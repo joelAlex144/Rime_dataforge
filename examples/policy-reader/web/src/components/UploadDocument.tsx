@@ -1,7 +1,7 @@
 /**
  * One upload, two faces.
  *
- * The listener face shows a progress bar keyed to the seven pipeline stages,
+ * The listener face shows a progress bar keyed to the eight pipeline stages,
  * the elapsed time, and the document's title when it lands. Nothing else: no
  * stage names, no counts, no scan findings. The developer face shows the
  * stage list with per-stage status and time, then the ingest report in full
@@ -14,7 +14,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Upload } from 'lucide-react'
 
-export const STAGES = ['extract', 'structure', 'segment', 'normalize', 'pii_scan', 'validate', 'write']
+export const STAGES = ['extract', 'structure', 'segment', 'normalize', 'pii_scan', 'validate', 'write', 'enrich']
 
 export type LibraryEntry = {
   doc_id: string

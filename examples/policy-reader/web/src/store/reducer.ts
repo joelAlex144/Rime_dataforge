@@ -24,6 +24,7 @@ export type StatusCells = {
   client_ws?: Cell
   stt?: Cell
   llm?: Cell
+  enrich_rest?: { enabled: boolean; navigator_waiting: number }
   upload_enabled?: boolean
 }
 
@@ -39,10 +40,12 @@ export type DocEntry = {
     minutes_left: number
   }
   referral: string
+  spoken_title?: string
   unreviewed?: boolean
   doc_id?: string
   reviewed?: boolean
   readable?: boolean
+  navigator?: 'ready' | 'preparing' | 'mechanical'
 }
 
 export type Unit = {
@@ -123,6 +126,18 @@ export type State = {
 
   phase: Phase
   answer: Answer | null
+  // Navigator: topic chips shown while the overview plays, and the one open
+  // prompt (choice | offer | start_choice | confirm_topic | table_choice) whose
+  // options render as buttons; the free-text box answers any of them too.
+  topics: { topic: string; section_id: string | null; heading: string | null }[]
+  prompt: Prompt | null
+  heardAs: HeardAs | null
+  // While a document is processed: the section list the structure pass found
+  // (before enrichment) and the companion's lines, a muted running transcript.
+  sectionsFound: string[]
+  companionLines: { text: string; at: number }[]
+  // Bumped by the welcome prompt's "upload" reply: the listener opens its dialog.
+  focusUpload: number
   // The answer's own audio context, once it is sounding. Its rendered echoes
   // never touch the clause on screen.
   answerCtx: string | null
@@ -165,6 +180,12 @@ export const initialState: State = {
   phase: 'idle',
   answer: null,
   answerCtx: null,
+  topics: [],
+  prompt: null,
+  heardAs: null,
+  sectionsFound: [],
+  companionLines: [],
+  focusUpload: 0,
   resume: null,
   error: null,
   status: {},
@@ -173,6 +194,25 @@ export const initialState: State = {
   events: [],
   ingestStages: [],
 }
+
+export type Prompt = {
+  kind: 'choice' | 'offer' | 'start_choice' | 'confirm_topic' | 'table_choice'
+    | 'welcome' | 'ingest_wait' | 'pick_topic' | 'section_end' | 'not_found' | 'end_choice' | string
+  options: string[]
+  text: string
+  section_id?: string | null
+  question?: string
+  clause_id?: string
+  labels?: string[]
+  heading?: string
+  topics?: string[]
+  titles?: string[]
+  next?: string
+}
+
+// What the server made of the last typed reply (reply_understood): shown
+// under the question box until the next prompt opens.
+export type HeardAs = { intent: string; sectionTitle: string | null; via: 'rules' | 'llm' | string }
 
 export type Action =
   | { type: 'connected'; value: boolean }
@@ -238,6 +278,14 @@ export function buildPause(contextId: string | null, renderedMs: number): any[] 
  *  same flush ack first, so the clause being left is attributed at the
  *  playhead and the server never has to ask this socket for an ack it could
  *  not receive until this handler returned. */
+/** A jump, a chip, or a spoken topic while the voice is sounding: the flush ack
+ *  first, as for every other cut. The server then treats it as the
+ *  interruption path with a different resume target. */
+export function buildCut(msg: any, contextId: string | null, renderedMs: number, sounding: boolean): any[] {
+  if (!sounding) return [msg]
+  return [{ type: 'flush_ack', context_id: contextId, rendered_ms: renderedMs }, msg]
+}
+
 export function buildOpen(name: string, contextId: string | null, renderedMs: number, sounding: boolean): any[] {
   if (!sounding) return [{ type: 'open', name }]
   return [
@@ -284,7 +332,7 @@ export function reducer(state: State, action: Action): State {
     case 'clearAnswer':
       return { ...state, answer: null }
     case 'clearIngest':
-      return { ...state, ingestStages: [] }
+      return { ...state, ingestStages: [], sectionsFound: [], companionLines: [] }
     case 'error':
       return { ...state, error: action.message }
     case 'server':
@@ -309,6 +357,7 @@ function applyServer(state: State, m: any): State {
         providerFellBack: (m.provider?.provider ?? '') === 'fake',
         documents: m.documents || [],
         current: m.current ?? null,
+        topics: m.topics && m.topics.length ? m.topics : state.topics,
       }
 
     case 'sink':
@@ -331,10 +380,23 @@ function applyServer(state: State, m: any): State {
         wordIndex: -1,
         answer: null,
         answerCtx: null,
+        // The chips it carries, else the ones already showing for this same
+        // document (a re-open never clears them), else none until they land.
+        topics: m.topics && m.topics.length ? m.topics : m.name === state.current ? state.topics : [],
+        sectionsFound: m.name === state.current ? state.sectionsFound : [],
+        prompt: null,
         phase: 'idle',
       }
 
     case 'unit_started':
+      if (m.kind === 'companion') {
+        // The companion's line: heard, but never the clause on screen. It
+        // joins the transcript under the progress bar.
+        return {
+          ...state,
+          companionLines: [...state.companionLines, { text: m.text_display, at: Date.now() }].slice(-20),
+        }
+      }
       if (m.kind === 'answer') {
         // The spoken answer is a unit of its own so it is acked and interruptible
         // like a clause, but it is not document text: the clause on screen stays,
@@ -468,11 +530,76 @@ function applyServer(state: State, m: any): State {
     case 'library_changed':
       return { ...state, documents: m.documents || state.documents }
 
+    case 'document_deleted':
+      // Gone from the library; if it was the open document the server says
+      // which one is open now (or none).
+      return {
+        ...state,
+        documents: m.documents || state.documents.filter((d) => d.name !== m.name),
+        current: m.current !== undefined ? m.current : state.current === m.name ? null : state.current,
+      }
+
+    case 'sections_found':
+      // The structure pass found the headings: the list shows before enrichment.
+      return { ...state, sectionsFound: m.titles || [] }
+
+    case 'navigator':
+      // The overview and chips for a document are being generated on entry,
+      // landed, or fell back to the mechanical map. Rows carry the state.
+      return {
+        ...state,
+        documents: m.documents
+          || state.documents.map((d) => (d.name === m.name ? { ...d, navigator: m.state } : d)),
+        topics: m.state === 'ready' && m.topics && m.topics.length && m.name === state.current ? m.topics : state.topics,
+      }
+
+    case 'topics':
+      if (m.document && state.current && m.document !== state.current) return state
+      return { ...state, topics: m.topics || [] }
+
+    case 'prompt':
+      // The prompt was heard: its options are the listener's for a few seconds.
+      return {
+        ...state,
+        prompt: {
+          kind: m.kind, options: m.options || [], text: m.text || '',
+          question: m.question, clause_id: m.clause_id, labels: m.labels, heading: m.heading,
+          topics: m.topics, titles: m.titles, next: m.next,
+        },
+        heardAs: null,
+        phase: m.kind === 'ingest_wait' ? state.phase : 'paused',
+      }
+
+    case 'reply_understood':
+      return { ...state, heardAs: { intent: m.intent, sectionTitle: m.section_title ?? null, via: m.via } }
+
+    case 'focus_upload':
+      return { ...state, focusUpload: state.focusUpload + 1 }
+
+    case 'prompt_closed':
+      return { ...state, prompt: null }
+
+    // The same two prompts under their older names, kept for older clients
+    // and traces: they carry no more than the generic message does.
+    case 'choice':
+      return { ...state, prompt: { kind: 'choice', options: ['now', 'overview_first'], text: '',
+                                   section_id: m.section_id ?? null }, phase: 'paused' }
+
+    case 'choice_closed':
+      return { ...state, prompt: state.prompt?.kind === 'choice' ? null : state.prompt }
+
+    case 'offer':
+      return { ...state, prompt: { kind: 'offer', options: ['yes', 'go_on'], text: '',
+                                   question: m.question, clause_id: m.clause_id }, phase: 'paused' }
+
+    case 'offer_closed':
+      return { ...state, prompt: state.prompt?.kind === 'offer' ? null : state.prompt }
+
     case 'document_finished':
       return { ...state, phase: 'finished' }
 
     case 'jumped':
-      return { ...state, answer: null, answerCtx: null }
+      return { ...state, answer: null, answerCtx: null, prompt: null, topics: [] }
 
     case 'replay_start':
       return { ...state, replaying: m.trace, events: [] }

@@ -14,6 +14,7 @@ from pathlib import Path
 
 os.environ["TTS_PROVIDER"] = "fake"
 os.environ.pop("LLM_API_KEY", None)
+os.environ.pop("LLM_PROVIDER", None)     # a sourced .env with LLM_PROVIDER=ollama must not reach the tests
 
 import sys                                                            # noqa: E402
 

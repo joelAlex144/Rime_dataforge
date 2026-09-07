@@ -69,6 +69,22 @@ _REG_LINE = re.compile(
     r"|CIN\s*[:\-]|IRDAI?\s+reg(?:istration|n)?\.?\s*(?:no|number)?|insurance\s+is\s+the\s+subject"
     r"\s+matter\s+of\s+solicitation)", re.I)
 _PLACEHOLDER = re.compile(r"<<[^<>]*>>")
+# Front matter: before the first numbered heading a line that is a URL, a
+# phone number, a UIN, a CIN or an ISO reference is the cover sheet, not the
+# document. Bounded, so a document with no numbered heading at all keeps
+# its contact section.
+_URL = re.compile(r"https?://|\bwww\.|\b[\w-]+\.(?:com|co\.in|in|org|net|gov)(?:/|\b)", re.I)
+_PHONE_ANY = re.compile(r"(?<![\d/])(?:\+?\d[\d\s().-]{7,}\d)(?![\d/])")
+_CIN = re.compile(r"\bCIN\b|\b[LU]\d{5}[A-Z]{2}\d{4}[A-Z]{3}\d{6}\b")
+_UIN_ANY = re.compile(r"\bUIN\b|\b[A-Z]{5}\d{2}[A-Z]{2}\d{4}V\d{6}\b|\b\d{3}[A-Z]\d{3}V\d{2}\b")
+_ISO = re.compile(r"\bISO\s*[:/-]?\s*\d{4,5}\b|\bCertified\s+Company\b", re.I)
+_NUMBERED_HEADING = re.compile(r"^\s*(?:\d+(?:\.\d+)*[.)]?|[IVXL]+[.)]|(?:Section|Part|Chapter|Clause|Article)\s+[\dIVXL]+)\s*\S", re.I)
+FRONT_MATTER_MAX_BLOCKS = 60
+
+
+def is_front_matter_junk(text: str) -> bool:
+    return bool(_URL.search(text) or _PHONE_ANY.search(text) or _CIN.search(text)
+                or _UIN_ANY.search(text) or _ISO.search(text))
 _WS = re.compile(r"\s+")
 _MD_EMPHASIS = re.compile(r"\*\*|__|(?<!\w)\*(?=\w)|(?<=\w)\*(?!\w)")   # DOCX bold/italic runs
 
@@ -345,7 +361,11 @@ def regex_boilerplate_pass(blocks: list[SBlock], n_pages: int,
     rep = report if report is not None else StructureReport()
     recurring = recurring_lines(blocks, n_pages)
     out: list[SBlock] = []
-    for b in blocks:
+    front = True
+    for i, b in enumerate(blocks):
+        if front and (i >= FRONT_MATTER_MAX_BLOCKS
+                      or (b.kind == "heading" and _NUMBERED_HEADING.match(b.text))):
+            front = False
         if b.kind in ("table_stub", "table_row"):
             out.append(b)
             continue
@@ -375,6 +395,8 @@ def regex_boilerplate_pass(blocks: list[SBlock], n_pages: int,
                 rule = "registration_line"
             elif _norm_line(text) in recurring:
                 rule = "recurring_on_pages"
+            elif front and b.kind == "body" and len(text) <= 300 and is_front_matter_junk(text):
+                rule = "front_matter"
         if rule:
             b.kind = "boilerplate"
             b.demoted_by = rule

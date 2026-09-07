@@ -154,11 +154,35 @@ class TestStructureMappingOffline(unittest.TestCase):
         self.assertNotIn("<<", body.text)
         self.assertEqual(body.kind, "body")
         self.assertEqual(body.text, "Dear , your policy starts today.")
+
         self.assertEqual(rep.placeholders_stripped, 2)
         kept = next(b for b in out if b.text.startswith("We will pay"))
         self.assertEqual(kept.kind, "body")
         # the heading recurring on 3 of 6 pages (50 %) is furniture
         self.assertTrue(all(b.kind == "boilerplate" for b in out if b.text == "Insurer Name Ltd"))
+
+
+    def test_front_matter_junk_before_the_first_numbered_heading_is_boilerplate(self):
+        import ingest_structure as istr
+        blocks = [
+            istr.SBlock("heading", "Some Policy Wording", level=1),
+            istr.SBlock("body", "Source URL: https://irdai.gov.in/documents/37343/policy.pdf"),
+            istr.SBlock("body", "Toll free 1800 209 5858 or 022 4890 3009"),
+            istr.SBlock("body", "UIN / reference: IRDAN159RP0019V01202021."),
+            istr.SBlock("body", "CIN: U66010MH2007PLC177117"),
+            istr.SBlock("body", "An ISO 9001:2015 certified company."),
+            istr.SBlock("body", "A Certified Company since the nineties."),
+            istr.SBlock("body", "This policy covers the insured home building against the insured events listed."),
+            istr.SBlock("heading", "1. Preamble", level=1),
+            istr.SBlock("body", "Grievances: call 1800 209 5858 or write to the address on www.insurer.in."),
+        ]
+        out = istr.regex_boilerplate_pass(blocks, n_pages=0)
+        kinds = [(b.text[:12], b.kind, b.demoted_by) for b in out]
+        for t, k, by in kinds[1:7]:
+            self.assertEqual(k, "boilerplate", kinds)
+        self.assertEqual({by for _t, _k, by in kinds[1:7]} - {"registration_line"}, {"front_matter"}, kinds)
+        self.assertEqual(out[7].kind, "body")
+        self.assertEqual(out[9].kind, "body", "after the first numbered heading a phone line is body")
 
     def test_segment_structured_ids_and_signposts(self):
         import ingest_structure as istr

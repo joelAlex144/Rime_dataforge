@@ -19,6 +19,7 @@ exactly the kind the spoiler gate exists to prevent.
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
@@ -80,14 +81,40 @@ class Session:
         )
 
 
+_UIN_TOKEN = re.compile(r"\b[A-Z]{3,}\d{2,}[A-Z0-9]*V\d+\b|\bUIN[:\s]*[A-Z0-9]{8,}\b", re.I)
+_FIXTURE_TAG = re.compile(r"\(\s*synthetic\s+fixture\s*\)", re.I)
+
+
+def clean_title(title: str) -> str:
+    """A title fit to be spoken: no underscores, no UIN, no
+    "(SYNTHETIC FIXTURE)", no leading "fixture" word; a lowercase slug is
+    title-cased ("fixture_arogya_sanjeevani" -> "Arogya Sanjeevani")."""
+    t = _FIXTURE_TAG.sub(" ", title or "")
+    t = _UIN_TOKEN.sub(" ", t)
+    t = t.replace("_", " ").replace("-", " ") if "_" in t else t
+    t = " ".join(t.split()).strip(" -\u2013\u2014:;,.")
+    words = t.split()
+    if words and words[0].lower() == "fixture" and len(words) > 1:
+        words = words[1:]
+    if words and all(w.islower() for w in words):
+        words = [w.capitalize() for w in words]
+    elif words and t.isupper():
+        words = [w if (w.startswith("(") and len(w.strip("()")) <= 5) else w.capitalize() for w in words]
+    return " ".join(words) or title
+
+
 class Document:
     """One registry entry. The fixture and its Grounding load on first use."""
 
     def __init__(self, name: str, title: str, path: Path, clause_count: int = 0,
                  source: Optional[dict] = None, doc_id: Optional[str] = None,
-                 reviewed: bool = False, readable: bool = True, report: Optional[str] = None) -> None:
+                 reviewed: bool = False, readable: bool = True, report: Optional[str] = None,
+                 spoken_title: Optional[str] = None) -> None:
         self.name = name
         self.title = title
+        # What the voice calls it: the first real heading or the file's title
+        # property at ingest, else the title cleaned. Editable on /dev.
+        self.spoken_title = spoken_title or clean_title(title)
         self.path = Path(path)
         self.clause_count = clause_count
         self.source = source or {}
@@ -144,6 +171,7 @@ class Library:
                 # keep the live session; refresh the registry fields
                 d = self._docs[name]
                 d.title = e.get("title") or name
+                d.spoken_title = e.get("spoken_title") or clean_title(d.title)
                 d.clause_count = int(e.get("clause_count") or 0)
                 d.reviewed = bool(e.get("reviewed", False))
                 d.readable = bool(e.get("readable", True))
@@ -160,6 +188,7 @@ class Library:
                 reviewed=bool(e.get("reviewed", False)),
                 readable=bool(e.get("readable", True)),
                 report=e.get("report"),
+                spoken_title=e.get("spoken_title"),
             )
 
     def reload(self) -> None:
@@ -177,8 +206,45 @@ class Library:
         d = self._docs.get(name)
         if d is None:
             return None
-        return {"doc_id": d.doc_id, "name": d.name, "title": d.title, "reviewed": d.reviewed,
-                "readable": d.readable, "clause_count": d.clause_count, "report": d.report}
+        return {"doc_id": d.doc_id, "name": d.name, "title": d.title, "spoken_title": d.spoken_title,
+                "reviewed": d.reviewed, "readable": d.readable, "clause_count": d.clause_count, "report": d.report}
+
+    def by_text_hash(self, text_sha256: Optional[str]) -> Optional[Document]:
+        """The document whose normalised text hashed the same at ingest."""
+        if not text_sha256:
+            return None
+        for d in self._docs.values():
+            if (d.source or {}).get("text_sha256") == text_sha256:
+                return d
+        return None
+
+    def set_spoken_title(self, name: str, spoken_title: str) -> dict:
+        """What the voice calls the document, from /dev. Written to index.json."""
+        d = self._docs[name]
+        d.spoken_title = clean_title(spoken_title) if spoken_title.strip() else clean_title(d.title)
+        data = json.loads(self.index_path.read_text(encoding="utf-8"))
+        for e in data.get("documents", []):
+            if e.get("name") == name:
+                e["spoken_title"] = d.spoken_title
+        self.index_path.write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+        self.events.emit("spoken_title_set", document=name, spoken_title=d.spoken_title)
+        return self.entry(name)
+
+    def remove(self, name: str) -> dict:
+        """Take a document out of the registry (index.json) and the library.
+        The caller deletes its files. The current document, if it was this
+        one, becomes none."""
+        d = self._docs.pop(name)
+        entry = {"doc_id": d.doc_id, "name": d.name, "title": d.title, "spoken_title": d.spoken_title,
+                 "path": str(d.path), "source": dict(d.source or {})}
+        if self.index_path.exists():
+            data = json.loads(self.index_path.read_text(encoding="utf-8"))
+            data["documents"] = [e for e in data.get("documents", []) if e.get("name") != name]
+            self.index_path.write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+        if self._current == name:
+            self._current = None
+        self.events.emit("document_removed", document=name, doc_id=d.doc_id)
+        return entry
 
     def set_reviewed(self, name: str, reviewed: bool = True) -> dict:
         """The Accept button: a person is the review. Written to index.json."""
@@ -208,8 +274,9 @@ class Library:
 
     # ---------------------------------------------------------------- query
     def list(self) -> list:
-        return [{"name": d.name, "title": d.title, "clause_count": d.clause_count,
-                 "doc_id": d.doc_id, "reviewed": d.reviewed, "readable": d.readable}
+        return [{"name": d.name, "title": d.title, "spoken_title": d.spoken_title,
+                 "clause_count": d.clause_count, "doc_id": d.doc_id, "reviewed": d.reviewed,
+                 "readable": d.readable}
                 for d in self._docs.values()]
 
     @property

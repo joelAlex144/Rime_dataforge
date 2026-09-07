@@ -182,3 +182,63 @@ bar from the stage events, the elapsed time and the title when the entry
 arrives -- no stage names, no clause counts, no scan findings, no accept step.
 The developer page renders the stage list, the report in full and Accept.
 Identity is `(doc_id, clause_id)`; `doc_id` is a content hash of the source.
+
+## Mismatch #11 — jump must go through the interruption path
+
+Observed: after an interruption, "Jump there" (or "go to claims") did not move
+the reader; the queued lookahead unit played and the position manager restored
+the old read position afterwards. Cause: jump set the reference position but
+not the read cursor, and cancelled nothing in flight.
+
+Every jump -- topic chip, spoken topic name, the spoiler-gate offer, "skip it",
+"go back to where I was" -- is now the same six-step interruption with a
+different resume target:
+
+1. `turn_id++`, as for VAD.
+2. Cancel fan-out: Rime `clear`, scheduler stop, worklet flush ->
+   `audible_stop_ts`, `cancel_issued`. From the tab with the voice the client
+   flushes first and sends `flush_ack`, then the jump; from another tab the
+   server sends `flush` to the sink and waits for its ack.
+3. Ledger truncates the sounding unit at the client-confirmed boundary
+   (`unit_truncated`, reason `jump:<why>`). Every readable unit between the cut
+   and the target is written `unit_skipped` with `reason: jump`.
+4. `position_saved` for the old read position, labelled `before_jump`, so "go
+   back to where I was" returns to it. Read cursor := sentence start of the
+   target clause, never unit top. `position_restored` with `reason: jump`.
+5. A cue unit is synthesised first, from a template: "Okay — going to
+   {heading}." followed by the section brief when the fixture has one. Its own
+   unit, its own ledger entry (`cue_spoken`, context `cue#t<n>`).
+6. Resume at the target.
+
+`jump` event `{from_unit, to_unit, reason, turn_id}` is written once per jump
+(`EventType.JUMP`). Ownership: steps 1–4 are `scheduler.py` / `position.py` /
+the ledger; target resolution (`grounding.py`: `find_section`,
+`navigation_intent`) and the cue template are this side. The reference
+implementation is `ReaderSession.jump_to` in `examples/policy-reader/server.py`,
+covered by `tests/test_server_jump.py`.
+
+### UI hooks (navigator)
+
+- `topics` `{topics: [{topic, section_id, heading}]}` is broadcast when the
+  overview starts; the client shows them as chips while it plays. A tap sends
+  `{"type": "topic", "section_id"}` (`section_id: null` = "Read from the start");
+  from the tab with the voice, `flush_ack` first.
+- `choice` `{options: ["now", "overview_first"], section_id}` follows the spoken
+  "{Topic} is {heading}, about N minutes. Read it now, or hear the rest of the
+  overview first?"; the client answers `{"type": "choice", "choice": "now" |
+  "overview_first"}`, or the listener says "now" / "overview first". Silence for
+  8 s: "I'll read from the start. Interrupt me any time." and reading starts.
+- Section transitions are spoken as the heading unit: "Next is {heading}.
+  {brief} About N minutes." "skip it" jumps to the next section; "go on" (or
+  nothing) continues.
+- `offer` `{question, clause_id}` follows the spoken "People usually ask here
+  whether … Want that?" after a section is heard; "yes" answers from the stored
+  clause (`retrieval_path: suggested`, no retrieval); "no" or 6 s of silence
+  continues (`offer_closed`).
+- Extractive asks -- "read me every exclusion", "what deadlines are in this
+  document", "summarise this section" -- are answered from the fixture's tags
+  and briefs with citations (`retrieval_path: extractive`), never ranked, no
+  model.
+- The listener page must not surface enrichment provenance; the developer page
+  shows `GET /documents/<doc_id>/enrichment` (provider, model, elapsed, guard
+  rejections, generated fields). The existing Accept covers generated text.

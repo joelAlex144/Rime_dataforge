@@ -126,7 +126,12 @@
      136,
      "page."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-ii",
@@ -249,7 +254,14 @@
      136,
      "premises."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-iii",
@@ -372,7 +384,14 @@
      143,
      "structures."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-iv",
@@ -495,7 +514,14 @@
      112,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-v",
@@ -608,7 +634,14 @@
      99,
      "date."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-vi",
@@ -731,7 +764,15 @@
      123,
      "peril."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation",
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-vii",
@@ -859,7 +900,14 @@
      124,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-1-viii",
@@ -937,7 +985,12 @@
      86,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2a-i",
@@ -1010,7 +1063,15 @@
      59,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition",
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2a-ii",
@@ -1118,7 +1179,15 @@
      98,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition",
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2a-iii",
@@ -1226,7 +1295,15 @@
      100,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition",
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2a-iv",
@@ -1339,7 +1416,15 @@
      93,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition",
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2a-v",
@@ -1422,7 +1507,15 @@
      85,
      "occurrence."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation",
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2a-vi",
@@ -1515,7 +1608,15 @@
      87,
      "person."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation",
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2b-i",
@@ -1658,7 +1759,15 @@
      128,
      "occurrence."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure",
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2b-ii",
@@ -1821,7 +1930,15 @@
      164,
      "injured."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation",
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2b-iii",
@@ -1934,7 +2051,12 @@
      103,
      "fault."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-2b-iv",
@@ -2057,7 +2179,15 @@
      134,
      "writing."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure",
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-3a-i",
@@ -2215,7 +2345,15 @@
      156,
      "household."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition",
+     "contact"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-3a-ii",
@@ -2293,7 +2431,14 @@
      70,
      "Company."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-3a-iii",
@@ -2401,7 +2546,14 @@
      121,
      "results."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-3a-iv",
@@ -2554,7 +2706,14 @@
      174,
      "compensation."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-3a-v",
@@ -2697,7 +2856,14 @@
      139,
      "began."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-3a-vi",
@@ -2855,7 +3021,14 @@
      149,
      "above."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-3a-vii",
@@ -3008,7 +3181,14 @@
      166,
      "premises."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-3a-viii",
@@ -3166,7 +3346,14 @@
      201,
      "period."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-3b-i",
@@ -3259,7 +3446,14 @@
      94,
      "property."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-3b-ii",
@@ -3407,7 +3601,14 @@
      170,
      "services."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-3b-iii",
@@ -3550,7 +3751,14 @@
      174,
      "location."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-3b-iv",
@@ -3693,7 +3901,14 @@
      156,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-3b-v",
@@ -3851,7 +4066,14 @@
      170,
      "depreciation."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-3b-vi",
@@ -3989,7 +4211,14 @@
      147,
      "fungi."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-3b-vii",
@@ -4107,7 +4336,14 @@
      123,
      "one."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-3b-viii",
@@ -4225,7 +4461,14 @@
      129,
      "days."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4a-i",
@@ -4363,7 +4606,14 @@
      136,
      "section."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4a-ii",
@@ -4456,7 +4706,14 @@
      85,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4a-iii",
@@ -4754,7 +5011,12 @@
      345,
      "system."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4a-iv",
@@ -4932,7 +5194,14 @@
      194,
      "dock."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4a-v",
@@ -5115,7 +5384,14 @@
      184,
      "occupied."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4a-vi",
@@ -5273,7 +5549,14 @@
      162,
      "loss."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4b-i",
@@ -5371,7 +5654,14 @@
      92,
      "vice."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4b-ii",
@@ -5514,7 +5804,14 @@
      145,
      "operations."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4b-iii",
@@ -5687,7 +5984,14 @@
      194,
      "C."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4b-iv",
@@ -5830,7 +6134,14 @@
      179,
      "ceilings."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4b-v",
@@ -5913,7 +6224,14 @@
      71,
      "insects."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4b-vi",
@@ -6006,7 +6324,14 @@
      72,
      "insured."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4b-vii",
@@ -6324,7 +6649,12 @@
      349,
      "itself."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4b-viii",
@@ -6442,7 +6772,15 @@
      137,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount",
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4c-i",
@@ -6530,7 +6868,14 @@
      80,
      "lightning."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4c-ii",
@@ -6818,7 +7163,14 @@
      285,
      "wall."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4c-iii",
@@ -6931,7 +7283,14 @@
      121,
      "vehicles."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4c-iv",
@@ -7084,7 +7443,14 @@
      178,
      "operations."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4c-v",
@@ -7297,7 +7663,14 @@
      227,
      "stolen."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4c-vi",
@@ -7490,7 +7863,14 @@
      208,
      "insured."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4c-vii",
@@ -7683,7 +8063,14 @@
      197,
      "object."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4c-viii",
@@ -7831,7 +8218,14 @@
      147,
      "building."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4c-ix",
@@ -8014,7 +8408,14 @@
      216,
      "system."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4c-x",
@@ -8232,7 +8633,14 @@
      284,
      "units."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-4c-xi",
@@ -8370,7 +8778,14 @@
      148,
      "tremors."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5a-i",
@@ -8568,7 +8983,14 @@
      203,
      "loss."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5a-ii",
@@ -8711,7 +9133,14 @@
      163,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5a-iii",
@@ -8859,7 +9288,14 @@
      185,
      "shifting."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5a-iv",
@@ -8942,7 +9378,12 @@
      82,
      "covered."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5a-v",
@@ -9095,7 +9536,12 @@
      151,
      "wind."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5a-vi",
@@ -9328,7 +9774,12 @@
      261,
      "structure."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5a-vii",
@@ -9411,7 +9862,12 @@
      80,
      "covered."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5a-viii",
@@ -9514,7 +9970,14 @@
      100,
      "policy."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5b-i",
@@ -9726,7 +10189,14 @@
      228,
      "peril."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5b-ii",
@@ -9864,7 +10334,14 @@
      130,
      "loss."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5b-iii",
@@ -10052,7 +10529,14 @@
      224,
      "these."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5b-iv",
@@ -10120,7 +10604,14 @@
      61,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5b-v",
@@ -10268,7 +10759,14 @@
      137,
      "loss."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5b-vi",
@@ -10421,7 +10919,14 @@
      183,
      "fire."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5c-i",
@@ -10649,7 +11154,14 @@
      242,
      "loss."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5c-ii",
@@ -10797,7 +11309,14 @@
      152,
      "body."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5c-iii",
@@ -10960,7 +11479,14 @@
      249,
      "maintenance."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-5c-iv",
@@ -11108,7 +11634,14 @@
      152,
      "loss."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-6a-i",
@@ -11361,7 +11894,12 @@
      275,
      "dwelling."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-6a-ii",
@@ -11499,7 +12037,14 @@
      145,
      "pollutants."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-6b-i",
@@ -11637,7 +12182,14 @@
      141,
      "loss."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-6b-ii",
@@ -11845,7 +12397,14 @@
      217,
      "removal."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-6b-iii",
@@ -12063,7 +12622,15 @@
      208,
      "tree."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount",
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-6c-i",
@@ -12266,7 +12833,14 @@
      230,
      "damage."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-6c-ii",
@@ -12454,7 +13028,14 @@
      216,
      "theft."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-6c-iii",
@@ -12657,7 +13238,15 @@
      181,
      "plant."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount",
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-6c-iv",
@@ -12885,7 +13474,14 @@
      260,
      "applying."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-6d-i",
@@ -13203,7 +13799,14 @@
      358,
      "construction."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-6d-ii",
@@ -13271,7 +13874,12 @@
      79,
      "expansion."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-6d-iii",
@@ -13489,7 +14097,14 @@
      252,
      "building."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-6d-iv",
@@ -13727,7 +14342,14 @@
      252,
      "building."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-6d-v",
@@ -13970,7 +14592,14 @@
      276,
      "C."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-6d-vi",
@@ -14218,7 +14847,14 @@
      258,
      "name."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-6d-vii",
@@ -14471,7 +15107,14 @@
      274,
      "collectively."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7a-i",
@@ -14603,7 +15246,12 @@
      125,
      "category."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7a-ii",
@@ -14711,7 +15359,14 @@
      120,
      "medals."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7a-iii",
@@ -14809,7 +15464,14 @@
      111,
      "costs."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7a-iv",
@@ -14932,7 +15594,14 @@
      150,
      "stamps."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7a-v",
@@ -15005,7 +15674,14 @@
      92,
      "motors."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7a-vi",
@@ -15058,7 +15734,14 @@
      44,
      "watercraft."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7a-vii",
@@ -15141,7 +15824,14 @@
      85,
      "stones."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7a-viii",
@@ -15194,7 +15884,14 @@
      37,
      "firearms."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7a-ix",
@@ -15513,7 +16210,14 @@
      111,
      "purpose."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7a-xii",
@@ -15706,7 +16410,14 @@
      205,
      "vehicle."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7b-i",
@@ -15819,7 +16530,12 @@
      133,
      "insurance."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7b-ii",
@@ -15877,7 +16593,12 @@
      54,
      "fish."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7b-iii",
@@ -16090,7 +16811,15 @@
      277,
      "handicapped."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion",
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7b-iv",
@@ -16218,7 +16947,14 @@
      131,
      "cargo."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7b-v",
@@ -16341,7 +17077,14 @@
      142,
      "insured."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7b-vi",
@@ -16484,7 +17227,14 @@
      154,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7b-vii",
@@ -16582,7 +17332,14 @@
      102,
      "premises."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7b-viii",
@@ -16835,7 +17592,12 @@
      295,
      "market."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-7b-ix",
@@ -16933,7 +17695,12 @@
      105,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-8a-i",
@@ -17120,7 +17887,15 @@
      205,
      "date."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure",
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-8a-ii",
@@ -17278,7 +18053,14 @@
      149,
      "effect."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "deadline"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-8a-iii",
@@ -17386,7 +18168,14 @@
      103,
      "institution."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-8b-i",
@@ -17539,7 +18328,14 @@
      134,
      "effect."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-8b-ii",
@@ -17662,7 +18458,14 @@
      111,
      "date."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-8b-iii",
@@ -17800,7 +18603,14 @@
      139,
      "effect."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-8b-iv",
@@ -18008,7 +18818,14 @@
      193,
      "effect."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-8b-v",
@@ -18216,7 +19033,14 @@
      227,
      "effect."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-8c-i",
@@ -18364,7 +19188,14 @@
      146,
      "page."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-8c-ii",
@@ -18562,7 +19393,14 @@
      211,
      "increase."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-8c-iii",
@@ -18660,7 +19498,15 @@
      110,
      "date."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition",
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-8c-iv",
@@ -18893,7 +19739,14 @@
      221,
      "notice."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9a-i",
@@ -19166,7 +20019,14 @@
      275,
      "liability."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9a-ii",
@@ -19344,7 +20204,14 @@
      158,
      "theft."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9a-iii",
@@ -19452,7 +20319,14 @@
      101,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9a-iv",
@@ -19595,7 +20469,14 @@
      161,
      "expenses."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9a-v",
@@ -19783,7 +20664,14 @@
      228,
      "inventory."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9a-vi",
@@ -20006,7 +20894,14 @@
      235,
      "insured."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9a-vii",
@@ -20284,7 +21179,14 @@
      275,
      "property."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9b-i",
@@ -20347,7 +21249,12 @@
      64,
      "follows."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9b-ii",
@@ -20590,7 +21497,14 @@
      291,
      "replace."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9b-iii",
@@ -20708,7 +21622,14 @@
      136,
      "conditions."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9b-iv",
@@ -21181,7 +22102,14 @@
      513,
      "replace."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9b-v",
@@ -21509,7 +22437,14 @@
      324,
      "cost."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9b-vi",
@@ -21752,7 +22687,14 @@
      231,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9b-vii",
@@ -21995,7 +22937,14 @@
      264,
      "basis."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9c-i",
@@ -22273,7 +23222,14 @@
      246,
      "loss."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9c-ii",
@@ -22446,7 +23402,15 @@
      186,
      "law."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition",
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9c-iii",
@@ -22664,7 +23628,14 @@
      219,
      "other."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9c-iv",
@@ -22906,7 +23877,14 @@
      225,
      "located."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9c-v",
@@ -23014,7 +23992,14 @@
      102,
      "equally."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9c-vi",
@@ -23252,7 +24237,15 @@
      246,
      "loss."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion",
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9c-vii",
@@ -23455,7 +24448,14 @@
      192,
      "loss."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9c-viii",
@@ -23643,7 +24643,14 @@
      185,
      "property."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9c-ix",
@@ -24000,7 +25007,14 @@
      345,
      "us."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9c-x",
@@ -24083,7 +25097,14 @@
      81,
      "insured."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9c-xi",
@@ -24311,7 +25332,14 @@
      231,
      "cancellation."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9c-xii",
@@ -24509,7 +25537,14 @@
      216,
      "policy."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9c-xiii",
@@ -24767,7 +25802,14 @@
      255,
      "property."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-9c-xiv",
@@ -24895,7 +25937,15 @@
      136,
      "eruption."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition",
+     "waiting_period"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10a-i",
@@ -25183,7 +26233,14 @@
      300,
      "liable."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10a-ii",
@@ -25241,7 +26298,14 @@
      65,
      "insured."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10a-iii",
@@ -25444,7 +26508,14 @@
      203,
      "appropriate."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10a-iv",
@@ -25617,7 +26688,14 @@
      177,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "deadline"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10b-i",
@@ -25790,7 +26868,14 @@
      192,
      "injury."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10b-ii",
@@ -25903,7 +26988,15 @@
      164,
      "services."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition",
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10b-iii",
@@ -26001,7 +27094,14 @@
      103,
      "employees."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10b-iv",
@@ -26204,7 +27304,14 @@
      248,
      "these."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10c-i",
@@ -26327,7 +27434,14 @@
      111,
      "insured."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10c-ii",
@@ -26570,7 +27684,14 @@
      242,
      "insured."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10c-iii",
@@ -26763,7 +27884,15 @@
      199,
      "residence."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure",
+     "contact"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10c-iv",
@@ -26906,7 +28035,14 @@
      142,
      "services."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10c-v",
@@ -27119,7 +28255,14 @@
      203,
      "location."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10c-vi",
@@ -27362,7 +28505,14 @@
      272,
      "insured."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10c-vii",
@@ -27575,7 +28725,15 @@
      231,
      "location."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure",
+     "contact"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10c-viii",
@@ -27878,7 +29036,14 @@
      319,
      "insured."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10c-ix",
@@ -28021,7 +29186,14 @@
      139,
      "insured."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10c-x",
@@ -28284,7 +29456,14 @@
      294,
      "physician."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10c-xi",
@@ -28467,7 +29646,14 @@
      210,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10c-xii",
@@ -28695,7 +29881,14 @@
      254,
      "occurrence."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10c-xiii",
@@ -28913,7 +30106,14 @@
      218,
      "explosion."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-10c-xiv",
@@ -29111,7 +30311,14 @@
      242,
      "law."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-11a-i",
@@ -29219,7 +30426,14 @@
      98,
      "defend."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-11a-ii",
@@ -29412,7 +30626,14 @@
      175,
      "bond."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-11a-iii",
@@ -29630,7 +30851,14 @@
      219,
      "suit."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-11a-iv",
@@ -29843,7 +31071,14 @@
      215,
      "applies."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-11b-i",
@@ -30046,7 +31281,14 @@
      195,
      "insured."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-11b-ii",
@@ -30199,7 +31441,14 @@
      155,
      "insured."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-11b-iii",
@@ -30387,7 +31636,14 @@
      178,
      "older."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-11b-iv",
@@ -30645,7 +31901,14 @@
      282,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-11b-v",
@@ -30768,7 +32031,14 @@
      129,
      "body."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-11b-vi",
@@ -30951,7 +32221,14 @@
      176,
      "trustee."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-12a-i",
@@ -31224,7 +32501,12 @@
      294,
      "injured."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-12a-ii",
@@ -31442,7 +32724,14 @@
      220,
      "declarations."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "amount"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-12a-iii",
@@ -31580,7 +32869,14 @@
      161,
      "occurrence."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-12a-iv",
@@ -31898,7 +33194,14 @@
      365,
      "witnesses."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-12a-v",
@@ -32016,7 +33319,14 @@
      127,
      "occurrence."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-12a-vi",
@@ -32244,7 +33554,14 @@
      241,
      "trials."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-12a-vii",
@@ -32422,7 +33739,14 @@
      186,
      "injury."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-12b-i",
@@ -32665,7 +33989,14 @@
      257,
      "records."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-12b-ii",
@@ -32798,7 +34129,14 @@
      126,
      "require."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "procedure"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-12b-iii",
@@ -32921,7 +34259,12 @@
      116,
      "us."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-12b-iv",
@@ -33154,7 +34497,14 @@
      219,
      "insured."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-12b-v",
@@ -33272,7 +34622,14 @@
      122,
      "policy."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "obligation"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-12b-vi",
@@ -33455,7 +34812,14 @@
      214,
      "policy."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "exclusion"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-13a-i",
@@ -33643,7 +35007,14 @@
      202,
      "."
     ]
-   ]
+   ],
+   "tags": {
+    "tags": [
+     "definition"
+    ],
+    "generated": true,
+    "provider": "ollama"
+   }
   },
   {
    "id": "sec-13a-ii",
@@ -36152,6 +37523,387 @@
      "."
     ]
    ]
+  }
+ ],
+ "enrichment": {
+  "provider": "ollama",
+  "model": "qwen2.5:3b",
+  "elapsed_ms": 62837,
+  "fields": [
+   "overview",
+   "sections",
+   "topics",
+   "tags",
+   "suggested_questions",
+   "tables"
+  ],
+  "done": [
+   "overview",
+   "sections",
+   "suggested_questions",
+   "tables",
+   "tags",
+   "topics"
+  ],
+  "guard_rejections": [
+   {
+    "field": "tags:batch10",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   }
+  ],
+  "tokens": {
+   "in": 31382,
+   "out": 4122
+  }
+ },
+ "overview": {
+  "text": "This document titled 'Northlake Mutual Homeowners Policy' is issued by Northlake Mutual Insurance Company to homeowners. It organises its content into several sections including Declarations, Coverages and Limits, Definitions, Perils Insured Against, General Exclusions, Additional Coverages, Special Limits of Liability, Premium, Renewal and Cancellation, Conditions Applicable to Property Coverages, Liability Coverages, Additional Liability Coverages, Conditions Applicable to Liability Coverages, and General Conditions. Listening from start to finish takes about 45 minutes.",
+  "generated": true,
+  "provider": "ollama",
+  "listening_minutes": 45,
+  "chars_per_second": 13.97,
+  "chars_per_second_source": "measured from 4 trace file(s)"
+ },
+ "sections": [
+  {
+   "id": "sec-1-i",
+   "title": "Declarations",
+   "brief": {
+    "text": "This section defines key terms and procedures related to policy issuance, coverage details, payment schedules, and deductible requirements.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1,
+   "suggested_questions": [
+    {
+     "text": "What is the total annual premium for this policy?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-1-iv"
+    },
+    {
+     "text": "How much is the windstorm and hail deductible under this policy?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-1-vi"
+    },
+    {
+     "text": "When does the policy period start and end?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-1-i"
+    }
+   ]
+  },
+  {
+   "id": "sec-2a-i",
+   "title": "Coverages and Limits",
+   "brief": {
+    "text": "defines coverages and their respective limits for insurance policy.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 1,
+   "suggested_questions": [
+    {
+     "text": "How does the increase in Coverage A limit work at each renewal?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-2b-iv"
+    },
+    {
+     "text": "What is the maximum liability for personal injury per occurrence covered under Coverage E?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-2a-v"
+    }
+   ]
+  },
+  {
+   "id": "sec-3a-i",
+   "title": "Definitions",
+   "brief": {
+    "text": "defines terms used throughout the policy including definitions for key concepts like bodily injury, business, and actual cash value.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 3,
+   "suggested_questions": [
+    {
+     "text": "What is considered an occurrence under this insurance policy?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-3a-viii"
+    },
+    {
+     "text": "How much compensation can be claimed for property damage that occurred more than 60 days ago and is not occupied by any person?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-3b-i"
+    },
+    {
+     "text": "Who qualifies as an insured under this insurance policy?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-3a-vi"
+    }
+   ]
+  },
+  {
+   "id": "sec-4a-i",
+   "title": "Perils Insured Against",
+   "brief": {
+    "text": "defines perils covered and excluded under insurance policy.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 5,
+   "suggested_questions": [
+    {
+     "text": "Does this insurance cover damage to my property caused by freezing of household appliances while the dwelling is vacant?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-4a-vi"
+    },
+    {
+     "text": "If a fence gets damaged due to settling, would that be covered under this insurance?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-4b-vi"
+    }
+   ]
+  },
+  {
+   "id": "sec-5a-i",
+   "title": "General Exclusions",
+   "brief": {
+    "text": "defines exclusions from coverage under various perils and events.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 4,
+   "suggested_questions": [
+    {
+     "text": "Does this policy cover loss caused by earthquake or land shock waves?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-5a-iii"
+    },
+    {
+     "text": "If a fire causes water damage, is that covered under this insurance policy?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-5a-vii"
+    }
+   ]
+  },
+  {
+   "id": "sec-6a-i",
+   "title": "Additional Coverages",
+   "brief": {
+    "text": "covers additional insurance coverage options such as Ordinance or Law, Debris Removal, Reasonable Repairs, Trees, Shrubs and Other Plants, Fire Department Service Charge, and Collapse.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 4
+  },
+  {
+   "id": "sec-7a-i",
+   "title": "Special Limits of Liability",
+   "brief": {
+    "text": "defines special limits of liability covered under insurance policy.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 3
+  },
+  {
+   "id": "sec-8a-i",
+   "title": "Premium, Renewal and Cancellation",
+   "brief": {
+    "text": "defines procedures and conditions related to premium adjustments, cancellations, and renewals.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 2,
+   "suggested_questions": [
+    {
+     "text": "If I provide incorrect information during application and it leads to an adjustment of my premium, will you notify me in writing at least 30 days before the adjustment takes effect?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-8a-ii"
+    },
+    {
+     "text": "What happens if I want to cancel this policy within the first 60 days of its effectiveness? Will I receive a refund for the unearned premium on a pro rata basis?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-8b-ii"
+    }
+   ]
+  },
+  {
+   "id": "sec-9a-i",
+   "title": "Conditions Applicable to Property Coverages",
+   "brief": {
+    "text": "defines conditions and procedures for property coverages including insurable interest, notification requirements, loss settlement methods, and building coverage levels.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 7,
+   "suggested_questions": [
+    {
+     "text": "What is the procedure for notifying you or our agent in case of loss to covered property?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-9a-i"
+    },
+    {
+     "text": "If a loss covers by this policy is also covered by other insurance, how do we handle it?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-9c-vi"
+    }
+   ]
+  },
+  {
+   "id": "sec-10a-i",
+   "title": "Liability Coverages",
+   "brief": {
+    "text": "covers various liability scenarios including personal and medical payments, excluding certain activities and professional services.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 5,
+   "suggested_questions": [
+    {
+     "text": "What is the maximum amount I can be liable for under Coverage E, Personal Liability?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-10a-i"
+    },
+    {
+     "text": "If a claim is made against me for damages caused by an occurrence covered by this policy, what defense will the insurance company provide at their expense?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-10a-iii"
+    },
+    {
+     "text": "How long does the medical payments coverage apply to injuries sustained in an accident?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-10b-i"
+    }
+   ]
+  },
+  {
+   "id": "sec-11a-i",
+   "title": "Additional Liability Coverages",
+   "brief": {
+    "text": "defines additional liability coverages and associated expenses, damages, assessments, and exclusions.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 2,
+   "suggested_questions": [
+    {
+     "text": "How do I get reimbursed for expenses incurred by an insured at your request, including actual loss of earnings up to $250 per day?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-11a-iii"
+    },
+    {
+     "text": "What is the maximum amount we will pay for property damage to others caused by an insured under this policy?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-11b-ii"
+    }
+   ]
+  },
+  {
+   "id": "sec-12a-i",
+   "title": "Conditions Applicable to Liability Coverages",
+   "brief": {
+    "text": "defines limits and responsibilities for liability coverages and procedures in case of accidents.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 3,
+   "suggested_questions": [
+    {
+     "text": "What is the maximum liability limit for Coverage E under this insurance policy?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-12a-i"
+    },
+    {
+     "text": "If an insured person needs to make a payment related to bodily injury, what must they do according to the document?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-12a-vii"
+    }
+   ]
+  },
+  {
+   "id": "sec-13a-i",
+   "title": "General Conditions",
+   "brief": {
+    "text": "This section defines terms and procedures related to policy validity, exclusions, and claims handling.",
+    "generated": true,
+    "provider": "ollama"
+   },
+   "est_minutes": 3,
+   "suggested_questions": [
+    {
+     "text": "What happens if an insured intentionally conceals or misrepresents any material fact or circumstance?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-13a-i"
+    },
+    {
+     "text": "How does the policy handle changes that broaden coverage without additional premium charge?",
+     "generated": true,
+     "provider": "ollama",
+     "clause_id": "sec-13a-iii"
+    }
+   ]
+  }
+ ],
+ "topics": [
+  {
+   "topic": "Exclusions",
+   "section_id": "sec-5a-i",
+   "heading": "General Exclusions",
+   "generated": true,
+   "provider": "ollama"
+  },
+  {
+   "topic": "Premium and charges",
+   "section_id": "sec-8a-i",
+   "heading": "Premium, Renewal and Cancellation",
+   "generated": true,
+   "provider": "ollama"
+  },
+  {
+   "topic": "Cancellation and refunds",
+   "section_id": "sec-8a-i",
+   "heading": "Premium, Renewal and Cancellation",
+   "generated": true,
+   "provider": "ollama"
+  },
+  {
+   "topic": "Definitions",
+   "section_id": "sec-3a-i",
+   "heading": "Definitions",
+   "generated": true,
+   "provider": "ollama"
+  },
+  {
+   "topic": "Read from the start",
+   "section_id": null,
+   "heading": null,
+   "generated": false
   }
  ]
 }

@@ -17,6 +17,7 @@ from pathlib import Path
 
 os.environ["TTS_PROVIDER"] = "fake"
 os.environ.pop("LLM_API_KEY", None)
+os.environ.pop("LLM_PROVIDER", None)     # a sourced .env with LLM_PROVIDER=ollama must not reach the tests
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -103,6 +104,8 @@ class WsCase(unittest.IsolatedAsyncioTestCase):
             await self.until(lambda m: m.get("type") == "unit_done" and m["context_id"] == ctx)
             if started.get("kind", "clause") != "clause":
                 await self.ack_all(ctx)          # the map is acked like anything else
+                if started["kind"] in ("pick_topic", "welcome", "start_choice"):   # the opening prompts: read on
+                    await self.ws.send_json({"type": "ask", "question": {"pick_topic": "from the top", "welcome": "the first one", "start_choice": "brief"}[started["kind"]]})
                 continue
             return started, ctx
 

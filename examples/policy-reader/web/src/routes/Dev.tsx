@@ -26,6 +26,23 @@ export default function Dev() {
   const [traces, setTraces] = useState<{ name: string; bytes: number }[]>([])
   const [trace, setTrace] = useState('')
   const [q, setQ] = useState('')
+  const [enrichment, setEnrichment] = useState<any>(null)
+  const currentDoc = state.documents.find((d) => d.name === state.current)
+  const [report, setReport] = useState<any>(null)
+  useEffect(() => {
+    setReport(null)
+  }, [currentDoc?.doc_id])
+  useEffect(() => {
+    const id = currentDoc?.doc_id
+    if (!id) {
+      setEnrichment(null)
+      return
+    }
+    fetch(`/documents/${encodeURIComponent(id)}/enrichment`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then(setEnrichment)
+      .catch(() => setEnrichment(null))
+  }, [currentDoc?.doc_id])
   const listRef = useRef<HTMLDivElement>(null)
 
   const dev = !!state.status.dev
@@ -205,9 +222,147 @@ export default function Dev() {
                   </button>
                 )}
                 <button onClick={() => s.open(d.name)}>Open</button>
+                <input
+                  className="mono"
+                  aria-label={`Spoken title of ${d.name}`}
+                  title="What the voice calls it"
+                  defaultValue={d.spoken_title || d.title}
+                  style={{ width: 220 }}
+                  onBlur={(e) => {
+                    if (e.target.value !== (d.spoken_title || d.title))
+                      fetch('/api/dev/spoken_title', {
+                        method: 'POST',
+                        headers: { 'content-type': 'application/json' },
+                        body: JSON.stringify({ name: d.name, spoken_title: e.target.value }),
+                      })
+                  }}
+                />
+                {d.doc_id && (
+                  <button
+                    aria-label={`Delete ${d.name}`}
+                    onClick={() => {
+                      if (window.confirm(`Delete ${d.name} and its files?`)) s.remove(d.doc_id!, true)
+                    }}
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="panel">
+          <h2>Enrichment (build time)</h2>
+          <label className="mono" style={{ display: 'block', marginBottom: 8 }}>
+            <input
+              type="checkbox"
+              checked={state.status.enrich_rest?.enabled ?? true}
+              onChange={(e) =>
+                fetch('/api/dev/enrich_rest', {
+                  method: 'POST',
+                  headers: { 'content-type': 'application/json' },
+                  body: JSON.stringify({ enabled: e.target.checked }),
+                })
+              }
+            />{' '}
+            background enrichment (tags, questions, tables) — off keeps the model free for answers
+          </label>
+          {!enrichment ? (
+            <p className="notice">No document open.</p>
+          ) : (
+            <>
+              <div className="mono">
+                provider {enrichment.enrichment?.provider ?? 'none'}
+                {enrichment.enrichment?.model ? ` · ${enrichment.enrichment.model}` : ''}
+                {enrichment.enrichment?.elapsed_ms != null ? ` · ${enrichment.enrichment.elapsed_ms} ms` : ''}
+                {` · ${enrichment.tagged_clauses} tagged clauses · ${enrichment.table_overrides} table overrides`}
+              </div>
+              {(enrichment.enrichment?.guard_rejections || []).length > 0 && (
+                <>
+                  <div className="hits-title s-warn">
+                    Guard rejections ({enrichment.enrichment.guard_rejections.length}): the model's text was refused and the mechanical text is read instead
+                  </div>
+                  <table aria-label="Guard rejections" className="mono" style={{ borderCollapse: 'collapse', width: '100%' }}>
+                    <thead>
+                      <tr><th align="left">field</th><th align="left">reason</th><th align="left">mechanical text used</th></tr>
+                    </thead>
+                    <tbody>
+                      {enrichment.enrichment.guard_rejections.map((r: any, i: number) => (
+                        <tr key={i} style={{ verticalAlign: 'top', borderTop: '1px solid #8883' }}>
+                          <td>{r.field}</td>
+                          <td className="s-warn">{(r.reasons || []).join('; ')}{r.dropped ? ` (dropped: ${r.dropped})` : ''}</td>
+                          <td className="s-off">{r.fallback ?? (r.dropped ? '(question dropped)' : '')}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </>
+              )}
+              <div style={{ marginTop: 6 }}>
+                <button
+                  onClick={() => {
+                    const id = currentDoc?.doc_id
+                    if (!id) return
+                    if (report) {
+                      setReport(null)
+                      return
+                    }
+                    fetch(`/documents/${encodeURIComponent(id)}/report`)
+                      .then((r) => (r.ok ? r.json() : { error: `HTTP ${r.status}` }))
+                      .then(setReport)
+                      .catch((e) => setReport({ error: String(e) }))
+                  }}
+                >
+                  {report ? 'Hide ingest report' : 'Ingest report'}
+                </button>
+                {report && (
+                  <div className="mono" style={{ marginTop: 6 }}>
+                    {report.error ? (
+                      <p className="notice s-down">{report.error}</p>
+                    ) : (
+                      <>
+                        <div>
+                          stages: {(report.stages || []).map((st: string) => `${st} ${report.elapsed_ms?.[st] ?? '-'} ms`).join(' · ')}
+                        </div>
+                        <div>
+                          structure: {report.structure?.tool} · {report.structure?.pages ?? 0} pages · {report.structure?.demoted ?? 0} demoted ·{' '}
+                          {report.structure?.splits ?? 0} splits · readable {String(report.readable)}
+                        </div>
+                        {(report.validate?.warnings || []).length > 0 && (
+                          <div className="s-warn">warnings: {report.validate.warnings.join(' | ')}</div>
+                        )}
+                        {(report.validate?.other_notes || []).length > 0 && (
+                          <details>
+                            <summary>{report.validate.other_notes.length} notes</summary>
+                            <ul>{report.validate.other_notes.map((n: string, i: number) => <li key={i}>{n}</li>)}</ul>
+                          </details>
+                        )}
+                        <details>
+                          <summary>full report (JSON)</summary>
+                          <pre style={{ whiteSpace: 'pre-wrap', maxHeight: 360, overflow: 'auto' }}>{JSON.stringify(report, null, 1)}</pre>
+                        </details>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
+              {enrichment.overview?.text && (
+                <p className="notice"><strong>overview</strong> ({enrichment.overview.provider}): {enrichment.overview.text}</p>
+              )}
+              {enrichment.topics?.length > 0 && (
+                <div className="mono">topics: {enrichment.topics.map((t: any) => `${t.topic}${t.heading ? ` -> ${t.heading}` : ''}`).join(' · ')}</div>
+              )}
+              {(enrichment.sections || []).map((sec: any) => (
+                <div className="stage" key={sec.id}>
+                  <span className="st mono">{sec.id}</span>
+                  <span>{sec.title}{sec.est_minutes ? ` (${sec.est_minutes} min)` : ''}</span>
+                  <span className="s-off">{sec.brief?.text ?? ''}</span>
+                  <span className="s-off">{(sec.suggested_questions || []).map((qq: any) => `${qq.text} [${qq.clause_id}]`).join(' | ')}</span>
+                </div>
+              ))}
+            </>
+          )}
         </section>
 
         <section className="panel">

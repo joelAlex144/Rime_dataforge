@@ -47,6 +47,12 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 pip install -r requirements-build.txt   # docling, pinned: the structure pass behind ingest and upload
 docling-tools models download            # one-time, ~500 MB to ~/.cache/docling; a judge reproducing live needs it
+
+# Optional, build time only: the navigator's generated fields (scripts/enrich.py).
+# ENRICH_PROVIDER=none (default) skips it and the reader uses the mechanical map.
+ollama pull granite4.2:3b                 # local: ENRICH_PROVIDER=ollama; same model as the runtime answers; the hero fixture enriches in ~1 min
+#   or   ENRICH_PROVIDER=groq GROQ_API_KEY=... GROQ_MODEL=<from GET /openai/v1/models>   # hosted free tier
+python scripts/enrich.py examples/policy-reader/fixtures/policy.json   # optional: pre-generate; otherwise it happens on entry (upload / first open)
 cp .env.example .env            # fill RIME_API_KEY and RIME_SPEAKER; never commit .env
 set -a; source .env; set +a
 
@@ -66,7 +72,9 @@ TTS_PROVIDER=rime python examples/policy-reader/read_demo.py --cut-ms 2500 -q "w
 | `websockets`, `requests` | runtime | Rime `/ws3`, catalog check |
 | `aiohttp` | web demo | one port for HTTP + `/ws/audio` |
 | `pypdf`, `python-docx`, `beautifulsoup4` | build time | line-based extractors in `scripts/ingest.py` |
+| Ollama (`granite4.2:3b`) | runtime, optional | local answer model behind grounded Q&A; no key; absent == extractive answers |
 | `docling` | build time only | structure pass; runs locally, no API, pinned in `requirements-build.txt`; models downloaded once with `docling-tools models download` |
+| `openai` client (Groq) / Ollama HTTP | build time only | `scripts/enrich.py`; Groq is a hosted third-party service used only during fixture preparation, never at runtime; Ollama is local |
 
 ## Rime integration
 
@@ -130,6 +138,42 @@ two optional fields the hero fixture does not use: `kind`
 (`clause` | `table_row` | `heading`) and `path` (the human numbering path, e.g.
 `4(b)(ii)`). Nothing else in the schema changed, so `grounding.py`, `wordmap.py`,
 `resume.py` and `read_demo.py` read both fixtures unmodified.
+
+### Upload cleaning (text dumps, headings, front matter)
+
+A PDF dumped to text is not the document: it carries `=== PAGE n ===`
+markers, "Page x of y", lines of dots or dashes, form blanks (underscore runs)
+and checkbox glyphs (the Unicode box set and the Private Use Area that
+Wingdings characters land in). `scripts/ingest.py` cleans every `.txt`/`.md`
+(and legacy PDF) line before segmentation -- `clean_lines()`: page markers and
+"Page x of y" go, punctuation/underscore/glyph-only lines go, glyphs inside a
+line go, `___` runs read as "blank"; a dropped line leaves a blank line so the
+paragraphs either side stay apart. A dump with page markers is split into
+pages (`split_pages`) so running headers and footers are stripped across
+pages for text exactly as for PDF (`drop_repeated_lines`). The heading
+heuristic for plain text never makes a heading from a single word, a form
+field ("APPLICATION NO.: ____"), a line that is mostly a number (a phone, a
+pin code), one dangling on "/" or a dash, one with table symbols (`> = %`),
+one that repeats a word ("Nil Nil Nil"), or one followed directly by another
+heading -- those were rows of a dumped table. In the structure pass a body
+line before the first numbered heading that is a URL, a phone number, a UIN,
+a CIN or an ISO reference is `boilerplate` (`front_matter`, bounded to the
+first 60 blocks so a document with no numbered heading keeps its contact
+section). Each rule has a test in `tests/test_ingest.py` /
+`tests/test_ingest_structure.py`; the home-loan text dump re-ingests with
+26 headings (was 65, twelve of them page markers) and zero
+"childless heading" warnings.
+
+Every fixture also carries a **spoken title** (`spoken_title` in the fixture
+and in `index.json`): the docx title property when the file has one, else the
+first real heading the structure pass found, else the title cleaned of
+underscores, UINs and "(SYNTHETIC FIXTURE)" and title-cased. It is what the
+voice says in every line that names the document, and it is editable on `/dev`.
+`scripts/ingest.py` skips a source whose bytes are already registered unless
+`--force`; a forced re-ingest keeps what the model generated where it still
+fits (`carry_enrichment`: briefs and questions by section title, tags where the
+clause text is unchanged, the overview and topics when the section list is the
+same) so a re-ingest for cleaning does not throw away an enrichment.
 
 ### Structure pass and the one ingestion function
 
@@ -245,6 +289,265 @@ accident can turn it into a yes or a no; the same rule is in `SYSTEM_PROMPT` as
 defence in depth. The spoiler gate still outranks it — an eligibility ask never
 pulls an unread clause forward.
 
+### Delete a document
+
+`DELETE /documents/{doc_id}` takes a document out of `index.json`, removes its
+fixture, Docling JSON, ingest report and table CSVs (and the `.incoming_*`
+source if it is still there), closes its session, and if it was the open
+document opens the next one. Every tab gets `document_deleted {name, doc_id,
+current, documents}`. The committed fixtures are refused (403) unless
+`?force=1`. The listener rail shows a trash icon on unreviewed entries (with a
+confirm); `/dev` has Delete on every entry. Uploads are deduplicated twice:
+the same bytes return the existing entry (as before), and the same text under
+other bytes -- a re-export, a different line wrap -- is a **409** with the
+existing entry and a companion line, "That looks like {title}, which is
+already here."
+(`text_sha256` in the entry's source block: a hash of the text with case,
+whitespace and punctuation removed, computed by the light extractors at ingest
+and at upload). Tests: `tests/test_server_delete.py`,
+`web/src/components/UploadDocument.test.tsx`.
+
+## Navigator (build-time enrichment)
+
+The navigator **describes and extracts; it does not interpret or recommend.**
+`scripts/enrich.py` runs after ingestion, at build time only, and writes
+generated fields into the fixture, every one marked `generated: true` with the
+provider's name: a document `overview` (what it is, who issues it, how it is
+organised, plus a listening time computed from clause length and the measured
+speech rate in the traces), one descriptive `brief` per top-level section with
+`est_minutes`, `tags` per clause from a fixed set (`exclusion`,
+`waiting_period`, `deadline`, `amount`, `obligation`, `definition`,
+`procedure`, `contact`), two or three `suggested_questions` per section (each
+pointing at a clause id that must exist in that section or it is dropped),
+`topics` chips from a fixed domain list resolved to headings that exist (a
+heading that names the topic always wins over the model's choice), and spoken
+descriptions for tables. An output guard rejects advisory or ranking language
+(`you should`, `important`, `make sure`, `recommend`, `beware`, `key thing`,
+`crucial`, `must know`, `be careful`); one regeneration, then the mechanical
+form, with the rejection logged in the ingest report and shown on `/dev`.
+
+Provider is `ollama` (local; `granite4.2:3b` by default, one pull serves both enrichment and runtime answers) or `groq` (hosted; an
+OpenAI-compatible free tier, disclosed here as a third-party service used only
+during fixture preparation and never in the judged runtime path; the model
+name is never in source, it comes from `GROQ_MODEL` and is checked against
+`GET /openai/v1/models` at start; ~30 requests/min and ~6,000 tokens/min, so a
+200-clause document takes a few minutes) or `none` (nothing generated; the
+reader speaks the mechanical map). Both model providers use the same prompts
+and the same parser, so the schema never changes with the provider.
+
+At runtime the reader speaks the overview on open while the topic chips show;
+a chip (or a spoken topic name) asks "Read it now, or hear the rest of the
+overview first?"; section transitions speak the brief as the coming-up cue
+("skip it" jumps on, "go on" continues); after a section is heard one
+suggested question is offered ("People usually ask here whether … Want that?",
+answered from its stored clause with no retrieval); and extractive asks --
+"read me every exclusion", "what deadlines are in this document", "summarise
+this section" -- return cited clauses from the tags, never ranked, no model.
+Every jump goes through the interruption path (see the failure table:
+`jump`). None of this calls a model at runtime.
+
+### Enrichment scheduling (runtime)
+
+The navigator pass (overview, briefs, topics) has its own lock and priority.
+The rest pass (tags, questions, tables) runs one model call at a time
+(`Enricher.steps()`: a tag batch, one section's questions, one table) and
+between calls yields while a navigator is waiting, an answer is in flight or
+a prompt is open, so a question asked during the rest pass is answered within
+one step and a second document's navigator lands while the first document's
+rest pass is mid-way. The fixture is written after every step, so progress
+survives a restart. `ENRICH_REST_ENABLED` (default true) and a `/dev` toggle
+switch the rest pass off, which keeps the model free for answers; the status
+row `enrich_rest` shows the switch and how many navigators are waiting. Trace:
+`enrich_step{step, index, of, ms}`, `enrich_rest_skipped`,
+`enrich_rest_toggled`. Test: `tests/test_enrich_sched.py`.
+
+### Conversation (prompts, starters, tables)
+
+The reader talks, and listens for the reply. Each prompt is a spoken unit of
+its own `kind`, heard on the client's acks like a clause, and only then gives
+the listener the floor for a fixed number of seconds before its default. At
+most one prompt is open at a time; opening another resolves the old one as
+`superseded`; a cue may follow a prompt, another prompt may not. A kind the
+listener lets time out twice in a session is muted for the rest of it
+(`prompt_muted`). The trace carries `prompt_opened{kind, options}` and
+`prompt_resolved{kind, by: reply|timeout|chip|superseded|cancelled, choice}`.
+
+**How a reply is read.** Every typed utterance goes through `route_reply`
+(`conversation.py`), in this order, and the trace says which step took it
+(`reply_understood{intent, section_id, row, via: rules|llm, ms}`):
+
+1. an exact option word, chip text or navigation phrase for the open prompt
+   -> the rules, no model;
+2. `llm.understand(text, ctx)`: the model returns intent and slots in a closed
+   schema (`topic | question | brief | start | carry_on | skip | back | row |
+   all | yes | no | recap | repeat | unclear`, plus a `section_id` from the
+   section list it was shown, a `row` from the labels, a cleaned `question`);
+   anything outside the lists is dropped and the reply is `unclear`;
+3. execution stays deterministic: a topic goes `find_section` first, else the
+   model's `section_id`, then the cue "{heading}, about {m} minutes.
+   Starting." and the jump; a question takes the ask path; every other intent
+   is read against the open prompt's options or takes its global action;
+4. the floor: no model, a timeout (4 s) or `unclear` -> the v1 rules exactly,
+   including the closed-set classifier for an open prompt (`via: rules`).
+
+| Prompt | Says | Options -> action | Silence | Read by |
+|---|---|---|---|---|
+| `welcome` (8 s) | "I can read a policy or agreement to you and answer questions as we go. You have {n} here: {titles}. Which one, or upload a new one?" On the first play of a session with nothing started and more than one document. | a title -> open -> `start_choice`; "upload" -> the upload dialog (`focus_upload`) | the first document, read | title by rules (exact, substring, overlap), then the model |
+| `ingest_wait` (no timer; closes at ready) | "I'm going through the document now, about a minute. While I do: is there something you want to know from it? I'll look for it first." Upload starts, voice claimed. Then the cues "Got it, I'll look for that.", "Found {S} sections.", "Nearly there. I'm putting an overview together." | anything said -> `parked_question`; at ready: "First, what you asked while I was reading it." -> the answer over the whole document -> `start_choice` | none | rules (everything is the question) |
+| `start_choice` (8 s) | "I've gone through {title}, about {N} minutes to read. Is there a topic you have in mind? If not, I'll give you a brief and you can pick from there." | a topic -> `confirm_topic`; "brief" / "no" -> the overview and chips; "start" -> read from the top, no overview; a question -> answered, then the invitation once more | the overview and chips | chip text by rules; anything else by the model |
+| `confirm_topic` (6 s) | "{heading}, about {m} minutes. Read it now?" | "yes" -> jump; "no" -> the overview | the overview | rules, then the model |
+| `pick_topic` (8 s) | "Where shall we start: {topic1}, {topic2}, {topic3}, or from the top?" After the overview is heard. | a topic -> jump; "top" -> read on | from the top | chip text by rules; the model otherwise |
+| `choice` (8 s) | "{topic} is {heading}, about {m} minutes. Read it now, or hear the rest of the overview first?" After a chip. | "now" / "overview first" | "I'll read from the start. Interrupt me any time." | rules, then the model |
+| `offer` (6 s) | "People usually ask here whether … Want that?" After a section is heard. | "yes" -> the stored clause; "no" / "go on" | reading continues | rules, then the model |
+| `section_end` (5 s) | "That's {heading}. Next is {next}. Carry on, or something else?" At a top-level boundary the listener heard to its end; never within `SECTION_END_MIN_GAP_S` (180 s) of the last prompt, never right after a jump the listener asked for, never when an offer was just made. | "carry on"; a topic -> jump; a question | carry on | rules, then the model |
+| `table_choice` (6 s) | "Here there's a table of {description}, {n} rows: {first six labels}. Want one of them, all of them, or shall I carry on?" | a label or ordinal -> that row as a `row` unit, then "Another, or carry on?"; "all" -> the rows in order; "carry on" | carry on | labels and ordinals by rules; the model otherwise |
+| `not_found` (6 s) | "I couldn't find that in this document; the insurer or lender can tell you. Carry on, or try another word?" After a question the document does not answer. | "carry on"; a question | carry on | rules, then the model |
+| resume cue | "We were in {heading}. Carrying on." On play after a pause longer than `RESUME_CUE_AFTER_S` (120 s). | -- | -- | -- |
+| `end_choice` (8 s) | "That's the end. Want any section again, or a recap of what we covered?" | a section -> jump; "recap" -> the sections heard in full, partly heard and not heard, built from the ledger, no model | stop | rules, then the model |
+
+Rows spoken on request are in the ledger as `heard` like clauses; rows never
+asked for stay `skipped:table_on_request`. Tables enrichment marked
+`read_inline` are read without a prompt. Play pressed over an invitation or a
+choice closes it and reads. Minutes come from the measured speech rate
+(`CHARS_PER_SECOND`). Cues and prompts are spoken one after another under one
+lock; a prompt closed while still streaming sends a terminal `unit_done{cut}`.
+
+### Companion (no radio silence while a document is processed)
+
+Two roles, one boundary. The **companion** keeps the line alive while a
+document is ingested and enriched; the **reader** answers from the document,
+unchanged.
+
+| | Companion | Reader |
+|---|---|---|
+| speaks | progress, the engagement question, an acknowledgement, a plan, fillers | clauses, grounded answers, the overview and briefs |
+| may see | title, page and section counts, section titles, stage names, the listener's own words, the ledger | clause text (retrieved), heard-so-far text, the question |
+| may never | state or paraphrase anything the document says; numbers, amounts, percentages, section citations | small talk |
+| text from | templates; a model only to reword an acknowledgement | `grounding.resolve` and the answer prompt |
+| model | `COMPANION_MODEL` (default: the answer model) | `LLM_MODEL` |
+| guard | `companion_guard` | the no-interpretation prompt and the eligibility refusal |
+
+While a tab has the voice, `Narrator` (`companion.py`) speaks, as `companion`
+units under the same lock as prompts: real progress as the stage events
+arrive ("Got the text, {pages} pages." -> "I can see {S} sections: {first
+three}, and more." -> "Checking the wording and any personal details." ->
+"Nearly there, putting an overview together." -> "Done."), the one engagement
+question at about five seconds ("While I do this, is there anything you want
+to know from it? I'll look for it first.", the `ingest_wait` prompt), the
+acknowledgement on a reply ("Okay, I'll keep that in mind: {topic phrase}."),
+the plan line at twenty seconds without one ("Okay. Once I'm done I'll give
+you an overview, and the main sections will show up below.", then no more
+questions that ingest), and fillers only after twelve seconds without a line
+(rotating, never repeated in a session, at most five per ingest). Any listener
+reply cancels the line in flight; nothing is said over a prompt that is
+waiting; a real event pre-empts a queued filler. The section list goes to the
+client at the structure stage (`sections_found`), before enrichment.
+
+`companion_guard` rejects a line with a digit, a percentage or currency, the
+words "section" or "clause", or any six-word span found in the document's
+clause text; it gates every model-phrased line (a rejection speaks the
+template). Templates are trusted and carry only counts and titles. The parked
+question is stored, never answered by the companion: at ready, "First, what you
+asked earlier.", then the reader path with `answer_source` and
+`retrieval_path` in the trace, then the invitation, which names the topic
+phrase. Trace: `companion_spoken{source: event|question|ack|plan|filler|ready,
+origin: template|model, text}`, `sections_found{n, titles}`, and per ingest
+`narration_gap_ms{max, count, gaps}`, the longest silence (target p95 under 15
+s; see RIME_EVIDENCE.md).
+
+VRAM, 6 GB: Granite (2.2 GB) and Qwen 3.5 4B (3.4 GB) do not co-reside with
+their KV caches; Ollama swaps, one to two seconds each. Enrichment needs
+Granite in the same window a Qwen companion would use, so a second model buys
+little during ingest and costs a swap per reply after it. The shipped path is
+one model; `COMPANION_MODEL` is a switch to try (a Qwen model is sent with
+thinking off). Templates need no model at all.
+
+**The model's roles, exhaustively.** (1) Phrasing an in-scope or deictic
+answer from the retrieved clause text (`SYSTEM_PROMPT`; "what does that mean"
+restates the clause in plain everyday words, adding nothing). (2) Enrichment
+at build time or on entry (`scripts/enrich.py`). (3) Understanding a reply
+that is not an exact option word (`llm.understand`: intent and slots from the
+lists it was given; JSON, temperature 0, `max_tokens` 80, 4 s; any failure is
+`unclear`). (4) Mapping a named topic to one section id from the list, or
+none (`llm.map_topic`). (5) As the floor only, classifying a reply into an
+open prompt's options plus "question" (`llm.classify`: 20 tokens, 5 s; any
+failure is "question"). (6) Rewording one acknowledgement for the companion
+(`companion.phrase_ack`, 40 tokens, 3 s, behind `companion_guard`). Never
+eligibility, never a jump target outside the section list, never a word of
+document text, never the recap.
+
+### The voice takes over for processing (both paths)
+
+The interactive voice runs whenever a document is processed -- an upload, or
+the enrichment of a document just opened -- and takes the voice over if it
+has to (`ReaderSession.take_voice_for(doc, reason)`): whatever is sounding is
+stopped exactly like an interrupt (boundary at the playhead, position saved,
+`unit_truncated{reason: upload|open}`), an open prompt is closed as
+`superseded`, and the companion says "I'll pause here and go through
+{spoken title}." Then the narration plan, all templates, no model:
+"Got the text, {pages} pages." at extract -> "I can see {S} sections: {first
+three}, and more." at structure (the headings go to the client as
+`sections_found`, shown as "Coming up" until the chips land) -> the engagement
+question at ~5 s ("While I do this, is there anything you want to know from
+it? I'll look for it first."; a reply is acknowledged "Okay, I'll keep that in
+mind: {phrase}." and parked for that document; 20 s without one: "Okay. Once
+I'm done I'll give you an overview, and the sections will show up below.") ->
+a filler after every 12 s of silence (five templates in rotation, never a
+document fact, for as long as the generation takes) -> "Nearly there, putting
+an overview together." when enrichment starts -> "Done." -> the parked
+question answered through the reader path -> `start_choice`. On the open
+path the structure line follows the takeover line at once. Every line and
+prompt is bound to the document being processed (`companion_spoken{document}`,
+`narration_gap_ms{document, owner}`), never to whatever is open, and opening
+another document does not close that document's `ingest_wait`. With no tab
+holding the voice nothing is said (`narration_pending`); the first play is
+told the backlog first: "While you were away I went through {title}. It has
+{S} sections." (`backlog_spoken`). `narration_gap_ms.max` is the measure;
+`scripts/qa_live.py` fails its pass when it exceeds 15 s.
+
+**The live pass, repeatable.** `python scripts/qa_live.py --serve --tts fake`
+(then `--tts rime`) starts a server on port 8090, claims the voice, starts
+reading `saral_jeevan_bima`, uploads `fixtures/source/fixture_arogya_sanjeevani.docx`
+converted to a plain PDF while that is being read, answers the engagement
+question, waits for `start_choice`, replies "exclusions", reads into a table
+and picks "the second one", and deletes the upload -- printing every companion
+and prompt line with a timestamp, `narration_gap_ms`, `topics_offered.n`, the
+uploaded fixture's headings and the delete result. Exit 1 on a silence over
+15 s, junk in the headings, no table, or a delete that left files behind. The
+enrichment guard also refuses a generated line that carries a clause id
+("mentioned in sec-1-p2"), seen once in that pass.
+
+`start_choice` is asked once per document: for a document opened from the
+rail, 1.5 s after the last open (a run of clicks asks once, for the document
+that stays; `start_choice_due` in the trace); never for the page re-opening the
+document it shows at load; otherwise on the first play. It says
+"I've gone through {spoken title}: {S} sections." -- the whole-document minutes
+are gone; `confirm_topic` keeps its per-section minutes.
+
+Side units -- the overview, the invitations, the welcome, companion lines, the
+recap -- are one unit to the client but one Rime context per sentence
+(`_stream_sentences`, the same sentence split as clauses), so an interrupt
+mid-overview fences at most one sentence's bytes instead of the whole overview
+streaming on. `/api/metrics` reports `fenced_bytes_session` and
+`fenced_unit_bytes`. `/dev` lists every guard rejection (field, reason, the
+mechanical text read instead) and shows the ingest report for the open
+document.
+
+**Chips, five to seven of them.** `Grounding.topics` is the generated topics
+whose pointer resolves, then top-level section headings (cleaned of numbering
+and "N items", four words at most) until there are five, then sub-headings
+for a document with few sections, then "Read from the start"; never more than
+seven, and `topics_offered.n` is at least five for every fixture in the index
+(`tests/test_grounding.py`). A sub-heading chip jumps to its own span
+(`Grounding.section_for_id`). `document_opened` carries the chips of a
+document that has its navigator, `navigator ready` and `hello` too, and the
+client never clears the chips for the document it is already showing, so an
+open, a re-open at load, or a prompt no longer blanks them; they show during
+`start_choice` as well. A `table_choice` or `offer` left behind by an open or
+a jump closes with `by: navigated`. The table prompt speaks the generated
+description as-is ("The table is ... Want one of them, all of them, or shall I
+carry on?") instead of "Here there's a table of The table is ...".
+
 ## Web demo
 
 Two React routes over one server and one event stream: `/` is the listener,
@@ -270,11 +573,21 @@ after `set -a; source .env; set +a`.
 
 **Upload on both routes.** `POST /documents` (multipart PDF; `.docx`, `.txt`,
 `.md`, `.html` or a `{"url": ...}` body take the same path) runs
-`ingest_document()` in a worker thread and streams the seven stages as
+`ingest_document()` in a worker thread and streams the eight stages as
 server-sent events `{stage, status, elapsed_ms}`; the last event carries the
-library entry `{doc_id, title, reviewed, readable, clause_count}`. The entry is
-appended to `index.json` at once with `reviewed: false`, and the reader can
-start on it. The listener page renders only a progress bar keyed to the
+library entry `{doc_id, title, reviewed, readable, clause_count}`. The eighth
+stage, `enrich`, runs **on entry**: with `ENRICH_PROVIDER` set, the overview,
+section briefs and topic chips are generated before `done` (the trace carries
+`enrich_started` / `enrich_done stage=navigator`, with elapsed time), and the
+remaining fields -- tags, suggested questions, table shapes -- follow in the
+background (`enrich_done stage=rest`). Without a provider the stage is
+`skipped`; if generation fails it is `error`, the document still enters and
+play uses the mechanical map. The entry is appended to `index.json` at once
+with `reviewed: false`, and the reader can start on it. Opening a fixture that
+has no navigator (the committed wordings before their first open on a machine
+with a provider) starts the same generation; the rail says "Preparing
+overview…", and play at the top of the document speaks a short cue and waits
+up to `NAVIGATOR_WAIT_S` (120) for it rather than reading blind. The listener page renders only a progress bar keyed to the
 stages, the elapsed time and the title once it lands: no stage names, no
 counts, no scan findings, no accept step. The developer page renders the stage
 list, the report in full (`GET /documents/<doc_id>/report`) and an **Accept**
@@ -294,11 +607,44 @@ the client's acks and interruptible like a clause. Once the client reports the
 answer's last frame, reading resumes after 600 ms at the sentence containing
 the cut, unless the answer was *beyond cursor* or *not found*, which wait for
 Jump there / Keep going / play. Deictic questions resolve against the clause
-the flush ack named, never the last clause synthesised under lookahead. With
-`LLM_API_KEY` set, in-scope answers go through the model named by
-`LLM_PROVIDER` / `LLM_MODEL` (key server-side only; `/api/status` shows which)
-and the trace records `answer_source`; without it, or if the call fails, the
-answer is extractive. Eligibility questions never go through the model.
+the flush ack named, never the last clause synthesised under lookahead. In-scope and deictic answers go through the model named by `LLM_PROVIDER` /
+`LLM_MODEL` when one is configured (key server-side only; `/api/status` shows
+which) and the trace records `answer_source`; without one, or if the call
+fails or exceeds `LLM_TIMEOUT_S`, the answer is extractive and the trace says
+`llm_failed`. Eligibility questions never go through the model.
+
+Every utterance the listener types (the same path when speech lands) goes
+through one router, `route_reply`, in a fixed order, and the trace says which
+step took it (`reply_routed{route: pending|nav|question|llm_classify}`):
+first the open prompt's own option grammar (deterministic); then the
+navigation regexes, where a bare topic name ("premium", "exclusions") jumps
+but anything shaped like a question ("what is the premium", "explain
+exclusions", a "?") never does; then a question, resolved by `grounding.py`;
+and only when a prompt is open and nothing above matched, the model
+classifies the reply into that prompt's options plus "question" (closed set,
+JSON, temperature 0, 20 tokens, 5 s; any failure is "question"). A reply
+never reaches the model when a rule matched, and the model never chooses a
+jump target the rules did not offer.
+
+**Local answer model (shipped path).** `LLM_PROVIDER=ollama` with
+`LLM_MODEL=granite4.2:3b` talks to a local Ollama server over its
+OpenAI-compatible endpoint and needs no key. Granite 4.2 3B was chosen
+because it is tuned for answering from supplied passages, its 2.2 GB of
+weights leave room for the KV cache on a 6 GB laptop GPU, and it does not
+reason before it speaks, so the listener is not left waiting. Every request
+is `temperature 0` and capped at `LLM_MAX_TOKENS`. At start the server runs
+`check_llm()` (is the model present? if not the trace carries the exact
+`ollama pull`) and `warm_llm()` (one-token request so the first question does
+not pay the model load), emitting `llm_ready` or `llm_unavailable`.
+
+```bash
+ollama pull granite4.2:3b                         # once; on Windows or in WSL, wherever Ollama runs
+python examples/policy-reader/llm.py --check      # reachable, present, warm, one timed answer
+```
+
+From WSL2 with Ollama on the Windows side, set `LLM_BASE_URL` to the Windows
+host IP (`ip route | awk '/default/ {print $3}'`) if `localhost:11434` does
+not reach it.
 
 **What `--dev` enables.** `python examples/policy-reader/server.py --dev` turns on
 provider swapping (`/api/dev/provider`) and the developer page's controls.
@@ -410,6 +756,14 @@ is a canary for the assumption, not a gate that is expected to pass.
 - **Uploaded documents are unreviewed** until a person presses Accept, and may
   carry residual boilerplate the regex pass did not catch; the developer page
   lists the first fifteen demotions so that is checkable.
+- **Generated text is reviewed by hand on the committed fixtures only.**
+  Uploaded documents get enrichment only if a provider is configured on the
+  machine that runs `scripts/enrich.py`; otherwise they open with the
+  mechanical map and no chips, briefs or tags.
+- **Scope note.** To pay for the navigator and the jump rewrite, the
+  generality claim is made on two fixtures (the hero policy and the two-wheeler
+  loan agreement) and the interruption drift script is run at 15 points rather
+  than 20.
 - **Retrieval quality is not claimed.** What is claimed is that the twenty
   scripted questions in `fixtures/policy.questions.json` resolve to the
   expected clause by the expected branch (`scripts/check_grounding.py`). The
@@ -428,9 +782,10 @@ is a canary for the assumption, not a gate that is expected to pass.
 | Rime socket drops mid-unit | `provider_disconnected` logged; in-flight iterators receive `TTSError`; agent reconnects and resumes from the last acknowledged boundary |
 | Late audio after cancel | dropped, `result_fenced` with byte count |
 | Boilerplate or table row in reading order | never sent to Rime; one `unit_skipped` per clause at session start with `reason: boilerplate` or `reason: table_on_request`, so the session record is heard / truncated / never-sent / skipped with nothing absent |
+| Jump (chip, spoken topic, spoiler-gate offer, "skip it", "go back") | the interruption path with a different target: `unit_truncated` at the client boundary, `unit_skipped` with `reason: jump` for every clause passed over, `position_saved` (before_jump), `position_restored` (jump), a `jump` event `{from_unit, to_unit, reason, turn_id}`, then a cue unit and the target |
 | Rime sends an odd-length PCM chunk | trailing byte carried into the next chunk, in the adapter and in the browser; `chunk_realigned` per unit with the odd-chunk count; a lone final byte is dropped and logged |
 | Client frame count short of the bytes sent | unit is not marked heard; `frame_count_mismatch` with both counts. Heard is client-acknowledged, never server-estimated |
 | Speaker not on live catalog | `fetch_voices.py` exits 1 — submission blocker |
 | Question about unread clause | offer to jump; clause not read |
 | Question not answerable from text | says so, redirects to insurer |
-| LLM unavailable | extractive answer: cite and re-read the clause |
+| LLM unavailable, slow (> `LLM_TIMEOUT_S`) or model not pulled | extractive answer: cite and re-read the clause; trace `llm_failed` / `llm_unavailable`, `/api/status` shows warn |

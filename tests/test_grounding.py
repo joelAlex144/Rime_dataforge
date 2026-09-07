@@ -96,12 +96,49 @@ class TestGrounding(unittest.TestCase):
         self.assertIn("NEVER decide whether the listener personally qualifies", SYSTEM_PROMPT)
         self.assertIn("Never answer such a question with yes or no.", SYSTEM_PROMPT)
 
+    def test_deictic_prompt_asks_for_a_plain_restatement(self):
+        r = self.g.resolve("what does that mean", "sec-5a-v", read_cursor=70)
+        self.assertEqual(r.kind, "deictic")
+        system = self.g.build_prompt(r)[0]["content"]
+        self.assertIn("restate the clause in plain everyday language", system)
+        self.assertIn("do not repeat the clause word for word", system)
+        self.assertIn("Add nothing that is not in the text", system)
+        self.assertIn("Do NOT interpret", system, "every other rule is kept")
+
     def test_prompt_contains_only_document_text(self):
         r = self.g.resolve("what does that mean", "sec-5a-v", read_cursor=70)
         msgs = self.g.build_prompt(r, heard_text_of_reference="Water damage, meaning flood, surface water")
         self.assertIn("[interrupted]", msgs[1]["content"])
         self.assertIn(self.g.by_id["sec-5a-v"]["text_spoken"], msgs[1]["content"])
         self.assertIn("Do NOT interpret", msgs[0]["content"])
+
+
+
+
+class TestTopicsGuarantee(unittest.TestCase):
+    def test_every_fixture_in_the_index_offers_five_to_seven_chips(self):
+        import json
+        root = Path(__file__).resolve().parents[1] / "examples" / "policy-reader" / "fixtures"
+        idx = json.loads((root / "index.json").read_text(encoding="utf-8"))
+        for e in idx["documents"]:
+            g = Grounding(root / e["path"])
+            chips = g.topics
+            with self.subTest(document=e["name"]):
+                self.assertGreaterEqual(len(chips), 5, [c["topic"] for c in chips])
+                self.assertLessEqual(len(chips), 7, [c["topic"] for c in chips])
+                self.assertEqual(chips[-1]["topic"], "Read from the start")
+                for c in chips[:-1]:
+                    self.assertIn(c["section_id"], g.by_id)
+                    self.assertLessEqual(len(c["topic"].split()), 8, c["topic"])
+
+    def test_chip_names_are_short_and_clean(self):
+        from grounding import chip_name
+        self.assertEqual(chip_name("3.DEFINITIONS"), "Definitions")
+        self.assertEqual(chip_name("Section 4 Perils insured against"), "Perils insured against")
+        self.assertEqual(chip_name("BRIEF PROCEDURE TO BE FOLLOWED FOR RECOVERY OF OVERDUES. 11 items."), "Brief Procedure To Be")
+        self.assertEqual(chip_name("Insured Events"), "Insured Events")
+        self.assertEqual(chip_name("=== PAGE 3 ==="), "")
+        self.assertEqual(chip_name("Level 4"), "Level 4")
 
 
 if __name__ == "__main__":
