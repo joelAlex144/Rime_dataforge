@@ -341,5 +341,30 @@ class TestFixturesAreClean(unittest.TestCase):
                 self.assertEqual(bad, [], f"{e['name']}: {bad[:5]}")
 
 
+
+class TestCommittedIndex(unittest.TestCase):
+    """The committed registry: every entry reviewed, titled for the voice."""
+
+    def test_every_committed_entry_is_reviewed_with_a_real_title(self):
+        idx = json.loads(REAL_INDEX.read_text(encoding="utf-8"))
+        self.assertGreaterEqual(len(idx["documents"]), 5)
+        for e in idx["documents"]:
+            with self.subTest(document=e["name"]):
+                self.assertTrue(e.get("reviewed"), f"{e['name']} is not reviewed")
+                self.assertFalse((e.get("title") or "").startswith("fixture_"), e.get("title"))
+                self.assertFalse((e.get("spoken_title") or e.get("title") or "").startswith("fixture_"))
+
+    def test_the_five_indian_fixtures_have_their_spoken_titles(self):
+        idx = {e["name"]: e for e in json.loads(REAL_INDEX.read_text(encoding="utf-8"))["documents"]}
+        want = {"arogya_sanjeevani": "Arogya Sanjeevani Policy Wording", "bharat_griha_raksha": "Bharat Griha Raksha Policy Wording",
+                "home_loan_mitc": "Home Loan Most Important Terms and Conditions", "saral_jeevan_bima": "Saral Jeevan Bima Policy Wording",
+                "two_wheeler_loan_agreement": "Two-Wheeler Loan Agreement"}
+        for name, title in want.items():
+            with self.subTest(document=name):
+                self.assertEqual(idx[name]["title"], title)
+                self.assertEqual(idx[name].get("spoken_title"), title)
+                self.assertTrue(idx[name]["reviewed"])
+
+
 if __name__ == "__main__":
     unittest.main()

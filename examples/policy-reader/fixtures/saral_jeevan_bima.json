@@ -1,6 +1,21 @@
 {
- "title": "fixture_saral_jeevan_bima",
- "spoken_title": "Saral Jeevan Bima — Policy Document",
+ "title": "Saral Jeevan Bima Policy Wording",
+ "spoken_title": "Saral Jeevan Bima Policy Wording",
+ "provenance": {
+  "intro": "Fixture document for the delivery-aware reader — verbatim text of a public Indian insurance policy.",
+  "rows": {
+   "Document type": "Insurance policy (individual term life) — IRDAI standard product",
+   "Issuer / source": "SBI Life Insurance Company Limited (IRDAI standard product)",
+   "UIN / reference": "111N128V01",
+   "Source pages": "39",
+   "Word count (body)": "12,646",
+   "Section headings": "81",
+   "Retrieved": "6 September 2026",
+   "Source URL": "https://irdai.gov.in/documents/37343/563751/SBI+Life+-+Saral+Jeevan+Bima_PD_2020-21.pdf/62c5de3d-fddd-f4b1-c294-ab466fe9221e?version=1.1&t=1668076574870"
+  },
+  "note": "Provenance and handling note.",
+  "blocks_dropped": 19
+ },
  "doc_id": "f5877d522f441c28",
  "synthetic": false,
  "readable": true,
@@ -112,7 +127,7 @@
   ],
   "text_sha256": "77fb5d4967795415118bd6f4407d60dd909f6cb238fc270812043a72ceb7dd24"
  },
- "clause_count": 419,
+ "clause_count": 407,
  "clauses": [
   {
    "id": "sec-1",
@@ -121,12 +136,12 @@
    "section_title": "Saral Jeevan Bima — Policy Document",
    "subsection": null,
    "item": null,
-   "text_display": "Saral Jeevan Bima — Policy Document. 11 items.",
-   "text_spoken": "Saral Jeevan Bima — Policy Document. eleven items.",
+   "text_display": "Saral Jeevan Bima — Policy Document. 1 item.",
+   "text_spoken": "Saral Jeevan Bima — Policy Document. one item.",
    "sentences": [
     [
      0,
-     46
+     44
     ]
    ],
    "spoken_map": [
@@ -162,18 +177,18 @@
     ],
     [
      37,
-     39,
-     "eleven"
+     38,
+     "one"
     ],
     [
-     40,
-     46,
-     "items."
+     39,
+     44,
+     "item."
     ]
    ],
    "kind": "heading",
    "level": 1,
-   "children": 11
+   "children": 1
   },
   {
    "id": "sec-1-p1",
@@ -182,1313 +197,459 @@
    "section_title": "Saral Jeevan Bima — Policy Document",
    "subsection": null,
    "item": null,
-   "text_display": "Fixture document for the delivery-aware reader — verbatim text of a public Indian insurance policy.",
-   "text_spoken": "Fixture document for the delivery-aware reader — verbatim text of a public Indian insurance policy.",
+   "text_display": "Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
+   "text_spoken": "Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
    "sentences": [
     [
      0,
-     99
+     173
+    ],
+    [
+     174,
+     252
+    ],
+    [
+     253,
+     303
+    ],
+    [
+     304,
+     420
+    ],
+    [
+     421,
+     517
     ]
    ],
    "spoken_map": [
     [
      0,
-     7,
-     "Fixture"
+     4,
+     "Text"
     ],
     [
-     8,
-     16,
-     "document"
-    ],
-    [
-     17,
-     20,
-     "for"
-    ],
-    [
-     21,
-     24,
-     "the"
-    ],
-    [
-     25,
-     39,
-     "delivery-aware"
-    ],
-    [
-     40,
-     46,
-     "reader"
-    ],
-    [
-     47,
-     48,
-     "—"
-    ],
-    [
-     49,
-     57,
-     "verbatim"
-    ],
-    [
-     58,
-     62,
-     "text"
-    ],
-    [
-     63,
-     65,
-     "of"
-    ],
-    [
-     66,
-     67,
-     "a"
-    ],
-    [
-     68,
-     74,
-     "public"
-    ],
-    [
-     75,
-     81,
-     "Indian"
-    ],
-    [
-     82,
-     91,
-     "insurance"
-    ],
-    [
-     92,
-     99,
-     "policy."
-    ]
-   ],
-   "kind": "body"
-  },
-  {
-   "id": "sec-1-t1",
-   "index": 2,
-   "section": 1,
-   "section_title": "Saral Jeevan Bima — Policy Document",
-   "subsection": null,
-   "item": null,
-   "text_display": "There is a table here: 8 entries, Document type to Source URL. Ask me for any row.",
-   "text_spoken": "There is a table here: eight entries, Document type to Source URL. Ask me for any row.",
-   "sentences": [
-    [
-     0,
-     62
-    ],
-    [
-     63,
-     82
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
      5,
-     "There"
-    ],
-    [
-     6,
      8,
-     "is"
+     "was"
     ],
     [
      9,
-     10,
-     "a"
+     18,
+     "extracted"
     ],
     [
-     11,
-     16,
-     "table"
-    ],
-    [
-     17,
-     22,
-     "here:"
-    ],
-    [
+     19,
      23,
+     "from"
+    ],
+    [
      24,
-     "eight"
+     27,
+     "the"
     ],
     [
-     25,
-     33,
-     "entries,"
+     28,
+     36,
+     "publicly"
     ],
     [
-     34,
-     42,
-     "Document"
-    ],
-    [
+     37,
      43,
+     "hosted"
+    ],
+    [
+     44,
      47,
-     "type"
+     "PDF"
     ],
     [
      48,
      50,
-     "to"
+     "at"
     ],
     [
      51,
-     57,
-     "Source"
-    ],
-    [
-     58,
-     62,
-     "URL."
-    ],
-    [
-     63,
-     66,
-     "Ask"
-    ],
-    [
-     67,
-     69,
-     "me"
-    ],
-    [
-     70,
-     73,
-     "for"
-    ],
-    [
-     74,
-     77,
-     "any"
-    ],
-    [
-     78,
-     82,
-     "row."
-    ]
-   ],
-   "kind": "table_stub",
-   "spoken_override": {
-    "text": "The table is a policy summary table for Saral Jeevan Bima (individual term life insurance). It has columns: Policy ID, Coverage Amount, Premium Amount, Validity Period, Beneficiary Name, and Expiry Date. Row labels are in order: UIN/Reference, Section Heading, Source Page, Word Count, Section Headings Count, Retrieved Date, Source URL. Which one do you want?",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-t1-r1",
-   "index": 3,
-   "section": 1,
-   "section_title": "Saral Jeevan Bima — Policy Document",
-   "subsection": null,
-   "item": null,
-   "text_display": "Document type: Insurance policy (individual term life) — IRDAI standard product.",
-   "text_spoken": "Document type: Insurance policy (individual term life) — IRDAI standard product.",
-   "sentences": [
-    [
-     0,
-     80
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     8,
-     "Document"
-    ],
-    [
-     9,
-     14,
-     "type:"
-    ],
-    [
-     15,
-     24,
-     "Insurance"
-    ],
-    [
-     25,
-     31,
-     "policy"
-    ],
-    [
-     32,
-     43,
-     "(individual"
-    ],
-    [
-     44,
-     48,
-     "term"
-    ],
-    [
-     49,
      54,
-     "life)"
+     "the"
     ],
     [
      55,
-     56,
-     "—"
-    ],
-    [
-     57,
-     62,
-     "IRDAI"
-    ],
-    [
-     63,
-     71,
-     "standard"
-    ],
-    [
-     72,
-     80,
-     "product."
-    ]
-   ],
-   "kind": "table_row",
-   "spoken_on_request": true,
-   "parent": "sec-1-t1",
-   "spoken_override": {
-    "text": "The document is an individual term life insurance policy issued by the insurer, conforming to the IRDAI standard product specifications and presented in a clear table format with all required fields filled accurately.",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-t1-r2",
-   "index": 4,
-   "section": 1,
-   "section_title": "Saral Jeevan Bima — Policy Document",
-   "subsection": null,
-   "item": null,
-   "text_display": "Issuer / source: SBI Life Insurance Company Limited (IRDAI standard product).",
-   "text_spoken": "Issuer / source: SBI Life Insurance Company Limited (IRDAI standard product).",
-   "sentences": [
-    [
-     0,
-     77
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     6,
-     "Issuer"
-    ],
-    [
-     7,
-     8,
-     "/"
-    ],
-    [
-     9,
-     16,
-     "source:"
-    ],
-    [
-     17,
-     20,
-     "SBI"
-    ],
-    [
-     21,
-     25,
-     "Life"
-    ],
-    [
-     26,
-     35,
-     "Insurance"
-    ],
-    [
-     36,
-     43,
-     "Company"
-    ],
-    [
-     44,
-     51,
-     "Limited"
-    ],
-    [
-     52,
      58,
-     "(IRDAI"
+     "URL"
     ],
     [
      59,
-     67,
-     "standard"
-    ],
-    [
-     68,
-     77,
-     "product)."
-    ]
-   ],
-   "kind": "table_row",
-   "spoken_on_request": true,
-   "parent": "sec-1-t1",
-   "spoken_override": {
-    "text": "The product is a standard life insurance policy issued by SBI Life Insurance Company Limited as defined under IRDAI regulations.",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-t1-r3",
-   "index": 5,
-   "section": 1,
-   "section_title": "Saral Jeevan Bima — Policy Document",
-   "subsection": null,
-   "item": null,
-   "text_display": "UIN / reference: 111N128V01.",
-   "text_spoken": "UIN / reference: 111N128V01.",
-   "sentences": [
-    [
-     0,
-     28
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     3,
-     "UIN"
-    ],
-    [
-     4,
-     5,
-     "/"
-    ],
-    [
-     6,
-     16,
-     "reference:"
-    ],
-    [
-     17,
-     28,
-     "111N128V01."
-    ]
-   ],
-   "kind": "table_row",
-   "spoken_on_request": true,
-   "parent": "sec-1-t1",
-   "spoken_override": {
-    "text": "The row of the table labeled UIN/reference 111N128V01 contains the requested information.",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-t1-r4",
-   "index": 6,
-   "section": 1,
-   "section_title": "Saral Jeevan Bima — Policy Document",
-   "subsection": null,
-   "item": null,
-   "text_display": "Source pages: 39.",
-   "text_spoken": "Source pages: thirty-nine.",
-   "sentences": [
-    [
-     0,
-     17
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     6,
-     "Source"
-    ],
-    [
-     7,
-     13,
-     "pages:"
-    ],
-    [
-     14,
-     16,
-     "thirty-nine"
-    ],
-    [
-     16,
-     17,
-     "."
-    ]
-   ],
-   "kind": "table_row",
-   "spoken_on_request": true,
-   "parent": "sec-1-t1",
-   "spoken_override": {
-    "text": "The source page is 39, which provides the row of table data you need.",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-t1-r5",
-   "index": 7,
-   "section": 1,
-   "section_title": "Saral Jeevan Bima — Policy Document",
-   "subsection": null,
-   "item": null,
-   "text_display": "Word count (body): 12,646.",
-   "text_spoken": "Word count (body): twelve thousand six hundred forty-six.",
-   "sentences": [
-    [
-     0,
-     26
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     4,
-     "Word"
-    ],
-    [
-     5,
-     10,
-     "count"
-    ],
-    [
-     11,
-     18,
-     "(body):"
-    ],
-    [
-     19,
-     25,
-     "twelve thousand six hundred forty-six"
-    ],
-    [
-     25,
-     26,
-     "."
-    ]
-   ],
-   "kind": "table_row",
-   "spoken_on_request": true,
-   "parent": "sec-1-t1",
-   "spoken_override": {
-    "text": "A detailed summary of the document's main points—covering its overall structure, key arguments, supporting evidence, contextual background, conclusions, and any relevant observations—is provided in a single natural spoken sentence that conveys all essential information clearly and concisely.",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-t1-r6",
-   "index": 8,
-   "section": 1,
-   "section_title": "Saral Jeevan Bima — Policy Document",
-   "subsection": null,
-   "item": null,
-   "text_display": "Section headings: 81.",
-   "text_spoken": "Section headings: eighty-one.",
-   "sentences": [
-    [
-     0,
-     21
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     7,
-     "Section"
-    ],
-    [
-     8,
-     17,
-     "headings:"
-    ],
-    [
-     18,
-     20,
-     "eighty-one"
-    ],
-    [
-     20,
-     21,
-     "."
-    ]
-   ],
-   "kind": "table_row",
-   "spoken_on_request": true,
-   "parent": "sec-1-t1",
-   "spoken_override": {
-    "text": "Section 81 is the row heading in the table.",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-t1-r7",
-   "index": 9,
-   "section": 1,
-   "section_title": "Saral Jeevan Bima — Policy Document",
-   "subsection": null,
-   "item": null,
-   "text_display": "Retrieved: 6 September 2026.",
-   "text_spoken": "Retrieved: six September twenty twenty-six.",
-   "sentences": [
-    [
-     0,
-     28
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     10,
-     "Retrieved:"
-    ],
-    [
-     11,
-     12,
-     "six"
-    ],
-    [
-     13,
-     22,
-     "September"
-    ],
-    [
-     23,
-     27,
-     "twenty twenty-six"
-    ],
-    [
-     27,
-     28,
-     "."
-    ]
-   ],
-   "kind": "table_row",
-   "spoken_on_request": true,
-   "parent": "sec-1-t1",
-   "spoken_override": {
-    "text": "The row of the table was retrieved on 6 September 2026.",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-t1-r8",
-   "index": 10,
-   "section": 1,
-   "section_title": "Saral Jeevan Bima — Policy Document",
-   "subsection": null,
-   "item": null,
-   "text_display": "Source URL: https://irdai.gov.in/documents/37343/563751/SBI+Life+-+Saral+Jeevan+Bima_PD_2020-21.pdf/62c5de3d-fddd-f4b1-c294-ab466fe9221e?version=1.1&t=1668076574870.",
-   "text_spoken": "Source URL: https://irdai.gov.in/documents/thirty-seven thousand three hundred forty-three/five hundred sixty-three thousand seven hundred fifty-one/SBI+Life+-+Saral+Jeevan+Bima_PD_2020-twenty-one.pdf/62c5de3d-fddd-f4b1-c294-ab466fe9221e?version=one point one&t=one thousand six hundred sixty-eight billion seventy-six million five hundred seventy-four thousand eight hundred seventy.",
-   "sentences": [
-    [
-     0,
-     165
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     6,
-     "Source"
-    ],
-    [
-     7,
-     11,
-     "URL:"
-    ],
-    [
-     12,
-     43,
-     "https://irdai.gov.in/documents/"
-    ],
-    [
-     43,
-     48,
-     "thirty-seven thousand three hundred forty-three"
-    ],
-    [
-     48,
-     49,
-     "/"
-    ],
-    [
-     49,
-     55,
-     "five hundred sixty-three thousand seven hundred fifty-one"
-    ],
-    [
-     55,
-     93,
-     "/SBI+Life+-+Saral+Jeevan+Bima_PD_2020-"
-    ],
-    [
-     93,
-     95,
-     "twenty-one"
-    ],
-    [
-     95,
-     145,
-     ".pdf/62c5de3d-fddd-f4b1-c294-ab466fe9221e?version="
-    ],
-    [
-     145,
-     148,
-     "one point one"
-    ],
-    [
-     148,
-     151,
-     "&t="
-    ],
-    [
-     151,
-     164,
-     "one thousand six hundred sixty-eight billion seventy-six million five hundred seventy-four thousand eight hundred seventy"
-    ],
-    [
-     164,
-     165,
-     "."
-    ]
-   ],
-   "kind": "table_row",
-   "spoken_on_request": true,
-   "parent": "sec-1-t1",
-   "spoken_override": {
-    "text": "The document titled 'SBI Life - Saral Jeevan Bima PD 2020-21' is available at the provided URL, which contains detailed information about the policy.",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-p3",
-   "index": 11,
-   "section": 1,
-   "section_title": "Saral Jeevan Bima — Policy Document",
-   "subsection": null,
-   "item": null,
-   "text_display": "Document type Issuer / source",
-   "text_spoken": "Document type Issuer / source",
-   "sentences": [
-    [
-     0,
-     29
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     8,
-     "Document"
-    ],
-    [
-     9,
-     13,
-     "type"
-    ],
-    [
-     14,
-     20,
-     "Issuer"
-    ],
-    [
-     21,
-     22,
-     "/"
-    ],
-    [
-     23,
-     29,
-     "source"
-    ]
-   ],
-   "kind": "body"
-  },
-  {
-   "id": "sec-1-b1",
-   "index": 12,
-   "section": 1,
-   "section_title": "Saral Jeevan Bima — Policy Document",
-   "subsection": null,
-   "item": null,
-   "text_display": "UIN / reference",
-   "text_spoken": "UIN / reference",
-   "sentences": [
-    [
-     0,
-     15
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     3,
-     "UIN"
-    ],
-    [
-     4,
-     5,
-     "/"
-    ],
-    [
-     6,
-     15,
-     "reference"
-    ]
-   ],
-   "kind": "boilerplate",
-   "demoted_by": "front_matter",
-   "label": "text"
-  },
-  {
-   "id": "sec-1-p10",
-   "index": 13,
-   "section": 1,
-   "section_title": "Saral Jeevan Bima — Policy Document",
-   "subsection": null,
-   "item": null,
-   "text_display": "Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note. Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
-   "text_spoken": "Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note. Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
-   "sentences": [
-    [
-     0,
-     98
-    ],
-    [
-     99,
-     272
-    ],
-    [
-     273,
-     351
-    ],
-    [
-     352,
-     402
-    ],
-    [
-     403,
-     519
-    ],
-    [
-     520,
-     616
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     6,
-     "Source"
-    ],
-    [
-     7,
-     12,
-     "pages"
-    ],
-    [
-     13,
-     17,
-     "Word"
-    ],
-    [
-     18,
-     23,
-     "count"
-    ],
-    [
-     24,
-     30,
-     "(body)"
-    ],
-    [
-     31,
-     38,
-     "Section"
-    ],
-    [
-     39,
-     47,
-     "headings"
-    ],
-    [
-     48,
-     57,
-     "Retrieved"
-    ],
-    [
-     58,
      64,
-     "Source"
+     "above"
     ],
     [
      65,
      68,
-     "URL"
+     "and"
     ],
     [
      69,
-     79,
-     "Provenance"
-    ],
-    [
-     80,
-     83,
-     "and"
-    ],
-    [
-     84,
-     92,
-     "handling"
-    ],
-    [
-     93,
-     98,
-     "note."
-    ],
-    [
-     99,
-     103,
-     "Text"
-    ],
-    [
-     104,
-     107,
-     "was"
-    ],
-    [
-     108,
-     117,
-     "extracted"
-    ],
-    [
-     118,
-     122,
-     "from"
-    ],
-    [
-     123,
-     126,
-     "the"
-    ],
-    [
-     127,
-     135,
-     "publicly"
-    ],
-    [
-     136,
-     142,
-     "hosted"
-    ],
-    [
-     143,
-     146,
-     "PDF"
-    ],
-    [
-     147,
-     149,
-     "at"
-    ],
-    [
-     150,
-     153,
-     "the"
-    ],
-    [
-     154,
-     157,
-     "URL"
-    ],
-    [
-     158,
-     163,
-     "above"
-    ],
-    [
-     164,
-     167,
-     "and"
-    ],
-    [
-     168,
-     170,
+     71,
      "is"
     ],
     [
-     171,
-     181,
+     72,
+     82,
      "reproduced"
     ],
     [
-     182,
-     188,
+     83,
+     89,
      "as-is,"
     ],
     [
-     189,
-     193,
+     90,
+     94,
      "with"
     ],
     [
-     194,
-     201,
+     95,
+     102,
      "running"
     ],
     [
-     202,
-     210,
+     103,
+     111,
      "headers,"
     ],
     [
-     211,
-     218,
+     112,
+     119,
      "footers"
     ],
     [
-     219,
-     222,
+     120,
+     123,
      "and"
     ],
     [
-     223,
-     227,
+     124,
+     128,
      "page"
     ],
     [
-     228,
-     235,
+     129,
+     136,
      "numbers"
     ],
     [
-     236,
-     243,
+     137,
+     144,
      "removed"
     ],
     [
-     244,
-     247,
+     145,
+     148,
      "and"
     ],
     [
-     248,
-     255,
+     149,
+     156,
      "wrapped"
     ],
     [
-     256,
-     261,
+     157,
+     162,
      "lines"
     ],
     [
-     262,
-     272,
+     163,
+     173,
      "re-joined."
     ],
     [
-     273,
-     279,
+     174,
+     180,
      "Tables"
     ],
     [
-     280,
-     283,
+     181,
+     184,
      "and"
     ],
     [
-     284,
-     294,
+     185,
+     195,
      "two-column"
     ],
     [
-     295,
-     305,
+     196,
+     206,
      "definition"
     ],
     [
-     306,
-     311,
+     207,
+     212,
      "lists"
     ],
     [
-     312,
-     314,
+     213,
+     215,
      "in"
     ],
     [
-     315,
-     318,
+     216,
+     219,
      "the"
     ],
     [
-     319,
-     327,
+     220,
+     228,
      "original"
     ],
     [
-     328,
-     331,
+     229,
+     232,
      "may"
     ],
     [
-     332,
-     336,
+     233,
+     237,
      "read"
     ],
     [
-     337,
-     345,
+     238,
+     246,
      "linearly"
     ],
     [
-     346,
-     351,
+     247,
+     252,
      "here;"
     ],
     [
-     352,
-     357,
+     253,
+     258,
      "check"
     ],
     [
-     358,
-     365,
+     259,
+     266,
      "against"
     ],
     [
-     366,
-     369,
+     267,
+     270,
      "the"
     ],
     [
-     370,
-     373,
+     271,
+     274,
      "PDF"
     ],
     [
-     374,
-     380,
+     275,
+     281,
      "before"
     ],
     [
-     381,
-     388,
+     282,
+     289,
      "relying"
     ],
     [
-     389,
-     391,
+     290,
+     292,
      "on"
     ],
     [
-     392,
-     395,
+     293,
+     296,
      "any"
     ],
     [
-     396,
-     402,
+     297,
+     303,
      "table."
     ],
     [
-     403,
-     407,
+     304,
+     308,
      "This"
     ],
     [
-     408,
-     410,
+     309,
+     311,
      "is"
     ],
     [
-     411,
-     412,
+     312,
+     313,
      "a"
     ],
     [
-     413,
-     419,
+     314,
+     320,
      "public"
     ],
     [
-     420,
-     427,
+     321,
+     328,
      "product"
     ],
     [
-     428,
-     435,
+     329,
+     336,
      "wording"
     ],
     [
-     436,
-     437,
+     337,
+     338,
      "/"
     ],
     [
-     438,
-     447,
+     339,
+     348,
      "template,"
     ],
     [
-     448,
-     451,
+     349,
+     352,
      "not"
     ],
     [
-     452,
-     453,
+     353,
+     354,
      "a"
     ],
     [
-     454,
-     462,
+     355,
+     363,
      "customer"
     ],
     [
-     463,
-     471,
+     364,
+     372,
      "document"
     ],
     [
-     472,
-     473,
+     373,
+     374,
      "—"
     ],
     [
-     474,
-     476,
+     375,
+     377,
      "it"
     ],
     [
-     477,
-     485,
+     378,
+     386,
      "contains"
     ],
     [
-     486,
-     488,
+     387,
+     389,
      "no"
     ],
     [
-     489,
-     501,
+     390,
+     402,
      "policyholder"
     ],
     [
-     502,
-     504,
+     403,
+     405,
      "or"
     ],
     [
-     505,
-     513,
+     406,
+     414,
      "borrower"
     ],
     [
-     514,
-     519,
+     415,
+     420,
      "data."
     ],
     [
-     520,
-     522,
+     421,
+     423,
      "If"
     ],
     [
-     523,
-     526,
+     424,
+     427,
      "the"
     ],
     [
-     527,
-     531,
+     428,
+     432,
      "demo"
     ],
     [
-     532,
-     538,
+     433,
+     439,
      "should"
     ],
     [
-     539,
-     542,
+     440,
+     443,
      "not"
     ],
     [
-     543,
-     547,
+     444,
+     448,
      "show"
     ],
     [
-     548,
-     549,
+     449,
+     450,
      "a"
     ],
     [
-     550,
-     556,
+     451,
+     457,
      "brand,"
     ],
     [
-     557,
-     564,
+     458,
+     465,
      "replace"
     ],
     [
-     565,
-     568,
+     466,
+     469,
      "the"
     ],
     [
-     569,
-     575,
+     470,
+     476,
      "issuer"
     ],
     [
-     576,
-     580,
+     477,
+     481,
      "name"
     ],
     [
-     581,
-     585,
+     482,
+     486,
      "with"
     ],
     [
-     586,
-     587,
+     487,
+     488,
      "a"
     ],
     [
-     588,
-     599,
+     489,
+     500,
      "placeholder"
     ],
     [
-     600,
-     606,
+     501,
+     507,
      "before"
     ],
     [
-     607,
-     616,
+     508,
+     517,
      "chunking."
     ]
    ],
@@ -1496,7 +657,7 @@
   },
   {
    "id": "sec-2",
-   "index": 14,
+   "index": 2,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -1592,7 +753,7 @@
   },
   {
    "id": "sec-2-p2",
-   "index": 15,
+   "index": 3,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -1622,7 +783,7 @@
   },
   {
    "id": "sec-2-b1",
-   "index": 16,
+   "index": 4,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -1643,7 +804,7 @@
   },
   {
    "id": "sec-2-p6",
-   "index": 17,
+   "index": 5,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -1912,7 +1073,7 @@
   },
   {
    "id": "sec-2-p8",
-   "index": 18,
+   "index": 6,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -2061,7 +1222,7 @@
   },
   {
    "id": "sec-2-p9",
-   "index": 19,
+   "index": 7,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -2205,7 +1366,7 @@
   },
   {
    "id": "sec-2-p9-3",
-   "index": 20,
+   "index": 8,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -2309,7 +1470,7 @@
   },
   {
    "id": "sec-2-b2",
-   "index": 21,
+   "index": 9,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -2330,7 +1491,7 @@
   },
   {
    "id": "sec-2-p9-4",
-   "index": 22,
+   "index": 10,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -2539,7 +1700,7 @@
   },
   {
    "id": "sec-2-p15",
-   "index": 23,
+   "index": 11,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -2638,7 +1799,7 @@
   },
   {
    "id": "sec-2-b3",
-   "index": 24,
+   "index": 12,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -2793,7 +1954,7 @@
   },
   {
    "id": "sec-2-b4",
-   "index": 25,
+   "index": 13,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -2834,7 +1995,7 @@
   },
   {
    "id": "sec-2-b5",
-   "index": 26,
+   "index": 14,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -2934,7 +2095,7 @@
   },
   {
    "id": "sec-2-p15-7",
-   "index": 27,
+   "index": 15,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -3083,7 +2244,7 @@
   },
   {
    "id": "sec-2-b6",
-   "index": 28,
+   "index": 16,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -3242,7 +2403,7 @@
   },
   {
    "id": "sec-2-p17",
-   "index": 29,
+   "index": 17,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -3398,7 +2559,7 @@
   },
   {
    "id": "sec-2-p18",
-   "index": 30,
+   "index": 18,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -3646,7 +2807,7 @@
   },
   {
    "id": "sec-2-p19",
-   "index": 31,
+   "index": 19,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -3910,7 +3071,7 @@
   },
   {
    "id": "sec-2-p21",
-   "index": 32,
+   "index": 20,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -4334,7 +3495,7 @@
   },
   {
    "id": "sec-2-p22",
-   "index": 33,
+   "index": 21,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -4697,7 +3858,7 @@
   },
   {
    "id": "sec-2-p28",
-   "index": 34,
+   "index": 22,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -4890,7 +4051,7 @@
   },
   {
    "id": "sec-2-p30",
-   "index": 35,
+   "index": 23,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -4924,7 +4085,7 @@
   },
   {
    "id": "sec-2-b7",
-   "index": 36,
+   "index": 24,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -4945,7 +4106,7 @@
   },
   {
    "id": "sec-2-b8",
-   "index": 37,
+   "index": 25,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -4966,7 +4127,7 @@
   },
   {
    "id": "sec-2-p31",
-   "index": 38,
+   "index": 26,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -5159,7 +4320,7 @@
   },
   {
    "id": "sec-2-p34",
-   "index": 39,
+   "index": 27,
    "section": 2,
    "section_title": "W E L C O M E L E T T E R",
    "subsection": null,
@@ -5228,7 +4389,7 @@
   },
   {
    "id": "sec-3",
-   "index": 40,
+   "index": 28,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -5274,7 +4435,7 @@
   },
   {
    "id": "sec-3-p1",
-   "index": 41,
+   "index": 29,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -5422,7 +4583,7 @@
   },
   {
    "id": "sec-3-p2",
-   "index": 42,
+   "index": 30,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -5830,7 +4991,7 @@
   },
   {
    "id": "sec-3-p4",
-   "index": 43,
+   "index": 31,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -6004,7 +5165,7 @@
   },
   {
    "id": "sec-3-p5",
-   "index": 44,
+   "index": 32,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -6253,7 +5414,7 @@
   },
   {
    "id": "sec-3-p6",
-   "index": 45,
+   "index": 33,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -6557,7 +5718,7 @@
   },
   {
    "id": "sec-3-p7",
-   "index": 46,
+   "index": 34,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -6771,7 +5932,7 @@
   },
   {
    "id": "sec-3-p8",
-   "index": 47,
+   "index": 35,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -6915,7 +6076,7 @@
   },
   {
    "id": "sec-3-p9",
-   "index": 48,
+   "index": 36,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -7064,7 +6225,7 @@
   },
   {
    "id": "sec-3-p10",
-   "index": 49,
+   "index": 37,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -7333,7 +6494,7 @@
   },
   {
    "id": "sec-3-p11",
-   "index": 50,
+   "index": 38,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -7610,7 +6771,7 @@
   },
   {
    "id": "sec-3-p12",
-   "index": 51,
+   "index": 39,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -7784,7 +6945,7 @@
   },
   {
    "id": "sec-3-p13",
-   "index": 52,
+   "index": 40,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -7928,7 +7089,7 @@
   },
   {
    "id": "sec-3-p14",
-   "index": 53,
+   "index": 41,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -8047,7 +7208,7 @@
   },
   {
    "id": "sec-3-p16",
-   "index": 54,
+   "index": 42,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -8256,7 +7417,7 @@
   },
   {
    "id": "sec-3-p18",
-   "index": 55,
+   "index": 43,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -8435,7 +7596,7 @@
   },
   {
    "id": "sec-3-p20",
-   "index": 56,
+   "index": 44,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -8644,7 +7805,7 @@
   },
   {
    "id": "sec-3-p23",
-   "index": 57,
+   "index": 45,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -8783,7 +7944,7 @@
   },
   {
    "id": "sec-3-p26",
-   "index": 58,
+   "index": 46,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -8977,7 +8138,7 @@
   },
   {
    "id": "sec-3-p27",
-   "index": 59,
+   "index": 47,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -9116,7 +8277,7 @@
   },
   {
    "id": "sec-3-p28",
-   "index": 60,
+   "index": 48,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -9340,7 +8501,7 @@
   },
   {
    "id": "sec-3-p29",
-   "index": 61,
+   "index": 49,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -9759,7 +8920,7 @@
   },
   {
    "id": "sec-3-p30",
-   "index": 62,
+   "index": 50,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -10093,7 +9254,7 @@
   },
   {
    "id": "sec-3-p33",
-   "index": 63,
+   "index": 51,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -10475,7 +9636,7 @@
   },
   {
    "id": "sec-3-p34",
-   "index": 64,
+   "index": 52,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -10844,7 +10005,7 @@
   },
   {
    "id": "sec-3-p35",
-   "index": 65,
+   "index": 53,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -11143,7 +10304,7 @@
   },
   {
    "id": "sec-3-p37",
-   "index": 66,
+   "index": 54,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -11587,7 +10748,7 @@
   },
   {
    "id": "sec-3-p38",
-   "index": 67,
+   "index": 55,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -11866,7 +11027,7 @@
   },
   {
    "id": "sec-3-p39",
-   "index": 68,
+   "index": 56,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -12035,7 +11196,7 @@
   },
   {
    "id": "sec-3-p40",
-   "index": 69,
+   "index": 57,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -12309,7 +11470,7 @@
   },
   {
    "id": "sec-3-p41",
-   "index": 70,
+   "index": 58,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -12502,7 +11663,7 @@
   },
   {
    "id": "sec-3-p42",
-   "index": 71,
+   "index": 59,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -12631,7 +11792,7 @@
   },
   {
    "id": "sec-3-p43",
-   "index": 72,
+   "index": 60,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -13047,7 +12208,7 @@
   },
   {
    "id": "sec-3-p47",
-   "index": 73,
+   "index": 61,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -13259,7 +12420,7 @@
   },
   {
    "id": "sec-3-p48",
-   "index": 74,
+   "index": 62,
    "section": 3,
    "section_title": "KEY FEATURES DOCUMENT",
    "subsection": null,
@@ -13358,7 +12519,7 @@
   },
   {
    "id": "sec-4",
-   "index": 75,
+   "index": 63,
    "section": 4,
    "section_title": "POLICY DOCUMENT",
    "subsection": null,
@@ -13399,7 +12560,7 @@
   },
   {
    "id": "sec-4-p1",
-   "index": 76,
+   "index": 64,
    "section": 4,
    "section_title": "POLICY DOCUMENT",
    "subsection": null,
@@ -13448,7 +12609,7 @@
   },
   {
    "id": "sec-4-b1",
-   "index": 77,
+   "index": 65,
    "section": 4,
    "section_title": "POLICY DOCUMENT",
    "subsection": null,
@@ -13479,7 +12640,7 @@
   },
   {
    "id": "sec-4-p2",
-   "index": 78,
+   "index": 66,
    "section": 4,
    "section_title": "POLICY DOCUMENT",
    "subsection": null,
@@ -13523,7 +12684,7 @@
   },
   {
    "id": "sec-5",
-   "index": 79,
+   "index": 67,
    "section": 5,
    "section_title": "INSURANCE PURE RISK PREMIUM PRODUCT)",
    "subsection": null,
@@ -13579,7 +12740,7 @@
   },
   {
    "id": "sec-5-p3",
-   "index": 80,
+   "index": 68,
    "section": 5,
    "section_title": "INSURANCE PURE RISK PREMIUM PRODUCT)",
    "subsection": null,
@@ -13925,7 +13086,7 @@
   },
   {
    "id": "sec-5-p4",
-   "index": 81,
+   "index": 69,
    "section": 5,
    "section_title": "INSURANCE PURE RISK PREMIUM PRODUCT)",
    "subsection": null,
@@ -14109,7 +13270,7 @@
   },
   {
    "id": "sec-5-p5",
-   "index": 82,
+   "index": 70,
    "section": 5,
    "section_title": "INSURANCE PURE RISK PREMIUM PRODUCT)",
    "subsection": null,
@@ -14380,7 +13541,7 @@
   },
   {
    "id": "sec-5-p6",
-   "index": 83,
+   "index": 71,
    "section": 5,
    "section_title": "INSURANCE PURE RISK PREMIUM PRODUCT)",
    "subsection": null,
@@ -14513,7 +13674,7 @@
   },
   {
    "id": "sec-5-p7",
-   "index": 84,
+   "index": 72,
    "section": 5,
    "section_title": "INSURANCE PURE RISK PREMIUM PRODUCT)",
    "subsection": null,
@@ -14795,7 +13956,7 @@
   },
   {
    "id": "sec-5-p9",
-   "index": 85,
+   "index": 73,
    "section": 5,
    "section_title": "INSURANCE PURE RISK PREMIUM PRODUCT)",
    "subsection": null,
@@ -15063,7 +14224,7 @@
   },
   {
    "id": "sec-5-p11",
-   "index": 86,
+   "index": 74,
    "section": 5,
    "section_title": "INSURANCE PURE RISK PREMIUM PRODUCT)",
    "subsection": null,
@@ -15257,7 +14418,7 @@
   },
   {
    "id": "sec-5-p14-5",
-   "index": 87,
+   "index": 75,
    "section": 5,
    "section_title": "INSURANCE PURE RISK PREMIUM PRODUCT)",
    "subsection": null,
@@ -15467,7 +14628,7 @@
   },
   {
    "id": "sec-5-7",
-   "index": 88,
+   "index": 76,
    "section": 6,
    "section_title": "Age at entry",
    "subsection": null,
@@ -15513,7 +14674,7 @@
   },
   {
    "id": "sec-5-7-8",
-   "index": 89,
+   "index": 77,
    "section": 6,
    "section_title": "Age at entry",
    "subsection": null,
@@ -15577,7 +14738,7 @@
   },
   {
    "id": "sec-5-10",
-   "index": 90,
+   "index": 78,
    "section": 7,
    "section_title": "Telephone Number with STD Code",
    "subsection": null,
@@ -15621,7 +14782,7 @@
   },
   {
    "id": "sec-5-11",
-   "index": 91,
+   "index": 79,
    "section": 8,
    "section_title": "Mobile Number",
    "subsection": null,
@@ -15662,7 +14823,7 @@
   },
   {
    "id": "sec-5-11-p1",
-   "index": 92,
+   "index": 80,
    "section": 8,
    "section_title": "Mobile Number",
    "subsection": null,
@@ -15726,7 +14887,7 @@
   },
   {
    "id": "sec-5-13",
-   "index": 93,
+   "index": 81,
    "section": 9,
    "section_title": "Name of the Nominee(s)",
    "subsection": null,
@@ -15777,7 +14938,7 @@
   },
   {
    "id": "sec-5-13-p1",
-   "index": 94,
+   "index": 82,
    "section": 9,
    "section_title": "Name of the Nominee(s)",
    "subsection": null,
@@ -15846,7 +15007,7 @@
   },
   {
    "id": "sec-5-14",
-   "index": 95,
+   "index": 83,
    "section": 10,
    "section_title": "Name of the Appointee(s)",
    "subsection": null,
@@ -15897,7 +15058,7 @@
   },
   {
    "id": "sec-5-14-p2-15",
-   "index": 96,
+   "index": 84,
    "section": 10,
    "section_title": "Name of the Appointee(s)",
    "subsection": null,
@@ -16002,7 +15163,7 @@
   },
   {
    "id": "sec-5-16",
-   "index": 97,
+   "index": 85,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -16053,7 +15214,7 @@
   },
   {
    "id": "sec-5-16-p5",
-   "index": 98,
+   "index": 86,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -16230,7 +15391,7 @@
   },
   {
    "id": "sec-5-16-p8-21",
-   "index": 99,
+   "index": 87,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -16446,7 +15607,7 @@
   },
   {
    "id": "sec-5-16-p10",
-   "index": 100,
+   "index": 88,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -16565,7 +15726,7 @@
   },
   {
    "id": "sec-5-16-p14",
-   "index": 101,
+   "index": 89,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -16670,7 +15831,7 @@
   },
   {
    "id": "sec-5-16-b1",
-   "index": 102,
+   "index": 90,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -16691,7 +15852,7 @@
   },
   {
    "id": "sec-5-16-p18",
-   "index": 103,
+   "index": 91,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -16951,7 +16112,7 @@
   },
   {
    "id": "sec-5-16-p20",
-   "index": 104,
+   "index": 92,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -16989,7 +16150,7 @@
   },
   {
    "id": "sec-5-16-b2",
-   "index": 105,
+   "index": 93,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -17010,7 +16171,7 @@
   },
   {
    "id": "sec-5-16-p22",
-   "index": 106,
+   "index": 94,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -17175,7 +16336,7 @@
   },
   {
    "id": "sec-5-16-p24",
-   "index": 107,
+   "index": 95,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -17344,7 +16505,7 @@
   },
   {
    "id": "sec-5-16-p27",
-   "index": 108,
+   "index": 96,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -17448,7 +16609,7 @@
   },
   {
    "id": "sec-5-16-b3",
-   "index": 109,
+   "index": 97,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -17469,7 +16630,7 @@
   },
   {
    "id": "sec-5-16-p34",
-   "index": 110,
+   "index": 98,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -17563,7 +16724,7 @@
   },
   {
    "id": "sec-5-16-p35",
-   "index": 111,
+   "index": 99,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -17597,7 +16758,7 @@
   },
   {
    "id": "sec-5-16-p36",
-   "index": 112,
+   "index": 100,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -17636,7 +16797,7 @@
   },
   {
    "id": "sec-5-16-p37",
-   "index": 113,
+   "index": 101,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -17675,7 +16836,7 @@
   },
   {
    "id": "sec-5-16-p38",
-   "index": 114,
+   "index": 102,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -17714,7 +16875,7 @@
   },
   {
    "id": "sec-5-16-p38-4-1",
-   "index": 115,
+   "index": 103,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -17784,7 +16945,7 @@
   },
   {
    "id": "sec-5-16-p38-4-3",
-   "index": 116,
+   "index": 104,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -17829,7 +16990,7 @@
   },
   {
    "id": "sec-5-16-p39",
-   "index": 117,
+   "index": 105,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -17878,7 +17039,7 @@
   },
   {
    "id": "sec-5-16-p40",
-   "index": 118,
+   "index": 106,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -17922,7 +17083,7 @@
   },
   {
    "id": "sec-5-16-p41",
-   "index": 119,
+   "index": 107,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -17961,7 +17122,7 @@
   },
   {
    "id": "sec-5-16-p42",
-   "index": 120,
+   "index": 108,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -18020,7 +17181,7 @@
   },
   {
    "id": "sec-5-16-p42-7-1",
-   "index": 121,
+   "index": 109,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -18095,7 +17256,7 @@
   },
   {
    "id": "sec-5-16-p42-7-3",
-   "index": 122,
+   "index": 110,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -18210,7 +17371,7 @@
   },
   {
    "id": "sec-5-16-p42-7-5",
-   "index": 123,
+   "index": 111,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -18270,7 +17431,7 @@
   },
   {
    "id": "sec-5-16-p42-7-7",
-   "index": 124,
+   "index": 112,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -18345,7 +17506,7 @@
   },
   {
    "id": "sec-5-16-p42-7-9",
-   "index": 125,
+   "index": 113,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -18395,7 +17556,7 @@
   },
   {
    "id": "sec-5-16-p43",
-   "index": 126,
+   "index": 114,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -18434,7 +17595,7 @@
   },
   {
    "id": "sec-5-16-p44",
-   "index": 127,
+   "index": 115,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -18473,7 +17634,7 @@
   },
   {
    "id": "sec-5-16-p45",
-   "index": 128,
+   "index": 116,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -18512,7 +17673,7 @@
   },
   {
    "id": "sec-5-16-p46",
-   "index": 129,
+   "index": 117,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -18566,7 +17727,7 @@
   },
   {
    "id": "sec-5-16-p46-9-1",
-   "index": 130,
+   "index": 118,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -18626,7 +17787,7 @@
   },
   {
    "id": "sec-5-16-p46-9-3",
-   "index": 131,
+   "index": 119,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -18721,7 +17882,7 @@
   },
   {
    "id": "sec-5-16-p46-9-5",
-   "index": 132,
+   "index": 120,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -18801,7 +17962,7 @@
   },
   {
    "id": "sec-5-16-p46-9-7",
-   "index": 133,
+   "index": 121,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -18871,7 +18032,7 @@
   },
   {
    "id": "sec-5-16-p46-9-9",
-   "index": 134,
+   "index": 122,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -18946,7 +18107,7 @@
   },
   {
    "id": "sec-5-16-p46-9-11",
-   "index": 135,
+   "index": 123,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -18991,7 +18152,7 @@
   },
   {
    "id": "sec-5-16-p47",
-   "index": 136,
+   "index": 124,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -19030,7 +18191,7 @@
   },
   {
    "id": "sec-5-16-p48",
-   "index": 137,
+   "index": 125,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -19074,7 +18235,7 @@
   },
   {
    "id": "sec-5-16-p49",
-   "index": 138,
+   "index": 126,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -19118,7 +18279,7 @@
   },
   {
    "id": "sec-5-16-p49-11-1",
-   "index": 139,
+   "index": 127,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -19343,7 +18504,7 @@
   },
   {
    "id": "sec-5-16-p49-11-4",
-   "index": 140,
+   "index": 128,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -19453,7 +18614,7 @@
   },
   {
    "id": "sec-5-16-p49-11-6",
-   "index": 141,
+   "index": 129,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -19508,7 +18669,7 @@
   },
   {
    "id": "sec-5-16-p50",
-   "index": 142,
+   "index": 130,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -19547,7 +18708,7 @@
   },
   {
    "id": "sec-5-16-p51",
-   "index": 143,
+   "index": 131,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -19586,7 +18747,7 @@
   },
   {
    "id": "sec-5-16-p52",
-   "index": 144,
+   "index": 132,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -19625,7 +18786,7 @@
   },
   {
    "id": "sec-5-16-p53",
-   "index": 145,
+   "index": 133,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -19664,7 +18825,7 @@
   },
   {
    "id": "sec-5-16-p54",
-   "index": 146,
+   "index": 134,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -19852,7 +19013,7 @@
   },
   {
    "id": "sec-5-16-p57",
-   "index": 147,
+   "index": 135,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -20010,7 +19171,7 @@
   },
   {
    "id": "sec-5-16-p58",
-   "index": 148,
+   "index": 136,
    "section": 11,
    "section_title": "End of Waiting period",
    "subsection": null,
@@ -20039,7 +19200,7 @@
   },
   {
    "id": "sec-5-1",
-   "index": 149,
+   "index": 137,
    "section": 12,
    "section_title": "Age",
    "subsection": null,
@@ -20075,7 +19236,7 @@
   },
   {
    "id": "sec-5-1-p1",
-   "index": 150,
+   "index": 138,
    "section": 12,
    "section_title": "Age",
    "subsection": null,
@@ -20189,7 +19350,7 @@
   },
   {
    "id": "sec-5-2",
-   "index": 151,
+   "index": 139,
    "section": 13,
    "section_title": "Annualized Premium",
    "subsection": null,
@@ -20230,7 +19391,7 @@
   },
   {
    "id": "sec-5-2-p1",
-   "index": 152,
+   "index": 140,
    "section": 13,
    "section_title": "Annualized Premium",
    "subsection": null,
@@ -20364,7 +19525,7 @@
   },
   {
    "id": "sec-5-3",
-   "index": 153,
+   "index": 141,
    "section": 14,
    "section_title": "Appointee",
    "subsection": null,
@@ -20400,7 +19561,7 @@
   },
   {
    "id": "sec-5-3-p1",
-   "index": 154,
+   "index": 142,
    "section": 14,
    "section_title": "Appointee",
    "subsection": null,
@@ -20579,7 +19740,7 @@
   },
   {
    "id": "sec-5-4",
-   "index": 155,
+   "index": 143,
    "section": 15,
    "section_title": "Assignee",
    "subsection": null,
@@ -20615,7 +19776,7 @@
   },
   {
    "id": "sec-5-4-p1",
-   "index": 156,
+   "index": 144,
    "section": 15,
    "section_title": "Assignee",
    "subsection": null,
@@ -20729,7 +19890,7 @@
   },
   {
    "id": "sec-5-5",
-   "index": 157,
+   "index": 145,
    "section": 16,
    "section_title": "Assignment",
    "subsection": null,
@@ -20765,7 +19926,7 @@
   },
   {
    "id": "sec-5-5-p1",
-   "index": 158,
+   "index": 146,
    "section": 16,
    "section_title": "Assignment",
    "subsection": null,
@@ -20939,7 +20100,7 @@
   },
   {
    "id": "sec-5-5-p1-6",
-   "index": 159,
+   "index": 147,
    "section": 16,
    "section_title": "Assignment",
    "subsection": null,
@@ -21053,7 +20214,7 @@
   },
   {
    "id": "sec-5-7-dup2",
-   "index": 160,
+   "index": 148,
    "section": 17,
    "section_title": "Base Policy",
    "subsection": null,
@@ -21094,7 +20255,7 @@
   },
   {
    "id": "sec-5-7-p1",
-   "index": 161,
+   "index": 149,
    "section": 17,
    "section_title": "Base Policy",
    "subsection": null,
@@ -21198,7 +20359,7 @@
   },
   {
    "id": "sec-5-8",
-   "index": 162,
+   "index": 150,
    "section": 18,
    "section_title": "Basic Sum assured",
    "subsection": null,
@@ -21244,7 +20405,7 @@
   },
   {
    "id": "sec-5-8-p1",
-   "index": 163,
+   "index": 151,
    "section": 18,
    "section_title": "Basic Sum assured",
    "subsection": null,
@@ -21358,7 +20519,7 @@
   },
   {
    "id": "sec-5-9",
-   "index": 164,
+   "index": 152,
    "section": 19,
    "section_title": "Beneficiary/Claimant",
    "subsection": null,
@@ -21394,7 +20555,7 @@
   },
   {
    "id": "sec-5-9-p1",
-   "index": 165,
+   "index": 153,
    "section": 19,
    "section_title": "Beneficiary/Claimant",
    "subsection": null,
@@ -21612,7 +20773,7 @@
   },
   {
    "id": "sec-5-10-dup2",
-   "index": 166,
+   "index": 154,
    "section": 20,
    "section_title": "Business Day or Working day",
    "subsection": null,
@@ -21668,7 +20829,7 @@
   },
   {
    "id": "sec-5-10-p1",
-   "index": 167,
+   "index": 155,
    "section": 20,
    "section_title": "Business Day or Working day",
    "subsection": null,
@@ -21832,7 +20993,7 @@
   },
   {
    "id": "sec-5-10-p1-11",
-   "index": 168,
+   "index": 156,
    "section": 20,
    "section_title": "Business Day or Working day",
    "subsection": null,
@@ -21989,7 +21150,7 @@
   },
   {
    "id": "sec-5-13-dup2",
-   "index": 169,
+   "index": 157,
    "section": 21,
    "section_title": "Date of commencement of risk",
    "subsection": null,
@@ -22045,7 +21206,7 @@
   },
   {
    "id": "sec-5-13-p1-14",
-   "index": 170,
+   "index": 158,
    "section": 21,
    "section_title": "Date of commencement of risk",
    "subsection": null,
@@ -22353,7 +21514,7 @@
   },
   {
    "id": "sec-5-16-dup2",
-   "index": 171,
+   "index": 159,
    "section": 22,
    "section_title": "Death Benefit",
    "subsection": null,
@@ -22394,7 +21555,7 @@
   },
   {
    "id": "sec-5-16-p1",
-   "index": 172,
+   "index": 160,
    "section": 22,
    "section_title": "Death Benefit",
    "subsection": null,
@@ -22598,7 +21759,7 @@
   },
   {
    "id": "sec-5-17",
-   "index": 173,
+   "index": 161,
    "section": 23,
    "section_title": "Discharge Form",
    "subsection": null,
@@ -22639,7 +21800,7 @@
   },
   {
    "id": "sec-5-17-p1",
-   "index": 174,
+   "index": 162,
    "section": 23,
    "section_title": "Discharge Form",
    "subsection": null,
@@ -22738,7 +21899,7 @@
   },
   {
    "id": "sec-5-18",
-   "index": 175,
+   "index": 163,
    "section": 24,
    "section_title": "Due date",
    "subsection": null,
@@ -22779,7 +21940,7 @@
   },
   {
    "id": "sec-5-18-p2",
-   "index": 176,
+   "index": 164,
    "section": 24,
    "section_title": "Due date",
    "subsection": null,
@@ -22947,7 +22108,7 @@
   },
   {
    "id": "sec-5-19",
-   "index": 177,
+   "index": 165,
    "section": 25,
    "section_title": "Endorsement",
    "subsection": null,
@@ -22983,7 +22144,7 @@
   },
   {
    "id": "sec-5-19-p1",
-   "index": 178,
+   "index": 166,
    "section": 25,
    "section_title": "Endorsement",
    "subsection": null,
@@ -23097,7 +22258,7 @@
   },
   {
    "id": "sec-5-19-p1-20",
-   "index": 179,
+   "index": 167,
    "section": 25,
    "section_title": "Endorsement",
    "subsection": null,
@@ -23236,7 +22397,7 @@
   },
   {
    "id": "sec-pb",
-   "index": 180,
+   "index": 168,
    "section": 26,
    "section_title": "PART B",
    "subsection": null,
@@ -23278,7 +22439,7 @@
   },
   {
    "id": "sec-pb-p2",
-   "index": 181,
+   "index": 169,
    "section": 26,
    "section_title": "PART B",
    "subsection": null,
@@ -23657,7 +22818,7 @@
   },
   {
    "id": "sec-pb-21",
-   "index": 182,
+   "index": 170,
    "section": 27,
    "section_title": "Grace period",
    "subsection": null,
@@ -23699,7 +22860,7 @@
   },
   {
    "id": "sec-pb-21-p1",
-   "index": 183,
+   "index": 171,
    "section": 27,
    "section_title": "Grace period",
    "subsection": null,
@@ -23948,7 +23109,7 @@
   },
   {
    "id": "sec-pb-22",
-   "index": 184,
+   "index": 172,
    "section": 28,
    "section_title": "In force Policy",
    "subsection": null,
@@ -23995,7 +23156,7 @@
   },
   {
    "id": "sec-pb-22-p1-23",
-   "index": 185,
+   "index": 173,
    "section": 28,
    "section_title": "In force Policy",
    "subsection": null,
@@ -24169,7 +23330,7 @@
   },
   {
    "id": "sec-pb-24",
-   "index": 186,
+   "index": 174,
    "section": 29,
    "section_title": "Lapse",
    "subsection": null,
@@ -24206,7 +23367,7 @@
   },
   {
    "id": "sec-pb-24-p1",
-   "index": 187,
+   "index": 175,
    "section": 29,
    "section_title": "Lapse",
    "subsection": null,
@@ -24385,7 +23546,7 @@
   },
   {
    "id": "sec-pb-24-p1-25",
-   "index": 188,
+   "index": 176,
    "section": 29,
    "section_title": "Lapse",
    "subsection": null,
@@ -24489,7 +23650,7 @@
   },
   {
    "id": "sec-pb-26",
-   "index": 189,
+   "index": 177,
    "section": 30,
    "section_title": "Material Information",
    "subsection": null,
@@ -24531,7 +23692,7 @@
   },
   {
    "id": "sec-pb-26-p1",
-   "index": 190,
+   "index": 178,
    "section": 30,
    "section_title": "Material Information",
    "subsection": null,
@@ -24705,7 +23866,7 @@
   },
   {
    "id": "sec-pb-27",
-   "index": 191,
+   "index": 179,
    "section": 31,
    "section_title": "Nomination",
    "subsection": null,
@@ -24742,7 +23903,7 @@
   },
   {
    "id": "sec-pb-27-p1",
-   "index": 192,
+   "index": 180,
    "section": 31,
    "section_title": "Nomination",
    "subsection": null,
@@ -24886,7 +24047,7 @@
   },
   {
    "id": "sec-pb-28",
-   "index": 193,
+   "index": 181,
    "section": 32,
    "section_title": "Nominee (s)",
    "subsection": null,
@@ -24928,7 +24089,7 @@
   },
   {
    "id": "sec-pb-28-p1",
-   "index": 194,
+   "index": 182,
    "section": 32,
    "section_title": "Nominee (s)",
    "subsection": null,
@@ -25087,7 +24248,7 @@
   },
   {
    "id": "sec-pb-29",
-   "index": 195,
+   "index": 183,
    "section": 33,
    "section_title": "Non-participating",
    "subsection": null,
@@ -25124,7 +24285,7 @@
   },
   {
    "id": "sec-pb-29-p1",
-   "index": 196,
+   "index": 184,
    "section": 33,
    "section_title": "Non-participating",
    "subsection": null,
@@ -25258,7 +24419,7 @@
   },
   {
    "id": "sec-pb-30",
-   "index": 197,
+   "index": 185,
    "section": 34,
    "section_title": "Policy anniversary",
    "subsection": null,
@@ -25300,7 +24461,7 @@
   },
   {
    "id": "sec-pb-30-p1",
-   "index": 198,
+   "index": 186,
    "section": 34,
    "section_title": "Policy anniversary",
    "subsection": null,
@@ -25439,7 +24600,7 @@
   },
   {
    "id": "sec-pb-31",
-   "index": 199,
+   "index": 187,
    "section": 35,
    "section_title": "Policy Cancellation",
    "subsection": null,
@@ -25481,7 +24642,7 @@
   },
   {
    "id": "sec-pb-31-p1",
-   "index": 200,
+   "index": 188,
    "section": 35,
    "section_title": "Policy Cancellation",
    "subsection": null,
@@ -25575,7 +24736,7 @@
   },
   {
    "id": "sec-pb-32",
-   "index": 201,
+   "index": 189,
    "section": 36,
    "section_title": "Policy Cancellation Value",
    "subsection": null,
@@ -25622,7 +24783,7 @@
   },
   {
    "id": "sec-pb-32-p1",
-   "index": 202,
+   "index": 190,
    "section": 36,
    "section_title": "Policy Cancellation Value",
    "subsection": null,
@@ -25751,7 +24912,7 @@
   },
   {
    "id": "sec-pb-33",
-   "index": 203,
+   "index": 191,
    "section": 37,
    "section_title": "Policy/ Policy document",
    "subsection": null,
@@ -25798,7 +24959,7 @@
   },
   {
    "id": "sec-pb-33-p1",
-   "index": 204,
+   "index": 192,
    "section": 37,
    "section_title": "Policy/ Policy document",
    "subsection": null,
@@ -25937,7 +25098,7 @@
   },
   {
    "id": "sec-pb-34",
-   "index": 205,
+   "index": 193,
    "section": 38,
    "section_title": "Policy Holder is the legal owner of this policy",
    "subsection": null,
@@ -26002,7 +25163,7 @@
   },
   {
    "id": "sec-pb-35",
-   "index": 206,
+   "index": 194,
    "section": 39,
    "section_title": "Policy Term",
    "subsection": null,
@@ -26044,7 +25205,7 @@
   },
   {
    "id": "sec-pb-35-p1",
-   "index": 207,
+   "index": 195,
    "section": 39,
    "section_title": "Policy Term",
    "subsection": null,
@@ -26203,7 +25364,7 @@
   },
   {
    "id": "sec-pb-36",
-   "index": 208,
+   "index": 196,
    "section": 40,
    "section_title": "Policy year",
    "subsection": null,
@@ -26245,7 +25406,7 @@
   },
   {
    "id": "sec-pb-36-p1",
-   "index": 209,
+   "index": 197,
    "section": 40,
    "section_title": "Policy year",
    "subsection": null,
@@ -26373,7 +25534,7 @@
   },
   {
    "id": "sec-pb-37",
-   "index": 210,
+   "index": 198,
    "section": 41,
    "section_title": "Premium",
    "subsection": null,
@@ -26410,7 +25571,7 @@
   },
   {
    "id": "sec-pb-37-p1",
-   "index": 211,
+   "index": 199,
    "section": 41,
    "section_title": "Premium",
    "subsection": null,
@@ -26569,7 +25730,7 @@
   },
   {
    "id": "sec-pb-37-p2",
-   "index": 212,
+   "index": 200,
    "section": 41,
    "section_title": "Premium",
    "subsection": null,
@@ -26782,7 +25943,7 @@
   },
   {
    "id": "sec-pb-37-p2-38",
-   "index": 213,
+   "index": 201,
    "section": 41,
    "section_title": "Premium",
    "subsection": null,
@@ -26881,7 +26042,7 @@
   },
   {
    "id": "sec-pb-39",
-   "index": 214,
+   "index": 202,
    "section": 42,
    "section_title": "Proof of continued insurability",
    "subsection": null,
@@ -26933,7 +26094,7 @@
   },
   {
    "id": "sec-pb-39-p2",
-   "index": 215,
+   "index": 203,
    "section": 42,
    "section_title": "Proof of continued insurability",
    "subsection": null,
@@ -27218,7 +26379,7 @@
   },
   {
    "id": "sec-pb-39-p2-40",
-   "index": 216,
+   "index": 204,
    "section": 42,
    "section_title": "Proof of continued insurability",
    "subsection": null,
@@ -27302,7 +26463,7 @@
   },
   {
    "id": "sec-pb-41",
-   "index": 217,
+   "index": 205,
    "section": 43,
    "section_title": "Revival of a policy",
    "subsection": null,
@@ -27354,7 +26515,7 @@
   },
   {
    "id": "sec-pb-41-p1",
-   "index": 218,
+   "index": 206,
    "section": 43,
    "section_title": "Revival of a policy",
    "subsection": null,
@@ -27525,7 +26686,7 @@
   },
   {
    "id": "sec-pb-41-p3",
-   "index": 219,
+   "index": 207,
    "section": 43,
    "section_title": "Revival of a policy",
    "subsection": null,
@@ -27849,7 +27010,7 @@
   },
   {
    "id": "sec-pb-42",
-   "index": 220,
+   "index": 208,
    "section": 44,
    "section_title": "Revival period",
    "subsection": null,
@@ -27891,7 +27052,7 @@
   },
   {
    "id": "sec-pb-42-p1",
-   "index": 221,
+   "index": 209,
    "section": 44,
    "section_title": "Revival period",
    "subsection": null,
@@ -28132,7 +27293,7 @@
   },
   {
    "id": "sec-pb-42-p1-43",
-   "index": 222,
+   "index": 210,
    "section": 44,
    "section_title": "Revival period",
    "subsection": null,
@@ -28241,7 +27402,7 @@
   },
   {
    "id": "sec-pb-44",
-   "index": 223,
+   "index": 211,
    "section": 45,
    "section_title": "Sum Assured on Death",
    "subsection": null,
@@ -28293,7 +27454,7 @@
   },
   {
    "id": "sec-pb-44-p1",
-   "index": 224,
+   "index": 212,
    "section": 45,
    "section_title": "Sum Assured on Death",
    "subsection": null,
@@ -28609,7 +27770,7 @@
   },
   {
    "id": "sec-pb-44-p1-45",
-   "index": 225,
+   "index": 213,
    "section": 45,
    "section_title": "Sum Assured on Death",
    "subsection": null,
@@ -28703,7 +27864,7 @@
   },
   {
    "id": "sec-pb-46",
-   "index": 226,
+   "index": 214,
    "section": 46,
    "section_title": "Surrender Value",
    "subsection": null,
@@ -28745,7 +27906,7 @@
   },
   {
    "id": "sec-pb-46-p1",
-   "index": 227,
+   "index": 215,
    "section": 46,
    "section_title": "Surrender Value",
    "subsection": null,
@@ -28874,7 +28035,7 @@
   },
   {
    "id": "sec-pb-47",
-   "index": 228,
+   "index": 216,
    "section": 47,
    "section_title": "Underwriting",
    "subsection": null,
@@ -28911,7 +28072,7 @@
   },
   {
    "id": "sec-pb-47-p1",
-   "index": 229,
+   "index": 217,
    "section": 47,
    "section_title": "Underwriting",
    "subsection": null,
@@ -29211,7 +28372,7 @@
   },
   {
    "id": "sec-pb-47-p1-48",
-   "index": 230,
+   "index": 218,
    "section": 47,
    "section_title": "Underwriting",
    "subsection": null,
@@ -29310,7 +28471,7 @@
   },
   {
    "id": "sec-pb-49",
-   "index": 231,
+   "index": 219,
    "section": 48,
    "section_title": "Waiting Period",
    "subsection": null,
@@ -29352,7 +28513,7 @@
   },
   {
    "id": "sec-pb-49-p1",
-   "index": 232,
+   "index": 220,
    "section": 48,
    "section_title": "Waiting Period",
    "subsection": null,
@@ -29602,7 +28763,7 @@
   },
   {
    "id": "sec-pb-49-p2",
-   "index": 233,
+   "index": 221,
    "section": 48,
    "section_title": "Waiting Period",
    "subsection": null,
@@ -29731,7 +28892,7 @@
   },
   {
    "id": "sec-pb-49-p4",
-   "index": 234,
+   "index": 222,
    "section": 48,
    "section_title": "Waiting Period",
    "subsection": null,
@@ -29855,7 +29016,7 @@
   },
   {
    "id": "sec-pb-49-p8",
-   "index": 235,
+   "index": 223,
    "section": 48,
    "section_title": "Waiting Period",
    "subsection": null,
@@ -29998,7 +29159,7 @@
   },
   {
    "id": "sec-pb-49-p12",
-   "index": 236,
+   "index": 224,
    "section": 48,
    "section_title": "Waiting Period",
    "subsection": null,
@@ -30146,7 +29307,7 @@
   },
   {
    "id": "sec-pb-4-1",
-   "index": 237,
+   "index": 225,
    "section": 49,
    "section_title": "Death Benefit",
    "subsection": null,
@@ -30188,7 +29349,7 @@
   },
   {
    "id": "sec-pb-4-1-4-1-1",
-   "index": 238,
+   "index": 226,
    "section": 49,
    "section_title": "Death Benefit",
    "subsection": null,
@@ -30753,7 +29914,7 @@
   },
   {
    "id": "sec-pb-4-1-4-1-1-2",
-   "index": 239,
+   "index": 227,
    "section": 49,
    "section_title": "Death Benefit",
    "subsection": null,
@@ -31293,7 +30454,7 @@
   },
   {
    "id": "sec-pb-4-1-4-1-2",
-   "index": 240,
+   "index": 228,
    "section": 49,
    "section_title": "Death Benefit",
    "subsection": null,
@@ -31851,7 +31012,7 @@
   },
   {
    "id": "sec-pb-4-1-4-1-2-2",
-   "index": 241,
+   "index": 229,
    "section": 49,
    "section_title": "Death Benefit",
    "subsection": null,
@@ -32296,7 +31457,7 @@
   },
   {
    "id": "sec-pb-4-2",
-   "index": 242,
+   "index": 230,
    "section": 50,
    "section_title": "Survival Benefit",
    "subsection": null,
@@ -32338,7 +31499,7 @@
   },
   {
    "id": "sec-pb-4-2-4-2-1",
-   "index": 243,
+   "index": 231,
    "section": 50,
    "section_title": "Survival Benefit",
    "subsection": null,
@@ -32413,7 +31574,7 @@
   },
   {
    "id": "sec-pb-4-3",
-   "index": 244,
+   "index": 232,
    "section": 51,
    "section_title": "Maturity Benefit",
    "subsection": null,
@@ -32455,7 +31616,7 @@
   },
   {
    "id": "sec-pb-4-3-p1",
-   "index": 245,
+   "index": 233,
    "section": 51,
    "section_title": "Maturity Benefit",
    "subsection": null,
@@ -32589,7 +31750,7 @@
   },
   {
    "id": "sec-pb-4-3-p1-5-1",
-   "index": 246,
+   "index": 234,
    "section": 51,
    "section_title": "Maturity Benefit",
    "subsection": null,
@@ -33124,7 +32285,7 @@
   },
   {
    "id": "sec-pb-4-3-p1-5-4",
-   "index": 247,
+   "index": 235,
    "section": 51,
    "section_title": "Maturity Benefit",
    "subsection": null,
@@ -33698,7 +32859,7 @@
   },
   {
    "id": "sec-pb-4-3-p1-6-3",
-   "index": 248,
+   "index": 236,
    "section": 51,
    "section_title": "Maturity Benefit",
    "subsection": null,
@@ -34063,7 +33224,7 @@
   },
   {
    "id": "sec-pb-4-3-p4",
-   "index": 249,
+   "index": 237,
    "section": 51,
    "section_title": "Maturity Benefit",
    "subsection": null,
@@ -34137,7 +33298,7 @@
   },
   {
    "id": "sec-pb-7-1",
-   "index": 250,
+   "index": 238,
    "section": 52,
    "section_title": "Proof of age",
    "subsection": null,
@@ -34184,7 +33345,7 @@
   },
   {
    "id": "sec-pb-7-1-7-1-2",
-   "index": 251,
+   "index": 239,
    "section": 52,
    "section_title": "Proof of age",
    "subsection": null,
@@ -34867,7 +34028,7 @@
   },
   {
    "id": "sec-pb-7-1-7-1-3",
-   "index": 252,
+   "index": 240,
    "section": 52,
    "section_title": "Proof of age",
    "subsection": null,
@@ -35439,7 +34600,7 @@
   },
   {
    "id": "sec-pb-7-1-7-1-4",
-   "index": 253,
+   "index": 241,
    "section": 52,
    "section_title": "Proof of age",
    "subsection": null,
@@ -35569,7 +34730,7 @@
   },
   {
    "id": "sec-pb-7-2",
-   "index": 254,
+   "index": 242,
    "section": 53,
    "section_title": "Free-look period",
    "subsection": null,
@@ -35611,7 +34772,7 @@
   },
   {
    "id": "sec-pb-7-2-7-2-1",
-   "index": 255,
+   "index": 243,
    "section": 53,
    "section_title": "Free-look period",
    "subsection": null,
@@ -36280,7 +35441,7 @@
   },
   {
    "id": "sec-pb-7-2-7-2-2",
-   "index": 256,
+   "index": 244,
    "section": 53,
    "section_title": "Free-look period",
    "subsection": null,
@@ -36640,7 +35801,7 @@
   },
   {
    "id": "sec-pb-7-3",
-   "index": 257,
+   "index": 245,
    "section": 54,
    "section_title": "Forfeiture provisions",
    "subsection": null,
@@ -36682,7 +35843,7 @@
   },
   {
    "id": "sec-pb-7-3-7-3-1",
-   "index": 258,
+   "index": 246,
    "section": 54,
    "section_title": "Forfeiture provisions",
    "subsection": null,
@@ -37007,7 +36168,7 @@
   },
   {
    "id": "sec-pb-7-3-7-3-2",
-   "index": 259,
+   "index": 247,
    "section": 54,
    "section_title": "Forfeiture provisions",
    "subsection": null,
@@ -37537,7 +36698,7 @@
   },
   {
    "id": "sec-pb-7-3-7-4-1",
-   "index": 260,
+   "index": 248,
    "section": 54,
    "section_title": "Forfeiture provisions",
    "subsection": null,
@@ -38032,7 +37193,7 @@
   },
   {
    "id": "sec-pb-7-3-7-4-3",
-   "index": 261,
+   "index": 249,
    "section": 54,
    "section_title": "Forfeiture provisions",
    "subsection": null,
@@ -38525,7 +37686,7 @@
   },
   {
    "id": "sec-pb-7-3-7-4-4",
-   "index": 262,
+   "index": 250,
    "section": 54,
    "section_title": "Forfeiture provisions",
    "subsection": null,
@@ -38918,7 +38079,7 @@
   },
   {
    "id": "sec-pb-7-3-p1-7-4-5",
-   "index": 263,
+   "index": 251,
    "section": 54,
    "section_title": "Forfeiture provisions",
    "subsection": null,
@@ -39411,7 +38572,7 @@
   },
   {
    "id": "sec-pb-7-5",
-   "index": 264,
+   "index": 252,
    "section": 55,
    "section_title": "Surrender",
    "subsection": null,
@@ -39448,7 +38609,7 @@
   },
   {
    "id": "sec-pb-7-5-7-5-1",
-   "index": 265,
+   "index": 253,
    "section": 55,
    "section_title": "Surrender",
    "subsection": null,
@@ -39523,7 +38684,7 @@
   },
   {
    "id": "sec-pb-7-6",
-   "index": 266,
+   "index": 254,
    "section": 56,
    "section_title": "Paid-up Benefit",
    "subsection": null,
@@ -39565,7 +38726,7 @@
   },
   {
    "id": "sec-pb-7-6-7-6-1",
-   "index": 267,
+   "index": 255,
    "section": 56,
    "section_title": "Paid-up Benefit",
    "subsection": null,
@@ -39650,7 +38811,7 @@
   },
   {
    "id": "sec-pb-7-7",
-   "index": 268,
+   "index": 256,
    "section": 57,
    "section_title": "Policy Cancellation Value",
    "subsection": null,
@@ -39697,7 +38858,7 @@
   },
   {
    "id": "sec-pb-7-7-p1",
-   "index": 269,
+   "index": 257,
    "section": 57,
    "section_title": "Policy Cancellation Value",
    "subsection": null,
@@ -40210,7 +39371,7 @@
   },
   {
    "id": "sec-pb-7-7-p2-7-7-3-2",
-   "index": 270,
+   "index": 258,
    "section": 57,
    "section_title": "Policy Cancellation Value",
    "subsection": null,
@@ -40500,7 +39661,7 @@
   },
   {
    "id": "sec-pb-7-7-p3-7-7-3-4",
-   "index": 271,
+   "index": 259,
    "section": 57,
    "section_title": "Policy Cancellation Value",
    "subsection": null,
@@ -40720,7 +39881,7 @@
   },
   {
    "id": "sec-pb-7-8",
-   "index": 272,
+   "index": 260,
    "section": 58,
    "section_title": "Policy Loan",
    "subsection": null,
@@ -40762,7 +39923,7 @@
   },
   {
    "id": "sec-pb-7-8-7-8-1",
-   "index": 273,
+   "index": 261,
    "section": 58,
    "section_title": "Policy Loan",
    "subsection": null,
@@ -40837,7 +39998,7 @@
   },
   {
    "id": "sec-pb-7-9",
-   "index": 274,
+   "index": 262,
    "section": 59,
    "section_title": "Termination of your policy",
    "subsection": null,
@@ -40889,7 +40050,7 @@
   },
   {
    "id": "sec-pb-7-9-p1",
-   "index": 275,
+   "index": 263,
    "section": 59,
    "section_title": "Termination of your policy",
    "subsection": null,
@@ -41329,7 +40490,7 @@
   },
   {
    "id": "sec-pb-7-10",
-   "index": 276,
+   "index": 264,
    "section": 60,
    "section_title": "Suicide Exclusion",
    "subsection": null,
@@ -41371,7 +40532,7 @@
   },
   {
    "id": "sec-pb-7-10-7-10-1",
-   "index": 277,
+   "index": 265,
    "section": 60,
    "section_title": "Suicide Exclusion",
    "subsection": null,
@@ -41916,7 +41077,7 @@
   },
   {
    "id": "sec-pb-7-10-7-10-2",
-   "index": 278,
+   "index": 266,
    "section": 60,
    "section_title": "Suicide Exclusion",
    "subsection": null,
@@ -42331,7 +41492,7 @@
   },
   {
    "id": "sec-pb-7-11",
-   "index": 279,
+   "index": 267,
    "section": 61,
    "section_title": "Normal requirements for a claim",
    "subsection": null,
@@ -42388,7 +41549,7 @@
   },
   {
    "id": "sec-pb-7-11-p1-7-11-1",
-   "index": 280,
+   "index": 268,
    "section": 61,
    "section_title": "Normal requirements for a claim",
    "subsection": null,
@@ -42927,7 +42088,7 @@
   },
   {
    "id": "sec-pb-7-11-p1-7-11-2",
-   "index": 281,
+   "index": 269,
    "section": 61,
    "section_title": "Normal requirements for a claim",
    "subsection": null,
@@ -43196,7 +42357,7 @@
   },
   {
    "id": "sec-pb-7-11-p1-7-11-3",
-   "index": 282,
+   "index": 270,
    "section": 61,
    "section_title": "Normal requirements for a claim",
    "subsection": null,
@@ -43765,7 +42926,7 @@
   },
   {
    "id": "sec-pb-7-11-p1-7-11-5-1",
-   "index": 283,
+   "index": 271,
    "section": 61,
    "section_title": "Normal requirements for a claim",
    "subsection": null,
@@ -44345,7 +43506,7 @@
   },
   {
    "id": "sec-pb-7-11-p6",
-   "index": 284,
+   "index": 272,
    "section": 61,
    "section_title": "Normal requirements for a claim",
    "subsection": null,
@@ -44429,7 +43590,7 @@
   },
   {
    "id": "sec-pb-9-1",
-   "index": 285,
+   "index": 273,
    "section": 62,
    "section_title": "Assignment",
    "subsection": null,
@@ -44466,7 +43627,7 @@
   },
   {
    "id": "sec-pb-9-1-p1",
-   "index": 286,
+   "index": 274,
    "section": 62,
    "section_title": "Assignment",
    "subsection": null,
@@ -44778,7 +43939,7 @@
   },
   {
    "id": "sec-pb-9-2",
-   "index": 287,
+   "index": 275,
    "section": 63,
    "section_title": "Nomination",
    "subsection": null,
@@ -44815,7 +43976,7 @@
   },
   {
    "id": "sec-pb-9-2-p1",
-   "index": 288,
+   "index": 276,
    "section": 63,
    "section_title": "Nomination",
    "subsection": null,
@@ -45306,7 +44467,7 @@
   },
   {
    "id": "sec-pb-9-2-p1-9-3",
-   "index": 289,
+   "index": 277,
    "section": 63,
    "section_title": "Nomination",
    "subsection": null,
@@ -45545,7 +44706,7 @@
   },
   {
    "id": "sec-pb-9-4",
-   "index": 290,
+   "index": 278,
    "section": 64,
    "section_title": "Tax",
    "subsection": null,
@@ -45582,7 +44743,7 @@
   },
   {
    "id": "sec-pb-9-4-9-4-1",
-   "index": 291,
+   "index": 279,
    "section": 64,
    "section_title": "Tax",
    "subsection": null,
@@ -46067,7 +45228,7 @@
   },
   {
    "id": "sec-pb-9-4-9-4-3",
-   "index": 292,
+   "index": 280,
    "section": 64,
    "section_title": "Tax",
    "subsection": null,
@@ -46536,7 +45697,7 @@
   },
   {
    "id": "sec-pb-9-4-9-5-2",
-   "index": 293,
+   "index": 281,
    "section": 64,
    "section_title": "Tax",
    "subsection": null,
@@ -47126,7 +46287,7 @@
   },
   {
    "id": "sec-pb-9-4-9-5-4",
-   "index": 294,
+   "index": 282,
    "section": 64,
    "section_title": "Tax",
    "subsection": null,
@@ -47381,7 +46542,7 @@
   },
   {
    "id": "sec-pb-9-6",
-   "index": 295,
+   "index": 283,
    "section": 65,
    "section_title": "Policy Cancellation",
    "subsection": null,
@@ -47423,7 +46584,7 @@
   },
   {
    "id": "sec-pb-9-6-9-6-1",
-   "index": 296,
+   "index": 284,
    "section": 65,
    "section_title": "Policy Cancellation",
    "subsection": null,
@@ -47638,7 +46799,7 @@
   },
   {
    "id": "sec-pb-9-6-p1",
-   "index": 297,
+   "index": 285,
    "section": 65,
    "section_title": "Policy Cancellation",
    "subsection": null,
@@ -47787,7 +46948,7 @@
   },
   {
    "id": "sec-pb-9-7",
-   "index": 298,
+   "index": 286,
    "section": 66,
    "section_title": "Issuance of Duplicate Policy",
    "subsection": null,
@@ -47839,7 +47000,7 @@
   },
   {
    "id": "sec-pb-9-7-9-7-1",
-   "index": 299,
+   "index": 287,
    "section": 66,
    "section_title": "Issuance of Duplicate Policy",
    "subsection": null,
@@ -48069,7 +47230,7 @@
   },
   {
    "id": "sec-pb-9-8",
-   "index": 300,
+   "index": 288,
    "section": 67,
    "section_title": "Jurisdiction",
    "subsection": null,
@@ -48106,7 +47267,7 @@
   },
   {
    "id": "sec-pb-9-8-9-8-1",
-   "index": 301,
+   "index": 289,
    "section": 67,
    "section_title": "Jurisdiction",
    "subsection": null,
@@ -48266,7 +47427,7 @@
   },
   {
    "id": "sec-pb-9-9",
-   "index": 302,
+   "index": 290,
    "section": 68,
    "section_title": "Legislative Changes",
    "subsection": null,
@@ -48308,7 +47469,7 @@
   },
   {
    "id": "sec-pb-9-9-9-9-1",
-   "index": 303,
+   "index": 291,
    "section": 68,
    "section_title": "Legislative Changes",
    "subsection": null,
@@ -48468,7 +47629,7 @@
   },
   {
    "id": "sec-pb-9-9-p3",
-   "index": 304,
+   "index": 292,
    "section": 68,
    "section_title": "Legislative Changes",
    "subsection": null,
@@ -48557,7 +47718,7 @@
   },
   {
    "id": "sec-pb-10-1",
-   "index": 305,
+   "index": 293,
    "section": 69,
    "section_title": "Grievance Redressal Mechanism",
    "subsection": null,
@@ -48604,7 +47765,7 @@
   },
   {
    "id": "sec-pb-10-1-10-1-1",
-   "index": 306,
+   "index": 294,
    "section": 69,
    "section_title": "Grievance Redressal Mechanism",
    "subsection": null,
@@ -48929,7 +48090,7 @@
   },
   {
    "id": "sec-pb-10-1-p1",
-   "index": 307,
+   "index": 295,
    "section": 69,
    "section_title": "Grievance Redressal Mechanism",
    "subsection": null,
@@ -49152,7 +48313,7 @@
   },
   {
    "id": "sec-pb-10-1-p2-10-1-4",
-   "index": 308,
+   "index": 296,
    "section": 69,
    "section_title": "Grievance Redressal Mechanism",
    "subsection": null,
@@ -49681,7 +48842,7 @@
   },
   {
    "id": "sec-pb-10-1-p3",
-   "index": 309,
+   "index": 297,
    "section": 69,
    "section_title": "Grievance Redressal Mechanism",
    "subsection": null,
@@ -49820,7 +48981,7 @@
   },
   {
    "id": "sec-pb-10-1-p3-10-1-5",
-   "index": 310,
+   "index": 298,
    "section": 69,
    "section_title": "Grievance Redressal Mechanism",
    "subsection": null,
@@ -50305,7 +49466,7 @@
   },
   {
    "id": "sec-pb-10-1-p3-10-1-5-1-c",
-   "index": 311,
+   "index": 299,
    "section": 69,
    "section_title": "Grievance Redressal Mechanism",
    "subsection": null,
@@ -50741,7 +49902,7 @@
   },
   {
    "id": "sec-pb-10-1-p3-10-1-5-1-h",
-   "index": 312,
+   "index": 300,
    "section": 69,
    "section_title": "Grievance Redressal Mechanism",
    "subsection": null,
@@ -51255,7 +50416,7 @@
   },
   {
    "id": "sec-pb-10-1-p5",
-   "index": 313,
+   "index": 301,
    "section": 69,
    "section_title": "Grievance Redressal Mechanism",
    "subsection": null,
@@ -51429,7 +50590,7 @@
   },
   {
    "id": "sec-pb-10-1-p6",
-   "index": 314,
+   "index": 302,
    "section": 69,
    "section_title": "Grievance Redressal Mechanism",
    "subsection": null,
@@ -51518,7 +50679,7 @@
   },
   {
    "id": "sec-pb-70",
-   "index": 315,
+   "index": 303,
    "section": 70,
    "section_title": "THEREIN, RETURN IT IMMEDIATELY FOR CORRECTION",
    "subsection": null,
@@ -51579,7 +50740,7 @@
   },
   {
    "id": "sec-pb-70-p1",
-   "index": 316,
+   "index": 304,
    "section": 70,
    "section_title": "THEREIN, RETURN IT IMMEDIATELY FOR CORRECTION",
    "subsection": null,
@@ -51613,7 +50774,7 @@
   },
   {
    "id": "sec-pb-11-1",
-   "index": 317,
+   "index": 305,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -51665,7 +50826,7 @@
   },
   {
    "id": "sec-pb-11-1-11-1-1",
-   "index": 318,
+   "index": 306,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -51914,7 +51075,7 @@
   },
   {
    "id": "sec-pb-11-1-1",
-   "index": 319,
+   "index": 307,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -52419,7 +51580,7 @@
   },
   {
    "id": "sec-pb-11-1-p1",
-   "index": 320,
+   "index": 308,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -52783,7 +51944,7 @@
   },
   {
    "id": "sec-pb-11-1-p1-2",
-   "index": 321,
+   "index": 309,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -53013,7 +52174,7 @@
   },
   {
    "id": "sec-pb-11-1-p2",
-   "index": 322,
+   "index": 310,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -53132,7 +52293,7 @@
   },
   {
    "id": "sec-pb-11-1-p2-11-4",
-   "index": 323,
+   "index": 311,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -53628,7 +52789,7 @@
   },
   {
    "id": "sec-pb-11-1-p2-1-e",
-   "index": 324,
+   "index": 312,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -54019,7 +53180,7 @@
   },
   {
    "id": "sec-pb-11-1-p2-1-i",
-   "index": 325,
+   "index": 313,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -54557,7 +53718,7 @@
   },
   {
    "id": "sec-pb-11-1-p2-4",
-   "index": 326,
+   "index": 314,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -54911,7 +54072,7 @@
   },
   {
    "id": "sec-pb-11-1-p3-1",
-   "index": 327,
+   "index": 315,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -55256,7 +54417,7 @@
   },
   {
    "id": "sec-pb-11-1-p3-2",
-   "index": 328,
+   "index": 316,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -55800,7 +54961,7 @@
   },
   {
    "id": "sec-pb-11-1-p4-a",
-   "index": 329,
+   "index": 317,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -56251,7 +55412,7 @@
   },
   {
    "id": "sec-pb-11-1-p6-c",
-   "index": 330,
+   "index": 318,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -56776,7 +55937,7 @@
   },
   {
    "id": "sec-pb-11-1-p6-5",
-   "index": 331,
+   "index": 319,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -56991,7 +56152,7 @@
   },
   {
    "id": "sec-pb-11-1-p7",
-   "index": 332,
+   "index": 320,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -57199,7 +56360,7 @@
   },
   {
    "id": "sec-pb-11-1-p10",
-   "index": 333,
+   "index": 321,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -57292,7 +56453,7 @@
   },
   {
    "id": "sec-pb-11-1-b1",
-   "index": 334,
+   "index": 322,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -57333,7 +56494,7 @@
   },
   {
    "id": "sec-pb-11-1-p12",
-   "index": 335,
+   "index": 323,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -57819,7 +56980,7 @@
   },
   {
    "id": "sec-pb-11-1-p12-03",
-   "index": 336,
+   "index": 324,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -58132,7 +57293,7 @@
   },
   {
    "id": "sec-pb-11-1-p12-05",
-   "index": 337,
+   "index": 325,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -58530,7 +57691,7 @@
   },
   {
    "id": "sec-pb-11-1-p12-07",
-   "index": 338,
+   "index": 326,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -59096,7 +58257,7 @@
   },
   {
    "id": "sec-pb-11-1-p12-09-d",
-   "index": 339,
+   "index": 327,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -59564,7 +58725,7 @@
   },
   {
    "id": "sec-pb-11-1-p12-12",
-   "index": 340,
+   "index": 328,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -59926,7 +59087,7 @@
   },
   {
    "id": "sec-pb-11-1-p14",
-   "index": 341,
+   "index": 329,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -60000,7 +59161,7 @@
   },
   {
    "id": "sec-pb-11-1-b2",
-   "index": 342,
+   "index": 330,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -60041,7 +59202,7 @@
   },
   {
    "id": "sec-pb-11-1-p14-13",
-   "index": 343,
+   "index": 331,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -60475,7 +59636,7 @@
   },
   {
    "id": "sec-pb-11-1-p14-13-b-ii",
-   "index": 344,
+   "index": 332,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -60905,7 +60066,7 @@
   },
   {
    "id": "sec-pb-11-1-p14-14-a",
-   "index": 345,
+   "index": 333,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -61442,7 +60603,7 @@
   },
   {
    "id": "sec-pb-11-1-p15",
-   "index": 346,
+   "index": 334,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -61675,7 +60836,7 @@
   },
   {
    "id": "sec-pb-11-1-p16",
-   "index": 347,
+   "index": 335,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -61744,7 +60905,7 @@
   },
   {
    "id": "sec-pb-11-1-b3",
-   "index": 348,
+   "index": 336,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -61785,7 +60946,7 @@
   },
   {
    "id": "sec-pb-11-1-p18",
-   "index": 349,
+   "index": 337,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -62222,7 +61383,7 @@
   },
   {
    "id": "sec-pb-11-1-p18-02",
-   "index": 350,
+   "index": 338,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -62753,7 +61914,7 @@
   },
   {
    "id": "sec-pb-11-1-p18-05",
-   "index": 351,
+   "index": 339,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -63349,7 +62510,7 @@
   },
   {
    "id": "sec-pb-11-1-p18-08",
-   "index": 352,
+   "index": 340,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -63732,7 +62893,7 @@
   },
   {
    "id": "sec-pb-11-1-p19",
-   "index": 353,
+   "index": 341,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -63920,7 +63081,7 @@
   },
   {
    "id": "sec-pb-11-1-p19-10",
-   "index": 354,
+   "index": 342,
    "section": 71,
    "section_title": "Governing laws and jurisdiction",
    "subsection": null,
@@ -64387,7 +63548,7 @@
   },
   {
    "id": "sec-pb-11-1-13",
-   "index": 355,
+   "index": 343,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -64464,7 +63625,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p2",
-   "index": 356,
+   "index": 344,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -64588,7 +63749,7 @@
   },
   {
    "id": "sec-pb-11-1-13-b1",
-   "index": 357,
+   "index": 345,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -64629,7 +63790,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p2-d",
-   "index": 358,
+   "index": 346,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -65133,7 +64294,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p2-15",
-   "index": 359,
+   "index": 347,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -65521,7 +64682,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p2-17",
-   "index": 360,
+   "index": 348,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -66148,7 +65309,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p3",
-   "index": 361,
+   "index": 349,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -66381,7 +65542,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p4",
-   "index": 362,
+   "index": 350,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -66450,7 +65611,7 @@
   },
   {
    "id": "sec-pb-11-1-13-b2",
-   "index": 363,
+   "index": 351,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -66491,7 +65652,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p6",
-   "index": 364,
+   "index": 352,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -67173,7 +66334,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p6-02-a",
-   "index": 365,
+   "index": 353,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -67368,7 +66529,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p7",
-   "index": 366,
+   "index": 354,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -67557,7 +66718,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p7-03",
-   "index": 367,
+   "index": 355,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -68084,7 +67245,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p7-04",
-   "index": 368,
+   "index": 356,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -68288,7 +67449,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p7-05",
-   "index": 369,
+   "index": 357,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -68676,7 +67837,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p7-06",
-   "index": 370,
+   "index": 358,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -69159,7 +68320,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p9",
-   "index": 371,
+   "index": 359,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -69233,7 +68394,7 @@
   },
   {
    "id": "sec-pb-11-1-13-b3",
-   "index": 372,
+   "index": 360,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -69274,7 +68435,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p9-07",
-   "index": 373,
+   "index": 361,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -69806,7 +68967,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p9-09",
-   "index": 374,
+   "index": 362,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -70169,7 +69330,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p10",
-   "index": 375,
+   "index": 363,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -70397,7 +69558,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p11",
-   "index": 376,
+   "index": 364,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -70461,7 +69622,7 @@
   },
   {
    "id": "sec-pb-11-1-13-b4",
-   "index": 377,
+   "index": 365,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -70502,7 +69663,7 @@
   },
   {
    "id": "sec-pb-11-1-13-p13",
-   "index": 378,
+   "index": 366,
    "section": 72,
    "section_title": "Where the policyholder whose life is insured nominates his",
    "subsection": null,
@@ -70630,7 +69791,7 @@
   },
   {
    "id": "sec-pb-73",
-   "index": 379,
+   "index": 367,
    "section": 73,
    "section_title": "AHMEDABAD",
    "subsection": null,
@@ -70666,7 +69827,7 @@
   },
   {
    "id": "sec-pb-73-p2",
-   "index": 380,
+   "index": 368,
    "section": 73,
    "section_title": "AHMEDABAD",
    "subsection": null,
@@ -70884,7 +70045,7 @@
   },
   {
    "id": "sec-pb-74",
-   "index": 381,
+   "index": 369,
    "section": 74,
    "section_title": "BENGALURU",
    "subsection": null,
@@ -70920,7 +70081,7 @@
   },
   {
    "id": "sec-pb-74-p1",
-   "index": 382,
+   "index": 370,
    "section": 74,
    "section_title": "BENGALURU",
    "subsection": null,
@@ -71099,7 +70260,7 @@
   },
   {
    "id": "sec-pb-74-p4",
-   "index": 383,
+   "index": 371,
    "section": 74,
    "section_title": "BENGALURU",
    "subsection": null,
@@ -71291,7 +70452,7 @@
   },
   {
    "id": "sec-pb-74-p5",
-   "index": 384,
+   "index": 372,
    "section": 74,
    "section_title": "BENGALURU",
    "subsection": null,
@@ -71385,7 +70546,7 @@
   },
   {
    "id": "sec-pb-75",
-   "index": 385,
+   "index": 373,
    "section": 75,
    "section_title": "BHUBANESHWAR",
    "subsection": null,
@@ -71421,7 +70582,7 @@
   },
   {
    "id": "sec-pb-75-p2",
-   "index": 386,
+   "index": 374,
    "section": 75,
    "section_title": "BHUBANESHWAR",
    "subsection": null,
@@ -71579,7 +70740,7 @@
   },
   {
    "id": "sec-pb-76",
-   "index": 387,
+   "index": 375,
    "section": 76,
    "section_title": "CHANDIGARH",
    "subsection": null,
@@ -71615,7 +70776,7 @@
   },
   {
    "id": "sec-pb-76-p1",
-   "index": 388,
+   "index": 376,
    "section": 76,
    "section_title": "CHANDIGARH",
    "subsection": null,
@@ -71768,7 +70929,7 @@
   },
   {
    "id": "sec-pb-76-p2",
-   "index": 389,
+   "index": 377,
    "section": 76,
    "section_title": "CHANDIGARH",
    "subsection": null,
@@ -71887,7 +71048,7 @@
   },
   {
    "id": "sec-pb-77",
-   "index": 390,
+   "index": 378,
    "section": 77,
    "section_title": "CHENNAI",
    "subsection": null,
@@ -71923,7 +71084,7 @@
   },
   {
    "id": "sec-pb-77-p2",
-   "index": 391,
+   "index": 379,
    "section": 77,
    "section_title": "CHENNAI",
    "subsection": null,
@@ -72086,7 +71247,7 @@
   },
   {
    "id": "sec-pb-77-p5",
-   "index": 392,
+   "index": 380,
    "section": 77,
    "section_title": "CHENNAI",
    "subsection": null,
@@ -72274,7 +71435,7 @@
   },
   {
    "id": "sec-pb-77-p7",
-   "index": 393,
+   "index": 381,
    "section": 77,
    "section_title": "CHENNAI",
    "subsection": null,
@@ -72347,7 +71508,7 @@
   },
   {
    "id": "sec-pb-77-b1",
-   "index": 394,
+   "index": 382,
    "section": 77,
    "section_title": "CHENNAI",
    "subsection": null,
@@ -72388,7 +71549,7 @@
   },
   {
    "id": "sec-pb-77-p8",
-   "index": 395,
+   "index": 383,
    "section": 77,
    "section_title": "CHENNAI",
    "subsection": null,
@@ -72447,7 +71608,7 @@
   },
   {
    "id": "sec-pb-78",
-   "index": 396,
+   "index": 384,
    "section": 78,
    "section_title": "GUWAHATI",
    "subsection": null,
@@ -72483,7 +71644,7 @@
   },
   {
    "id": "sec-pb-78-p1",
-   "index": 397,
+   "index": 385,
    "section": 78,
    "section_title": "GUWAHATI",
    "subsection": null,
@@ -72605,7 +71766,7 @@
   },
   {
    "id": "sec-pb-78-p2",
-   "index": 398,
+   "index": 386,
    "section": 78,
    "section_title": "GUWAHATI",
    "subsection": null,
@@ -72709,7 +71870,7 @@
   },
   {
    "id": "sec-pb-79",
-   "index": 399,
+   "index": 387,
    "section": 79,
    "section_title": "HYDERABAD",
    "subsection": null,
@@ -72745,7 +71906,7 @@
   },
   {
    "id": "sec-pb-79-p1-a",
-   "index": 400,
+   "index": 388,
    "section": 79,
    "section_title": "HYDERABAD",
    "subsection": null,
@@ -72922,7 +72083,7 @@
   },
   {
    "id": "sec-pb-79-p2",
-   "index": 401,
+   "index": 389,
    "section": 79,
    "section_title": "HYDERABAD",
    "subsection": null,
@@ -73031,7 +72192,7 @@
   },
   {
    "id": "sec-pb-79-p5",
-   "index": 402,
+   "index": 390,
    "section": 79,
    "section_title": "HYDERABAD",
    "subsection": null,
@@ -73198,7 +72359,7 @@
   },
   {
    "id": "sec-pb-80",
-   "index": 403,
+   "index": 391,
    "section": 80,
    "section_title": "ERNAKULAM",
    "subsection": null,
@@ -73234,7 +72395,7 @@
   },
   {
    "id": "sec-pb-80-p2",
-   "index": 404,
+   "index": 392,
    "section": 80,
    "section_title": "ERNAKULAM",
    "subsection": null,
@@ -73459,7 +72620,7 @@
   },
   {
    "id": "sec-pb-81",
-   "index": 405,
+   "index": 393,
    "section": 81,
    "section_title": "KOLKATA",
    "subsection": null,
@@ -73495,7 +72656,7 @@
   },
   {
    "id": "sec-pb-81-p2",
-   "index": 406,
+   "index": 394,
    "section": 81,
    "section_title": "KOLKATA",
    "subsection": null,
@@ -73701,7 +72862,7 @@
   },
   {
    "id": "sec-pb-82",
-   "index": 407,
+   "index": 395,
    "section": 82,
    "section_title": "LUCKNOW",
    "subsection": null,
@@ -73737,7 +72898,7 @@
   },
   {
    "id": "sec-pb-82-p1",
-   "index": 408,
+   "index": 396,
    "section": 82,
    "section_title": "LUCKNOW",
    "subsection": null,
@@ -73851,7 +73012,7 @@
   },
   {
    "id": "sec-pb-82-p3",
-   "index": 409,
+   "index": 397,
    "section": 82,
    "section_title": "LUCKNOW",
    "subsection": null,
@@ -74165,7 +73326,7 @@
   },
   {
    "id": "sec-pb-82-p5",
-   "index": 410,
+   "index": 398,
    "section": 82,
    "section_title": "LUCKNOW",
    "subsection": null,
@@ -74264,7 +73425,7 @@
   },
   {
    "id": "sec-pb-82-b1",
-   "index": 411,
+   "index": 399,
    "section": 82,
    "section_title": "LUCKNOW",
    "subsection": null,
@@ -74305,7 +73466,7 @@
   },
   {
    "id": "sec-pb-82-p7",
-   "index": 412,
+   "index": 400,
    "section": 82,
    "section_title": "LUCKNOW",
    "subsection": null,
@@ -74491,7 +73652,7 @@
   },
   {
    "id": "sec-pb-82-p9",
-   "index": 413,
+   "index": 401,
    "section": 82,
    "section_title": "LUCKNOW",
    "subsection": null,
@@ -74635,7 +73796,7 @@
   },
   {
    "id": "sec-pb-82-p10",
-   "index": 414,
+   "index": 402,
    "section": 82,
    "section_title": "LUCKNOW",
    "subsection": null,
@@ -74754,7 +73915,7 @@
   },
   {
    "id": "sec-pb-82-p11",
-   "index": 415,
+   "index": 403,
    "section": 82,
    "section_title": "LUCKNOW",
    "subsection": null,
@@ -74933,7 +74094,7 @@
   },
   {
    "id": "sec-pb-82-p13",
-   "index": 416,
+   "index": 404,
    "section": 82,
    "section_title": "LUCKNOW",
    "subsection": null,
@@ -75042,7 +74203,7 @@
   },
   {
    "id": "sec-pb-82-p16",
-   "index": 417,
+   "index": 405,
    "section": 82,
    "section_title": "LUCKNOW",
    "subsection": null,
@@ -75248,7 +74409,7 @@
   },
   {
    "id": "sec-pb-82-p17",
-   "index": 418,
+   "index": 406,
    "section": 82,
    "section_title": "LUCKNOW",
    "subsection": null,

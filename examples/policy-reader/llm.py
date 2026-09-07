@@ -58,6 +58,15 @@ def spoken(text: str) -> str:
     a list and a final "**Answer:**" line; Rime would read the tags and the
     asterisks. Strip those, keep the words, collapse whitespace."""
     t = _THINK.sub(" ", text or "")
+    # granite4.2:3b sometimes answers with a fabricated prompt echo: "You
+    # asked: <question>" then "INSTRUCTIONS: You are a policy expert ..."
+    # before (or instead of) the answer. Neither line is an answer.
+    t = re.sub(r"(?im)^\s*you asked\s*:.*$", "", t)
+    t = re.sub(r"(?im)^\s*instructions\s*:.*$", "", t)
+    # ... or a persona it invents for itself ("You are a policy expert with
+    # deep knowledge of ..."): a leading sentence about being an expert or an
+    # assistant is not an answer. "You are covered for ..." is, and stays.
+    t = re.sub(r"(?is)^\s*you are (?:an?|the)\b[^.!?\n]*?\b(?:expert|assistant|model|ai|advisor|specialist)\b[^.!?\n]*[.!?]\s*", "", t)
     t = re.sub(r"(?im)^\s*\**\s*answer\s*:\s*\**\s*", "", t)   # a closing "**Answer:**" label
     t = _MD.sub("", t)
     # A leading fragment of the question echoed back ("amount? The premium is ...").
@@ -65,6 +74,24 @@ def spoken(text: str) -> str:
     lines = [ln.strip() for ln in t.splitlines()]
     lines = [ln for ln in lines if ln and ln not in ("?", ":")]
     return re.sub(r"\s+", " ", " ".join(lines)).strip()
+
+
+def drop_echoed_system(text: str, system: str) -> str:
+    """granite4.2:3b sometimes opens its answer by reciting the system prompt
+    ("You are a policy expert with deep knowledge ..."). The recited words
+    are dropped, word for word as far as they match; what follows is the
+    answer. Nothing is touched when the reply does not start that way."""
+    sys_words = (system or "").split()
+    words = (text or "").split()
+    if len(sys_words) < 4 or len(words) < 4:
+        return text or ""
+    norm = lambda w: w.strip(".,;:!?*\"'()").lower()
+    n = 0
+    while n < len(words) and n < len(sys_words) and norm(words[n]) == norm(sys_words[n]):
+        n += 1
+    if n < 4:
+        return text or ""
+    return " ".join(words[n:])
 
 
 def _post(provider: str, key: str, model: str, messages: list, max_tokens: int | None = None,
@@ -78,8 +105,8 @@ def _post(provider: str, key: str, model: str, messages: list, max_tokens: int |
 
     max_tokens = max_tokens or _max_tokens()
     timeout = timeout or _timeout()
-    clean = (lambda t: t.strip()) if raw else spoken
     system = "\n".join(m["content"] for m in messages if m["role"] == "system")
+    clean = (lambda t: t.strip()) if raw else (lambda t: spoken(drop_echoed_system(t, system)))
     turns = [m for m in messages if m["role"] != "system"]
     if provider == "anthropic":
         r = requests.post(

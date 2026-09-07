@@ -331,6 +331,11 @@ class ReaderSession:
         self._navigator_lock = asyncio.Lock()
         self._open_task: Optional[asyncio.Task] = None
         self._open_seq = 0
+        # The last clause streamed by the read loop. Under lookahead it may be
+        # several clauses ahead of what the listener hears; a prompt opened
+        # from the read loop (table, offer, section end) waits until it is
+        # HEARD, so a pause during that paragraph lands on the paragraph.
+        self._last_clause_st: Optional["ContextState"] = None
         self._navigator_waiting = 0
         self._enriching: dict[str, asyncio.Task] = {}
         self.enrich_rest_enabled = ENRICH_REST_ENABLED
@@ -488,7 +493,7 @@ class ReaderSession:
                 "doc_id": doc.doc_id,
                 "reviewed": doc.reviewed,
                 "readable": doc.readable,
-                "unreviewed": not doc.reviewed,
+                "unreviewed": not doc.reviewed and doc.name not in COMMITTED_FIXTURES,   # never for a committed fixture
                 # ready | preparing | mechanical: whether play opens with the
                 # generated overview and chips, is still generating them, or
                 # will use the mechanical map.
@@ -999,7 +1004,7 @@ class ReaderSession:
                 narrator = await self.narrate_enrichment(doc, socks, owner="open")
                 narrator.prime("takeover", cp.TAKEOVER_LINE.format(title=doc.spoken_title))
         try:
-            provider = make_enrich_provider()
+            provider = await loop.run_in_executor(None, make_enrich_provider)   # a catalogue check: off the loop
             self.events.emit("enrich_started", document=doc.name, doc_id=doc.doc_id,
                              provider=provider.name, model=getattr(provider, "model", None),
                              fields=list(enrich_mod.NAVIGATOR_FIELDS))
@@ -1190,6 +1195,7 @@ class ReaderSession:
                 ctx_id = f"{c['id']}#t{self.turn}"
                 st = ContextState(ctx_id, self.turn, c["id"], state="streaming")
                 self.contexts[ctx_id] = st
+                self._last_clause_st = st
                 s.current_unit_id = c["id"]
                 s.read_index = c["index"]
                 s.read_cursor += 1
@@ -1410,6 +1416,19 @@ class ReaderSession:
             await self.jump_to(socks, data["section"]["start"], "topic", ws)
         # top, silence, a question: the read loop continues from the top
 
+    async def _await_previous_clause_heard(self, timeout: float = 45.0) -> bool:
+        """Before a prompt opened from the read loop speaks: the clause last
+        sent must have been heard to its end (the client's acks reached it).
+        Lookahead sends clauses well before they sound; without this the
+        table prompt replaces a paragraph the listener is still hearing."""
+        st = self._last_clause_st
+        if st is None or st.heard or st.state in ("fenced", "error") or st.abandoned:
+            return True
+        self.events.emit("prompt_waits_for_heard", context_id=st.context_id, unit_id=st.unit_id)
+        heard = await self._wait_heard(st, timeout=timeout)
+        self.events.emit("prompt_wait_done", context_id=st.context_id, unit_id=st.unit_id, heard=heard)
+        return heard
+
     async def _wait_heard(self, st: "ContextState", timeout: float = 30.0, until=None) -> bool:
         """Block until the client acks the whole unit (or reading stops, or
         `until()` says the unit no longer matters -- a superseded prompt)."""
@@ -1436,6 +1455,7 @@ class ReaderSession:
             return False
         self._offered.add(prev["id"])
         # The offer belongs after the section is HEARD, not merely sent.
+        await self._await_previous_clause_heard()
         while self.playing and self._backlog_ms() > 0:
             await asyncio.sleep(0.05)
         if not self.playing:
@@ -1477,6 +1497,9 @@ class ReaderSession:
         if not self.playing:
             return
         text = f"That's {prev['title']}. Next is {nxt['title']}. Carry on, or something else?"
+        await self._await_previous_clause_heard()             # the section's last clause, heard
+        if not self.playing:
+            return
         task = await self.open_prompt("section_end", text, ["carry_on", "topic", "question"], sockets=sockets,
                                       payload={"prev": prev["id"], "next": nxt["title"]},
                                       classify_options={"carry on": "carry_on", "a topic name": "topic"})
@@ -2094,6 +2117,9 @@ class ReaderSession:
         classify.update({"all of them": "all", "carry on": "carry_on"})
         payload = {"stub": stub["id"], "rows": [r["id"] for r in rows], "labels": labels}
         spoken_rows: set = set()
+        await self._await_previous_clause_heard()             # the paragraph before the table, heard
+        if not self.playing:
+            return
         while self.playing:
             self._table_decision = None
             task = await self.open_prompt("table_choice", text, ["row", "all", "carry_on"], sockets=sockets,

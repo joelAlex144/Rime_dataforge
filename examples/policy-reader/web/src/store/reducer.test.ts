@@ -391,6 +391,41 @@ describe('the companion while a document is processed', () => {
     expect(s.topics).toEqual([])
   })
 
+  it('a spoken prompt never replaces the clause on screen: unit_started clause -> table_choice -> paused', () => {
+    let s = run([UNIT, { type: 'rendered', context_id: UNIT.context_id, rendered_ms: 400 }])
+    const before = s.boundaryChar
+    s = run([{
+      type: 'unit_started', kind: 'table_choice', unit_id: 'sec-1-t1', context_id: 'table_choice#t2', index: 3,
+      section_title: 'Section 1', path: null,
+      text_display: "Here there's a table of Document type to Source URL, 8 rows: Document type, Issuer / source. Want one of them, all of them, or shall I carry on?",
+      sentences: [[0, 60]], char_start: 0,
+    }], s)
+    s = run([{ type: 'paused' }], s)
+    expect(s.unit?.textDisplay).toBe(UNIT.text_display)
+    expect(s.unit?.contextId).toBe(UNIT.context_id)
+    expect(s.boundaryChar).toBe(before)
+    expect(s.phase).toBe('paused')
+    // the prompt's words are the prompt's, not the clause's
+    expect(s.prompt?.text).toMatch(/^Here there's a table/)
+    expect(s.unit?.textDisplay).not.toMatch(/table/)
+  })
+
+  it('every non-clause kind leaves the clause alone; clause and row set it', () => {
+    let s = run([UNIT, { type: 'paused' }])                 // the clause on screen, paused
+    for (const kind of ['map', 'cue', 'welcome', 'start_choice', 'pick_topic', 'confirm_topic', 'choice', 'offer',
+                        'section_end', 'not_found', 'end_choice', 'recap']) {
+      const next = run([{ type: 'unit_started', kind, unit_id: kind, context_id: `${kind}#t9`, index: -1,
+                          section_title: 'x', text_display: `spoken ${kind}`, sentences: [[0, 5]] }], s)
+      expect(next.unit?.contextId).toBe(UNIT.context_id)
+      expect(next.unit?.textDisplay).toBe(UNIT.text_display)
+      expect(next.phase).toBe('paused')                    // never set playing by a prompt
+    }
+    const row = run([{ type: 'unit_started', kind: 'row', unit_id: 'sec-1-t1-r2', context_id: 'row#t3', index: 4,
+                       section_title: 'Section 1', text_display: 'Issuer / source: Reliance General.', sentences: [[0, 30]] }], s)
+    expect(row.unit?.unitId).toBe('sec-1-t1-r2')
+    expect(row.phase).toBe('playing')
+  })
+
   it('sections_found fills the list and a companion unit joins the transcript, not the clause on screen', () => {
     let s = run([{ type: 'sections_found', titles: ['Definitions', 'Premium'] }])
     expect(s.sectionsFound).toEqual(['Definitions', 'Premium'])

@@ -8,7 +8,7 @@
  * interrupt -- see buildInterrupt() in reducer.ts.
  */
 import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
-import { Action, DISCONNECTED, State, buildCut, buildInterrupt, buildOpen, buildPause, initialState, reducer, wordAt } from './reducer'
+import { Action, DISCONNECTED, State, buildCut, buildInterrupt, buildOpen, buildPause, initialState, reducer, wordAt, PROMPT_KINDS } from './reducer'
 
 const ACK_INTERVAL_MS = 100
 
@@ -202,6 +202,28 @@ export class AudioPlayer {
     this.units.push({ contextId, startFrame: this.enqueuedFrames, ended: false })
   }
 
+  /** Drop ONE unit's unplayed audio -- a prompt the listener answered while
+   *  it was still sounding -- and everything queued after it (nothing is:
+   *  a prompt is spoken alone). What was already played stays counted, so the
+   *  acks remain honest; the unit never fires unit_ended (the server closed
+   *  it). Returns true when something was dropped. */
+  dropUnit(contextId: string): boolean {
+    const i = this.units.findIndex((u) => u.contextId === contextId)
+    if (i < 0) return false
+    const at = Math.max(this.units[i].startFrame, this.framesPlayed)
+    if (at >= this.enqueuedFrames) return false
+    this.node?.port.postMessage({ type: 'truncate', atFrame: at })
+    this.enqueuedFrames = at
+    // Later units go (nothing follows a prompt); the prompt itself stays only
+    // if some of it was heard -- then it must not fire unit_ended -- and is
+    // forgotten altogether if none of it played.
+    this.units = this.units.filter((u, k) => k < i || (k === i && at > u.startFrame))
+    const kept = this.units.find((u) => u.contextId === contextId)
+    if (kept) kept.ended = true
+    this.carry = null
+    return true
+  }
+
   /** Drop everything queued but not yet played, and report where we stopped.
    *
    * Only an interrupt does this. Dropped frames are never played, so the
@@ -311,6 +333,8 @@ export function useSession(): Session {
   const pendingUnits = useRef<Map<string, any>>(new Map())
   const pendingTs = useRef<Map<string, any>>(new Map())
   const shownCtx = useRef<string | null>(null)
+  // The context of the prompt being spoken, so an answer can drop its remainder.
+  const promptCtx = useRef<string | null>(null)
 
   const send = useCallback((msg: any) => {
     const ws = wsRef.current
@@ -439,7 +463,21 @@ export function useSession(): Session {
         playerRef.current.pushB64(m.b64)
         return
       }
+      if (m.type === 'prompt_closed') {
+        // A prompt answered while it was still sounding: the rest of it is
+        // never played, so the next unit's audio starts at once and the screen
+        // (which follows the playhead) moves on with it.
+        const ctx = promptCtx.current
+        promptCtx.current = null
+        if (ctx && sinkRef.current) {
+          const dropped = playerRef.current.dropUnit(ctx)
+          if (dropped) pendingUnits.current.delete(ctx)
+        }
+        dispatch({ type: 'server', msg: m })
+        return
+      }
       if (m.type === 'unit_started') {
+        if (PROMPT_KINDS.has(m.kind)) promptCtx.current = m.context_id
         if (!sinkRef.current) {
           // No playhead here to release it: show it as it happens.
           dispatch({ type: 'server', msg: m })

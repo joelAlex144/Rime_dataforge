@@ -1147,6 +1147,50 @@ def text_fingerprint(path: Path) -> Optional[str]:
     return None
 
 
+# ---- the fixture builder's preamble ---------------------------------------
+# Every fixtures/source/fixture_*.docx opens with the builder's own block: a
+# paragraph "Fixture document for the delivery-aware reader ...", a provenance
+# table (Document type / Issuer / source / UIN / reference / Source pages /
+# Word count (body) / Section headings / Retrieved / Source URL) and a
+# paragraph "Provenance and handling note ...". None of it is the document.
+PREAMBLE_INTRO = "Fixture document for the delivery-aware reader"
+PREAMBLE_NOTE = "Provenance and handling note"
+PREAMBLE_LABELS = ("Document type", "Issuer / source", "UIN / reference", "Source pages",
+                   "Word count (body)", "Section headings", "Retrieved", "Source URL")
+
+
+def strip_fixture_preamble(sblocks: list) -> tuple:
+    """Detect the fixture builder's preamble by its exact markers and take it
+    out of the block stream. Returns (blocks, provenance|None): the intro, the
+    table's rows as {label: value} and the handling note, for the fixture's
+    top-level "provenance" and the ingest report -- never clauses."""
+    texts = [(b.text or "") for b in sblocks]
+    start = next((i for i, t in enumerate(texts[:12]) if t.strip().startswith(PREAMBLE_INTRO)), None)
+    if start is None:
+        return sblocks, None
+    end = next((i for i in range(start, min(len(texts), start + 40)) if PREAMBLE_NOTE in texts[i]), None)
+    if end is None:
+        end = start
+        for i in range(start + 1, min(len(texts), start + 40)):
+            if any(texts[i].lstrip().startswith(lab) for lab in PREAMBLE_LABELS) or sblocks[i].kind in ("table_stub", "table_row"):
+                end = i
+            elif sblocks[i].kind == "heading":
+                break
+    rows: dict = {}
+    for b in sblocks[start:end + 1]:
+        t = (b.text or "").strip()
+        for lab in PREAMBLE_LABELS:
+            if t.startswith(lab) and ":" in t:
+                rows[lab] = t.split(":", 1)[1].strip().rstrip(".").strip()
+                break
+    note_text = texts[end].strip() if PREAMBLE_NOTE in texts[end] else ""
+    if PREAMBLE_NOTE in note_text and not note_text.startswith(PREAMBLE_NOTE):
+        note_text = note_text[note_text.index(PREAMBLE_NOTE):]
+    provenance = {"intro": texts[start].strip(), "rows": rows, "note": note_text,
+                  "blocks_dropped": end - start + 1}
+    return sblocks[:start] + sblocks[end + 1:], provenance
+
+
 def spoken_title_for(sblocks, doc_title: str, path: Optional[Path] = None) -> str:
     """What the voice will call the document: the file's own title property
     (docx), else the first real heading the structure pass found, else the
@@ -1593,6 +1637,9 @@ def ingest_document(source, out_dir=None, *, out_path=None, name=None, title=Non
         sblocks = istr.blocks_from_legacy(blocks)
         n_pages = 0
     sblocks = istr.regex_boilerplate_pass(sblocks, n_pages, rep_s)
+    sblocks, provenance = strip_fixture_preamble(sblocks)
+    if provenance:
+        notes.append(f"fixture preamble dropped: {provenance['blocks_dropped']} blocks, {len(provenance['rows'])} provenance rows")
     if ddoc is not None:
         raw = "\n".join(b.text for b in sblocks)
     if len(raw.strip()) < MIN_EXTRACT_CHARS:
@@ -1698,7 +1745,15 @@ def ingest_document(source, out_dir=None, *, out_path=None, name=None, title=Non
     if pii.institutional:
         source_block["institutional_contacts"] = [{"label": l, "redacted": redact(v)} for l, v in pii.institutional]
     doc_title = title or (urlparse(src).netloc + urlparse(src).path if is_url else Path(src).stem)
-    spoken_title = spoken_title_for(sblocks, doc_title, None if is_url else Path(src))
+    src_stem = Path(src).stem if not is_url else ""
+    # A title given on purpose is what the voice says. The filename stem is
+    # not one (the upload passes it, and its source is renamed .incoming_*_name).
+    explicit = bool(title and title.strip()) and title.strip() != src_stem and not src_stem.endswith(title.strip())
+    if explicit:
+        from library import clean_title
+        spoken_title = clean_title(title)
+    else:
+        spoken_title = spoken_title_for(sblocks, doc_title, None if is_url else Path(src))
     source_block["text_sha256"] = normalised_text_hash(raw) if is_url else text_fingerprint(Path(src))
     try:
         import docling
@@ -1708,6 +1763,7 @@ def ingest_document(source, out_dir=None, *, out_path=None, name=None, title=Non
     doc = {
         "title": doc_title,
         "spoken_title": spoken_title,
+        "provenance": provenance,
         "doc_id": doc_id,
         "synthetic": bool(synthetic),
         "readable": readable,
@@ -1735,6 +1791,7 @@ def ingest_document(source, out_dir=None, *, out_path=None, name=None, title=Non
         "pii_scan": pii_report,
         "validate": validate_report,
         "readable": readable,
+        "provenance": provenance,
     }
     fixture_path = report_path = docling_path = None
     entry = {"doc_id": doc_id, "name": doc_key, "title": doc_title, "reviewed": False,

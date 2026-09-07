@@ -98,6 +98,9 @@ export default function Listener() {
     <div className="listener">
       <nav className="rail" aria-label="Your documents">
         <h2>Your documents</h2>
+        <div className="rail-voice s-off" aria-label="Voice">
+          {state.audioSink ? 'Voice: this tab' : state.anySink ? 'Voice: another tab' : 'Voice: not claimed'}
+        </div>
         {state.documents.map((d) => (
           <div key={d.name} className="rail-item" style={{ position: 'relative' }}>
             <button
@@ -205,6 +208,16 @@ export default function Listener() {
             <strong>Coming up:</strong> {state.sectionsFound.slice(0, 8).join(' · ')}
             {state.sectionsFound.length > 8 ? ' · …' : ''}
           </div>
+        )}
+
+        {state.companionLines.length > 0 && (Date.now() - state.companionLines[state.companionLines.length - 1].at < 90000 || state.phase !== 'playing') && (
+          <p className="notice companion-line" aria-label="Companion line">
+            {state.companionLines[state.companionLines.length - 1].text}
+          </p>
+        )}
+
+        {state.prompt?.text && (
+          <p className="notice prompt-text" aria-label="Prompt">{state.prompt.text}</p>
         )}
 
         {state.topics.length > 0 && state.prompt?.kind !== 'choice' && (
@@ -375,7 +388,10 @@ export default function Listener() {
         )}
         {busy && <p className="notice">Replaying a recorded session. Playback is paused.</p>}
         {!state.audioSink && state.anySink && (
-          <p className="notice">The voice is playing in another tab. Press play here to move it.</p>
+          <p className="notice" aria-label="Voice elsewhere">
+            The voice is playing in another tab.{' '}
+            <button onClick={() => s.play()} aria-label="Play here">Play here</button>
+          </p>
         )}
         {voice.status === 'error' && (
           <p className="notice">Voice input isn&apos;t available right now: {voice.error}</p>

@@ -299,6 +299,9 @@ class Narrator:
                     line = self._next_filler()
                     if line:
                         await self._speak("filler", "template", line)
+                    # A filler that could not be spoken (the voice went away)
+                    # still restarts the clock: no retry every quarter second.
+                    self.last_spoken = max(self.last_spoken, time.monotonic())
         except asyncio.CancelledError:
             raise
         except Exception as e:

@@ -1,7 +1,7 @@
 {
  "doc_id": "f23bb7ce63372d57",
  "name": "arogya_sanjeevani",
- "title": "fixture_arogya_sanjeevani",
+ "title": "Arogya Sanjeevani Policy Wording",
  "source": {
   "type": "docx",
   "path_or_url": "fixture_arogya_sanjeevani.docx",
@@ -104,14 +104,14 @@
   "write"
  ],
  "elapsed_ms": {
-  "extract": 26202.6,
-  "structure": 210.9,
-  "segment": 6.7,
-  "normalize": 52.0,
-  "pii_scan": 15.0,
-  "validate": 6.8,
-  "write": 169.3,
-  "total": 26663.2
+  "extract": 57864.6,
+  "structure": 155.3,
+  "segment": 7.2,
+  "normalize": 146.1,
+  "pii_scan": 13.8,
+  "validate": 7.4,
+  "write": 182.2,
+  "total": 58376.6
  },
  "structure": {
   "tool": "docling",
@@ -246,37 +246,28 @@
   "note": "Informational. Nothing here removed or altered any text; the developer view shows it as the review trail."
  },
  "validate": {
-  "clause_count": 275,
+  "clause_count": 263,
   "by_kind": {
-   "body": 218,
-   "boilerplate": 1,
+   "body": 216,
    "definition": 5,
-   "heading": 42,
-   "table_row": 8,
-   "table_stub": 1
+   "heading": 42
   },
-  "body_clauses": 223,
+  "body_clauses": 221,
   "readable": true,
   "splits": [],
   "folds_and_merges": [
    "folded 246 list items into their runs (max 600 chars)",
-   "merged 178 short clauses (< 120 chars) into the next"
+   "merged 171 short clauses (< 120 chars) into the next"
   ],
   "oversized_ok": true,
   "max_clause_chars": 972,
-  "boilerplate_first_15": [
-   {
-    "id": "sec-1-b1",
-    "text": "UIN / reference",
-    "reason": "front_matter"
-   }
-  ],
+  "boilerplate_first_15": [],
   "expected_range": {
    "reference": "150-250 clauses for a ~12,000-word wording",
-   "words": 12423,
+   "words": 12327,
    "scaled_range": [
-    155,
-    259
+    154,
+    257
    ],
    "in_range": true
   },
@@ -286,5 +277,20 @@
   "unknown_labels": {},
   "warnings": []
  },
- "readable": true
+ "readable": true,
+ "provenance": {
+  "intro": "Fixture document for the delivery-aware reader — verbatim text of a public Indian insurance policy.",
+  "rows": {
+   "Document type": "Insurance policy (individual/family health) — IRDAI standard product",
+   "Issuer / source": "Reliance General Insurance Company Limited (IRDAI standard wording)",
+   "UIN / reference": "RELHLIP21001V012021",
+   "Source pages": "21",
+   "Word count (body)": "12,187",
+   "Section headings": "41",
+   "Retrieved": "6 September 2026",
+   "Source URL": "https://irdai.gov.in/documents/37343/931203/RELHLIP21001V012021_2019-2020.pdf/416c6534-eafe-0426-1f91-18a060da9600?version=1.1&t=1668575841183&download=true"
+  },
+  "note": "Provenance and handling note.",
+  "blocks_dropped": 19
+ }
 }

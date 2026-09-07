@@ -1,7 +1,7 @@
 {
  "doc_id": "f5877d522f441c28",
  "name": "saral_jeevan_bima",
- "title": "fixture_saral_jeevan_bima",
+ "title": "Saral Jeevan Bima Policy Wording",
  "source": {
   "type": "docx",
   "path_or_url": "fixture_saral_jeevan_bima.docx",
@@ -120,14 +120,14 @@
   "write"
  ],
  "elapsed_ms": {
-  "extract": 237.2,
-  "structure": 74.7,
-  "segment": 6.4,
-  "normalize": 58.3,
-  "pii_scan": 16.6,
-  "validate": 8.5,
-  "write": 136.5,
-  "total": 538.3
+  "extract": 238.3,
+  "structure": 74.5,
+  "segment": 7.0,
+  "normalize": 56.8,
+  "pii_scan": 15.4,
+  "validate": 7.9,
+  "write": 124.2,
+  "total": 524.2
  },
  "structure": {
   "tool": "docling",
@@ -282,29 +282,22 @@
   "note": "Informational. Nothing here removed or altered any text; the developer view shows it as the review trail."
  },
  "validate": {
-  "clause_count": 419,
+  "clause_count": 407,
   "by_kind": {
-   "body": 308,
-   "boilerplate": 22,
-   "heading": 80,
-   "table_row": 8,
-   "table_stub": 1
+   "body": 306,
+   "boilerplate": 21,
+   "heading": 80
   },
-  "body_clauses": 308,
+  "body_clauses": 306,
   "readable": true,
   "splits": [],
   "folds_and_merges": [
    "folded 174 list items into their runs (max 600 chars)",
-   "merged 144 short clauses (< 120 chars) into the next"
+   "merged 137 short clauses (< 120 chars) into the next"
   ],
   "oversized_ok": true,
   "max_clause_chars": 719,
   "boilerplate_first_15": [
-   {
-    "id": "sec-1-b1",
-    "text": "UIN / reference",
-    "reason": "front_matter"
-   },
    {
     "id": "sec-2-b1",
     "text": "",
@@ -374,14 +367,19 @@
     "id": "sec-pb-11-1-b2",
     "text": "Page 32 of 39",
     "reason": "page_number"
+   },
+   {
+    "id": "sec-pb-11-1-b3",
+    "text": "Page 33 of 39",
+    "reason": "page_number"
    }
   ],
   "expected_range": {
    "reference": "150-250 clauses for a ~12,000-word wording",
-   "words": 12779,
+   "words": 12682,
    "scaled_range": [
-    160,
-    266
+    159,
+    264
    ],
    "in_range": false
   },
@@ -393,5 +391,20 @@
   "unknown_labels": {},
   "warnings": []
  },
- "readable": true
+ "readable": true,
+ "provenance": {
+  "intro": "Fixture document for the delivery-aware reader — verbatim text of a public Indian insurance policy.",
+  "rows": {
+   "Document type": "Insurance policy (individual term life) — IRDAI standard product",
+   "Issuer / source": "SBI Life Insurance Company Limited (IRDAI standard product)",
+   "UIN / reference": "111N128V01",
+   "Source pages": "39",
+   "Word count (body)": "12,646",
+   "Section headings": "81",
+   "Retrieved": "6 September 2026",
+   "Source URL": "https://irdai.gov.in/documents/37343/563751/SBI+Life+-+Saral+Jeevan+Bima_PD_2020-21.pdf/62c5de3d-fddd-f4b1-c294-ab466fe9221e?version=1.1&t=1668076574870"
+  },
+  "note": "Provenance and handling note.",
+  "blocks_dropped": 19
+ }
 }

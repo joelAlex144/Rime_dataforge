@@ -195,11 +195,19 @@ export const initialState: State = {
   ingestStages: [],
 }
 
+/** Only these kinds are the document on screen; everything else spoken through
+ *  unit_started is a prompt or a side unit and never touches the clause. */
+export const CLAUSE_KINDS = new Set(['clause', 'row'])
+export const PROMPT_KINDS = new Set(['choice', 'offer', 'start_choice', 'confirm_topic', 'table_choice', 'welcome',
+                                     'ingest_wait', 'pick_topic', 'section_end', 'not_found', 'end_choice'])
+
 export type Prompt = {
   kind: 'choice' | 'offer' | 'start_choice' | 'confirm_topic' | 'table_choice'
     | 'welcome' | 'ingest_wait' | 'pick_topic' | 'section_end' | 'not_found' | 'end_choice' | string
   options: string[]
   text: string
+  // The prompt's words are being spoken; its options arrive with `prompt`.
+  speaking?: boolean
   section_id?: string | null
   question?: string
   clause_id?: string
@@ -403,6 +411,25 @@ function applyServer(state: State, m: any): State {
         // and only the phase changes. "Answering from the document…" is replaced
         // when the answer's audio actually starts, which is when this arrives.
         return { ...state, answerCtx: m.context_id, phase: 'speaking' }
+      }
+      if (m.kind && !CLAUSE_KINDS.has(m.kind)) {
+        // A prompt (start_choice, table_choice, offer, ...) or a side unit (the
+        // overview, a cue, the recap) is spoken through the same message, but it
+        // is never the clause on screen: the paragraph, its boundary and its
+        // words stay exactly as they are, and a pause lands on the paragraph.
+        // Prompts show their words in the prompt area; side units join the
+        // transcript. The phase is never set to playing by a prompt.
+        if (PROMPT_KINDS.has(m.kind)) {
+          return {
+            ...state,
+            prompt: { ...(state.prompt && state.prompt.kind === m.kind ? state.prompt : { kind: m.kind, options: [] }),
+                      kind: m.kind, text: m.text_display, speaking: true },
+          }
+        }
+        return {
+          ...state,
+          companionLines: [...state.companionLines, { text: m.text_display, at: Date.now() }].slice(-20),
+        }
       }
       return {
         ...state,

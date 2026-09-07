@@ -1,15 +1,20 @@
 """table_choice: a table reached while reading is a prompt, not a stub sentence.
 
-Uses the arogya_sanjeevani fixture, whose first table (sec-1-t1) has 8 rows
-that are spoken only on request. A row label speaks that row as a `row` unit
-(acked, in the ledger as heard) and asks "Another, or carry on?"; "all" reads
-every row in order; silence carries on after the table with the rows still
-skipped:table_on_request.
+Uses a fixture built in setUp from a small HTML document: a heading, one
+paragraph, then a table (sec-1-t1) of 8 rows that are spoken only on request,
+then more paragraphs. A row label speaks that row as a `row` unit (acked, in
+the ledger as heard) and asks "Another, or carry on?"; "all" reads every row
+in order; silence carries on after the table with the rows still
+skipped:table_on_request. The prompt is spoken only once the paragraph
+before the table has been HEARD (the client's acks reached its end), so a
+pause during that paragraph lands on the paragraph.
 """
 import asyncio
 import base64
+import json
 import os
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -28,18 +33,44 @@ from aiohttp.test_utils import TestClient, TestServer               # noqa: E402
 import llm as llm_mod                                               # noqa: E402
 import server as srv                                                # noqa: E402
 
+sys.path.insert(0, str(ROOT / "scripts"))
+
 STUB = "sec-1-t1"
 ROWS = [f"{STUB}-r{i}" for i in range(1, 9)]
+TABLE = [("Document type", "Insurance policy (individual/family health), an IRDAI standard product"),
+         ("Issuer / source", "Reliance General Insurance Company Limited (IRDAI standard wording)"),
+         ("UIN / reference", "RELHLIP21001V012021"), ("Source pages", "21"), ("Word count (body)", "12,187"),
+         ("Section headings", "41"), ("Retrieved", "6 September 2026"), ("Source URL", "https://example.test/policy.pdf")]
+PARA = ("The policy covers hospitalisation expenses of the insured person for treatment taken during the policy "
+        "period, subject to the terms and conditions set out below and to the limits stated in the schedule.")
+
+
+def table_fixture(tmp: Path) -> Path:
+    """A document whose first body clause is followed by a table stub."""
+    rows = "".join(f"<tr><td>{k}</td><td>{v}</td></tr>" for k, v in TABLE)
+    html = ("<html><body><h1>Test Table Policy</h1>"
+            f"<p>{PARA}</p>"
+            f"<table><tr><th>Field</th><th>Value</th></tr>{rows}</table>"
+            + "".join(f"<h2>Section {i}</h2><p>Paragraph {i} of the test policy. {PARA}</p>" for i in range(2, 6))
+            + "</body></html>")
+    src = tmp / "table_policy.html"
+    src.write_text(html, encoding="utf-8")
+    import ingest as ingest_mod
+    ingest_mod.ingest_document(str(src), out_dir=tmp, name="tabledoc", title="Test Table Policy",
+                               register=True, index_path=tmp / "index.json")
+    return tmp / "index.json"
 
 
 class TableCase(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
         self.env = mock.patch.dict(os.environ, {"ENRICH_PROVIDER": ""})
         self.env.start()
-        self.app = srv.build_app(dev=False, warm_converter=False)
+        self.tmp = tempfile.TemporaryDirectory()
+        index = table_fixture(Path(self.tmp.name))
+        self.app = srv.build_app(dev=False, warm_converter=False, index_path=index)
         self.s = self.app["session"]
-        self.s.library.open("arogya_sanjeevani")
-        self.s._opened_by_listener.add("arogya_sanjeevani")          # chosen: no welcome re-routes it
+        self.s.library.open("tabledoc")
+        self.s._opened_by_listener.add("tabledoc")                   # chosen: no welcome re-routes it
         self.client = TestClient(TestServer(self.app))
         await self.client.start_server()
         self.ws = await self.client.ws_connect("/ws/audio")
@@ -58,6 +89,7 @@ class TableCase(unittest.IsolatedAsyncioTestCase):
         p = getattr(self.s.events, "path", None)
         if p and Path(p).exists():
             Path(p).unlink()
+        self.tmp.cleanup()
 
     async def recv(self, timeout=6.0):
         m = await self.ws.receive_json(timeout=timeout)
@@ -111,6 +143,36 @@ class TableCase(unittest.IsolatedAsyncioTestCase):
 
 
 class TestTableChoice(TableCase):
+    async def test_the_prompt_waits_until_the_paragraph_before_it_is_heard(self):
+        await self.ws.send_json({"type": "play"})
+        while True:
+            st = await self.until(lambda m: m.get("type") == "unit_started")
+            await self.until(lambda m: m.get("type") == "unit_done" and m["context_id"] == st["context_id"])
+            if st["kind"] in ("pick_topic", "welcome", "start_choice"):
+                await self.ack_all(st["context_id"])
+                await self.ws.send_json({"type": "ask", "question": {"pick_topic": "from the top", "welcome": "the first one",
+                                                                     "start_choice": "from the start"}[st["kind"]]})
+                continue
+            if st["unit_id"] == "sec-1-p1":
+                break
+            await self.ack_all(st["context_id"])
+        # The paragraph is sounding: most of it played (the backlog is under the
+        # 4 s lead, so the read loop moves on to the table) but its end is not
+        # acked. The table prompt must not open on top of it.
+        frames = self.audio[st["context_id"]] // 2
+        ms = frames / 24000 * 1000
+        await self.ws.send_json({"type": "rendered", "context_id": st["context_id"], "rendered_ms": max(0, ms - 2000),
+                                 "enqueued_frames": frames})
+        await asyncio.sleep(3.0)
+        self.assertEqual([e["kind"] for e in self.s.events.of_type("prompt_opened") if e["kind"] == "table_choice"], [])
+        self.assertTrue(self.s.events.of_type("prompt_waits_for_heard"), "the read loop reached the table and waited")
+        await self.ack_all(st["context_id"])
+        await self.hear(lambda m: m.get("kind") == "table_choice")        # the prompt unit, heard: its options follow
+        pm = await self.until(lambda m: m.get("type") == "prompt" and m.get("kind") == "table_choice", timeout=15)
+        self.assertEqual(pm["labels"][:2], ["Document type", "Issuer / source"])
+        waited = self.s.events.of_type("prompt_wait_done")[0]
+        self.assertEqual((waited["unit_id"], waited["heard"]), ("sec-1-p1", True))
+
     async def test_the_prompt_names_the_table_and_its_first_six_rows(self):
         st, pm = await self.play_to_table()
         self.assertEqual(st["unit_id"], STUB, "the prompt stands for the stub")
@@ -128,7 +190,8 @@ class TestTableChoice(TableCase):
         await self.ws.send_json({"type": "ask", "question": "issuer"})
         row = await self.hear(lambda m: m.get("kind") == "row")
         self.assertEqual(row["unit_id"], f"{STUB}-r2")
-        self.assertTrue(row["text_display"].startswith("Issuer / source: Reliance General"))
+        self.assertIn("Issuer / source", row["text_display"])
+        self.assertIn("Reliance General", row["text_display"])
         self.assertEqual(await self.ledger_says(f"{STUB}-r2", "heard"), "heard")
         again = await self.hear(lambda m: m.get("kind") == "table_choice")
         self.assertEqual(again["text_display"], "Another, or carry on?")

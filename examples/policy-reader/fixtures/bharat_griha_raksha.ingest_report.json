@@ -1,7 +1,7 @@
 {
  "doc_id": "23a9c597adf161d6",
  "name": "bharat_griha_raksha",
- "title": "fixture_bharat_griha_raksha",
+ "title": "Bharat Griha Raksha Policy Wording",
  "source": {
   "type": "docx",
   "path_or_url": "fixture_bharat_griha_raksha.docx",
@@ -128,14 +128,14 @@
   "write"
  ],
  "elapsed_ms": {
-  "extract": 179.6,
-  "structure": 54.2,
+  "extract": 180.5,
+  "structure": 61.4,
   "segment": 4.2,
-  "normalize": 146.1,
-  "pii_scan": 14.1,
-  "validate": 7.5,
-  "write": 119.6,
-  "total": 525.4
+  "normalize": 53.3,
+  "pii_scan": 13.8,
+  "validate": 6.5,
+  "write": 110.8,
+  "total": 430.5
  },
  "structure": {
   "tool": "docling",
@@ -301,107 +301,100 @@
   "note": "Informational. Nothing here removed or altered any text; the developer view shows it as the review trail."
  },
  "validate": {
-  "clause_count": 294,
+  "clause_count": 282,
   "by_kind": {
-   "body": 207,
-   "boilerplate": 15,
+   "body": 205,
+   "boilerplate": 14,
    "definition": 8,
-   "heading": 55,
-   "table_row": 8,
-   "table_stub": 1
+   "heading": 55
   },
-  "body_clauses": 215,
+  "body_clauses": 213,
   "readable": true,
   "splits": [],
   "folds_and_merges": [
    "folded 133 list items into their runs (max 600 chars)",
-   "merged 87 short clauses (< 120 chars) into the next"
+   "merged 80 short clauses (< 120 chars) into the next"
   ],
   "oversized_ok": true,
   "max_clause_chars": 921,
   "boilerplate_first_15": [
    {
     "id": "sec-1-b1",
-    "text": "UIN / reference",
-    "reason": "front_matter"
-   },
-   {
-    "id": "sec-1-b2",
     "text": "11 Edelweiss General Insurance Company Limited, Bharat Griha Raksha Policy I UIN: IRDAN159RP0019V01202021",
     "reason": "front_matter"
    },
    {
-    "id": "sec-1-b3",
+    "id": "sec-1-b2",
     "text": "Clause A. This Policy and the Insurance Contract",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b4",
+    "id": "sec-1-b3",
     "text": "Clause B. Insured Events",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b5",
+    "id": "sec-1-b4",
     "text": "Clause C. Home Building Cover",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b6",
+    "id": "sec-1-b5",
     "text": "Clause D. Home Contents cover",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b7",
+    "id": "sec-1-b6",
     "text": "Clause E. Additional Covers",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b8",
+    "id": "sec-1-b7",
     "text": "Clause F. Exclusions",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b9",
+    "id": "sec-1-b8",
     "text": "Clause G. Conditions",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b10",
+    "id": "sec-1-b9",
     "text": "Clause H. Changes to covers",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b11",
+    "id": "sec-1-b10",
     "text": "Clause I. Waiver of Under Insurance",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b12",
+    "id": "sec-1-b11",
     "text": "Clause J. Other Details",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b13",
+    "id": "sec-1-b12",
     "text": "Clause K. Grievances",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b14",
+    "id": "sec-1-b13",
     "text": "Clause L. Information about us",
     "reason": "toc_run"
    },
    {
-    "id": "sec-1-b15",
+    "id": "sec-1-b14",
     "text": "2",
     "reason": "page_number"
    }
   ],
   "expected_range": {
    "reference": "150-250 clauses for a ~12,000-word wording",
-   "words": 11658,
+   "words": 11560,
    "scaled_range": [
-    146,
-    243
+    144,
+    241
    ],
    "in_range": true
   },
@@ -414,5 +407,20 @@
   "unknown_labels": {},
   "warnings": []
  },
- "readable": true
+ "readable": true,
+ "provenance": {
+  "intro": "Fixture document for the delivery-aware reader — verbatim text of a public Indian insurance policy.",
+  "rows": {
+   "Document type": "Insurance policy (home building & contents) — IRDAI standard product",
+   "Issuer / source": "Edelweiss General Insurance Company Limited (IRDAI standard wording)",
+   "UIN / reference": "IRDAN159RP0019V01202021",
+   "Source pages": "21",
+   "Word count (body)": "11,427",
+   "Section headings": "68",
+   "Retrieved": "6 September 2026",
+   "Source URL": "https://irdai.gov.in/documents/37343/993134/IRDAN159RP0019V01202021_GEN3919.pdf/fb985424-eeb5-c823-9504-5eed65672d5c?version=1.1&t=1668329881560&download=true"
+  },
+  "note": "Provenance and handling note.",
+  "blocks_dropped": 19
+ }
 }

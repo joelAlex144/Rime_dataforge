@@ -244,6 +244,66 @@ class TestCleanLines(unittest.TestCase):
         self.assertEqual([b.kind for b in blocks], ["para", "para", "para"])
 
 
+class TestFixturePreamble(unittest.TestCase):
+    """The fixture builder's preamble is provenance, never clauses."""
+
+    def blocks(self):
+        from types import SimpleNamespace as B
+        b = lambda kind, text: B(kind=kind, text=text, level=1 if kind == "heading" else 0)
+        return [
+            b("heading", "Arogya Sanjeevani Policy — Policy Wording"),
+            b("body", "Fixture document for the delivery-aware reader — verbatim text of a public Indian insurance policy."),
+            b("table_stub", "There is a table here: 8 entries, Document type to Source URL. Ask me for any row."),
+            b("table_row", "Document type: Insurance policy (individual/family health) — IRDAI standard product."),
+            b("table_row", "Issuer / source: Reliance General Insurance Company Limited (IRDAI standard wording)."),
+            b("table_row", "UIN / reference: RELHLIP21001V012021."),
+            b("table_row", "Source pages: 21."),
+            b("table_row", "Word count (body): 12,187."),
+            b("table_row", "Section headings: 41."),
+            b("table_row", "Retrieved: 6 September 2026."),
+            b("table_row", "Source URL: https://irdai.gov.in/documents/37343/931203/RELHLIP21001V012021.pdf."),
+            b("body", "Document type Issuer / source"),
+            b("boilerplate", "UIN / reference"),
+            b("body", "Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note. "
+                      "Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is."),
+            b("heading", "1.PREAMBLE"),
+            b("body", "The proposal and declaration given by the proposer form the basis of this contract."),
+        ]
+
+    def test_the_preamble_is_dropped_and_kept_as_provenance(self):
+        out, prov = ingest.strip_fixture_preamble(self.blocks())
+        self.assertEqual([b.text for b in out][:3], ["Arogya Sanjeevani Policy — Policy Wording", "1.PREAMBLE",
+                                                     "The proposal and declaration given by the proposer form the basis of this contract."])
+        self.assertTrue(prov["intro"].startswith("Fixture document for"))
+        self.assertEqual(prov["rows"]["Issuer / source"], "Reliance General Insurance Company Limited (IRDAI standard wording)")
+        self.assertEqual(prov["rows"]["Source URL"], "https://irdai.gov.in/documents/37343/931203/RELHLIP21001V012021.pdf")
+        self.assertEqual(prov["rows"]["Word count (body)"], "12,187")
+        self.assertTrue(prov["note"].startswith("Provenance and handling note"))
+        self.assertEqual(prov["blocks_dropped"], 13)
+        for t in (b.text for b in out):
+            for marker in ("Fixture document for", "Provenance and handling note", "Word count (body)", "Source URL"):
+                self.assertNotIn(marker, t)
+
+    def test_a_document_without_the_preamble_is_untouched(self):
+        from types import SimpleNamespace as B
+        blocks = [B(kind="heading", text="Terms", level=1), B(kind="body", text="The lender may charge interest.", level=0)]
+        out, prov = ingest.strip_fixture_preamble(blocks)
+        self.assertEqual(len(out), 2)
+        self.assertIsNone(prov)
+
+    def test_the_five_committed_fixtures_carry_no_preamble_clauses(self):
+        import json
+        root = ROOT / "examples" / "policy-reader" / "fixtures"
+        for name in ("arogya_sanjeevani", "bharat_griha_raksha", "home_loan_mitc", "saral_jeevan_bima", "two_wheeler_loan_agreement"):
+            fx = json.loads((root / f"{name}.json").read_text(encoding="utf-8"))
+            with self.subTest(fixture=name):
+                self.assertTrue(fx.get("provenance"), "provenance block recorded")
+                self.assertEqual(fx["clauses"][0].get("kind"), "heading", "the first clause is the policy's own first heading")
+                for c in fx["clauses"]:
+                    for marker in ("Fixture document for", "Provenance and handling note", "Word count (body)", "Source URL"):
+                        self.assertNotIn(marker, c["text_display"], c["id"])
+
+
 class TestSpokenTitle(unittest.TestCase):
     def test_clean_title_strips_underscores_uins_and_fixture_tags(self):
         from library import clean_title

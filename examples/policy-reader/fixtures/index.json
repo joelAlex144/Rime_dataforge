@@ -3,7 +3,7 @@
   {
    "name": "arogya_sanjeevani",
    "doc_id": "f23bb7ce63372d57",
-   "title": "fixture_arogya_sanjeevani",
+   "title": "Arogya Sanjeevani Policy Wording",
    "path": "arogya_sanjeevani.json",
    "source": {
     "type": "docx",
@@ -97,18 +97,18 @@
     ],
     "text_sha256": "997f899c914bc82806aa181bae0353cb5a0ad7630f56bcbe5d2dfc15ee1beafb"
    },
-   "clause_count": 275,
-   "reviewed": false,
+   "clause_count": 263,
+   "reviewed": true,
    "readable": true,
    "report": "arogya_sanjeevani.ingest_report.json",
    "referral": "the team that publishes this document",
-   "ingested_at": "2026-09-07T17:37:54Z",
-   "spoken_title": "Arogya Sanjeevani Policy — Policy Wording"
+   "ingested_at": "2026-09-07T22:27:09Z",
+   "spoken_title": "Arogya Sanjeevani Policy Wording"
   },
   {
    "name": "bharat_griha_raksha",
    "doc_id": "23a9c597adf161d6",
-   "title": "fixture_bharat_griha_raksha",
+   "title": "Bharat Griha Raksha Policy Wording",
    "path": "bharat_griha_raksha.json",
    "source": {
     "type": "docx",
@@ -226,13 +226,13 @@
     ],
     "text_sha256": "c07d8454ff1cccff657b12a57d2884a6dd4d54f2b2b55d8bcda9eeb53fcb08ca"
    },
-   "clause_count": 294,
-   "reviewed": false,
+   "clause_count": 282,
+   "reviewed": true,
    "readable": true,
    "report": "bharat_griha_raksha.ingest_report.json",
    "referral": "the team that publishes this document",
-   "ingested_at": "2026-09-07T17:37:55Z",
-   "spoken_title": "Bharat Griha Raksha Policy — Standard Policy Wordings"
+   "ingested_at": "2026-09-07T22:27:09Z",
+   "spoken_title": "Bharat Griha Raksha Policy Wording"
   },
   {
    "name": "carers_allowance",
@@ -254,7 +254,7 @@
   {
    "name": "home_loan_mitc",
    "doc_id": "47a0feca107a0723",
-   "title": "fixture_home_loan_mitc",
+   "title": "Home Loan Most Important Terms and Conditions",
    "path": "home_loan_mitc.json",
    "source": {
     "type": "docx",
@@ -280,13 +280,13 @@
     ],
     "text_sha256": "660fac460a23d2cf28401ed154e1d9c92a8af58c6965c24e5c62d38744bc3138"
    },
-   "clause_count": 144,
-   "reviewed": false,
+   "clause_count": 132,
+   "reviewed": true,
    "readable": true,
    "report": "home_loan_mitc.ingest_report.json",
    "referral": "the team that publishes this document",
-   "ingested_at": "2026-09-07T17:37:55Z",
-   "spoken_title": "Most Important Terms and Conditions (MITC) — Retail Secured and Unsecured Loans"
+   "ingested_at": "2026-09-07T22:27:10Z",
+   "spoken_title": "Home Loan Most Important Terms and Conditions"
   },
   {
    "name": "policy",
@@ -308,7 +308,7 @@
   {
    "name": "saral_jeevan_bima",
    "doc_id": "f5877d522f441c28",
-   "title": "fixture_saral_jeevan_bima",
+   "title": "Saral Jeevan Bima Policy Wording",
    "path": "saral_jeevan_bima.json",
    "source": {
     "type": "docx",
@@ -418,18 +418,18 @@
     ],
     "text_sha256": "77fb5d4967795415118bd6f4407d60dd909f6cb238fc270812043a72ceb7dd24"
    },
-   "clause_count": 419,
-   "reviewed": false,
+   "clause_count": 407,
+   "reviewed": true,
    "readable": true,
    "report": "saral_jeevan_bima.ingest_report.json",
    "referral": "the team that publishes this document",
-   "ingested_at": "2026-09-07T17:37:56Z",
-   "spoken_title": "Saral Jeevan Bima — Policy Document"
+   "ingested_at": "2026-09-07T22:27:10Z",
+   "spoken_title": "Saral Jeevan Bima Policy Wording"
   },
   {
    "name": "two_wheeler_loan_agreement",
    "doc_id": "ded4b9c3f93d44ec",
-   "title": "fixture_two_wheeler_loan_agreement",
+   "title": "Two-Wheeler Loan Agreement",
    "path": "two_wheeler_loan_agreement.json",
    "source": {
     "type": "docx",
@@ -439,18 +439,6 @@
      {
       "label": "email",
       "redacted": "nama…"
-     },
-     {
-      "label": "email",
-      "redacted": "CCRC…"
-     },
-     {
-      "label": "email",
-      "redacted": "GRO@…"
-     },
-     {
-      "label": "email",
-      "redacted": "PNO@…"
      },
      {
       "label": "phone",
@@ -475,13 +463,13 @@
     ],
     "text_sha256": "ed239c85f65a41e4046faa6d5ebeec47b343780f029e7840f277f1acd454cba4"
    },
-   "clause_count": 375,
-   "reviewed": false,
+   "clause_count": 363,
+   "reviewed": true,
    "readable": true,
    "report": "two_wheeler_loan_agreement.ingest_report.json",
    "referral": "the team that publishes this document",
-   "ingested_at": "2026-09-07T17:37:57Z",
-   "spoken_title": "Two Wheeler Loan Agreement"
+   "ingested_at": "2026-09-07T22:27:11Z",
+   "spoken_title": "Two-Wheeler Loan Agreement"
   }
  ]
 }

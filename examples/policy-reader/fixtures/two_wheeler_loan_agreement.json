@@ -1,6 +1,21 @@
 {
- "title": "fixture_two_wheeler_loan_agreement",
- "spoken_title": "Two Wheeler Loan Agreement",
+ "title": "Two-Wheeler Loan Agreement",
+ "spoken_title": "Two-Wheeler Loan Agreement",
+ "provenance": {
+  "intro": "Fixture document for the delivery-aware reader — verbatim text of a public Indian legal document.",
+  "rows": {
+   "Document type": "Legal agreement (NBFC retail vehicle loan)",
+   "Issuer / source": "SMFG India Credit Company Limited (public template, V12 May 2026)",
+   "UIN / reference": "—",
+   "Source pages": "28",
+   "Word count (body)": "21,397",
+   "Section headings": "59",
+   "Retrieved": "6 September 2026",
+   "Source URL": "https://assets.smfgindiacredit.com/sites/default/files/Two-Wheeler-Loan-Agreement.pdf"
+  },
+  "note": "Provenance and handling note.",
+  "blocks_dropped": 19
+ },
  "doc_id": "ded4b9c3f93d44ec",
  "synthetic": false,
  "readable": true,
@@ -12,18 +27,6 @@
    {
     "label": "email",
     "redacted": "nama…"
-   },
-   {
-    "label": "email",
-    "redacted": "CCRC…"
-   },
-   {
-    "label": "email",
-    "redacted": "GRO@…"
-   },
-   {
-    "label": "email",
-    "redacted": "PNO@…"
    },
    {
     "label": "phone",
@@ -48,7 +51,7 @@
   ],
   "text_sha256": "ed239c85f65a41e4046faa6d5ebeec47b343780f029e7840f277f1acd454cba4"
  },
- "clause_count": 375,
+ "clause_count": 363,
  "clauses": [
   {
    "id": "sec-1",
@@ -57,8 +60,8 @@
    "section_title": "Two Wheeler Loan Agreement",
    "subsection": null,
    "item": null,
-   "text_display": "Two Wheeler Loan Agreement. 20 items.",
-   "text_spoken": "Two Wheeler Loan Agreement. twenty items.",
+   "text_display": "Two Wheeler Loan Agreement. 10 items.",
+   "text_spoken": "Two Wheeler Loan Agreement. ten items.",
    "sentences": [
     [
      0,
@@ -89,7 +92,7 @@
     [
      28,
      30,
-     "twenty"
+     "ten"
     ],
     [
      31,
@@ -99,7 +102,7 @@
    ],
    "kind": "heading",
    "level": 1,
-   "children": 20
+   "children": 10
   },
   {
    "id": "sec-1-p1",
@@ -108,1271 +111,467 @@
    "section_title": "Two Wheeler Loan Agreement",
    "subsection": null,
    "item": null,
-   "text_display": "Fixture document for the delivery-aware reader — verbatim text of a public Indian legal document.",
-   "text_spoken": "Fixture document for the delivery-aware reader — verbatim text of a public Indian legal document.",
+   "text_display": "Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
+   "text_spoken": "Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
    "sentences": [
     [
      0,
-     97
+     173
+    ],
+    [
+     174,
+     252
+    ],
+    [
+     253,
+     303
+    ],
+    [
+     304,
+     420
+    ],
+    [
+     421,
+     517
     ]
    ],
    "spoken_map": [
     [
      0,
-     7,
-     "Fixture"
+     4,
+     "Text"
     ],
     [
+     5,
      8,
-     16,
-     "document"
+     "was"
     ],
     [
-     17,
-     20,
-     "for"
+     9,
+     18,
+     "extracted"
     ],
     [
-     21,
+     19,
+     23,
+     "from"
+    ],
+    [
      24,
+     27,
      "the"
     ],
     [
-     25,
-     39,
-     "delivery-aware"
-    ],
-    [
-     40,
-     46,
-     "reader"
-    ],
-    [
-     47,
-     48,
-     "—"
-    ],
-    [
-     49,
-     57,
-     "verbatim"
-    ],
-    [
-     58,
-     62,
-     "text"
-    ],
-    [
-     63,
-     65,
-     "of"
-    ],
-    [
-     66,
-     67,
-     "a"
-    ],
-    [
-     68,
-     74,
-     "public"
-    ],
-    [
-     75,
-     81,
-     "Indian"
-    ],
-    [
-     82,
-     87,
-     "legal"
-    ],
-    [
-     88,
-     97,
-     "document."
-    ]
-   ],
-   "kind": "body"
-  },
-  {
-   "id": "sec-1-t1",
-   "index": 2,
-   "section": 1,
-   "section_title": "Two Wheeler Loan Agreement",
-   "subsection": null,
-   "item": null,
-   "text_display": "There is a table here: 8 entries, Document type to Source URL. Ask me for any row.",
-   "text_spoken": "There is a table here: eight entries, Document type to Source URL. Ask me for any row.",
-   "sentences": [
-    [
-     0,
-     62
-    ],
-    [
-     63,
-     82
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     5,
-     "There"
-    ],
-    [
-     6,
-     8,
-     "is"
-    ],
-    [
-     9,
-     10,
-     "a"
-    ],
-    [
-     11,
-     16,
-     "table"
-    ],
-    [
-     17,
-     22,
-     "here:"
-    ],
-    [
-     23,
-     24,
-     "eight"
-    ],
-    [
-     25,
-     33,
-     "entries,"
-    ],
-    [
-     34,
-     42,
-     "Document"
-    ],
-    [
-     43,
-     47,
-     "type"
-    ],
-    [
-     48,
-     50,
-     "to"
-    ],
-    [
-     51,
-     57,
-     "Source"
-    ],
-    [
-     58,
-     62,
-     "URL."
-    ],
-    [
-     63,
-     66,
-     "Ask"
-    ],
-    [
-     67,
-     69,
-     "me"
-    ],
-    [
-     70,
-     73,
-     "for"
-    ],
-    [
-     74,
-     77,
-     "any"
-    ],
-    [
-     78,
-     82,
-     "row."
-    ]
-   ],
-   "kind": "table_stub",
-   "spoken_override": {
-    "text": "The table is a loan agreement summary table with 8 rows (each representing a specific clause or term) and multiple columns including 'Term', 'Description', 'Amount', 'Due Date', 'Status', 'Notes', 'Reference', 'Remarks'. Row labels are ordered as: Clause 1, Clause 2, Clause 3, Clause 4, Clause 5, Clause 6, Clause 7, Clause 8. Which one do you want?",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-t1-r1",
-   "index": 3,
-   "section": 1,
-   "section_title": "Two Wheeler Loan Agreement",
-   "subsection": null,
-   "item": null,
-   "text_display": "Document type: Legal agreement (NBFC retail vehicle loan).",
-   "text_spoken": "Document type: Legal agreement (NBFC retail vehicle loan).",
-   "sentences": [
-    [
-     0,
-     58
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     8,
-     "Document"
-    ],
-    [
-     9,
-     14,
-     "type:"
-    ],
-    [
-     15,
-     20,
-     "Legal"
-    ],
-    [
-     21,
-     30,
-     "agreement"
-    ],
-    [
-     31,
+     28,
      36,
-     "(NBFC"
+     "publicly"
     ],
     [
      37,
      43,
-     "retail"
+     "hosted"
     ],
     [
      44,
-     51,
-     "vehicle"
-    ],
-    [
-     52,
-     58,
-     "loan)."
-    ]
-   ],
-   "kind": "table_row",
-   "spoken_on_request": true,
-   "parent": "sec-1-t1",
-   "spoken_override": {
-    "text": "The NBFC's retail vehicle loan is a legal agreement where the borrower and lender sign documents outlining their rights, responsibilities, and terms of the loan.",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-t1-r2",
-   "index": 4,
-   "section": 1,
-   "section_title": "Two Wheeler Loan Agreement",
-   "subsection": null,
-   "item": null,
-   "text_display": "Issuer / source: SMFG India Credit Company Limited (public template, V12 May 2026).",
-   "text_spoken": "Issuer / source: SMFG India Credit Company Limited (public template, V12 May twenty twenty-six).",
-   "sentences": [
-    [
-     0,
-     83
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     6,
-     "Issuer"
-    ],
-    [
-     7,
-     8,
-     "/"
-    ],
-    [
-     9,
-     16,
-     "source:"
-    ],
-    [
-     17,
-     21,
-     "SMFG"
-    ],
-    [
-     22,
-     27,
-     "India"
-    ],
-    [
-     28,
-     34,
-     "Credit"
-    ],
-    [
-     35,
-     42,
-     "Company"
-    ],
-    [
-     43,
-     50,
-     "Limited"
-    ],
-    [
-     51,
-     58,
-     "(public"
-    ],
-    [
-     59,
-     68,
-     "template,"
-    ],
-    [
-     69,
-     72,
-     "V12"
-    ],
-    [
-     73,
-     76,
-     "May"
-    ],
-    [
-     77,
-     81,
-     "twenty twenty-six"
-    ],
-    [
-     81,
-     83,
-     ")."
-    ]
-   ],
-   "kind": "table_row",
-   "spoken_on_request": true,
-   "parent": "sec-1-t1",
-   "spoken_override": {
-    "text": "...",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-t1-r3",
-   "index": 5,
-   "section": 1,
-   "section_title": "Two Wheeler Loan Agreement",
-   "subsection": null,
-   "item": null,
-   "text_display": "UIN / reference: —.",
-   "text_spoken": "UIN / reference: —.",
-   "sentences": [
-    [
-     0,
-     19
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     3,
-     "UIN"
-    ],
-    [
-     4,
-     5,
-     "/"
-    ],
-    [
-     6,
-     16,
-     "reference:"
-    ],
-    [
-     17,
-     19,
-     "—."
-    ]
-   ],
-   "kind": "table_row",
-   "spoken_on_request": true,
-   "parent": "sec-1-t1",
-   "spoken_override": {
-    "text": "The row contains the label 'UIN' and the value is a reference identifier.",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-t1-r4",
-   "index": 6,
-   "section": 1,
-   "section_title": "Two Wheeler Loan Agreement",
-   "subsection": null,
-   "item": null,
-   "text_display": "Source pages: 28.",
-   "text_spoken": "Source pages: twenty-eight.",
-   "sentences": [
-    [
-     0,
-     17
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     6,
-     "Source"
-    ],
-    [
-     7,
-     13,
-     "pages:"
-    ],
-    [
-     14,
-     16,
-     "twenty-eight"
-    ],
-    [
-     16,
-     17,
-     "."
-    ]
-   ],
-   "kind": "table_row",
-   "spoken_on_request": true,
-   "parent": "sec-1-t1",
-   "spoken_override": {
-    "text": "The source page is 28, which provides the row of table data you need.",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-t1-r5",
-   "index": 7,
-   "section": 1,
-   "section_title": "Two Wheeler Loan Agreement",
-   "subsection": null,
-   "item": null,
-   "text_display": "Word count (body): 21,397.",
-   "text_spoken": "Word count (body): twenty-one thousand three hundred ninety-seven.",
-   "sentences": [
-    [
-     0,
-     26
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     4,
-     "Word"
-    ],
-    [
-     5,
-     10,
-     "count"
-    ],
-    [
-     11,
-     18,
-     "(body):"
-    ],
-    [
-     19,
-     25,
-     "twenty-one thousand three hundred ninety-seven"
-    ],
-    [
-     25,
-     26,
-     "."
-    ]
-   ],
-   "kind": "table_row",
-   "spoken_on_request": true,
-   "parent": "sec-1-t1",
-   "spoken_override": {
-    "text": "A detailed analysis of 21,397 words covering various topics was provided as requested.",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-t1-r6",
-   "index": 8,
-   "section": 1,
-   "section_title": "Two Wheeler Loan Agreement",
-   "subsection": null,
-   "item": null,
-   "text_display": "Section headings: 59.",
-   "text_spoken": "Section headings: fifty-nine.",
-   "sentences": [
-    [
-     0,
-     21
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     7,
-     "Section"
-    ],
-    [
-     8,
-     17,
-     "headings:"
-    ],
-    [
-     18,
-     20,
-     "fifty-nine"
-    ],
-    [
-     20,
-     21,
-     "."
-    ]
-   ],
-   "kind": "table_row",
-   "spoken_on_request": true,
-   "parent": "sec-1-t1",
-   "spoken_override": {
-    "text": "Section 59 is the row heading for 'Table' in the document.",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-t1-r7",
-   "index": 9,
-   "section": 1,
-   "section_title": "Two Wheeler Loan Agreement",
-   "subsection": null,
-   "item": null,
-   "text_display": "Retrieved: 6 September 2026.",
-   "text_spoken": "Retrieved: six September twenty twenty-six.",
-   "sentences": [
-    [
-     0,
-     28
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     10,
-     "Retrieved:"
-    ],
-    [
-     11,
-     12,
-     "six"
-    ],
-    [
-     13,
-     22,
-     "September"
-    ],
-    [
-     23,
-     27,
-     "twenty twenty-six"
-    ],
-    [
-     27,
-     28,
-     "."
-    ]
-   ],
-   "kind": "table_row",
-   "spoken_on_request": true,
-   "parent": "sec-1-t1",
-   "spoken_override": {
-    "text": "The row of the table was retrieved on 6 September 2026.",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-t1-r8",
-   "index": 10,
-   "section": 1,
-   "section_title": "Two Wheeler Loan Agreement",
-   "subsection": null,
-   "item": null,
-   "text_display": "Source URL: https://assets.smfgindiacredit.com/sites/default/files/Two-Wheeler-Loan-Agreement.pdf.",
-   "text_spoken": "Source URL: https://assets.smfgindiacredit.com/sites/default/files/Two-Wheeler-Loan-Agreement.pdf.",
-   "sentences": [
-    [
-     0,
-     98
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     6,
-     "Source"
-    ],
-    [
-     7,
-     11,
-     "URL:"
-    ],
-    [
-     12,
-     98,
-     "https://assets.smfgindiacredit.com/sites/default/files/Two-Wheeler-Loan-Agreement.pdf."
-    ]
-   ],
-   "kind": "table_row",
-   "spoken_on_request": true,
-   "parent": "sec-1-t1",
-   "spoken_override": {
-    "text": "The Two-Wheeler Loan Agreement PDF outlines the terms of the loan including repayment schedule interest rate and liability provisions as described in the source.",
-    "generated": true,
-    "provider": "ollama"
-   }
-  },
-  {
-   "id": "sec-1-p3",
-   "index": 11,
-   "section": 1,
-   "section_title": "Two Wheeler Loan Agreement",
-   "subsection": null,
-   "item": null,
-   "text_display": "Document type Issuer / source",
-   "text_spoken": "Document type Issuer / source",
-   "sentences": [
-    [
-     0,
-     29
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     8,
-     "Document"
-    ],
-    [
-     9,
-     13,
-     "type"
-    ],
-    [
-     14,
-     20,
-     "Issuer"
-    ],
-    [
-     21,
-     22,
-     "/"
-    ],
-    [
-     23,
-     29,
-     "source"
-    ]
-   ],
-   "kind": "body"
-  },
-  {
-   "id": "sec-1-b1",
-   "index": 12,
-   "section": 1,
-   "section_title": "Two Wheeler Loan Agreement",
-   "subsection": null,
-   "item": null,
-   "text_display": "UIN / reference",
-   "text_spoken": "UIN / reference",
-   "sentences": [
-    [
-     0,
-     15
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     3,
-     "UIN"
-    ],
-    [
-     4,
-     5,
-     "/"
-    ],
-    [
-     6,
-     15,
-     "reference"
-    ]
-   ],
-   "kind": "boilerplate",
-   "demoted_by": "front_matter",
-   "label": "text"
-  },
-  {
-   "id": "sec-1-p10",
-   "index": 13,
-   "section": 1,
-   "section_title": "Two Wheeler Loan Agreement",
-   "subsection": null,
-   "item": null,
-   "text_display": "Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note. Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
-   "text_spoken": "Source pages Word count (body) Section headings Retrieved Source URL Provenance and handling note. Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, with running headers, footers and page numbers removed and wrapped lines re-joined. Tables and two-column definition lists in the original may read linearly here; check against the PDF before relying on any table. This is a public product wording / template, not a customer document — it contains no policyholder or borrower data. If the demo should not show a brand, replace the issuer name with a placeholder before chunking.",
-   "sentences": [
-    [
-     0,
-     98
-    ],
-    [
-     99,
-     272
-    ],
-    [
-     273,
-     351
-    ],
-    [
-     352,
-     402
-    ],
-    [
-     403,
-     519
-    ],
-    [
-     520,
-     616
-    ]
-   ],
-   "spoken_map": [
-    [
-     0,
-     6,
-     "Source"
-    ],
-    [
-     7,
-     12,
-     "pages"
-    ],
-    [
-     13,
-     17,
-     "Word"
-    ],
-    [
-     18,
-     23,
-     "count"
-    ],
-    [
-     24,
-     30,
-     "(body)"
-    ],
-    [
-     31,
-     38,
-     "Section"
-    ],
-    [
-     39,
      47,
-     "headings"
+     "PDF"
     ],
     [
      48,
-     57,
-     "Retrieved"
+     50,
+     "at"
     ],
     [
+     51,
+     54,
+     "the"
+    ],
+    [
+     55,
      58,
+     "URL"
+    ],
+    [
+     59,
      64,
-     "Source"
+     "above"
     ],
     [
      65,
      68,
-     "URL"
+     "and"
     ],
     [
      69,
-     79,
-     "Provenance"
-    ],
-    [
-     80,
-     83,
-     "and"
-    ],
-    [
-     84,
-     92,
-     "handling"
-    ],
-    [
-     93,
-     98,
-     "note."
-    ],
-    [
-     99,
-     103,
-     "Text"
-    ],
-    [
-     104,
-     107,
-     "was"
-    ],
-    [
-     108,
-     117,
-     "extracted"
-    ],
-    [
-     118,
-     122,
-     "from"
-    ],
-    [
-     123,
-     126,
-     "the"
-    ],
-    [
-     127,
-     135,
-     "publicly"
-    ],
-    [
-     136,
-     142,
-     "hosted"
-    ],
-    [
-     143,
-     146,
-     "PDF"
-    ],
-    [
-     147,
-     149,
-     "at"
-    ],
-    [
-     150,
-     153,
-     "the"
-    ],
-    [
-     154,
-     157,
-     "URL"
-    ],
-    [
-     158,
-     163,
-     "above"
-    ],
-    [
-     164,
-     167,
-     "and"
-    ],
-    [
-     168,
-     170,
+     71,
      "is"
     ],
     [
-     171,
-     181,
+     72,
+     82,
      "reproduced"
     ],
     [
-     182,
-     188,
+     83,
+     89,
      "as-is,"
     ],
     [
-     189,
-     193,
+     90,
+     94,
      "with"
     ],
     [
-     194,
-     201,
+     95,
+     102,
      "running"
     ],
     [
-     202,
-     210,
+     103,
+     111,
      "headers,"
     ],
     [
-     211,
-     218,
+     112,
+     119,
      "footers"
     ],
     [
-     219,
-     222,
+     120,
+     123,
      "and"
     ],
     [
-     223,
-     227,
+     124,
+     128,
      "page"
     ],
     [
-     228,
-     235,
+     129,
+     136,
      "numbers"
     ],
     [
-     236,
-     243,
+     137,
+     144,
      "removed"
     ],
     [
-     244,
-     247,
+     145,
+     148,
      "and"
     ],
     [
-     248,
-     255,
+     149,
+     156,
      "wrapped"
     ],
     [
-     256,
-     261,
+     157,
+     162,
      "lines"
     ],
     [
-     262,
-     272,
+     163,
+     173,
      "re-joined."
     ],
     [
-     273,
-     279,
+     174,
+     180,
      "Tables"
     ],
     [
-     280,
-     283,
+     181,
+     184,
      "and"
     ],
     [
-     284,
-     294,
+     185,
+     195,
      "two-column"
     ],
     [
-     295,
-     305,
+     196,
+     206,
      "definition"
     ],
     [
-     306,
-     311,
+     207,
+     212,
      "lists"
     ],
     [
-     312,
-     314,
+     213,
+     215,
      "in"
     ],
     [
-     315,
-     318,
+     216,
+     219,
      "the"
     ],
     [
-     319,
-     327,
+     220,
+     228,
      "original"
     ],
     [
-     328,
-     331,
+     229,
+     232,
      "may"
     ],
     [
-     332,
-     336,
+     233,
+     237,
      "read"
     ],
     [
-     337,
-     345,
+     238,
+     246,
      "linearly"
     ],
     [
-     346,
-     351,
+     247,
+     252,
      "here;"
     ],
     [
-     352,
-     357,
+     253,
+     258,
      "check"
     ],
     [
-     358,
-     365,
+     259,
+     266,
      "against"
     ],
     [
-     366,
-     369,
+     267,
+     270,
      "the"
     ],
     [
-     370,
-     373,
+     271,
+     274,
      "PDF"
     ],
     [
-     374,
-     380,
+     275,
+     281,
      "before"
     ],
     [
-     381,
-     388,
+     282,
+     289,
      "relying"
     ],
     [
-     389,
-     391,
+     290,
+     292,
      "on"
     ],
     [
-     392,
-     395,
+     293,
+     296,
      "any"
     ],
     [
-     396,
-     402,
+     297,
+     303,
      "table."
     ],
     [
-     403,
-     407,
+     304,
+     308,
      "This"
     ],
     [
-     408,
-     410,
+     309,
+     311,
      "is"
     ],
     [
-     411,
-     412,
+     312,
+     313,
      "a"
     ],
     [
-     413,
-     419,
+     314,
+     320,
      "public"
     ],
     [
-     420,
-     427,
+     321,
+     328,
      "product"
     ],
     [
-     428,
-     435,
+     329,
+     336,
      "wording"
     ],
     [
-     436,
-     437,
+     337,
+     338,
      "/"
     ],
     [
-     438,
-     447,
+     339,
+     348,
      "template,"
     ],
     [
-     448,
-     451,
+     349,
+     352,
      "not"
     ],
     [
-     452,
-     453,
+     353,
+     354,
      "a"
     ],
     [
-     454,
-     462,
+     355,
+     363,
      "customer"
     ],
     [
-     463,
-     471,
+     364,
+     372,
      "document"
     ],
     [
-     472,
-     473,
+     373,
+     374,
      "—"
     ],
     [
-     474,
-     476,
+     375,
+     377,
      "it"
     ],
     [
-     477,
-     485,
+     378,
+     386,
      "contains"
     ],
     [
-     486,
-     488,
+     387,
+     389,
      "no"
     ],
     [
-     489,
-     501,
+     390,
+     402,
      "policyholder"
     ],
     [
-     502,
-     504,
+     403,
+     405,
      "or"
     ],
     [
-     505,
-     513,
+     406,
+     414,
      "borrower"
     ],
     [
-     514,
-     519,
+     415,
+     420,
      "data."
     ],
     [
-     520,
-     522,
+     421,
+     423,
      "If"
     ],
     [
-     523,
-     526,
+     424,
+     427,
      "the"
     ],
     [
-     527,
-     531,
+     428,
+     432,
      "demo"
     ],
     [
-     532,
-     538,
+     433,
+     439,
      "should"
     ],
     [
-     539,
-     542,
+     440,
+     443,
      "not"
     ],
     [
-     543,
-     547,
+     444,
+     448,
      "show"
     ],
     [
-     548,
-     549,
+     449,
+     450,
      "a"
     ],
     [
-     550,
-     556,
+     451,
+     457,
      "brand,"
     ],
     [
-     557,
-     564,
+     458,
+     465,
      "replace"
     ],
     [
-     565,
-     568,
+     466,
+     469,
      "the"
     ],
     [
-     569,
-     575,
+     470,
+     476,
      "issuer"
     ],
     [
-     576,
-     580,
+     477,
+     481,
      "name"
     ],
     [
-     581,
-     585,
+     482,
+     486,
      "with"
     ],
     [
-     586,
-     587,
+     487,
+     488,
      "a"
     ],
     [
-     588,
-     599,
+     489,
+     500,
      "placeholder"
     ],
     [
-     600,
-     606,
+     501,
+     507,
      "before"
     ],
     [
-     607,
-     616,
+     508,
+     517,
      "chunking."
     ]
    ],
    "kind": "body"
   },
   {
-   "id": "sec-1-p15-s1",
-   "index": 14,
+   "id": "sec-1-p6-s1",
+   "index": 2,
    "section": 1,
    "section_title": "Two Wheeler Loan Agreement",
    "subsection": null,
@@ -2094,8 +1293,8 @@
    "kind": "body"
   },
   {
-   "id": "sec-1-p15-s2",
-   "index": 15,
+   "id": "sec-1-p6-s2",
+   "index": 3,
    "section": 1,
    "section_title": "Two Wheeler Loan Agreement",
    "subsection": null,
@@ -2590,8 +1789,8 @@
    "kind": "body"
   },
   {
-   "id": "sec-1-p15-s3",
-   "index": 16,
+   "id": "sec-1-p6-s3",
+   "index": 4,
    "section": 1,
    "section_title": "Two Wheeler Loan Agreement",
    "subsection": null,
@@ -3049,8 +2248,8 @@
    "kind": "body"
   },
   {
-   "id": "sec-1-p16",
-   "index": 17,
+   "id": "sec-1-p7",
+   "index": 5,
    "section": 1,
    "section_title": "Two Wheeler Loan Agreement",
    "subsection": null,
@@ -3562,8 +2761,8 @@
    "kind": "body"
   },
   {
-   "id": "sec-1-p17",
-   "index": 18,
+   "id": "sec-1-p8",
+   "index": 6,
    "section": 1,
    "section_title": "Two Wheeler Loan Agreement",
    "subsection": null,
@@ -3865,8 +3064,8 @@
    "kind": "body"
   },
   {
-   "id": "sec-1-p18",
-   "index": 19,
+   "id": "sec-1-p9",
+   "index": 7,
    "section": 1,
    "section_title": "Two Wheeler Loan Agreement",
    "subsection": null,
@@ -3950,7 +3149,7 @@
   },
   {
    "id": "sec-a1",
-   "index": 20,
+   "index": 8,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -3997,7 +3196,7 @@
   },
   {
    "id": "sec-a1-p1",
-   "index": 21,
+   "index": 9,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -4156,7 +3355,7 @@
   },
   {
    "id": "sec-a1-p2",
-   "index": 22,
+   "index": 10,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -4435,7 +3634,7 @@
   },
   {
    "id": "sec-a1-p3",
-   "index": 23,
+   "index": 11,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -4574,7 +3773,7 @@
   },
   {
    "id": "sec-a1-p4",
-   "index": 24,
+   "index": 12,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -4773,7 +3972,7 @@
   },
   {
    "id": "sec-a1-p5",
-   "index": 25,
+   "index": 13,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -5017,7 +4216,7 @@
   },
   {
    "id": "sec-a1-p6",
-   "index": 26,
+   "index": 14,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -5216,7 +4415,7 @@
   },
   {
    "id": "sec-a1-p8",
-   "index": 27,
+   "index": 15,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -5480,7 +4679,7 @@
   },
   {
    "id": "sec-a1-p9",
-   "index": 28,
+   "index": 16,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -5779,7 +4978,7 @@
   },
   {
    "id": "sec-a1-p10",
-   "index": 29,
+   "index": 17,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -5973,7 +5172,7 @@
   },
   {
    "id": "sec-a1-p11",
-   "index": 30,
+   "index": 18,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -6142,7 +5341,7 @@
   },
   {
    "id": "sec-a1-p12",
-   "index": 31,
+   "index": 19,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -6291,7 +5490,7 @@
   },
   {
    "id": "sec-a1-p13",
-   "index": 32,
+   "index": 20,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -6634,7 +5833,7 @@
   },
   {
    "id": "sec-a1-p15",
-   "index": 33,
+   "index": 21,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -6878,7 +6077,7 @@
   },
   {
    "id": "sec-a1-p16",
-   "index": 34,
+   "index": 22,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -7167,7 +6366,7 @@
   },
   {
    "id": "sec-a1-p18",
-   "index": 35,
+   "index": 23,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -7366,7 +6565,7 @@
   },
   {
    "id": "sec-a1-p19",
-   "index": 36,
+   "index": 24,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -7643,7 +6842,7 @@
   },
   {
    "id": "sec-a1-p21",
-   "index": 37,
+   "index": 25,
    "section": 2,
    "section_title": "DEFINITIONS AND INTERPRETATION",
    "subsection": null,
@@ -8037,7 +7236,7 @@
   },
   {
    "id": "sec-a2",
-   "index": 38,
+   "index": 26,
    "section": 3,
    "section_title": "LOAN AMOUNT AND INTEREST",
    "subsection": null,
@@ -8089,7 +7288,7 @@
   },
   {
    "id": "sec-a2-2-1",
-   "index": 39,
+   "index": 27,
    "section": 4,
    "section_title": "Amount of loan:",
    "subsection": null,
@@ -8136,7 +7335,7 @@
   },
   {
    "id": "sec-a2-2-1-p1",
-   "index": 40,
+   "index": 28,
    "section": 4,
    "section_title": "Amount of loan:",
    "subsection": null,
@@ -8574,7 +7773,7 @@
   },
   {
    "id": "sec-a2-2-2",
-   "index": 41,
+   "index": 29,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -8611,7 +7810,7 @@
   },
   {
    "id": "sec-a2-2-2-a",
-   "index": 42,
+   "index": 30,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -9442,7 +8641,7 @@
   },
   {
    "id": "sec-a2-2-2-b",
-   "index": 43,
+   "index": 31,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -9742,7 +8941,7 @@
   },
   {
    "id": "sec-a2-2-2-c",
-   "index": 44,
+   "index": 32,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -10351,7 +9550,7 @@
   },
   {
    "id": "sec-a2-2-2-d",
-   "index": 45,
+   "index": 33,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -10765,7 +9964,7 @@
   },
   {
    "id": "sec-a2-2-2-p1",
-   "index": 46,
+   "index": 34,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -11114,7 +10313,7 @@
   },
   {
    "id": "sec-a2-2-2-p1-f",
-   "index": 47,
+   "index": 35,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -11349,7 +10548,7 @@
   },
   {
    "id": "sec-a2-2-2-p1-g",
-   "index": 48,
+   "index": 36,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -11659,7 +10858,7 @@
   },
   {
    "id": "sec-a2-2-2-p2",
-   "index": 49,
+   "index": 37,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -12150,7 +11349,7 @@
   },
   {
    "id": "sec-a2-2-2-p3-s1",
-   "index": 50,
+   "index": 38,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -12921,7 +12120,7 @@
   },
   {
    "id": "sec-a2-2-2-p3-s2",
-   "index": 51,
+   "index": 39,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -13055,7 +12254,7 @@
   },
   {
    "id": "sec-a2-2-2-p4",
-   "index": 52,
+   "index": 40,
    "section": 5,
    "section_title": "Interest:",
    "subsection": null,
@@ -13269,7 +12468,7 @@
   },
   {
    "id": "sec-a2-2-4",
-   "index": 53,
+   "index": 41,
    "section": 6,
    "section_title": "Term of the Loan:",
    "subsection": null,
@@ -13321,7 +12520,7 @@
   },
   {
    "id": "sec-a2-2-4-p1",
-   "index": 54,
+   "index": 42,
    "section": 6,
    "section_title": "Term of the Loan:",
    "subsection": null,
@@ -13415,7 +12614,7 @@
   },
   {
    "id": "sec-a2-2-5",
-   "index": 55,
+   "index": 43,
    "section": 7,
    "section_title": "Terminal Dates for Disbursements:",
    "subsection": null,
@@ -13467,7 +12666,7 @@
   },
   {
    "id": "sec-a2-2-5-p1",
-   "index": 56,
+   "index": 44,
    "section": 7,
    "section_title": "Terminal Dates for Disbursements:",
    "subsection": null,
@@ -13821,7 +13020,7 @@
   },
   {
    "id": "sec-a3",
-   "index": 57,
+   "index": 45,
    "section": 8,
    "section_title": "REPAYMENT/PREPAYMENT",
    "subsection": null,
@@ -13858,7 +13057,7 @@
   },
   {
    "id": "sec-a3-3-1",
-   "index": 58,
+   "index": 46,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -13895,7 +13094,7 @@
   },
   {
    "id": "sec-a3-3-1-a-s1",
-   "index": 59,
+   "index": 47,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -14616,7 +13815,7 @@
   },
   {
    "id": "sec-a3-3-1-a-s2",
-   "index": 60,
+   "index": 48,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -14901,7 +14100,7 @@
   },
   {
    "id": "sec-a3-3-1-b",
-   "index": 61,
+   "index": 49,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -15231,7 +14430,7 @@
   },
   {
    "id": "sec-a3-3-1-c-s1",
-   "index": 62,
+   "index": 50,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -16015,7 +15214,7 @@
   },
   {
    "id": "sec-a3-3-1-c-s2",
-   "index": 63,
+   "index": 51,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -16608,7 +15807,7 @@
   },
   {
    "id": "sec-a3-3-1-d",
-   "index": 64,
+   "index": 52,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -16883,7 +16082,7 @@
   },
   {
    "id": "sec-a3-3-1-p1",
-   "index": 65,
+   "index": 53,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -17301,7 +16500,7 @@
   },
   {
    "id": "sec-a3-3-1-p2",
-   "index": 66,
+   "index": 54,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -17608,7 +16807,7 @@
   },
   {
    "id": "sec-a3-3-1-p2-e",
-   "index": 67,
+   "index": 55,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -17863,7 +17062,7 @@
   },
   {
    "id": "sec-a3-3-1-p2-f",
-   "index": 68,
+   "index": 56,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -18337,7 +17536,7 @@
   },
   {
    "id": "sec-a3-3-1-p3",
-   "index": 69,
+   "index": 57,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -18536,7 +17735,7 @@
   },
   {
    "id": "sec-a3-3-1-p3-g",
-   "index": 70,
+   "index": 58,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -19051,7 +18250,7 @@
   },
   {
    "id": "sec-a3-3-1-p3-h",
-   "index": 71,
+   "index": 59,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -19406,7 +18605,7 @@
   },
   {
    "id": "sec-a3-3-1-p3-i",
-   "index": 72,
+   "index": 60,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -19893,7 +19092,7 @@
   },
   {
    "id": "sec-a3-3-1-p3-3",
-   "index": 73,
+   "index": 61,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -20032,7 +19231,7 @@
   },
   {
    "id": "sec-a3-3-1-p3-3-j",
-   "index": 74,
+   "index": 62,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -20472,7 +19671,7 @@
   },
   {
    "id": "sec-a3-3-1-p3-3-k",
-   "index": 75,
+   "index": 63,
    "section": 9,
    "section_title": "Repayment",
    "subsection": null,
@@ -21005,7 +20204,7 @@
   },
   {
    "id": "sec-a3-3-2",
-   "index": 76,
+   "index": 64,
    "section": 10,
    "section_title": "Cheques/ECS/SI/NACH:",
    "subsection": null,
@@ -21042,7 +20241,7 @@
   },
   {
    "id": "sec-a3-3-2-p1-s1",
-   "index": 77,
+   "index": 65,
    "section": 10,
    "section_title": "Cheques/ECS/SI/NACH:",
    "subsection": null,
@@ -21783,7 +20982,7 @@
   },
   {
    "id": "sec-a3-3-2-p1-s2",
-   "index": 78,
+   "index": 66,
    "section": 10,
    "section_title": "Cheques/ECS/SI/NACH:",
    "subsection": null,
@@ -22506,7 +21705,7 @@
   },
   {
    "id": "sec-a3-3-2-p1-s3",
-   "index": 79,
+   "index": 67,
    "section": 10,
    "section_title": "Cheques/ECS/SI/NACH:",
    "subsection": null,
@@ -22908,7 +22107,7 @@
   },
   {
    "id": "sec-a3-3-2-p2-s1",
-   "index": 80,
+   "index": 68,
    "section": 10,
    "section_title": "Cheques/ECS/SI/NACH:",
    "subsection": null,
@@ -23082,7 +22281,7 @@
   },
   {
    "id": "sec-a3-3-2-p2-s2",
-   "index": 81,
+   "index": 69,
    "section": 10,
    "section_title": "Cheques/ECS/SI/NACH:",
    "subsection": null,
@@ -23836,7 +23035,7 @@
   },
   {
    "id": "sec-a3-3-2-p2-s3",
-   "index": 82,
+   "index": 70,
    "section": 10,
    "section_title": "Cheques/ECS/SI/NACH:",
    "subsection": null,
@@ -24065,7 +23264,7 @@
   },
   {
    "id": "sec-a3-3-3",
-   "index": 83,
+   "index": 71,
    "section": 11,
    "section_title": "Prepayment:",
    "subsection": null,
@@ -24102,7 +23301,7 @@
   },
   {
    "id": "sec-a3-3-3-p1",
-   "index": 84,
+   "index": 72,
    "section": 11,
    "section_title": "Prepayment:",
    "subsection": null,
@@ -24504,7 +23703,7 @@
   },
   {
    "id": "sec-a3-3-4",
-   "index": 85,
+   "index": 73,
    "section": 12,
    "section_title": "Delay in Payment:",
    "subsection": null,
@@ -24551,7 +23750,7 @@
   },
   {
    "id": "sec-a3-3-4-p1",
-   "index": 86,
+   "index": 74,
    "section": 12,
    "section_title": "Delay in Payment:",
    "subsection": null,
@@ -24993,7 +24192,7 @@
   },
   {
    "id": "sec-a3-3-5",
-   "index": 87,
+   "index": 75,
    "section": 13,
    "section_title": "Liability to be Joint and Several:",
    "subsection": null,
@@ -25055,7 +24254,7 @@
   },
   {
    "id": "sec-a3-3-5-p1",
-   "index": 88,
+   "index": 76,
    "section": 13,
    "section_title": "Liability to be Joint and Several:",
    "subsection": null,
@@ -25324,7 +24523,7 @@
   },
   {
    "id": "sec-a3-3-5-p1-3-6",
-   "index": 89,
+   "index": 77,
    "section": 13,
    "section_title": "Liability to be Joint and Several:",
    "subsection": null,
@@ -25809,7 +25008,7 @@
   },
   {
    "id": "sec-a4",
-   "index": 90,
+   "index": 78,
    "section": 14,
    "section_title": "CONDITION PRECEDENT TO DISBURSEMENT OF THE LOAN",
    "subsection": null,
@@ -25876,7 +25075,7 @@
   },
   {
    "id": "sec-a4-4-1",
-   "index": 91,
+   "index": 79,
    "section": 14,
    "section_title": "CONDITION PRECEDENT TO DISBURSEMENT OF THE LOAN",
    "subsection": null,
@@ -26339,7 +25538,7 @@
   },
   {
    "id": "sec-a4-4-1-b",
-   "index": 92,
+   "index": 80,
    "section": 14,
    "section_title": "CONDITION PRECEDENT TO DISBURSEMENT OF THE LOAN",
    "subsection": null,
@@ -26808,7 +26007,7 @@
   },
   {
    "id": "sec-a4-4-1-d",
-   "index": 93,
+   "index": 81,
    "section": 14,
    "section_title": "CONDITION PRECEDENT TO DISBURSEMENT OF THE LOAN",
    "subsection": null,
@@ -27162,7 +26361,7 @@
   },
   {
    "id": "sec-a4-4-1-f",
-   "index": 94,
+   "index": 82,
    "section": 14,
    "section_title": "CONDITION PRECEDENT TO DISBURSEMENT OF THE LOAN",
    "subsection": null,
@@ -27701,7 +26900,7 @@
   },
   {
    "id": "sec-a4-4-1-g",
-   "index": 95,
+   "index": 83,
    "section": 14,
    "section_title": "CONDITION PRECEDENT TO DISBURSEMENT OF THE LOAN",
    "subsection": null,
@@ -27896,7 +27095,7 @@
   },
   {
    "id": "sec-a5",
-   "index": 96,
+   "index": 84,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -27933,7 +27132,7 @@
   },
   {
    "id": "sec-a5-5-1",
-   "index": 97,
+   "index": 85,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -28538,7 +27737,7 @@
   },
   {
    "id": "sec-a5-p1",
-   "index": 98,
+   "index": 86,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -29133,7 +28332,7 @@
   },
   {
    "id": "sec-a5-p1-5-2-s1",
-   "index": 99,
+   "index": 87,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -29801,7 +29000,7 @@
   },
   {
    "id": "sec-a5-p1-5-2-s2",
-   "index": 100,
+   "index": 88,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -30262,7 +29461,7 @@
   },
   {
    "id": "sec-a5-p1-5-3",
-   "index": 101,
+   "index": 89,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -30584,7 +29783,7 @@
   },
   {
    "id": "sec-a5-p1-5-4-s1",
-   "index": 102,
+   "index": 90,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -31185,7 +30384,7 @@
   },
   {
    "id": "sec-a5-p1-5-4-s2",
-   "index": 103,
+   "index": 91,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -31631,7 +30830,7 @@
   },
   {
    "id": "sec-a5-p1-5-5",
-   "index": 104,
+   "index": 92,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -32182,7 +31381,7 @@
   },
   {
    "id": "sec-a5-p1-5-6",
-   "index": 105,
+   "index": 93,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -32414,7 +31613,7 @@
   },
   {
    "id": "sec-a5-p2",
-   "index": 106,
+   "index": 94,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -32650,7 +31849,7 @@
   },
   {
    "id": "sec-a5-p2-5-7-s1",
-   "index": 107,
+   "index": 95,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -33449,7 +32648,7 @@
   },
   {
    "id": "sec-a5-p2-5-7-s2",
-   "index": 108,
+   "index": 96,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -33621,7 +32820,7 @@
   },
   {
    "id": "sec-a5-p2-5-7-b",
-   "index": 109,
+   "index": 97,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -34182,7 +33381,7 @@
   },
   {
    "id": "sec-a5-p2-5-8-s1",
-   "index": 110,
+   "index": 98,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -35012,7 +34211,7 @@
   },
   {
    "id": "sec-a5-p2-5-8-s2",
-   "index": 111,
+   "index": 99,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -35234,7 +34433,7 @@
   },
   {
    "id": "sec-a5-p2-5-8-b",
-   "index": 112,
+   "index": 100,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -35831,7 +35030,7 @@
   },
   {
    "id": "sec-a5-p2-5-8-c",
-   "index": 113,
+   "index": 101,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -36141,7 +35340,7 @@
   },
   {
    "id": "sec-a5-p2-5-9",
-   "index": 114,
+   "index": 102,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -36433,7 +35632,7 @@
   },
   {
    "id": "sec-a5-p2-5-10",
-   "index": 115,
+   "index": 103,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -36939,7 +36138,7 @@
   },
   {
    "id": "sec-a5-p2-5-11",
-   "index": 116,
+   "index": 104,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -37768,7 +36967,7 @@
   },
   {
    "id": "sec-a5-p2-5-12",
-   "index": 117,
+   "index": 105,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -38092,7 +37291,7 @@
   },
   {
    "id": "sec-a5-p3",
-   "index": 118,
+   "index": 106,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -38689,7 +37888,7 @@
   },
   {
    "id": "sec-a5-p3-5-14",
-   "index": 119,
+   "index": 107,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -39059,7 +38258,7 @@
   },
   {
    "id": "sec-a5-p3-5-14-b",
-   "index": 120,
+   "index": 108,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -39513,7 +38712,7 @@
   },
   {
    "id": "sec-a5-p3-5-14-b-iii",
-   "index": 121,
+   "index": 109,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -39866,7 +39065,7 @@
   },
   {
    "id": "sec-a5-p3-5-15-s1",
-   "index": 122,
+   "index": 110,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -40061,7 +39260,7 @@
   },
   {
    "id": "sec-a5-p3-5-15-s2",
-   "index": 123,
+   "index": 111,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -40796,7 +39995,7 @@
   },
   {
    "id": "sec-a5-p3-5-15-s3",
-   "index": 124,
+   "index": 112,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -40916,7 +40115,7 @@
   },
   {
    "id": "sec-a5-p4-s1",
-   "index": 125,
+   "index": 113,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -41358,7 +40557,7 @@
   },
   {
    "id": "sec-a5-p4-s2",
-   "index": 126,
+   "index": 114,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -41797,7 +40996,7 @@
   },
   {
    "id": "sec-a5-p4-5-17",
-   "index": 127,
+   "index": 115,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -42212,7 +41411,7 @@
   },
   {
    "id": "sec-a5-p4-5-18-s1",
-   "index": 128,
+   "index": 116,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -42941,7 +42140,7 @@
   },
   {
    "id": "sec-a5-p4-5-18-s2",
-   "index": 129,
+   "index": 117,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -43539,7 +42738,7 @@
   },
   {
    "id": "sec-a5-p4-5-19",
-   "index": 130,
+   "index": 118,
    "section": 15,
    "section_title": "SECURITY",
    "subsection": null,
@@ -43829,7 +43028,7 @@
   },
   {
    "id": "sec-a6",
-   "index": 131,
+   "index": 119,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -43881,7 +43080,7 @@
   },
   {
    "id": "sec-a6-6-1",
-   "index": 132,
+   "index": 120,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -44346,7 +43545,7 @@
   },
   {
    "id": "sec-a6-6-1-b",
-   "index": 133,
+   "index": 121,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -44711,7 +43910,7 @@
   },
   {
    "id": "sec-a6-6-1-c",
-   "index": 134,
+   "index": 122,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -45010,7 +44209,7 @@
   },
   {
    "id": "sec-a6-6-1-e",
-   "index": 135,
+   "index": 123,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -45290,7 +44489,7 @@
   },
   {
    "id": "sec-a6-6-1-f",
-   "index": 136,
+   "index": 124,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -45565,7 +44764,7 @@
   },
   {
    "id": "sec-a6-6-1-g",
-   "index": 137,
+   "index": 125,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -45935,7 +45134,7 @@
   },
   {
    "id": "sec-a6-6-1-g-iii",
-   "index": 138,
+   "index": 126,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -46437,7 +45636,7 @@
   },
   {
    "id": "sec-a6-6-1-i",
-   "index": 139,
+   "index": 127,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -46704,7 +45903,7 @@
   },
   {
    "id": "sec-a6-6-1-j",
-   "index": 140,
+   "index": 128,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -46971,7 +46170,7 @@
   },
   {
    "id": "sec-a6-6-1-k",
-   "index": 141,
+   "index": 129,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -47376,7 +46575,7 @@
   },
   {
    "id": "sec-a6-6-1-l",
-   "index": 142,
+   "index": 130,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -47825,7 +47024,7 @@
   },
   {
    "id": "sec-a6-6-1-n",
-   "index": 143,
+   "index": 131,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -48165,7 +47364,7 @@
   },
   {
    "id": "sec-a6-6-1-o",
-   "index": 144,
+   "index": 132,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -48609,7 +47808,7 @@
   },
   {
    "id": "sec-a6-6-1-p",
-   "index": 145,
+   "index": 133,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -48924,7 +48123,7 @@
   },
   {
    "id": "sec-a6-6-1-q",
-   "index": 146,
+   "index": 134,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -49414,7 +48613,7 @@
   },
   {
    "id": "sec-a6-6-2-s1",
-   "index": 147,
+   "index": 135,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -49918,7 +49117,7 @@
   },
   {
    "id": "sec-a6-6-2-s2",
-   "index": 148,
+   "index": 136,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -50368,7 +49567,7 @@
   },
   {
    "id": "sec-a6-6-3",
-   "index": 149,
+   "index": 137,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -50673,7 +49872,7 @@
   },
   {
    "id": "sec-a6-6-4",
-   "index": 150,
+   "index": 138,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -51177,7 +50376,7 @@
   },
   {
    "id": "sec-a6-6-5",
-   "index": 151,
+   "index": 139,
    "section": 16,
    "section_title": "BORROWER(S) REPRESENTATION AND WARRANTIES",
    "subsection": null,
@@ -51463,7 +50662,7 @@
   },
   {
    "id": "sec-a7",
-   "index": 152,
+   "index": 140,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -51515,7 +50714,7 @@
   },
   {
    "id": "sec-a7-7-1",
-   "index": 153,
+   "index": 141,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -51905,7 +51104,7 @@
   },
   {
    "id": "sec-a7-7-1-b",
-   "index": 154,
+   "index": 142,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -52114,7 +51313,7 @@
   },
   {
    "id": "sec-a7-p1",
-   "index": 155,
+   "index": 143,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -52248,7 +51447,7 @@
   },
   {
    "id": "sec-a7-p1-c",
-   "index": 156,
+   "index": 144,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -52757,7 +51956,7 @@
   },
   {
    "id": "sec-a7-p1-e",
-   "index": 157,
+   "index": 145,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -53121,7 +52320,7 @@
   },
   {
    "id": "sec-a7-p1-g",
-   "index": 158,
+   "index": 146,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -53441,7 +52640,7 @@
   },
   {
    "id": "sec-a7-p1-h",
-   "index": 159,
+   "index": 147,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -53751,7 +52950,7 @@
   },
   {
    "id": "sec-a7-p1-i",
-   "index": 160,
+   "index": 148,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -54249,7 +53448,7 @@
   },
   {
    "id": "sec-a7-p1-l",
-   "index": 161,
+   "index": 149,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -54733,7 +53932,7 @@
   },
   {
    "id": "sec-a7-p1-m",
-   "index": 162,
+   "index": 150,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -55183,7 +54382,7 @@
   },
   {
    "id": "sec-a7-p1-n",
-   "index": 163,
+   "index": 151,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -55696,7 +54895,7 @@
   },
   {
    "id": "sec-a7-p1-q",
-   "index": 164,
+   "index": 152,
    "section": 17,
    "section_title": "COVENANTS 7 AFFIRMATIVE COVENANTS",
    "subsection": null,
@@ -56419,7 +55618,7 @@
   },
   {
    "id": "sec-a7-7-2",
-   "index": 165,
+   "index": 153,
    "section": 18,
    "section_title": "NEGATIVE COVENANTS:",
    "subsection": null,
@@ -56461,7 +55660,7 @@
   },
   {
    "id": "sec-a7-7-2-p1",
-   "index": 166,
+   "index": 154,
    "section": 18,
    "section_title": "NEGATIVE COVENANTS:",
    "subsection": null,
@@ -56914,7 +56113,7 @@
   },
   {
    "id": "sec-a7-7-2-p1-c",
-   "index": 167,
+   "index": 155,
    "section": 18,
    "section_title": "NEGATIVE COVENANTS:",
    "subsection": null,
@@ -57068,7 +56267,7 @@
   },
   {
    "id": "sec-a8",
-   "index": 168,
+   "index": 156,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -57115,7 +56314,7 @@
   },
   {
    "id": "sec-a8-8-1",
-   "index": 169,
+   "index": 157,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -57440,7 +56639,7 @@
   },
   {
    "id": "sec-a8-p1",
-   "index": 170,
+   "index": 158,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -57684,7 +56883,7 @@
   },
   {
    "id": "sec-a8-p2",
-   "index": 171,
+   "index": 159,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -58007,7 +57206,7 @@
   },
   {
    "id": "sec-a8-p3",
-   "index": 172,
+   "index": 160,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -58241,7 +57440,7 @@
   },
   {
    "id": "sec-a8-p4",
-   "index": 173,
+   "index": 161,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -58614,7 +57813,7 @@
   },
   {
    "id": "sec-a8-p5",
-   "index": 174,
+   "index": 162,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -58938,7 +58137,7 @@
   },
   {
    "id": "sec-a8-p6",
-   "index": 175,
+   "index": 163,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -59531,7 +58730,7 @@
   },
   {
    "id": "sec-a8-p7",
-   "index": 176,
+   "index": 164,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -60255,7 +59454,7 @@
   },
   {
    "id": "sec-a8-p8",
-   "index": 177,
+   "index": 165,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -60384,7 +59583,7 @@
   },
   {
    "id": "sec-a8-p9",
-   "index": 178,
+   "index": 166,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -60683,7 +59882,7 @@
   },
   {
    "id": "sec-a8-p10",
-   "index": 179,
+   "index": 167,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -60831,7 +60030,7 @@
   },
   {
    "id": "sec-a8-p11",
-   "index": 180,
+   "index": 168,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -61200,7 +60399,7 @@
   },
   {
    "id": "sec-a8-p12",
-   "index": 181,
+   "index": 169,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -61403,7 +60602,7 @@
   },
   {
    "id": "sec-a8-p13",
-   "index": 182,
+   "index": 170,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -61537,7 +60736,7 @@
   },
   {
    "id": "sec-a8-p14",
-   "index": 183,
+   "index": 171,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -61741,7 +60940,7 @@
   },
   {
    "id": "sec-a8-p15",
-   "index": 184,
+   "index": 172,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -62345,7 +61544,7 @@
   },
   {
    "id": "sec-a8-p16",
-   "index": 185,
+   "index": 173,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -62678,7 +61877,7 @@
   },
   {
    "id": "sec-a8-p16-ii",
-   "index": 186,
+   "index": 174,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -63248,7 +62447,7 @@
   },
   {
    "id": "sec-a8-p16-iii",
-   "index": 187,
+   "index": 175,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -63712,7 +62911,7 @@
   },
   {
    "id": "sec-a8-p16-vi",
-   "index": 188,
+   "index": 176,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -64105,7 +63304,7 @@
   },
   {
    "id": "sec-a8-p17-ix",
-   "index": 189,
+   "index": 177,
    "section": 19,
    "section_title": "EVENTS OF DEFAULT",
    "subsection": null,
@@ -64200,7 +63399,7 @@
   },
   {
    "id": "sec-a9",
-   "index": 190,
+   "index": 178,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -64257,7 +63456,7 @@
   },
   {
    "id": "sec-a9-9-1",
-   "index": 191,
+   "index": 179,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -64490,7 +63689,7 @@
   },
   {
    "id": "sec-a9-9-1-i-s1",
-   "index": 192,
+   "index": 180,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -65230,7 +64429,7 @@
   },
   {
    "id": "sec-a9-9-1-i-s2",
-   "index": 193,
+   "index": 181,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -65475,7 +64674,7 @@
   },
   {
    "id": "sec-a9-9-1-a",
-   "index": 194,
+   "index": 182,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -66016,7 +65215,7 @@
   },
   {
    "id": "sec-a9-9-1-c-ii",
-   "index": 195,
+   "index": 183,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -66150,7 +65349,7 @@
   },
   {
    "id": "sec-a9-9-1-c-iii",
-   "index": 196,
+   "index": 184,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -66589,7 +65788,7 @@
   },
   {
    "id": "sec-a9-9-1-c-iv",
-   "index": 197,
+   "index": 185,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -66979,7 +66178,7 @@
   },
   {
    "id": "sec-a9-9-1-c-v",
-   "index": 198,
+   "index": 186,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -67741,7 +66940,7 @@
   },
   {
    "id": "sec-a9-p1",
-   "index": 199,
+   "index": 187,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -68080,7 +67279,7 @@
   },
   {
    "id": "sec-a9-p2",
-   "index": 200,
+   "index": 188,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -68324,7 +67523,7 @@
   },
   {
    "id": "sec-a9-p2-vi-s1",
-   "index": 201,
+   "index": 189,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -69093,7 +68292,7 @@
   },
   {
    "id": "sec-a9-p2-vi-s2",
-   "index": 202,
+   "index": 190,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -69912,7 +69111,7 @@
   },
   {
    "id": "sec-a9-p2-vii-s1",
-   "index": 203,
+   "index": 191,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -70727,7 +69926,7 @@
   },
   {
    "id": "sec-a9-p2-vii-s2",
-   "index": 204,
+   "index": 192,
    "section": 20,
    "section_title": "REMEDIES OF SMFG INDIA CREDIT",
    "subsection": null,
@@ -70847,7 +70046,7 @@
   },
   {
    "id": "sec-a10",
-   "index": 205,
+   "index": 193,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -70889,7 +70088,7 @@
   },
   {
    "id": "sec-a10-10-1",
-   "index": 206,
+   "index": 194,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -71392,7 +70591,7 @@
   },
   {
    "id": "sec-a10-10-1-iii",
-   "index": 207,
+   "index": 195,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -71712,7 +70911,7 @@
   },
   {
    "id": "sec-a10-10-1-iv",
-   "index": 208,
+   "index": 196,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -72216,7 +71415,7 @@
   },
   {
    "id": "sec-a10-10-1-vi",
-   "index": 209,
+   "index": 197,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -72575,7 +71774,7 @@
   },
   {
    "id": "sec-a10-10-1-vii",
-   "index": 210,
+   "index": 198,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -72820,7 +72019,7 @@
   },
   {
    "id": "sec-a10-10-1-viii",
-   "index": 211,
+   "index": 199,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -73245,7 +72444,7 @@
   },
   {
    "id": "sec-a10-10-2",
-   "index": 212,
+   "index": 200,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -73720,7 +72919,7 @@
   },
   {
    "id": "sec-a10-p1",
-   "index": 213,
+   "index": 201,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -73874,7 +73073,7 @@
   },
   {
    "id": "sec-a10-p1-10-4",
-   "index": 214,
+   "index": 202,
    "section": 21,
    "section_title": "CONSTITUTED ATTORNEY",
    "subsection": null,
@@ -74139,7 +73338,7 @@
   },
   {
    "id": "sec-a11",
-   "index": 215,
+   "index": 203,
    "section": 22,
    "section_title": "CROSS COLLATERAL",
    "subsection": null,
@@ -74181,7 +73380,7 @@
   },
   {
    "id": "sec-a11-p1",
-   "index": 216,
+   "index": 204,
    "section": 22,
    "section_title": "CROSS COLLATERAL",
    "subsection": null,
@@ -74574,7 +73773,7 @@
   },
   {
    "id": "sec-a11-23",
-   "index": 217,
+   "index": 205,
    "section": 23,
    "section_title": "REVIVAL OF AGREEMENT",
    "subsection": null,
@@ -74620,7 +73819,7 @@
   },
   {
    "id": "sec-a11-23-p1",
-   "index": 218,
+   "index": 206,
    "section": 23,
    "section_title": "REVIVAL OF AGREEMENT",
    "subsection": null,
@@ -75233,7 +74432,7 @@
   },
   {
    "id": "sec-a13",
-   "index": 219,
+   "index": 207,
    "section": 24,
    "section_title": "SUBORDINATE DEBT",
    "subsection": null,
@@ -75275,7 +74474,7 @@
   },
   {
    "id": "sec-a13-p1",
-   "index": 220,
+   "index": 208,
    "section": 24,
    "section_title": "SUBORDINATE DEBT",
    "subsection": null,
@@ -75808,7 +75007,7 @@
   },
   {
    "id": "sec-a14",
-   "index": 221,
+   "index": 209,
    "section": 25,
    "section_title": "SMFG INDIA CREDIT’S STATEMENTS OF ACCOUNTS TO BE ACCEPTED BY",
    "subsection": null,
@@ -75890,7 +75089,7 @@
   },
   {
    "id": "sec-a14-26",
-   "index": 222,
+   "index": 210,
    "section": 26,
    "section_title": "BORROWER(S)",
    "subsection": null,
@@ -75926,7 +75125,7 @@
   },
   {
    "id": "sec-a14-26-p1",
-   "index": 223,
+   "index": 211,
    "section": 26,
    "section_title": "BORROWER(S)",
    "subsection": null,
@@ -76304,7 +75503,7 @@
   },
   {
    "id": "sec-a15",
-   "index": 224,
+   "index": 212,
    "section": 27,
    "section_title": "SET OFF AND LIEN",
    "subsection": null,
@@ -76356,7 +75555,7 @@
   },
   {
    "id": "sec-a15-15-1",
-   "index": 225,
+   "index": 213,
    "section": 27,
    "section_title": "SET OFF AND LIEN",
    "subsection": null,
@@ -76981,7 +76180,7 @@
   },
   {
    "id": "sec-a15-15-2",
-   "index": 226,
+   "index": 214,
    "section": 27,
    "section_title": "SET OFF AND LIEN",
    "subsection": null,
@@ -77281,7 +76480,7 @@
   },
   {
    "id": "sec-a15-15-3",
-   "index": 227,
+   "index": 215,
    "section": 27,
    "section_title": "SET OFF AND LIEN",
    "subsection": null,
@@ -77881,7 +77080,7 @@
   },
   {
    "id": "sec-a16",
-   "index": 228,
+   "index": 216,
    "section": 28,
    "section_title": "ASSIGNMENT/TRANSFER OF PORTFOLIO/SECUERTISATION",
    "subsection": null,
@@ -77928,7 +77127,7 @@
   },
   {
    "id": "sec-a16-p1-s1",
-   "index": 229,
+   "index": 217,
    "section": 28,
    "section_title": "ASSIGNMENT/TRANSFER OF PORTFOLIO/SECUERTISATION",
    "subsection": null,
@@ -78747,7 +77946,7 @@
   },
   {
    "id": "sec-a16-p1-s2",
-   "index": 230,
+   "index": 218,
    "section": 28,
    "section_title": "ASSIGNMENT/TRANSFER OF PORTFOLIO/SECUERTISATION",
    "subsection": null,
@@ -79061,7 +78260,7 @@
   },
   {
    "id": "sec-a17",
-   "index": 231,
+   "index": 219,
    "section": 29,
    "section_title": "SERVICE PROVIDER",
    "subsection": null,
@@ -79103,7 +78302,7 @@
   },
   {
    "id": "sec-a17-p1-s1",
-   "index": 232,
+   "index": 220,
    "section": 29,
    "section_title": "SERVICE PROVIDER",
    "subsection": null,
@@ -79837,7 +79036,7 @@
   },
   {
    "id": "sec-a17-p1-s2",
-   "index": 233,
+   "index": 221,
    "section": 29,
    "section_title": "SERVICE PROVIDER",
    "subsection": null,
@@ -80471,7 +79670,7 @@
   },
   {
    "id": "sec-a18",
-   "index": 234,
+   "index": 222,
    "section": 30,
    "section_title": "TERMINATION",
    "subsection": null,
@@ -80508,7 +79707,7 @@
   },
   {
    "id": "sec-a18-p1",
-   "index": 235,
+   "index": 223,
    "section": 30,
    "section_title": "TERMINATION",
    "subsection": null,
@@ -80907,7 +80106,7 @@
   },
   {
    "id": "sec-a19",
-   "index": 236,
+   "index": 224,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -80954,7 +80153,7 @@
   },
   {
    "id": "sec-a19-19-1-s1",
-   "index": 237,
+   "index": 225,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -81689,7 +80888,7 @@
   },
   {
    "id": "sec-a19-19-1-s2",
-   "index": 238,
+   "index": 226,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -82389,7 +81588,7 @@
   },
   {
    "id": "sec-a19-19-1-ii",
-   "index": 239,
+   "index": 227,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -82866,7 +82065,7 @@
   },
   {
    "id": "sec-a19-19-1-a",
-   "index": 240,
+   "index": 228,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -83265,7 +82464,7 @@
   },
   {
    "id": "sec-a19-19-1-c",
-   "index": 241,
+   "index": 229,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -83635,7 +82834,7 @@
   },
   {
    "id": "sec-a19-19-1-c-iv-s1",
-   "index": 242,
+   "index": 230,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -84355,7 +83554,7 @@
   },
   {
    "id": "sec-a19-19-1-c-iv-s2",
-   "index": 243,
+   "index": 231,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -84535,7 +83734,7 @@
   },
   {
    "id": "sec-a19-19-1-c-iv-s3",
-   "index": 244,
+   "index": 232,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -84875,7 +84074,7 @@
   },
   {
    "id": "sec-a19-19-1-c-v-s1",
-   "index": 245,
+   "index": 233,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -85624,7 +84823,7 @@
   },
   {
    "id": "sec-a19-19-1-c-v-s2",
-   "index": 246,
+   "index": 234,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -86342,7 +85541,7 @@
   },
   {
    "id": "sec-a19-19-1-c-vi",
-   "index": 247,
+   "index": 235,
    "section": 31,
    "section_title": "DISCLOSURE OF INFORMATION",
    "subsection": null,
@@ -86812,7 +86011,7 @@
   },
   {
    "id": "sec-a20",
-   "index": 248,
+   "index": 236,
    "section": 32,
    "section_title": "CONTINUING SECURITY",
    "subsection": null,
@@ -86854,7 +86053,7 @@
   },
   {
    "id": "sec-a20-p1",
-   "index": 249,
+   "index": 237,
    "section": 32,
    "section_title": "CONTINUING SECURITY",
    "subsection": null,
@@ -87163,7 +86362,7 @@
   },
   {
    "id": "sec-a21",
-   "index": 250,
+   "index": 238,
    "section": 33,
    "section_title": "MISCELLANEOUS",
    "subsection": null,
@@ -87200,7 +86399,7 @@
   },
   {
    "id": "sec-a21-21-1",
-   "index": 251,
+   "index": 239,
    "section": 34,
    "section_title": "Notice:",
    "subsection": null,
@@ -87237,7 +86436,7 @@
   },
   {
    "id": "sec-a21-21-1-p1-a",
-   "index": 252,
+   "index": 240,
    "section": 34,
    "section_title": "Notice:",
    "subsection": null,
@@ -87825,7 +87024,7 @@
   },
   {
    "id": "sec-a21-21-1-p2",
-   "index": 253,
+   "index": 241,
    "section": 34,
    "section_title": "Notice:",
    "subsection": null,
@@ -87934,7 +87133,7 @@
   },
   {
    "id": "sec-a21-21-2",
-   "index": 254,
+   "index": 242,
    "section": 35,
    "section_title": "Benefits:",
    "subsection": null,
@@ -87971,7 +87170,7 @@
   },
   {
    "id": "sec-a21-21-2-p1-s1",
-   "index": 255,
+   "index": 243,
    "section": 35,
    "section_title": "Benefits:",
    "subsection": null,
@@ -88635,7 +87834,7 @@
   },
   {
    "id": "sec-a21-21-2-p1-s2",
-   "index": 256,
+   "index": 244,
    "section": 35,
    "section_title": "Benefits:",
    "subsection": null,
@@ -88869,7 +88068,7 @@
   },
   {
    "id": "sec-a21-21-3",
-   "index": 257,
+   "index": 245,
    "section": 36,
    "section_title": "Waiver",
    "subsection": null,
@@ -88906,7 +88105,7 @@
   },
   {
    "id": "sec-a21-21-3-p1-s1",
-   "index": 258,
+   "index": 246,
    "section": 36,
    "section_title": "Waiver",
    "subsection": null,
@@ -89646,7 +88845,7 @@
   },
   {
    "id": "sec-a21-21-3-p1-s2",
-   "index": 259,
+   "index": 247,
    "section": 36,
    "section_title": "Waiver",
    "subsection": null,
@@ -89852,7 +89051,7 @@
   },
   {
    "id": "sec-a21-21-3-p1-21-4",
-   "index": 260,
+   "index": 248,
    "section": 36,
    "section_title": "Waiver",
    "subsection": null,
@@ -89992,7 +89191,7 @@
   },
   {
    "id": "sec-a21-21-5",
-   "index": 261,
+   "index": 249,
    "section": 37,
    "section_title": "Partial Invalidity:",
    "subsection": null,
@@ -90034,7 +89233,7 @@
   },
   {
    "id": "sec-a21-21-5-p1",
-   "index": 262,
+   "index": 250,
    "section": 37,
    "section_title": "Partial Invalidity:",
    "subsection": null,
@@ -90448,7 +89647,7 @@
   },
   {
    "id": "sec-a21-21-6",
-   "index": 263,
+   "index": 251,
    "section": 38,
    "section_title": "Overriding Effect:",
    "subsection": null,
@@ -90490,7 +89689,7 @@
   },
   {
    "id": "sec-a21-21-6-p1",
-   "index": 264,
+   "index": 252,
    "section": 38,
    "section_title": "Overriding Effect:",
    "subsection": null,
@@ -91064,7 +90263,7 @@
   },
   {
    "id": "sec-a21-21-7",
-   "index": 265,
+   "index": 253,
    "section": 39,
    "section_title": "Costs:",
    "subsection": null,
@@ -91101,7 +90300,7 @@
   },
   {
    "id": "sec-a21-21-7-p1",
-   "index": 266,
+   "index": 254,
    "section": 39,
    "section_title": "Costs:",
    "subsection": null,
@@ -91849,7 +91048,7 @@
   },
   {
    "id": "sec-a21-21-8",
-   "index": 267,
+   "index": 255,
    "section": 40,
    "section_title": "Return on Unbanked Cheques:",
    "subsection": null,
@@ -91901,7 +91100,7 @@
   },
   {
    "id": "sec-a21-21-8-p1",
-   "index": 268,
+   "index": 256,
    "section": 40,
    "section_title": "Return on Unbanked Cheques:",
    "subsection": null,
@@ -92384,7 +91583,7 @@
   },
   {
    "id": "sec-a21-21-9",
-   "index": 269,
+   "index": 257,
    "section": 41,
    "section_title": "Law:",
    "subsection": null,
@@ -92421,7 +91620,7 @@
   },
   {
    "id": "sec-a21-21-9-p1",
-   "index": 270,
+   "index": 258,
    "section": 41,
    "section_title": "Law:",
    "subsection": null,
@@ -92520,7 +91719,7 @@
   },
   {
    "id": "sec-a21-21-10",
-   "index": 271,
+   "index": 259,
    "section": 42,
    "section_title": "Arbitration/Jurisdiction:",
    "subsection": null,
@@ -92557,7 +91756,7 @@
   },
   {
    "id": "sec-a21-21-10-p1",
-   "index": 272,
+   "index": 260,
    "section": 42,
    "section_title": "Arbitration/Jurisdiction:",
    "subsection": null,
@@ -93284,7 +92483,7 @@
   },
   {
    "id": "sec-a21-21-11",
-   "index": 273,
+   "index": 261,
    "section": 43,
    "section_title": "Schedules to Form Part of the Agreement:",
    "subsection": null,
@@ -93351,7 +92550,7 @@
   },
   {
    "id": "sec-a21-21-11-p1",
-   "index": 274,
+   "index": 262,
    "section": 43,
    "section_title": "Schedules to Form Part of the Agreement:",
    "subsection": null,
@@ -93495,7 +92694,7 @@
   },
   {
    "id": "sec-a21-21-12",
-   "index": 275,
+   "index": 263,
    "section": 44,
    "section_title": "Marginal Notes and Head Notes:",
    "subsection": null,
@@ -93552,7 +92751,7 @@
   },
   {
    "id": "sec-a21-21-12-p1",
-   "index": 276,
+   "index": 264,
    "section": 44,
    "section_title": "Marginal Notes and Head Notes:",
    "subsection": null,
@@ -93656,7 +92855,7 @@
   },
   {
    "id": "sec-a21-21-13",
-   "index": 277,
+   "index": 265,
    "section": 45,
    "section_title": "Acceptance",
    "subsection": null,
@@ -93693,7 +92892,7 @@
   },
   {
    "id": "sec-a21-21-13-p1",
-   "index": 278,
+   "index": 266,
    "section": 45,
    "section_title": "Acceptance",
    "subsection": null,
@@ -93947,7 +93146,7 @@
   },
   {
    "id": "sec-a21-21-13-p2",
-   "index": 279,
+   "index": 267,
    "section": 45,
    "section_title": "Acceptance",
    "subsection": null,
@@ -94356,7 +93555,7 @@
   },
   {
    "id": "sec-a21-21-14",
-   "index": 280,
+   "index": 268,
    "section": 46,
    "section_title": "Insurance or Third Party Products",
    "subsection": null,
@@ -94413,7 +93612,7 @@
   },
   {
    "id": "sec-a21-21-14-p1",
-   "index": 281,
+   "index": 269,
    "section": 46,
    "section_title": "Insurance or Third Party Products",
    "subsection": null,
@@ -94687,7 +93886,7 @@
   },
   {
    "id": "sec-a21-21-14-p1-21-15",
-   "index": 282,
+   "index": 270,
    "section": 46,
    "section_title": "Insurance or Third Party Products",
    "subsection": null,
@@ -95132,7 +94331,7 @@
   },
   {
    "id": "sec-a21-21-14-p1-21-16",
-   "index": 283,
+   "index": 271,
    "section": 46,
    "section_title": "Insurance or Third Party Products",
    "subsection": null,
@@ -95809,7 +95008,7 @@
   },
   {
    "id": "sec-a21-21-17",
-   "index": 284,
+   "index": 272,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -95861,7 +95060,7 @@
   },
   {
    "id": "sec-a21-21-17-i",
-   "index": 285,
+   "index": 273,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -96041,7 +95240,7 @@
   },
   {
    "id": "sec-a21-21-17-p1",
-   "index": 286,
+   "index": 274,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -96275,7 +95474,7 @@
   },
   {
    "id": "sec-a21-21-17-p2",
-   "index": 287,
+   "index": 275,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -96676,7 +95875,7 @@
   },
   {
    "id": "sec-a21-21-17-p3",
-   "index": 288,
+   "index": 276,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -96809,7 +96008,7 @@
   },
   {
    "id": "sec-a21-21-17-p5",
-   "index": 289,
+   "index": 277,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -97356,7 +96555,7 @@
   },
   {
    "id": "sec-a21-21-17-p6",
-   "index": 290,
+   "index": 278,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -97694,7 +96893,7 @@
   },
   {
    "id": "sec-a21-21-17-p8",
-   "index": 291,
+   "index": 279,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -98200,7 +97399,7 @@
   },
   {
    "id": "sec-a21-21-17-p8-ii",
-   "index": 292,
+   "index": 280,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -98805,7 +98004,7 @@
   },
   {
    "id": "sec-a21-21-17-p8-iii",
-   "index": 293,
+   "index": 281,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -99090,7 +98289,7 @@
   },
   {
    "id": "sec-a21-21-17-p9",
-   "index": 294,
+   "index": 282,
    "section": 47,
    "section_title": "Customer Grievance Redressal Mechanism",
    "subsection": null,
@@ -99274,7 +98473,7 @@
   },
   {
    "id": "sec-a21-48",
-   "index": 295,
+   "index": 283,
    "section": 48,
    "section_title": "SCHEDULE.",
    "subsection": null,
@@ -99310,7 +98509,7 @@
   },
   {
    "id": "sec-a21-48-p2",
-   "index": 296,
+   "index": 284,
    "section": 48,
    "section_title": "SCHEDULE.",
    "subsection": null,
@@ -99441,7 +98640,7 @@
   },
   {
    "id": "sec-a21-48-p5",
-   "index": 297,
+   "index": 285,
    "section": 48,
    "section_title": "SCHEDULE.",
    "subsection": null,
@@ -99536,7 +98735,7 @@
   },
   {
    "id": "sec-a21-48-p7",
-   "index": 298,
+   "index": 286,
    "section": 48,
    "section_title": "SCHEDULE.",
    "subsection": null,
@@ -99595,7 +98794,7 @@
   },
   {
    "id": "sec-a21-49",
-   "index": 299,
+   "index": 287,
    "section": 49,
    "section_title": "TERMS & CONDITIONS (MITC)",
    "subsection": null,
@@ -99646,7 +98845,7 @@
   },
   {
    "id": "sec-a21-49-p1",
-   "index": 300,
+   "index": 288,
    "section": 49,
    "section_title": "TERMS & CONDITIONS (MITC)",
    "subsection": null,
@@ -99900,7 +99099,7 @@
   },
   {
    "id": "sec-a21-49-p2",
-   "index": 301,
+   "index": 289,
    "section": 49,
    "section_title": "TERMS & CONDITIONS (MITC)",
    "subsection": null,
@@ -99953,7 +99152,7 @@
   },
   {
    "id": "sec-a21-50",
-   "index": 302,
+   "index": 290,
    "section": 50,
    "section_title": "NAME AND ADDRESS",
    "subsection": null,
@@ -99999,7 +99198,7 @@
   },
   {
    "id": "sec-a21-50-p2",
-   "index": 303,
+   "index": 291,
    "section": 50,
    "section_title": "NAME AND ADDRESS",
    "subsection": null,
@@ -100105,7 +99304,7 @@
   },
   {
    "id": "sec-a21-51",
-   "index": 304,
+   "index": 292,
    "section": 51,
    "section_title": "LOAN DETAILS",
    "subsection": null,
@@ -100146,7 +99345,7 @@
   },
   {
    "id": "sec-a21-51-p1",
-   "index": 305,
+   "index": 293,
    "section": 51,
    "section_title": "LOAN DETAILS",
    "subsection": null,
@@ -100815,7 +100014,7 @@
   },
   {
    "id": "sec-a21-52",
-   "index": 306,
+   "index": 294,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -100856,7 +100055,7 @@
   },
   {
    "id": "sec-a21-52-p3",
-   "index": 307,
+   "index": 295,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -101401,7 +100600,7 @@
   },
   {
    "id": "sec-a21-52-p4",
-   "index": 308,
+   "index": 296,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -101590,7 +100789,7 @@
   },
   {
    "id": "sec-a21-52-p5",
-   "index": 309,
+   "index": 297,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -102073,7 +101272,7 @@
   },
   {
    "id": "sec-a21-52-p5-b-s1",
-   "index": 310,
+   "index": 298,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -102706,7 +101905,7 @@
   },
   {
    "id": "sec-a21-52-p5-b-s2",
-   "index": 311,
+   "index": 299,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -102861,7 +102060,7 @@
   },
   {
    "id": "sec-a21-52-p5-c",
-   "index": 312,
+   "index": 300,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -103125,7 +102324,7 @@
   },
   {
    "id": "sec-a21-52-p6",
-   "index": 313,
+   "index": 301,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -103309,7 +102508,7 @@
   },
   {
    "id": "sec-a21-52-p8",
-   "index": 314,
+   "index": 302,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -103435,7 +102634,7 @@
   },
   {
    "id": "sec-a21-52-p9",
-   "index": 315,
+   "index": 303,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -104373,7 +103572,7 @@
   },
   {
    "id": "sec-a21-52-p10",
-   "index": 316,
+   "index": 304,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -104722,7 +103921,7 @@
   },
   {
    "id": "sec-a21-52-p11",
-   "index": 317,
+   "index": 305,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -104881,7 +104080,7 @@
   },
   {
    "id": "sec-a21-52-p13",
-   "index": 318,
+   "index": 306,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -105069,7 +104268,7 @@
   },
   {
    "id": "sec-a21-52-p14",
-   "index": 319,
+   "index": 307,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -105325,7 +104524,7 @@
   },
   {
    "id": "sec-a21-52-p16",
-   "index": 320,
+   "index": 308,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -105700,7 +104899,7 @@
   },
   {
    "id": "sec-a21-52-p17",
-   "index": 321,
+   "index": 309,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -105876,7 +105075,7 @@
   },
   {
    "id": "sec-a21-52-p18",
-   "index": 322,
+   "index": 310,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -106042,7 +105241,7 @@
   },
   {
    "id": "sec-a21-52-p19",
-   "index": 323,
+   "index": 311,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -106196,7 +105395,7 @@
   },
   {
    "id": "sec-a21-52-p21",
-   "index": 324,
+   "index": 312,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -106320,7 +105519,7 @@
   },
   {
    "id": "sec-a21-52-p22",
-   "index": 325,
+   "index": 313,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -106644,7 +105843,7 @@
   },
   {
    "id": "sec-a21-52-p23-i",
-   "index": 326,
+   "index": 314,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -107183,7 +106382,7 @@
   },
   {
    "id": "sec-a21-52-p23-iv",
-   "index": 327,
+   "index": 315,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -107652,7 +106851,7 @@
   },
   {
    "id": "sec-a21-52-p25",
-   "index": 328,
+   "index": 316,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -107755,7 +106954,7 @@
   },
   {
    "id": "sec-a21-52-p27",
-   "index": 329,
+   "index": 317,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -107974,7 +107173,7 @@
   },
   {
    "id": "sec-a21-52-p28",
-   "index": 330,
+   "index": 318,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -108110,7 +107309,7 @@
   },
   {
    "id": "sec-a21-52-p29",
-   "index": 331,
+   "index": 319,
    "section": 52,
    "section_title": "VEHICLE DETAILS",
    "subsection": null,
@@ -108350,7 +107549,7 @@
   },
   {
    "id": "sec-a21-53",
-   "index": 332,
+   "index": 320,
    "section": 53,
    "section_title": "INSTRUCTION FOR DISBURSEMENT OF THE LOAN AMOUNT",
    "subsection": null,
@@ -108416,7 +107615,7 @@
   },
   {
    "id": "sec-a21-53-p3",
-   "index": 333,
+   "index": 321,
    "section": 53,
    "section_title": "INSTRUCTION FOR DISBURSEMENT OF THE LOAN AMOUNT",
    "subsection": null,
@@ -108643,7 +107842,7 @@
   },
   {
    "id": "sec-a21-53-p4",
-   "index": 334,
+   "index": 322,
    "section": 53,
    "section_title": "INSTRUCTION FOR DISBURSEMENT OF THE LOAN AMOUNT",
    "subsection": null,
@@ -108852,7 +108051,7 @@
   },
   {
    "id": "sec-a21-53-p5",
-   "index": 335,
+   "index": 323,
    "section": 53,
    "section_title": "INSTRUCTION FOR DISBURSEMENT OF THE LOAN AMOUNT",
    "subsection": null,
@@ -108996,7 +108195,7 @@
   },
   {
    "id": "sec-a21-53-p6",
-   "index": 336,
+   "index": 324,
    "section": 53,
    "section_title": "INSTRUCTION FOR DISBURSEMENT OF THE LOAN AMOUNT",
    "subsection": null,
@@ -109268,7 +108467,7 @@
   },
   {
    "id": "sec-a21-53-p9",
-   "index": 337,
+   "index": 325,
    "section": 53,
    "section_title": "INSTRUCTION FOR DISBURSEMENT OF THE LOAN AMOUNT",
    "subsection": null,
@@ -109444,7 +108643,7 @@
   },
   {
    "id": "sec-a21-53-p15",
-   "index": 338,
+   "index": 326,
    "section": 53,
    "section_title": "INSTRUCTION FOR DISBURSEMENT OF THE LOAN AMOUNT",
    "subsection": null,
@@ -109582,7 +108781,7 @@
   },
   {
    "id": "sec-a21-54",
-   "index": 339,
+   "index": 327,
    "section": 54,
    "section_title": "DECLARATION IN CASE THE BORROWER/CO-",
    "subsection": null,
@@ -109631,7 +108830,7 @@
   },
   {
    "id": "sec-a21-55",
-   "index": 340,
+   "index": 328,
    "section": 55,
    "section_title": "BORROWER/GUARANTORS IS ILLITERATE OR EXECUTES",
    "subsection": null,
@@ -109680,7 +108879,7 @@
   },
   {
    "id": "sec-a21-56",
-   "index": 341,
+   "index": 329,
    "section": 56,
    "section_title": "LOAN DOCUMENTS IN VERNACULAR LANGUAGE OR IS",
    "subsection": null,
@@ -109746,7 +108945,7 @@
   },
   {
    "id": "sec-a21-56-p1",
-   "index": 342,
+   "index": 330,
    "section": 56,
    "section_title": "LOAN DOCUMENTS IN VERNACULAR LANGUAGE OR IS",
    "subsection": null,
@@ -110070,7 +109269,7 @@
   },
   {
    "id": "sec-a21-56-p2",
-   "index": 343,
+   "index": 331,
    "section": 56,
    "section_title": "LOAN DOCUMENTS IN VERNACULAR LANGUAGE OR IS",
    "subsection": null,
@@ -110583,7 +109782,7 @@
   },
   {
    "id": "sec-a21-56-p3",
-   "index": 344,
+   "index": 332,
    "section": 56,
    "section_title": "LOAN DOCUMENTS IN VERNACULAR LANGUAGE OR IS",
    "subsection": null,
@@ -110842,7 +110041,7 @@
   },
   {
    "id": "sec-a21-56-p4",
-   "index": 345,
+   "index": 333,
    "section": 56,
    "section_title": "LOAN DOCUMENTS IN VERNACULAR LANGUAGE OR IS",
    "subsection": null,
@@ -111104,7 +110303,7 @@
   },
   {
    "id": "sec-a21-57",
-   "index": 346,
+   "index": 334,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -111150,7 +110349,7 @@
   },
   {
    "id": "sec-a21-57-p2",
-   "index": 347,
+   "index": 335,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -111747,7 +110946,7 @@
   },
   {
    "id": "sec-a21-57-p3",
-   "index": 348,
+   "index": 336,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -112202,7 +111401,7 @@
   },
   {
    "id": "sec-a21-57-p4",
-   "index": 349,
+   "index": 337,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -112784,7 +111983,7 @@
   },
   {
    "id": "sec-a21-57-p4-ii",
-   "index": 350,
+   "index": 338,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -113024,7 +112223,7 @@
   },
   {
    "id": "sec-a21-57-p4-iii",
-   "index": 351,
+   "index": 339,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -113349,7 +112548,7 @@
   },
   {
    "id": "sec-a21-57-p4-iv",
-   "index": 352,
+   "index": 340,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -113863,7 +113062,7 @@
   },
   {
    "id": "sec-a21-57-p4-vi",
-   "index": 353,
+   "index": 341,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -114228,7 +113427,7 @@
   },
   {
    "id": "sec-a21-57-p4-vii",
-   "index": 354,
+   "index": 342,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -114478,7 +113677,7 @@
   },
   {
    "id": "sec-a21-57-p4-viii",
-   "index": 355,
+   "index": 343,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -114898,7 +114097,7 @@
   },
   {
    "id": "sec-a21-57-p5",
-   "index": 356,
+   "index": 344,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -115182,7 +114381,7 @@
   },
   {
    "id": "sec-a21-57-p6",
-   "index": 357,
+   "index": 345,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -115516,7 +114715,7 @@
   },
   {
    "id": "sec-a21-57-p7",
-   "index": 358,
+   "index": 346,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -115775,7 +114974,7 @@
   },
   {
    "id": "sec-a21-57-p8",
-   "index": 359,
+   "index": 347,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -115954,7 +115153,7 @@
   },
   {
    "id": "sec-a21-57-p9",
-   "index": 360,
+   "index": 348,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -116393,7 +115592,7 @@
   },
   {
    "id": "sec-a21-57-p10",
-   "index": 361,
+   "index": 349,
    "section": 57,
    "section_title": "POWER OF ATTORNEY",
    "subsection": null,
@@ -116602,7 +115801,7 @@
   },
   {
    "id": "sec-si",
-   "index": 362,
+   "index": 350,
    "section": 58,
    "section_title": "SCHEDULE I",
    "subsection": null,
@@ -116644,7 +115843,7 @@
   },
   {
    "id": "sec-si-59",
-   "index": 363,
+   "index": 351,
    "section": 59,
    "section_title": "NAME AND ADDRESS",
    "subsection": null,
@@ -116690,7 +115889,7 @@
   },
   {
    "id": "sec-si-59-p2",
-   "index": 364,
+   "index": 352,
    "section": 59,
    "section_title": "NAME AND ADDRESS",
    "subsection": null,
@@ -116734,7 +115933,7 @@
   },
   {
    "id": "sec-si-60",
-   "index": 365,
+   "index": 353,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -116795,7 +115994,7 @@
   },
   {
    "id": "sec-si-60-p2",
-   "index": 366,
+   "index": 354,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -117046,7 +116245,7 @@
   },
   {
    "id": "sec-si-60-p4",
-   "index": 367,
+   "index": 355,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -117124,7 +116323,7 @@
   },
   {
    "id": "sec-si-60-p6",
-   "index": 368,
+   "index": 356,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -117168,7 +116367,7 @@
   },
   {
    "id": "sec-si-60-p7",
-   "index": 369,
+   "index": 357,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -117212,7 +116411,7 @@
   },
   {
    "id": "sec-si-60-p9",
-   "index": 370,
+   "index": 358,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -117271,7 +116470,7 @@
   },
   {
    "id": "sec-si-60-p13",
-   "index": 371,
+   "index": 359,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -117378,7 +116577,7 @@
   },
   {
    "id": "sec-si-60-p15",
-   "index": 372,
+   "index": 360,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -117407,7 +116606,7 @@
   },
   {
    "id": "sec-si-60-p17",
-   "index": 373,
+   "index": 361,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,
@@ -117446,7 +116645,7 @@
   },
   {
    "id": "sec-si-60-p19",
-   "index": 374,
+   "index": 362,
    "section": 60,
    "section_title": "HYPOTHECTED PROPERTY - MOTOR CYCLE DETAILS",
    "subsection": null,

@@ -107,6 +107,25 @@ describe('listener route', () => {
     expect(screen.getByText(/22 min left/)).toBeInTheDocument()
   })
 
+  it('a table prompt spoken mid-read leaves the paragraph in the clause area', async () => {
+    const { container } = render(<MemoryRouter><Listener /></MemoryRouter>)
+    await waitFor(() => expect(sockets.length).toBeGreaterThan(0))
+    feed(HELLO)
+    feed(UNIT)
+    feed({ type: 'playing' })
+    feed({
+      type: 'unit_started', kind: 'table_choice', unit_id: 'sec-1-t1', context_id: 'table_choice#t2', index: 47,
+      section_title: 'Perils insured against', path: null,
+      text_display: "Here there's a table of Document type to Source URL, 8 rows. Want one of them, all of them, or shall I carry on?",
+      sentences: [[0, 60]], char_start: 0,
+    })
+    feed({ type: 'paused' })
+    const doc = container.querySelector('.doc') as HTMLElement
+    await waitFor(() => expect(doc.textContent).toContain('If any of the causes listed'))
+    expect(doc.textContent).not.toContain("Here there's a table")
+    expect(screen.getByText(/Paused/i)).toBeInTheDocument()
+  })
+
   it('shows the sections found as "Coming up" until the chips land', async () => {
     render(<MemoryRouter><Listener /></MemoryRouter>)
     await waitFor(() => expect(sockets.length).toBeGreaterThan(0))

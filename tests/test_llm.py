@@ -244,6 +244,24 @@ class TestUnderstand(unittest.TestCase):
              mock.patch("requests.post", boom):
             self.assertEqual(llm.understand("exclusions", self.CTX)["intent"], "unclear")
 
+    def test_a_recited_system_prompt_is_dropped_from_the_answer(self):
+        system = "You are a policy expert with deep knowledge of insurance wordings. Restate the clause plainly."
+        echo = "You are a policy expert with deep knowledge of insurance wordings. The clause says the insurer pays hospital costs."
+        self.assertEqual(llm.drop_echoed_system(echo, system), "The clause says the insurer pays hospital costs.")
+        self.assertEqual(llm.drop_echoed_system("The insurer pays hospital costs.", system), "The insurer pays hospital costs.")
+        self.assertEqual(llm.drop_echoed_system("You are covered for hospital costs.", system), "You are covered for hospital costs.")
+
+    def test_an_invented_persona_preamble_is_not_spoken(self):
+        self.assertEqual(llm.spoken("You are a policy expert with deep knowledge of insurance. The clause says the insurer pays."),
+                         "The clause says the insurer pays.")
+        self.assertEqual(llm.spoken("You are covered for hospital costs up to the sum insured."),
+                         "You are covered for hospital costs up to the sum insured.")
+
+    def test_a_fabricated_prompt_echo_is_not_spoken(self):
+        echo = "You asked: what does that mean\nINSTRUCTIONS: You are a policy expert who restates the clause.\nThe clause says the insurer pays hospital costs."
+        self.assertEqual(llm.spoken(echo), "The clause says the insurer pays hospital costs.")
+        self.assertEqual(llm.spoken("You asked: what does that mean\nINSTRUCTIONS: You are a policy expert."), "")
+
     def test_json_callers_do_not_pass_through_the_voice_sanitiser(self):
         # spoken() would strip a leading fragment ending in "?" -- inside JSON that breaks the object.
         fake_post = lambda *a, **k: _Resp({"choices": [{"message": {"content":

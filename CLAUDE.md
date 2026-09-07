@@ -452,6 +452,38 @@ Second QA pass, trace session_web-8126d423 (same day):
     (`test_enrich`). The pass itself is `scripts/qa_live.py` (fake, then
     rime); it fails on a narration gap over 15 s.
 
+## Unit kinds and the screen
+
+Every spoken thing arrives at the client as `unit_started{kind}` so it is
+acked and interruptible the same way. Only two kinds are the document on
+screen: `clause` and `row` (a table row spoken on request). They alone set
+`state.unit`, reset the boundary, words and spans, and set the phase to
+playing. Everything else is a prompt or a side unit and never touches the
+clause: prompts (`choice`, `offer`, `start_choice`, `confirm_topic`,
+`table_choice`, `welcome`, `ingest_wait`, `pick_topic`, `section_end`,
+`not_found`, `end_choice`) show their words in `state.prompt.text` and their
+options when `prompt` arrives; side units (`map`, `cue`, `recap`,
+`companion`) join the transcript; `answer` only changes the phase. A pause
+during a paragraph therefore lands on the paragraph even when a prompt is
+being spoken over it (`reducer.ts` `CLAUSE_KINDS` / `PROMPT_KINDS`). On the
+server, a prompt opened from the read loop (table, offer, section end) waits
+for the last streamed clause to be HEARD before it speaks
+(`_await_previous_clause_heard`), because lookahead sends clauses up to
+`LEAD_MS` ahead of what the listener hears. The screen follows the playhead:
+the client shows a unit when its audio starts, so a prompt answered while
+it is still sounding must not keep playing -- on `prompt_closed` the player
+drops that prompt's unplayed audio (`AudioPlayer.dropUnit`, the worklet's
+`truncate`), and the next unit's audio, and screen, start at once. With the
+fake voice a whole prompt is buffered the moment it is spoken, so without
+this every reply was followed by the rest of the prompt (18 s of welcome,
+10 s of invitation). The fixture builder's preamble
+(intro paragraph, provenance table, handling note) is never a clause: it is
+`provenance` on the fixture and in the ingest report
+(`ingest.strip_fixture_preamble`). `scripts/qa_browser.py` (Playwright,
+fake voice, `npm run dev`) is the gate for any change to `server.py`,
+`reducer.ts` or `scripts/ingest.py`: run it three times green before
+reporting.
+
 ## Rules that are not negotiable
 
 - Heard state is client-acknowledged. Never mark a clause delivered from the
