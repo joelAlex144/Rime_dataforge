@@ -182,12 +182,13 @@ describe('listener route', () => {
     expect(screen.queryByRole('button', { name: 'Jump there' })).toBeNull()
   })
 
-  it('disables the mic and explains why', async () => {
+  it('offers voice input, off by default, until the listener turns it on', async () => {
     render(<MemoryRouter><Listener /></MemoryRouter>)
     feed(HELLO)
     const mic = await screen.findByRole('button', { name: 'Voice input' })
-    expect(mic).toBeDisabled()
-    expect(mic).toHaveAttribute('title', 'Voice input arrives with the LiveKit client')
+    expect(mic).not.toBeDisabled()
+    expect(mic).toHaveAttribute('aria-pressed', 'false')
+    expect(mic).toHaveAttribute('title', 'Talk instead of typing')
   })
 
   it('shows the fallback line and an amber dot when the provider flips to fake', async () => {

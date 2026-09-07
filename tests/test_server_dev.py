@@ -72,10 +72,11 @@ class TestStatusAndMetrics(ServerCase):
         self.assertIn("provider", d)
         self.assertFalse(d["dev"])
 
-    async def test_llm_is_off_and_stt_is_button_only_without_keys(self):
+    async def test_llm_is_off_and_stt_describes_the_external_bridge(self):
         d = await (await self.client.get("/api/status")).json()
         self.assertEqual(d["llm"], {"state": "off", "detail": "extractive"})
-        self.assertEqual(d["stt"], {"state": "warn", "detail": "button only"})
+        self.assertEqual(d["stt"]["state"], "warn")
+        self.assertIn("voice bridge", d["stt"]["detail"])
 
     async def test_ingest_cell_reports_the_structure_pass_and_upload_is_always_on(self):
         d = await (await self.client.get("/api/status")).json()

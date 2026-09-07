@@ -581,7 +581,11 @@ class ReaderSession:
             "normalize": norm,
             "rime_ws": rime,
             "client_ws": cws,
-            "stt": cell("warn", "button only"),
+            # No direct visibility into the bridge process from here (it's
+            # just another /ws/audio client, same as a browser tab) -- this
+            # describes the mechanism honestly without claiming a live
+            # status this endpoint can't actually verify.
+            "stt": cell("warn", "external voice bridge (examples/policy-reader/voice/bridge.py)"),
             "llm": llm,
         }
 
@@ -2418,6 +2422,25 @@ async def api_status(request):
     return _json(request.app["session"].status())
 
 
+async def api_livekit_token(request):
+    """Mint a LiveKit token for the browser tab to publish its mic into this
+    session's voice room. Purely additive: it hands out a token and nothing
+    else, and only exists so voice/bridge.py has audio to subscribe to. No
+    interrupt/ask/delivery logic lives here -- see voice/bridge.py and
+    handle_client_message's existing "interrupt"/"ask" handling for that."""
+    s = request.app["session"]
+    try:
+        from voice.livekit_token import mint_token, room_name_for_session
+        token = mint_token(s.id, "listener", can_publish=True, can_subscribe=False)
+    except Exception as e:
+        return _json({"error": str(e)}, status=503)
+    return _json({
+        "url": os.environ.get("LIVEKIT_URL", ""),
+        "token": token,
+        "room": room_name_for_session(s.id),
+    })
+
+
 async def api_contexts(request):
     s = request.app["session"]
     return _json({"contexts": [c.as_dict() for c in s.contexts.values()]})
@@ -2844,17 +2867,17 @@ async def ws_audio(request):
     s.events.sockets.add(ws)
     socks = s.events.sockets
     try:
-        await s.ensure_provider()
-    except Exception as e:
-        await ws.send_str(json.dumps({"type": "provider_error", "message": str(e)}))
-    await ws.send_str(json.dumps({"type": "hello", "session_id": s.id, "dev": s.dev,
-                                  "upload_enabled": s.allow_upload,
-                                  "sink": ws is s.sink, "sink_any": s.sink is not None,
-                                  "provider": s.descriptor,
-                                  "documents": s.listener_library(),
-                                  "current": s.library.current.name if s.library.current else None,
-                                  "topics": s.topics_for(s.library.current)}))
-    try:
+        try:
+            await s.ensure_provider()
+        except Exception as e:
+            await ws.send_str(json.dumps({"type": "provider_error", "message": str(e)}))
+        await ws.send_str(json.dumps({"type": "hello", "session_id": s.id, "dev": s.dev,
+                                      "upload_enabled": s.allow_upload,
+                                      "sink": ws is s.sink, "sink_any": s.sink is not None,
+                                      "provider": s.descriptor,
+                                      "documents": s.listener_library(),
+                                      "current": s.library.current.name if s.library.current else None,
+                                      "topics": s.topics_for(s.library.current)}))
         async for msg in ws:
             if msg.type != WSMsgType.TEXT:
                 continue
@@ -2863,6 +2886,15 @@ async def ws_audio(request):
             except ValueError:
                 continue
             await handle_client_message(s, m, socks, ws)
+    except ConnectionResetError:
+        # The client (browser tab or voice bridge) vanished mid-handshake or
+        # mid-session -- nothing to do but clean up below like any other
+        # disconnect. Before this try/except covered ensure_provider()/hello
+        # too, a client that disappeared in that window skipped the
+        # socks.discard() below entirely, leaving a dead socket in the
+        # broadcast set that every later interrupt/ask/progress message would
+        # then also try (and fail) to write to.
+        pass
     finally:
         socks.discard(ws)
         if ws is s.sink:
@@ -3319,6 +3351,7 @@ def build_app(dev: bool = False, index_path: Path = INDEX,
     app = web.Application(client_max_size=MAX_UPLOAD_BYTES + 1024 * 1024)
     app["session"] = ReaderSession(dev=dev, index_path=index_path, allow_upload=allow_upload)
     app.router.add_get("/api/status", api_status)
+    app.router.add_get("/api/livekit/token", api_livekit_token)
     app.router.add_get("/api/contexts", api_contexts)
     app.router.add_get("/api/metrics", api_metrics)
     app.router.add_get("/api/events", api_events)
