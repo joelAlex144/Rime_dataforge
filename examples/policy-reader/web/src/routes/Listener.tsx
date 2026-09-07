@@ -21,6 +21,7 @@ import {
 import { useSession } from '../store/session'
 import type { DocEntry } from '../store/reducer'
 import UploadDocument, { openUnreviewed } from '../components/UploadDocument'
+import { useVoiceInput } from '../hooks/useVoiceInput'
 
 const ICON = 18
 
@@ -37,6 +38,7 @@ export default function Listener() {
   const inputRef = useRef<HTMLInputElement>(null)
   const dialogRef = useRef<HTMLDialogElement>(null)
   const [q, setQ] = useState('')
+  const voice = useVoiceInput()
 
   const current = state.documents.find((d) => d.name === state.current) || null
   const referral = current?.referral || 'the team that publishes this document'
@@ -224,13 +226,29 @@ export default function Listener() {
               aria-label="Ask about what you just heard"
             />
           </form>
-          <button disabled title="Voice input arrives with the LiveKit client" aria-label="Voice input">
+          <button
+            onClick={voice.toggle}
+            disabled={voice.status === 'connecting'}
+            aria-pressed={voice.status === 'live'}
+            title={
+              voice.status === 'live'
+                ? 'Voice input is on — click to stop'
+                : voice.status === 'error'
+                  ? `Voice input unavailable: ${voice.error}`
+                  : 'Talk instead of typing'
+            }
+            aria-label="Voice input"
+          >
             <Mic size={ICON} aria-hidden="true" />
+            {voice.status === 'live' ? ' Listening…' : ''}
           </button>
         </div>
         {busy && <p className="notice">Replaying a recorded session. Playback is paused.</p>}
         {!state.audioSink && state.anySink && (
           <p className="notice">The voice is playing in another tab. Press play here to move it.</p>
+        )}
+        {voice.status === 'error' && (
+          <p className="notice">Voice input isn&apos;t available right now: {voice.error}</p>
         )}
       </main>
     </div>
