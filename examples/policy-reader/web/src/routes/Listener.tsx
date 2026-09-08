@@ -9,7 +9,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
+  ChevronLeft,
+  ChevronRight,
   CornerDownRight,
+  FileText,
   FilePlus,
   Hand,
   MessageSquare,
@@ -17,6 +20,7 @@ import {
   Pause,
   Play,
   Volume2,
+  X,
 } from 'lucide-react'
 import { useSession } from '../store/session'
 import type { DocEntry } from '../store/reducer'
@@ -41,11 +45,48 @@ export default function Listener() {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const [q, setQ] = useState('')
   const [r, setR] = useState('')
+  // On by default: the script is the primary "what's actually happening" view
+  // (screen 3 of the screen map), so it's the reader's normal state rather
+  // than something to go dig for -- the footer button just hides it.
+  const [showScript, setShowScript] = useState(true)
+  const scriptRef = useRef<HTMLDivElement>(null)
+  const scriptSentinelRef = useRef<HTMLDivElement>(null)
+  // Renders the script list a batch at a time as the panel is scrolled,
+  // instead of mounting every clause's <p> the moment it opens -- opening a
+  // 40-clause document shouldn't mean rendering 40 paragraphs no one has
+  // scrolled to yet.
+  const SCRIPT_BATCH = 12
+  const [scriptVisible, setScriptVisible] = useState(SCRIPT_BATCH)
+  const [railOpen, setRailOpen] = useState(() => {
+    try {
+      return localStorage.getItem('rail_open') !== '0'
+    } catch {
+      return true
+    }
+  })
+  const toggleRail = () => {
+    setRailOpen((v) => {
+      const next = !v
+      try {
+        localStorage.setItem('rail_open', next ? '1' : '0')
+      } catch {
+        /* private browsing etc. -- just don't persist */
+      }
+      return next
+    })
+  }
   const voice = useVoiceInput()
 
   const current = state.documents.find((d) => d.name === state.current) || null
   const referral = current?.referral || 'the team that publishes this document'
   const busy = !!state.replaying
+
+  // Up next: the real section outline the navigator produced (title + the
+  // same est_minutes spoken at a section transition), sliced to the ones
+  // still ahead of the current position. [] until the navigator has run --
+  // never a client-side guess.
+  const curSectionIdx = current ? Math.max(1, current.progress.current_section_index) : 0
+  const upNext = state.sections.slice(curSectionIdx, curSectionIdx + 3)
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -88,16 +129,119 @@ export default function Listener() {
     if (state.focusUpload > 0) dialogRef.current?.showModal()
   }, [state.focusUpload])
 
+  useEffect(() => {
+    // Keep the script panel's "now" row current as the read position moves,
+    // or when the open document changes, while the panel is showing. The
+    // ledger itself always comes from the server -- this only asks for it.
+    if (showScript) s.getScript()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showScript, state.unit?.unitId, state.current])
+
+  useEffect(() => {
+    // A fresh document (or reopening the panel) starts back at one lazy
+    // batch -- the previous document's scroll depth has nothing to do with
+    // this one.
+    setScriptVisible(SCRIPT_BATCH)
+  }, [state.current, showScript])
+
+  useEffect(() => {
+    // Follow the read position: the "now" row scrolls into view as it
+    // changes, so the panel never needs a manual scroll to see what's
+    // playing right now. If lazy-loading hasn't reached that row yet,
+    // reveal up to it first so there's something to scroll to.
+    if (!showScript) return
+    const nowIndex = state.script.findIndex((row) => row.status === 'now')
+    if (nowIndex >= 0) {
+      setScriptVisible((v) => Math.max(v, nowIndex + Math.ceil(SCRIPT_BATCH / 2)))
+    }
+    const id = requestAnimationFrame(() => {
+      const el = scriptRef.current?.querySelector('.script-now')
+      el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    })
+    return () => cancelAnimationFrame(id)
+  }, [showScript, state.script])
+
+  useEffect(() => {
+    // Loads the next batch of clauses as the sentinel at the bottom of the
+    // rendered list scrolls into view, instead of mounting the whole
+    // document's worth of paragraphs up front.
+    if (!showScript) return
+    const root = scriptRef.current
+    const sentinel = scriptSentinelRef.current
+    if (!root || !sentinel) return
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setScriptVisible((v) => Math.min(v + SCRIPT_BATCH, state.script.length))
+        }
+      },
+      { root, rootMargin: '200px' },
+    )
+    io.observe(sentinel)
+    return () => io.disconnect()
+  }, [showScript, state.script.length])
+
   const uploaded = (d: { name: string }) => {
     // It is in the library already (reviewed: false); open it and read.
     s.open(d.name)
     dialogRef.current?.close()
   }
 
+  // Catalog (screen 1): the document already in progress gets its own
+  // "Continue listening" card above the plain library list, exactly like the
+  // screen map -- started, not finished, and not the placeholder currently
+  // open in the reader for the first time.
+  const continueListening = state.documents.find(
+    (d) => d.progress.started && !d.progress.finished,
+  )
+
   return (
-    <div className="listener">
+    <div className={`listener${railOpen ? '' : ' rail-collapsed'}${showScript ? ' with-script' : ''}`}>
       <nav className="rail" aria-label="Your documents">
-        <h2>Your documents</h2>
+        <div className="rail-head">
+          <h1 className="rail-title">Library</h1>
+          <button
+            className="rail-collapse-btn"
+            onClick={toggleRail}
+            aria-label={railOpen ? 'Collapse the document list' : 'Expand the document list'}
+            aria-pressed={!railOpen}
+            title={railOpen ? 'Collapse' : 'Expand'}
+          >
+            <ChevronLeft size={16} aria-hidden="true" />
+          </button>
+        </div>
+
+        <button className="upload-cta" onClick={() => dialogRef.current?.showModal()}>
+          <FilePlus size={16} aria-hidden="true" /> Upload a document
+        </button>
+
+        {continueListening && (
+          <button
+            className="continue-card"
+            onClick={() => s.open(continueListening.name)}
+            aria-label={`Continue listening to ${continueListening.spoken_title || continueListening.title}`}
+          >
+            <div className="continue-card-label">Continue listening</div>
+            <div className="continue-card-title">{continueListening.spoken_title || continueListening.title}</div>
+            <div className="continue-card-sub">{railSubtitle(continueListening)}</div>
+            <div className="continue-card-bar">
+              <div
+                className="continue-card-fill"
+                style={{
+                  width: `${Math.min(
+                    100,
+                    Math.round(
+                      (Math.max(1, continueListening.progress.current_section_index) /
+                        Math.max(1, continueListening.section_count)) *
+                        100,
+                    ),
+                  )}%`,
+                }}
+              />
+            </div>
+          </button>
+        )}
+
         {state.documents.map((d) => (
           <div key={d.name} className="rail-item" style={{ position: 'relative' }}>
             <button
@@ -129,11 +273,6 @@ export default function Listener() {
             )}
           </div>
         ))}
-        <button className="rail-row" onClick={() => dialogRef.current?.showModal()}>
-          <span className="t">
-            <FilePlus size={16} aria-hidden="true" /> Add a document
-          </span>
-        </button>
 
         <dialog ref={dialogRef} aria-label="Add a document">
           <p>Pick a PDF. It appears in your documents as soon as it is ready.</p>
@@ -172,7 +311,67 @@ export default function Listener() {
         </dialog>
       </nav>
 
+      {!railOpen && (
+        <button
+          type="button"
+          className="library-toggle"
+          onClick={toggleRail}
+          aria-label="Show the document list"
+          title="Show the document list"
+        >
+          <ChevronRight size={16} aria-hidden="true" /> Library
+        </button>
+      )}
+
       <main className="main">
+       {state.answer && (
+          <div className="interrupt-overlay" role="dialog" aria-label="Interruption">
+            <section className="answer" aria-label="Answer">
+              <span className="interrupted-tag">[interrupted]</span>
+              <div className="q">
+                <MessageSquare size={14} aria-hidden="true" /> You asked: {state.answer.question}
+              </div>
+              <div className="a">
+                <CornerDownRight size={14} aria-hidden="true" /> {state.answer.answer}
+              </div>
+              <div className="disclaimer">
+                Read from the document only. For a decision about your claim, contact {state.answer.referral}.
+              </div>
+            </section>
+
+            <div className="resume-point">
+              <div className="resume-point-label">Resume point</div>
+              <div className="resume-point-text">
+                {state.unit?.sectionTitle
+                  ? `So — back to ${state.unit.sectionTitle}...`
+                  : 'Ready to carry on where we left off.'}
+              </div>
+              <div className="actions">
+                {state.answer.offer && (
+                  <button
+                    onClick={() => {
+                      if (state.answer?.unitId) s.jump(state.answer.unitId)
+                    }}
+                  >
+                    Jump there
+                  </button>
+                )}
+                <button
+                  className="primary"
+                  onClick={() => {
+                    // Keep going means read on: the reader was stopped by the
+                    // question, so this has to start it, not just hide the card.
+                    s.dispatch({ type: 'clearAnswer' })
+                    s.play()
+                  }}
+                >
+                  Keep going
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+       <div className="main-primary">
         {current?.unreviewed && (
           <div className="banner">
             Unreviewed document. It is loaded into this session only and is not in the library.
@@ -180,22 +379,37 @@ export default function Listener() {
         )}
         {state.error && <p className="notice">{state.error}</p>}
 
-        <div className="section-label">
-          {state.unit
-            ? `${state.unit.sectionTitle}${state.unit.path ? ` · part ${state.unit.path}` : ''}`
-            : current
-              ? current.title
-              : 'No document open'}
+        <div className="reader-head">
+          <div className="reader-head-left">
+            <div>
+              <div className="reader-doc-title">{current ? (current.spoken_title || current.title) : 'No document open'}</div>
+              <div className="section-label">
+                {state.unit
+                  ? `${state.unit.sectionTitle}${state.unit.path ? ` · part ${state.unit.path}` : ''}`
+                  : 'Not started'}
+              </div>
+            </div>
+          </div>
+          {current && current.section_count > 0 && (
+            <div
+              className="section-chip"
+              aria-label={`Section ${Math.max(1, current.progress.current_section_index)} of ${current.section_count}`}
+            >
+              {Math.max(1, current.progress.current_section_index)}/{current.section_count}
+            </div>
+          )}
         </div>
 
-        <div className="doc">
-          <Clause
-            text={state.unit?.textDisplay ?? ''}
-            boundary={state.boundaryChar}
-            words={state.words}
-            wordIndex={state.wordIndex}
-            active={state.phase === 'playing'}
-          />
+        <div className="reader-card">
+          <div className="doc">
+            <Clause
+              text={state.unit?.textDisplay ?? ''}
+              boundary={state.boundaryChar}
+              words={state.words}
+              wordIndex={state.wordIndex}
+              active={state.phase === 'playing'}
+            />
+          </div>
         </div>
 
         <StatusLine phase={state.phase} current={current} />
@@ -296,61 +510,64 @@ export default function Listener() {
           </div>
         )}
 
-        {state.answer && (
-          <section className="answer" aria-label="Answer">
-            <div className="q">You asked: {state.answer.question}</div>
-            <div className="a">{state.answer.answer}</div>
-            <div className="disclaimer">
-              Read from the document only. For a decision about your claim, contact {state.answer.referral}.
+        {upNext.length > 0 && (
+          <div className="up-next" aria-label="Up next">
+            <div className="up-next-head">
+              <span>Up next</span>
+              {current && (
+                <span className="muted">about {current.progress.minutes_left} min left</span>
+              )}
             </div>
-            {state.answer.offer && (
-              <div className="actions">
-                <button
-                  onClick={() => {
-                    if (state.answer?.unitId) s.jump(state.answer.unitId)
-                  }}
-                >
-                  Jump there
-                </button>
-                <button
-                  onClick={() => {
-                    // Keep going means read on: the reader was stopped by the
-                    // question, so this has to start it, not just hide the card.
-                    s.dispatch({ type: 'clearAnswer' })
-                    s.play()
-                  }}
-                >
-                  Keep going
-                </button>
+            {upNext.map((sec) => (
+              <div className="up-next-row" key={sec.id}>
+                <span>{sec.title}</span>
+                {sec.est_minutes != null && <span className="muted">{sec.est_minutes} min</span>}
               </div>
-            )}
-          </section>
+            ))}
+          </div>
         )}
+
+        <form onSubmit={submit} className="ask-row">
+          <input
+            ref={inputRef}
+            type="text"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="Ask about what you just heard"
+            aria-label="Ask about what you just heard"
+          />
+          <button type="button" onClick={stopAndAsk} disabled={busy} aria-label="Stop and ask">
+            <Hand size={ICON} aria-hidden="true" /> Stop and ask
+          </button>
+        </form>
 
         <div className="transport">
           <button
-            className="primary"
+            className="round-button"
+            onClick={s.skipBack}
+            disabled={busy || current?.readable === false}
+            aria-label="Previous section"
+          >
+            <ChevronLeft size={ICON} aria-hidden="true" />
+          </button>
+          <button
+            className="round-button primary"
             onClick={() => (state.phase === 'playing' || state.phase === 'speaking' ? s.pause() : s.play())}
             disabled={busy || current?.readable === false}
             aria-label={state.phase === 'playing' || state.phase === 'speaking' ? 'Pause' : 'Play'}
           >
             {state.phase === 'playing' || state.phase === 'speaking' ? <Pause size={ICON} aria-hidden="true" /> : <Play size={ICON} aria-hidden="true" />}
-            {state.phase === 'playing' || state.phase === 'speaking' ? 'Pause' : 'Play'}
           </button>
-          <button onClick={stopAndAsk} disabled={busy} aria-label="Stop and ask">
-            <Hand size={ICON} aria-hidden="true" /> Stop and ask
-          </button>
-          <form onSubmit={submit} style={{ display: 'contents' }}>
-            <input
-              ref={inputRef}
-              type="text"
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Ask about what you just heard"
-              aria-label="Ask about what you just heard"
-            />
-          </form>
           <button
+            className="round-button"
+            onClick={s.skipForward}
+            disabled={busy || current?.readable === false}
+            aria-label="Next section"
+          >
+            <ChevronRight size={ICON} aria-hidden="true" />
+          </button>
+          <button
+            className={`round-button mic${voice.status === 'live' ? ' mic-live' : ''}`}
             onClick={voice.toggle}
             disabled={voice.status === 'connecting'}
             aria-pressed={voice.status === 'live'}
@@ -364,7 +581,21 @@ export default function Listener() {
             aria-label="Voice input"
           >
             <Mic size={ICON} aria-hidden="true" />
-            {voice.status === 'live' ? ' Listening…' : ''}
+          </button>
+        </div>
+        <div className="transport-footer">
+          <span className="muted">{voice.status === 'live' ? 'Listening…' : ''}</span>
+          <button
+            type="button"
+            className="script-toggle"
+            onClick={() => {
+              const next = !showScript
+              setShowScript(next)
+              if (next) s.getScript()
+            }}
+            aria-pressed={showScript}
+          >
+            <FileText size={16} aria-hidden="true" /> {showScript ? 'Hide script' : 'Show script'}
           </button>
         </div>
         {state.heardAs && (
@@ -380,7 +611,40 @@ export default function Listener() {
         {voice.status === 'error' && (
           <p className="notice">Voice input isn&apos;t available right now: {voice.error}</p>
         )}
+       </div>
       </main>
+
+      {showScript && (
+        <div className="script-panel" aria-label="Script" ref={scriptRef}>
+          <div className="script-panel-head">
+            <div className="script-caption">
+              Grey = heard &middot; yellow = playing now &middot; faint = not sent yet
+            </div>
+            <button
+              className="script-close"
+              onClick={() => setShowScript(false)}
+              aria-label="Hide script"
+              title="Hide script"
+            >
+              <X size={14} aria-hidden="true" />
+            </button>
+          </div>
+          {state.script.length === 0 ? (
+            <p className="notice">Nothing has been read yet.</p>
+          ) : (
+            <>
+              {state.script.slice(0, scriptVisible).map((row, i) => (
+                <p key={i} className={`script-row script-${row.status}`}>
+                  {row.text}
+                </p>
+              ))}
+              {scriptVisible < state.script.length && (
+                <div ref={scriptSentinelRef} className="script-sentinel" aria-hidden="true" />
+              )}
+            </>
+          )}
+        </div>
+      )}
     </div>
   )
 }

@@ -447,11 +447,24 @@ class ReaderSession:
         except Exception:
             return []
 
+    def sections_for(self, doc) -> list:
+        """The real section outline -- title and the same est_minutes already
+        spoken at a section transition (`sec.get("est_minutes")` in
+        read_loop) -- for a client-side "up next" list. [] before the
+        navigator has run; nothing here is estimated client-side."""
+        if doc is None or not self.has_navigator(doc):
+            return []
+        try:
+            return [{"id": s["id"], "title": s["title"], "est_minutes": s.get("est_minutes")}
+                    for s in doc.grounding.sections]
+        except Exception:
+            return []
+
     def opened_message(self, doc) -> dict:
         """document_opened, carrying the chips so no later frame has to and
         the client never clears them for the document it shows."""
         return {"type": "document_opened", "name": doc.name, "documents": self.listener_library(),
-                "topics": self.topics_for(doc)}
+                "topics": self.topics_for(doc), "sections": self.sections_for(doc)}
 
     def listener_library(self) -> list:
         """What the listener rail shows. No ids, no milliseconds, no provider."""
@@ -1023,7 +1036,8 @@ class ReaderSession:
                              fields=info.get("fields", []), elapsed_ms=ms,
                              guard_rejections=len(info.get("guard_rejections") or []))
             await broadcast({"type": "navigator", "name": doc.name, "state": "ready",
-                             "documents": self.listener_library(), "topics": self.topics_for(doc)}, socks)
+                             "documents": self.listener_library(), "topics": self.topics_for(doc),
+                             "sections": self.sections_for(doc)}, socks)
             if narrator is not None:
                 await narrator.finish()                  # "Done.", and narration_gap_ms
             if self.sink is not None:
@@ -2877,7 +2891,8 @@ async def ws_audio(request):
                                       "provider": s.descriptor,
                                       "documents": s.listener_library(),
                                       "current": s.library.current.name if s.library.current else None,
-                                      "topics": s.topics_for(s.library.current)}))
+                                      "topics": s.topics_for(s.library.current),
+                                      "sections": s.sections_for(s.library.current)}))
         async for msg in ws:
             if msg.type != WSMsgType.TEXT:
                 continue
@@ -3143,6 +3158,60 @@ async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
         c = doc.grounding.by_id.get(str(m.get("unit_id", "")))
         if c:
             await s.jump_to(socks, c["index"], str(m.get("reason") or "spoiler_offer"), ws)
+        return
+
+    if t == "get_script":
+        # Screen 3 ("Show script"): the same per-clause ledger the end-of-
+        # document recap reads from (heard / truncated@ / skipped:*), shaped
+        # for a heard / now / not-yet list. No clause id, offset, or turn id
+        # crosses the wire -- only text and a three-way status, same rule as
+        # everything else the listener page shows.
+        doc = s.library.current
+        if doc is None:
+            await ws.send_str(json.dumps({"type": "script", "clauses": []}))
+            return
+        g = doc.grounding
+        sess = doc.session
+        rows = []
+        for c in g.clauses:
+            if not is_readable(c):
+                continue
+            state = sess.ledger.get(c["id"])
+            if c["id"] == sess.last_heard_unit_id:
+                status = "now"
+            elif state == "heard" or (isinstance(state, str) and state.startswith("truncated@")):
+                status = "heard"
+            else:
+                status = "not_yet"
+            rows.append({"text": c["text_display"], "status": status})
+        await ws.send_str(json.dumps({"type": "script", "clauses": rows}))
+        return
+
+    if t == "skip_forward":
+        # The transport's forward control: the same "skip to the next
+        # section" jump the typed/spoken "skip" intent already does -- no
+        # new position semantics, just a direct button for it.
+        doc = s.library.current
+        g = doc.grounding
+        sess = doc.session
+        cur = g.section_of(max(sess.read_index, 0))
+        nxt = next((x for x in g.sections if x["start"] > (cur["start"] if cur else -1)), None)
+        if nxt:
+            await s.jump_to(socks, nxt["start"], "skip", ws)
+        return
+
+    if t == "skip_back":
+        # Symmetric with skip_forward: the section before the one containing
+        # the read position, so pressing back always lands somewhere earlier
+        # than what's on screen even from partway into a section.
+        doc = s.library.current
+        g = doc.grounding
+        sess = doc.session
+        cur = g.section_of(max(sess.read_index, 0))
+        earlier = [x for x in g.sections if x["start"] < (cur["start"] if cur else 0)]
+        prev = earlier[-1] if earlier else (g.sections[0] if g.sections else None)
+        if prev:
+            await s.jump_to(socks, prev["start"], "back", ws)
         return
 
     if t == "topic":

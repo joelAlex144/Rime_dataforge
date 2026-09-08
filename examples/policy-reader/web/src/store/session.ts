@@ -292,6 +292,9 @@ export type Session = {
   open: (name: string) => void
   remove: (docId: string, force?: boolean) => Promise<boolean>
   jump: (unitId: string) => void
+  skipForward: () => void
+  skipBack: () => void
+  getScript: () => void
   topic: (sectionId: string | null) => void
   choose: (choice: 'now' | 'overview_first') => void
   player: AudioPlayer
@@ -561,6 +564,15 @@ export function useSession(): Session {
     [send],
   )
   const jump = useCallback((unitId: string) => cut({ type: 'jump', unit_id: unitId, reason: 'spoiler_offer' }), [cut])
+  // Transport back/forward: section-granular (the next/previous section
+  // boundary from the read position), same interruption path as any other
+  // jump. Not a time seek -- there is no continuous position to seek to.
+  const skipForward = useCallback(() => cut({ type: 'skip_forward' }), [cut])
+  const skipBack = useCallback(() => cut({ type: 'skip_back' }), [cut])
+  // Screen 3 ("Show script"): pull the current heard/now/not-yet ledger on
+  // demand rather than carrying it on every message -- it's a full
+  // document's worth of text, not something the read loop needs each turn.
+  const getScript = useCallback(() => send({ type: 'get_script' }), [send])
   const topic = useCallback((sectionId: string | null) => cut({ type: 'topic', section_id: sectionId }), [cut])
   const choose = useCallback((choice: 'now' | 'overview_first') => send({ type: 'choice', choice }), [send])
   // A button on a prompt: the same `ask` the voice would hear, routed by the
@@ -580,12 +592,15 @@ export function useSession(): Session {
       open,
       remove,
       jump,
+      skipForward,
+      skipBack,
+      getScript,
       topic,
       choose,
       reply,
       player: playerRef.current,
     }),
-    [state, send, interrupt, play, pause, ask, resume, open, remove, jump, topic, choose, reply],
+    [state, send, interrupt, play, pause, ask, resume, open, remove, jump, skipForward, skipBack, getScript, topic, choose, reply],
   )
 }
 
