@@ -1,0 +1,1266 @@
+{
+ "doc_id": "cc425ea573bcccb3",
+ "name": "cc425ea573bcccb3",
+ "title": "RELHLIP21001V012021_2019-2020",
+ "source": {
+  "type": "pdf",
+  "path_or_url": ".incoming_b47f23fb_RELHLIP21001V012021_2019-2020.pdf",
+  "sha256": "cc425ea573bcccb3975ef9d675ea659e22d383fae64707e873c259ca5a4cc337",
+  "institutional_contacts": [
+   {
+    "label": "email",
+    "redacted": "rgic…"
+   },
+   {
+    "label": "email",
+    "redacted": "rgic…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "Bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…"
+   }
+  ],
+  "text_sha256": "d5b82cf6145bbfcf9186ec7053998516fb3dca9e32271e6214b72d2ca1a68a77"
+ },
+ "stages": [
+  "extract",
+  "structure",
+  "segment",
+  "normalize",
+  "pii_scan",
+  "validate",
+  "write"
+ ],
+ "elapsed_ms": {
+  "extract": 69214.7,
+  "structure": 77.7,
+  "segment": 4.6,
+  "normalize": 51.2,
+  "pii_scan": 13.0,
+  "validate": 7.2,
+  "write": 732.9,
+  "total": 70101.6
+ },
+ "structure": {
+  "tool": "docling",
+  "version": "2.69.1",
+  "docling_json": "cc425ea573bcccb3.docling.json",
+  "pages": 21,
+  "labels": {
+   "caption": 1,
+   "checkbox_unselected": 21,
+   "list_item": 267,
+   "page_footer": 2,
+   "picture": 6,
+   "section_header": 82,
+   "table": 16,
+   "text": 262
+  },
+  "demoted": 22,
+  "placeholders_stripped": 0,
+  "splits": 0,
+  "tables": [
+   {
+    "key": "t1",
+    "rows": 9,
+    "csv": "cc425ea573bcccb3.t1.csv"
+   },
+   {
+    "key": "t2",
+    "rows": 2,
+    "csv": "cc425ea573bcccb3.t2.csv"
+   },
+   {
+    "key": "t3",
+    "rows": 8,
+    "csv": "cc425ea573bcccb3.t3.csv"
+   },
+   {
+    "key": "t4",
+    "rows": 7,
+    "csv": "cc425ea573bcccb3.t4.csv"
+   },
+   {
+    "key": "t5",
+    "rows": 8,
+    "csv": "cc425ea573bcccb3.t5.csv"
+   },
+   {
+    "key": "t6",
+    "rows": 11,
+    "csv": "cc425ea573bcccb3.t6.csv"
+   },
+   {
+    "key": "t7",
+    "rows": 41,
+    "csv": "cc425ea573bcccb3.t7.csv"
+   },
+   {
+    "key": "t8",
+    "rows": 29,
+    "csv": "cc425ea573bcccb3.t8.csv"
+   },
+   {
+    "key": "t9",
+    "rows": 9,
+    "csv": "cc425ea573bcccb3.t9.csv"
+   },
+   {
+    "key": "t10",
+    "rows": 29,
+    "csv": "cc425ea573bcccb3.t10.csv"
+   },
+   {
+    "key": "t11",
+    "rows": 9,
+    "csv": "cc425ea573bcccb3.t11.csv"
+   },
+   {
+    "key": "t12",
+    "rows": 16,
+    "csv": "cc425ea573bcccb3.t12.csv"
+   },
+   {
+    "key": "t13",
+    "rows": 19,
+    "csv": "cc425ea573bcccb3.t13.csv"
+   },
+   {
+    "key": "t14",
+    "rows": 8,
+    "csv": "cc425ea573bcccb3.t14.csv"
+   },
+   {
+    "key": "t15",
+    "rows": 6,
+    "csv": "cc425ea573bcccb3.t15.csv"
+   },
+   {
+    "key": "t16",
+    "rows": 3,
+    "csv": "cc425ea573bcccb3.t16.csv"
+   }
+  ]
+ },
+ "pii_scan": {
+  "personal": [],
+  "institutional": [
+   {
+    "label": "email",
+    "redacted": "rgic…",
+    "clause_id": "sec-68-p3"
+   },
+   {
+    "label": "email",
+    "redacted": "rgic…",
+    "clause_id": "sec-68-t4-r6"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-72-t14-r2"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-72-t14-r3"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-72-t14-r4"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-72-t14-r5"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-72-t14-r6"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-72-t14-r7"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-72-t14-r8"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-72-t15-r2"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-72-t15-r3"
+   },
+   {
+    "label": "email",
+    "redacted": "Bima…",
+    "clause_id": "sec-72-t15-r4"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-72-t15-r5"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-72-t15-r6"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-72-t16-r2"
+   },
+   {
+    "label": "email",
+    "redacted": "bima…",
+    "clause_id": "sec-72-t16-r3"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…",
+    "clause_id": "sec-intro-b1"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…",
+    "clause_id": "sec-68-p6"
+   },
+   {
+    "label": "phone",
+    "redacted": "1800…",
+    "clause_id": "sec-68-t4-r5"
+   }
+  ],
+  "note": "Informational. Nothing here removed or altered any text; the developer view shows it as the review trail."
+ },
+ "validate": {
+  "clause_count": 558,
+  "by_kind": {
+   "body": 177,
+   "boilerplate": 45,
+   "definition": 26,
+   "heading": 80,
+   "table_row": 214,
+   "table_stub": 16
+  },
+  "body_clauses": 203,
+  "readable": true,
+  "splits": [],
+  "folds_and_merges": [
+   "folded 174 list items into their runs (max 600 chars)",
+   "merged 133 short clauses (< 120 chars) into the next"
+  ],
+  "oversized_ok": true,
+  "max_clause_chars": 936,
+  "boilerplate_first_15": [
+   {
+    "id": "sec-intro-b1",
+    "text": "reliancegeneral.co.in | 1800 3009 (toll free ) |",
+    "reason": "front_matter"
+   },
+   {
+    "id": "sec-intro-b2",
+    "text": "022 - 4890 3009 (Paid)",
+    "reason": "front_matter"
+   },
+   {
+    "id": "sec-intro-b3",
+    "text": "IRDAI Registration No. 103.",
+    "reason": "registration_line"
+   },
+   {
+    "id": "sec-intro-b4",
+    "text": "Registered Office & Corporate Office: Reliance Centre, t h South Wing, 4 Floor, Off. Western Express Highway, Santacruz ",
+    "reason": "registration_line"
+   },
+   {
+    "id": "sec-intro-b5",
+    "text": "UIN -RELHLIP21001V012021.",
+    "reason": "front_matter"
+   },
+   {
+    "id": "sec-intro-b6",
+    "text": "Corporate Identity No.: U66603MH2000PLC128300.",
+    "reason": "registration_line"
+   },
+   {
+    "id": "sec-intro-b7",
+    "text": "An ISO 9001:2015 Certified Company RGI/MCOM/CO/AROGYA_SANJEEVANI_POLICY WORDING/Ver.0.1/020420.",
+    "reason": "front_matter"
+   },
+   {
+    "id": "sec-4-b1",
+    "text": "01",
+    "reason": "page_number"
+   },
+   {
+    "id": "sec-4-b2",
+    "text": "03",
+    "reason": "page_number"
+   },
+   {
+    "id": "sec-4-3-b1",
+    "text": "09",
+    "reason": "page_number"
+   },
+   {
+    "id": "sec-14-b1",
+    "text": "11",
+    "reason": "page_number"
+   },
+   {
+    "id": "sec-14-b2",
+    "text": "12",
+    "reason": "page_number"
+   },
+   {
+    "id": "sec-7-8-b1",
+    "text": "13",
+    "reason": "page_number"
+   },
+   {
+    "id": "sec-36-b1",
+    "text": "15",
+    "reason": "page_number"
+   },
+   {
+    "id": "sec-10-4-b1",
+    "text": "17",
+    "reason": "page_number"
+   }
+  ],
+  "expected_range": {
+   "reference": "150-250 clauses for a ~12,000-word wording",
+   "words": 12116,
+   "scaled_range": [
+    151,
+    252
+   ],
+   "in_range": false
+  },
+  "other_notes": [
+   "childless heading read as body: 'AROGYA SANJEEVANI POLICY, RELIANCE GENERAL'",
+   "childless heading read as body: 'Any expenses incurred on Domiciliary Hospitalization and OPD'"
+  ],
+  "unknown_labels": {
+   "checkbox_unselected": 21
+  },
+  "warnings": []
+ },
+ "readable": true,
+ "provenance": null,
+ "enrichment": {
+  "done": [
+   "overview",
+   "sections",
+   "suggested_questions",
+   "tables",
+   "tags",
+   "topics"
+  ],
+  "provider": "ollama",
+  "model": "granite4.2:3b",
+  "elapsed_ms": 1171629,
+  "fields": [
+   "tags",
+   "suggested_questions",
+   "tables"
+  ],
+  "guard_rejections": [
+   {
+    "field": "overview",
+    "reasons": [
+     "unparseable reply: Extra data: line 2 column 1 (char 1058)",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "This document, RELHLIP21001V012021_2019-2020, has 28 sections. I'll read them in order; interrupt me any time."
+   },
+   {
+    "field": "tags:batch0",
+    "reasons": [
+     "Expecting property name enclosed in double quotes: line 1 column 40 (char 39)"
+    ]
+   },
+   {
+    "field": "tags:batch2",
+    "reasons": [
+     "Expecting value: line 1 column 25 (char 24)"
+    ]
+   },
+   {
+    "field": "tags:batch3",
+    "reasons": [
+     "Extra data: line 21 column 1 (char 387)"
+    ]
+   },
+   {
+    "field": "tags:batch4",
+    "reasons": [
+     "Expecting value: line 1 column 25 (char 24)"
+    ]
+   },
+   {
+    "field": "tags:batch5",
+    "reasons": [
+     "Extra data: line 2 column 1 (char 31)"
+    ]
+   },
+   {
+    "field": "tags:batch6",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch7",
+    "reasons": [
+     "Expecting value: line 1 column 25 (char 24)"
+    ]
+   },
+   {
+    "field": "tags:batch8",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch9",
+    "reasons": [
+     "Extra data: line 3 column 1 (char 409)"
+    ]
+   },
+   {
+    "field": "tags:batch10",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch11",
+    "reasons": [
+     "Extra data: line 1 column 33 (char 32)"
+    ]
+   },
+   {
+    "field": "tags:batch12",
+    "reasons": [
+     "Expecting value: line 1 column 25 (char 24)"
+    ]
+   },
+   {
+    "field": "tags:batch13",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch14",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch15",
+    "reasons": [
+     "Expecting value: line 1 column 25 (char 24)"
+    ]
+   },
+   {
+    "field": "tags:batch17",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch19",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch20",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "question:sec-2",
+    "reasons": [
+     "clause id 'sec-2-p1'"
+    ],
+    "dropped": "What does clause sec-2-p1 state regarding the purpose of this policy?"
+   },
+   {
+    "field": "questions:sec-3",
+    "reasons": [
+     "Expecting value: line 2 column 16 (char 17)"
+    ]
+   },
+   {
+    "field": "questions:sec-5",
+    "reasons": [
+     "Expecting ':' delimiter: line 1 column 19 (char 18)"
+    ]
+   },
+   {
+    "field": "question:sec-8",
+    "reasons": [
+     "clause id 'sec-4-3-p19'"
+    ],
+    "dropped": "According to clause sec-4-3-p19, what is covered regarding procedures that can b"
+   },
+   {
+    "field": "question:sec-8",
+    "reasons": [
+     "clause id 'sec-4-3-p32'"
+    ],
+    "dropped": "What procedure types are listed under sec-4-3-p32 through sec-4-3-p47 in the doc"
+   },
+   {
+    "field": "question:sec-11",
+    "reasons": [
+     "clause id 'sec-11-p9'"
+    ],
+    "dropped": "Under which conditions does the CB reduce according to sec-11-p9?"
+   },
+   {
+    "field": "question:sec-11",
+    "reasons": [
+     "clause id 'sec-11-p12'"
+    ],
+    "dropped": "What is the basis for adding and making available the CB under sec-11-p12?"
+   },
+   {
+    "field": "questions:sec-14",
+    "reasons": [
+     "Expecting property name enclosed in double quotes: line 5 column 5 (char 50)"
+    ]
+   },
+   {
+    "field": "question:sec-33",
+    "reasons": [
+     "clause id 'sec-1-1-i'"
+    ],
+    "dropped": "According to clause sec-1-1-i, how is pre-authorization handled for treatment ta"
+   },
+   {
+    "field": "question:sec-33",
+    "reasons": [
+     "clause id 'sec-1-2-p1'"
+    ],
+    "dropped": "What document or form must be completed and submitted before reimbursement can o"
+   },
+   {
+    "field": "question:sec-38",
+    "reasons": [
+     "clause id 'sec-9-4-i'"
+    ],
+    "dropped": "According to sec-9-4-i, how long does the Company have to reject or settle a cla"
+   },
+   {
+    "field": "question:sec-38",
+    "reasons": [
+     "clause id 'sec-9-3-p1'"
+    ],
+    "dropped": "What is the copayment percentage mentioned in sec-9-3-p1 for claims under the Po"
+   },
+   {
+    "field": "question:sec-42",
+    "reasons": [
+     "clause id 'sec-9-6-p1'"
+    ],
+    "dropped": "\"What does sec-9-6-p1 state about the currency in which claims must be payable?\""
+   },
+   {
+    "field": "question:sec-44",
+    "reasons": [
+     "clause id 'sec-10-2-p1'"
+    ],
+    "dropped": "According to clause sec-10-2-p1, what is a condition precedent for the Company t"
+   },
+   {
+    "field": "question:sec-44",
+    "reasons": [
+     "clause id 'sec-10-4-p1'"
+    ],
+    "dropped": "What must the Insured Person do regarding medical records as specified in clause"
+   },
+   {
+    "field": "question:sec-44",
+    "reasons": [
+     "clause id 'sec-10-7-p1'"
+    ],
+    "dropped": "According to clause sec-10-7-p1, where must all medical treatment for the purpos"
+   },
+   {
+    "field": "question:sec-68",
+    "reasons": [
+     "clause id 'sec-68-p1'"
+    ],
+    "dropped": "What are the different methods for submitting a grievance according to clause se"
+   },
+   {
+    "field": "question:sec-68",
+    "reasons": [
+     "clause id 'sec-68-p3'"
+    ],
+    "dropped": "Where can I find the details of the grievance officer as mentioned in clause sec"
+   },
+   {
+    "field": "question:sec-68",
+    "reasons": [
+     "clause id 'sec-68-p6'"
+    ],
+    "dropped": "How can I contact the insurance company for grievance redressal using the teleph"
+   },
+   {
+    "field": "question:sec-70",
+    "reasons": [
+     "clause id 'sec-70-1'"
+    ],
+    "dropped": "Which items are listed in Clause sec-70-1 that are not covered by the policy?"
+   },
+   {
+    "field": "questions:sec-72",
+    "reasons": [
+     "Expecting value: line 1 column 15 (char 14)"
+    ]
+   },
+   {
+    "field": "question:sec-74",
+    "reasons": [
+     "clause id 'sec-74-p3-c'"
+    ],
+    "dropped": "What is the gender listed in clause sec-74-p3-c?"
+   },
+   {
+    "field": "question:sec-75",
+    "reasons": [
+     "clause id 'sec-75-p3'"
+    ],
+    "dropped": "What does clause sec-75-p3 specify regarding the duration of the present ailment"
+   },
+   {
+    "field": "question:sec-75",
+    "reasons": [
+     "clause id 'sec-75-p3'"
+    ],
+    "dropped": "Which part of clause sec-75-p3 asks for the policy number or name of the corpora"
+   },
+   {
+    "field": "question:sec-78",
+    "reasons": [
+     "clause id 'sec-78-p9'"
+    ],
+    "dropped": "What is the total expected cost of hospitalization for this patient, according t"
+   },
+   {
+    "field": "question:sec-78",
+    "reasons": [
+     "clause id 'sec-78-p5-i'"
+    ],
+    "dropped": "According to clause sec-78-p5-i, what type of charges are included in the all in"
+   },
+   {
+    "field": "questions:sec-80",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "table:sec-4-t1",
+    "reasons": [
+     "unparseable reply: Expecting ':' delimiter: line 3 column 1 (char 510)",
+     "unparseable reply: Expecting value: line 1 column 17 (char 16)"
+    ],
+    "fallback": "There is a table here: 0, 1, 2. Ask me for any row."
+   },
+   {
+    "field": "row:sec-4-t1-r5",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "forbidden phrase 'recommended'"
+    ],
+    "fallback": "0: 3.28; 1: Medical Advice means any consultation or advice from a Medical Practitioner including the issue of any presc"
+   },
+   {
+    "field": "table:sec-10-10-t3",
+    "reasons": [
+     "unparseable reply: Extra data: line 1 column 15 (char 14)",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "There is a table here: 8 entries, 0 to 6monthsto12months. Ask me for any row."
+   },
+   {
+    "field": "row:sec-68-1-t6-r11",
+    "reasons": [
+     "unparseable reply: Extra data: line 4 column 1 (char 48)",
+     "unparseable reply: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+    ],
+    "fallback": "Co Pay: 5% co pay on all claims."
+   },
+   {
+    "field": "table:sec-70-t7",
+    "reasons": [
+     "unparseable reply: Expecting ':' delimiter: line 4 column 1 (char 393)",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "There is a table here: 41 entries, SI No to 40. Ask me for any row."
+   },
+   {
+    "field": "table:sec-70-t8",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "There is a table here: 29 entries, 0 to 68. Ask me for any row."
+   },
+   {
+    "field": "row:sec-70-2-t10-r20",
+    "reasons": [
+     "unparseable reply: Extra data: line 4 column 1 (char 149)",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "28: DIABETIC CHART CHARGES."
+   },
+   {
+    "field": "row:sec-72-t14-r3",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "Karnataka: Email: bimalokpal.bengaluru@ecoi.co.in Office of the Insurance Ombudsman,Jeevan Soudha Building,PID No. 57-27"
+   },
+   {
+    "field": "row:sec-72-t14-r6",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "Punjab, Haryana, Jammu &Kashmir, Chandigarh Himachal Pradesh,: CHANDIGARH - Dr. Dinesh Kumar Verma Office of the Insuran"
+   },
+   {
+    "field": "row:sec-72-t14-r7",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "Tamil Nadu, Karaikal (which are part of Pondicherry) Pondicherry Town and: Email: bimalokpal.chennai@ecoi.co.in CHENNAI "
+   },
+   {
+    "field": "row:sec-72-t15-r2",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "Assam, Manipur, Mizoram, Meghalaya, Arunachal Pradesh, Nagaland and Tripura: Email: bimalokpal.guwahati@ecoi.co.in Tel.:"
+   },
+   {
+    "field": "row:sec-72-t15-r3",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "part of Territory of Pondicherry. Andhra Pradesh, Telangana, Yanam and: Tel.: 040 - 67504123 / 23312122 HYDERABAD - Shri"
+   },
+   {
+    "field": "row:sec-72-t15-r5",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "Lakshadweep, Kerala, Mahe-a part of Pondicherry.: Office of the Insurance Ombudsman, Opp. Cochin Shipyard, M. G. Road, E"
+   },
+   {
+    "field": "row:sec-72-t15-r6",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "Sikkim, Andaman &Nicobar Islands. West Bengal,: KOLKATA - 700 072. Tel.: 033 - 22124339 / 22124340 Email: bimalokpal.kol"
+   },
+   {
+    "field": "tags:batch0",
+    "reasons": [
+     "Expecting property name enclosed in double quotes: line 1 column 40 (char 39)"
+    ]
+   },
+   {
+    "field": "tags:batch2",
+    "reasons": [
+     "Expecting value: line 1 column 25 (char 24)"
+    ]
+   },
+   {
+    "field": "tags:batch3",
+    "reasons": [
+     "Extra data: line 21 column 1 (char 387)"
+    ]
+   },
+   {
+    "field": "tags:batch4",
+    "reasons": [
+     "Expecting value: line 1 column 25 (char 24)"
+    ]
+   },
+   {
+    "field": "tags:batch5",
+    "reasons": [
+     "Extra data: line 2 column 1 (char 31)"
+    ]
+   },
+   {
+    "field": "tags:batch6",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch7",
+    "reasons": [
+     "Expecting value: line 1 column 25 (char 24)"
+    ]
+   },
+   {
+    "field": "tags:batch8",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch9",
+    "reasons": [
+     "Extra data: line 3 column 1 (char 409)"
+    ]
+   },
+   {
+    "field": "tags:batch10",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch11",
+    "reasons": [
+     "Extra data: line 1 column 33 (char 32)"
+    ]
+   },
+   {
+    "field": "tags:batch12",
+    "reasons": [
+     "Expecting value: line 1 column 25 (char 24)"
+    ]
+   },
+   {
+    "field": "tags:batch13",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch14",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch15",
+    "reasons": [
+     "Expecting value: line 1 column 25 (char 24)"
+    ]
+   },
+   {
+    "field": "tags:batch17",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch19",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "tags:batch20",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "question:sec-2",
+    "reasons": [
+     "clause id 'sec-2-p1'"
+    ],
+    "dropped": "What does clause sec-2-p1 state regarding the purpose of this policy?"
+   },
+   {
+    "field": "questions:sec-3",
+    "reasons": [
+     "Expecting value: line 2 column 16 (char 17)"
+    ]
+   },
+   {
+    "field": "questions:sec-5",
+    "reasons": [
+     "Expecting ':' delimiter: line 1 column 19 (char 18)"
+    ]
+   },
+   {
+    "field": "question:sec-8",
+    "reasons": [
+     "clause id 'sec-4-3-p19'"
+    ],
+    "dropped": "According to clause sec-4-3-p19, what is covered regarding procedures that can b"
+   },
+   {
+    "field": "question:sec-8",
+    "reasons": [
+     "clause id 'sec-4-3-p32'"
+    ],
+    "dropped": "What procedure types are listed under sec-4-3-p32 through sec-4-3-p47 in the doc"
+   },
+   {
+    "field": "question:sec-11",
+    "reasons": [
+     "clause id 'sec-11-p9'"
+    ],
+    "dropped": "Under which conditions does the CB reduce according to sec-11-p9?"
+   },
+   {
+    "field": "question:sec-11",
+    "reasons": [
+     "clause id 'sec-11-p12'"
+    ],
+    "dropped": "What is the basis for adding and making available the CB under sec-11-p12?"
+   },
+   {
+    "field": "questions:sec-14",
+    "reasons": [
+     "Expecting property name enclosed in double quotes: line 5 column 5 (char 50)"
+    ]
+   },
+   {
+    "field": "question:sec-33",
+    "reasons": [
+     "clause id 'sec-1-1-i'"
+    ],
+    "dropped": "According to clause sec-1-1-i, how is pre-authorization handled for treatment ta"
+   },
+   {
+    "field": "question:sec-33",
+    "reasons": [
+     "clause id 'sec-1-2-p1'"
+    ],
+    "dropped": "What document or form must be completed and submitted before reimbursement can o"
+   },
+   {
+    "field": "question:sec-38",
+    "reasons": [
+     "clause id 'sec-9-4-i'"
+    ],
+    "dropped": "According to sec-9-4-i, how long does the Company have to reject or settle a cla"
+   },
+   {
+    "field": "question:sec-38",
+    "reasons": [
+     "clause id 'sec-9-3-p1'"
+    ],
+    "dropped": "What is the copayment percentage mentioned in sec-9-3-p1 for claims under the Po"
+   },
+   {
+    "field": "question:sec-42",
+    "reasons": [
+     "clause id 'sec-9-6-p1'"
+    ],
+    "dropped": "\"What does sec-9-6-p1 state about the currency in which claims must be payable?\""
+   },
+   {
+    "field": "question:sec-44",
+    "reasons": [
+     "clause id 'sec-10-2-p1'"
+    ],
+    "dropped": "According to clause sec-10-2-p1, what is a condition precedent for the Company t"
+   },
+   {
+    "field": "question:sec-44",
+    "reasons": [
+     "clause id 'sec-10-4-p1'"
+    ],
+    "dropped": "What must the Insured Person do regarding medical records as specified in clause"
+   },
+   {
+    "field": "question:sec-44",
+    "reasons": [
+     "clause id 'sec-10-7-p1'"
+    ],
+    "dropped": "According to clause sec-10-7-p1, where must all medical treatment for the purpos"
+   },
+   {
+    "field": "question:sec-68",
+    "reasons": [
+     "clause id 'sec-68-p1'"
+    ],
+    "dropped": "What are the different methods for submitting a grievance according to clause se"
+   },
+   {
+    "field": "question:sec-68",
+    "reasons": [
+     "clause id 'sec-68-p3'"
+    ],
+    "dropped": "Where can I find the details of the grievance officer as mentioned in clause sec"
+   },
+   {
+    "field": "question:sec-68",
+    "reasons": [
+     "clause id 'sec-68-p6'"
+    ],
+    "dropped": "How can I contact the insurance company for grievance redressal using the teleph"
+   },
+   {
+    "field": "question:sec-70",
+    "reasons": [
+     "clause id 'sec-70-1'"
+    ],
+    "dropped": "Which items are listed in Clause sec-70-1 that are not covered by the policy?"
+   },
+   {
+    "field": "questions:sec-72",
+    "reasons": [
+     "Expecting value: line 1 column 15 (char 14)"
+    ]
+   },
+   {
+    "field": "question:sec-74",
+    "reasons": [
+     "clause id 'sec-74-p3-c'"
+    ],
+    "dropped": "What is the gender listed in clause sec-74-p3-c?"
+   },
+   {
+    "field": "question:sec-75",
+    "reasons": [
+     "clause id 'sec-75-p3'"
+    ],
+    "dropped": "What does clause sec-75-p3 specify regarding the duration of the present ailment"
+   },
+   {
+    "field": "question:sec-75",
+    "reasons": [
+     "clause id 'sec-75-p3'"
+    ],
+    "dropped": "Which part of clause sec-75-p3 asks for the policy number or name of the corpora"
+   },
+   {
+    "field": "question:sec-78",
+    "reasons": [
+     "clause id 'sec-78-p9'"
+    ],
+    "dropped": "What is the total expected cost of hospitalization for this patient, according t"
+   },
+   {
+    "field": "question:sec-78",
+    "reasons": [
+     "clause id 'sec-78-p5-i'"
+    ],
+    "dropped": "According to clause sec-78-p5-i, what type of charges are included in the all in"
+   },
+   {
+    "field": "questions:sec-80",
+    "reasons": [
+     "no JSON object in the reply"
+    ]
+   },
+   {
+    "field": "table:sec-4-t1",
+    "reasons": [
+     "unparseable reply: Expecting ':' delimiter: line 3 column 1 (char 510)",
+     "unparseable reply: Expecting value: line 1 column 17 (char 16)"
+    ],
+    "fallback": "There is a table here: 0, 1, 2. Ask me for any row."
+   },
+   {
+    "field": "row:sec-4-t1-r5",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "forbidden phrase 'recommended'"
+    ],
+    "fallback": "0: 3.28; 1: Medical Advice means any consultation or advice from a Medical Practitioner including the issue of any presc"
+   },
+   {
+    "field": "table:sec-10-10-t3",
+    "reasons": [
+     "unparseable reply: Extra data: line 1 column 15 (char 14)",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "There is a table here: 8 entries, 0 to 6monthsto12months. Ask me for any row."
+   },
+   {
+    "field": "row:sec-68-1-t6-r11",
+    "reasons": [
+     "unparseable reply: Extra data: line 4 column 1 (char 48)",
+     "unparseable reply: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+    ],
+    "fallback": "Co Pay: 5% co pay on all claims."
+   },
+   {
+    "field": "table:sec-70-t7",
+    "reasons": [
+     "unparseable reply: Expecting ':' delimiter: line 4 column 1 (char 393)",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "There is a table here: 41 entries, SI No to 40. Ask me for any row."
+   },
+   {
+    "field": "table:sec-70-t8",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "There is a table here: 29 entries, 0 to 68. Ask me for any row."
+   },
+   {
+    "field": "row:sec-70-2-t10-r20",
+    "reasons": [
+     "unparseable reply: Extra data: line 4 column 1 (char 149)",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "28: DIABETIC CHART CHARGES."
+   },
+   {
+    "field": "row:sec-72-t14-r3",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "Karnataka: Email: bimalokpal.bengaluru@ecoi.co.in Office of the Insurance Ombudsman,Jeevan Soudha Building,PID No. 57-27"
+   },
+   {
+    "field": "row:sec-72-t14-r6",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "Punjab, Haryana, Jammu &Kashmir, Chandigarh Himachal Pradesh,: CHANDIGARH - Dr. Dinesh Kumar Verma Office of the Insuran"
+   },
+   {
+    "field": "row:sec-72-t14-r7",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "Tamil Nadu, Karaikal (which are part of Pondicherry) Pondicherry Town and: Email: bimalokpal.chennai@ecoi.co.in CHENNAI "
+   },
+   {
+    "field": "row:sec-72-t15-r2",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "Assam, Manipur, Mizoram, Meghalaya, Arunachal Pradesh, Nagaland and Tripura: Email: bimalokpal.guwahati@ecoi.co.in Tel.:"
+   },
+   {
+    "field": "row:sec-72-t15-r3",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "part of Territory of Pondicherry. Andhra Pradesh, Telangana, Yanam and: Tel.: 040 - 67504123 / 23312122 HYDERABAD - Shri"
+   },
+   {
+    "field": "row:sec-72-t15-r5",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "Lakshadweep, Kerala, Mahe-a part of Pondicherry.: Office of the Insurance Ombudsman, Opp. Cochin Shipyard, M. G. Road, E"
+   },
+   {
+    "field": "row:sec-72-t15-r6",
+    "reasons": [
+     "unparseable reply: no JSON object in the reply",
+     "unparseable reply: no JSON object in the reply"
+    ],
+    "fallback": "Sikkim, Andaman &Nicobar Islands. West Bengal,: KOLKATA - 700 072. Tel.: 033 - 22124339 / 22124340 Email: bimalokpal.kol"
+   }
+  ],
+  "tokens": {
+   "in": 118359,
+   "out": 69650
+  }
+ }
+}

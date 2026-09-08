@@ -252,6 +252,103 @@
    "readable": true
   },
   {
+   "name": "cc425ea573bcccb3",
+   "doc_id": "cc425ea573bcccb3",
+   "title": "RELHLIP21001V012021_2019-2020",
+   "spoken_title": "Arogya Sanjeevani Policy, Reliance General",
+   "path": "cc425ea573bcccb3.json",
+   "source": {
+    "type": "pdf",
+    "path_or_url": ".incoming_b47f23fb_RELHLIP21001V012021_2019-2020.pdf",
+    "sha256": "cc425ea573bcccb3975ef9d675ea659e22d383fae64707e873c259ca5a4cc337",
+    "institutional_contacts": [
+     {
+      "label": "email",
+      "redacted": "rgic…"
+     },
+     {
+      "label": "email",
+      "redacted": "rgic…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "Bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     }
+    ],
+    "text_sha256": "d5b82cf6145bbfcf9186ec7053998516fb3dca9e32271e6214b72d2ca1a68a77"
+   },
+   "clause_count": 558,
+   "reviewed": false,
+   "readable": true,
+   "report": "cc425ea573bcccb3.ingest_report.json",
+   "referral": "the team that publishes this document",
+   "ingested_at": "2026-09-08T13:04:53Z"
+  },
+  {
    "name": "home_loan_mitc",
    "doc_id": "47a0feca107a0723",
    "title": "Home Loan Most Important Terms and Conditions",

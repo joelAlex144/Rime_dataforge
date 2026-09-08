@@ -19,6 +19,7 @@ golden set stays reproducible offline.
 """
 from __future__ import annotations
 
+import contextvars
 import re
 from dataclasses import dataclass
 
@@ -102,14 +103,37 @@ def roman_to_int(s: str) -> int | None:
 
 
 def paren_part(p: str) -> str:
-    """'(b)' -> 'b', '(ii)' -> 'two', '(3)' -> 'three'."""
+    """'(b)' -> 'b', '(ii)' -> 'two', '(II)' -> 'two', '(3)' -> 'three'."""
     inner = p.strip("()")
     if inner.isdigit():
         return cardinal(int(inner))
-    r = roman_to_int(inner)
-    if r is not None and len(inner) > 1 or inner in ("i", "v", "x"):
-        return cardinal(r) if r is not None else inner
-    return inner.lower()
+    low = inner.lower()
+    r = roman_to_int(low)
+    if r is not None and (len(low) > 1 or low in ("i", "v", "x")):
+        return cardinal(r)
+    return low
+
+
+# Standalone list markers. "(ii)", "(IV)", "clauses (i) and (ii)", a line that
+# starts "iii." or "iv)", and "Section IV" / "Part II". Multi-letter numerals
+# are always roman. A single "i", "v" or "x" is a letter in an (a)...(z) list
+# and a numeral in an (i)...(x) list, so it is read as a number only when the
+# same text also carries an unambiguous roman marker; the flag is set per
+# text by normalize_with_map (a ContextVar, so worker threads do not share it).
+_ROMAN_CONTEXT: contextvars.ContextVar = contextvars.ContextVar("roman_context", default=False)
+_ROMAN_MULTI = re.compile(r"\((?:ii|iii|iv|vi|vii|viii|ix|xi|xii|xiii|xiv|xv|xvi|xvii|xviii|xix|xx)\)|"
+                          r"(?:^|(?<=[\n.;:]\s))(?:ii|iii|iv|vi|vii|viii|ix)[.)]\s", re.I | re.M)
+
+
+def _roman_marker(raw: str) -> str | None:
+    """Spoken cardinal for a roman list marker, or None to leave it alone."""
+    low = raw.lower()
+    n = roman_to_int(low)
+    if n is None or n > 40:
+        return None
+    if len(low) == 1 and not _ROMAN_CONTEXT.get():
+        return None
+    return cardinal(n)
 
 
 # ------------------------------------------------------------------- handlers
@@ -214,6 +238,30 @@ def _h_decimal(m: re.Match) -> str:
     return decimal_words(m.group(0))
 
 
+def _h_roman_paren(m: re.Match) -> str:
+    spoken = _roman_marker(m.group("rp"))
+    if spoken is None:
+        return m.group(0)
+    # A marker that opens a sentence gets a pause after it: "(ii) The insured
+    # shall" -> "two, The insured shall"; mid-sentence "clause (ii) above" does not.
+    before = m.string[:m.start()].rstrip()
+    if not before or before.endswith((".", ":", ";", "\n")):
+        return spoken + ","
+    return spoken
+
+
+def _h_roman_line(m: re.Match) -> str:
+    spoken = _roman_marker(m.group("rl"))
+    return (spoken + ",") if spoken is not None else m.group(0)
+
+
+def _h_roman_label(m: re.Match) -> str:
+    n = roman_to_int(m.group("rlab_n").lower())
+    if n is None or n > 40:
+        return m.group(0)
+    return m.group("rlab_l") + " " + cardinal(n)
+
+
 def _h_int(m: re.Match) -> str:
     raw = m.group(0)
     n = int(raw.replace(",", ""))
@@ -240,8 +288,13 @@ _PATTERNS = [
     ("date_long", r"\b(?P<dl_month>January|February|March|April|May|June|July|August|September|October|November|December)\s+(?P<dl_day>\d{1,2})(?:st|nd|rd|th)?,?\s+(?P<dl_year>\d{4})\b", _h_date_long),
     ("date_num", r"\b(?P<dn_m>\d{1,2})/(?P<dn_d>\d{1,2})/(?P<dn_y>\d{4})\b", _h_date_num),
     ("date_iso", r"\b(?P<di_y>\d{4})-(?P<di_m>\d{2})-(?P<di_d>\d{2})\b", _h_date_iso),
-    ("section", r"\b(?:(?P<sec_label>Sections?|Parts?|Paragraphs?|Clauses?|Articles?|Items?)\s+)?(?P<sec_num>\d+(?:\.\d+)*)(?P<sec_parens>(?:\([a-z0-9]{1,4}\))+)", _h_section),
+    ("section", r"\b(?:(?P<sec_label>Sections?|Parts?|Paragraphs?|Clauses?|Articles?|Items?)\s+)?(?P<sec_num>\d+(?:\.\d+)*)(?P<sec_parens>(?:\([A-Za-z0-9]{1,4}\))+)", _h_section),
     ("section_dotted", r"\b(?P<sd_label>Sections?|Parts?|Paragraphs?|Clauses?|Articles?)\s+(?P<sd_num>\d+(?:\.\d+)+)\b", _h_section),
+    # Roman list markers and labels: "(ii)", "(IV)", "Section IV", a line
+    # starting "iii." -- see _roman_marker for the single-letter rule.
+    ("roman_paren", r"(?<![\w)])\((?P<rp>[ivxIVX]{1,6})\)", _h_roman_paren),
+    ("roman_label", r"\b(?P<rlab_l>Sections?|Parts?|Schedules?|Chapters?|Annexures?|Clauses?|Articles?|Phases?|Stages?|Tables?)\s+(?P<rlab_n>[IVX]{1,6})\b(?![.\d])", _h_roman_label),
+    ("roman_line", r"(?:^|(?<=[.;:]\s))(?P<rl>[ivxIVX]{1,6})[.)](?=\s)", _h_roman_line),
     ("time", r"\b(?P<tm_h>\d{1,2}):(?P<tm_m>\d{2})(?:\s?(?P<tm_ap>[apAP]\.?[mM]\.?))?", _h_time),
     ("ordinal", r"\b(?P<ord_num>\d+)(?:st|nd|rd|th)\b", _h_ordinal),
     ("decimal", r"\b\d+\.\d+\b", _h_decimal),
@@ -272,6 +325,7 @@ def _gap_segments(text: str, start: int, end: int) -> list[Segment]:
 def normalize_with_map(text: str) -> tuple[str, list[Segment]]:
     segments: list[Segment] = []
     cursor = 0
+    _ROMAN_CONTEXT.set(bool(_ROMAN_MULTI.search(text)))
     for m in _MASTER.finditer(text):
         segments.extend(_gap_segments(text, cursor, m.start()))
         segments.append(Segment(m.start(), m.end(), _HANDLERS[m.lastgroup](m), replaced=True))

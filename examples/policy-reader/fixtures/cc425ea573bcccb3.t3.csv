@@ -1,0 +1,8 @@
+0,1
+Refund%,Refund%
+RefundofPremium(basisPolicyPeriod),RefundofPremium(basisPolicyPeriod)
+Timing of Cancellation,1year
+Upto30days,75.0%
+31to90days,50.0%
+3monthsto6months,25.0%
+6monthsto12months,0.00%

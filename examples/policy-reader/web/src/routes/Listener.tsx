@@ -116,15 +116,20 @@ export default function Listener() {
               </span>
               <span className="s">{railSubtitle(d)}</span>
             </button>
-            {d.reviewed === false && d.doc_id && (
+            {d.doc_id && (
               <button
                 className="rail-trash"
                 aria-label={`Delete ${d.spoken_title || d.title}`}
-                title="Delete this document"
+                title={d.reviewed ? 'Remove this bundled document from the library' : 'Delete this document'}
                 style={{ position: 'absolute', right: 6, top: 6, background: 'none', border: 0, cursor: 'pointer', opacity: 0.7 }}
                 onClick={(e) => {
                   e.stopPropagation()
-                  if (window.confirm(`Delete "${d.spoken_title || d.title}"? Its files are removed.`)) s.remove(d.doc_id!)
+                  // A bundled fixture needs force on the server side; the wording
+                  // says so, because it comes back only by re-ingesting its source.
+                  const msg = d.reviewed
+                    ? `Remove "${d.spoken_title || d.title}" from the library? It is a bundled document; it comes back only by re-ingesting its source file.`
+                    : `Delete "${d.spoken_title || d.title}"? Its files are removed.`
+                  if (window.confirm(msg)) s.remove(d.doc_id!, !!d.reviewed)
                 }}
               >
                 🗑

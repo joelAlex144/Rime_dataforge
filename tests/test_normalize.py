@@ -11,7 +11,7 @@ GOLDEN = Path(__file__).with_name("numbers.jsonl")
 class TestGolden(unittest.TestCase):
     def test_golden_set(self):
         rows = [json.loads(l) for l in GOLDEN.read_text().splitlines() if l.strip()]
-        self.assertEqual(len(rows), 46)
+        self.assertEqual(len(rows), 52)
         for r in rows:
             with self.subTest(r["display"]):
                 self.assertEqual(normalize(r["display"]), r["spoken"])

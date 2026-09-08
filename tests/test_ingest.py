@@ -272,17 +272,46 @@ class TestFixturePreamble(unittest.TestCase):
 
     def test_the_preamble_is_dropped_and_kept_as_provenance(self):
         out, prov = ingest.strip_fixture_preamble(self.blocks())
-        self.assertEqual([b.text for b in out][:3], ["Arogya Sanjeevani Policy — Policy Wording", "1.PREAMBLE",
+        # The cover heading is the builder's title, not a section: it goes to
+        # provenance too, so the first clause read is the document's own heading.
+        self.assertEqual([b.text for b in out][:2], ["1.PREAMBLE",
                                                      "The proposal and declaration given by the proposer form the basis of this contract."])
+        self.assertEqual(prov["title"], "Arogya Sanjeevani Policy — Policy Wording")
         self.assertTrue(prov["intro"].startswith("Fixture document for"))
         self.assertEqual(prov["rows"]["Issuer / source"], "Reliance General Insurance Company Limited (IRDAI standard wording)")
         self.assertEqual(prov["rows"]["Source URL"], "https://irdai.gov.in/documents/37343/931203/RELHLIP21001V012021.pdf")
         self.assertEqual(prov["rows"]["Word count (body)"], "12,187")
         self.assertTrue(prov["note"].startswith("Provenance and handling note"))
-        self.assertEqual(prov["blocks_dropped"], 13)
+        self.assertEqual(prov["blocks_dropped"], 14)
         for t in (b.text for b in out):
-            for marker in ("Fixture document for", "Provenance and handling note", "Word count (body)", "Source URL"):
+            for marker in ("Fixture document for", "Provenance and handling note", "Word count (body)", "Source URL",
+                           "Text was extracted"):
                 self.assertNotIn(marker, t)
+
+    def test_a_note_split_across_blocks_is_dropped_whole(self):
+        """The structure pass split the note into "Provenance and handling
+        note." and "Text was extracted ..."; stopping at the first left the
+        second as the first clause read aloud (seen 2026-09-07)."""
+        from types import SimpleNamespace as B
+        b = lambda kind, text: B(kind=kind, text=text, level=1 if kind == "heading" else 0)
+        blocks = [
+            b("heading", "Saral Jeevan Bima — Policy Wording"),
+            b("body", "Fixture document for the delivery-aware reader — verbatim text of a public policy."),
+            b("table_row", "Document type: Life insurance policy."),
+            b("table_row", "Source URL: https://example.invalid/x.pdf."),
+            b("body", "Provenance and handling note."),
+            b("body", "Text was extracted from the publicly hosted PDF at the URL above and is reproduced as-is, "
+                      "with running headers, footers and page numbers removed."),
+            b("body", "If the demo should not show a brand, replace the issuer name with a placeholder before chunking."),
+            b("heading", "PART A"),
+            b("body", "This policy is issued on the basis of the proposal."),
+        ]
+        out, prov = ingest.strip_fixture_preamble(blocks)
+        self.assertEqual([x.text for x in out], ["PART A", "This policy is issued on the basis of the proposal."])
+        self.assertTrue(prov["note"].startswith("Provenance and handling note"))
+        self.assertIn("Text was extracted", prov["note"])
+        self.assertIn("placeholder before chunking", prov["note"])
+        self.assertEqual(prov["title"], "Saral Jeevan Bima — Policy Wording")
 
     def test_a_document_without_the_preamble_is_untouched(self):
         from types import SimpleNamespace as B
@@ -299,8 +328,11 @@ class TestFixturePreamble(unittest.TestCase):
             with self.subTest(fixture=name):
                 self.assertTrue(fx.get("provenance"), "provenance block recorded")
                 self.assertEqual(fx["clauses"][0].get("kind"), "heading", "the first clause is the policy's own first heading")
+                self.assertNotIn("Policy Wording", fx["clauses"][0]["text_display"],
+                                 "the builder's cover title is provenance, not the first section")
                 for c in fx["clauses"]:
-                    for marker in ("Fixture document for", "Provenance and handling note", "Word count (body)", "Source URL"):
+                    for marker in ("Fixture document for", "Provenance and handling note", "Word count (body)",
+                                   "Source URL", "Text was extracted", "placeholder before chunking"):
                         self.assertNotIn(marker, c["text_display"], c["id"])
 
 

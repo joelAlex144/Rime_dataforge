@@ -1163,32 +1163,46 @@ def strip_fixture_preamble(sblocks: list) -> tuple:
     """Detect the fixture builder's preamble by its exact markers and take it
     out of the block stream. Returns (blocks, provenance|None): the intro, the
     table's rows as {label: value} and the handling note, for the fixture's
-    top-level "provenance" and the ingest report -- never clauses."""
+    top-level "provenance" and the ingest report -- never clauses.
+
+    The block is everything from the intro paragraph up to, but not including,
+    the document's own first heading: the structure pass may have split the
+    handling note into several blocks ("Provenance and handling note." and
+    "Text was extracted ..."), so stopping at the block that names the note
+    left its body behind as the first clause read aloud. The fixture's cover
+    heading directly above the intro is the builder's title, not a section of
+    the document; it goes into provenance["title"] rather than becoming a
+    childless heading."""
     texts = [(b.text or "") for b in sblocks]
     start = next((i for i, t in enumerate(texts[:12]) if t.strip().startswith(PREAMBLE_INTRO)), None)
     if start is None:
         return sblocks, None
-    end = next((i for i in range(start, min(len(texts), start + 40)) if PREAMBLE_NOTE in texts[i]), None)
-    if end is None:
-        end = start
-        for i in range(start + 1, min(len(texts), start + 40)):
-            if any(texts[i].lstrip().startswith(lab) for lab in PREAMBLE_LABELS) or sblocks[i].kind in ("table_stub", "table_row"):
-                end = i
-            elif sblocks[i].kind == "heading":
-                break
+    # Everything up to the document's own first heading belongs to the builder.
+    end = start
+    for i in range(start + 1, min(len(sblocks), start + 60)):
+        if getattr(sblocks[i], "kind", "") == "heading":
+            break
+        end = i
     rows: dict = {}
-    for b in sblocks[start:end + 1]:
+    note_parts: list = []
+    for b in sblocks[start + 1:end + 1]:
         t = (b.text or "").strip()
-        for lab in PREAMBLE_LABELS:
-            if t.startswith(lab) and ":" in t:
-                rows[lab] = t.split(":", 1)[1].strip().rstrip(".").strip()
-                break
-    note_text = texts[end].strip() if PREAMBLE_NOTE in texts[end] else ""
+        lab = next((lab for lab in PREAMBLE_LABELS if t.startswith(lab) and ":" in t), None)
+        if lab:
+            rows[lab] = t.split(":", 1)[1].strip().rstrip(".").strip()
+        elif getattr(b, "kind", "") not in ("table_stub", "table_row") and t:
+            note_parts.append(t)
+    note_text = " ".join(note_parts).strip()
     if PREAMBLE_NOTE in note_text and not note_text.startswith(PREAMBLE_NOTE):
         note_text = note_text[note_text.index(PREAMBLE_NOTE):]
-    provenance = {"intro": texts[start].strip(), "rows": rows, "note": note_text,
-                  "blocks_dropped": end - start + 1}
-    return sblocks[:start] + sblocks[end + 1:], provenance
+    title = None
+    cut_from = start
+    if start > 0 and getattr(sblocks[start - 1], "kind", "") == "heading":
+        title = (sblocks[start - 1].text or "").strip()
+        cut_from = start - 1
+    provenance = {"title": title, "intro": texts[start].strip(), "rows": rows, "note": note_text,
+                  "blocks_dropped": end - cut_from + 1}
+    return sblocks[:cut_from] + sblocks[end + 1:], provenance
 
 
 def spoken_title_for(sblocks, doc_title: str, path: Optional[Path] = None) -> str:
