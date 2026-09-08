@@ -131,6 +131,7 @@ input:focus-visible, button:focus-visible, select:focus-visible, a:focus-visible
 .banner {
   background: var(--warn-soft); border: 1px solid var(--warn); color: var(--ink);
   border-radius: 8px; padding: 8px 12px; margin-bottom: 16px; font-size: 13px;
+  max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 dialog { border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper);
@@ -235,3 +236,319 @@ dialog .upload { min-width: min(520px, 90vw); }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
 .chip { border-radius: 999px; padding: 6px 12px; border: 1px solid var(--line); background: var(--paper); }
 .chip:hover { border-color: var(--accent); }
+
+/* ------------------------------------------------------- listener: dark player
+   Scoped to .listener .main only -- /dev keeps the light theme above. */
+.listener {
+  --nv-bg: #0f1526;
+  --nv-surface: #1a2138;
+  --nv-surface-2: #212a45;
+  --nv-line: #2b3554;
+  --nv-cream: #f5f0e6;
+  --nv-cream-ink: #4a3d2f;
+  --nv-cream-muted: #8a7d6a;
+  --nv-amber: #e7b64e;
+  --nv-amber-ink: #2a1f0a;
+  --nv-text: #f2f3f7;
+  --nv-text-muted: #9aa4c0;
+}
+/* The whole row goes dark, not just the text column -- otherwise a wide
+   viewport shows the light page background past the content's max-width. */
+.listener { background: var(--nv-bg); min-height: 100vh; }
+/* .main is its own grid column (see .listener.with-script above) so it's
+   always exactly viewport-minus-rail-minus-script wide, no independent
+   centering math -- the reading column and the script panel are true grid
+   neighbours, sitting only the grid gap apart, never a stray viewport-sized
+   gap and never a change to the page's overall width. */
+.listener .main {
+  background: var(--nv-bg); color: var(--nv-text); border-radius: 0;
+  display: flex; justify-content: center; align-items: flex-start;
+  gap: 24px; width: 100%; max-width: none; flex-wrap: wrap; padding: 24px 28px;
+  box-sizing: border-box;
+}
+/* flex-grow: 0 -- never grow past 640px. With grow enabled the column would
+   expand to fill the grid cell and then get capped by max-width, but that
+   route left the leftover space as trailing empty area on one side instead
+   of splitting it evenly; a fixed basis with no grow is what actually
+   centers reliably via .main's justify-content. */
+.main-primary { min-width: 0; width: 100%; max-width: 640px; flex: 0 1 640px; }
+.listener .main .interrupt-overlay {
+  flex: 0 0 280px; width: 280px; order: -1;
+  position: sticky; top: 20px; max-height: calc(100vh - 40px); overflow-y: auto;
+  margin: 0;
+}
+@media (max-width: 980px) {
+  .listener .main .interrupt-overlay {
+    flex-basis: 100%; width: 100%; max-width: none;
+    position: static; max-height: none; order: 0;
+  }
+}
+
+/* Screen 3: the script panel is the grid's third column -- a real neighbour
+   of the reading column, not a viewport-fixed overlay, so it always sits
+   flush against it (just the grid gap) with a divider line tying the two
+   together instead of floating apart. */
+.listener .script-panel {
+  height: 100vh;
+  max-height: 100vh;
+  border-radius: 0;
+  border-top: none; border-bottom: none; border-right: none;
+  border-left: 1px solid var(--nv-line);
+  /* Extra top padding clears the floating "Hide script" button pinned at
+     the same corner. */
+  padding: 64px 16px 24px;
+  margin: 0;
+  position: sticky;
+  top: 0;
+  /* Fades and slides in instead of popping into existence with a full page
+     of text already rendered -- opening it should read as revealing a
+     panel, not as a data dump landing on screen. */
+  animation: script-in 180ms ease-out;
+}
+@keyframes script-in {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+/* Unread clauses are an outline, not the document laid bare -- a one-line
+   preview of what's ahead, not the full paragraph. Heard and the current
+   line stay full length; those are what the panel exists to show. */
+.script-row.script-not_yet {
+  display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
+  overflow: hidden; font-size: 13px;
+}
+@media (max-width: 900px) {
+  .listener .script-panel {
+    height: auto; max-height: 40vh; position: static;
+    border-left: none; border-top: 1px solid var(--nv-line);
+  }
+}
+
+/* Topic chips and the "actions" prompt buttons (Read it now / Brief / etc.)
+   were still the light-theme default (white pill, light border) -- bring
+   them into the same dark/amber language as every other control. */
+.listener .chip, .listener .actions button {
+  background: var(--nv-surface-2); border: 1px solid var(--nv-line); color: var(--nv-text);
+  transition: border-color 120ms ease, color 120ms ease, filter 120ms ease;
+}
+.listener .chip:hover, .listener .actions button:hover {
+  border-color: var(--nv-amber); color: var(--nv-amber);
+}
+.listener .actions button.primary {
+  background: var(--nv-amber); border-color: var(--nv-amber); color: var(--nv-amber-ink);
+}
+.listener .actions button.primary:hover { filter: brightness(1.08); color: var(--nv-amber-ink); }
+.listener .notice { color: var(--nv-text-muted); }
+
+/* Two floating tabs pinned to the top corners, mirroring each other: the
+   library toggle on the left (only shown collapsed -- open, the rail has
+   its own header control), the script toggle on the right. Fixed and
+   always visible beats living in the footer or at the bottom of a long
+   scroll -- neither ever has to be hunted for mid-demo, and top corners
+   keep them out of the way of the centered reading column and controls. */
+.library-toggle, .script-toggle {
+  position: fixed;
+  top: 20px;
+  z-index: 40;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  background: var(--nv-surface-2); border: 1px solid var(--nv-line); color: var(--nv-text);
+  border-radius: 999px; padding: 8px 14px; font-weight: 600; font-size: 13px;
+  display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+  transition: border-color 120ms ease, color 120ms ease;
+}
+.library-toggle:hover, .script-toggle:hover { border-color: var(--nv-text); }
+.library-toggle { left: 20px; }
+.script-toggle { right: 20px; }
+
+.reader-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 12px; margin-bottom: 16px;
+}
+.reader-doc-title { font-weight: 700; font-size: 16px; color: var(--nv-text); }
+.listener .main .section-label {
+  color: var(--nv-text-muted); margin-bottom: 0; margin-top: 2px;
+}
+.section-chip {
+  flex: none; background: var(--nv-surface-2); color: var(--nv-amber);
+  border: 1px solid var(--nv-line); border-radius: 999px; padding: 4px 10px;
+  font-family: var(--mono); font-size: 12px; font-weight: 600;
+}
+
+.reader-card {
+  background: var(--nv-cream); border-radius: 18px; padding: 22px 22px 26px;
+  margin-bottom: 18px;
+}
+.reader-card .doc { color: var(--nv-cream-ink); max-width: none; }
+.reader-card .doc .heard { color: var(--nv-cream-muted); }
+.reader-card .doc .unheard { color: var(--nv-cream-ink); }
+.reader-card mark { background: var(--nv-amber); color: var(--nv-cream-ink); border-radius: 3px; padding: 0 2px; }
+
+.listener .main .transcript {
+  background: var(--nv-surface); border: 1px solid var(--nv-line); border-radius: 12px;
+  padding: 10px 14px; color: var(--nv-text-muted); opacity: 1;
+}
+
+.listener .main .statusline { color: var(--nv-text-muted); }
+
+.up-next { margin: 18px 0 6px; }
+.up-next-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  font-weight: 700; color: var(--nv-text); margin-bottom: 8px;
+}
+.up-next-head .muted, .up-next-row .muted, .transport-footer .muted {
+  text-transform: none; letter-spacing: normal; font-weight: 400; color: var(--nv-text-muted);
+}
+.up-next-row {
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--nv-surface-2); border-radius: 12px; padding: 10px 14px;
+  margin-bottom: 8px; font-weight: 600; color: var(--nv-text);
+  transition: background 120ms ease;
+}
+.up-next-row:hover { background: var(--nv-line); }
+
+.ask-row { display: flex; gap: 8px; margin-top: 16px; }
+.ask-row input[type="text"] {
+  flex: 1; background: var(--nv-surface); border: 1px solid var(--nv-line); color: var(--nv-text);
+}
+.ask-row button { background: var(--nv-surface-2); border-color: var(--nv-line); color: var(--nv-text); }
+
+.listener .main .transport {
+  justify-content: center; gap: 16px; margin-top: 18px;
+}
+.round-button {
+  width: 52px; height: 52px; border-radius: 50%; padding: 0; justify-content: center;
+  background: transparent; border: 1px solid var(--nv-line); color: var(--nv-text);
+  transition: transform 100ms ease, border-color 120ms ease, filter 120ms ease;
+}
+.round-button.primary {
+  width: 62px; height: 62px; background: var(--nv-text); color: var(--nv-bg); border-color: var(--nv-text);
+}
+.round-button.mic { background: var(--nv-amber); color: var(--nv-amber-ink); border-color: var(--nv-amber); }
+.round-button:hover:not(:disabled) { border-color: var(--nv-text); filter: brightness(1.08); }
+.round-button:active:not(:disabled) { transform: scale(0.94); }
+/* Listening: a soft amber ring pulses outward so the mic reads as live at a
+   glance, not just from the small "Listening…" text label. */
+.round-button.mic-live { animation: mic-pulse 1.6s ease-out infinite; }
+@keyframes mic-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(231, 182, 78, 0.55); }
+  70% { box-shadow: 0 0 0 12px rgba(231, 182, 78, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(231, 182, 78, 0); }
+}
+
+.transport-footer {
+  display: flex; justify-content: space-between; align-items: center; margin-top: 14px;
+}
+.script-toggle { background: var(--nv-surface-2); border-color: var(--nv-line); color: var(--nv-text); transition: border-color 120ms ease, color 120ms ease; }
+.script-toggle[aria-pressed="true"] { border-color: var(--nv-amber); color: var(--nv-amber); }
+
+/* Screen 3: the real heard / now / not-yet ledger, not the current-clause stub */
+.script-panel {
+  background: var(--nv-surface); border: 1px solid var(--nv-line); border-radius: 12px;
+  padding: 12px 16px; margin: 8px 0 16px; max-height: 40vh; overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.script-panel-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.script-caption { color: var(--nv-text-muted); font-size: 11px; margin-bottom: 8px; }
+.script-close {
+  width: 24px; height: 24px; padding: 0; justify-content: center; flex: none;
+  background: transparent; border: 1px solid var(--nv-line); border-radius: 6px; color: var(--nv-text-muted);
+}
+.script-close:hover { color: var(--nv-text); border-color: var(--nv-text); }
+.script-row { font-family: var(--serif); font-size: 14px; line-height: 1.6; margin: 0 0 10px; transition: color 200ms ease; }
+.script-row.script-heard { color: var(--nv-text-muted); }
+.script-row.script-now { color: var(--nv-cream-ink); background: var(--nv-amber); border-radius: 4px; padding: 2px 6px; display: inline; box-decoration-break: clone; }
+.script-row.script-not_yet { color: #4b5578; }
+
+/* Catalog (screen 1): "Continue listening" card above the plain library list */
+.rail {
+  background: var(--nv-bg); color: var(--nv-text); border-right-color: var(--nv-line);
+  transition: width 160ms ease, padding 160ms ease, opacity 120ms ease;
+  overflow: hidden; width: 200px; flex: none;
+}
+.rail h2 { color: var(--nv-text-muted); }
+.rail-row { border-color: var(--nv-line); color: var(--nv-text); }
+.rail-row:hover { background: var(--nv-surface); }
+.rail-row.current { background: var(--nv-surface-2); border-color: var(--nv-amber); }
+.rail-row .s { color: var(--nv-text-muted); }
+
+.rail-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.rail-title {
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--nv-text-muted); font-weight: 600; margin: 0;
+}
+.rail-collapse-btn, .rail-expand-btn {
+  width: 30px; height: 30px; padding: 0; border-radius: 8px; justify-content: center;
+  background: var(--nv-surface-2); border-color: var(--nv-line); color: var(--nv-text); flex: none;
+}
+.rail-expand-btn { margin-right: 10px; }
+
+.upload-cta {
+  display: flex; width: 100%; justify-content: center; margin-bottom: 16px;
+  background: var(--nv-amber); border-color: var(--nv-amber); color: var(--nv-amber-ink); font-weight: 600;
+}
+.upload-cta:hover { filter: brightness(1.05); }
+
+/* Collapsed: the rail shrinks to nothing rather than just hiding, so the
+   reader column reclaims the width instead of leaving a blank strip. */
+.listener.rail-collapsed { grid-template-columns: 0 1fr; }
+.listener.rail-collapsed .rail {
+  width: 0; padding-left: 0; padding-right: 0; border-right: none; opacity: 0; pointer-events: none;
+}
+/* Script open: a third grid column, sized exactly, right next to the main
+   column with only the grid gap between them -- not viewport-relative
+   positioning, so there's never a stray gap or an unrelated width change. */
+.listener.with-script { grid-template-columns: 200px 1fr 320px; }
+.listener.rail-collapsed.with-script { grid-template-columns: 0 1fr 320px; }
+@media (max-width: 900px) {
+  .listener.with-script,
+  .listener.rail-collapsed.with-script { grid-template-columns: 200px 1fr; }
+  .listener.rail-collapsed.with-script { grid-template-columns: 0 1fr; }
+}
+
+.reader-head-left { display: flex; align-items: flex-start; gap: 10px; }
+
+.continue-card {
+  display: block; width: 100%; height: auto; text-align: left; margin-bottom: 18px;
+  background: var(--nv-surface-2); border: 1px solid var(--nv-line); border-radius: 14px;
+  padding: 14px; transition: border-color 120ms ease, transform 120ms ease;
+}
+.continue-card:hover { border-color: var(--nv-amber); transform: translateY(-1px); }
+.continue-card-label {
+  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--nv-amber); font-weight: 700; margin-bottom: 4px;
+}
+.continue-card-title { font-weight: 700; color: var(--nv-text); margin-bottom: 2px; }
+.continue-card-sub { font-size: 12px; color: var(--nv-text-muted); margin-bottom: 10px; }
+.continue-card-bar { height: 5px; border-radius: 3px; background: var(--nv-line); overflow: hidden; }
+.continue-card-fill { height: 100%; background: var(--nv-amber); }
+
+/* Screen 4: interrupt & resume overlay. It's a real flex sibling of the
+   reading column (see .listener .main .interrupt-overlay above), docked to
+   its left in normal flow -- never absolutely positioned, so it can't drift
+   over the rail regardless of window width or whether the rail is open. */
+.interrupt-overlay {
+  background: var(--nv-surface); border: 1px solid var(--nv-line); border-radius: 16px;
+  padding: 16px 18px; margin: 16px 0; max-width: 68ch;
+}
+.interrupt-overlay .answer { background: transparent; border: none; padding: 0; margin: 0; max-width: none; position: relative; }
+.interrupted-tag {
+  display: inline-block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.04em;
+  color: var(--nv-amber); border: 1px solid var(--nv-amber); border-radius: 999px;
+  padding: 1px 8px; margin-bottom: 8px;
+}
+.interrupt-overlay .q { color: var(--nv-text-muted); display: flex; align-items: center; gap: 6px; }
+.interrupt-overlay .a {
+  font-family: var(--serif); font-size: 15px; color: var(--nv-text); margin-top: 8px;
+  display: flex; align-items: flex-start; gap: 6px;
+}
+.interrupt-overlay .disclaimer { color: var(--nv-text-muted); }
+.resume-point {
+  border-top: 1px solid var(--nv-line); margin-top: 14px; padding-top: 12px;
+}
+.resume-point-label {
+  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--nv-text-muted); font-weight: 700; margin-bottom: 4px;
+}
+.resume-point-text { color: var(--nv-text); font-style: italic; margin-bottom: 10px; }
+.interrupt-overlay .actions button { background: var(--nv-surface-2); border-color: var(--nv-line); color: var(--nv-text); }
+.interrupt-overlay .actions button.primary { background: var(--nv-amber); border-color: var(--nv-amber); color: var(--nv-amber-ink); }

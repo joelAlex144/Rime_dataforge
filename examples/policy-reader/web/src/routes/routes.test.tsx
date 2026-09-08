@@ -103,8 +103,8 @@ describe('listener route', () => {
   it('shows progress in words, not identifiers', async () => {
     render(<MemoryRouter><Listener /></MemoryRouter>)
     feed(HELLO)
-    expect(await screen.findByText(/Section 4 of 13/)).toBeInTheDocument()
-    expect(screen.getByText(/22 min left/)).toBeInTheDocument()
+    expect((await screen.findAllByText(/Section 4 of 13/)).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/22 min left/).length).toBeGreaterThan(0)
   })
 
   it('shows the sections found as "Coming up" until the chips land', async () => {
@@ -210,8 +210,8 @@ describe('listener route', () => {
   it('offers Add a document with only a progress bar behind it', async () => {
     render(<MemoryRouter><Listener /></MemoryRouter>)
     feed(HELLO)
-    await screen.findByText(/Section 4 of 13/)
-    expect(screen.getByRole('button', { name: /Add a document/ })).toBeInTheDocument()
+    await screen.findAllByText(/Section 4 of 13/)
+    expect(screen.getByRole('button', { name: /Upload a document/ })).toBeInTheDocument()
     expect(screen.getByLabelText('Document file')).toBeInTheDocument()
     expect(screen.queryByLabelText('Document URL')).toBeNull()
     expect(screen.queryByText(/pii_scan|validate|Accept/)).toBeNull()
@@ -233,20 +233,20 @@ describe('listener route', () => {
     const input = screen.getByLabelText('Ask about what you just heard')
     fireEvent.change(input, { target: { value: 'what does that mean' } })
     fireEvent.submit(input.closest('form')!)
-    const types = sockets[0].sent.map((m) => m.type)
-    expect(types).toEqual(['flush_ack', 'interrupt', 'ask'])
-    expect(sockets[0].sent[2].question).toBe('what does that mean')
+    const sent = sockets[0].sent.filter((m) => m.type !== 'get_script')
+    expect(sent.map((m) => m.type)).toEqual(['flush_ack', 'interrupt', 'ask'])
+    expect(sent[2].question).toBe('what does that mean')
     expect(screen.getByText(/Answering from the document/)).toBeInTheDocument()
   })
 
   it('Enter while paused asks without an interrupt', async () => {
     render(<MemoryRouter><Listener /></MemoryRouter>)
     feed(HELLO)
-    await screen.findByText(/Section 4 of 13/)
+    await screen.findAllByText(/Section 4 of 13/)
     const input = screen.getByLabelText('Ask about what you just heard')
     fireEvent.change(input, { target: { value: 'what is the deductible' } })
     fireEvent.submit(input.closest('form')!)
-    expect(sockets[0].sent.map((m) => m.type)).toEqual(['ask'])
+    expect(sockets[0].sent.map((m) => m.type).filter((t) => t !== 'get_script')).toEqual(['ask'])
   })
 
   it('Keep going sends play, not just a dismissal', async () => {
@@ -255,7 +255,7 @@ describe('listener route', () => {
     feed({ type: 'answer', question: 'q', kind: 'beyond_cursor', unit_id: 'sec-7a-i', answer: 'a',
            referral: 'your insurer or lender', offer: true })
     fireEvent.click(await screen.findByText('Keep going'))
-    expect(sockets[0].sent.map((m) => m.type)).toEqual(['play'])
+    expect(sockets[0].sent.map((m) => m.type).filter((t) => t !== 'get_script')).toEqual(['play'])
   })
 })
 
@@ -281,7 +281,7 @@ describe('dev route', () => {
     feed({ ...HELLO, sink: false, sink_any: true })
     expect(await screen.findByText('voice: another tab')).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: 'Play' }))
-    expect(sockets[0].sent.map((m) => m.type)).toEqual(['play'])
+    expect(sockets[0].sent.map((m) => m.type).filter((t) => t !== 'get_script')).toEqual(['play'])
     feed(UNIT)                                        // playing
     expect(await screen.findByRole('button', { name: 'Pause' })).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: 'Stop and ask' }))

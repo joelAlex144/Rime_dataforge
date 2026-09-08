@@ -130,6 +130,14 @@ export type State = {
   // prompt (choice | offer | start_choice | confirm_topic | table_choice) whose
   // options render as buttons; the free-text box answers any of them too.
   topics: { topic: string; section_id: string | null; heading: string | null }[]
+  // The real section outline (title + the same est_minutes spoken at a
+  // section transition), for an "up next" list. [] before the navigator has
+  // run for this document -- nothing here is a client-side estimate.
+  sections: { id: string; title: string; est_minutes: number | null }[]
+  // Screen 3 ("Show script"): the per-clause heard/now/not_yet ledger,
+  // fetched on demand (see session.ts getScript) -- never derived on the
+  // client, since heard state is server-side and client-acknowledged only.
+  script: { text: string; status: 'heard' | 'now' | 'not_yet' }[]
   prompt: Prompt | null
   heardAs: HeardAs | null
   // While a document is processed: the section list the structure pass found
@@ -181,6 +189,8 @@ export const initialState: State = {
   answer: null,
   answerCtx: null,
   topics: [],
+  sections: [],
+  script: [],
   prompt: null,
   heardAs: null,
   sectionsFound: [],
@@ -358,6 +368,7 @@ function applyServer(state: State, m: any): State {
         documents: m.documents || [],
         current: m.current ?? null,
         topics: m.topics && m.topics.length ? m.topics : state.topics,
+        sections: m.sections && m.sections.length ? m.sections : state.sections,
       }
 
     case 'sink':
@@ -383,10 +394,15 @@ function applyServer(state: State, m: any): State {
         // The chips it carries, else the ones already showing for this same
         // document (a re-open never clears them), else none until they land.
         topics: m.topics && m.topics.length ? m.topics : m.name === state.current ? state.topics : [],
+        sections: m.sections && m.sections.length ? m.sections : m.name === state.current ? state.sections : [],
         sectionsFound: m.name === state.current ? state.sectionsFound : [],
+        script: m.name === state.current ? state.script : [],
         prompt: null,
         phase: 'idle',
       }
+
+    case 'script':
+      return { ...state, script: m.clauses || [] }
 
     case 'unit_started':
       if (m.kind === 'companion') {
@@ -551,6 +567,7 @@ function applyServer(state: State, m: any): State {
         documents: m.documents
           || state.documents.map((d) => (d.name === m.name ? { ...d, navigator: m.state } : d)),
         topics: m.state === 'ready' && m.topics && m.topics.length && m.name === state.current ? m.topics : state.topics,
+        sections: m.state === 'ready' && m.sections && m.sections.length && m.name === state.current ? m.sections : state.sections,
       }
 
     case 'topics':
