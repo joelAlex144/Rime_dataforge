@@ -50,6 +50,13 @@ export default function Listener() {
   // than something to go dig for -- the footer button just hides it.
   const [showScript, setShowScript] = useState(true)
   const scriptRef = useRef<HTMLDivElement>(null)
+  const scriptSentinelRef = useRef<HTMLDivElement>(null)
+  // Renders the script list a batch at a time as the panel is scrolled,
+  // instead of mounting every clause's <p> the moment it opens -- opening a
+  // 40-clause document shouldn't mean rendering 40 paragraphs no one has
+  // scrolled to yet.
+  const SCRIPT_BATCH = 12
+  const [scriptVisible, setScriptVisible] = useState(SCRIPT_BATCH)
   const [railOpen, setRailOpen] = useState(() => {
     try {
       return localStorage.getItem('rail_open') !== '0'
@@ -131,13 +138,48 @@ export default function Listener() {
   }, [showScript, state.unit?.unitId, state.current])
 
   useEffect(() => {
+    // A fresh document (or reopening the panel) starts back at one lazy
+    // batch -- the previous document's scroll depth has nothing to do with
+    // this one.
+    setScriptVisible(SCRIPT_BATCH)
+  }, [state.current, showScript])
+
+  useEffect(() => {
     // Follow the read position: the "now" row scrolls into view as it
     // changes, so the panel never needs a manual scroll to see what's
-    // playing right now.
+    // playing right now. If lazy-loading hasn't reached that row yet,
+    // reveal up to it first so there's something to scroll to.
     if (!showScript) return
-    const el = scriptRef.current?.querySelector('.script-now')
-    el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    const nowIndex = state.script.findIndex((row) => row.status === 'now')
+    if (nowIndex >= 0) {
+      setScriptVisible((v) => Math.max(v, nowIndex + Math.ceil(SCRIPT_BATCH / 2)))
+    }
+    const id = requestAnimationFrame(() => {
+      const el = scriptRef.current?.querySelector('.script-now')
+      el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    })
+    return () => cancelAnimationFrame(id)
   }, [showScript, state.script])
+
+  useEffect(() => {
+    // Loads the next batch of clauses as the sentinel at the bottom of the
+    // rendered list scrolls into view, instead of mounting the whole
+    // document's worth of paragraphs up front.
+    if (!showScript) return
+    const root = scriptRef.current
+    const sentinel = scriptSentinelRef.current
+    if (!root || !sentinel) return
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setScriptVisible((v) => Math.min(v + SCRIPT_BATCH, state.script.length))
+        }
+      },
+      { root, rootMargin: '200px' },
+    )
+    io.observe(sentinel)
+    return () => io.disconnect()
+  }, [showScript, state.script.length])
 
   const uploaded = (d: { name: string }) => {
     // It is in the library already (reviewed: false); open it and read.
@@ -590,11 +632,16 @@ export default function Listener() {
           {state.script.length === 0 ? (
             <p className="notice">Nothing has been read yet.</p>
           ) : (
-            state.script.map((row, i) => (
-              <p key={i} className={`script-row script-${row.status}`}>
-                {row.text}
-              </p>
-            ))
+            <>
+              {state.script.slice(0, scriptVisible).map((row, i) => (
+                <p key={i} className={`script-row script-${row.status}`}>
+                  {row.text}
+                </p>
+              ))}
+              {scriptVisible < state.script.length && (
+                <div ref={scriptSentinelRef} className="script-sentinel" aria-hidden="true" />
+              )}
+            </>
           )}
         </div>
       )}

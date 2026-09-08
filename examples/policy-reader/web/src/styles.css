@@ -284,22 +284,22 @@ dialog .upload { min-width: min(520px, 90vw); }
   }
 }
 
-/* Screen 3: the script panel is the grid's third column -- a real neighbour
-   of the reading column, not a viewport-fixed overlay, so it always sits
-   flush against it (just the grid gap) with a divider line tying the two
-   together instead of floating apart. */
+/* Screen 3: the script panel still lives in the grid's third column (a real
+   neighbour of the reading column, never a viewport-fixed overlay -- see
+   the with-script grid rules above), but reads as a floating rounded card
+   inset from the edges rather than a flush, edge-to-edge slab. */
 .listener .script-panel {
-  height: 100vh;
-  max-height: 100vh;
-  border-radius: 0;
-  border-top: none; border-bottom: none; border-right: none;
-  border-left: 1px solid var(--nv-line);
+  height: calc(100vh - 40px);
+  max-height: calc(100vh - 40px);
+  border-radius: 18px;
+  border: 1px solid var(--nv-line);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
   /* Extra top padding clears the floating "Hide script" button pinned at
      the same corner. */
   padding: 64px 16px 24px;
-  margin: 0;
+  margin: 20px 20px 20px 4px;
   position: sticky;
-  top: 0;
+  top: 20px;
   /* Fades and slides in instead of popping into existence with a full page
      of text already rendered -- opening it should read as revealing a
      panel, not as a data dump landing on screen. */
@@ -319,9 +319,11 @@ dialog .upload { min-width: min(520px, 90vw); }
 @media (max-width: 900px) {
   .listener .script-panel {
     height: auto; max-height: 40vh; position: static;
-    border-left: none; border-top: 1px solid var(--nv-line);
+    margin: 12px 0 0; border-radius: 12px;
   }
 }
+/* Lazy-load sentinel: invisible, just a scroll trigger for the next batch. */
+.script-sentinel { height: 1px; }
 
 /* Topic chips and the "actions" prompt buttons (Read it now / Brief / etc.)
    were still the light-theme default (white pill, light border) -- bring
@@ -456,7 +458,16 @@ dialog .upload { min-width: min(520px, 90vw); }
 .script-close:hover { color: var(--nv-text); border-color: var(--nv-text); }
 .script-row { font-family: var(--serif); font-size: 14px; line-height: 1.6; margin: 0 0 10px; transition: color 200ms ease; }
 .script-row.script-heard { color: var(--nv-text-muted); }
-.script-row.script-now { color: var(--nv-cream-ink); background: var(--nv-amber); border-radius: 4px; padding: 2px 6px; display: inline; box-decoration-break: clone; }
+/* A soft pulse on the highlighted line so it visibly reads as "live" rather
+   than a static highlight someone has to notice moved. */
+.script-row.script-now {
+  color: var(--nv-cream-ink); background: var(--nv-amber); border-radius: 4px; padding: 2px 6px;
+  display: inline; box-decoration-break: clone; animation: script-now-pulse 2.2s ease-in-out infinite;
+}
+@keyframes script-now-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.72; }
+}
 .script-row.script-not_yet { color: #4b5578; }
 
 /* Catalog (screen 1): "Continue listening" card above the plain library list */
