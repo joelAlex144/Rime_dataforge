@@ -1,0 +1,73 @@
+{
+ "run_at": "20260909T160044Z",
+ "provider": {
+  "provider": "rime",
+  "speaker": "bancroft",
+  "modelId": "coda",
+  "audioFormat": "pcm",
+  "lang": "en",
+  "samplingRate": 24000,
+  "segment": "bySentence",
+  "speedAlpha": 1.0,
+  "endpoint": "wss://users-ws.rime.ai/ws3",
+  "transport": "wss (Rime) -> webrtc (LiveKit) -> client"
+ },
+ "fixture": "examples\\policy-reader\\fixtures\\policy.json",
+ "units": [
+  "sec-3a-iii",
+  "sec-3a-iv",
+  "sec-3a-v",
+  "sec-3a-vi",
+  "sec-3a-vii",
+  "sec-3a-viii",
+  "sec-3b-i",
+  "sec-3b-ii",
+  "sec-3b-iii",
+  "sec-3b-iv"
+ ],
+ "cold": {
+  "n": 10,
+  "ttfb_ms": {
+   "p50": 382.5,
+   "p95": 422.0,
+   "max": 422.0,
+   "mean": 382.9
+  },
+  "total_ms": {
+   "p50": 3507.5,
+   "p95": 4579.6,
+   "max": 4594.0,
+   "mean": 3726.7
+  },
+  "rtf": {
+   "p50": 0.3,
+   "p95": 0.3,
+   "max": 0.3,
+   "mean": 0.3
+  }
+ },
+ "warm": {
+  "n": 10,
+  "ttfb_ms": {
+   "p50": 414.5,
+   "p95": 437.0,
+   "max": 437.0,
+   "mean": 407.9
+  },
+  "total_ms": {
+   "p50": 3750.0,
+   "p95": 4626.6,
+   "max": 4718.0,
+   "mean": 3834.3
+  },
+  "rtf": {
+   "p50": 0.3,
+   "p95": 0.3,
+   "max": 0.4,
+   "mean": 0.3
+  }
+ },
+ "errors": [],
+ "measured_at": "server (synthesis only; not audible latency at the listener)",
+ "raw": "traces\\latency_bench_20260909T160044Z.jsonl"
+}
