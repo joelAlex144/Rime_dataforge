@@ -6,7 +6,7 @@
  * reader shows about position comes from acks, so text after the delivery
  * boundary stays grey even though the server has already sent that audio.
  */
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   ChevronLeft,
@@ -130,12 +130,35 @@ export default function Listener() {
   }, [state.focusUpload])
 
   useEffect(() => {
-    // Keep the script panel's "now" row current as the read position moves,
-    // or when the open document changes, while the panel is showing. The
+    // Keep the script panel's ledger current as the read position moves, or
+    // when the open document changes, while the panel is showing. The
     // ledger itself always comes from the server -- this only asks for it.
     if (showScript) s.getScript()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showScript, state.unit?.unitId, state.current])
+
+  // The fetched ledger can lag one clause behind: it is requested the moment
+  // a new unit starts, but the server's own "now" pointer may not have moved
+  // yet, so the amber row can be a beat behind the clause actually on screen
+  // (and briefly behind the mic-panel's live word-by-word highlight). Since
+  // `state.unit` is updated by the same `unit_started` event that drives the
+  // reader card -- no round trip -- matching the script row to its text is
+  // always in step, so it overrides the fetched "now" for display without
+  // waiting on another round trip.
+  const syncedScript = useMemo(() => {
+    const live = state.unit?.textDisplay?.trim()
+    if (!live || state.script.length === 0) return state.script
+    const nowIndex = state.script.findIndex((row) => {
+      const t = row.text.trim()
+      return t === live || live.startsWith(t) || t.startsWith(live)
+    })
+    if (nowIndex === -1 || state.script[nowIndex].status === 'now') return state.script
+    return state.script.map((row, i) => {
+      if (i === nowIndex) return { ...row, status: 'now' as const }
+      if (row.status === 'now') return { ...row, status: 'heard' as const }
+      return row
+    })
+  }, [state.script, state.unit?.textDisplay])
 
   useEffect(() => {
     // A fresh document (or reopening the panel) starts back at one lazy
@@ -150,7 +173,7 @@ export default function Listener() {
     // playing right now. If lazy-loading hasn't reached that row yet,
     // reveal up to it first so there's something to scroll to.
     if (!showScript) return
-    const nowIndex = state.script.findIndex((row) => row.status === 'now')
+    const nowIndex = syncedScript.findIndex((row) => row.status === 'now')
     if (nowIndex >= 0) {
       setScriptVisible((v) => Math.max(v, nowIndex + Math.ceil(SCRIPT_BATCH / 2)))
     }
@@ -159,7 +182,7 @@ export default function Listener() {
       el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
     })
     return () => cancelAnimationFrame(id)
-  }, [showScript, state.script])
+  }, [showScript, syncedScript])
 
   useEffect(() => {
     // Loads the next batch of clauses as the sentinel at the bottom of the
@@ -618,7 +641,7 @@ export default function Listener() {
         <div className="script-panel" aria-label="Script" ref={scriptRef}>
           <div className="script-panel-head">
             <div className="script-caption">
-              Grey = heard &middot; yellow = playing now &middot; faint = not sent yet
+              Teal = heard &middot; amber glow = playing now &middot; faint violet = not sent yet
             </div>
             <button
               className="script-close"
@@ -629,16 +652,16 @@ export default function Listener() {
               <X size={14} aria-hidden="true" />
             </button>
           </div>
-          {state.script.length === 0 ? (
+          {syncedScript.length === 0 ? (
             <p className="notice">Nothing has been read yet.</p>
           ) : (
             <>
-              {state.script.slice(0, scriptVisible).map((row, i) => (
+              {syncedScript.slice(0, scriptVisible).map((row, i) => (
                 <p key={i} className={`script-row script-${row.status}`}>
                   {row.text}
                 </p>
               ))}
-              {scriptVisible < state.script.length && (
+              {scriptVisible < syncedScript.length && (
                 <div ref={scriptSentinelRef} className="script-sentinel" aria-hidden="true" />
               )}
             </>
