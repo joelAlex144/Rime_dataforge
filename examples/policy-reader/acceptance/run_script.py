@@ -152,6 +152,14 @@ async def run_point(agent, demo, point: dict, ledger_path: Path) -> dict:
     resume_sentence = next((i for i, (s, e) in enumerate(sentences)
                             if char_start is not None and s <= char_start < e), None)
 
+    # Release the ledger's file handle now that everything needed from it
+    # (rows, summary, resume bookkeeping) has been read. Without this the
+    # EventLog kept its file open for the lifetime of the session object,
+    # and the NEXT point's `ledger_path.unlink()` at the top of this
+    # function would fail on Windows (which locks open files exclusively,
+    # unlike POSIX) with WinError 32 -- harmless on Linux/Mac, fatal here.
+    h.ledger.close()
+
     provider = h.answer_provider
     return {
         "unit_id": target.unit_id,

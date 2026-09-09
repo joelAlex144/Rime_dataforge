@@ -1,0 +1,55 @@
+{
+  "generated_at": 1788978282.3814883,
+  "protocol_version": 1,
+  "unit_count": 5,
+  "heard": 0,
+  "truncated": 1,
+  "never_played": 4,
+  "units": [
+    {
+      "unit_id": "answer-1",
+      "turn_id": 1,
+      "status": "never_played",
+      "rendered_ms": null,
+      "delivered_text": "",
+      "boundary_word_index": null,
+      "straddling_word": null
+    },
+    {
+      "unit_id": "cue-1",
+      "turn_id": 1,
+      "status": "never_played",
+      "rendered_ms": null,
+      "delivered_text": "",
+      "boundary_word_index": null,
+      "straddling_word": null
+    },
+    {
+      "unit_id": "sec-5b-vi",
+      "turn_id": 0,
+      "status": "truncated_at_offset",
+      "rendered_ms": 4900,
+      "delivered_text": "Governmental action, meaning the destruction, confiscation, or seizure of property by order of any governmental",
+      "boundary_word_index": 14,
+      "straddling_word": "or"
+    },
+    {
+      "unit_id": "sec-5b-vi/resume#1",
+      "turn_id": 1,
+      "status": "never_played",
+      "rendered_ms": null,
+      "delivered_text": "",
+      "boundary_word_index": null,
+      "straddling_word": null
+    },
+    {
+      "unit_id": "sec-5c-i",
+      "turn_id": 1,
+      "status": "never_played",
+      "rendered_ms": null,
+      "delivered_text": "",
+      "boundary_word_index": null,
+      "straddling_word": null
+    }
+  ]
+}

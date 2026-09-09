@@ -1,10 +1,16 @@
 # Delivery-aware position layer
 
-A voice agent that reads a long insurance policy aloud, takes questions mid-clause, answers them against the **last clause the listener actually heard**, and resumes within one sentence of where they were cut off — with a per-session record of which clauses were heard.
+A voice agent that reads a long insurance policy or loan agreement aloud to someone consuming it by ear — on a call, while driving, with their hands or eyes occupied, or because a 40-page document in print isn't practical for them — takes questions mid-clause, answers them against the **last clause the listener actually heard** (never the last one the server merely sent), and resumes within one sentence of wherever they were cut off. Every session keeps a client-acknowledged, per-clause record of what was heard, truncated, or never delivered.
 
-**The product is the layer. The policy reader in `examples/policy-reader/` is the environment that makes the failure obvious.**
+Listening has a failure mode text doesn't. Text is delivered atomically — sent equals received. Speech is delivered over time, so a listener can be cut off mid-word, and only the client actually rendering audio knows where playback really stopped. This layer exists to own that boundary honestly, instead of trusting the server's send position as if it were the truth.
 
-Text is delivered atomically: sent equals received. Speech is delivered over time, so a message can be half-received, and only the client knows where it stopped. This layer owns that boundary.
+**The product is `delivery_layer/`: the ledger, the fence, the position manager, the resume logic. `examples/policy-reader/` is the environment that makes the failure visible and demoable — it is not the product.**
+
+Two failure modes are claimed here:
+- **Primary — interruption and recovery.** Stop synthesis and playback promptly, fence out any stale audio still arriving after a cancel, and keep state consistent with what the client actually rendered — never with what the server assumed.
+- **Supporting — evaluation and observability.** Every session emits an append-only, per-clause record of what was actually heard, truncated, or skipped — the artifact that makes "delivery-aware" a checkable claim rather than a description.
+
+**Evidence, method, and results — every number traced to a committed file — live in [`RIME_EVIDENCE.md`](./RIME_EVIDENCE.md). Start there for the hard voice claim, the acceptance test, and an honest account of what is and isn't verified yet.**
 
 ## Repository layout
 
@@ -37,8 +43,6 @@ tests/                     pytest / unittest; tests/numbers.jsonl is the 40-stri
 traces/                    committed evidence (catalog snapshot, preflight, bench, round-trip)
 RIME_EVIDENCE.md           claim, acceptance test, procedure, results, limitations
 ```
-
-Owned by Person B (not in this slice): client AudioWorklet + playback acks, turn guard, delivery ledger, scheduler, position manager, LiveKit agent, acceptance harness.
 
 ## Setup
 

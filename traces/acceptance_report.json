@@ -1,0 +1,1189 @@
+{
+ "n": 20,
+ "A3": "20/20",
+ "A4": "20/20",
+ "A5": "20/20",
+ "failures": [],
+ "points": [
+  {
+   "unit_id": "sec-5b-i",
+   "cut_char_planned": 190,
+   "cut_char_actual": 193,
+   "resume_char_start": 124,
+   "cut_sentence": 1,
+   "resume_sentence": 1,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-5b-i/resume#1",
+   "frames_played": 73,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-5b-i",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 10320,
+     "delivered_text": "Power failure, meaning the failure of power or other utility service if the failure takes place off the residence premises; if a peril insured against ensues on the residence premises, we cover",
+     "boundary_word_index": 31,
+     "straddling_word": "loss"
+    },
+    {
+     "unit_id": "sec-5b-i/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-5b-ii",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-7a-i",
+   "cut_char_planned": 91,
+   "cut_char_actual": 91,
+   "resume_char_start": 73,
+   "cut_sentence": 1,
+   "resume_sentence": 1,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-7a-i/resume#1",
+   "frames_played": 35,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-7a-i",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 5440,
+     "delivered_text": "The special limits in this section do not increase the Coverage C limit; they are the total",
+     "boundary_word_index": 16,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-7a-i/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-7a-ii",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-8a-i",
+   "cut_char_planned": 163,
+   "cut_char_actual": 168,
+   "resume_char_start": 108,
+   "cut_sentence": 1,
+   "resume_sentence": 1,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-8a-i/resume#1",
+   "frames_played": 57,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-8a-i",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 8960,
+     "delivered_text": "The premium shown on the declarations page is based on information you provided at the time of application; if that information is inaccurate, we may adjust the premium",
+     "boundary_word_index": 27,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-8a-i/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-8a-ii",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-9c-iv",
+   "cut_char_planned": 113,
+   "cut_char_actual": 115,
+   "resume_char_start": 42,
+   "cut_sentence": 1,
+   "resume_sentence": 1,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-9c-iv/resume#1",
+   "frames_played": 49,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-9c-iv",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 7120,
+     "delivered_text": "The two appraisers will choose an umpire; if they cannot agree upon an umpire within 15 days, you or we may request",
+     "boundary_word_index": 21,
+     "straddling_word": "that"
+    },
+    {
+     "unit_id": "sec-9c-iv/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-9c-v",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-9c-ix",
+   "cut_char_planned": 279,
+   "cut_char_actual": 283,
+   "resume_char_start": 157,
+   "cut_sentence": 1,
+   "resume_sentence": 1,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-9c-ix/resume#1",
+   "frames_played": 117,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-9c-ix",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 17680,
+     "delivered_text": "Loss Payment: we will adjust all losses with you and will pay you unless some other person is named in the policy or is legally entitled to receive payment; loss will be payable 60 days after we receive your proof of loss and reach agreement with you, or there is an entry of a final",
+     "boundary_word_index": 54,
+     "straddling_word": "judgment,"
+    },
+    {
+     "unit_id": "sec-9c-ix/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-9c-x",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-13a-vi",
+   "cut_char_planned": 141,
+   "cut_char_actual": 145,
+   "resume_char_start": 102,
+   "cut_sentence": 1,
+   "resume_sentence": 1,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-13a-vi/resume#1",
+   "frames_played": 53,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-13a-vi",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 8000,
+     "delivered_text": "Subrogation: an insured may waive in writing before a loss all rights of recovery against any person; if not waived, we may require an assignment",
+     "boundary_word_index": 24,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-13a-vi/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-13a-vii",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-9b-v",
+   "cut_char_planned": 142,
+   "cut_char_actual": 144,
+   "resume_char_start": 0,
+   "cut_sentence": 0,
+   "resume_sentence": 0,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-9b-v/resume#1",
+   "frames_played": 63,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-9b-v",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 9600,
+     "delivered_text": "If at the time of loss the amount of insurance on the damaged building is less than 80% of the full replacement cost, we will pay the greater of",
+     "boundary_word_index": 28,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-9b-v/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-9b-vi",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-8a-ii",
+   "cut_char_planned": 71,
+   "cut_char_actual": 74,
+   "resume_char_start": 0,
+   "cut_sentence": 0,
+   "resume_sentence": 0,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-8a-ii/resume#1",
+   "frames_played": 36,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-8a-ii",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 5120,
+     "delivered_text": "If the adjusted premium exceeds the premium paid by more than 25%, we will",
+     "boundary_word_index": 13,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-8a-ii/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-8a-iii",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-10c-iv",
+   "cut_char_planned": 70,
+   "cut_char_actual": 74,
+   "resume_char_start": 0,
+   "cut_sentence": 0,
+   "resume_sentence": 0,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-10c-iv/resume#1",
+   "frames_played": 30,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-10c-iv",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 4560,
+     "delivered_text": "Coverages E and F do not apply to bodily injury or property damage arising",
+     "boundary_word_index": 13,
+     "straddling_word": "out"
+    },
+    {
+     "unit_id": "sec-10c-iv/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-10c-v",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-13a-ii",
+   "cut_char_planned": 179,
+   "cut_char_actual": 180,
+   "resume_char_start": 0,
+   "cut_sentence": 0,
+   "resume_sentence": 0,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-13a-ii/resume#1",
+   "frames_played": 60,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-13a-ii",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 8960,
+     "delivered_text": "Concealment or Fraud: the entire policy will be void if, whether before or after a loss, an insured has intentionally concealed or misrepresented any material fact or circumstance,",
+     "boundary_word_index": 27,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-13a-ii/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-13a-iii",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-4a-v",
+   "cut_char_planned": 101,
+   "cut_char_actual": 101,
+   "resume_char_start": 0,
+   "cut_sentence": 0,
+   "resume_sentence": 0,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-4a-v/resume#1",
+   "frames_played": 41,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-4a-v",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 6400,
+     "delivered_text": "We do not insure for loss caused by theft in or to a dwelling under construction, or of materials and",
+     "boundary_word_index": 19,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-4a-v/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-4a-vi",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-3a-iv",
+   "cut_char_planned": 89,
+   "cut_char_actual": 90,
+   "resume_char_start": 0,
+   "cut_sentence": 0,
+   "resume_sentence": 0,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-3a-iv/resume#1",
+   "frames_played": 33,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-3a-iv",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 5120,
+     "delivered_text": "Business means a trade, profession, or occupation engaged in on a full-time, part-time, or",
+     "boundary_word_index": 13,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-3a-iv/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-3a-v",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-13a-iii",
+   "cut_char_planned": 161,
+   "cut_char_actual": 165,
+   "resume_char_start": 0,
+   "cut_sentence": 0,
+   "resume_sentence": 0,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-13a-iii/resume#1",
+   "frames_played": 52,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-13a-iii",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 7760,
+     "delivered_text": "Liberalization Clause: if we make a change which broadens coverage under this edition of our policy without additional premium charge, that change will automatically",
+     "boundary_word_index": 23,
+     "straddling_word": "apply"
+    },
+    {
+     "unit_id": "sec-13a-iii/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-13a-iv",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-11a-iii",
+   "cut_char_planned": 96,
+   "cut_char_actual": 100,
+   "resume_char_start": 0,
+   "cut_sentence": 0,
+   "resume_sentence": 0,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-11a-iii/resume#1",
+   "frames_played": 32,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-11a-iii",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 5120,
+     "delivered_text": "We pay reasonable expenses incurred by an insured at our request, including actual loss of earnings,",
+     "boundary_word_index": 15,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-11a-iii/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-11a-iv",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-6d-iii",
+   "cut_char_planned": 152,
+   "cut_char_actual": 155,
+   "resume_char_start": 0,
+   "cut_sentence": 0,
+   "resume_sentence": 0,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-6d-iii/resume#1",
+   "frames_played": 45,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-6d-iii",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 6720,
+     "delivered_text": "Loss to an awning, fence, patio, pavement, swimming pool, underground pipe, flue, drain, cesspool, septic tank, foundation, retaining wall, bulkhead, pier,",
+     "boundary_word_index": 20,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-6d-iii/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-6d-iv",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-13b-i",
+   "cut_char_planned": 74,
+   "cut_char_actual": 76,
+   "resume_char_start": 0,
+   "cut_sentence": 0,
+   "resume_sentence": 0,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-13b-i/resume#1",
+   "frames_played": 21,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-13b-i",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 3200,
+     "delivered_text": "Nuclear Hazard Clause: nuclear hazard means any nuclear reaction, radiation,",
+     "boundary_word_index": 9,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-13b-i/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-13b-ii",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-13a-iv",
+   "cut_char_planned": 108,
+   "cut_char_actual": 109,
+   "resume_char_start": 0,
+   "cut_sentence": 0,
+   "resume_sentence": 0,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-13a-iv/resume#1",
+   "frames_played": 44,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-13a-iv",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 6800,
+     "delivered_text": "Waiver or Change of Policy Provisions: a waiver or change of a provision of this policy must be in writing by",
+     "boundary_word_index": 20,
+     "straddling_word": "us"
+    },
+    {
+     "unit_id": "sec-13a-iv/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-13a-v",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-1-vi",
+   "cut_char_planned": 46,
+   "cut_char_actual": 47,
+   "resume_char_start": 0,
+   "cut_sentence": 0,
+   "resume_sentence": 0,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-1-vi/resume#1",
+   "frames_played": 22,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-1-vi",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 3520,
+     "delivered_text": "The policy is subject to a deductible of $1,000",
+     "boundary_word_index": 8,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-1-vi/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-1-vii",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-3a-vii",
+   "cut_char_planned": 52,
+   "cut_char_actual": 55,
+   "resume_char_start": 0,
+   "cut_sentence": 0,
+   "resume_sentence": 0,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-3a-vii/resume#1",
+   "frames_played": 19,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-3a-vii",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 2560,
+     "delivered_text": "Insured location means the residence premises, the part",
+     "boundary_word_index": 7,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-3a-vii/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-3a-viii",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  },
+  {
+   "unit_id": "sec-5b-vi",
+   "cut_char_planned": 107,
+   "cut_char_actual": 111,
+   "resume_char_start": 0,
+   "cut_sentence": 0,
+   "resume_sentence": 0,
+   "deictic_unit_id": null,
+   "answer_kind": "deictic",
+   "resumed_unit": "sec-5b-vi/resume#1",
+   "frames_played": 35,
+   "units": [
+    {
+     "unit_id": "answer-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "cue-1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-5b-vi",
+     "turn_id": 0,
+     "status": "truncated_at_offset",
+     "rendered_ms": 4900,
+     "delivered_text": "Governmental action, meaning the destruction, confiscation, or seizure of property by order of any governmental",
+     "boundary_word_index": 14,
+     "straddling_word": "or"
+    },
+    {
+     "unit_id": "sec-5b-vi/resume#1",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    },
+    {
+     "unit_id": "sec-5c-i",
+     "turn_id": 1,
+     "status": "never_played",
+     "rendered_ms": null,
+     "delivered_text": "",
+     "boundary_word_index": null,
+     "straddling_word": null
+    }
+   ]
+  }
+ ]
+}
