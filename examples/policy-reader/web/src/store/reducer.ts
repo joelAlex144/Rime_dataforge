@@ -267,9 +267,9 @@ export function wordAt(words: State['words'], renderedMs: number): number {
  * the wire before the interrupt that stops the clock. Sending them the other
  * way round measures the interrupt against a boundary that has already moved.
  */
-export function buildInterrupt(contextId: string | null, renderedMs: number): any[] {
+export function buildInterrupt(contextId: string | null, renderedMs: number, audibleStopTs?: number): any[] {
   return [
-    { type: 'flush_ack', context_id: contextId, rendered_ms: renderedMs },
+    { type: 'flush_ack', context_id: contextId, rendered_ms: renderedMs, audible_stop_ts: audibleStopTs },
     { type: 'interrupt' },
   ]
 }
@@ -277,9 +277,9 @@ export function buildInterrupt(contextId: string | null, renderedMs: number): an
 /** Pause is an interrupt without a question: the same flush_ack first, so the
  *  server attributes the boundary to the clause being heard and re-reads it
  *  from the cursor instead of skipping it. */
-export function buildPause(contextId: string | null, renderedMs: number): any[] {
+export function buildPause(contextId: string | null, renderedMs: number, audibleStopTs?: number): any[] {
   return [
-    { type: 'flush_ack', context_id: contextId, rendered_ms: renderedMs },
+    { type: 'flush_ack', context_id: contextId, rendered_ms: renderedMs, audible_stop_ts: audibleStopTs },
     { type: 'pause' },
   ]
 }
@@ -291,15 +291,15 @@ export function buildPause(contextId: string | null, renderedMs: number): any[] 
 /** A jump, a chip, or a spoken topic while the voice is sounding: the flush ack
  *  first, as for every other cut. The server then treats it as the
  *  interruption path with a different resume target. */
-export function buildCut(msg: any, contextId: string | null, renderedMs: number, sounding: boolean): any[] {
+export function buildCut(msg: any, contextId: string | null, renderedMs: number, sounding: boolean, audibleStopTs?: number): any[] {
   if (!sounding) return [msg]
-  return [{ type: 'flush_ack', context_id: contextId, rendered_ms: renderedMs }, msg]
+  return [{ type: 'flush_ack', context_id: contextId, rendered_ms: renderedMs, audible_stop_ts: audibleStopTs }, msg]
 }
 
-export function buildOpen(name: string, contextId: string | null, renderedMs: number, sounding: boolean): any[] {
+export function buildOpen(name: string, contextId: string | null, renderedMs: number, sounding: boolean, audibleStopTs?: number): any[] {
   if (!sounding) return [{ type: 'open', name }]
   return [
-    { type: 'flush_ack', context_id: contextId, rendered_ms: renderedMs },
+    { type: 'flush_ack', context_id: contextId, rendered_ms: renderedMs, audible_stop_ts: audibleStopTs },
     { type: 'open', name },
   ]
 }

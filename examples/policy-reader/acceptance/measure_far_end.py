@@ -36,6 +36,8 @@ sys.path.insert(0, str(ROOT))
 
 WINDOW_MS = 20
 SILENCE_RMS = 300          # int16 RMS below this counts as silence
+SILENCE_GAP_MS = 400       # a run of silence this long means playback really stopped
+MAX_LOOKAHEAD_MS = 5000    # give up bounding the tail past this; avoids scanning to EOF
 
 
 def read_wav(path: Path):
@@ -60,13 +62,35 @@ def rms_windows(samples, rate: int):
 
 
 def last_audible_ms(samples, rate: int, after_ms: float = 0.0) -> float | None:
-    """End of the last non-silent window at or after after_ms."""
+    """End of the buffered/queued audio that kept sounding right after
+    after_ms, before the recording actually went quiet.
+
+    Originally this scanned to end of file and kept overwriting `last` with
+    whatever non-silent window it found, however far away -- on a document
+    that keeps being read after the interrupt, that returns the END OF THE
+    NEXT SPEECH BURST (or the last one in the whole file), not the tail of
+    the flushed audio. That produced latencies in the tens of seconds to
+    minutes on a real recording. Bounded correctly: stop as soon as a real
+    silence gap (SILENCE_GAP_MS) is seen after audio has started, and give up
+    bounding after MAX_LOOKAHEAD_MS so a recording with no silence at all
+    doesn't walk to EOF either.
+    """
     last = None
+    silence_run = 0.0
+    started = False
     for start_ms, rms in rms_windows(samples, rate):
         if start_ms + WINDOW_MS < after_ms:
             continue
+        if start_ms - after_ms > MAX_LOOKAHEAD_MS:
+            break
         if rms > SILENCE_RMS:
             last = start_ms + WINDOW_MS
+            silence_run = 0.0
+            started = True
+        elif started:
+            silence_run += WINDOW_MS
+            if silence_run >= SILENCE_GAP_MS:
+                break
     return last
 
 
