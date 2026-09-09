@@ -60,9 +60,9 @@ Offline tests cover the "four b two" ↔ "4(b)(ii)" case, conservative mid-word 
 | Number round-trip pass rate + ASR model | Audio synthesized for all 46 fixture strings (`n: 46`), but `asr: null` — **no ASR/STT key is configured** (`STT_API_KEY` / `GROQ_API_KEY` / `OPENAI_API_KEY`), so 0 of 46 were actually scored (`n_scored: 0`, `n_pass: 0`). The number-normalization text pairs exist (display → spoken) but the round-trip claim — that Rime's audio, transcribed back, matches — is **not yet verified**. **Outstanding**: set one of the STT keys above and re-run `python scripts/number_roundtrip.py` | `traces/number_roundtrip_20260909T160227Z.json` |
 | A1 audible stop p50 / p95 (far end) | Not run. **Outstanding**: needs the two-person acceptance harness (Person B measuring at the far end) | acceptance harness (Person B) |
 | A2 delivered-text agreement | Not run. **Outstanding**: needs the two-person acceptance harness | acceptance harness |
-| A3 deictic resolution | interrupt at 8160 ms in `sec-5b-i`; the deictic question resolved against the last **heard** clause, boundary 126 chars (word 20, straddling `a`) from the live word map | `traces/demo_rime_20260906.jsonl` |
-| A4 resume within one sentence | cut at char 126, sentence 0 ends at 123; resumed as `sec-5b-i/resume#1` with `char_start=124`, the start of the sentence containing the cut. Read cursor advanced to the next unit, not a replay | `traces/demo_rime_20260906.jsonl` |
-| A5 no false deliveries | Not run. **Outstanding**: needs the two-person acceptance harness | acceptance harness |
+| A3 deictic resolution | **20/20** — offline scripted harness, 20 interruption points across the fixture (`examples/policy-reader/acceptance/run_script.py`, `TTS_PROVIDER=fake`). Every deictic question resolved against the last **heard** clause, never the last one sent. Zero failures. Live single-sample confirmation: interrupt at 8160 ms in `sec-5b-i`, boundary 126 chars (word 20, straddling `a`) from the live word map — `traces/demo_rime_20260906.jsonl` | `traces/acceptance_report.json` |
+| A4 resume within one sentence | **20/20** — same 20-point harness run; every resume landed within one sentence of its cut point. Zero failures. Live single-sample confirmation: cut at char 126 (sentence 0 ends at 123), resumed as `sec-5b-i/resume#1` at `char_start=124`, the start of the sentence containing the cut — `traces/demo_rime_20260906.jsonl` | `traces/acceptance_report.json` |
+| A5 no false deliveries | **20/20** — same harness run; no unit across any of the 20 points was marked heard without a matching `frames_played` ack. Zero failures | `traces/acceptance_report.json` |
 
 ## Timestamp fidelity
 
@@ -190,6 +190,7 @@ claimed.
 - The `clear` leak measurement depends on how much text was queued; we report the queued length alongside the bytes.
 - Word-level boundaries depend on Rime's timestamps. Spans the aligner could not match are interpolated and counted; if that count is non-trivial in a run, the boundary claim for that run is clause-level, not word-level.
 - `modelId` is asserted from configuration and the catalog check, not from the audio stream, because the stream does not identify the model.
+- A3/A4/A5's 20/20 result is from the offline scripted harness on `TTS_PROVIDER=fake`, not live Rime — it verifies the ledger/fence/position-manager logic deterministically and is reproducible on demand, but is not a substitute for A1/A2 (audible stop, delivered-text agreement), which specifically require the real Rime path and a recording of actual speaker output.
 
 ## Narration gap (no radio silence while a document is processed)
 

@@ -1,0 +1,59 @@
+{"ts_ms": 2394429375.0, "wall": 1788978233.4792264, "session_id": "policy-reader", "type": "provider_active", "provider": "fake", "modelId": "fake", "speaker": "fake", "lang": "en", "audioFormat": "pcm", "samplingRate": 24000, "endpoint": "in-process", "transport": "in-process"}
+{"ts_ms": 2394429375.0, "wall": 1788978233.4792264, "session_id": "policy-reader", "type": "synth_requested", "turn_id": 0, "unit_id": "sec-5b-vi", "provider": "fake"}
+{"ts_ms": 2394429375.0, "wall": 1788978233.4801786, "session_id": "policy-reader", "type": "synth_requested", "provider": "fake", "context_id": "t0:sec-5b-vi", "generation": 0, "chars": 183}
+{"ts_ms": 2394429562.0, "wall": 1788978233.6698837, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 160}
+{"ts_ms": 2394429750.0, "wall": 1788978233.857329, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 320}
+{"ts_ms": 2394429937.0, "wall": 1788978234.0416925, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 480}
+{"ts_ms": 2394430140.0, "wall": 1788978234.258585, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 640}
+{"ts_ms": 2394430343.0, "wall": 1788978234.4590423, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 800}
+{"ts_ms": 2394430562.0, "wall": 1788978234.6775255, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 960}
+{"ts_ms": 2394430656.0, "wall": 1788978234.7707024, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 1060}
+{"ts_ms": 2394430750.0, "wall": 1788978234.8645847, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 1160}
+{"ts_ms": 2394430843.0, "wall": 1788978234.9553158, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 1260}
+{"ts_ms": 2394430937.0, "wall": 1788978235.050137, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 1360}
+{"ts_ms": 2394431125.0, "wall": 1788978235.2365131, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 1520}
+{"ts_ms": 2394431312.0, "wall": 1788978235.4228394, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 1680}
+{"ts_ms": 2394431500.0, "wall": 1788978235.612473, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 1840}
+{"ts_ms": 2394431687.0, "wall": 1788978235.7989564, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 2000}
+{"ts_ms": 2394431875.0, "wall": 1788978235.9861028, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 2160}
+{"ts_ms": 2394432062.0, "wall": 1788978236.173781, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 2320}
+{"ts_ms": 2394432250.0, "wall": 1788978236.358991, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 2480}
+{"ts_ms": 2394432437.0, "wall": 1788978236.546117, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 2640}
+{"ts_ms": 2394432625.0, "wall": 1788978236.7327273, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 2800}
+{"ts_ms": 2394432812.0, "wall": 1788978236.9198365, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 2960}
+{"ts_ms": 2394433015.0, "wall": 1788978237.1208022, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 3120}
+{"ts_ms": 2394433218.0, "wall": 1788978237.3360589, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 3280}
+{"ts_ms": 2394433421.0, "wall": 1788978237.5379825, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 3440}
+{"ts_ms": 2394433640.0, "wall": 1788978237.7571864, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 3600}
+{"ts_ms": 2394433734.0, "wall": 1788978237.8501768, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 3700}
+{"ts_ms": 2394433843.0, "wall": 1788978237.949576, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 3800}
+{"ts_ms": 2394433937.0, "wall": 1788978238.0556734, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 3900}
+{"ts_ms": 2394434062.0, "wall": 1788978238.177082, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 4000}
+{"ts_ms": 2394434312.0, "wall": 1788978238.4157338, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 4160}
+{"ts_ms": 2394434406.0, "wall": 1788978238.5232627, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 4260}
+{"ts_ms": 2394434515.0, "wall": 1788978238.6192074, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 4360}
+{"ts_ms": 2394434609.0, "wall": 1788978238.7280567, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 4460}
+{"ts_ms": 2394434703.0, "wall": 1788978238.8205535, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 4560}
+{"ts_ms": 2394434921.0, "wall": 1788978239.0405977, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 4720}
+{"ts_ms": 2394435125.0, "wall": 1788978239.2408488, "session_id": "policy-reader", "type": "frames_played", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 4900}
+{"ts_ms": 2394435156.0, "wall": 1788978239.272597, "session_id": "policy-reader", "type": "cancel_issued", "turn_id": 1, "unit_id": null}
+{"ts_ms": 2394435156.0, "wall": 1788978239.272597, "session_id": "policy-reader", "type": "audible_stop", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 4900, "audible_stop_ts": 2394435.156}
+{"ts_ms": 2394435156.0, "wall": 1788978239.272597, "session_id": "policy-reader", "type": "unit_truncated", "turn_id": 0, "unit_id": "sec-5b-vi", "rendered_ms": 4900}
+{"ts_ms": 2394435156.0, "wall": 1788978239.272597, "session_id": "policy-reader", "type": "position_saved", "turn_id": 1, "unit_id": "sec-5b-vi", "anchor": "Governmental action, meaning the destruction, confiscation, or seizure of property by order of any governmental or public authority, except when ordered to prevent the spread of fire."}
+{"ts_ms": 2394435156.0, "wall": 1788978239.272597, "session_id": "policy-reader", "type": "cancel_issued", "provider": "fake", "generation": 1, "fenced_contexts": ["t0:sec-5b-vi"]}
+{"ts_ms": 2394435218.0, "wall": 1788978239.3333683, "session_id": "policy-reader", "type": "result_fenced", "issued_turn_id": 0, "current_turn_id": 1, "unit_id": "sec-5b-vi"}
+{"ts_ms": 2394435218.0, "wall": 1788978239.3333683, "session_id": "policy-reader", "type": "cancel_issued", "provider": "fake", "generation": 2, "fenced_contexts": []}
+{"ts_ms": 2394435218.0, "wall": 1788978239.3333683, "session_id": "policy-reader", "type": "result_fenced", "issued_turn_id": 0, "current_turn_id": 1, "unit_id": null}
+{"ts_ms": 2394435218.0, "wall": 1788978239.3346248, "session_id": "policy-reader", "type": "synth_requested", "turn_id": 1, "unit_id": "answer-1", "provider": "fake"}
+{"ts_ms": 2394435218.0, "wall": 1788978239.3346248, "session_id": "policy-reader", "type": "synth_requested", "provider": "fake", "context_id": "t1:answer-1", "generation": 2, "chars": 229}
+{"ts_ms": 2394447968.0, "wall": 1788978252.084838, "session_id": "policy-reader", "type": "synth_done", "context_id": "t1:answer-1", "bytes": 522240, "audio_ms": 10880.0}
+{"ts_ms": 2394447968.0, "wall": 1788978252.084838, "session_id": "policy-reader", "type": "position_restored", "turn_id": 1, "unit_id": "sec-5b-vi", "anchor": "Governmental action, meaning the destruction, confiscation, or seizure of property by order of any governmental or public authority, except when ordered to prevent the spread of fire."}
+{"ts_ms": 2394447968.0, "wall": 1788978252.084838, "session_id": "policy-reader", "type": "synth_requested", "turn_id": 1, "unit_id": "cue-1", "provider": "fake"}
+{"ts_ms": 2394447968.0, "wall": 1788978252.084838, "session_id": "policy-reader", "type": "synth_requested", "provider": "fake", "context_id": "t1:cue-1", "generation": 2, "chars": 54}
+{"ts_ms": 2394451718.0, "wall": 1788978255.8226764, "session_id": "policy-reader", "type": "synth_done", "context_id": "t1:cue-1", "bytes": 153600, "audio_ms": 3200.0}
+{"ts_ms": 2394451718.0, "wall": 1788978255.8226764, "session_id": "policy-reader", "type": "synth_requested", "turn_id": 1, "unit_id": "sec-5b-vi/resume#1", "provider": "fake"}
+{"ts_ms": 2394451718.0, "wall": 1788978255.8226764, "session_id": "policy-reader", "type": "synth_requested", "provider": "fake", "context_id": "t1:sec-5b-vi/resume#1", "generation": 2, "chars": 183}
+{"ts_ms": 2394461828.0, "wall": 1788978265.9366436, "session_id": "policy-reader", "type": "synth_done", "context_id": "t1:sec-5b-vi/resume#1", "bytes": 414720, "audio_ms": 8640.0}
+{"ts_ms": 2394461828.0, "wall": 1788978265.9366436, "session_id": "policy-reader", "type": "synth_requested", "turn_id": 1, "unit_id": "sec-5c-i", "provider": "fake"}
+{"ts_ms": 2394461828.0, "wall": 1788978265.9366436, "session_id": "policy-reader", "type": "synth_requested", "provider": "fake", "context_id": "t1:sec-5c-i", "generation": 2, "chars": 244}
+{"ts_ms": 2394478250.0, "wall": 1788978282.367448, "session_id": "policy-reader", "type": "synth_done", "context_id": "t1:sec-5c-i", "bytes": 675840, "audio_ms": 14080.0}
