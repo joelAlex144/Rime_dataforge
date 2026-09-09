@@ -207,6 +207,14 @@ export class AudioPlayer {
    * Only an interrupt does this. Dropped frames are never played, so the
    * enqueued counter is resynced to what was actually heard.
    */
+  /** The audio-hardware clock value right now: seconds since this
+   *  AudioContext was created, monotonic. This is what audible_stop_ts is
+   *  measured against server-side (A1) -- not wall-clock time, since only
+   *  the audio clock says when playback actually stopped. */
+  audibleStopTs(): number {
+    return this.ctx?.currentTime ?? 0
+  }
+
   flush(): number {
     const at = this.renderedMs()
     this.node?.port.postMessage({ type: 'flush' })
@@ -380,7 +388,8 @@ export function useSession(): Session {
         // the playhead so the server can attribute the boundary.
         const ctx = playheadCtx()
         const at = playerRef.current.flush()
-        send({ type: 'flush_ack', context_id: ctx, rendered_ms: at })
+        const stopTs = playerRef.current.audibleStopTs()
+        send({ type: 'flush_ack', context_id: ctx, rendered_ms: at, audible_stop_ts: stopTs })
         return
       }
       if (m.type === 'audio') {
@@ -513,7 +522,8 @@ export function useSession(): Session {
     // moving, stamped with the unit at the playhead (not the last to arrive).
     const ctx = playerRef.current.playheadUnit()?.contextId ?? ctxRef.current
     const at = playerRef.current.flush()
-    for (const msg of buildInterrupt(ctx, at)) send(msg)
+    const stopTs = playerRef.current.audibleStopTs()
+    for (const msg of buildInterrupt(ctx, at, stopTs)) send(msg)
   }, [send])
 
   const play = useCallback(() => {
@@ -524,7 +534,8 @@ export function useSession(): Session {
   const pause = useCallback(() => {
     const ctx = playerRef.current.playheadUnit()?.contextId ?? ctxRef.current
     const at = playerRef.current.flush()
-    for (const msg of buildPause(ctx, at)) send(msg)
+    const stopTs = playerRef.current.audibleStopTs()
+    for (const msg of buildPause(ctx, at, stopTs)) send(msg)
   }, [send])
 
   const ask = useCallback(
@@ -547,7 +558,8 @@ export function useSession(): Session {
       const sounding = playerRef.current.playheadUnit() !== null
       const ctx = playerRef.current.playheadUnit()?.contextId ?? ctxRef.current
       const at = sounding ? playerRef.current.flush() : 0
-      for (const msg of buildOpen(name, ctx, at, sounding)) send(msg)
+      const stopTs = sounding ? playerRef.current.audibleStopTs() : undefined
+      for (const msg of buildOpen(name, ctx, at, sounding, stopTs)) send(msg)
     },
     [send],
   )
@@ -559,7 +571,8 @@ export function useSession(): Session {
       const sounding = playerRef.current.playheadUnit() !== null
       const ctx = playerRef.current.playheadUnit()?.contextId ?? ctxRef.current
       const at = sounding ? playerRef.current.flush() : 0
-      for (const m of buildCut(msg, ctx, at, sounding)) send(m)
+      const stopTs = sounding ? playerRef.current.audibleStopTs() : undefined
+      for (const m of buildCut(msg, ctx, at, sounding, stopTs)) send(m)
     },
     [send],
   )

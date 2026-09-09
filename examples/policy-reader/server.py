@@ -3067,6 +3067,17 @@ async def handle_client_message(s: ReaderSession, m: dict, socks, ws) -> None:
         s._flush_ctx = fctx or None
         s.events.emit("flush_ack", context_id=fctx,
                       rendered_ms=round(float(m.get("rendered_ms") or 0.0), 1))
+        audible_stop_ts = m.get("audible_stop_ts")
+        if audible_stop_ts is not None:
+            # The client's audio-hardware clock value at the moment playback
+            # actually stopped -- what A1 (audible-stop latency) is measured
+            # against. Mirrors agent.py's Ledger.log_audible_stop() for this
+            # server's own lightweight event mechanism.
+            s.events.emit("audible_stop", context_id=fctx,
+                          turn_id=(st.turn_id if st else None),
+                          unit_id=(st.unit_id if st else None),
+                          rendered_ms=round(float(m.get("rendered_ms") or 0.0), 1),
+                          audible_stop_ts=float(audible_stop_ts))
         if s._flush_waiter is not None and not s._flush_waiter.done():
             s._flush_waiter.set_result(True)          # a stop from another tab was waiting
         return

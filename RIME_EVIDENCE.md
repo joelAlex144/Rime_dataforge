@@ -58,11 +58,46 @@ Offline tests cover the "four b two" ↔ "4(b)(ii)" case, conservative mid-word 
 | Full-unit RTF cold p50 / p95 | 0.30 / 0.30 (mean 0.30, max 0.30) | `traces/latency_bench_20260909T160044Z.json` |
 | Full-unit RTF warm p50 / p95 | 0.30 / 0.30 (mean 0.30, max 0.40) | `traces/latency_bench_20260909T160044Z.json` |
 | Number round-trip pass rate + ASR model | Audio synthesized for all 46 fixture strings (`n: 46`), but `asr: null` — **no ASR/STT key is configured** (`STT_API_KEY` / `GROQ_API_KEY` / `OPENAI_API_KEY`), so 0 of 46 were actually scored (`n_scored: 0`, `n_pass: 0`). The number-normalization text pairs exist (display → spoken) but the round-trip claim — that Rime's audio, transcribed back, matches — is **not yet verified**. **Outstanding**: set one of the STT keys above and re-run `python scripts/number_roundtrip.py` | `traces/number_roundtrip_20260909T160227Z.json` |
-| A1 audible stop p50 / p95 (far end) | Not run. **Outstanding**: needs the two-person acceptance harness (Person B measuring at the far end) | acceptance harness (Person B) |
-| A2 delivered-text agreement | Not run. **Outstanding**: needs the two-person acceptance harness | acceptance harness |
+| A1 audible stop p50 / p95 (far end) | **p50 2228.0 ms / p95 2657.3 ms** (n=8, samples: 2649.3, 1440.0, 838.7, 2188.0, 2228.0, 2648.0, 1100.0, 2657.3 ms) — loopback recording of the real Rime session, measured with `examples/policy-reader/acceptance/measure_far_end.py --skip-asr` | `traces/session_webf77b6df1.jsonl`, `traces/acceptance_far_end.json` |
+| A2 delivered-text agreement | **Transcript captured, not scored.** `measure_far_end.py` (run on Astitva's own machine, open network) transcribed the same recording with faster-whisper `base.en`: 3115 chars, opening "I've gone through Carers Allowance, Eligibility, ..." — matches the session's actual `start_choice` line. **Outstanding**: `measure_a2` only transcribes; it does not compute the character-level agreement itself (its own docstring: "computed by the caller once the clip boundaries are aligned"). The trace's `unit_truncated` rows carry `char_end`/`of` offsets into the fixture text, not delivered text, so scoring this for real needs pulling the fixture text per `context_id`, slicing a clip per truncated unit from the WAV, and diffing each against its expected prefix — not built. No fabricated pass rate is reported. | `traces/session_web-f77b6df1.jsonl` (Astitva's machine; not yet copied into this repo's `traces/`) |
 | A3 deictic resolution | **20/20** — offline scripted harness, 20 interruption points across the fixture (`examples/policy-reader/acceptance/run_script.py`, `TTS_PROVIDER=fake`). Every deictic question resolved against the last **heard** clause, never the last one sent. Zero failures. Live single-sample confirmation: interrupt at 8160 ms in `sec-5b-i`, boundary 126 chars (word 20, straddling `a`) from the live word map — `traces/demo_rime_20260906.jsonl` | `traces/acceptance_report.json` |
 | A4 resume within one sentence | **20/20** — same 20-point harness run; every resume landed within one sentence of its cut point. Zero failures. Live single-sample confirmation: cut at char 126 (sentence 0 ends at 123), resumed as `sec-5b-i/resume#1` at `char_start=124`, the start of the sentence containing the cut — `traces/demo_rime_20260906.jsonl` | `traces/acceptance_report.json` |
 | A5 no false deliveries | **20/20** — same harness run; no unit across any of the 20 points was marked heard without a matching `frames_played` ack. Zero failures | `traces/acceptance_report.json` |
+
+## A1 measurement — two bugs found and fixed getting here
+
+Getting a real A1 number surfaced two separate bugs, not just a recording
+technique problem. Recorded as the QA sections above do, since both would
+otherwise silently produce a wrong "no data" or a wrong number.
+
+**1. The client never sent `audible_stop_ts`.** `delivery_layer/playback_protocol.py`'s
+`FlushAck` has always carried an `audible_stop_ts` field, and `agent.py`'s
+LiveKit path logs it correctly via `Ledger.log_audible_stop()`. But the actual
+browser app (`examples/policy-reader/web`) builds its `flush_ack` messages by
+hand in `session.ts`/`reducer.ts`, and those never included the field — every
+recording produced a trace with `flush_ack` events but zero `audible_stop`
+events, so A1 had nothing to measure against. Fixed: `AudioPlayer.audibleStopTs()`
+(reads `AudioContext.currentTime`, the audio-hardware clock) is now threaded
+through `buildInterrupt`/`buildPause`/`buildCut`/`buildOpen` and the flush
+handler in `session.ts`, and `server.py`'s `flush_ack` handler now reads
+`audible_stop_ts` off the incoming message and emits a matching `audible_stop`
+event, mirroring the `agent.py` path. Confirmed on the recording used for this
+row: 8 `flush_ack` events, 8 `audible_stop` events.
+
+**2. `measure_far_end.py`'s `last_audible_ms` scanned to end of file.** It
+returned whichever non-silent window it found last, however far past the
+interrupt — on a session where reading continues after every interrupt (the
+normal case), that is the end of the *next* speech burst, or the last one in
+the whole recording, not the tail of the flushed audio. The first run against
+this recording reported p50 179148 ms / p95 264769 ms — not a fluke, a
+measurement bug. Fixed: it now stops at the first real silence gap
+(`SILENCE_GAP_MS = 400`) after audio has started, bounded to a 5 s lookahead.
+Re-run against the same recording: p50 2228.0 ms / p95 2657.3 ms, the number
+in the Results table above.
+
+Both fixes are in the committed scripts (`server.py`, `session.ts`,
+`reducer.ts`, `measure_far_end.py`); nothing here is a one-off patch applied
+only to produce this number.
 
 ## Timestamp fidelity
 
@@ -191,6 +226,7 @@ claimed.
 - Word-level boundaries depend on Rime's timestamps. Spans the aligner could not match are interpolated and counted; if that count is non-trivial in a run, the boundary claim for that run is clause-level, not word-level.
 - `modelId` is asserted from configuration and the catalog check, not from the audio stream, because the stream does not identify the model.
 - A3/A4/A5's 20/20 result is from the offline scripted harness on `TTS_PROVIDER=fake`, not live Rime — it verifies the ledger/fence/position-manager logic deterministically and is reproducible on demand, but is not a substitute for A1/A2 (audible stop, delivered-text agreement), which specifically require the real Rime path and a recording of actual speaker output.
+- A1 is a single recorded session (n=8 interruption points), not the full 20-point script; it establishes the measurement pipeline works end-to-end and gives a real, if small-sample, p50/p95. A2's transcript was captured from the same session but not scored against the fixture text — the character-level comparison the acceptance test calls for was never wired up in `measure_far_end.py`, so no A2 pass rate is claimed.
 
 ## Narration gap (no radio silence while a document is processed)
 
