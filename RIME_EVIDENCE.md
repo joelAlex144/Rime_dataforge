@@ -50,18 +50,18 @@ Offline tests cover the "four b two" ↔ "4(b)(ii)" case, conservative mid-word 
 
 | Measure | Value | Trace |
 |---|---|---|
-| Catalog check date / speaker / model / lang | | `traces/rime_catalog_check.json` |
-| Preflight: audio ms, words, drift, interpolated spans | | `traces/preflight_*.jsonl` |
-| Bytes (ms) arriving after `clear` | | `traces/preflight_*.jsonl` → `clear_leak_measured` |
-| TTFB warm p50 / p95 | | `traces/latency_bench_*.json` |
-| TTFB cold p50 / p95 | | `traces/latency_bench_*.json` |
-| Full-unit RTF warm p50 / p95 | | `traces/latency_bench_*.json` |
-| Number round-trip pass rate + ASR model | | `traces/number_roundtrip_*.json` |
-| A1 audible stop p50 / p95 (far end) | | acceptance harness (Person B) |
-| A2 delivered-text agreement | | acceptance harness |
+| Catalog check date / speaker / model / lang | 2026-09-05T15:56:59Z / `bancroft` / `coda` / `eng` — confirmed present in the live catalog fetched from `https://users.rime.ai/data/voices/all-v2.json` | `traces/rime_catalog_20260905.json` |
+| Preflight: audio ms, words, drift, interpolated spans | audio_ms 22080.0, words 65, last word end 22205.19 ms (trailing_ms −125.2 vs audio length); drift ratios measured separately per clause in "Timestamp fidelity" below (0.90 / 1.01 / 0.66) | `traces/preflight_20260905T163015Z.jsonl`, `traces/preflight_20260905T163015Z.timestamps.json` |
+| Bytes (ms) arriving after `clear` | 1,112,576 bytes (≈23,178.7 ms of audio) still arrived after `clear`, measured over a 6 s wait — this is the leak the generation fence exists to drop, not a bug in the fence | `traces/preflight_20260905T163015Z.jsonl` → `clear_leak_measured` |
+| TTFB (not yet a benchmark) | Two single observations from the same preflight run: 374.2 ms and 380.9 ms. Not a p50/p95 — `scripts/bench_latency.py` has not been run to produce a real distribution. **Outstanding**, run before submission if time allows | `traces/preflight_20260905T163015Z.jsonl` → `synth_first_byte` |
+| TTFB cold p50 / p95 | Not run. **Outstanding**: `python scripts/bench_latency.py` | `traces/latency_bench_*.json` |
+| Full-unit RTF warm p50 / p95 | Not run. **Outstanding**: `python scripts/bench_latency.py` | `traces/latency_bench_*.json` |
+| Number round-trip pass rate + ASR model | Not run. **Outstanding**: `python scripts/number_roundtrip.py` | `traces/number_roundtrip_*.json` |
+| A1 audible stop p50 / p95 (far end) | Not run. **Outstanding**: needs the two-person acceptance harness (Person B measuring at the far end) | acceptance harness (Person B) |
+| A2 delivered-text agreement | Not run. **Outstanding**: needs the two-person acceptance harness | acceptance harness |
 | A3 deictic resolution | interrupt at 8160 ms in `sec-5b-i`; the deictic question resolved against the last **heard** clause, boundary 126 chars (word 20, straddling `a`) from the live word map | `traces/demo_rime_20260906.jsonl` |
 | A4 resume within one sentence | cut at char 126, sentence 0 ends at 123; resumed as `sec-5b-i/resume#1` with `char_start=124`, the start of the sentence containing the cut. Read cursor advanced to the next unit, not a replay | `traces/demo_rime_20260906.jsonl` |
-| A5 no false deliveries | | acceptance harness |
+| A5 no false deliveries | Not run. **Outstanding**: needs the two-person acceptance harness | acceptance harness |
 
 ## Timestamp fidelity
 
