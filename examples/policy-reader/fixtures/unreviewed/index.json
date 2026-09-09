@@ -1,0 +1,306 @@
+{
+ "documents": [
+  {
+   "name": "C--Users-astit-Desktop-HackRime-traces-_ingest_inst-md",
+   "title": "_ingest_inst",
+   "path": "C--Users-astit-Desktop-HackRime-traces-_ingest_inst-md.json",
+   "source": {
+    "type": "text",
+    "path_or_url": "_ingest_inst.md",
+    "fetched_at": "2026-09-06T16:47:41Z",
+    "sha256": "2216ee19d6673815412dcb75622c46f4ac1521d2359c852eae0dea004641a2c6",
+    "institutional_contacts": [
+     {
+      "label": "email",
+      "redacted": "grie…"
+     },
+     {
+      "label": "email",
+      "redacted": "comp…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     }
+    ]
+   },
+   "clause_count": 26,
+   "referral": "the team that publishes this document",
+   "ingested_at": "2026-09-06T16:47:41Z"
+  },
+  {
+   "name": "C--Users-astit-Desktop-HackRime-traces-_ingest_open_test-md",
+   "title": "_ingest_open_test",
+   "path": "C--Users-astit-Desktop-HackRime-traces-_ingest_open_test-md.json",
+   "source": {
+    "type": "text",
+    "path_or_url": "_ingest_open_test.md",
+    "fetched_at": "2026-09-06T16:47:46Z",
+    "sha256": "14cad095d53f4b07c5ca31d0cc8c57f26a078a14fac104d209042c06e4b1c72d"
+   },
+   "clause_count": 25,
+   "referral": "the team that publishes this document",
+   "ingested_at": "2026-09-06T16:47:46Z"
+  },
+  {
+   "name": "C--Users-astit-Desktop-HackRime-traces-_ingest_over-md",
+   "title": "_ingest_over",
+   "path": "C--Users-astit-Desktop-HackRime-traces-_ingest_over-md.json",
+   "source": {
+    "type": "text",
+    "path_or_url": "_ingest_over.md",
+    "fetched_at": "2026-09-06T16:47:43Z",
+    "sha256": "e27d42163efc1e312a6a572a4bec4b892858a729e58028072e8b0624af6cf5ed",
+    "pii_override_reason": "sample person is fictional (synthetic fixture)",
+    "institutional_contacts": [
+     {
+      "label": "email",
+      "redacted": "grie…"
+     },
+     {
+      "label": "email",
+      "redacted": "comp…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     }
+    ]
+   },
+   "clause_count": 26,
+   "referral": "the team that publishes this document",
+   "ingested_at": "2026-09-06T16:47:43Z"
+  },
+  {
+   "name": "C--Users-astit-Desktop-HackRime-traces-_ingest_sample-md",
+   "title": "_ingest_sample",
+   "path": "C--Users-astit-Desktop-HackRime-traces-_ingest_sample-md.json",
+   "source": {
+    "type": "text",
+    "path_or_url": "_ingest_sample.md",
+    "fetched_at": "2026-09-06T16:47:41Z",
+    "sha256": "0f10826036a6030ff19b316ff85ef92afce6f2a2012fc6841b6b4c8141d15737"
+   },
+   "clause_count": 25,
+   "referral": "the team that publishes this document",
+   "ingested_at": "2026-09-06T16:47:41Z"
+  },
+  {
+   "name": "C--Users-astit-Desktop-HackRime-traces-_ingest_sample2-md",
+   "title": "_ingest_sample2",
+   "path": "C--Users-astit-Desktop-HackRime-traces-_ingest_sample2-md.json",
+   "source": {
+    "type": "text",
+    "path_or_url": "_ingest_sample2.md",
+    "fetched_at": "2026-09-06T16:47:40Z",
+    "sha256": "c7f62fcb90c9f3e71d3e6313d9dd728efa7083fd97c52195eba9ffe9aa350975"
+   },
+   "clause_count": 25,
+   "referral": "the team that publishes this document",
+   "ingested_at": "2026-09-06T16:47:40Z"
+  },
+  {
+   "name": "RELHLIP21001V012021_2019-2020",
+   "title": ".incoming_RELHLIP21001V012021_2019-2020",
+   "path": "RELHLIP21001V012021_2019-2020.json",
+   "source": {
+    "type": "pdf",
+    "path_or_url": ".incoming_RELHLIP21001V012021_2019-2020.pdf",
+    "fetched_at": "2026-09-06T16:48:15Z",
+    "sha256": "bf96dd57aa180fad3d904472613f855f1043c08c235b508ad09e4bfbfaa9ff6c",
+    "institutional_contacts": [
+     {
+      "label": "email",
+      "redacted": "rgic…"
+     },
+     {
+      "label": "email",
+      "redacted": "rgic…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "Bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "email",
+      "redacted": "bima…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     }
+    ]
+   },
+   "clause_count": 371,
+   "referral": "the team that publishes this document",
+   "ingested_at": "2026-09-06T16:48:16Z"
+  },
+  {
+   "name": "_ingest_inst-md",
+   "title": "_ingest_inst",
+   "path": "_ingest_inst-md.json",
+   "source": {
+    "type": "text",
+    "path_or_url": "_ingest_inst.md",
+    "fetched_at": "2026-09-07T17:42:51Z",
+    "sha256": "2216ee19d6673815412dcb75622c46f4ac1521d2359c852eae0dea004641a2c6",
+    "institutional_contacts": [
+     {
+      "label": "email",
+      "redacted": "grie…"
+     },
+     {
+      "label": "email",
+      "redacted": "comp…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     }
+    ]
+   },
+   "clause_count": 26,
+   "referral": "the team that publishes this document",
+   "ingested_at": "2026-09-07T17:42:51Z"
+  },
+  {
+   "name": "_ingest_open_test-md",
+   "title": "_ingest_open_test",
+   "path": "_ingest_open_test-md.json",
+   "source": {
+    "type": "text",
+    "path_or_url": "_ingest_open_test.md",
+    "fetched_at": "2026-09-07T17:42:54Z",
+    "sha256": "14cad095d53f4b07c5ca31d0cc8c57f26a078a14fac104d209042c06e4b1c72d"
+   },
+   "clause_count": 25,
+   "referral": "the team that publishes this document",
+   "ingested_at": "2026-09-07T17:42:54Z"
+  },
+  {
+   "name": "_ingest_over-md",
+   "title": "_ingest_over",
+   "path": "_ingest_over-md.json",
+   "source": {
+    "type": "text",
+    "path_or_url": "_ingest_over.md",
+    "fetched_at": "2026-09-07T17:42:51Z",
+    "sha256": "e27d42163efc1e312a6a572a4bec4b892858a729e58028072e8b0624af6cf5ed",
+    "pii_override_reason": "sample person is fictional (synthetic fixture)",
+    "institutional_contacts": [
+     {
+      "label": "email",
+      "redacted": "grie…"
+     },
+     {
+      "label": "email",
+      "redacted": "comp…"
+     },
+     {
+      "label": "phone",
+      "redacted": "1800…"
+     }
+    ]
+   },
+   "clause_count": 26,
+   "referral": "the team that publishes this document",
+   "ingested_at": "2026-09-07T17:42:52Z"
+  },
+  {
+   "name": "_ingest_sample-md",
+   "title": "_ingest_sample",
+   "path": "_ingest_sample-md.json",
+   "source": {
+    "type": "text",
+    "path_or_url": "_ingest_sample.md",
+    "fetched_at": "2026-09-07T17:42:50Z",
+    "sha256": "0f10826036a6030ff19b316ff85ef92afce6f2a2012fc6841b6b4c8141d15737"
+   },
+   "clause_count": 25,
+   "referral": "the team that publishes this document",
+   "ingested_at": "2026-09-07T17:42:50Z"
+  },
+  {
+   "name": "_ingest_sample2-md",
+   "title": "_ingest_sample2",
+   "path": "_ingest_sample2-md.json",
+   "source": {
+    "type": "text",
+    "path_or_url": "_ingest_sample2.md",
+    "fetched_at": "2026-09-07T17:42:50Z",
+    "sha256": "c7f62fcb90c9f3e71d3e6313d9dd728efa7083fd97c52195eba9ffe9aa350975"
+   },
+   "clause_count": 25,
+   "referral": "the team that publishes this document",
+   "ingested_at": "2026-09-07T17:42:50Z"
+  }
+ ]
+}
